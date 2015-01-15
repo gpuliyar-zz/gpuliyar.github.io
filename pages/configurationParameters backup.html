@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Configuration Parameters</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+$("#searchBox").keyup(function fun(e){
+var searchField=document.getElementById("searchBox").value;
+if(searchField==""){
+$("li").show();
+}else{
+ $("li").hide();
+ $("#searchBoxli").show();
+}
+
+if (e.keyCode === 32) {
+            $(this).val($(this).val()+" ");
+        }
+var searchValue = $(this).val().toLowerCase(),
+        matchSub = false;
+
+     $('.nav-second-level').each(function() {
+
+			var itemValue;
+
+                var Sub = $(this).children('li').children('a');
+				
+				
+                for(var i = 0; i < Sub.length; i++) {     //for SubMenu
+                    itemValue = $.trim(Sub.eq(i).text()).toLowerCase();
+
+                    if(itemValue.search(searchValue) >= 0) {
+
+                        Sub.eq(i).show();
+						Sub.eq(i).parent().show();
+						
+                        matchSub = true;
+                    }
+                    else{
+                        Sub.eq(i).hide();
+						Sub.eq(i).parent().hide();
+                    }
+                }
+                
+                if(matchSub) {
+                    $(this).parent().show();
+                    matchSub = false;
+                }
+                else {
+                   $(this).parent().hide();
+                }
+           // }
+            
+        });
+
+
+});
+});
+</script>
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; z-index:5; width: 100%;">
+                <div class="navbar-header" style="position:fixed;background-color: gainsboro;
+border-bottom-style: inset; width:100%; z-index:6;">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Technical Documentation - Configuration Parameters</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <!-- /.navbar-top-links -->
+
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+						<ul class="nav" id="side-menu">
+                            <li class="sidebar-search" id="searchBoxli">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" id="searchBox" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <!-- /input-group -->
+                            </li>
+                            <li>
+                                <a href="summary.html"><i class="fa fa-files-o fa-fw"></i> Summary</a>
+
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-dashboard fa-fw"></i> Dashboard<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="dashboard.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+                                    <li>
+                                        <a href="dashboard.html#Conflict Mineral Survey Response By Organization">Conflict Mineral Survey Response By Organization</a>
+                                    </li>
+<!-- automate data here end -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                               <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="charts.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+                                    <li>
+                                        <a href="chartssub.html#">%automate data%</a>
+                                    </li>
+<!-- automate data here end -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-table fa-fw"></i> Data Tables<span class="fa arrow"></span></a>
+                               <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="datatables.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+                                    <li>
+                                        <a href="datatablessub.html#">%automate data%</a>
+                                    </li>
+<!-- automate data here end -->
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-edit fa-fw"></i> Data Forms<span class="fa arrow"></span></a>
+                                 <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="dataforms.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+<!-- automate data here end -->
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-wrench fa-fw"></i> Data Browsers<span class="fa arrow"></span></a>
+                                 <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="databrowsers.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+<!-- automate data here end -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-sitemap fa-fw"></i> List Of Values<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="listofvalues.html">Sub menu 1</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="listofvaluessub.html#">Sub menu 2</a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-files-o fa-fw"></i> BluePrint<span class="fa arrow"></span></a>
+                                 <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="blueprint.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+                                    <li>
+                                        <a href="blueprintsub.html#">%automate data%</a>
+                                    </li>
+<!-- automate data here end -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-cogs fa-fw"></i> Configuration Parameters<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="configuration.html">Sub menu 1</a>
+                                    </li>
+								
+                                    <li>
+                                        <a href="configurationsub.html#">Sub menu 2</a>
+                                    </li>
+									
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-database fa-fw"></i> Data Objects<span class="fa arrow"></span></a>
+                                 <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="dataobjects.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+<!-- automate data here end -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-building fa-fw"></i> Infocenters<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="infocenters.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+                                    <li>
+                                        <a href="infocenterssub.html#Setup Survey">Setup Survey</a>
+                                    </li>
+                                    <li>
+                                        <a href="infocenterssub.html#Respond To Conflict Minerals Surveys">Respond To Conflict Minerals Surveys</a>
+                                    </li>
+                                    <li>
+                                        <a href="infocenterssub.html#Setup Survey">Setup Survey</a>
+                                    </li>
+                                    <li>
+                                        <a href="infocenterssub.html#Setup Surveys">Setup Surveys</a>
+                                    </li>
+                                    <li>
+                                        <a href="infocenterssub.html#Surveys">Surveys</a>
+                                    </li>
+<!-- automate data here end -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-info fa-fw"></i> Infolets<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="infolets.html">Sub Menu 1</a>
+                                    </li>
+								
+                                    <li>
+                                        <a href="infoletssub.html#">Sub Menu 2()</a>
+                                    </li>
+								
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-list-alt fa-fw"></i> Reports<span class="fa arrow"></span></a>
+                                 <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="reports.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+                                    <li>
+                                        <a href="reportssub.html#Survey Summary Report">Survey Summary Report</a>
+                                    </li>
+                                    <li>
+                                        <a href="reportssub.html#Supplier Details">Supplier Details</a>
+                                    </li>
+                                    <li>
+                                        <a href="reportssub.html#Open Surveys">Open Surveys</a>
+                                    </li>
+<!-- automate data here end -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-calendar fa-fw"></i> Calendar<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="calendar.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+                                    <li>
+                                        <a href="calendarsub.html#">%automate data%</a>
+                                    </li>
+<!-- automate data here end -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-vk fa-fw"></i> WorkFlows<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="workflows.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+                                    <li>
+                                        <a href="workflowssub.html#">%automate data%</a>
+                                    </li>
+<!-- automate data here end -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-adn fa-fw"></i> Activities<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="activities.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+                                    <li>
+                                        <a href="activitiessub.html#">%automate data%</a>
+                                    </li>
+<!-- automate data here end -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-user fa-fw"></i> Roles<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="roles.html">View All</a>
+                                    </li>
+<!-- automate data here start -->
+                                    <li>
+                                        <a href="rolessub.html#">%automate data%</a>
+                                    </li>
+<!-- automate data here end -->
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        </ul>
+					</div>
+				</div>
+			 <!-- /.navbar-static-side -->
+            </nav>
+
+			<div id="page-wrapper">
+                <div class="row">
+					<br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <b>
+									Configuration Parameters
+								</b>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+								</div>
+                                <!-- /.table-responsive -->
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<!-- /.col-lg-12 -->
+				</div>
+				<!-- /page wrapper -->
+			</div>
+			<!-- /.wrapper-->
+		</div>
+
+        <!-- jQuery -->
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../dist/js/sb-admin-2.js"></script>
+
+        <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+
+        <script>
+            $(document).ready(function() {
+                $('#configuration-table-1').DataTable({
+                    responsive: true
+                });
+            });
+        </script>
+
+    </body>
+
+</html>
