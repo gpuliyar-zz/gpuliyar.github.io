@@ -3,9 +3,9 @@ $(document).ready(function(){
 $("#searchBox").keyup(function fun(e){
 var searchField=document.getElementById("searchBox").value;
 if(searchField==""){
-$("li").show();
+$("#menuDivScroll li").show();
 }else{
- $("li").hide();
+ $("#menuDivScroll li").hide();
  $("#searchBoxli").show();
 }
 
