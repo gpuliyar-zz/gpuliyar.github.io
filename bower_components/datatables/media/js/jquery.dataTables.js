@@ -6092,7 +6092,7 @@
 					}
 					else
 					{
-						_fnLog( allSettings[i], 0, 'Cannot reinitialise DataTable', 3 );
+						//_fnLog( allSettings[i], 0, 'Cannot reinitialise DataTable', 3 );
 						return;
 					}
 				}
