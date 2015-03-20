@@ -1,4 +1,4 @@
 cd/
-cd D:/dev/htmlreport/GRC_8680c1cb-1c00-47c5-816c-c0837d93a62d/pages
+cd D:/dev/htmlreport/GRC_66c5e947-99a0-4c45-89a8-b5df0d86c7e5/pages
 call hhc index.html
 exit
