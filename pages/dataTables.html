@@ -61,7 +61,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #1 : <a style="text-decoration: none; " id="MS_AUD_ACTIONS" href="dbTables.html#MS_AUD_ACTIONS">MS_AUD_ACTIONS</a><button onclick="displayData('MS_AUD_ACTIONS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                                <h4><span class="fa fa-table fa-fw"></span> #1 : <a style="text-decoration: none; " id="MS_QSM_ACTIONS" href="dbTables.html#MS_QSM_ACTIONS">MS_QSM_ACTIONS</a><button onclick="displayData('MS_QSM_ACTIONS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
                             </div>
                             <div class="panel-body">
                                 <div class="dataTable_wrapper">
@@ -73,7 +73,8 @@
                                             </tr>
                                             <tr>
                                                 <th style="width:15%;">Description</th>
-                                                <td>This data table stores the action values that are used across all the forms in Audits module.</td>
+                                                <td>
+This table hosts the various form actions available in the Survey application</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -90,134 +91,51 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
+                                                <td>
+                                                Stage Type<br>STAGE_TYPE
+                                                 </td>
+                                                <td>Number(3)</td>
+                                                <td>Mention the stage type here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
                                                 <td>
                                                 Action ID<br>ACTION_ID
                                                  </td>
-                                                <td>Number(10)</td>
-                                                <td>To capture the action id</td>
+                                                <td>Varchar2(10 char)</td>
+                                                <td>Capture the Action Id here.</td>
                                             </tr>
                                             <tr>
-                                                <td>2</td>
+                                                <td>3</td>
                                                 <td>
                                                 Action Name<br>ACTION_NAME
                                                  </td>
-                                                <td>Varchar2(30 char)</td>
-                                                <td>To Catpure Action Name</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>
-                                                Intermediate Status<br>INTERMEDIATE_STATUS
-                                                 </td>
-                                                <td>Varchar2(30 char)</td>
-                                                <td>To Catpure Intermediate Status</td>
+                                                <td>Varchar2(35 char)</td>
+                                                <td>Capture the Action Name / description here</td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
                                                 <td>
-                                                Active Flag<br>ACTIVE
+                                                Intermediate STatus<br>INTERMEDIATE_STATUS
+                                                 </td>
+                                                <td>Varchar2(30 char)</td>
+                                                <td>Capture Intermediate Statuses here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Active<br>ACTIVE
                                                  </td>
                                                 <td>Varchar2(1 char)</td>
-                                                <td>Can bear Y/N values</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>
-                                                 <font style="color:red;">Locale ID</font><br> <font style="color:red;">LOCALE_ID</font>
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>Locale Id column</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #2 : <a style="text-decoration: none; " id="MS_AUD_AE_LIB_CONF" href="dbTables.html#MS_AUD_AE_LIB_CONF">MS_AUD_AE_LIB_CONF</a><button onclick="displayData('MS_AUD_AE_LIB_CONF');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Description</th>
-                                                <td>This data table stores the pushform names of the objects that needs to be pulled in Auditable Entities field and in Audit Advisor.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br/>
-                                    <table class="table table-hover dataTable-table-nr">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title<br>Name</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
-                                                 <font style="color:red;">ID</font><br> <font style="color:red;">ID</font>
-                                                 </td>
-                                                <td>Number</td>
-                                                <td>This is used to store the sequnece of the config</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                OBJECT_TYPE<br>OBJECT_TYPE
-                                                 </td>
-                                                <td>Varchar2(200 char)</td>
-                                                <td>Object Type</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>
-                                                DESCRIPTION<br>DESCRIPTION
-                                                 </td>
-                                                <td>Varchar2(1000 char)</td>
-                                                <td>DESCRIPTION</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>
-                                                ACTIVE<br>ACTIVE
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>ACTIVE</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>
-                                                OBJECT_NAME<br>OBJECT_NAME
-                                                 </td>
-                                                <td>Varchar2(1000 char)</td>
-                                                <td>Object Name</td>
+                                                <td>Y / N</td>
                                             </tr>
                                             <tr>
                                                 <td>6</td>
                                                 <td>
-                                                 <font style="color:red;">Locale ID</font><br> <font style="color:red;">LOCALE_ID</font>
+                                                Locale ID<br>LOCALE_ID
                                                  </td>
                                                 <td>Number(10)</td>
-                                                <td>Locale Id description</td>
+                                                <td>Will store locale specific details.</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -235,7 +153,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #3 : <a style="text-decoration: none; " id="MS_AUD_CONFIGURE_LABELS" href="dbTables.html#MS_AUD_CONFIGURE_LABELS">MS_AUD_CONFIGURE_LABELS</a><button onclick="displayData('MS_AUD_CONFIGURE_LABELS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                                <h4><span class="fa fa-table fa-fw"></span> #2 : <a style="text-decoration: none; " id="MS_QSM_APPLIES_TO" href="dbTables.html#MS_QSM_APPLIES_TO">MS_QSM_APPLIES_TO</a><button onclick="displayData('MS_QSM_APPLIES_TO');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_QSM_APPLIES_TO');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:5" class="fa fa-tags fa-fw"></span></a></h4>
                             </div>
                             <div class="panel-body">
                                 <div class="dataTable_wrapper">
@@ -247,7 +165,8 @@
                                             </tr>
                                             <tr>
                                                 <th style="width:15%;">Description</th>
-                                                <td>This data table maintains columns whose labels need to be configured in the application such as Lead Auditor, Autir Manager, Core Objects etc.</td>
+                                                <td>
+This table hosts the various GRC sectors available on which a questionnaire may be carried out</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -263,167 +182,76 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>1</td>
-                                                <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
-                                                 <font style="color:red;">Sequence Number</font><br> <font style="color:red;">SEQ_NO</font>
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>Sequence Number</td>
-                                            </tr>
-                                            <tr>
                                                 <td>2</td>
                                                 <td>
-                                                Object Type<br>OBJECT_TYPE
+                                                Object ID<br>OBJECT_ID
                                                  </td>
-                                                <td>Varchar2(30 char)</td>
-                                                <td>Object Type</td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td>Will store object id.</td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
                                                 <td>
                                                 Object Name<br>OBJECT_NAME
                                                  </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>Object Name</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>
-                                                Column Name<br>COLUMN_ID
-                                                 </td>
-                                                <td>Varchar2(30 char)</td>
-                                                <td>Column Name</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>
-                                                Column Group<br>COLUMN_GROUP
-                                                 </td>
-                                                <td>Varchar2(30 char)</td>
-                                                <td>Column Group</td>
+                                                <td>Varchar2(500 char)</td>
+                                                <td>Will store object name.</td>
                                             </tr>
                                             <tr>
                                                 <td>6</td>
                                                 <td>
-                                                ACTIVE<br>ACTIVE
+                                                Locale ID<br>LOCALE_ID
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td>Will store locale specific values.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Display Order<br>DISPLAY_ORDER
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td>Will store ordering of display of objects.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Active<br>IS_ACTIVE
                                                  </td>
                                                 <td>Varchar2(1 char)</td>
-                                                <td>Active</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #4 : <a style="text-decoration: none; " id="MS_AUD_DU_SETUP" href="dbTables.html#MS_AUD_DU_SETUP">MS_AUD_DU_SETUP</a><button onclick="displayData('MS_AUD_DU_SETUP');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Description</th>
-                                                <td>This data table stores the details of forms that can be uploaded in Audits and Checklist module.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br/>
-                                    <table class="table table-hover dataTable-table-nr">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title<br>Name</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
-                                                ID<br>ID
-                                                 </td>
-                                                <td>Number</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                GROUP_ID<br>GROUP_ID
-                                                 </td>
-                                                <td>Varchar2(10 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>
-                                                MODULE<br>MODULE
-                                                 </td>
-                                                <td>Varchar2(10 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>
-                                                DATA_FORM_NAME<br>DATA_FORM_NAME
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>
-                                                PROFILE_NAME<br>PROFILE_NAME
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>
-                                                WORKFLOW_CODE<br>WORKFLOW_CODE
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>WORKFLOW_CODE</td>
+                                                <td>Will store Y/N for each object.</td>
                                             </tr>
                                             <tr>
                                                 <td>7</td>
                                                 <td>
-                                                ATTACH_FIELD_NAME<br>ATTACH_FIELD_NAME
+                                                CONTACT_USER_AVAILABLE<br>CONTACT_USER_AVAILABLE
                                                  </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>ATTACH_FIELD_NAME</td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>Contact User available in the respective module</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>
+                                                CONTEXT_FIELD_HOOK<br>CONTEXT_FIELD_HOOK
+                                                 </td>
+                                                <td>Varchar2(4000 char)</td>
+                                                <td>Context Field Hook - Function unit to update the context field values</td>
                                             </tr>
                                             <tr>
                                                 <td>8</td>
                                                 <td>
-                                                ATTACH_PID_FIELD<br>ATTACH_PID_FIELD
+                                                ENABLE_CONTEXT_FIELD_HOOK<br>ENABLE_CONTEXT_FIELD_HOOK
                                                  </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>ATTACH_PID_FIELD</td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>This field enables the Context Field Hook column</td>
                                             </tr>
                                             <tr>
                                                 <td>9</td>
                                                 <td>
-                                                STATUS<br>STATUS
+                                                OBJECT_TYPE<br>OBJECT_TYPE
                                                  </td>
-                                                <td>Varchar2(10 char)</td>
-                                                <td>STATUS</td>
+                                                <td>Varchar2(4000 char)</td>
+                                                <td>this column stores the GRC object type of the entiy</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -441,7 +269,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #5 : <a style="text-decoration: none; " id="MS_AUD_Email_Subject_Config" href="dbTables.html#MS_AUD_Email_Subject_Config">MS_AUD_Email_Subject_Config</a><button onclick="displayData('MS_AUD_Email_Subject_Config');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                                <h4><span class="fa fa-table fa-fw"></span> #3 : <a style="text-decoration: none; " id="MS_QSM_GRADE_CONFIG" href="dbTables.html#MS_QSM_GRADE_CONFIG">MS_QSM_GRADE_CONFIG</a><button onclick="displayData('MS_QSM_GRADE_CONFIG');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
                             </div>
                             <div class="panel-body">
                                 <div class="dataTable_wrapper">
@@ -453,7 +281,8 @@
                                             </tr>
                                             <tr>
                                                 <th style="width:15%;">Description</th>
-                                                <td>This data table stores the subject of Audit emails so that it can be configured based on users locale.</td>
+                                                <td>
+This table hosts the grading details for the section as well as questionnaire level</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -471,232 +300,42 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
-                                                Subject_ID<br>SUBJECT_ID
+                                                Grade ID<br>GRADE_ID
                                                  </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>SUBJECT_ID</td>
+                                                <td>Varchar2(255 char)</td>
+                                                <td>Unique ID for the Grade</td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
                                                 <td>
-                                                Subject<br>SUBJECT
+                                                Grade Description<br>GRADE_DESC
                                                  </td>
                                                 <td>Varchar2(4000 char)</td>
-                                                <td>SUBJECT</td>
+                                                <td>Description of the Grade</td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
                                                 <td>
-                                                Locale_ID<br>LOCALE_ID
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>LOCALE_ID</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #6 : <a style="text-decoration: none; " id="MS_AUD_FIELD_EDITABILITY" href="dbTables.html#MS_AUD_FIELD_EDITABILITY">MS_AUD_FIELD_EDITABILITY</a><button onclick="displayData('MS_AUD_FIELD_EDITABILITY');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Description</th>
-                                                <td>This table is to configure the columns that are editable for data correction feature. This can be extended for other features as well where column editability is needed.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br/>
-                                    <table class="table table-hover dataTable-table-nr">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title<br>Name</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                 <font style="color:red;">Form Name</font><br> <font style="color:red;">FORM_NAME</font>
+                                                Grade Name<br>GRADE_NAME
                                                  </td>
                                                 <td>Varchar2(4000 char)</td>
-                                                <td>Form Name as available in metric_name column of si_metrics_t table.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                 <font style="color:red;">Column Name</font><br> <font style="color:red;">COLUMN_NAME</font>
-                                                 </td>
-                                                <td>Varchar2(4000 char)</td>
-                                                <td>Column Name as available in result_column_name of si_metric_columns table.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>
-                                                Is Editable<br>IS_EDITABLE
-                                                 </td>
-                                                <td>Varchar2(10 char)</td>
-                                                <td>This column will have value 'Y' if the field is editable.</td>
+                                                <td>Name of the Grade</td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
                                                 <td>
-                                                 <font style="color:red;">Feature Type</font><br> <font style="color:red;">FEATURE_TYPE</font>
+                                                Grade Colour<br>GRADE_COLOUR
                                                  </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>This is used to store the feature name where field editability is needed. Example, DC for Data Correction feature.</td>
+                                                <td>Varchar2(255 char)</td>
+                                                <td>Colur of the Grade</td>
                                             </tr>
                                             <tr>
                                                 <td>5</td>
                                                 <td>
-                                                Previous Stage<br>PREVIOUS_STAGE
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>This is used to store the previous stage of the form.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>
-                                                Current Stage<br>CURRENT_STAGE
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>This is used to store the current stage of the form.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>
-                                                Region Name<br>REGION_NAME
-                                                 </td>
-                                                <td>Varchar2(10 char)</td>
-                                                <td>Region acronym of the multirow fields as available in multirow_name of si_metric_columns table.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>8</td>
-                                                <td>
-                                                ID of Link Report<br>LINK_REPORT_ID
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>ID of Link Report associated to the LOV/MLOV column</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #7 : <a style="text-decoration: none; " id="MS_AUD_FLOW_STAGE_ACTION" href="dbTables.html#MS_AUD_FLOW_STAGE_ACTION">MS_AUD_FLOW_STAGE_ACTION</a><button onclick="displayData('MS_AUD_FLOW_STAGE_ACTION');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_AUD_FLOW_STAGE_ACTION');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:1" class="fa fa-tags fa-fw"></span></a></h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Description</th>
-                                                <td>This data table stores the mapping between flows, its respective stages and the action values.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br/>
-                                    <table class="table table-hover dataTable-table-nr">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title<br>Name</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                Flow ID<br>FLOW_ID
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>Stores Flow id</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                Previous Stage<br>PREVIOUS_STAGE
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>Capture Previous Stage ID here</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>
-                                                Current Stage<br>CURRENT_STAGE
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>To Capture Current Stage</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>
-                                                Activity<br>ACTIVITY
-                                                 </td>
-                                                <td>Varchar2(50 char)</td>
-                                                <td>Capture Activity.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>
-                                                Action ID<br>ACTION_ID
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>Capture Action ID</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>
-                                                Active Flag<br>ACTIVE
+                                                Is Active<br>IS_ACTIVE
                                                  </td>
                                                 <td>Varchar2(1 char)</td>
-                                                <td>Can bear values Y / N</td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>
-                                                Status<br>STATUS_ID
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>Cature Status.</td>
+                                                <td>This field showns whether the grade is active or not</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -714,7 +353,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #8 : <a style="text-decoration: none; " id="MS_AUD_FLOW_XSL_CONFIG" href="dbTables.html#MS_AUD_FLOW_XSL_CONFIG">MS_AUD_FLOW_XSL_CONFIG</a><button onclick="displayData('MS_AUD_FLOW_XSL_CONFIG');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                                <h4><span class="fa fa-table fa-fw"></span> #4 : <a style="text-decoration: none; " id="MS_QSM_METRIC_MAINT" href="dbTables.html#MS_QSM_METRIC_MAINT">MS_QSM_METRIC_MAINT</a><button onclick="displayData('MS_QSM_METRIC_MAINT');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
                             </div>
                             <div class="panel-body">
                                 <div class="dataTable_wrapper">
@@ -726,7 +365,8 @@
                                             </tr>
                                             <tr>
                                                 <th style="width:15%;">Description</th>
-                                                <td>This data table stores the XSL mapping between various forms in Audits module.</td>
+                                                <td>
+This table hosts the unique identifier setup for the push forms in the Survey application</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -744,473 +384,450 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>
-                                                XSL_ID<br>XSL_ID
+                                                 <font style="color:red;">Global Unique Identifier</font><br> <font style="color:red;">GUID</font>
                                                  </td>
-                                                <td>Varchar2(255 char)</td>
-                                                <td>XSL_ID</td>
+                                                <td>Varchar2(6 char)</td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
                                                 <td>
-                                                SOURCE_FLOW<br>SOURCE_FLOW
+                                                 <font style="color:red;">Product Module</font><br> <font style="color:red;">MODULE</font>
                                                  </td>
-                                                <td>Varchar2(255 char)</td>
-                                                <td>SOURCE_FLOW</td>
+                                                <td>Varchar2(225 char)</td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
                                                 <td>
-                                                DESTINATION_FLOW<br>DESTINATION_FLOW
+                                                 <font style="color:red;">Metirc Name</font><br> <font style="color:red;">METRIC_NAME</font>
                                                  </td>
-                                                <td>Varchar2(255 char)</td>
-                                                <td>DESTINATION_FLOW</td>
+                                                <td>Varchar2(225 char)</td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
                                                 <td>
-                                                SOURCE_FORM<br>SOURCE_FORM
+                                                 <font style="color:red;">Status of Maintenance(Y/N)</font><br> <font style="color:red;">IS_ACTIVE</font>
                                                  </td>
-                                                <td>Varchar2(255 char)</td>
-                                                <td>SOURCE_FORM</td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td></td>
                                             </tr>
                                             <tr>
                                                 <td>5</td>
                                                 <td>
-                                                DESTINATION_FORM<br>DESTINATION_FORM
+                                                 <font style="color:red;">Source</font><br> <font style="color:red;">SOURCE</font>
+                                                 </td>
+                                                <td>Varchar2(4 char)</td>
+                                                <td>the Souce either 'PROD' or the modified identified if the form is derivied/or a new form is created for a customer, then an acronym[max 4 chars] to denote the same</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #5 : <a style="text-decoration: none; " id="MS_QSM_PARAMS" href="dbTables.html#MS_QSM_PARAMS">MS_QSM_PARAMS</a><button onclick="displayData('MS_QSM_PARAMS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_QSM_PARAMS');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:1" class="fa fa-tags fa-fw"></span></a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This table hosts the various decision parameters maintained in the system.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                group identifier<br>param_Group
+                                                 </td>
+                                                <td>Varchar2(225 char)</td>
+                                                <td>Group identifier for the Parameter[s]</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
+                                                 <font style="color:red;">Parameter Name</font><br> <font style="color:red;">parameter</font>
+                                                 </td>
+                                                <td>Varchar2(225 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Description of the Parameter<br>Description
+                                                 </td>
+                                                <td>Varchar2(225 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                 <font style="color:red;">Value of the parameter</font><br> <font style="color:red;">Value</font>
+                                                 </td>
+                                                <td>Varchar2(225 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                 <font style="color:red;">ENABLED</font><br> <font style="color:red;">ENABLED</font>
+                                                 </td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>active state of the parameter [Y/N]</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #6 : <a style="text-decoration: none; " id="MS_QSM_REPORTING_PERIOD_TYPE" href="dbTables.html#MS_QSM_REPORTING_PERIOD_TYPE">MS_QSM_REPORTING_PERIOD_TYPE</a><button onclick="displayData('MS_QSM_REPORTING_PERIOD_TYPE');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>
+This table is used to configure the reporting period types to be available in the system</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Period Type ID<br>PERIOD_TYPE_ID
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td>identifier for a reporting period type</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Period Type<br>PERIOD_TYPE
                                                  </td>
                                                 <td>Varchar2(255 char)</td>
-                                                <td>DESTINATION_FORM</td>
+                                                <td>this can be defined by the customer based on all the different Period Categories they would require to configure in the system.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Applies To Organizations<br>APPLIES_TO_ORGANIATIONS
+                                                 </td>
+                                                <td>Varchar2(4000 char)</td>
+                                                <td>this column would ensure that only the users belonging to the organizations listed here would be able to view the Reporting Period Type that it is linked with. This field logic would not be a part of the first release for Surveys.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Valid From<br>VALID_FROM
+                                                 </td>
+                                                <td> Date</td>
+                                                <td>data columns would be used to define the validity of a reporting period. A reporting period type wouldn’t show in the form if the current date is before the Valid from date.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Valid Until<br>VALID_UNTIL
+                                                 </td>
+                                                <td> Date</td>
+                                                <td>data columns would be used to define the validity of a reporting period. A reporting period type wouldn’t show in the form if the current date has exceeded the Valid Until date.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #7 : <a style="text-decoration: none; " id="MS_QSM_REPORTING_PERIOD" href="dbTables.html#MS_QSM_REPORTING_PERIOD">MS_QSM_REPORTING_PERIOD</a><button onclick="displayData('MS_QSM_REPORTING_PERIOD');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_QSM_REPORTING_PERIOD');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:1" class="fa fa-tags fa-fw"></span></a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This table is used to configure the reporting periods to be available in the system</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Period ID<br>PERIOD_ID
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td>identifier for a reporting period</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Period Type<br>PERIOD_TYPE
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td>this column should match all the values that have already been defined in the Reporting Period Type data table Period Type column.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Period Name<br>PERIOD_NAME
+                                                 </td>
+                                                <td>Varchar2(255 char)</td>
+                                                <td>this column would have period names corresponding to the  Reporting Period Types  defined in the previous table</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Period Start Date<br>PERIOD_START_DATE
+                                                 </td>
+                                                <td> Date</td>
+                                                <td>these date columns would be used to define the start  for a defined period. These dates would not be used for the current release of Surveys.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Period End Date<br>PERIOD_END_DATE
+                                                 </td>
+                                                <td> Date</td>
+                                                <td>these date columns would be used to define the end date for a defined period. These dates would not be used for the current release of Surveys.</td>
                                             </tr>
                                             <tr>
                                                 <td>6</td>
                                                 <td>
-                                                DESCRIPTION<br>DESCRIPTION
+                                                Assignment Start Date<br>ASSIGNMENT_START_DATE
                                                  </td>
-                                                <td>Varchar2(255 char)</td>
-                                                <td>DESCRIPTION</td>
+                                                <td> Date</td>
+                                                <td>these dates would determine which Period Name options would display for the user’s selection while setting up the survey</td>
                                             </tr>
                                             <tr>
                                                 <td>7</td>
                                                 <td>
-                                                XSL_SOURCE<br>XSL_SOURCE
+                                                Assignment End Date<br>ASSIGNMENT_END_DATE
                                                  </td>
-                                                <td>Varchar2(4000 char)</td>
-                                                <td>XSL_SOURCE</td>
+                                                <td> Date</td>
+                                                <td>these dates would determine which Period Name options would display for the user’s selection while setting up the survey.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #8 : <a style="text-decoration: none; " id="MS_QSM_SCORING_INFOLETS" href="dbTables.html#MS_QSM_SCORING_INFOLETS">MS_QSM_SCORING_INFOLETS</a><button onclick="displayData('MS_QSM_SCORING_INFOLETS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
                                             </tr>
                                             <tr>
-                                                <td>8</td>
-                                                <td>
-                                                COMMENTS<br>COMMENTS
+                                                <th style="width:15%;">Description</th>
+                                                <td>This table hosts the scoring rules of a questionnaire (applies to the Question Level Scoring)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
+                                                 <font style="color:red;">Infolet ID</font><br> <font style="color:red;">INFOLET_ID</font>
                                                  </td>
-                                                <td>Varchar2(4000 char)</td>
-                                                <td>COMMENTS</td>
+                                                <td>Varchar2(255 char)</td>
+                                                <td>This filed stores the unique scoring infolet ID</td>
                                             </tr>
                                             <tr>
-                                                <td>9</td>
+                                                <td>2</td>
                                                 <td>
-                                                STATUS<br>STATUS
+                                                Function Name<br>FUNCTION_NAME
+                                                 </td>
+                                                <td>Varchar2(255 char)</td>
+                                                <td>This filed stores the scoring function name</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                DB Function Name<br>DB_FUNCTION_NAME
+                                                 </td>
+                                                <td>Varchar2(30 char)</td>
+                                                <td>Thi field stores the name of the data base function used for score calculation</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Description<br>DESCRIPTION
+                                                 </td>
+                                                <td>Varchar2(4000 char)</td>
+                                                <td>This field stores the description about the infolet</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Active<br>ACTIVE
+                                                 </td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>This field shows whether the infolet is active or not</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #9 : <a style="text-decoration: none; " id="MS_QSM_STAGES" href="dbTables.html#MS_QSM_STAGES">MS_QSM_STAGES</a><button onclick="displayData('MS_QSM_STAGES');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This table hosts the various stages in the lifecycle of a questionnaire, survey/certification/scorecard Plan, survey response.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Stage Type<br>STAGE_TYPE
+                                                 </td>
+                                                <td>Number(3)</td>
+                                                <td>Maintains the Stage Type information</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Stage ID<br>STAGE_ID
                                                  </td>
                                                 <td>Varchar2(10 char)</td>
-                                                <td>STATUS</td>
-                                            </tr>
-                                            <tr>
-                                                <td>10</td>
-                                                <td>
-                                                VIEW_NAME<br>VIEW_NAME
-                                                 </td>
-                                                <td>Varchar2(255 char)</td>
-                                                <td>VIEW_NAME</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #9 : <a style="text-decoration: none; " id="MS_AUD_FREQUENCY_CYCLE" href="dbTables.html#MS_AUD_FREQUENCY_CYCLE">MS_AUD_FREQUENCY_CYCLE</a><button onclick="displayData('MS_AUD_FREQUENCY_CYCLE');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Description</th>
-                                                <td>This data table is used to compute the value of Suggested Years in Advisor.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br/>
-                                    <table class="table table-hover dataTable-table-nr">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title<br>Name</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                STORED_VALUE<br>STORED_VALUE
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>STORED_VALUE</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                DISPLAY_VALUE<br>DISPLAY_VALUE
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>DISPLAY_VALUE</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>
-                                                 <font style="color:red;">Locale ID</font><br> <font style="color:red;">LOCALE_ID</font>
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>Locale Id description</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #10 : <a style="text-decoration: none; " id="MS_AUD_LOV_CONFIG" href="dbTables.html#MS_AUD_LOV_CONFIG">MS_AUD_LOV_CONFIG</a><button onclick="displayData('MS_AUD_LOV_CONFIG');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Description</th>
-                                                <td>This data table stores the Audit Classification and Audit Type values and also its mapping.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br/>
-                                    <table class="table table-hover dataTable-table-nr">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title<br>Name</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                 <font style="color:red;">Code Group</font><br> <font style="color:red;">CODE_GROUP</font>
-                                                 </td>
-                                                <td>Varchar2(4000 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                Code Code<br>CODE_CODE
-                                                 </td>
-                                                <td>Varchar2(4000 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>
-                                                Code Description<br>CODE_DESCRIPTION
-                                                 </td>
-                                                <td>Varchar2(4000 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>
-                                                Code LInk<br>CODE_LINK
-                                                 </td>
-                                                <td>Varchar2(4000 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>
-                                                Status<br>STATUS
-                                                 </td>
-                                                <td>Varchar2(20 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>
-                                                Value<br>VALUE
-                                                 </td>
-                                                <td>Varchar2(4000 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>
-                                                Data Type<br>DATA_TYPE
-                                                 </td>
-                                                <td>Varchar2(4000 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>8</td>
-                                                <td>
-                                                Code Order<br>CODE_ORDER
-                                                 </td>
-                                                <td>Number(2)</td>
-                                                <td>the order which should be display in application</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #11 : <a style="text-decoration: none; " id="MS_AUD_NA_FORM_SECURITY" href="dbTables.html#MS_AUD_NA_FORM_SECURITY">MS_AUD_NA_FORM_SECURITY</a><button onclick="displayData('MS_AUD_NA_FORM_SECURITY');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Description</th>
-                                                <td>This data table stores the pushform names of live forms and the respective activities to implement security for these forms.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br/>
-                                    <table class="table table-hover dataTable-table-nr">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title<br>Name</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                Push Form Name<br>PUSH_FORM_NAME
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td>Push Form Name</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                Activity Name<br>ACTIVITY_NAME
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #12 : <a style="text-decoration: none; " id="MS_AUD_RELATED_FORMS" href="dbTables.html#MS_AUD_RELATED_FORMS">MS_AUD_RELATED_FORMS</a><button onclick="displayData('MS_AUD_RELATED_FORMS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_AUD_RELATED_FORMS');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:1" class="fa fa-tags fa-fw"></span></a></h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Description</th>
-                                                <td>This data table is deprecated.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br/>
-                                    <table class="table table-hover dataTable-table-nr">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title<br>Name</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
-                                                Form ID<br>FORM_ID
-                                                 </td>
-                                                <td>Number</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                MODULE<br>MODULE
-                                                 </td>
-                                                <td>Varchar2(50 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>
-                                                FORM_NAME<br>FORM_NAME
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>
-                                                COLUMN_NAME<br>COLUMN_NAME
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>
-                                                RELATED_FORM<br>RELATED_FORM
-                                                 </td>
-                                                <td>Varchar2(100 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>
-                                                ACTIVE<br>ACTIVE
-                                                 </td>
-                                                <td>Varchar2(5 char)</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
-                                                MODULE_ID<br>MODULE_ID
-                                                 </td>
-                                                <td>Number</td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #13 : <a style="text-decoration: none; " id="MS_AUD_STAGES" href="dbTables.html#MS_AUD_STAGES">MS_AUD_STAGES</a><button onclick="displayData('MS_AUD_STAGES');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_AUD_STAGES');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:1" class="fa fa-tags fa-fw"></span></a></h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Description</th>
-                                                <td>This data table stores all the stages of each flow used in Audits module.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br/>
-                                    <table class="table table-hover dataTable-table-nr">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Title<br>Name</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                 <font style="color:red;">Flow ID</font><br> <font style="color:red;">FLOW_ID</font>
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>To Map to the Flow</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                 <font style="color:red;">Stage ID</font><br> <font style="color:red;">STAGE_ID</font>
-                                                 </td>
-                                                <td>Number(10)</td>
-                                                <td>To Store the Stage ID</td>
+                                                <td>Capture Stage IDs here</td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
@@ -1218,23 +835,31 @@
                                                 Stage Name<br>STAGE_NAME
                                                  </td>
                                                 <td>Varchar2(30 char)</td>
-                                                <td>To Capture the Stage Name</td>
+                                                <td>Capture the stage Name here</td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
                                                 <td>
-                                                Status Id<br>STATUS_ID
+                                                Status<br>STATUS
                                                  </td>
-                                                <td>Number(10)</td>
-                                                <td>To Capture the Stage Status ID at this particular stage</td>
+                                                <td>Varchar2(30 char)</td>
+                                                <td>Capture the stage statuses here</td>
                                             </tr>
                                             <tr>
                                                 <td>5</td>
                                                 <td>
-                                                Active Flag<br>ACTIVE
+                                                Active<br>ACTIVE
                                                  </td>
                                                 <td>Varchar2(1 char)</td>
                                                 <td>Y / N</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>
+                                                Locale ID<br>LOCALE_ID
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td>Will store Locale specific details.</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1252,7 +877,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> #14 : <a style="text-decoration: none; " id="MS_AUD_STATUS" href="dbTables.html#MS_AUD_STATUS">MS_AUD_STATUS</a><button onclick="displayData('MS_AUD_STATUS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                                <h4><span class="fa fa-table fa-fw"></span> #10 : <a style="text-decoration: none; " id="MS_QSM_STAGE_ACTION_MAPPING" href="dbTables.html#MS_QSM_STAGE_ACTION_MAPPING">MS_QSM_STAGE_ACTION_MAPPING</a><button onclick="displayData('MS_QSM_STAGE_ACTION_MAPPING');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
                             </div>
                             <div class="panel-body">
                                 <div class="dataTable_wrapper">
@@ -1264,7 +889,272 @@
                                             </tr>
                                             <tr>
                                                 <th style="width:15%;">Description</th>
-                                                <td>This data table stores the status values that are used across all the forms in Audits module.</td>
+                                                <td>This table hosts the mapping of the stages and actions available in the system.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Stage Type<br>STAGE_TYPE
+                                                 </td>
+                                                <td>Number(3)</td>
+                                                <td>This field Holds the information about stage type</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Previous Stage<br>PREVIOUS_STAGE
+                                                 </td>
+                                                <td>Varchar2(10 char)</td>
+                                                <td>Maintain Previous Stage Here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Current Stage<br>CURRENT_STAGE
+                                                 </td>
+                                                <td>Varchar2(10 char)</td>
+                                                <td>Maintain the Current Stage Here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Role/Activity<br>ROLE_ACTIVITY
+                                                 </td>
+                                                <td>Varchar2(35 char)</td>
+                                                <td>Maint the Role or Activity here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Action ID<br>ACTION_ID
+                                                 </td>
+                                                <td>Varchar2(10 char)</td>
+                                                <td>Maintain the corresponding action id here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>
+                                                Active<br>ACTIVE
+                                                 </td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>Y / N</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>
+                                                Remarks<br>REMARKS
+                                                 </td>
+                                                <td>Varchar2(50 char)</td>
+                                                <td>holds the comments entered</td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>
+                                                Status<br>STATUS
+                                                 </td>
+                                                <td>Varchar2(30 char)</td>
+                                                <td>Status at this stage.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>9</td>
+                                                <td>
+                                                Locale ID<br>LOCALE_ID
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td>Will store Locale specific details.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #11 : <a style="text-decoration: none; " id="MS_QSM_STATUS" href="dbTables.html#MS_QSM_STATUS">MS_QSM_STATUS</a><button onclick="displayData('MS_QSM_STATUS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_QSM_STATUS');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:3" class="fa fa-tags fa-fw"></span></a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This table hosts the various statuses applicable to the system.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                STATUS_TYPE<br>STATUS_TYPE
+                                                 </td>
+                                                <td>Number(3)</td>
+                                                <td>Status Type</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                STATUS_ID<br>STATUS_ID
+                                                 </td>
+                                                <td>Number(3)</td>
+                                                <td>Status ID</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Status Name<br>STATUS_NAME
+                                                 </td>
+                                                <td>Varchar2(40 char)</td>
+                                                <td>Capture the Status Name / Description here.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Active<br>ACTIVE
+                                                 </td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>Y / N</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Locale ID<br>LOCALE_ID
+                                                 </td>
+                                                <td>Varchar2(10 char)</td>
+                                                <td>Will store Locale details.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #12 : <a style="text-decoration: none; " id="MS_QSM_SPRD_DATA_POPULATION" href="dbTables.html#MS_QSM_SPRD_DATA_POPULATION">MS_QSM_SPRD_DATA_POPULATION</a><button onclick="displayData('MS_QSM_SPRD_DATA_POPULATION');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This table is mainly used to enable the spreadsheet data auto population</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                SPRD_SHT_ID<br>SPRD_SHT_ID
+                                                 </td>
+                                                <td>Varchar2(10 char)</td>
+                                                <td>SPRD_SHT_ID</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                ENABLE_DATA_POPULATION<br>ENABLE_DATA_POPULATION
+                                                 </td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>ENABLE_DATA_POPULATION</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                DATA_POPULATION_HOOK<br>DATA_POPULATION_HOOK
+                                                 </td>
+                                                <td>Varchar2(4000 char)</td>
+                                                <td>DATA_POPULATION_HOOK</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #13 : <a style="text-decoration: none; " id="MS_QSM_POSTHOOK_INTERFACE" href="dbTables.html#MS_QSM_POSTHOOK_INTERFACE">MS_QSM_POSTHOOK_INTERFACE</a><button onclick="displayData('MS_QSM_POSTHOOK_INTERFACE');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This table hosts the information about the post hook APIs configured by various integrated module and the same will be executed on response to a survey</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1282,26 +1172,208 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
-                                                Status ID<br>STATUS_ID
+                                                 <font style="color:red;">Source ID</font><br> <font style="color:red;">SOURCE_ID</font>
                                                  </td>
-                                                <td>Number(3)</td>
-                                                <td>Status ID</td>
+                                                <td>Varchar2(10 char)</td>
+                                                <td>Source ID</td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
                                                 <td>
-                                                Status Name<br>STATUS_NAME
+                                                Source Type<br>SOURCE_TYPE
                                                  </td>
-                                                <td>Varchar2(40 char)</td>
-                                                <td>Status Name</td>
+                                                <td>Varchar2(15 char)</td>
+                                                <td>Source Type</td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
                                                 <td>
-                                                Active<br>ACTIVE
+                                                 <font style="color:red;">API Name</font><br> <font style="color:red;">TARGET_API_NAME</font>
+                                                 </td>
+                                                <td>Varchar2(30 char)</td>
+                                                <td>API Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                 <font style="color:red;">Active</font><br> <font style="color:red;">ACTIVE</font>
                                                  </td>
                                                 <td>Varchar2(1 char)</td>
-                                                <td>Active (Y/N)</td>
+                                                <td>Active</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Remarks<br>REMARKS
+                                                 </td>
+                                                <td>Varchar2(1000 char)</td>
+                                                <td>Remarks</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>
+                                                TRANSFORM_TO_CIF_PAYLOAD<br>TRANSFORM_TO_CIF_PAYLOAD
+                                                 </td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>Indicates whether the XML need to be transfored to CIF Payload template</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #14 : <a style="text-decoration: none; " id="MS_QSM_AUTO_ISSUE_CONFIG" href="dbTables.html#MS_QSM_AUTO_ISSUE_CONFIG">MS_QSM_AUTO_ISSUE_CONFIG</a><button onclick="displayData('MS_QSM_AUTO_ISSUE_CONFIG');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This data table hold the information of the parameters to be passed to ISM as part of the Auto issue creation feature</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Field_Key<br>Field_Key
+                                                 </td>
+                                                <td>Varchar2(255 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Field_Name<br>Field_Name
+                                                 </td>
+                                                <td>Varchar2(255 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Description<br>Description
+                                                 </td>
+                                                <td>Varchar2(1000 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Field_Value<br>Field_Value
+                                                 </td>
+                                                <td>Varchar2(1000 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Local_String<br>Local_String
+                                                 </td>
+                                                <td>Varchar2(4000 char)</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #15 : <a style="text-decoration: none; " id="MS_QSM_Questionnaire_Category" href="dbTables.html#MS_QSM_Questionnaire_Category">MS_QSM_Questionnaire_Category</a><button onclick="displayData('MS_QSM_Questionnaire_Category');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This table hosts the various questionnaire categories available in the system.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Field_Key<br>Field_Key
+                                                 </td>
+                                                <td>Varchar2(255 char)</td>
+                                                <td>Field_Key</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Field_Value<br>Field_Value
+                                                 </td>
+                                                <td>Varchar2(255 char)</td>
+                                                <td>Field_Value</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Field_Description<br>Field_Description
+                                                 </td>
+                                                <td>Varchar2(255 char)</td>
+                                                <td>Field_Description</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Locale_String<br>Locale_String
+                                                 </td>
+                                                <td>Varchar2(255 char)</td>
+                                                <td>Locale_String</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1386,18 +1458,30 @@
                     ]
                 });
             });
-            
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
                         (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
                 $(window).load(function(){
                 
                 $("body").mCustomScrollbar({
                     theme:"minimal",
-                    mouseWheel:{ scrollAmount: "300px" }
+                    mouseWheel:{ scrollAmount: "100px" }
                 });
-                var referrer = document.URL;
-                var res = referrer.split("#");
-                   var hashAddress="#"+res[1];
-            $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));    
+                scrollBody();   
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
             });
             })(jQuery);
         </script>

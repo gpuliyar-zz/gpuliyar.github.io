@@ -86,16 +86,23 @@
                
             });
                         (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
                 $(window).load(function(){
                 
                 $("body").mCustomScrollbar({
                     theme:"minimal",
-                    mouseWheel:{ scrollAmount: "300px" }
+                    mouseWheel:{ scrollAmount: "100px" }
                 });
-                var referrer = document.URL;
-                var res = referrer.split("#");
-                   var hashAddress="#"+res[1];
-            $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));    
+                scrollBody();   
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
             });
             })(jQuery);
         </script>

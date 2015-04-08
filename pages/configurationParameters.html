@@ -49,7 +49,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                    <h4><span class="fa fa-gears fa-fw"></span> #1 : <a style="text-decoration: none; " id="MS_AUD_Integrated_Modules">MS AUD Integrated Modules</a>  </h4>
+                                    <h4><span class="fa fa-gears fa-fw"></span> #1 : <a style="text-decoration: none; " id="MS_QSM_Configuration">MS_QSM_Configuration</a>  <a onclick="displayRef('MS_QSM_Configuration');" data-toggle="modal" data-target="#data-Modal"  class="tooltip-c"><span data-toggle="tooltip" data-placement="top" title="Infolets:3" class="fa fa-tags fa-fw"></span></a></h4>
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -62,12 +62,12 @@
                                             </tr>
                                             <tr>
                                                 <th style="width:15%;">Description</th>
-                                                <td>Define Parameter for integration with other Modules.</td>
+                                                <td>Use this parameter type to configure Survey Management application.</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <br/>
-                                    <table class="table table-hover configuration-table-nr">
+                                    <table class="table table-hover configuration-table">
                                         <thead>
                                             <tr>
                                                 <th>Parameter Name</th>
@@ -78,56 +78,88 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Is_RSK_Integrated</td>
-                                                <td>select  Y If you want to integrate the Risk Management application with the Audit
-Management application.
-select N If you do not want to integrate the Risk Management application with
-the Audit Management application.</td>
+                                                <td>QSM_Debug</td>
+                                                <td>The value that appears in the Parameter Value field determines whether to enable or disable the debug
+code.The possible values that you can enter are: Y and N.</td>
                                                 <td><a href="listOfValues.html#"></a></td>
                                                 <td> Y</td>
                                             </tr>
                                             <tr>
-                                                <td>Is_RSM_Integrated</td>
-                                                <td>select Y If you want to integrate the Resource Management application with the
-Audit Management application.
-select N If you do not want to integrate the Resource Management application
-with the Audit Management application.</td>
+                                                <td>IS_FindingsTab_Required</td>
+                                                <td>Use this parameter to enable the Findings/Issues tab in the survey response form</td>
                                                 <td><a href="listOfValues.html#"></a></td>
                                                 <td> Y</td>
                                             </tr>
                                             <tr>
-                                                <td>Is_DMS_Integrated</td>
-                                                <td>select Y If you want to integrate Policy and Document Management System
-application with the Audit Management application.
-select N If you do not want to integrate Policy and Document System application
-with the Audit Management application.</td>
+                                                <td>Response_Assignment_Validity_After_Due_Date</td>
+                                                <td>The value that appears in the Parameter Value field determines the number of days after the due date the
+Respond To survey/scorecard/certification assignments should be withdrawn from the respondents.</td>
+                                                <td><a href="listOfValues.html#"></a></td>
+                                                <td> 365</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Approval_Assignment_Validity_After_Due_Date</td>
+                                                <td>The value that appears in the Parameter Value field determines the number of days from the due date
+after which the Respond To survey/scorecard/certification assignments should be withdrawn from the
+approver.</td>
+                                                <td><a href="listOfValues.html#"></a></td>
+                                                <td> 365</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Enable_Context_Field_Updation</td>
+                                                <td>This parameter would enable the Context Field Data Population while generating a survey response assignment</td>
                                                 <td><a href="listOfValues.html#"></a></td>
                                                 <td> Y</td>
                                             </tr>
                                             <tr>
-                                                <td>Is_ISM_Integrated</td>
-                                                <td>select Y If you want to integrate Issue Management application with the
-Audit Management application.
-select N If you do not want to integrate Issue Management application with
-the Audit Management application.</td>
+                                                <td>Offline_Survey_Template_Header</td>
+                                                <td>This parameter allows the user to configure default header in Offline Survey template.</td>
+                                                <td><a href="listOfValues.html#"></a></td>
+                                                <td> Offline Survey</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Number_of_Days_after_due</td>
+                                                <td>The value that appears in the Parameter Value field determines the number of days before the due date
+the respondent receives reminder email notification to respond to the survey/scorecard/certification.</td>
+                                                <td><a href="listOfValues.html#"></a></td>
+                                                <td> 0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Enable_Auto_Creation_of_Issues</td>
+                                                <td>This parameter enables or disables auto creation of issues in ISM on crossing the due date of a survey response</td>
+                                                <td><a href="listOfValues.html#MS_QSM_Yes_No">MS_QSM_Yes_No</a></td>
+                                                <td> Yes</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Issue_Landing_Stage</td>
+                                                <td>This parameter indicates the stages in which the issues added from auto creation to be landed</td>
+                                                <td><a href="listOfValues.html#"></a></td>
+                                                <td> MO</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Enable Response Pre Population</td>
+                                                <td>This parameter will determine if the pre population of survey response would be enabled or not in the system</td>
                                                 <td><a href="listOfValues.html#"></a></td>
                                                 <td> Y</td>
                                             </tr>
                                             <tr>
-                                                <td>Allow access to documents based on Category-Access Group mapping</td>
-                                                <td>You can type the following values:
- Y If you want all the documents to appear in the Select Document window,
-type this value.
- N If you want only the production documents to appear in the Select Document
-window, type this value.</td>
+                                                <td>Capture_Initial_Response</td>
+                                                <td>This parameter specified whether the initial survey response to be captured in the survey change history report.</td>
                                                 <td><a href="listOfValues.html#"></a></td>
                                                 <td> Y</td>
                                             </tr>
                                             <tr>
-                                                <td>Trigger Issues at Monitor Stage</td>
-                                                <td>If value is Y, the reportable issues that are part of final report will be assigned to Issue owner at Monitor Issue stg and Implement Action form is assigned to Action Owner. If value is N, these issues will be assigned to owner at Manage Issue stg.</td>
+                                                <td>Enable Findings or Issues for Questionnaires</td>
+                                                <td>The value that appears in the Parameter Value field determines whether the Findings tab in the Respond
+To Survey/Scorecard/Certification form needs to be enabled or not.The possible values that you can enter are: Y and N.</td>
                                                 <td><a href="listOfValues.html#"></a></td>
-                                                <td> N</td>
+                                                <td> Y</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Disable_Comments_RTF_in_Response_Form</td>
+                                                <td>This parameter specifies whether Response Comments are RTF Based or Plan Text.</td>
+                                                <td><a href="listOfValues.html#MS_QSM_ENABLE_OR_DISABLE_RTF">MS_QSM_ENABLE_OR_DISABLE_RTF</a></td>
+                                                <td> No</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -145,7 +177,7 @@ window, type this value.</td>
                     <div class="col-lg-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                    <h4><span class="fa fa-gears fa-fw"></span> #2 : <a style="text-decoration: none; " id="MS_AUD_SYSTEM_PARAMETERS">MS_AUD_SYSTEM_PARAMETERS</a>  </h4>
+                                    <h4><span class="fa fa-gears fa-fw"></span> #2 : <a style="text-decoration: none; " id="MS_QSM_Email_Configuration">MS_QSM_Email_Configuration</a>  </h4>
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -158,12 +190,15 @@ window, type this value.</td>
                                             </tr>
                                             <tr>
                                                 <th style="width:15%;">Description</th>
-                                                <td>Define System Level Parameters for Audits .</td>
+                                                <td>
+
+
+Use this parameter type to manage the various email notifications in the Survey Management application.</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <br/>
-                                    <table class="table table-hover configuration-table">
+                                    <table class="table table-hover configuration-table-nr">
                                         <thead>
                                             <tr>
                                                 <th>Parameter Name</th>
@@ -174,321 +209,103 @@ window, type this value.</td>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Enable print for Tasks and Draft Issues</td>
-                                                <td>You can type the following values:
- Y: If you want enable the Print functionality in the Tasks and Draft Issues
-form, type this value.
- N: If you do not want to enable the Print functionality in the Tasks and Draft
-Issues form, type this value.</td>
+                                                <td>Number_of_Days_before_due_date</td>
+                                                <td>The value that appears in the Parameter Value field determines the number of days prior to which a notification
+needs to be sent to the respondents before the Response Due Date.</td>
                                                 <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
+                                                <td> 3</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                    <h4><span class="fa fa-gears fa-fw"></span> #3 : <a style="text-decoration: none; " id="MS_QSM_Performance_Configuration">MS_QSM_Performance_Configuration</a>  </h4>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Scope</th>
+                                                <td>Enterprise</td>
                                             </tr>
                                             <tr>
-                                                <td>Enable non-workflow based coaching notes</td>
-                                                <td>You can type the following values:
- Y If you want enable the Coaching Notes link in the View Tasks report,
-type this value.
- N If you do not want to enable the Coaching Notes link in the View Tasks
-report, type this value.</td>
+                                                <th style="width:15%;">Description</th>
+                                                <td>
+
+
+Use this parameter type to configure Survey Management performance-related settings.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover configuration-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>Parameter Name</th>
+                                                <th>Description</th>
+                                                <th>List Of Value</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Maximum_Session_Sleep_Time</td>
+                                                <td>The value that appears in the Parameter Value field indicates the maximum DB sleep time is seconds while controlling the DB sessions to improve the performance</td>
                                                 <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
+                                                <td> 120</td>
                                             </tr>
                                             <tr>
-                                                <td>IS_Detailed_Estimation_Required</td>
-                                                <td>You can type the following values:
- Y If you want to enable the resource estimation, type this value.
- N If you do not want to enable the resource estimation, type this value.</td>
+                                                <td>Maximum_Allowed_Sessions</td>
+                                                <td>
+This parameter specifies the maximum number of allowed sessions in the DB at a particular point of time (Survey Process).</td>
                                                 <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
+                                                <td> 20</td>
                                             </tr>
                                             <tr>
-                                                <td>IS_Plan_Additional_Detail_Required</td>
-                                                <td>You can type the following values:
- Y If you want to enable the Additional Details tab, type this value.
- N If you do not want to enable the Additional Details tab, type this value.</td>
+                                                <td>Minimum_Session_Sleep_Time</td>
+                                                <td>The value that appears in the Parameter Value field indicates the minimum DB sleep time is seconds while controlling the DB sessions to improve the performance</td>
                                                 <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
+                                                <td> 60</td>
                                             </tr>
                                             <tr>
-                                                <td>IS_Re_Audit_Required</td>
-                                                <td>You can type the following values:
- Y If you want to enable re-auditing, type this value.
- N If you do not want to enable re-auditing, type this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>IS_Locations_Required</td>
-                                                <td>You can type the following values:
- Y If you want the user to view the chosen location, type this value.
- N If you do not want the user to view the chosen location, type this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Reminder_Notification_x_Days_Prior_To_Audit</td>
-                                                <td>The parameter ‘x’ determines the email notification that is sent to all the stakeholders before the start of the audi</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> 1</td>
-                                            </tr>
-                                            <tr>
-                                                <td>IS_ADD_QST_SCORE_INCLUDED</td>
-                                                <td>Specify Y if you want to include additional questions created at the time of checklist tasks for final audit score calculation.
-Specify N otherwise</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>IS_Use_Assessment_From_Mandatory</td>
-                                                <td>You can type the following values:
- Y If you want to turn the Use Assessment From field to a mandatory field,
-type this value.
- N If you do not want to turn the Use Assessment From field to a mandatory
-field, type this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> N</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Enable_Organization_For_Ae_Risk_Org</td>
-                                                <td>You can type the following values:
- Y If you want to enable the organization for auditable-entity-risk-organization,
-type this value.
- N If you do not want to enable the organization for auditable-entity-riskorganization,
-type this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>IS_Enable_Samples_in_Control_Test</td>
-                                                <td>You can type the following values:
- Y If you want to enable the samples in the control test, type this value.
- N If you do not want to enable the samples in the control test, type this
-value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>IS_Audit_Recurrence</td>
-                                                <td>You can type the following values:
- Y If you want the audit to recur, type this value.
- N If you do not want the audit to recur, type this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>IS_Audit_Title_Editable</td>
-                                                <td>You can type the following values:
- Y If you want to enable the audit title, type this value.
- N If you do not want to enable the audit title, type this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>IS_Enable_Root_Cause_and_Contributing_Factors</td>
-                                                <td>You can type the following values:
- Y If you want the root cause and contributing factors to be enabled, type
-this value.
- N If you do not want the root cause and contributing factors to be enabled,
-type this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>CAN_Lead_Auditor_From_Any_Org</td>
-                                                <td>You can type the following values:
- Y If you want the lead auditor to be chosen from any organization level,
-type this value.
- N If you do not want the lead auditor to be chosen from a particular organization
-level, type this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>IS_Auditee_Can_Delegate_Findings</td>
-                                                <td>You can type the following values:
-Y If you want the auditee to delegate the findings, type this value.
-N If you do not want the auditee to delegate the findings, type this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>IS_Risk_Mandatory_for_Ae_Risk_Org</td>
-                                                <td>If  system level parameter “IS_AE_Risk_Mandatory= N” then the risk field becomes optional for only Planned Audit when scope is Process/AE-Risk Audit </td>
+                                                <td>Enable_Progressive_Submission</td>
+                                                <td>This flag indicates whether progressive submission has been enabled or not</td>
                                                 <td><a href="listOfValues.html#"></a></td>
                                                 <td> N</td>
                                             </tr>
                                             <tr>
-                                                <td>IS_AE_Risks_Relation_Required</td>
-                                                <td>You can type the following values:
- Y If you want to enable a relationship between the auditable entity and
-related risks.
- N If you do not want to enable a relationship between the auditable entity
-and related risks.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Audits_Conducted_In_Past_X_Months</td>
-                                                <td>This parameter is used by Audit Status Pie Chart to filter the audits based on the duration (in months) specified</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> 6</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Needs Audit Closure Process</td>
-                                                <td>You can type the following values:
- Y If you want to close the audit without working on the Audit Closure
-form, type this value.
- N If you do not want to close the audit without going through the Audit
-Closure form, type this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mandate Controls Tests in APS form for Scheduled Audits</td>
-                                                <td>This parameter is to make the controls & tests mandatory in the Plan Scope form for scheduled Audits</td>
+                                                <td>Score_Calculation_From_Backend</td>
+                                                <td>The value that appears in the Parameter Value field determines the score calculation.
+If you enter Y, then the score is calculated from backend, else the score is calculated from JS</td>
                                                 <td><a href="listOfValues.html#"></a></td>
                                                 <td> N</td>
                                             </tr>
                                             <tr>
-                                                <td>Can add adhoc team members</td>
-                                                <td>This parameter is to enable the option of adding the additional team members in the Audit Form even when RSM is integrated with Audits</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> N</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Audits being conducted in next X months</td>
-                                                <td>This parameter is used by Audit Status Pie Chart to filter the audits based on the duration (in months) specified</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> 6</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Set_Default_Scope</td>
-                                                <td>This parameter is used to default the scope in plan &Audit form</td>
-                                                <td><a href="listOfValues.html#MS_AUD_Audit_Based_On">MS AUD Audit Based On</a></td>
-                                                <td> Process/AE-Risk Audit</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Hide_Scope_Based_On_Field</td>
-                                                <td>You can type following values:
- Y If you want to display the Scope Based On field in the Audit and Annual/
-Multi-year Plan form.
- N If you do not want to display the Scope Based On field in the Audit and
-Annual/Multi-year Plan form.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> N</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Auto_Populate_Related_Controls_And_Tests</td>
-                                                <td>You can type the following values:
- Y If you want to auto-populate the Tests and Controls in the Audit Plan/
-Scope form, type this value.
- N If you do not want to auto-populate the Tests and Controls in the Audit
-Plan/Scope form, type this value.</td>
+                                                <td>DB_Sleep_Required</td>
+                                                <td>This Parameter indicates whether DB Sessions need to be controlled for performance improvement</td>
                                                 <td><a href="listOfValues.html#"></a></td>
                                                 <td> Y</td>
                                             </tr>
                                             <tr>
-                                                <td>List_all_core_objects_in_advisors_as_per_GRCF</td>
-                                                <td>You can type the following values:
- Y If you want to turn the Use Assessment From field to a mandatory field,
-type this value.
- N If you do not want to turn the Use Assessment From field to a mandatory
-field, type this value.</td>
+                                                <td>Response_Upload_Thread_Pool_Size</td>
+                                                <td>The value that appears in the Parameter Value field specifies the number of threads that need to be started
+for the response upload process</td>
                                                 <td><a href="listOfValues.html#"></a></td>
-                                                <td> N</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Enable_Create_Tasks_For_Scheduled_Audits</td>
-                                                <td>This parameter is to enable task creation for scheduled audits</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Enable Re-opening of Approved Tasks</td>
-                                                <td>You can type the following values:
- Y If you want to reopen the approved tasks, type this value.
- N If you do not want to reopen the approved tasks, type this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Auto Population of Risk Control and Test while creating tasks</td>
-                                                <td>You can type following values:
- Y If you want to auto-populate the related Risks, Controls, and Tests in the
-Create Task form.
- N If you do not want to auto-populate the related Risks, Controls, and Tests
-in the Create Task form.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> N</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Audits closed in past X months</td>
-                                                <td>All the audits closed within the value defined will be displayed in this report.
-Default value is 12 months</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> 12</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Set_Debugger_On</td>
-                                                <td>This Parameter is used to enable debug mode</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> N</td>
-                                            </tr>
-                                            <tr>
-                                                <td>IS_Plan_Reviewer_Required</td>
-                                                <td>You can type the following values:
- Y If you want to enable reviewer action on the planned audit, type this
-value.
- N If you do not want to enable reviewer action on the planned audit, type
-this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Edit Audit Report ID</td>
-                                                <td>This parameter is set to Y by default which will allow the user to edit the Audit report ID in the Audit Report form. 
-If this parameter is set to N, system will auto populate the report ID in the following format AUD ID – YYYY - 000</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> N</td>
-                                            </tr>
-                                            <tr>
-                                                <td>MS_AUD_AE_Enable_Auto_Approval</td>
-                                                <td>This parameter is to define the approval workflow for the uploaded AE’s.  Auto Approve & To Owners or Approvers will be the List of Values</td>
-                                                <td><a href="listOfValues.html#MS_AUD_AUTO_APPROVE_OBJ">MS_AUD_AUTO_APPROVE_OBJ</a></td>
-                                                <td> To Owners Or Approvers</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Reference In-progress Tasks</td>
-                                                <td>You can type following values:
- Y If you want to include only in-progress tasks for referencing.
- N If you do not want to include in-progress tasks for referencing. Only the approved and reopened tasks will be included.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Enable_Draft_Issues_For_Active_Audit</td>
-                                                <td>You can type the following values:
- Y If you want to enable the Draft Issues icon for active audits, type this
-value.
- N If you do not want to enable the Draft issues icon for active audits, type
-this value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
-                                            </tr>
-                                            <tr>
-                                                <td>MS_OnGoingAudits_window</td>
-                                                <td>You can type the following values:
- Y If you want to enable the ‘audit start date calculation’, type this value.
- N If you do not want to enable the ‘audit start date calculation’, type this
-value.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> 4000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Create Adhoc Risks in APS form</td>
-                                                <td>This parameter allows the Audit Manager & Lead Auditor to define adhoc risks in APS form of the Audit Project.</td>
-                                                <td><a href="listOfValues.html#"></a></td>
-                                                <td> Y</td>
+                                                <td> 5</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -562,18 +379,31 @@ value.</td>
                     ]
                 });
             });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
 
                         (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
                 $(window).load(function(){
                 
                 $("body").mCustomScrollbar({
                     theme:"minimal",
-                    mouseWheel:{ scrollAmount: "300px" }
+                    mouseWheel:{ scrollAmount: "100px" }
                 });
-                var referrer = document.URL;
-                var res = referrer.split("#");
-                   var hashAddress="#"+res[1];
-            $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));    
+                scrollBody();   
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
             });
             })(jQuery);
         </script>

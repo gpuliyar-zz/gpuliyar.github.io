@@ -49,7 +49,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h4><span class="fa fa-dashboard fa-fw"></span> #1 : <a style="text-decoration: none; " id="MS_AUD_Dash_Audit_Status">Audit Status</a>   </h4>
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #1 : <a style="text-decoration: none; " id="MS_QSM_OVERVIEW_DBD">Overview</a>   </h4>
                             </div>
                             <div class="panel-body">
                                 <div class="dataTable_wrapper">
@@ -57,11 +57,12 @@
                                         <tbody>
                                             <tr>
                                                 <th style="width:15%">Name</th>
-                                                <td>MS_AUD_Dash_Audit_Status</td>
+                                                <td>MS_QSM_OVERVIEW_DBD</td>
                                             </tr>
                                             <tr>
                                                 <th style="width:15%;">Comments</th>
-                                                <td>This dashboard has a pie chart that looks at the audits available in the system for the user in the specified time window </td>
+                                                <td>This Dashboard Provides information on the overview of survey module and various charts used in the Survey
+Management application.</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -81,419 +82,23 @@
                                                     <tr>
                                                         <td class="tooltip-chart">
                                                                                                                 <span data-toggle="tooltip" data-placement="top" title="Pie Chart" class="fa fa-pie-chart fa-fw" style="border: 1px solid black;"></span>
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_AUD_Status">MS_AUD_Chrt_AUD_Status</a></td>
-                                                        <td>This Chart is deprecated</td>
+                                                                                                                <a href="charts.html#MS_QSM_ONGOING_SURV_CHART">MS_QSM_ONGOING_SURV_CHART</a></td>
+                                                        <td>This chart displays the status of all completed, and in-process 
+surveys for the previous month based on the due date.</td>
                                                     </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-dashboard fa-fw"></span> #2 : <a style="text-decoration: none; " id="MS_AUD_Dash_Top_5">Top 5</a>  <a onclick="displayRef('100004');" data-toggle="modal" data-target="#data-Modal" class="tooltip-chart"><span  data-toggle="tooltip" data-placement="top" title="Infocenters:1" class="fa fa-tags fa-fw"></span></a> </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%">Name</th>
-                                                <td>MS_AUD_Dash_Top_5</td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td>This dashboard has 7 charts which gives an overview of the current state of the system as planned. This typically presents the most relevant information for an audit manager or executive.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="panel panel-warning">
-                                        <div class="panel-heading">
-                                            Charts
-                                        </div>
-                                        <div class="panel-body">
-                                            <table class="table table-hover dashboard-table-nr">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Description</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chart_Top_5_Audit_Classification">MS_AUD_Chart_Top_5_Audit_Classification</a></td>
-                                                        <td>This is a stacked bar chart that looks at all audits for the user based on security in the specified time window. We ignore the recurrence frequency in determining if the audit schedule should contribute more than once to the count.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chart_Top_5_Audit_Type">MS_AUD_Chart_Top_5_Audit_Type</a></td>
-                                                        <td>This is a stacked bar chart that looks at all audit schedules for the user based on security in the specified time window. We ignore the recurrence frequency in determining if the audit schedule should contribute more than once to the count</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chart_Top_5_Checklist">MS_AUD_Chart_Top_5_Checklist</a></td>
-                                                        <td>This is a bar chart that looks at all audit executions for the user based on security in the specified time window and counts the top 5 most frequently used checklists</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chart_Top_5_Compliant_Org">MS_AUD_Chart_Top_5_Compliant_Org</a></td>
-                                                        <td>This is a stacked bar chart that looks at all audits that have published final reports for the user in the specified time window</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chart_Top_5_NonCompl_Org">MS_AUD_Chart_Top_5_NonCompl_Org</a></td>
-                                                        <td>This is a stacked bar chart that looks at all audits that have published final reports for the user based on security in the specified time window</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chart_Top_5_NonCompl_Audit_Class">MS_AUD_Chart_Top_5_NonCompl_Audit_Class</a></td>
-                                                        <td>This is a stacked bar chart that looks at all audits that have published final reports for the user based on security in the specified time window</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chart_Top_5_NonComp_Quest">MS_AUD_Chart_Top_5_NonComp_Quest</a></td>
-                                                        <td>This is a stacked bar chart that looks at all audit executions for the user based on security in the specified time window and counts the top 5 most frequently non-compliant questions</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#UnDefined7">UnDefined7</a></td>
-                                                        <td></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-dashboard fa-fw"></span> #3 : <a style="text-decoration: none; " id="MS_AUD_Dsh_Audit_Execution">Top 5</a>   </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%">Name</th>
-                                                <td>MS_AUD_Dsh_Audit_Execution</td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td>This dashboard is deprecated</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="panel panel-warning">
-                                        <div class="panel-heading">
-                                            Charts
-                                        </div>
-                                        <div class="panel-body">
-                                            <table class="table table-hover dashboard-table-nr">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Description</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_Top_Checklist_Used">MS_AUD_Chrt_Top_Checklist_Used</a></td>
-                                                        <td>This Chart is deprecated</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_Top_Compliant_Org">MS_AUD_Chrt_Top_Compliant_Org</a></td>
-                                                        <td>This Chart is deprecated</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_Top_Non_Compliant_Org">MS_AUD_Chrt_Top_Non_Compliant_Org</a></td>
-                                                        <td>This Chart is deprecated</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_Top_NonCompliant_Audit_Classification">MS_AUD_Chrt_Top_NonCompliant_Audit_Classification</a></td>
-                                                        <td>This Chart is deprecated</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_Top_Audit_Type">MS_AUD_Chrt_Top_Audit_Type</a></td>
-                                                        <td>This Chart is deprecated</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_Aud_Chrt_Top_Audit_Classification">MS_Aud_Chrt_Top_Audit_Classification</a></td>
-                                                        <td>Top 5 Audit Classifications</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_Top_Non_Compliant_Questions">MS_AUD_Chrt_Top_Non_Compliant_Questions</a></td>
-                                                        <td>This Chart is deprecated</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-dashboard fa-fw"></span> #4 : <a style="text-decoration: none; " id="MS_AUD_Dsh_Audit_Status_Pie">Audit Status</a>   </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%">Name</th>
-                                                <td>MS_AUD_Dsh_Audit_Status_Pie</td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td>This dashboard is deprecated</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="panel panel-warning">
-                                        <div class="panel-heading">
-                                            Charts
-                                        </div>
-                                        <div class="panel-body">
-                                            <table class="table table-hover dashboard-table-nr">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Description</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
                                                     <tr>
                                                         <td class="tooltip-chart">
                                                                                                                 <span data-toggle="tooltip" data-placement="top" title="Pie Chart" class="fa fa-pie-chart fa-fw" style="border: 1px solid black;"></span>
-                                                                                                                <a href="charts.html#MS_AUD_Chart_Audit_Status_Pie">MS_AUD_Chart_Audit_Status_Pie</a></td>
-                                                        <td>This is a pie chart that looks at the audits available in the system for the user in the specified time window. 
-The specific time window should be configurable based on system level parameters.</td>
+                                                                                                                <a href="charts.html#MS_QSM_ONGOING_CERT_CHART">MS_QSM_ONGOING_CERT_CHART</a></td>
+                                                        <td>This chart displays the status of all completed, in-process certifica-
+tions for the previous month based on the due date.</td>
                                                     </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-dashboard fa-fw"></span> #5 : <a style="text-decoration: none; " id="MS_AUD_Dsh_Efforts">Efforts/Cost</a>  <a onclick="displayRef('100007');" data-toggle="modal" data-target="#data-Modal" class="tooltip-chart"><span  data-toggle="tooltip" data-placement="top" title="Infocenters:1" class="fa fa-tags fa-fw"></span></a> </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%">Name</th>
-                                                <td>MS_AUD_Dsh_Efforts</td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td>This dashboard has two charts which gives an overview of effort and cost with respect to audits.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="panel panel-warning">
-                                        <div class="panel-heading">
-                                            Charts
-                                        </div>
-                                        <div class="panel-body">
-                                            <table class="table table-hover dashboard-table-nr">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Description</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_Top_Audit_Classification_By_ActualCost">MS_AUD_Chrt_Top_Audit_Classification_By_ActualCost</a></td>
-                                                        <td>This is a bar chart that looks at all in progress and completed audits for the user in the specified time window.
-This chart is useful only if the org tracks budgeted days and time spent at task-level</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_Top_Audit_Classification_By_TimeSpent">MS_AUD_Chrt_Top_Audit_Classification_By_TimeSpent</a></td>
-                                                        <td>This is a stacked bar chart that looks at all in progress and completed audits for the user based on security in the specified time window. This chart is useful only if the org tracks budgeted days and time spent at task-level</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-dashboard fa-fw"></span> #6 : <a style="text-decoration: none; " id="MS_AUD_Dsh_Planned_Audit_Candidate">Planned Audit Candidates</a>  <a onclick="displayRef('100008');" data-toggle="modal" data-target="#data-Modal" class="tooltip-chart"><span  data-toggle="tooltip" data-placement="top" title="Infocenters:1" class="fa fa-tags fa-fw"></span></a> </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%">Name</th>
-                                                <td>MS_AUD_Dsh_Planned_Audit_Candidate</td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td>This dashboard has a pie chart that puts together the focus areas from all Annual 
-or multi-year plan that are currently active and valid in the users organization and presents it in a pie-chart.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="panel panel-warning">
-                                        <div class="panel-heading">
-                                            Charts
-                                        </div>
-                                        <div class="panel-body">
-                                            <table class="table table-hover dashboard-table-nr">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Description</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
                                                     <tr>
                                                         <td class="tooltip-chart">
                                                                                                                 <span data-toggle="tooltip" data-placement="top" title="Pie Chart" class="fa fa-pie-chart fa-fw" style="border: 1px solid black;"></span>
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_Planned_Audit_Candidate">MS_AUD_Chrt_Planned_Audit_Candidate</a></td>
-                                                        <td>This is a pie chart that puts together the focus areas from all Annual or multi-year plan that are currently active and valid in the users organization and presents it in a pie-chart</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.table-wrapper -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel panel-default -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4><span class="fa fa-dashboard fa-fw"></span> #7 : <a style="text-decoration: none; " id="MS_AUD_Dsh_Trends">Trends</a>  <a onclick="displayRef('100009');" data-toggle="modal" data-target="#data-Modal" class="tooltip-chart"><span  data-toggle="tooltip" data-placement="top" title="Infocenters:1" class="fa fa-tags fa-fw"></span></a> </h4>
-                            </div>
-                            <div class="panel-body">
-                                <div class="dataTable_wrapper">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <th style="width:15%">Name</th>
-                                                <td>MS_AUD_Dsh_Trends</td>
-                                            </tr>
-                                            <tr>
-                                                <th style="width:15%;">Comments</th>
-                                                <td>This dashboard has two charts which gives an overview of the current trends of the Audits as planned</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="panel panel-warning">
-                                        <div class="panel-heading">
-                                            Charts
-                                        </div>
-                                        <div class="panel-body">
-                                            <table class="table table-hover dashboard-table-nr">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Description</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_Scheduled_Audits_By_Month">MS_AUD_Chrt_Scheduled_Audits_By_Month</a></td>
-                                                        <td>This is a stacked bar chart that looks at audits scheduled to begin in a given time window. The goal is to see monthly trends on the number of audits being conducted.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tooltip-chart">
-                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
-                                                                                                                <a href="charts.html#MS_AUD_Chrt_Audit_By_Month">MS_AUD_Chrt_Audit_By_Month</a></td>
-                                                        <td>This is a stacked bar chart that looks at audits that have begun in a given time window based on security. The goal is see monthly trends on the number of audits being conducted</td>
+                                                                                                                <a href="charts.html#MS_QSM_ONGOING_SCOR_CHART">MS_QSM_ONGOING_SCOR_CHART</a></td>
+                                                        <td>This chart displays the status of all completed, in-process
+scorecards for the previous month based on the due date.</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -566,17 +171,30 @@ or multi-year plan that are currently active and valid in the users organization
                 });
                 
             });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
                         (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
                 $(window).load(function(){
                 
                 $("body").mCustomScrollbar({
                     theme:"minimal",
-                    mouseWheel:{ scrollAmount: "300px" }
+                    mouseWheel:{ scrollAmount: "100px" }
                 });
-                var referrer = document.URL;
-                var res = referrer.split("#");
-                   var hashAddress="#"+res[1];
-            $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));    
+                scrollBody();   
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
             });
             })(jQuery);
         </script>

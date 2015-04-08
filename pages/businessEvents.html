@@ -49,7 +49,67 @@
                     <div class="col-lg-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h4><span class="fa fa-suitcase fa-fw"></span> #1 : <a style="text-decoration: none; " id="Trigger_Audit_In_AUD">Trigger Audit In AUD</a> </h4>
+                                <h4><span class="fa fa-suitcase fa-fw"></span> #1 : <a style="text-decoration: none; " id="Retrieve_QSM_XML_Template">Retrieve QSM XML Template</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Subscription Program Name</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-suitcase fa-fw"></span> #2 : <a style="text-decoration: none; " id="Trigger_Surveys_In_QSM">Trigger Surveys In QSM</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Subscription Program Name</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-suitcase fa-fw"></span> #3 : <a style="text-decoration: none; " id="Retrieve_Spreadsheet_XML_Template">Retrieve Spreadsheet XML Template</a> </h4>
                             </div>
                             <div class="panel-body">
                                 <div class="dataTable_wrapper">
@@ -109,16 +169,23 @@
                 
             });
                         (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
                 $(window).load(function(){
                 
                 $("body").mCustomScrollbar({
                     theme:"minimal",
-                    mouseWheel:{ scrollAmount: "300px" }
+                    mouseWheel:{ scrollAmount: "100px" }
                 });
-                var referrer = document.URL;
-                var res = referrer.split("#");
-                   var hashAddress="#"+res[1];
-            $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));    
+                scrollBody();   
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
             });
             })(jQuery);
         </script>
