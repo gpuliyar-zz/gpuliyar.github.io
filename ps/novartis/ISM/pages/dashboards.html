@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Dashboards</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #1 : <a style="text-decoration: none; " id="MS_ISM_ISSUE_PRIORITY">Issue Priority</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS ISM ISSUE PRIORITY</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display ISM Issue Priority chart</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
+                                                                                                                <a href="charts.html#MS_ISM_ISSUE_PRIORITY_CHART">MS_ISM_ISSUE_PRIORITY_CHART</a></td>
+                                                        <td>This is a Pie Chart that provides list of all the Issues that are approved by the Issue Approver. 
+If the Approval stage is not enabled, the Issues once sent to theIssue Owner by the Issue Initiator should be pulled up 
+in the list report and the maximum number of Issue based on Priority. </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #2 : <a style="text-decoration: none; " id="MS_ISM_ISSUE_RATING">Issue Rating</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS ISM ISSUE RATING</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display 
+ISM Issue Rating.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
+                                                                                                                <a href="charts.html#MS_ISM_ISSUE_RATING_CHART">MS_ISM_ISSUE_RATING_CHART</a></td>
+                                                        <td>This is a Pie Chart that provides list all the Issues that are approved by the Issue Approver.
+If the Approval stage is not enabled, the Issues once sent to the Issue Owner by the Issue Initiator should be pulled up in the list report 
+and the maximum number of Issue based on Rating. </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #3 : <a style="text-decoration: none; " id="MS_ISM_ISSUE_STATUS">Issue Status</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS ISM ISSUE STATUS</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display 
+ISM  Issue Status</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
+                                                                                                                <a href="charts.html#MS_ISM_ISSUE_STATUS_CHART">MS_ISM_ISSUE_STATUS_CHART</a></td>
+                                                        <td>This is a Bar Graph that provides list of all issues for 
+the user based on the below mentioned security and the different Issue Status</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #4 : <a style="text-decoration: none; " id="MS_ISM_Closed_Iss_By_Src_Prio">Closed Issues by Source and Priority</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS_ISM_Closed_Iss_By_Src_Prio</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display
+ Closed Issue by priority</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
+                                                                                                                <a href="charts.html#MS_ISM_Closed_Issue_By_Src_Priority">MS_ISM_Closed_Issue_By_Src_Priority</a></td>
+                                                        <td>This is a Bar Chart that provides list of all Closed issues for the user based on the 
+below mentioned security grouped by Issue Source and Priority Type.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #5 : <a style="text-decoration: none; " id="MS_ISM_Issue_By_Bizz_Unit">Aging by Business Unit</a>  <a onclick="displayRef('100007');" data-toggle="modal" data-target="#data-Modal" class="tooltip-chart"><span  data-toggle="tooltip" data-placement="top" title="Infocenters:1" class="fa fa-tags fa-fw"></span></a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS_ISM_Issue_By_Bizz_Unit</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display to 
+Aging by Business Unit Chart</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
+                                                                                                                <a href="charts.html#MS_ISM_Issue_By_Bizz_Unit">MS_ISM_Issue_By_Bizz_Unit</a></td>
+                                                        <td>This is a stacked bar chart that looks at all Aging Issues based on the above mentioned security and Different Organizations. 
+All the Issues that are approved by the Issue Approver are considered for the ageing report.  </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #6 : <a style="text-decoration: none; " id="MS_ISM_Issue_By_GRC_Object">Issue by Area of Compliance</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS_ISM_Issue_By_GRC_Object</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display to 
+Issue by Area of Compliance</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
+                                                                                                                <a href="charts.html#MS_ISM_Issue_By_GRC_Object">MS_ISM_Issue_By_GRC_Object</a></td>
+                                                        <td>This is a stacked bar chart that looks at all Aging Issues based on the above mentioned security and GRC Object Area of Compliance. 
+Area of Compliance is the default GRC Object chosen in this report. </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #7 : <a style="text-decoration: none; " id="MS_ISM_Issue_By_Priority">Issues by Priority</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS_ISM_Issue_By_Priority</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to 
+displayIssues by Priority</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="Pie Chart" class="fa fa-pie-chart fa-fw" style="border: 1px solid black;"></span>
+                                                                                                                <a href="charts.html#MS_ISM_Issue_By_Priority">MS_ISM_Issue_By_Priority</a></td>
+                                                        <td>This is a Pie Chart that provides list of all the Issues that are approved by the Issue Approver. 
+If the Approval stage is not enabled, the Issues once sent to 
+the Issue Owner by the Issue Initiator should be pulled up in the list report and the maximum number of Issue based on Priority.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #8 : <a style="text-decoration: none; " id="MS_ISM_Issue_By_Risk">Top Ten Risks by Open Issues</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS_ISM_Issue_By_Risk</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display 
+Top Ten Risks by Open Issues</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
+                                                                                                                <a href="charts.html#MS_ISM_Issue_By_Risk">MS_ISM_Issue_By_Risk</a></td>
+                                                        <td> This is a bar graph that provides list of all the Issues that are approved by the Issue Approver.
+ If the Approval stage is not enabled, the Issues once sent to the Issue Owner by the Issue Initiator 
+ should be pulled up in the list report and based on top 10 Risks
+</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #9 : <a style="text-decoration: none; " id="MS_ISM_Issue_By_Severity">Issues by Rating</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS_ISM_Issue_By_Severity</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to 
+display Issues by Rating</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="Pie Chart" class="fa fa-pie-chart fa-fw" style="border: 1px solid black;"></span>
+                                                                                                                <a href="charts.html#MS_ISM_Issue_By_Severity">MS_ISM_Issue_By_Severity</a></td>
+                                                        <td>This is a Pie Chart that provides list all the Issues that are approved by the Issue Approver.
+ If the Approval stage is not enabled, the Issues once sent to the Issue Owner by the Issue Initiator should be pulled up in 
+the list report and the maximum number of Issue based on Rating. </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #10 : <a style="text-decoration: none; " id="MS_ISM_Issue_By_Source">Issues by Source</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS_ISM_Issue_By_Source</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display 
+Issues by Source</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
+                                                                                                                <a href="charts.html#MS_ISM_Issue_By_Source">MS_ISM_Issue_By_Source</a></td>
+                                                        <td>This is a Bar Graph that provides all the Issues that are approved by the Issue Approver.
+If the Approval stage is not enabled, the Issues once sent to the Issue Owner by the Issue Initiator should be pulled up in the 
+list report and the maximum number of Issue based on Source Type.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #11 : <a style="text-decoration: none; " id="MS_ISM_Issue_By_Status">Issues by Status</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS_ISM_Issue_By_Status</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display 
+Issues by Status</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="Pie Chart" class="fa fa-pie-chart fa-fw" style="border: 1px solid black;"></span>
+                                                                                                                <a href="charts.html#MS_ISM_Issue_By_Status">MS_ISM_Issue_By_Status</a></td>
+                                                        <td>This is a Bar Graph that provides list of all issues for the user based on the below 
+mentioned security and the different Issue Status.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #12 : <a style="text-decoration: none; " id="MS_ISM_Issue_By_Type">Issues by Issue Type</a>  <a onclick="displayRef('100014');" data-toggle="modal" data-target="#data-Modal" class="tooltip-chart"><span  data-toggle="tooltip" data-placement="top" title="Infocenters:1" class="fa fa-tags fa-fw"></span></a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS_ISM_Issue_By_Type</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display 
+Issues by Issue Type</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
+                                                                                                                <a href="charts.html#MS_ISM_Issue_By_Type">MS_ISM_Issue_By_Type</a></td>
+                                                        <td>This is a Bar Chart that provides list of all issues that are approved by the Issue Approver.If the Approval stage is not enabled, 
+the Issues once sent to the Issue Owner by the Issue Initiator should be pulled up in the issue list report</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #13 : <a style="text-decoration: none; " id="MS_ISM_Os_Src_Priority">Outstanding Open Issues by Source and Priority</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS_ISM_Os_Src_Priority</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display Outstanding
+Open Issues by Source and Priority
+</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
+                                                                                                                <a href="charts.html#MS_ISM_Issue_By_Src_Priority">MS_ISM_Issue_By_Src_Priority</a></td>
+                                                        <td>This is a Bar Chart that provides list of all Past Due issues for the user based on the  
+security grouped by Issue Source and Priority Type</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-dashboard fa-fw"></span> #14 : <a style="text-decoration: none; " id="MS_ISM_Os_Src_org">Outstanding Open Issues by Source and Organization</a>   </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>MS_ISM_Os_Src_org</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td>This Dashboard to display to Outstanding
+ Open Issues by Source and Organization</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading">
+                                            Charts
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover dashboard-table-nr">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="tooltip-chart">
+                                                                                                                <span data-toggle="tooltip" data-placement="top" title="3D Stacking Bar Chart" class="fa fa-bar-chart-o fa-fw" style="border: 1px solid black;"></span> 
+                                                                                                                <a href="charts.html#MS_ISM_Issue_By_Src_Org">MS_ISM_Issue_By_Src_Org</a></td>
+                                                        <td>This is a Bar Chart that provides list of all Past Due issues for the user based
+ on the below mentioned security grouped by Issue Source and Priority Type. </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <div class="modal fade" id="data-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        </div>
+
+                <!-- jQuery -->
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <script type="text/javascript" src="../dist/js/data.json"></script>
+        <script type="text/javascript" src="index/dashboardsReferences.json"></script>
+        <script type="text/javascript" src="../dist/js/displayReferences.js"></script>
+        <script>
+            $(document).ready(function() {
+                 $('.tooltip-chart').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+            
+                $('.dashboard-table').DataTable({
+                    "responsive": true,
+                    "aoColumns": [
+                        { "sWidth": "45%" },      // 1st column width 
+                        { "sWidth": "55%" }      // 2nd column width 
+                    ]
+                });
+                $('.dashboard-table-nr').DataTable({
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,
+                    "aoColumns": [
+                        { "sWidth": "45%" },      // 1st column width 
+                        { "sWidth": "55%" }      // 2nd column width 
+                    ]
+                });
+                
+            });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

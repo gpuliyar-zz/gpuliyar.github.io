@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Data Tables</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+     <script src="../js/jquery-1.11.1.min.js"></script>
+	<script src="../dist/js/searchInfoletJavaScript.js"></script>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                 <div style="float:right;">
+                    <div id="divinfolet" class="input-group custom-search-form" style="position:fixed; width:200px; z-index:1;right:30px;top:15px;">
+                        <input onblur="blursearch(this)" onfocus="focussearch(this)" type="text" class="form-control" id="searchinfolet" placeholder="Search Data Tables..">
+                        <span class="input-group-btn">
+                            <button id="infosearchbtn" onclick="clearinfo()" class="btn btn-default disabled" type="button">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #1 : <a style="text-decoration: none; " id="MS_RSK_ACTIONS" href="dbTables.html#MS_RSK_ACTIONS">MS_RSK_ACTIONS</a><button onclick="displayData('MS_RSK_ACTIONS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>Maintains list of Actions</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Stage Type<br>STAGE_TYPE
+                                                 </td>
+                                                <td>Number(3)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Action ID<br>ACTION_ID
+                                                 </td>
+                                                <td>Number(3)</td>
+                                                <td>Capture the Action Id here.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Action Name<br>ACTION_NAME
+                                                 </td>
+                                                <td>Varchar2(30 char)</td>
+                                                <td>Capture the Action Name / description here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Intermediate Status<br>INTERMEDIATE_STATUS
+                                                 </td>
+                                                <td>Varchar2(30 char)</td>
+                                                <td>Capture Intermediate Statuses here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Active<br>ACTIVE
+                                                 </td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>Y?N</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #2 : <a style="text-decoration: none; " id="MS_RSK_ASSESSED_SCORE" href="dbTables.html#MS_RSK_ASSESSED_SCORE">MS_RSK_ASSESSED_SCORE</a><button onclick="displayData('MS_RSK_ASSESSED_SCORE');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Risk Score<br>RISK_SCORE
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Maximum Value<br>MAXIMUM_VALUE
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Minimum Value<br>MINIMUM_VALUE
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Risk Score Store Value<br>RISK_SCORE_STORED_VALUE
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Color<br>COLOR
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #3 : <a style="text-decoration: none; " id="MS_RSK_CONTROL_EFFECTIVENESS" href="dbTables.html#MS_RSK_CONTROL_EFFECTIVENESS">MS_RSK_CONTROL_EFFECTIVENESS</a><button onclick="displayData('MS_RSK_CONTROL_EFFECTIVENESS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_RSK_CONTROL_EFFECTIVENESS');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:2" class="fa fa-tags fa-fw"></span></a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This table is used to maintain the range for Control Effectiveness Rating in Risk Assessment Form.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Display Value<br>DISPLAY_VALUE
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Score Description<br>SCORE_DESCRIPTION
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Control Effectiveness Score<br>CONTROL_EFFECTIVENESS_SCORE
+                                                 </td>
+                                                <td>Varchar2(10 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Store Value<br>STORE_VALUE
+                                                 </td>
+                                                <td>Varchar2(20 char)</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #4 : <a style="text-decoration: none; " id="MS_RSK_FORM_STATUS" href="dbTables.html#MS_RSK_FORM_STATUS">MS_RSK_FORM_STATUS</a><button onclick="displayData('MS_RSK_FORM_STATUS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_RSK_FORM_STATUS');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:1" class="fa fa-tags fa-fw"></span></a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>To display status in form</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                 <font style="color:red;">FORM NAME</font><br> <font style="color:red;">FORM_NAME</font>
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td>pushform name</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                 <font style="color:red;">PREVIOUS STAGE</font><br> <font style="color:red;">PREVIOUS_STAGE</font>
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td>Previos stage of form default value zero</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                 <font style="color:red;">CURRENT STAGE</font><br> <font style="color:red;">CURRENT_STAGE</font>
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td>Current stage</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Action<br>FORM_ACTION
+                                                 </td>
+                                                <td>Varchar2(9 char)</td>
+                                                <td>FORM ACTION</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                 <font style="color:red;">STATUS CODE</font><br> <font style="color:red;">STATUS_CODE</font>
+                                                 </td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>STATUS_CODE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>
+                                                 <font style="color:red;">STATUS NAME</font><br> <font style="color:red;">STATUS_NAME</font>
+                                                 </td>
+                                                <td>Varchar2(1000 char)</td>
+                                                <td>STATUS_NAME</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>
+                                                 <font style="color:red;">ACTIVE</font><br> <font style="color:red;">ACTIVE</font>
+                                                 </td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>ACTIVE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>
+                                                LOCALE<br>LOCALE
+                                                 </td>
+                                                <td>Number(8)</td>
+                                                <td>LOCALE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>9</td>
+                                                <td>
+                                                COMMENTS<br>COMMENTS
+                                                 </td>
+                                                <td>Varchar2(500 char)</td>
+                                                <td>COMMENTS</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #5 : <a style="text-decoration: none; " id="MS_RSK_HEATMAP_CONFIG" href="dbTables.html#MS_RSK_HEATMAP_CONFIG">MS_RSK_HEATMAP_CONFIG</a><button onclick="displayData('MS_RSK_HEATMAP_CONFIG');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>MS_RSK_HEATMAP_CONFIG</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                STATUS<br>STATUS
+                                                 </td>
+                                                <td>Varchar2(50 char)</td>
+                                                <td>STATUS</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                BUBBLE_COLOR<br>BUBBLE_COLOR
+                                                 </td>
+                                                <td>Varchar2(50 char)</td>
+                                                <td>BUBBLE_COLOR</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                BUBBLE_SIZE<br>BUBBLE_SIZE
+                                                 </td>
+                                                <td>Number</td>
+                                                <td>BUBBLE_SIZE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                BUBBLE_SHAPE<br>BUBBLE_SHAPE
+                                                 </td>
+                                                <td>Number</td>
+                                                <td>BUBBLE_SHAPE</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #6 : <a style="text-decoration: none; " id="MS_RSK_HEATMP_PARAMS" href="dbTables.html#MS_RSK_HEATMP_PARAMS">MS_RSK_HEATMP_PARAMS</a><button onclick="displayData('MS_RSK_HEATMP_PARAMS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>MS_RSK_HEATMP_PARAMS</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                PARAMATER_NAME<br>PARAMATER_NAME
+                                                 </td>
+                                                <td>Varchar2(50 char)</td>
+                                                <td>PARAMATER_NAME</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                PARAMATER_VALUE<br>PARAMATER_VALUE
+                                                 </td>
+                                                <td>Varchar2(50 char)</td>
+                                                <td>PARAMATER_VALUE</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #7 : <a style="text-decoration: none; " id="MS_RSK_LAND_CONFIG_SF" href="dbTables.html#MS_RSK_LAND_CONFIG_SF">MS_RSK_LAND_CONFIG_SF</a><button onclick="displayData('MS_RSK_LAND_CONFIG_SF');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
+                                                Standard Factor<br>SF_NAME
+                                                 </td>
+                                                <td>Varchar2(1000 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
+                                                Order<br>SF_ORDER
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td>Order</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Standard Factor ID<br>SF_ID
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #8 : <a style="text-decoration: none; " id="MS_RSK_LND_RATING_CONFIG" href="dbTables.html#MS_RSK_LND_RATING_CONFIG">MS_RSK_LND_RATING_CONFIG</a><button onclick="displayData('MS_RSK_LND_RATING_CONFIG');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>MS_RSK_LND_RATING_CONFIG</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Rating Name<br>RATING_NAME
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Rating<br>RATING
+                                                 </td>
+                                                <td>Varchar2(1000 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Rating Order<br>RATING_ORDER
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td>Rating Order</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Rating Type<br>RATING_TYPE
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td>Rating Type</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #9 : <a style="text-decoration: none; " id="MS_RSK_OVERRIDE_SCORE" href="dbTables.html#MS_RSK_OVERRIDE_SCORE">MS_RSK_OVERRIDE_SCORE</a><button onclick="displayData('MS_RSK_OVERRIDE_SCORE');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Display Value<br>DISPLAY_VALUE
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Store Value<br>STORE_VALUE
+                                                 </td>
+                                                <td>Varchar2(20 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Score Description<br>SCORE_DESCRIPTION
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Override Score<br>OVERRIDE_SCORE
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #10 : <a style="text-decoration: none; " id="MS_RSK_STAGES" href="dbTables.html#MS_RSK_STAGES">MS_RSK_STAGES</a><button onclick="displayData('MS_RSK_STAGES');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>To store Stages</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Stage Type<br>STAGE_TYPE
+                                                 </td>
+                                                <td>Number(3)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Stage Id<br>STAGE_ID
+                                                 </td>
+                                                <td>Number(3)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Stage Name<br>STAGE_NAME
+                                                 </td>
+                                                <td>Varchar2(30 char)</td>
+                                                <td>Capture the stage Name here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Status<br>STATUS
+                                                 </td>
+                                                <td>Varchar2(40 char)</td>
+                                                <td>Capture the stage statuses here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Active<br>ACTIVE
+                                                 </td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>Y/N</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #11 : <a style="text-decoration: none; " id="MS_RSK_STAGE_ACTIONS_MAPPINGS" href="dbTables.html#MS_RSK_STAGE_ACTIONS_MAPPINGS">MS_RSK_STAGE_ACTIONS_MAPPINGS</a><button onclick="displayData('MS_RSK_STAGE_ACTIONS_MAPPINGS');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>Mapping Of Stages and Actions</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Stage Type<br>STAGE_TYPE
+                                                 </td>
+                                                <td>Number(3)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Previous Stage<br>PREVIOUS_STAGE
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td>Maintain Previous Stage Here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                Current Stage<br>CURRENT_STAGE
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td>Maintain the Current Stage Here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Role / Activity<br>ROLE_ACTIVITY
+                                                 </td>
+                                                <td>Varchar2(35 char)</td>
+                                                <td>Maint the Role or Activity here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                Action<br>ACTION_ID
+                                                 </td>
+                                                <td>Number(3)</td>
+                                                <td>Maintain the corresponding action id here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>
+                                                Active<br>ACTIVE
+                                                 </td>
+                                                <td>Varchar2(1 char)</td>
+                                                <td>Y / N</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>
+                                                Comments<br>REMARKS
+                                                 </td>
+                                                <td>Varchar2(50 char)</td>
+                                                <td>Enter comments here</td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>
+                                                Status<br>STATUS
+                                                 </td>
+                                                <td>Varchar2(200 char)</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #12 : <a style="text-decoration: none; " id="MS_RSK_THREAT_OPPORTUNITY" href="dbTables.html#MS_RSK_THREAT_OPPORTUNITY">MS_RSK_THREAT_OPPORTUNITY</a><button onclick="displayData('MS_RSK_THREAT_OPPORTUNITY');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_RSK_THREAT_OPPORTUNITY');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:4" class="fa fa-tags fa-fw"></span></a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                Name<br>Name
+                                                 </td>
+                                                <td>Varchar2(1000 char)</td>
+                                                <td>Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                Type<br>Type
+                                                 </td>
+                                                <td>Varchar2(1000 char)</td>
+                                                <td>Type</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                StoredValue<br>StoredValue
+                                                 </td>
+                                                <td>Number(10)</td>
+                                                <td>StoredValue</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                DisplayedValue<br>DisplayedValue
+                                                 </td>
+                                                <td>Varchar2(1000 char)</td>
+                                                <td>DisplayedValue</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                EndDate<br>EndDate
+                                                 </td>
+                                                <td> Date</td>
+                                                <td>EndDate</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #13 : <a style="text-decoration: none; " id="MS_RSK_HEATMAP_AXIS_RATING" href="dbTables.html#MS_RSK_HEATMAP_AXIS_RATING">MS_RSK_HEATMAP_AXIS_RATING</a><button onclick="displayData('MS_RSK_HEATMAP_AXIS_RATING');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>MS_RSK_HEATMAP_AXIS_RATING</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                XAXIS_DISPLAYED<br>XAXIS_DISPLAYED
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td>XAXIS_DISPLAYED</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                XAXIS_STORED<br>XAXIS_STORED
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td>XAXIS_STORED</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                YAXIS_DISPLAYED<br>YAXIS_DISPLAYED
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td>YAXIS_DISPLAYED</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                YAXIS_STORED<br>YAXIS_STORED
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td>YAXIS_STORED</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #14 : <a style="text-decoration: none; " id="MS_RSK_CONTROL_OVERRIDE" href="dbTables.html#MS_RSK_CONTROL_OVERRIDE">MS_RSK_CONTROL_OVERRIDE</a><button onclick="displayData('MS_RSK_CONTROL_OVERRIDE');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_RSK_CONTROL_OVERRIDE');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:1" class="fa fa-tags fa-fw"></span></a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This table is used to maintain values for 'Override Overall Control Effectiveness' field in Control tab in Risk Assessment form.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                DISPLAY_VALUE<br>DISPLAY_VALUE
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                STORE_VALUE<br>STORE_VALUE
+                                                 </td>
+                                                <td>Varchar2(20 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                SCORE_DESCRIPTION<br>SCORE_DESCRIPTION
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                OVERRIDE_SCORE<br>OVERRIDE_SCORE
+                                                 </td>
+                                                <td>Varchar2(100 char)</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                DEFAULT_CONTROL_WEIGHTING<br>DEFAULT_CONTROL_WEIGHTING
+                                                 </td>
+                                                <td>Varchar2(1000 char)</td>
+                                                <td>Used to define the default control weigting as well as for specifying the type as % or numeric for weight. If value is provided with % at the end, it considers as Percentage else it considers as numeric during calculation in risk assessment form</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> #15 : <a style="text-decoration: none; " id="MS_RSK_HEATMAP_RANGE" href="dbTables.html#MS_RSK_HEATMAP_RANGE">MS_RSK_HEATMAP_RANGE</a><button onclick="displayData('MS_RSK_HEATMAP_RANGE');makeTableResponsive();" class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button>  <a onclick="displayRef('MS_RSK_HEATMAP_RANGE');" data-toggle="modal" data-target="#data-Modal" class="tooltip-dt"><span data-toggle="tooltip" data-placement="top" title="Infolets:3" class="fa fa-tags fa-fw"></span></a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>MS_RSK_HEATMAP_RANGE</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <table class="table table-hover dataTable-table-nr">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title<br>Name</th>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                LOW_SCORE<br>LOW_SCORE
+                                                 </td>
+                                                <td>Number</td>
+                                                <td>LOW_SCORE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>
+                                                HIGH_SCORE<br>HIGH_SCORE
+                                                 </td>
+                                                <td>Number</td>
+                                                <td>HIGH_SCORE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>
+                                                X_COORDINATE<br>X_COORDINATE
+                                                 </td>
+                                                <td>Number</td>
+                                                <td>X_COORDINATE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>
+                                                Y_COORDINATE<br>Y_COORDINATE
+                                                 </td>
+                                                <td>Number</td>
+                                                <td>Y_COORDINATE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                RISK_SCORE<br>RISK_SCORE
+                                                 </td>
+                                                <td>Varchar2(4000 char)</td>
+                                                <td>RISK_SCORE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>
+                                                COLOR<br>COLOR
+                                                 </td>
+                                                <td>Varchar2(4000 char)</td>
+                                                <td>COLOR</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>
+                                                RISK_SCORE_STORED_VALUE<br>RISK_SCORE_STORED_VALUE
+                                                 </td>
+                                                <td>Varchar2(4000 char)</td>
+                                                <td>RISK_SCORE_STORED_VALUE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>
+                                                FONT_COLOR<br>FONT_COLOR
+                                                 </td>
+                                                <td>Varchar2(4000 char)</td>
+                                                <td>FONT_COLOR</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <div class="modal fade" id="data-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        </div>
+        
+                <!-- jQuery -->
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="../dist/js/data.json"></script>
+        <script type="text/javascript" src="index/dataTableData.json"></script>
+        <script type="text/javascript" src="../dist/js/displayDataForTable.js"></script>
+        <script type="text/javascript" src="index/dataTableReferences.json"></script>
+        <script type="text/javascript" src="../dist/js/displayReferences.js"></script>
+        <script>
+            function makeTableResponsive() {
+                $('.data-table-d').DataTable({
+                    destroy:true,
+                    "responsive": true
+                });
+                $('.data-table-dnr').DataTable({
+                    destroy:true,
+                    "responsive": false
+                });
+           }
+            $(document).ready(function() {
+                $('.tooltip-dt').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.dataTable-table').DataTable({
+                    responsive: true,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "15%" },     // 3rd column width 
+                        { "sWidth": "45%" }      // 4th column width 
+                    ]
+                });
+                $('.dataTable-table-nr').DataTable({
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "15%" },     // 3rd column width 
+                        { "sWidth": "45%" }      // 4th column width 
+                    ]
+                });
+            });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
