@@ -86,20 +86,6 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>ISSUE_DETAILS_HTM</td>
-                                                                <td>CLOB
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>C_RTF_1_HTM</td>
-                                                                <td>CLOB
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
                                                                 <td>C_RTF_2_HTM</td>
                                                                 <td>CLOB
                                                                 </td>
@@ -107,91 +93,11 @@
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>METRIC_COMPLETED_DATE</td>
-                                                                <td>DATE
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>LATEST_FLAG</td>
+                                                                <td>ACTION_CATEGORY</td>
                                                                 <td>VARCHAR2
-(1
+(4000
 Char
 )
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>CREATED_BY</td>
-                                                                <td>NUMBER
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>CREATION_DATE</td>
-                                                                <td>DATE
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>PROCESS_FLOW_STATUS</td>
-                                                                <td>NUMBER
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>PROCESS_INSTANCE_ID</td>
-                                                                <td>NUMBER
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>MULTIROW_GROUP_NAME</td>
-                                                                <td>VARCHAR2
-(100
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ELECTRONICALLY_SIGNED</td>
-                                                                <td>NUMBER
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>MULTIROW_REGION_ID</td>
-                                                                <td>NUMBER
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_DETAILS_HTM</td>
-                                                                <td>CLOB
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_WORK_DONE_HTM</td>
-                                                                <td>CLOB
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_RESULTS_HTM</td>
-                                                                <td>CLOB
                                                                 </td>
                                                                 <td>
                                                                 </td>
@@ -207,7 +113,7 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>ACTION_CATEGORY</td>
+                                                                <td>DOC_ACTION_ID</td>
                                                                 <td>VARCHAR2
 (4000
 Char
@@ -261,7 +167,7 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>REMOVE_DELEGATION</td>
+                                                                <td>REOPEN_ACTION</td>
                                                                 <td>VARCHAR2
 (4000
 Char
@@ -480,6 +386,23 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
+                                                                <td>FINAL_ACTION_APPROVED</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ORIG_ACTION_DUE_DT</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
                                                                 <td>CONFIG_FLAG</td>
                                                                 <td>VARCHAR2
 (4000
@@ -500,7 +423,7 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>ISSUE_ID</td>
+                                                                <td>ASSIGNEE</td>
                                                                 <td>VARCHAR2
 (4000
 Char
@@ -520,7 +443,42 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>ASSIGNEE</td>
+                                                                <td>DOC_ID</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_RESULTS_HTM</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_WORK_DONE_HTM</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ISSUE_DETAILS_HTM</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>C_RTF_1_HTM</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>PREVIOUS_STAGE</td>
                                                                 <td>VARCHAR2
 (4000
 Char
@@ -530,7 +488,214 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>ACTION_ID</td>
+                                                                <td>ISSUE_ID</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>NO_OF_EXTENSIONS</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DOC_ATTACHMENTS</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_COMMENTS</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_PER_COMPLTE</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>METRIC_RUN_DATE</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>METRIC_COMPLETED_DATE</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>LATEST_FLAG</td>
+                                                                <td>VARCHAR2
+(1
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>CREATED_BY</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>CREATION_DATE</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>PROCESS_FLOW_STATUS</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>PROCESS_INSTANCE_ID</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>MULTIROW_GROUP_NAME</td>
+                                                                <td>VARCHAR2
+(100
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ELECTRONICALLY_SIGNED</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>MULTIROW_REGION_ID</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_DETAILS_HTM</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_REVIEWER</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACT_ACTION</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>REQUESTED_DUE_DATE</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>REMOVE_DELEGATION</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_DELEGATEE</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_STATUS</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DELEGATEE_COMMENTS</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DOCUMENT_NAME</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>FILE_DESCRIPTION</td>
                                                                 <td>VARCHAR2
 (4000
 Char
@@ -560,148 +725,7 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>PREVIOUS_STAGE</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_SOURCE_TYPE</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_COMMENTS</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_DELEGATEE</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_PER_COMPLTE</td>
-                                                                <td>NUMBER
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>REQUESTED_DUE_DATE</td>
-                                                                <td>DATE
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_REVIEWER</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACT_ACTION</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_ATTACHMENT</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>DOC_ACTION_ID</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>DOC_ATTACHMENTS</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>FILE_DESCRIPTION</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>DOCUMENT_NAME</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>DOC_ID</td>
-                                                                <td>NUMBER
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>DELEGATEE_COMMENTS</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ISSUE_SOURCE</td>
+                                                                <td>ISSUE_TITLE</td>
                                                                 <td>VARCHAR2
 (4000
 Char
@@ -721,8 +745,11 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>ISSUE_DETAILS</td>
-                                                                <td>CLOB
+                                                                <td>ISSUE_SOURCE</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
                                                                 </td>
                                                                 <td>
                                                                 </td>
@@ -745,7 +772,7 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>ACTION_RESULTS</td>
+                                                                <td>ISSUE_DETAILS</td>
                                                                 <td>CLOB
                                                                 </td>
                                                                 <td>
@@ -759,45 +786,11 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>REOPEN_ACTION</td>
+                                                                <td>ACTION_TITLE</td>
                                                                 <td>VARCHAR2
 (4000
 Char
 )
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_PRIORITY</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>NO_OF_EXTENSIONS</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ORIG_ACTION_DUE_DT</td>
-                                                                <td>DATE
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_DUE_DATE</td>
-                                                                <td>DATE
                                                                 </td>
                                                                 <td>
                                                                 </td>
@@ -810,54 +803,7 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>ACTION_APPROVER2</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_APPROVER1</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_OWNER</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ACTION_DETAILS</td>
-                                                                <td>CLOB
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>FINAL_ACTION_APPROVED</td>
-                                                                <td>VARCHAR2
-(4000
-Char
-)
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>ISSUE_TITLE</td>
+                                                                <td>ACTION_SOURCE_TYPE</td>
                                                                 <td>VARCHAR2
 (4000
 Char
@@ -877,7 +823,14 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>ACTION_STATUS</td>
+                                                                <td>ACTION_RESULTS</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_PRIORITY</td>
                                                                 <td>VARCHAR2
 (4000
 Char
@@ -887,7 +840,61 @@ Char
                                                                 </td>
                                                             </tr>												
                                                             <tr>
-                                                                <td>ACTION_TITLE</td>
+                                                                <td>ACTION_OWNER</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_ID</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_DUE_DATE</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_DETAILS</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_ATTACHMENT</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_APPROVER2</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTION_APPROVER1</td>
                                                                 <td>VARCHAR2
 (4000
 Char
@@ -973,13 +980,6 @@ Char
                                                             <tr>
                                                                 <td>METRIC_ID</td>
                                                                 <td>NUMBER
-                                                                </td>
-                                                                <td>
-                                                                </td>
-                                                            </tr>												
-                                                            <tr>
-                                                                <td>METRIC_RUN_DATE</td>
-                                                                <td>DATE
                                                                 </td>
                                                                 <td>
                                                                 </td>

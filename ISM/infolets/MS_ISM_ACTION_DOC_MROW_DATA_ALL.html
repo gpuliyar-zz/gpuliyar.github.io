@@ -83,12 +83,6 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>6</td>
-                                                                <td>FILE_DESCRIPTION</td>                                                                <td>Varchar2</td>
-                                                                <td>FILE_DESCRIPTION</td>
-                                                                <td>FILE_DESCRIPTION</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td>1</td>
                                                                 <td>ACTION_ID</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_ID</td>
@@ -117,6 +111,12 @@
                                                                 <td>DOC_ID</td>                                                                <td>Number</td>
                                                                 <td>DOC_ID</td>
                                                                 <td>DOC_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>FILE_DESCRIPTION</td>                                                                <td>Varchar2</td>
+                                                                <td>FILE_DESCRIPTION</td>
+                                                                <td>FILE_DESCRIPTION</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -155,7 +155,17 @@
                                                     </div>
                                                     <div class="modal-body" >
                                                         <pre id="selectme-sql">
-                                                        SELECTACTION_ID , DD_STATUS_FLAG , DOCUMENT_NAME , DOC_ATTACHMENTS , DOC_ID , FILE_DESCRIPTION  FROM MS_ISM_ACTION_DOC WHERE ACTION_ID = :1
+                                                        SELECT
+ACTION_ID
+ , DD_STATUS_FLAG
+ , DOCUMENT_NAME
+ , DOC_ATTACHMENTS
+ , DOC_ID
+ , FILE_DESCRIPTION
+  FROM MS_ISM_ACTION_DOC
+ WHERE 
+ACTION_ID = :1
+
                                                         </pre>
                                                     </div>
                                                 </div>

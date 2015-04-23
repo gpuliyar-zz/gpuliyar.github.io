@@ -57,14 +57,14 @@
                                             <div class="modal-body" >
                                                 <pre id="selectme">
                                                 
-  CREATE OR REPLACE FORCE VIEW "ISM_61_SP2_DEV"."MS_ISM_ISSUE_ICO" ("ICO_COMMENTS", "ICO_TITLE", "ICO_CORE", "ISSUE_ID", "DD_STATUS_FLAG") AS 
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_ISM_ISSUE_ICO" ("ICO_COMMENTS", "ICO_TITLE", "ICO_CORE", "ISSUE_ID", "DD_STATUS_FLAG") AS 
   SELECT rel_comments ico_comments,
-      tgt_obj_id ico_title,
-      tgt_obj_name ico_core,
-      rel_source_id issue_id,
-      'Y' dd_status_flag
-   FROM ms_ism_orb_relation_orb
-   Where Tgt_Obj_Type In ('Core Objects','Processes')
+    tgt_obj_id ico_title,
+    tgt_obj_name ico_core,
+    rel_source_id issue_id,
+    'Y' dd_status_flag
+  FROM ms_ism_orb_relation_orb
+  WHERE tgt_obj_type = 'Core Objects'
  
                                                 </pre>
                                             </div>

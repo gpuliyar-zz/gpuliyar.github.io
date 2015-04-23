@@ -57,7 +57,7 @@
                                             <div class="modal-body" >
                                                 <pre id="selectme">
                                                 
-  CREATE OR REPLACE FORCE VIEW "ISM_61_SP2_DEV"."MS_ISM_ISSUES_DASHBOARD_V" ("ISSUE_ID", "ISSUE_TITLE", "ISSUE_STATUS", "ISSUE_STATUS_ACT", "ISSUE_RISK_RATING_STR", "ISSUE_RISK_RATING", "ISSUE_RISK_PRIORITY_STR", "ISSUE_RISK_PRIORITY", "OWNER_ORGANIZATIONS", "RESTRICT_ACCESS_TO", "DD_OBJECT_TYPE", "ISSUE_OWNERORG", "ISSUE_APPROVERORG") AS 
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_ISM_ISSUES_DASHBOARD_V" ("ISSUE_ID", "ISSUE_TITLE", "ISSUE_STATUS", "ISSUE_STATUS_ACT", "ISSUE_RISK_RATING_STR", "ISSUE_RISK_RATING", "ISSUE_RISK_PRIORITY_STR", "ISSUE_RISK_PRIORITY", "OWNER_ORGANIZATIONS", "RESTRICT_ACCESS_TO", "DD_OBJECT_TYPE", "ISSUE_OWNERORG", "ISSUE_APPROVERORG") AS 
   SELECT a.issue_id,
     a.issue_title ,
     DECODE (a.issue_status ,'11', 'Open' ,'10', 'Closed' ,'7', 'Cancelled' ,'4', 'Open' ,'6', 'Open' ,'17', 'Open' ,'5', 'Open' ,'14', 'Open' ,'21','Open','Open' ) issue_status ,
@@ -81,8 +81,6 @@
     --AND a.issue_action NOT IN ('1','3')
   AND a.reached_manage = 'Y'
     --End of bug 40919;;
- 
- 
  
                                                 </pre>
                                             </div>

@@ -57,7 +57,7 @@
                                             <div class="modal-body" >
                                                 <pre id="selectme">
                                                 
-  CREATE OR REPLACE FORCE VIEW "ISM_61_SP2_DEV"."MS_ISM_REOPEN_ISSUE_V" ("ISSUE_LINK", "ISSUE_TITLE", "ISSUE_OWNER", "ISSUE_APPROVER", "SOURCE_TYPE", "ISSUE_RATING", "ISSUE_DUE_DATE", "ISSUE_CLOSED_ON", "ISSUE_ID", "PID", "INSTANCEID", "ACTIONS", "REOPEN_COUNT", "NO_OF_ACTIONS", "ISSUE_OWNERORG_DISP", "ISSUE_OWNERORG", "ISSUE_APPRORG_DISP", "ISSUE_APPRORG") AS 
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_ISM_REOPEN_ISSUE_V" ("ISSUE_LINK", "ISSUE_TITLE", "ISSUE_OWNER", "ISSUE_APPROVER", "SOURCE_TYPE", "ISSUE_RATING", "ISSUE_DUE_DATE", "ISSUE_CLOSED_ON", "ISSUE_ID", "PID", "INSTANCEID", "ACTIONS", "REOPEN_COUNT", "NO_OF_ACTIONS", "ISSUE_OWNERORG_DISP", "ISSUE_OWNERORG", "ISSUE_APPRORG_DISP", "ISSUE_APPRORG") AS 
   SELECT
     (SELECT '<a target="_self" href="javascript'
       || CHR (58)
@@ -91,7 +91,8 @@
     a.dd_instance_id                                                                                       AS instanceid,
     NULL                                                                                                   AS actions,
     NVL(a.reopen_issue,0)                                                                                  AS reopen_count,
-    NVL(a.no_of_action,0) AS no_of_actions,
+    (SELECT COUNT (1) FROM ms_ism_action WHERE issue_id = a.issue_id
+    ) AS no_of_actions,
     (SELECT org_entity_name
     FROM si_org_entities_t
     WHERE org_entity_id = a.issue_ownerorg
@@ -104,7 +105,6 @@
     a.issue_approverorg AS issue_approrg
   FROM ms_ism_issue a
   WHERE a.issue_status = '10'
- 
  
                                                 </pre>
                                             </div>

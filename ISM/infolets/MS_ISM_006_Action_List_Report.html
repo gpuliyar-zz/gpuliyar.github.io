@@ -55,7 +55,7 @@
                                         <tbody>
                                             <tr>
                                                 <th style="width:15%;">Description</th>
-                                                <td>This infot used  in  Action list report(base)</td>
+                                                <td>Infolet for Action list report(base)</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -93,72 +93,66 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>2</td>
-                                                                <td>ACTION_STATUS_STORED</td>                                                                <td>Varchar2</td>
-                                                                <td>ACTION_STATUS_STORED</td>
-                                                                <td>ACTION_STATUS_STORED</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
                                                                 <td>ACTION_STATUS</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_STATUS</td>
                                                                 <td>Action Status</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>4</td>
+                                                                <td>3</td>
                                                                 <td>ACTION_OWNER</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_OWNER</td>
                                                                 <td>Action Owner</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>5</td>
+                                                                <td>4</td>
                                                                 <td>PRIORITY</td>                                                                <td>Varchar2</td>
                                                                 <td>PRIORITY</td>
                                                                 <td>Priority</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>6</td>
+                                                                <td>5</td>
                                                                 <td>ACTION_DUE_DATE</td>                                                                <td>Date</td>
                                                                 <td>ACTION_DUE_DATE</td>
                                                                 <td>Action Due Date</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>7</td>
+                                                                <td>6</td>
                                                                 <td>ACTION_COMPLETED_ON</td>                                                                <td>Date</td>
-                                                                <td>ACTION_CLOSED_DATE</td>
-                                                                <td>Action Closed Date</td>                                                                <td>--/ --</td>
+                                                                <td>ACTION_COMPLETED_ON</td>
+                                                                <td>Action Completed On</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>8</td>
+                                                                <td>7</td>
                                                                 <td>ISSUE_TITLE</td>                                                                <td>Varchar2</td>
                                                                 <td>ISSUE_TITLE</td>
                                                                 <td>Issue Title</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>9</td>
+                                                                <td>8</td>
                                                                 <td>ISSUE_OWNER</td>                                                                <td>Varchar2</td>
                                                                 <td>ISSUE_OWNER</td>
                                                                 <td>Issue Owner</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>10</td>
+                                                                <td>9</td>
                                                                 <td>PERCENTAGE_COMPLETED</td>                                                                <td>Varchar2</td>
-                                                                <td>PERCENTAGE_COMPLETE</td>
-                                                                <td>Percentage Complete</td>                                                                <td>--/ --</td>
+                                                                <td>PERCENTAGE_COMPLETED</td>
+                                                                <td>Percentage Completed</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>11</td>
+                                                                <td>10</td>
                                                                 <td>PID</td>                                                                <td>Number</td>
                                                                 <td>PID</td>
                                                                 <td>PID</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>12</td>
+                                                                <td>11</td>
                                                                 <td>INSTANCEID</td>                                                                <td>Number</td>
                                                                 <td>INSTANCEID</td>
                                                                 <td>INSTANCEID</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>13</td>
+                                                                <td>12</td>
                                                                 <td>OWNER_ORGANIZATION</td>                                                                <td>Varchar2</td>
                                                                 <td>OWNER_ORGANIZATION</td>
                                                                 <td>Owner Organization</td>                                                                <td>--/ --</td>
@@ -181,29 +175,29 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Action Title</td>
-                                                                <td>(trim(UPPER(SUBSTR(Action_Title,INSTR(Action_Title,'>')+1,INSTR(Action_Title,'</a')-1))) like UPPER('%'||:Action Title||'%'))</td>
-                                                                <td>Take Action Title as Input in free text field</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Owner Organization</td>
-                                                                <td>(trim(UPPER(Owner_Organization)) = UPPER(:Owner Organization))</td>
-                                                                <td>Take Issue Owner Organization name as input from drop down list</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Issue Title</td>
-                                                                <td>(trim(UPPER(Issue_Title)) like UPPER('%'||:Issue Title||'%'))</td>
-                                                                <td>Take Issue Title as input in free text field</td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td>Priority</td>
                                                                 <td>(trim(UPPER(Priority)) = UPPER(:Priority))</td>
-                                                                <td>Take Action Priority as input from drop down list</td>
+                                                                <td></td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Action Status</td>
-                                                                <td>(trim(Action_Status_Stored) = (:Action Status))</td>
-                                                                <td>Take Action status as input from drop down list</td>
+                                                                <td>Status</td>
+                                                                <td>(trim(Action_Status) = (:Action Status))</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>issue Title</td>
+                                                                <td>(trim(UPPER(Issue_Title)) like UPPER('%'||:Issue Title||'%'))</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Action Title</td>
+                                                                <td>(trim(UPPER(SUBSTR(Action_Title,INSTR(Action_Title,'>')+1,INSTR(Action_Title,'</a')-1))) like UPPER('%'||:Action Title||'%'))</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Organization</td>
+                                                                <td>(trim(UPPER(Owner_Organization)) = UPPER(:Organization))</td>
+                                                                <td></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -264,12 +258,12 @@
                                                     </div>
                                                     <div class="modal-body" >
                                                         <pre id="selectme-sql">
-                                                        select action_title as action_title,action_status_stored as action_status_stored, action_status as action_status,action_owner as action_owner,priority as priority,action_due_date as action_due_date,
-action_completed_on as action_completed_on,issue_title as issue_title,issue_owner as issue_owner,
-Percentage_Completed As Percentage_Completed,Pid,
-Instanceid,Owner_Organization as Owner_Organization
-From Table(Ms_Ism_Helper.Fn_Get_Action_List_Rep_Detl(:1))
-ORDER BY org_action_title
+                                                        select action_title,action_status,action_owner,priority,action_due_date,
+action_completed_on,issue_title,issue_owner,
+decode(action_status, 'Closed', '', percentage_completed) as percentage_completed,pid,
+instanceid,owner_organization from MS_ISM_DETAILED_ACTION_LIST a
+where  (1=ms_ism_helper.fn_ism_securities(a.issue_id,:1))
+ORDER BY action_title
                                                         </pre>
                                                     </div>
                                                 </div>
@@ -308,7 +302,7 @@ ORDER BY org_action_title
                                         <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
                                     </thead>
                                         <tr>
-                                            <td><a href="../reports/100092.html">Actions</a></td>
+                                            <td><a href="../reports/100111.html">Action List Report</a></td>
                                             <td></td>
 
                                     </tbody>

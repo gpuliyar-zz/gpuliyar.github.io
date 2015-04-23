@@ -57,7 +57,7 @@
                                             <div class="modal-body" >
                                                 <pre id="selectme">
                                                 
-  CREATE OR REPLACE FORCE VIEW "ISM_61_SP2_DEV"."MS_ISM_006_ACT_LIST_REPORT_V" ("ACTION_TITLE", "ACTION_STATUS", "ACTION_OWNER", "PRIORITY", "ACTION_DUE_DATE", "ACTION_COMPLETED_ON", "ISSUE_TITLE", "ISSUE_OWNER", "PERCENTAGE_COMPLETED", "PID", "INSTANCEID", "OWNER_ORGANIZATION", "ISSUE_ID", "APPROVER_ORG") AS 
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_ISM_006_ACT_LIST_REPORT_V" ("ACTION_TITLE", "ACTION_STATUS", "ACTION_OWNER", "PRIORITY", "ACTION_DUE_DATE", "ACTION_COMPLETED_ON", "ISSUE_TITLE", "ISSUE_OWNER", "PERCENTAGE_COMPLETED", "PID", "INSTANCEID", "OWNER_ORGANIZATION", "ISSUE_ID", "APPROVER_ORG") AS 
   SELECT
     (SELECT '<a target="_self" href="javascript'
       || CHR (58)
@@ -98,8 +98,6 @@
     ms_ism_issue b              -- start of bug - 39313, MS_ISM_ISSUE_IAR c End of Bug - 39313
   WHERE a.issue_id      = b.issue_id -- start of bug - 39313 AND b.issue_id = c.issue_id End of Bug - 39313
   AND b.issue_status NOT IN ('1', 'Issue Reviewed', '5', '7', '6')
- 
- 
  
                                                 </pre>
                                             </div>

@@ -55,7 +55,7 @@
                                         <tbody>
                                             <tr>
                                                 <th style="width:15%;">Description</th>
-                                                <td>This Infolet to retrieve users based on selected organizations</td>
+                                                <td>Infolet to retrieve users based on selected organizations</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -150,12 +150,6 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>ISSUE_DELEGATEE_1</td>
-                                                                <td>(trim(User_Login_Name) != :x_issue_owner) AND
-(trim(Activity_Name) = 'ISM - Issue Owner')</td>
-                                                                <td></td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td>Initiate Issue</td>
                                                                 <td>(trim(Activity_Name) = 'ISM - Create Issue')</td>
                                                                 <td></td>
@@ -203,6 +197,12 @@
                                                             <tr>
                                                                 <td>Action_Owner_Deligate</td>
                                                                 <td>(trim(Activity_Name) = 'ISM - Implement Action') AND (trim(User_Login_Name) != :Action_Owner)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ISSUE_DELEGATEE_1</td>
+                                                                <td>(trim(User_Login_Name) != :x_issue_owner) AND
+(trim(Activity_Name) = 'ISM - Issue Owner')</td>
                                                                 <td></td>
                                                             </tr>
                                                         </tbody>

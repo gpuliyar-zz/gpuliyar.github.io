@@ -118,8 +118,8 @@
                                                             <tr>
                                                                 <td>6</td>
                                                                 <td>ACTION_COMPLETED_ON</td>                                                                <td>Date</td>
-                                                                <td>ACTION_CLOSED_DATE</td>
-                                                                <td>Action Closed Date</td>                                                                <td>--/ --</td>
+                                                                <td>ACTION_COMPLETED_ON</td>
+                                                                <td>Action Completed On</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>7</td>
@@ -135,15 +135,9 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>9</td>
-                                                                <td>ACTION_TYPEACTION_TYPE</td>                                                                <td>Varchar2</td>
+                                                                <td>ACTION_TYPE</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_TYPE</td>
                                                                 <td>Action Type</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>10</td>
-                                                                <td>PERCENTAGE_COMPLETED</td>                                                                <td>Varchar2</td>
-                                                                <td>PERCENTAGE_COMPLETE</td>
-                                                                <td>Percentage Complete</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>11</td>
@@ -171,51 +165,81 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>15</td>
+                                                                <td>APPROVER_ORG</td>                                                                <td>Varchar2</td>
+                                                                <td>APPROVER_ORG</td>
+                                                                <td>APPROVER_ORG</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>16</td>
                                                                 <td>ACTION_APPROVER</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_APPROVER</td>
                                                                 <td>Action Approver</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>16</td>
+                                                                <td>17</td>
+                                                                <td>FINAL_APPROVER</td>                                                                <td>Varchar2</td>
+                                                                <td>FINAL_APPROVER</td>
+                                                                <td>Final Approver</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>18</td>
                                                                 <td>ACTION_START_DATE</td>                                                                <td>Date</td>
                                                                 <td>ACTION_START_DATE</td>
                                                                 <td>Action Start Date</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>17</td>
-                                                                <td>ACTION_DESCRIPTION</td>                                                                <td>Long Varchar</td>
+                                                                <td>19</td>
+                                                                <td>ACTION_DETAILS</td>                                                                <td>Long Varchar</td>
                                                                 <td>ACTION_DESCRIPTION</td>
                                                                 <td>Action Description</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>18</td>
-                                                                <td>WORK_DONE</td>                                                                <td>Long Varchar</td>
+                                                                <td>20</td>
+                                                                <td>ACTION_CLOSED_ON</td>                                                                <td>Date</td>
+                                                                <td>ACTION_CLOSED_DATE</td>
+                                                                <td>Action Closed Date</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>21</td>
+                                                                <td>ACTION_WORK_DONE</td>                                                                <td>Long Varchar</td>
                                                                 <td>WORK_DONE</td>
                                                                 <td>Work Done</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>19</td>
-                                                                <td>RESULTS</td>                                                                <td>Long Varchar</td>
+                                                                <td>22</td>
+                                                                <td>ACTION_RESULTS</td>                                                                <td>Long Varchar</td>
                                                                 <td>RESULTS</td>
                                                                 <td>Results</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>20</td>
-                                                                <td>NO_OF_DUE_DATE_EXTN</td>                                                                <td>Varchar2</td>
-                                                                <td>NO_OF_ACTION_DUE_DATE_EXTN</td>
-                                                                <td>No of Action Due Date Extn</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>21</td>
-                                                                <td>NO_OF_REOPEN</td>                                                                <td>Varchar2</td>
+                                                                <td>24</td>
+                                                                <td>REOPEN_ACTION</td>                                                                <td>Varchar2</td>
                                                                 <td>NO_OF_ACTION_REOPEN</td>
                                                                 <td>No of Action Reopen</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>22</td>
-                                                                <td>ORG_ACTION_TITLE</td>                                                                <td>Varchar2</td>
-                                                                <td>ORG_ACTION_TITLE</td>
-                                                                <td>ORG_ACTION_TITLE</td>                                                                <td>--/ --</td>
+                                                                <td>25</td>
+                                                                <td>OWNER_ORG_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>OWNER_ORG_ID</td>
+                                                                <td>OWNER_ORG_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>26</td>
+                                                                <td>APPROVER_ORG_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>APPROVER_ORG_ID</td>
+                                                                <td>APPROVER_ORG_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>23</td>
+                                                                <td>NO_OF_EXTENSIONS</td>                                                                <td>Varchar2</td>
+                                                                <td>N_OF_ACTION_DUE_DATE_EXTENSIO</td>
+                                                                <td>N of Action Due Date Extensio</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>PERCENTAGE_COMPLETED</td>                                                                <td>Varchar2</td>
+                                                                <td>PERCENTAGE_COMPLETE</td>
+                                                                <td>Percentage Complete</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -235,34 +259,34 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Action Status</td>
-                                                                <td>(trim(Action_Status) = :Action Status)</td>
-                                                                <td>Take Action status as input from drop down list</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Action Closed Date</td>
-                                                                <td>(trim(Action_Closed_Date)  = :Action Closed Date)</td>
-                                                                <td>Take date as input for action closed on date</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Owner Organization</td>
-                                                                <td>(trim(OWNER_ORGANIZATION) = :Owner Organization)</td>
-                                                                <td>Take Issue Owner organization as input from drop down list</td>
+                                                                <td>Organization</td>
+                                                                <td>(trim(OWNER_ORG_ID) = :Organization)</td>
+                                                                <td>Organization</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Issue Title</td>
                                                                 <td>(trim(UPPER(Issue_Title)) like UPPER('%'||:Issue Title||'%'))</td>
-                                                                <td>Take Issue Title as input in free text field</td>
+                                                                <td>Issue Title</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Action Title</td>
                                                                 <td>(trim(UPPER(SUBSTR(Action_Title,INSTR(Action_Title,'>')+1,INSTR(Action_Title,'</a')-INSTR(Action_Title,'>')-1))) like UPPER('%'||:Action Title||'%'))</td>
-                                                                <td>Take Action Title as input in free text field</td>
+                                                                <td></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Priority</td>
                                                                 <td>(trim(Action_Priority) = :Priority)</td>
-                                                                <td>Take Action Priority as input from drop down list</td>
+                                                                <td>Priority</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Action Status</td>
+                                                                <td>(trim(Action_Status) = :Action Status)</td>
+                                                                <td>Action Status</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Action Closed Date</td>
+                                                                <td>(Action_Closed_Date  = :Action Closed Date)</td>
+                                                                <td>Action Closed Date</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -323,15 +347,13 @@
                                                     </div>
                                                     <div class="modal-body" >
                                                         <pre id="selectme-sql">
-                                                        Select Action_Title As Action_Title, Action_Status As Action_Status, Action_Owner As Action_Owner, Priority As Priority, 
-Action_Due_Date As Action_Due_Date, Action_Completed_On As Action_Completed_On, 
-Issue_Title As Issue_Title, Issue_Owner As Issue_Owner,Action_Type Action_Type, Percentage_Completed As Percentage_Completed, 
-Pid, Instanceid, Owner_Organization As Owner_Organization,Issue_ID as Issue_ID,
-Action_Approver As Action_Approver,Action_Start_Date As Action_Start_Date,
-Action_Description As Action_Description,Work_Done As Work_Done,Results As Results,
-No_Of_Due_Date_Extn As No_Of_Due_Date_Extn,No_Of_Reopen As No_Of_Reopen, Org_Action_Title As Org_Action_Title
-From Table(Ms_Ism_Helper.Fn_Get_Detl_Action_List_Rep(:1))
-Order By Org_Action_Title
+                                                        SELECT ACTION_TITLE, ACTION_STATUS, ACTION_OWNER, PRIORITY, ACTION_DUE_DATE, ACTION_COMPLETED_ON, ISSUE_TITLE, ISSUE_OWNER,ACTION_TYPE, decode(ACTION_STATUS,'Closed','',PERCENTAGE_COMPLETED) as PERCENTAGE_COMPLETED, PID, INSTANCEID, OWNER_ORGANIZATION, ISSUE_ID, APPROVER_ORG,ACTION_APPROVER,FINAL_APPROVER,ACTION_START_DATE,ACTION_DETAILS,ACTION_CLOSED_ON,ACTION_WORK_DONE,ACTION_RESULTS,NO_OF_EXTENSIONS,
+REOPEN_ACTION,
+OWNER_ORG_ID,
+APPROVER_ORG_ID
+FROM MS_ISM_DETAILED_ACTION_LIST a
+Where  (1=ms_ism_helper.fn_ism_securities(a.issue_id,:1))
+ORDER BY ORG_ACTION_TITLE
                                                         </pre>
                                                     </div>
                                                 </div>
@@ -370,7 +392,7 @@ Order By Org_Action_Title
                                         <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
                                     </thead>
                                         <tr>
-                                            <td><a href="../reports/101495.html">Detailed Actions</a></td>
+                                            <td><a href="../reports/100137.html">Detailed Action List Report</a></td>
                                             <td></td>
 
                                     </tbody>

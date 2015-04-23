@@ -102,63 +102,63 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>4</td>
+                                                                <td>ACTION_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>ACTION_ID</td>
+                                                                <td>ACTION_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
                                                                 <td>ACTION_OWNER</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_OWNER</td>
                                                                 <td>ACTION_OWNER</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>5</td>
+                                                                <td>6</td>
                                                                 <td>ACTION_PRIORITY</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_PRIORITY</td>
                                                                 <td>ACTION_PRIORITY</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>6</td>
+                                                                <td>7</td>
                                                                 <td>ACTION_START_DATE</td>                                                                <td>Date</td>
                                                                 <td>ACTION_START_DATE</td>
                                                                 <td>ACTION_START_DATE</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>7</td>
+                                                                <td>8</td>
                                                                 <td>ACTION_STATE</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_STATE</td>
                                                                 <td>ACTION_STATE</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>8</td>
+                                                                <td>9</td>
                                                                 <td>ACTION_TITLE</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_TITLE</td>
                                                                 <td>ACTION_TITLE</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>9</td>
+                                                                <td>10</td>
                                                                 <td>ACTION_TYPE</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_TYPE</td>
                                                                 <td>ACTION_TYPE</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>10</td>
+                                                                <td>11</td>
                                                                 <td>DD_STATUS_FLAG</td>                                                                <td>Varchar2</td>
                                                                 <td>DD_STATUS_FLAG</td>
                                                                 <td>DD_STATUS_FLAG</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>11</td>
+                                                                <td>12</td>
                                                                 <td>ORIG_ACTION_DUE_DATE</td>                                                                <td>Date</td>
                                                                 <td>ORIG_ACTION_DUE_DATE</td>
                                                                 <td>ORIG_ACTION_DUE_DATE</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>12</td>
+                                                                <td>13</td>
                                                                 <td>TMP_ACTION_IDA_PK</td>                                                                <td>Varchar2</td>
                                                                 <td>TMP_ACTION_IDA_PK</td>
                                                                 <td>TMP_ACTION_IDA_PK</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>13</td>
-                                                                <td>TMP_ACTION_PK</td>                                                                <td>Varchar2</td>
-                                                                <td>TMP_ACTION_PK</td>
-                                                                <td>TMP_ACTION_PK</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -178,9 +178,9 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>TMP_ACTION_PK</td>
+                                                                <td>ACTION_ID</td>
                                                                 <td>N</td>
-                                                                <td>TMP_ACTION_PK</td>
+                                                                <td>ACTION_ID</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -197,24 +197,7 @@
                                                     </div>
                                                     <div class="modal-body" >
                                                         <pre id="selectme-sql">
-                                                        SELECT
-ACTION_APPROVER
- , ACTION_DESCRIPTION
- , ACTION_DUE_DATE
- , ACTION_OWNER
- , ACTION_PRIORITY
- , ACTION_START_DATE
- , ACTION_STATE
- , ACTION_TITLE
- , ACTION_TYPE
- , DD_STATUS_FLAG
- , ORIG_ACTION_DUE_DATE
- , TMP_ACTION_IDA_PK
- , TMP_ACTION_PK
-  FROM MS_ISM_TMP_ACTION_IDA
- WHERE 
-TMP_ACTION_PK = :1
-
+                                                        SELECTACTION_APPROVER , ACTION_DESCRIPTION , ACTION_DUE_DATE , ACTION_ID , ACTION_OWNER , ACTION_PRIORITY , ACTION_START_DATE , ACTION_STATE , ACTION_TITLE , ACTION_TYPE , DD_STATUS_FLAG , ORIG_ACTION_DUE_DATE , TMP_ACTION_IDA_PK  FROM MS_ISM_TMP_ACTION_IDA WHERE ACTION_ID = :1
                                                         </pre>
                                                     </div>
                                                 </div>

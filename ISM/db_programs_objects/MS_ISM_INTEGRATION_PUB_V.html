@@ -57,49 +57,47 @@
                                             <div class="modal-body" >
                                                 <pre id="selectme">
                                                 
-  CREATE OR REPLACE FORCE VIEW "ISM_61_SP2_DEV"."MS_ISM_INTEGRATION_PUB_V" ("ISSUE_ID", "ISSUE_TITLE", "ISSUE_STATUS", "ISSUE_DUE_DATE", "ISSUE_SOURCE_TYPE", "ISSUE_SOURCE_REF", "CREATED_ON", "ISSUE_CLOSED_ON", "OBJECT_TYPE", "RELATED_RISKS", "RELATED_AREA_OF_COMP", "RELATED_CONTROLS", "RELATED_CORE_PROCESSES", "RELATED_ORGS") AS 
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_ISM_INTEGRATION_PUB_V" ("ISSUE_ID", "ISSUE_TITLE", "ISSUE_STATUS", "ISSUE_DUE_DATE", "ISSUE_SOURCE_TYPE", "ISSUE_SOURCE_REF", "CREATED_ON", "ISSUE_CLOSED_ON", "OBJECT_TYPE", "RELATED_RISKS", "RELATED_AREA_OF_COMP", "RELATED_CONTROLS", "RELATED_CORE_PROCESSES", "RELATED_ORGS") AS 
   SELECT a.issue_id                                                                                                                                    AS issue_id,
     a.issue_title                                                                                                                                      AS issue_title,
     ms_ism_helper.get_status_display_name(a.issue_status)                                                                                              AS issue_status,
-    A.Issue_Due_Date                                                                                                                                   As Issue_Due_Date,
-    Decode (A.Issue_Source_Type, 1, 'Audit', 2, 'Test Execution', 3, 'Risk Assessment', 4, 'Surveys', 5, 'Internal Loss Event', 6, 'GRC Intelligence',
-    7, 'Scenario Analysis',8, 'IT-GRC',9,'Business Continuity',10,'Conflict Minerals',11,'Overdue CM Surveys',12,'Supplier On-Boarding and Monitoring') AS issue_source_type,
+    a.issue_due_date                                                                                                                                   AS issue_due_date,
+    DECODE (a.issue_source_type, 1, 'Audit', 2, 'Test Execution', 3, 'Risk Assessment', 4, 'Surveys', 5, 'Internal Loss Event', 6, 'GRC Intelligence') AS issue_source_type,
     a.issue_source_ref                                                                                                                                 AS issue_source_ref,
     a.dd_created_on                                                                                                                                    AS created_on,
     a.issue_closed_on                                                                                                                                  AS issue_closed_on,
     a.dd_object_type                                                                                                                                   AS object_type
-    /*   (SELECT XMLAGG (XMLELEMENT ("elem", r.iar_title
-    || ',')). EXTRACT ('/elem/text()').getclobval ()
+ /*   (SELECT XMLAGG (XMLELEMENT ("elem", r.iar_title
+      || ',')). EXTRACT ('/elem/text()').getclobval ()
     FROM ms_ism_issue_iar r
     WHERE r.issue_id = a.issue_id
     AND iar_title   IS NOT NULL
     ) AS related_risks,
     (SELECT XMLAGG (XMLELEMENT ("elem", r.atc_title
-    || ',')). EXTRACT ('/elem/text()').getclobval ()
+      || ',')). EXTRACT ('/elem/text()').getclobval ()
     FROM ms_ism_issue_atc r
     WHERE r.issue_id = a.issue_id
     AND atc_title   IS NOT NULL
     ) AS related_area_of_comp,
     (SELECT XMLAGG (XMLELEMENT ("elem", r.iac_title
-    || ',')). EXTRACT ('/elem/text()').getclobval ()
+      || ',')). EXTRACT ('/elem/text()').getclobval ()
     FROM ms_ism_issue_iac r
     WHERE r.issue_id = a.issue_id
     AND iac_title   IS NOT NULL
     ) AS related_controls,
     (SELECT XMLAGG (XMLELEMENT ("elem", r.ico_title
-    || ',')). EXTRACT ('/elem/text()').getclobval ()
+      || ',')). EXTRACT ('/elem/text()').getclobval ()
     FROM ms_ism_issue_ico r
     WHERE r.issue_id = a.issue_id
     AND ico_title   IS NOT NULL
     ) AS related_core_processes,
     (SELECT XMLAGG (XMLELEMENT ("elem", r.iao_title
-    || ',')). EXTRACT ('/elem/text()').getclobval ()
+      || ',')). EXTRACT ('/elem/text()').getclobval ()
     FROM ms_ism_issue_iao r
     WHERE r.issue_id = a.issue_id
     AND iao_title   IS NOT NULL
     ) AS related_orgs*/
-    ,
-    (SELECT XMLAGG (XMLELEMENT ("elem", r.tgt_obj_name
+     ,(SELECT XMLAGG (XMLELEMENT ("elem", r.tgt_obj_name
       || ',')). EXTRACT ('/elem/text()').getclobval ()
     FROM ms_ism_orb_relation_orb r
     WHERE r.rel_source_id = a.issue_id
@@ -129,7 +127,7 @@
     WHERE r.rel_source_id = a.issue_id
     AND r.tgt_obj_type    = 'Organization(s)'
     ) AS related_orgs
-  From Ms_Ism_Issue A
+  FROM ms_ism_issue a
   WHERE NVL (issue_source_type, '0') <> 0
  
                                                 </pre>

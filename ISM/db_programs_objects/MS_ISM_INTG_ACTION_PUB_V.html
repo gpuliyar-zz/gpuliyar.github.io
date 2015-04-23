@@ -57,88 +57,33 @@
                                             <div class="modal-body" >
                                                 <pre id="selectme">
                                                 
-  CREATE OR REPLACE FORCE VIEW "ISM_61_SP2_DEV"."MS_ISM_INTG_ACTION_PUB_V" ("ACTION_ID", "ISSUE_ID", "ACTION_TITLE", "ACTION_STATUS", "ACTION_STATUS_STORED", "ACTION_DUE_DATE", "CREATED_BY", "CREATED_BY_FULL_NAME", "CREATED_ON", "LAST_MODIFIED_BY", "MODIFIED_BY_FULL_NAME", "LAST_MODIFIED_ON", "ACTION_START_DATE", "ACTION_CLOSED_ON", "OBJECT_TYPE", "ACTION_OWNER", "ACTION_OWNER_FULL_NAME", "ACTION_DELEGATEE", "ACTION_DELEGATEE_FULL_NAME", "ACTION_APPROVER1", "ACTION_APPROVER1_FULL_NAME", "ACTION_APPROVER2", "ACTION_APPROVER2_FULL_NAME", "NO_OF_REOPEN", "PRIORITY", "PRIORITY_STORED", "ACTION_TYPE", "ACTION_TYPE_STORED", "PERCENTAGE_COMPLETED", "ACTION_DETAILS", "WORK_DONE", "RESULTS", "ACTION_LINK", "ACTION_POPUP_LINK") AS 
-  SELECT A.Action_Id                                                                                                  AS Action_Id,
-    A.Issue_Id                                                                                                        AS Issue_Id,
-    a.action_title                                                                                                    AS action_title,
-    Ms_Ism_Helper.Get_Status_Display_Name(A.Action_Status)                                                            AS Action_Status,
-    A.Action_Status                                                                                                   AS Action_Status_stored,
-    A.action_Due_Date                                                                                                 AS action_Due_Date,
-    A.Dd_Created_By                                                                                                   AS Created_By,
-    Ms_Ism_Utilities.Get_User_Full_Name(A.Dd_Created_By)                                                              AS Created_By_full_name,
-    A.Dd_Created_On                                                                                                   AS Created_On,
-    A.Dd_Modified_By                                                                                                  AS Last_Modified_By,
-    Ms_Ism_Utilities.Get_User_Full_Name(A.Dd_Modified_By)                                                             AS Modified_By_full_name,
-    A.Dd_Modified_On                                                                                                  AS Last_Modified_On,
-    A.Action_Start_Date                                                                                               AS Action_Start_Date,
-    A.action_Closed_On                                                                                                AS action_Closed_On,
-    A.Dd_Object_Type                                                                                                  AS Object_Type,
-    A.Action_Owner                                                                                                    AS Action_Owner,
-    Ms_Ism_Utilities.Get_User_Full_Name(A.Action_Owner)                                                               AS Action_Owner_full_name,
-    A.Action_Delegatee                                                                                                AS Action_Delegatee,
-    Ms_Ism_Utilities.Get_User_Full_Name(A.Action_Delegatee)                                                           AS Action_Dlgt_full_name,
-    DECODE(B.Final_Action_Approval, '4',A.Issue_Owner, A.Action_Approver1)                                            AS Action_Approver1,
-    Ms_Ism_Utilities.Get_User_Full_Name(DECODE(B.Final_Action_Approval, '4',A.Issue_Owner, A.Action_Approver1), NULL) AS Act_Appr1_full_name,
-    A.Action_Approver2                                                                                                AS Action_Approver2,
-    Ms_Ism_Utilities.Get_User_Full_Name(A.Action_Approver2)                                                           AS Act_Appr2_Full_Name,
-    A.Reopen_Action                                                                                                   AS Reopen_Action_Count,
-    Ms_Apps_Utilities.Get_Display_Value (100000, 'MS ISM Priority', A.Action_Priority, 1, NULL, NULL)                 AS Priority,
-    A.Action_Priority                                                                                                 AS Priority_Stored,
-    Ms_ism_helper.Fn_Get_Action_Type(C.Action_Type)                                                                   AS Action_Type,
-    c.Action_Type                                                                                                     AS Action_Type_stored,
-    A.action_per_complte                                                                                              AS Percentage_Completed,
-    Regexp_Replace (A.action_details, '<[^>]+>', NULL)                                                                AS Action_Details,
-    Regexp_Replace (A.Action_Work_Done, '<[^>]+>', NULL)                                                              AS Work_Done,
-    Regexp_Replace (A.Action_Results, '<[^>]+>', NULL)                                                                AS Results,
-    'Pushinfolet?id='
-    || ms_ism_utilities.get_ism_infolet_id ('ACTION')
-    || CHR (38)
-    || 'amp;'
-    || 'proc='
-    || a.DD_PROCESS_INSTANCE_ID
-    || CHR (38)
-    || 'amp;'
-    || 'instid='
-    || a.dd_instance_id
-    || CHR (38)
-    || 'amp;'
-    || 'flag=1'
-    || CHR (38)
-    || 'amp;'
-    || 'emd=1'
-    || CHR (38)
-    || 'amp;'
-    || 'x_edit_mode=No'
-    || CHR (38)
-    || 'amp;'
-    || 'wrapper=no' AS ACTION_LINK,
-    'Pushinfolet?id='
-    || ms_ism_utilities.get_ism_infolet_id ('ACTION')
-    || CHR (38)
-    || 'amp;'
-    || 'proc='
-    || a.DD_PROCESS_INSTANCE_ID
-    || CHR (38)
-    || 'amp;'
-    || 'instid='
-    || a.dd_instance_id
-    || CHR (38)
-    || 'amp;'
-    || 'flag=1'
-    || CHR (38)
-    || 'amp;'
-    || 'emd=5'
-    || CHR (38)
-    || 'amp;'
-    || 'x_edit_mode=No'
-    || CHR (38)
-    || 'amp;'
-    || 'wrapper=no' AS ACTION_POPUP_LINK
-  FROM Ms_Ism_Action A,
-    Ms_Ism_Issue B,
-    Ms_Ism_Issue_Iap c
-  Where A.Issue_Id = B.Issue_Id
-  AND a.action_id  = c.issue_action_id
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_ISM_INTG_ACTION_PUB_V" ("ACTION_ID", "ISSUE_ID", "ACTION_TITLE", "ACTION_STATUS", "ACTION_DUE_DATE", "CREATED_BY", "CREATED_ON", "LAST_MODIFIED_BY", "LAST_MODIFIED_ON", "ACTION_START_DATE", "ACTION_CLOSED_ON", "OBJECT_TYPE", "ACTION_OWNER", "ACTION_DELEGATEE", "ACTION_APPROVER1", "ACTION_APPROVER2", "NO_OF_REOPEN", "PRIORITY", "ACTION_TYPE", "PERCENTAGE_COMPLETED", "ACTION_DETAILS", "WORK_DONE", "RESULTS") AS 
+  Select A.Action_Id  As Action_Id,
+ A.Issue_Id As Issue_Id,
+    a.action_title  AS action_title,
+    Ms_Ism_Helper.Get_Status_Display_Name(A.Action_Status) As Action_Status,
+    A.action_Due_Date As action_Due_Date,
+    A.Dd_Created_By As Created_By,
+    A.Dd_Created_On As Created_On,
+    A.Dd_Modified_By as Last_Modified_By,
+    A.Dd_Modified_On As Last_Modified_On,
+    A.Action_Start_Date As Action_Start_Date,
+    A.action_Closed_On As action_Closed_On,
+    A.Dd_Object_Type As Object_Type,
+    A.Action_Owner As Action_Owner,
+    A.Action_Delegatee As Action_Delegatee,
+    (Select Decode(Final_Action_Approval, '4',A.Issue_Owner, A.Action_Approver1)
+    From Ms_Ism_Issue Where Issue_Id = A.Issue_Id)As Action_Approver1,
+    A.Action_Approver2 As Action_Approver2,
+    A.Reopen_Action As Reopen_Count,
+    ms_apps_utilities.get_display_value (100000, 'MS ISM Priority', a.action_priority, 1, NULL, NULL)  AS priority,
+    Ms_Apps_Utilities.Get_Display_Value (100000, 'MS ISM Action Item Type',
+      (Select Action_Type From Ms_Ism_Issue_Iap Where Issue_Action_Id=A.Action_Id), 1, Null, Null) As Action_Type,
+    A.Remove_Delegation      As Percentage_Completed,
+    Regexp_Replace (A.action_details, '<[^>]+>', Null)      As Action_Details,
+    Regexp_Replace (A.Action_Work_Done, '<[^>]+>', Null)      As Work_Done,
+    REGEXP_REPLACE (a.ACTION_RESULTS, '<[^>]+>', NULL)        AS Results
+  From Ms_Ism_action A
  
                                                 </pre>
                                             </div>

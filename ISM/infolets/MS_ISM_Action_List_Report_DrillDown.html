@@ -74,7 +74,7 @@
                                         <div class="tab-pane fade in active" id="columns-pill">
                                             <div class="panel-body">
                                                 <div class="dataTable_wrapper">
-                                                    <table class="table table-hover infolet-table-c">
+                                                    <table class="table table-hover infolet-table-cnr">
                                                         <thead>
                                                             <th>#</th>
                                                             <th>Name</th>
@@ -86,69 +86,63 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>1</td>
-                                                                <td>ACTION_TITLE</td>                                                                <td>Varchar2</td>
+                                                                <td>ACTION_TITLE         </td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_TITLE</td>
                                                                 <td>Action Title</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>2</td>
-                                                                <td>ACTION_STATUS</td>                                                                <td>Varchar2</td>
+                                                                <td>ACTION_STATUS         </td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_STATUS</td>
                                                                 <td>Action Status</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>3</td>
-                                                                <td>ACTION_OWNER</td>                                                                <td>Varchar2</td>
+                                                                <td>ACTION_OWNER         </td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_OWNER</td>
                                                                 <td>Action Owner</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>4</td>
-                                                                <td>PRIORITY</td>                                                                <td>Varchar2</td>
-                                                                <td>ACTION_PRIORITY</td>
-                                                                <td>Action Priority</td>                                                                <td>--/ --</td>
+                                                                <td>PRIORITY          </td>                                                                <td>Varchar2</td>
+                                                                <td>PRIORITY</td>
+                                                                <td>Priority</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>5</td>
-                                                                <td>ACTION_DUE_DATE</td>                                                                <td>Date</td>
-                                                                <td>ACTION_DUE_DATE</td>
-                                                                <td>Action Due Date</td>                                                                <td>--/ --</td>
+                                                                <td>ACTION_DUE_DATE         </td>                                                                <td>Date</td>
+                                                                <td>ACTION_DUE_BY</td>
+                                                                <td>Action Due By</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>6</td>
-                                                                <td>ACTION_COMPLETED_ON</td>                                                                <td>Date</td>
+                                                                <td>ACTION_COMPLETED_ON         </td>                                                                <td>Date</td>
                                                                 <td>ACTION_COMPLETED_ON</td>
                                                                 <td>Action Completed On</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>7</td>
-                                                                <td>ISSUE_TITLE</td>                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_TITLE         </td>                                                                <td>Varchar2</td>
                                                                 <td>ISSUE_TITLE</td>
                                                                 <td>Issue Title</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>8</td>
-                                                                <td>ISSUE_OWNER</td>                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_OWNER         </td>                                                                <td>Varchar2</td>
                                                                 <td>ISSUE_OWNER</td>
                                                                 <td>Issue Owner</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>9</td>
-                                                                <td>PERCENTAGE_COMPLETED</td>                                                                <td>Varchar2</td>
-                                                                <td>PERCENTAGE_COMPLETED</td>
-                                                                <td>Percentage Completed</td>                                                                <td>--/ --</td>
+                                                                <td>PID         </td>                                                                <td>Number</td>
+                                                                <td>PROCESSINSTANCEID</td>
+                                                                <td>ProcessInstanceID</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>10</td>
-                                                                <td>PID</td>                                                                <td>Number</td>
-                                                                <td>PID</td>
-                                                                <td>PID</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>11</td>
                                                                 <td>INSTANCEID</td>                                                                <td>Number</td>
                                                                 <td>INSTANCEID</td>
-                                                                <td>INSTANCEID</td>                                                                <td>--/ --</td>
+                                                                <td>InstanceID</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -172,11 +166,6 @@
                                                                 <td>N</td>
                                                                 <td>Issue ID</td>
                                                             </tr>
-                                                            <tr>
-                                                                <td>LOGIN_ID</td>
-                                                                <td>N</td>
-                                                                <td>LOGIN_ID</td>
-                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -199,6 +188,11 @@
                                                                 <td>Report</td>
                                                                 <td>SYSTEMI</td>
                                                             </tr>
+                                                            <tr>
+                                                                <td>MS_ISM_Action_List_DrillDown_Report1</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -215,17 +209,17 @@
                                                     <div class="modal-body" >
                                                         <pre id="selectme-sql">
                                                         SELECT action_title as Action_Title
-       ,action_status as Action_Status
-       ,action_owner as Action_Owner
-       ,priority as Priority 
+       ,ms_ism_helper.get_status_display_name(action_status) as Action_Status
+       ,ms_apps_utilities.get_user_full_name(action_owner) as Action_Owner
+       ,MS_APPS_UTILITIES.GET_DISPLAY_VALUE(100000,'MS ISM Risk Rating',action_priority,1,null,null) as Priority 
        ,action_due_date as Action_Due_Date
-       ,action_completed_on as Action_Completed_On
+       ,Null as Action_Completed_On
        ,issue_title as Issue_Title
-       ,issue_owner as Issue_Owner
-       ,PERCENTAGE_COMPLETED as PERCENTAGE_COMPLETED
-       ,pid as pid
-       ,INSTANCEID as instanceid
-  FROM table(ms_ism_helper.Fn_Get_Act_List_drilldown_Rept(:2, :1))
+       ,ms_apps_utilities.get_user_full_name(issue_owner) as Issue_Owner
+       ,dd_process_instance_id as pid
+       ,dd_instance_id as instanceid
+  FROM ms_ism_action
+  WHERE issue_id=:1
                                                         </pre>
                                                     </div>
                                                 </div>
@@ -264,9 +258,9 @@
                                         <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
                                     </thead>
                                         <tr>
-                                            <td><a href="../reports/100110.html">Actions</a></td>
-                                            <td></td>
-
+                                            <td><a href="../reports/100130.html">Action List DrillDown Report</a></td>
+                                            <td><a href="../reports/100131.html">Action List DrillDown Report</a></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

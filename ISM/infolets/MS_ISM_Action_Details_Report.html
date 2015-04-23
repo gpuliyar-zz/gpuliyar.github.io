@@ -85,16 +85,22 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>1</td>
-                                                                <td>A.ISSUE_ID</td>                                                                <td>Varchar2</td>
-                                                                <td>ISSUE_ID</td>
-                                                                <td>Issue ID</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td>2</td>
                                                                 <td>ACTION_COMMENTS</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_COMMENTS</td>
                                                                 <td>Action Comments</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>ACTION_PER_COMPLETE</td>                                                                <td>Varchar2</td>
+                                                                <td>ACTION_PERCENTAGE</td>
+                                                                <td>Action Percentage</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>A.ISSUE_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_ID</td>
+                                                                <td>Issue ID</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>3</td>
@@ -115,22 +121,10 @@
                                                                 <td>Action Owner</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>6</td>
-                                                                <td>ACTION_PER_COMPLETE</td>                                                                <td>Varchar2</td>
-                                                                <td>ACTION_PERCENTAGE</td>
-                                                                <td>Action Percentage</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td>7</td>
                                                                 <td>ACTION_PRIORITY</td>                                                                <td>Varchar2</td>
                                                                 <td>ACTION_PRIORITY</td>
                                                                 <td>Action Priority</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>8</td>
-                                                                <td>DECODE(ACTION_STATUS,'2','OPEN','16','PENDINGCLOSURE','5','PENDINGREVIEW','21','REOPENED','6','PENDINGAPPROVAL','CLOSED')ACTION_STATUS</td>                                                                <td>Varchar2</td>
-                                                                <td>ACTION_STATUS</td>
-                                                                <td>Action Status</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>9</td>
@@ -149,6 +143,12 @@
                                                                 <td>REOPEN_ACTION</td>                                                                <td>Varchar2</td>
                                                                 <td>REOPEN_ACTION</td>
                                                                 <td>Reopen Action</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>DECODE(ACTION_STATUS,'2','OPEN','16','PENDINGCLOSURE','5','PENDINGREVIEW','21','REOPENED','6','PENDINGAPPROVAL','CLOSED')ACTION_STATUS</td>                                                                <td>Varchar2</td>
+                                                                <td>ACTION_STATUS</td>
+                                                                <td>Action Status</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -295,7 +295,7 @@ and  a.issue_id=:1
                                         <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
                                     </thead>
                                         <tr>
-                                            <td><a href="../reports/100115.html">Action Details Report</a></td>
+                                            <td><a href="../reports/100165.html">Action Details Report</a></td>
                                             <td></td>
 
                                     </tbody>

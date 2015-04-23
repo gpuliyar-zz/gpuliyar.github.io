@@ -57,7 +57,7 @@
                                             <div class="modal-body" >
                                                 <pre id="selectme">
                                                 
-  CREATE OR REPLACE FORCE VIEW "ISM_61_SP2_DEV"."MS_ISM_FLOW_DOWN_ORG_V" ("ENTERPRISE_ID", "ACTIVITY_ID", "ACTIVITY_NAME", "ACTIVITY_SHORT_NAME", "USER_ID", "USER_NAME", "ORG_ENTITY_ID", "ORG_ENTITY_NAME", "ROLE_ID", "ROLE_NAME") AS 
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_ISM_FLOW_DOWN_ORG_V" ("ENTERPRISE_ID", "ACTIVITY_ID", "ACTIVITY_NAME", "ACTIVITY_SHORT_NAME", "USER_ID", "USER_NAME", "ORG_ENTITY_ID", "ORG_ENTITY_NAME", "ROLE_ID", "ROLE_NAME") AS 
   SELECT a.enterprise_id,
           d.activity_id,
           d.activity_name,
@@ -94,8 +94,6 @@
           AND NVL (b.end_date, SYSDATE) >= SYSDATE
           AND NVL (d.end_date, SYSDATE) >= SYSDATE
           AND d.activity_id = c.activity_id
- 
- 
  
                                                 </pre>
                                             </div>

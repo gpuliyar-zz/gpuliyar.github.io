@@ -85,6 +85,24 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
+                                                                <td>6</td>
+                                                                <td>ISSUE_APPROVERORG</td>                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_APPROVER_ORGANIZATION</td>
+                                                                <td>Issue Approver Organization</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>ISSUE_SOURCE_TYPE</td>                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_SOURCE_TYPE</td>
+                                                                <td>Issue Source Type</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>ISSUE_TYPE</td>                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_TYPE</td>
+                                                                <td>Issue Type</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td>1</td>
                                                                 <td>ISSUE_ID</td>                                                                <td>Varchar2</td>
                                                                 <td>ISSUE_ID</td>
@@ -113,24 +131,6 @@
                                                                 <td>ISSUE_OWNERORG</td>                                                                <td>Varchar2</td>
                                                                 <td>ISSUE_OWNER_ORGANIZATION</td>
                                                                 <td>Issue Owner Organization</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>6</td>
-                                                                <td>ISSUE_APPROVERORG</td>                                                                <td>Varchar2</td>
-                                                                <td>ISSUE_APPROVER_ORGANIZATION</td>
-                                                                <td>Issue Approver Organization</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>7</td>
-                                                                <td>ISSUE_SOURCE_TYPE</td>                                                                <td>Varchar2</td>
-                                                                <td>ISSUE_SOURCE_TYPE</td>
-                                                                <td>Issue Source Type</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>8</td>
-                                                                <td>ISSUE_TYPE</td>                                                                <td>Varchar2</td>
-                                                                <td>ISSUE_TYPE</td>
-                                                                <td>Issue Type</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -191,8 +191,14 @@
                                                     </div>
                                                     <div class="modal-body" >
                                                         <pre id="selectme-sql">
-                                                        SELECT  issue_id As issue_id,issue_title As issue_title,  ms_ism_utilities.get_lov_display_value ('MS ISM Risk Rating', issue_risk_rating,:1) AS issue_rating,issue_due_date As issue_due_date,ms_ism_helper.get_org_name(issue_ownerorg) As issue_ownerorg,ms_ism_helper.get_org_name(issue_approverorg) As issue_approverorg,Ms_Ism_Utilities.Get_Lov_Display_Value ('MS ISM Source Type', issue_SOURCE_type,:1) as issue_source_type,
-          ms_ism_utilities.get_iss_type_list(a.issue_id,:1) As issue_type
+                                                        SELECT  issue_id As issue_id,
+		  issue_title As issue_title,
+		  ms_apps_utilities.get_display_value (100000, 'MS ISM Risk Rating', issue_risk_rating, 1, NULL, NULL) AS issue_rating,
+          issue_due_date As issue_due_date,
+          ms_ism_helper.get_org_name(issue_ownerorg) As issue_ownerorg,
+		  ms_ism_helper.get_org_name(issue_approverorg) As issue_approverorg, 
+          ms_apps_utilities.get_display_value (100000, 'MS ISM Source Type', issue_SOURCE_type, 1, NULL, NULL) as issue_source_type,
+          ms_ism_helper.get_comma_sep_value_for_mlov('issue_type','ms_ism_issue_ist',a.issue_id,'MS ISM Issue Type') As issue_type
           FROM ms_ism_issue a
           WHERE issue_id IS NOT NULL
           AND    ( 1 = ms_ism_helper.fn_ism_securities(issue_id, :1) )
@@ -234,7 +240,7 @@
                                         <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
                                     </thead>
                                         <tr>
-                                            <td><a href="../reports/100095.html">Audit Trail</a></td>
+                                            <td><a href="../reports/100114.html">Issue Audit Trail Report</a></td>
                                             <td></td>
 
                                     </tbody>

@@ -85,6 +85,30 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
+                                                                <td>3</td>
+                                                                <td>DUE_THIS_MONTH</td>                                                                <td>Varchar2</td>
+                                                                <td>DUE_THIS_MONTH</td>
+                                                                <td>DUE_THIS_MONTH</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>COL1</td>                                                                <td>Varchar2</td>
+                                                                <td>COL1</td>
+                                                                <td>COL1</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>COL2</td>                                                                <td>Varchar2</td>
+                                                                <td>COL2</td>
+                                                                <td>COL2</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>COL3</td>                                                                <td>Varchar2</td>
+                                                                <td>COL3</td>
+                                                                <td>COL3</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td>1</td>
                                                                 <td>ISSUE_SOURCE_TYPE</td>                                                                <td>Varchar2</td>
                                                                 <td>ISSUE_SOURCE_TYPE</td>
@@ -95,12 +119,6 @@
                                                                 <td>OVER_DUE</td>                                                                <td>Varchar2</td>
                                                                 <td>OVER_DUE</td>
                                                                 <td>OVER_DUE</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
-                                                                <td>DUE_THIS_MONTH</td>                                                                <td>Varchar2</td>
-                                                                <td>DUE_THIS_MONTH</td>
-                                                                <td>DUE_THIS_MONTH</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>4</td>
@@ -138,24 +156,6 @@
                                                                 <td>OWNER_ORG</td>
                                                                 <td>OWNER_ORG</td>                                                                <td>--/ --</td>
                                                             </tr>
-                                                            <tr>
-                                                                <td>10</td>
-                                                                <td>COL1</td>                                                                <td>Varchar2</td>
-                                                                <td>COL1</td>
-                                                                <td>COL1</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>11</td>
-                                                                <td>COL2</td>                                                                <td>Varchar2</td>
-                                                                <td>COL2</td>
-                                                                <td>COL2</td>                                                                <td>--/ --</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>12</td>
-                                                                <td>COL3</td>                                                                <td>Varchar2</td>
-                                                                <td>COL3</td>
-                                                                <td>COL3</td>                                                                <td>--/ --</td>
-                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -174,14 +174,14 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Organization</td>
-                                                                <td>N</td>
-                                                                <td>Organization</td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td>LOGIN_ID</td>
                                                                 <td>N</td>
                                                                 <td>Logged in User</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Organization</td>
+                                                                <td>N</td>
+                                                                <td>Organization</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -220,7 +220,7 @@
                                                     </div>
                                                     <div class="modal-body" >
                                                         <pre id="selectme-sql">
-                                                        select Lov_T.displayed_value     as ISSUE_SOURCE_TYPE,
+                                                        select ISSUE_SOURCE_TYPE     as ISSUE_SOURCE_TYPE,
   NVL(SUM(OVERDUE_THIS_MONTH),0)    as OVER_DUE,
   NVL(SUM(DUE_THIS_MONTH),0)        as DUE_THIS_MONTH,
   NVL(SUM(OD_PAST_THREE_MONTH),0)   as OVERDUE_PAST_3_MONTH,
@@ -236,7 +236,7 @@ AS total,
   2          AS Col2,
   3          AS COL3
 FROM
-  (SELECT SOURCE_TYPE_Stored,
+  (SELECT ISSUE_SOURCE_TYPE,
     DECODE(OVERDUE_THIS_MONTH,'Y',COUNT(OVERDUE_THIS_MONTH))       AS OVERDUE_THIS_MONTH,
     DECODE(DUE_THIS_MONTH,'Y',COUNT(DUE_THIS_MONTH))               AS DUE_THIS_MONTH,
     DECODE(OD_PAST_THREE_MONTH,'Y',COUNT(OD_PAST_THREE_MONTH))     AS OD_PAST_THREE_MONTH,
@@ -245,20 +245,16 @@ FROM
     DECODE(DUE_BEYOND_X_MONTH,'Y',COUNT(DUE_BEYOND_X_MONTH))       AS DUE_BEYOND_X_MONTH
   FROM MS_ISM_ISSUE_REPORTING
   WHERE (1 = MS_ISM_HELPER.FN_ISM_SECURITIES(ISSUE_ID,:2))
-  And (:1 Is Null Or Issue_Owner_Org =:1)
-  GROUP BY SOURCE_TYPE_Stored,
+  AND (:1 IS NULL or ISSUE_OWNER_ORG = :1)
+  GROUP BY ISSUE_SOURCE_TYPE,
     OVERDUE_THIS_MONTH,
     DUE_THIS_MONTH,
     OD_PAST_THREE_MONTH,
     OD_BEYOND_THREE_MONTH,
     DUE_WITHIN_X_MONTH,
-    Due_Beyond_X_Month
-  ) Tmp, Ms_Qs_Ism_Lov_Org_Values_V Lov_T,Si_Users_T A, Si_Locales B
-  Where Tmp.Source_Type_Stored = Lov_T.Stored_Value(+)
-  And Lov_T.Lov_Name(+)   = 'MS ISM Source Type'
-  And User_Name = :2 And B.Locale_String = A.Locale
-  and lov_t.locale_id = b.locale_id
-GROUP BY Lov_T.displayed_value
+    DUE_BEYOND_X_MONTH
+  )
+GROUP BY ISSUE_SOURCE_TYPE
                                                         </pre>
                                                     </div>
                                                 </div>
@@ -297,7 +293,7 @@ GROUP BY Lov_T.displayed_value
                                         <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
                                     </thead>
                                         <tr>
-                                            <td><a href="../reports/100094.html">Issue Aging</a></td>
+                                            <td><a href="../reports/100113.html">Issue Ageing Report</a></td>
                                             <td></td>
 
                                     </tbody>

@@ -163,6 +163,11 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
+                                                                <td>From Date</td>
+                                                                <td>(trunc(Modified_On) >= to_date(:From Date , 'mon-dd-yyyy'))</td>
+                                                                <td>From Date</td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td>Issue Title</td>
                                                                 <td>(trim(UPPER(Issue_Title1)) like UPPER('%'||(:Issue Title)||'%'))</td>
                                                                 <td>Issue Title</td>
@@ -171,11 +176,6 @@
                                                                 <td>Modified By</td>
                                                                 <td>(trim(UPPER(Modified_By)) like UPPER('%'||(:Changed By)||'%'))</td>
                                                                 <td>Modified By</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>From Date</td>
-                                                                <td>(trunc(Modified_On) >= to_date(:From Date , 'mon-dd-yyyy'))</td>
-                                                                <td>From Date</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>End Date</td>
@@ -221,11 +221,6 @@
                                                             <th>User</th>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>Dummy_Change_History</td>
-                                                                <td>Report</td>
-                                                                <td>SYSTEMI</td>
-                                                            </tr>
                                                             <tr>
                                                                 <td>MS_ISM_CHANGE_HISTORY_RPT</td>
                                                                 <td>Report</td>
@@ -304,9 +299,9 @@ and ( 1 = ms_ism_helper.fn_ism_securities(b.issue_id, :1) ) order by Modified_on
                                         <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
                                     </thead>
                                         <tr>
-                                            <td><a href="../reports/100645.html">Reopen and Update Change History Report</a></td>
-                                            <td><a href="../reports/106625.html">Dummy_Change_History</a></td>
-                                        </tr>
+                                            <td><a href="../reports/100133.html">Reopen and Update Change History Report</a></td>
+                                            <td></td>
+
                                     </tbody>
                                 </table>
                             </div>

@@ -55,7 +55,7 @@
                                         <tbody>
                                             <tr>
                                                 <th style="width:15%;">Description</th>
-                                                <td>This infolet is used to pull all active organizations from system to be associated with issue</td>
+                                                <td>This infolet to get  Organization from GRC</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -66,6 +66,7 @@
                                     <ul class="nav nav-pills">
                                         <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
                                         <li><a href="#query-pill" data-toggle="tab">Query</a></li>
+                                        <li><a href="#xml-pill" data-toggle="tab">XML</a></li>
                                         <li><a href="#usedin-pill" data-toggle="tab">Used In</a></li>
                                     </ul>
                                     <div class="tab-content">
@@ -155,11 +156,24 @@
                                                     </div>
                                                     <div class="modal-body" >
                                                         <pre id="selectme-sql">
-                                                         SELECT ms_ism_helper.get_html_checkbox(p_id=&gt;a.org_entity_id,p_value=&gt;a.org_entity_name) As Checkbox,
-       a.org_entity_id as org_entity_id,a.org_entity_name as org_entity_name,a.description as description,a.parent_org_entity_id as
-       parent_org_entity_id,a.org_level as org_level from SI_ORG_ENTITY_HIERARCHY_V a, si_org_entities b
-       WHERE a.org_entity_id=b.org_entity_id
-       AND SYSDATE BETWEEN b.start_date AND Nvl(b.end_date, SYSDATE)
+                                                        SELECT ms_ism_helper.get_html_checkbox(p_id=&gt;org_entity_id,p_value=&gt;org_entity_name) As Checkbox,
+       org_entity_id,org_entity_name,description,parent_org_entity_id,org_level from SI_ORG_ENTITY_HIERARCHY_V
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <div class="tab-pane fade" id="xml-pill">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-xml')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-xml">
+                                                        &lt;?xml version=&quot;1.0&quot;?&gt;&lt;METRIC_DEPLOYMENT&gt;&lt;METRIC       PROCESS=&quot;0&quot;  INSTANCE=&quot;0&quot;  NOTIFY=&quot;YES&quot;   RETURN=&quot;RESULTSET&quot; &gt;&lt;RESULTMAP &gt;&lt;/RESULTMAP&gt;&lt;/METRIC&gt;&lt;/METRIC_DEPLOYMENT&gt;
                                                         </pre>
                                                     </div>
                                                 </div>
@@ -182,7 +196,7 @@
                                         <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
                                     </thead>
                                         <tr>
-                                            <td><a href="../reports/100126.html">Add Organizations</a></td>
+                                            <td><a href="../reports/100176.html">Add Organizations</a></td>
                                             <td></td>
 
                                     </tbody>

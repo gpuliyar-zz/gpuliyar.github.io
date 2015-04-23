@@ -57,7 +57,7 @@
                                             <div class="modal-body" >
                                                 <pre id="selectme">
                                                 
-  CREATE OR REPLACE FORCE VIEW "ISM_61_SP2_DEV"."MS_ISM_STATUS_V" ("CREATED_BY", "CREATION_DATE", "LAST_UPDATED_BY", "LAST_UPDATE_DATE", "STATUS_TYPE", "STATUS_ID", "STATUS_NAME", "ACTIVE", "LOCALE_ID") AS 
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_ISM_STATUS_V" ("CREATED_BY", "CREATION_DATE", "LAST_UPDATED_BY", "LAST_UPDATE_DATE", "STATUS_TYPE", "STATUS_ID", "STATUS_NAME", "ACTIVE", "LOCALE_ID") AS 
   SELECT t.created_by,
     t.creation_date,
     t.last_updated_by,
@@ -71,8 +71,6 @@
     ms_ism_status_tl tl
   WHERE t.status_id   = tl.status_id(+)
   AND tl.locale_id(+) = si_db_locale_sv.getvalue
- 
- 
  
                                                 </pre>
                                             </div>

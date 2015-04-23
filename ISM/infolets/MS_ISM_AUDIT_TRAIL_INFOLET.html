@@ -46,7 +46,7 @@
                                 <span data-toggle="tooltip" data-placement="top" title="Category: Assets" class="fa fa-cubes fa-fw"></span>
                                 <span data-toggle="tooltip" data-placement="top" title="Output Type: Ordinary Graph" class="fa fa-sign-out fa-fw"></span>
                                 <span data-toggle="tooltip" data-placement="top" title="Type: SQL Based" class="fa fa-globe fa-fw"></span>
-                                <span data-toggle="tooltip" data-placement="top" title="Non Persistent" class="fa fa fa-thumbs-down fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Keep History" class="fa fa-history fa-fw"></span>
                                 <a style="text-decoration: none; " id="MS_ISM_AUDIT_TRAIL_INFOLET">MS_ISM_AUDIT_TRAIL_INFOLET</a> </h4>
                             </div>
                             <div class="panel-body">
@@ -111,8 +111,8 @@
                                                             <tr>
                                                                 <td>5</td>
                                                                 <td>ISSUE_STATUS</td>                                                                <td>Varchar2</td>
-                                                                <td>STATUS</td>
-                                                                <td>Status</td>                                                                <td>--/ --</td>
+                                                                <td>ISSUE_STATUS</td>
+                                                                <td>Issue Status</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>6</td>
@@ -153,8 +153,8 @@
                                                             <tr>
                                                                 <td>12</td>
                                                                 <td>COMMENTS</td>                                                                <td>Varchar2</td>
-                                                                <td>ISS_COMMENT</td>
-                                                                <td>Iss_Comment</td>                                                                <td>--/ --</td>
+                                                                <td>ISSUE_COMMENTS</td>
+                                                                <td>Issue_Comments</td>                                                                <td>--/ --</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>13</td>
@@ -185,11 +185,6 @@
                                                             <th>Description</th>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>LOGIN_ID</td>
-                                                                <td>N</td>
-                                                                <td>LOGIN_ID</td>
-                                                            </tr>
                                                             <tr>
                                                                 <td>issue_id</td>
                                                                 <td>N</td>
@@ -270,7 +265,7 @@
                  || '&lt;/a&gt;' from dual) as issue_stage, issue_status, user_action, action_title,
        completed_on, completed_by, ROLE, org, comments, elec_sig_role,
        elec_sig_tstmp
-  FROM (TABLE (ms_ism_audit_trail (:1,:2)))
+  FROM (TABLE (ms_ism_audit_trail (:1)))
   order by p_id
                                                         </pre>
                                                     </div>
@@ -310,7 +305,7 @@
                                         <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
                                     </thead>
                                         <tr>
-                                            <td><a href="../reports/100109.html">Issue Audit Trail Details</a></td>
+                                            <td><a href="../reports/100129.html">Issue Audit Trail Drill Down Report</a></td>
                                             <td></td>
 
                                     </tbody>

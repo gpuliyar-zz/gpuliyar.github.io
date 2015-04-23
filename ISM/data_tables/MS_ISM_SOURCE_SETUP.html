@@ -51,7 +51,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h4><span class="fa fa-table fa-fw"></span> <a style="text-decoration: none; " id="MS_ISM_SOURCE_SETUP" href="../db_tables/MS_ISM_SOURCE_SETUP.html">MS_ISM_SOURCE_SETUP</a><button class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button> </h4>
+                                <h4><span class="fa fa-table fa-fw"></span> <a style="text-decoration: none; " id="MS_ISM_SOURCE_SETUP" href="../db_tables/MS_ISM_SOURCE_SETUP.html">MS_ISM_SOURCE_SETUP</a></h4>
                             </div>
                             <div class="panel-body">
                                 <div class="dataTable_wrapper">
@@ -88,20 +88,20 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>4</td>
-                                                                <td>
-                                                                Active<br>ACTIVE
-                                                                 </td>
-                                                                <td>Varchar2(10 char)</td>
-                                                                <td>This column will contain Y/N.</td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td>1</td>
                                                                 <td>
                                                                 Module Name<br>MODULE_NAME
                                                                  </td>
                                                                 <td>Varchar2(50 char)</td>
                                                                 <td>This column will contain upstream module name integrating with ISM.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>
+                                                                Module Code<br>MODULE_CODE
+                                                                 </td>
+                                                                <td>Varchar2(20 char)</td>
+                                                                <td>This column will contain module code for each module name.</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>3</td>
@@ -112,12 +112,12 @@
                                                                 <td>This column will contain stored value for each module integrating with ISM and should match with the stored value specified in lov 'MS ISM Source Type'.</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>2</td>
+                                                                <td>4</td>
                                                                 <td>
-                                                                Module Code<br>MODULE_CODE
+                                                                Active<br>ACTIVE
                                                                  </td>
-                                                                <td>Varchar2(20 char)</td>
-                                                                <td>This column will contain module code for each module name.</td>
+                                                                <td>Varchar2(10 char)</td>
+                                                                <td>This column will contain Y/N.</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -164,7 +164,7 @@
                                                                     <td>SAM</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>Audits</td>
+                                                                    <td>Audit</td>
                                                                     <td>1</td>
                                                                     <td>Y</td>
                                                                     <td>AUD</td>
@@ -194,7 +194,7 @@
                                                                     <td>BCM</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>Overdue CM Surveys</td>
+                                                                    <td>Overdue CM Survey</td>
                                                                     <td>11</td>
                                                                     <td>Y</td>
                                                                     <td>OCS</td>
@@ -204,12 +204,6 @@
                                                                     <td>10</td>
                                                                     <td>Y</td>
                                                                     <td>CMS</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Supplier On-Boarding and Monitoring</td>
-                                                                    <td>12</td>
-                                                                    <td>Y</td>
-                                                                    <td>SBM</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>

@@ -343,16 +343,6 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Exclude Closed Status</td>
-                                                                <td>(trim(ISSUE_STATUS_STORED) != '10')</td>
-                                                                <td>Exclude Closed Status for Chart</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Last One Year Chart</td>
-                                                                <td>TO_DATE (Created_On, 'DD/MM/RRRR')>=ADD_MONTHS(TO_DATE (sysdate, 'DD/MM/RRRR'), -12)</td>
-                                                                <td>Filter for last one year issues chart</td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td>Issue Title</td>
                                                                 <td>(trim(UPPER(SUBSTR(Issue_Title,INSTR(Issue_Title,'>')+1,INSTR(Issue_Title,'</a')-1))) like UPPER('%'||:Issue Title||'%'))</td>
                                                                 <td></td>
@@ -388,13 +378,13 @@
                                                                 <td></td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Related To Organization</td>
+                                                                <td>Related to Organization</td>
                                                                 <td>((trim(UPPER(Organization)) like UPPER('%'||:Related To Organization||'%')))</td>
                                                                 <td></td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Related To Risks</td>
-                                                                <td>(trim(UPPER(Risks)) like UPPER('%'||:Related To Risks||'%'))</td>
+                                                                <td>(trim(UPPER(Risks)) like UPPER('%'||:Related to Risks||'%'))</td>
                                                                 <td></td>
                                                             </tr>
                                                             <tr>
@@ -464,6 +454,16 @@ AND (trim(Issue_Status) != 'Closed')AND(trim(Issue_Status) != 'Issue Cancelled')
                                                                 <td>Issue Type</td>
                                                                 <td>(trim(UPPER(Issue_Type)) like UPPER('%'||:Issue Type||'%'))</td>
                                                                 <td>Issue Type</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Last One Year Chart</td>
+                                                                <td>TO_DATE (Created_On, 'DD/MM/RRRR')>=ADD_MONTHS(TO_DATE (sysdate, 'DD/MM/RRRR'), -12)</td>
+                                                                <td>Filter for last one year issues chart</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Exclude Closed Status</td>
+                                                                <td>(trim(ISSUE_STATUS_STORED) != '10')</td>
+                                                                <td>Exclude Closed Status for Chart</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>Exclude Cancelled Status</td>
@@ -591,7 +591,7 @@ issue_status_stored As issue_status_stored
                                         <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
                                     </thead>
                                         <tr>
-                                            <td><a href="../reports/101868.html">Issues</a></td>
+                                            <td><a href="../reports/100148.html">Issue List Report</a></td>
                                             <td></td>
 
                                     </tbody>

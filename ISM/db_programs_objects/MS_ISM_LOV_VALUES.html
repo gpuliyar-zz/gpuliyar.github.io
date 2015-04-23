@@ -57,7 +57,7 @@
                                             <div class="modal-body" >
                                                 <pre id="selectme">
                                                 
-  CREATE OR REPLACE FORCE VIEW "ISM_61_SP2_DEV"."MS_ISM_LOV_VALUES" ("STORED_VALUE", "DISPLAYED_VALUE", "LOV_NAME", "LOCALE_ID", "ENTERPRISE_ID", "LOV_ID", "LOV_VALUE_ID", "ORG_ENTITY_ID", "ORG_ENTITY_NAME", "START_DATE", "END_DATE") AS 
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_ISM_LOV_VALUES" ("STORED_VALUE", "DISPLAYED_VALUE", "LOV_NAME", "LOCALE_ID", "ENTERPRISE_ID", "LOV_ID", "LOV_VALUE_ID", "ORG_ENTITY_ID", "ORG_ENTITY_NAME", "START_DATE", "END_DATE") AS 
   Select Stored_Value,
        Displayed_Value,
        Lov_Name,
@@ -71,8 +71,6 @@
        End_Date
 From   Ms_Qs_Lov_Org_Values_v
 order by Lov_Name,TO_NUMBER(Stored_Value) DESC 
- 
- 
  
  
  

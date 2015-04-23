@@ -57,7 +57,7 @@
                                             <div class="modal-body" >
                                                 <pre id="selectme">
                                                 
-  CREATE OR REPLACE FORCE VIEW "ISM_61_SP2_DEV"."MS_ISM_001_ISS_LIST_REP_NEW_V" ("ISSUE_TITLE", "ISSUE_STATUS", "ISSUE_OWNER", "ISSUE_RATING", "PRIORITY", "SOURCE_TYPE", "ISSUE_DUE_DATE", "ISSUE_INITIATOR", "FIRST_IDENTIFIED_ON", "ISSUE_ID", "ISSUE_DETAILS", "NO_OF_ACTIONS", "ISSUE_OWNER_ORG", "ISSUE_APPROVERORG", "OWNERORG", "APPROVERORG", "PROGRESS_STATUS", "PID", "INSTANCEID", "ORG", "AREA_OF_COMPLIANCE", "CONTROLS", "RISKS", "CORE_OBJECTS") AS 
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_ISM_001_ISS_LIST_REP_NEW_V" ("ISSUE_TITLE", "ISSUE_STATUS", "ISSUE_OWNER", "ISSUE_RATING", "PRIORITY", "SOURCE_TYPE", "ISSUE_DUE_DATE", "ISSUE_INITIATOR", "FIRST_IDENTIFIED_ON", "ISSUE_ID", "ISSUE_DETAILS", "NO_OF_ACTIONS", "ISSUE_OWNER_ORG", "ISSUE_APPROVERORG", "OWNERORG", "APPROVERORG", "PROGRESS_STATUS", "PID", "INSTANCEID", "ORG", "AREA_OF_COMPLIANCE", "CONTROLS", "RISKS", "CORE_OBJECTS") AS 
   SELECT (SELECT    '<a target="_self" href="javascript'
                   || CHR (58)
                   || 'callreportdetails(''Pushinfolet?id='
@@ -170,8 +170,6 @@
                    WHERE issue_id = a.issue_id AND dd_current_stage = 4)
           AND a.issue_action NOT IN ('1', '3')
 -- end of fixing of bug - 40918;;
- 
- 
  
  
                                                 </pre>

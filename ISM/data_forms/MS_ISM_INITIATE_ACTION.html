@@ -49,7 +49,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h4><span class="fa fa-edit fa-fw"></span> <a style="text-decoration: none; " id="MS_ISM_INITIATE_ACTION">Action</a> </h4>
+                                <h4><span class="fa fa-edit fa-fw"></span> <a style="text-decoration: none; " id="MS_ISM_INITIATE_ACTION">Initiate Action</a> </h4>
                             </div>
                             <div class="panel-body">
                                 <div class="dataTable_wrapper">
@@ -71,11 +71,11 @@
                                     </table>
                                 </div>
                                 <!-- table-wrapper -->
-                                <div class="panel-group" id="accordion2">
+                                <div class="panel-group" id="accordion6">
                                     <div class="panel panel-warning">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion2" href="#MS_ISM_INITIATE_ACTIONmain" aria-expanded="false" class="collapsed" style="text-decoration: none">No Source Data Object</a>
+                                                <a data-toggle="collapse" data-parent="#accordion6" href="#MS_ISM_INITIATE_ACTIONmain" aria-expanded="false" class="collapsed" style="text-decoration: none">No Source Data Object</a>
 
                                             </h4>
                                         </div>
@@ -97,9 +97,14 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Object Type<br>DD_OBJECT_TYPE</td>
+                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Enterprise Info<br>DD_ENTERPRISE_INFO</td>
                                                                     <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field captures the object type</td>
+                                                                    <td>This field captures the enterprise name</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Current Stage<br>DD_CURRENT_STAGE</td>
+                                                                    <td><a href="../infolets/.html"></a></td>
+                                                                    <td>This field captures the current stage of the form</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Current User Name<br>DD_CURRENT_USER_NAME</td>
@@ -112,14 +117,9 @@
                                                                     <td>This field captures the event user name</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Current Stage<br>DD_CURRENT_STAGE</td>
+                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Object Type<br>DD_OBJECT_TYPE</td>
                                                                     <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field captures the current stage of the form</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Enterprise Info<br>DD_ENTERPRISE_INFO</td>
-                                                                    <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field captures the enterprise name</td>
+                                                                    <td>This field captures the object type</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="form-tooltip">Process Code<br>DD_PROCESS_CODE</td>
@@ -141,7 +141,7 @@
                                     <div class="panel panel-warning">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion2" href="#MS_ISM_INITIATE_ACTIONMS_ISM_TMP_ACTION" class="collapsed" aria-expanded="false" style="text-decoration: none">TMP ACTION</a> <a href="../data_objects/MS_ISM_TMP_ACTION.html" class="form-tooltip"><span data-toggle="tooltip" data-placement="top" title="Navigate to data object" class="fa fa-database fa-fw"></span></a>
+                                                <a data-toggle="collapse" data-parent="#accordion6" href="#MS_ISM_INITIATE_ACTIONMS_ISM_TMP_ACTION" class="collapsed" aria-expanded="false" style="text-decoration: none">TMP ACTION</a> <a href="../data_objects/MS_ISM_TMP_ACTION.html" class="form-tooltip"><span data-toggle="tooltip" data-placement="top" title="Navigate to data object" class="fa fa-database fa-fw"></span></a>
                                             </h4>
                                         </div>
                                         <div id="MS_ISM_INITIATE_ACTIONMS_ISM_TMP_ACTION" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
@@ -163,9 +163,14 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td class="form-tooltip">DUMMY3<br>DUMMY3</td>
+                                                                    <td class="form-tooltip">IDA_ACTION_ID Hidden<br>IDA_ACTION_ID</td>
                                                                     <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field gets defaulted to FROM MONITOR value on independent action trigger</td>
+                                                                    <td>deprecated</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Issue Status<br>ISSUE_STATUS</td>
+                                                                    <td><a href="../infolets/MS_ISM_FETCH_ISSUE_DETAILS.html">MS_ISM_FETCH_ISSUE_DETAILS</a></td>
+                                                                    <td>This field contain issue status</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="form-tooltip">DUMMY1<br>DUMMY1</td>
@@ -173,14 +178,14 @@
                                                                     <td>This field gets defaulted to 1 when blank initiate action form is opened, and in case the form opened from Monitor Issue form then get defaulted to 2. This parameter is passed as input parameter to issue title infolet</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="form-tooltip">Issue ID<br>ISSUE_ID</td>
-                                                                    <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field contain Issue ID</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="form-tooltip">Source Type<br>ISSUE_SOURCE_TYPE</td>
+                                                                    <td class="form-tooltip">DUMMY4<br>DUMMY4</td>
                                                                     <td><a href="../infolets/.html"></a></td>
                                                                     <td>deprecated</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="form-tooltip">RTF_ATTACH<br>RTF_ATTACH</td>
+                                                                    <td><a href="../infolets/.html"></a></td>
+                                                                    <td>This field contain attachment details when added in action description</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="form-tooltip">ISSUE_OWNERORG<br>ISSUE_OWNERORG</td>
@@ -188,24 +193,14 @@
                                                                     <td>This field contain Issue Owner Organization name</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="form-tooltip">DUMMY4<br>DUMMY4</td>
+                                                                    <td class="form-tooltip">Issue ID<br>ISSUE_ID</td>
                                                                     <td><a href="../infolets/.html"></a></td>
-                                                                    <td>deprecated</td>
+                                                                    <td>This field contain Issue ID</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="form-tooltip">DUMMY2<br>DUMMY2</td>
-                                                                    <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field gets defaulted to selected Issue Title and is used for fetching action approval value</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="form-tooltip">Issue Title<br>ISSUE_TITLE</td>
-                                                                    <td><a href="../infolets/MS_ISM_GET_ISSUE_TITLE.html">MS_ISM_GET_ISSUE_TITLE</a></td>
-                                                                    <td>This field contain Issue title</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="form-tooltip">RTF_ATTACH<br>RTF_ATTACH</td>
-                                                                    <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field contain attachment details when added in action description</td>
+                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Issue Due Date<br>ISSUE_DUE_DATE</td>
+                                                                    <td><a href="../infolets/MS_ISM_FETCH_ISSUE_DETAILS.html">MS_ISM_FETCH_ISSUE_DETAILS</a></td>
+                                                                    <td>This field contain Issue due date</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Issue Owner<br>ISSUE_OWNER</td>
@@ -218,19 +213,14 @@
                                                                     <td>This field contain action source details to represent from which source action got triggered, which is Issue by default</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="form-tooltip">IDA_ACTION_ID Hidden<br>IDA_ACTION_ID</td>
+                                                                    <td class="form-tooltip">Action ID<br>ACTION_ID</td>
                                                                     <td><a href="../infolets/.html"></a></td>
-                                                                    <td>deprecated</td>
+                                                                    <td>This field contain Action ID</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Issue Status<br>ISSUE_STATUS</td>
-                                                                    <td><a href="../infolets/MS_ISM_FETCH_ISSUE_STAUS_DETAILS.html">MS_ISM_FETCH_ISSUE_STAUS_DETAILS</a></td>
-                                                                    <td>This field contain issue status</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Issue Due Date<br>ISSUE_DUE_DATE</td>
-                                                                    <td><a href="../infolets/MS_ISM_FETCH_ISSUE_DETAILS.html">MS_ISM_FETCH_ISSUE_DETAILS</a></td>
-                                                                    <td>This field contain Issue due date</td>
+                                                                    <td class="form-tooltip">DUMMY2<br>DUMMY2</td>
+                                                                    <td><a href="../infolets/.html"></a></td>
+                                                                    <td>This field gets defaulted to selected Issue Title and is used for fetching action approval value</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="form-tooltip">First Identified On<br>DATE_FIRST_IDENTIFIED</td>
@@ -238,9 +228,19 @@
                                                                     <td>This field contain issue indentified on date</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="form-tooltip">Action ID<br>ACTION_ID</td>
+                                                                    <td class="form-tooltip">DUMMY3<br>DUMMY3</td>
                                                                     <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field contain Action ID</td>
+                                                                    <td>This field gets defaulted to FROM MONITOR value on independent action trigger</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="form-tooltip">Issue Title<br>ISSUE_TITLE</td>
+                                                                    <td><a href="../infolets/MS_ISM_GET_ISSUE_TITLE.html">MS_ISM_GET_ISSUE_TITLE</a></td>
+                                                                    <td>This field contain Issue title</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="form-tooltip">Source Type<br>ISSUE_SOURCE_TYPE</td>
+                                                                    <td><a href="../infolets/.html"></a></td>
+                                                                    <td>deprecated</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -258,9 +258,9 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td class="form-tooltip">Action Due Date<br>ACTION_DUE_DATE</td>
+                                                                    <td class="form-tooltip">ACTION_STATE<br>ACTION_STATE</td>
                                                                     <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field contain Action Due Date</td>
+                                                                    <td>This field contain value either OPEN or CLOSED depending on currection action status</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="form-tooltip">Action Description<br>ACTION_DESCRIPTION</td>
@@ -278,16 +278,6 @@
                                                                     <td>This field contain action owner name</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="form-tooltip">Action Start Date<br>ACTION_START_DATE</td>
-                                                                    <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field contain action start date</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="form-tooltip">Action Approver<br>ACTION_APPROVER</td>
-                                                                    <td><a href="../infolets/MS_ISM_Users_All.html">MS_ISM_Users_All</a><br>(Action Approver)</td>
-                                                                    <td>This field contain first level action approver name</td>
-                                                                </tr>
-                                                                <tr>
                                                                     <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Original Action Due Date<br>ORIG_ACTION_DUE_DATE</td>
                                                                     <td><a href="../infolets/.html"></a></td>
                                                                     <td>This field contain current Action Due Date</td>
@@ -298,9 +288,9 @@
                                                                     <td>This field contain action title</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="form-tooltip">TMP_ACTION_IDA_PK<br>TMP_ACTION_IDA_PK</td>
-                                                                    <td><a href="../infolets/.html"></a></td>
-                                                                    <td>deprecated</td>
+                                                                    <td class="form-tooltip">Performed By<br>PEFORMED_BY</td>
+                                                                    <td><a href="../infolets/MS_GRC_Common_LOV_Infolet.html">MS GRC Common LOV Infolet</a><br>(Control Owner)</td>
+                                                                    <td>&lt;P&gt;Performed By Field&lt;&#x2F;P&gt;</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="form-tooltip">Priority<br>ACTION_PRIORITY</td>
@@ -308,9 +298,24 @@
                                                                     <td>This field contain Action priority</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="form-tooltip">ACTION_STATE<br>ACTION_STATE</td>
+                                                                    <td class="form-tooltip">Action Start Date<br>ACTION_START_DATE</td>
                                                                     <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field contain value either OPEN or CLOSED depending on currection action status</td>
+                                                                    <td>This field contain action start date</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="form-tooltip">Action Approver<br>ACTION_APPROVER</td>
+                                                                    <td><a href="../infolets/MS_ISM_Users_All.html">MS_ISM_Users_All</a><br>(Action Approver)</td>
+                                                                    <td>This field contain first level action approver name</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="form-tooltip">TMP_ACTION_IDA_PK<br>TMP_ACTION_IDA_PK</td>
+                                                                    <td><a href="../infolets/.html"></a></td>
+                                                                    <td>deprecated</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="form-tooltip">Action Due Date<br>ACTION_DUE_DATE</td>
+                                                                    <td><a href="../infolets/.html"></a></td>
+                                                                    <td>This field contain Action Due Date</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -327,7 +332,7 @@
                                     <div class="panel panel-warning">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a data-toggle="collapse" data-parent="#accordion2" href="#MS_ISM_INITIATE_ACTIONMS_ISM_TMP" class="collapsed" aria-expanded="false" style="text-decoration: none">TMP</a> <a href="../data_objects/MS_ISM_TMP.html" class="form-tooltip"><span data-toggle="tooltip" data-placement="top" title="Navigate to data object" class="fa fa-database fa-fw"></span></a>
+                                                <a data-toggle="collapse" data-parent="#accordion6" href="#MS_ISM_INITIATE_ACTIONMS_ISM_TMP" class="collapsed" aria-expanded="false" style="text-decoration: none">TMP</a> <a href="../data_objects/MS_ISM_TMP.html" class="form-tooltip"><span data-toggle="tooltip" data-placement="top" title="Navigate to data object" class="fa fa-database fa-fw"></span></a>
                                             </h4>
                                         </div>
                                         <div id="MS_ISM_INITIATE_ACTIONMS_ISM_TMP" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
@@ -348,9 +353,9 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td class="form-tooltip">Previous Stage<br>PREVIOUS_STAGE</td>
-                                                                    <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field captures the Previous stage of form.</td>
+                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Action Approval By<br>FINAL_ACTION_APPROVED</td>
+                                                                    <td><a href="../infolets/MS_ISM_FETCH_ISSUE_DETAILS.html">MS_ISM_FETCH_ISSUE_DETAILS</a></td>
+                                                                    <td>This field contain action approver flow details from given 6 options like Issue Owner, Issue Owner and Action Approver, Action Approver and Issue Owner, Action Approver (Optional) and Issue Owner, Action Approver or No Approver</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="form-tooltip">ACTION_EXISTS<br>ACTION_EXISTS</td>
@@ -358,19 +363,9 @@
                                                                     <td>This field get defaulted to Y on creation of independent action at monitor stage</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="form-tooltip">ASSIGNEE<br>ASSIGNEE</td>
+                                                                    <td class="form-tooltip">Previous Stage<br>PREVIOUS_STAGE</td>
                                                                     <td><a href="../infolets/.html"></a></td>
-                                                                    <td>This field contain the user name to which action assignment will get triggered. When auto delegation setup present then both action owner and auto delegatee name will get stored comma seperated, else only action owner name</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="form-tooltip">Approved By (Organization)<br>ISSUE_APPROVERORG</td>
-                                                                    <td><a href="../infolets/MS_ISM_LIB_ORGANIZATIONS.html">MS_ISM_LIB_ORGANIZATIONS</a></td>
-                                                                    <td>This field contain Issue Approver Organization name</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="form-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Read Only" class="fa fa-eye fa-fw" style="border: 1px solid black;"></span>Action Approval By<br>FINAL_ACTION_APPROVED</td>
-                                                                    <td><a href="../infolets/MS_ISM_FETCH_ACT_APPR_BY.html">MS_ISM_FETCH_ACT_APPR_BY</a></td>
-                                                                    <td>This field contain action approver flow details from given 6 options like Issue Owner, Issue Owner and Action Approver, Action Approver and Issue Owner, Action Approver (Optional) and Issue Owner, Action Approver or No Approver</td>
+                                                                    <td>This field captures the Previous stage of form.</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="form-tooltip">Config flag Dummy<br>CONFIG_FLAG_DUMMY</td>
@@ -378,9 +373,19 @@
                                                                     <td>deprecated</td>
                                                                 </tr>
                                                                 <tr>
+                                                                    <td class="form-tooltip">Approved By (Organization)<br>ISSUE_APPROVERORG</td>
+                                                                    <td><a href="../infolets/MS_ISM_LIB_ORGANIZATIONS.html">MS_ISM_LIB_ORGANIZATIONS</a></td>
+                                                                    <td>This field contain Issue Approver Organization name</td>
+                                                                </tr>
+                                                                <tr>
                                                                     <td class="form-tooltip">Assign To<br>ASSIGN_TO</td>
                                                                     <td><a href="../infolets/.html"></a></td>
                                                                     <td>This field will get populated only when independent action gets added to Monitor Issue stage. This field value is combination of Issue Owner organization and Approver Organization comma seperated</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="form-tooltip">ASSIGNEE<br>ASSIGNEE</td>
+                                                                    <td><a href="../infolets/.html"></a></td>
+                                                                    <td>This field contain the user name to which action assignment will get triggered. When auto delegation setup present then both action owner and auto delegatee name will get stored comma seperated, else only action owner name</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -406,7 +411,7 @@
                                         <th colspan="2" style="background-color:rgb(221, 221, 221);">Infocenters</th>
                                     </thead>
                                         <tr>
-                                            <td><a href="../infocenters/Create/Manage_Issues.html">Issues</a></td>
+                                            <td><a href="../infocenters/Create/Manage_Issues.html">Create/Manage Issues</a></td>
                                             <td></td>
                                     </tbody>
                                 </table>

@@ -251,7 +251,33 @@
                                                     </div>
                                                     <div class="modal-body" >
                                                         <pre id="selectme-sql">
-                                                        SELECTADDITIONAL_COLUMN1 , ADDITIONAL_COLUMN2 , ADDITIONAL_COLUMN3 , ADDITIONAL_COLUMN4 , ADDITIONAL_COLUMN5 , ADDITIONAL_DETAILS , ADDITIONAL_DETAILS_WITH_ID , APPLICABLE_TO , DD_STATUS_FLAG , ORB_FORM_URL , PARENT_REL_INST_ID , REL_COMMENTS , REL_CONFIG_ID , REL_INST_ID , REL_SOURCE_ID , REL_VALID_FROM , REL_VALID_UNTIL , ROW_NUM , SELF_REL_TYPE , TGT_OBJ_ID , TGT_OBJ_NAME , TGT_OBJ_TYPE  FROM MS_ISM_ORB_RELATION_ORB WHERE REL_SOURCE_ID = :1
+                                                        SELECT
+ADDITIONAL_COLUMN1
+ , ADDITIONAL_COLUMN2
+ , ADDITIONAL_COLUMN3
+ , ADDITIONAL_COLUMN4
+ , ADDITIONAL_COLUMN5
+ , ADDITIONAL_DETAILS
+ , ADDITIONAL_DETAILS_WITH_ID
+ , APPLICABLE_TO
+ , DD_STATUS_FLAG
+ , ORB_FORM_URL
+ , PARENT_REL_INST_ID
+ , REL_COMMENTS
+ , REL_CONFIG_ID
+ , REL_INST_ID
+ , REL_SOURCE_ID
+ , REL_VALID_FROM
+ , REL_VALID_UNTIL
+ , ROW_NUM
+ , SELF_REL_TYPE
+ , TGT_OBJ_ID
+ , TGT_OBJ_NAME
+ , TGT_OBJ_TYPE
+  FROM MS_ISM_ORB_RELATION_ORB
+ WHERE 
+REL_SOURCE_ID = :1
+
                                                         </pre>
                                                     </div>
                                                 </div>
