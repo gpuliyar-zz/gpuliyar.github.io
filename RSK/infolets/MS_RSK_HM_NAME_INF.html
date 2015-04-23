@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Infolets</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">                                <h4 class="infolet-tooltip"><span class="fa fa-gears fa-fw"></span>  
+                                <span data-toggle="tooltip" data-placement="top" title="Category: Assets" class="fa fa-cubes fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Output Type: Ordinary Graph" class="fa fa-sign-out fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Type: SQL Based" class="fa fa-globe fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Non Persistent" class="fa fa fa-thumbs-down fa-fw"></span>
+                                <a style="text-decoration: none; " id="MS_RSK_HM_NAME_INF">MS_RSK_HM_NAME_INF</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This Infolet is used to display all Heat Map Report by Name</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#query-pill" data-toggle="tab">Query</a></li>
+                                        <li><a href="#xml-pill" data-toggle="tab">XML</a></li>
+                                        <li><a href="#params-pill" data-toggle="tab">Parameters</a></li>
+                                        <li><a href="#filters-pill" data-toggle="tab">Filetrs</a></li>
+                                        <li><a href="#usedin-pill" data-toggle="tab">Used In</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-c">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Type</th>
+                                                            <th>Result Column Name</th>
+                                                            <th>User Column Name</th>
+                                                            <th>Default Infolet/<br>Input Infolet</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>42</td>
+                                                                <td>ASSESSMENT_TYPE1</td>                                                                <td>Varchar2</td>
+                                                                <td>ASSESSMENT_TYPE1</td>
+                                                                <td>ASSESSMENT_TYPE1</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>46</td>
+                                                                <td>CORE_OBJECT_URL</td>                                                                <td>Varchar2</td>
+                                                                <td>COREOBJECT_URL</td>
+                                                                <td>CoreObject url</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>47</td>
+                                                                <td>RISK_NAME_URL</td>                                                                <td>Varchar2</td>
+                                                                <td>RISK_URL</td>
+                                                                <td>Risk url</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>41</td>
+                                                                <td>VIEW_ASSESSMENT1</td>                                                                <td>Varchar2</td>
+                                                                <td>VIEW_ASSESSMENT1</td>
+                                                                <td>VIEW_ASSESSMENT1</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>44</td>
+                                                                <td>RISK_CATEGORIES</td>                                                                <td>Varchar2</td>
+                                                                <td>RISK_CATEGORIES</td>
+                                                                <td>Risk Categories</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>45</td>
+                                                                <td>OBJECT_OWNERS</td>                                                                <td>Varchar2</td>
+                                                                <td>OBJECT_OWNERS</td>
+                                                                <td>Object Owners</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>SCENARIO_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>PERSPECTIVE</td>
+                                                                <td>Perspective</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>ORG_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>ORG_ID</td>
+                                                                <td>ORG_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>ORG_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>ORGANIZATION</td>
+                                                                <td>Organization</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>CORE_OBJECT_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>CORE_OBJECT_ID</td>
+                                                                <td>CORE_OBJECT_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>CORE_OBJECT_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>COREOBJECT</td>
+                                                                <td>CoreObject</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>RISK_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>RISK_ID</td>
+                                                                <td>RISK_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>RISK_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>RISK</td>
+                                                                <td>Risk</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td>PREV_INHERENT_SCORE</td>                                                                <td>Varchar2</td>
+                                                                <td>PREVIOUSINHERENTSCORE</td>
+                                                                <td>PreviousInherentScore</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>CURR_INHERENT_SCORE</td>                                                                <td>Varchar2</td>
+                                                                <td>CURRENTINHERENTSCORE</td>
+                                                                <td>CurrentInherentScore</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>SHORT_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>SHORTNAME</td>
+                                                                <td>ShortName</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>TREND_VALUE_INHERENT</td>                                                                <td>Varchar2</td>
+                                                                <td>TRENDVALUEINHERENT</td>
+                                                                <td>TrendValueInherent</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>13</td>
+                                                                <td>CREATED_BY</td>                                                                <td>Varchar2</td>
+                                                                <td>CREATED_BY1</td>
+                                                                <td>CREATED_BY1</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>14</td>
+                                                                <td>CREATION_DATE</td>                                                                <td>Varchar2</td>
+                                                                <td>CREATION_DATE1</td>
+                                                                <td>CREATION_DATE1</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>15</td>
+                                                                <td>LAST_UPDATED_BY</td>                                                                <td>Varchar2</td>
+                                                                <td>LAST_UPDATED_BY1</td>
+                                                                <td>LAST_UPDATED_BY1</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>16</td>
+                                                                <td>LAST_UPDATE_DATE</td>                                                                <td>Varchar2</td>
+                                                                <td>LAST_UPDATE_DATE1</td>
+                                                                <td>LAST_UPDATE_DATE1</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>17</td>
+                                                                <td>X_AXIS_INHERENT</td>                                                                <td>Number</td>
+                                                                <td>X_AXIS_INHERENT</td>
+                                                                <td>X_AXIS_INHERENT</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>18</td>
+                                                                <td>Y_AXIS_INHERENT</td>                                                                <td>Number</td>
+                                                                <td>Y_AXIS_INHERENT</td>
+                                                                <td>Y_AXIS_INHERENT</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>19</td>
+                                                                <td>BUBBLE_SIZE_INHERENT</td>                                                                <td>Number</td>
+                                                                <td>BUBBLE_SIZE_INHERENT</td>
+                                                                <td>BUBBLE_SIZE_INHERENT</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>20</td>
+                                                                <td>BUBBLE_SHAPE_INHERENT</td>                                                                <td>Number</td>
+                                                                <td>BUBBLE_SHAPE_INHERENT</td>
+                                                                <td>BUBBLE_SHAPE_INHERENT</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>21</td>
+                                                                <td>BUBBLE_COLOR_INHERENT</td>                                                                <td>Varchar2</td>
+                                                                <td>BUBBLE_COLOR_INHERENT</td>
+                                                                <td>BUBBLE_COLOR_INHERENT</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>22</td>
+                                                                <td>TREND_INHERENT</td>                                                                <td>Varchar2</td>
+                                                                <td>TRENDINHERENT</td>
+                                                                <td>TrendInherent</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>23</td>
+                                                                <td>CURR_RESIDUAL_SCORE</td>                                                                <td>Varchar2</td>
+                                                                <td>CURRENTRESIDUALSCORE</td>
+                                                                <td>CurrentResidualScore</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>24</td>
+                                                                <td>PREV_RESIDUAL_SCORE</td>                                                                <td>Varchar2</td>
+                                                                <td>PREVIOUSRESIDUALSCORE</td>
+                                                                <td>PreviousResidualScore</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>25</td>
+                                                                <td>LEVEL_NUM</td>                                                                <td>Varchar2</td>
+                                                                <td>LEVELNUMBER</td>
+                                                                <td>LevelNumber</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>26</td>
+                                                                <td>X_AXIS_RESIDUAL</td>                                                                <td>Number</td>
+                                                                <td>X_AXIS_RESIDUAL</td>
+                                                                <td>X_AXIS_RESIDUAL</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>27</td>
+                                                                <td>Y_AXIS_RESIDUAL</td>                                                                <td>Number</td>
+                                                                <td>Y_AXIS_RESIDUAL</td>
+                                                                <td>Y_AXIS_RESIDUAL</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>28</td>
+                                                                <td>TREND_RESIDUAL</td>                                                                <td>Varchar2</td>
+                                                                <td>TRENDRESIDUAL</td>
+                                                                <td>TrendResidual</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>29</td>
+                                                                <td>TREND_VALUE_RESIDUAL</td>                                                                <td>Varchar2</td>
+                                                                <td>TRENDVALUERESIDUAL</td>
+                                                                <td>TrendValueResidual</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>30</td>
+                                                                <td>INHERENT_RATING</td>                                                                <td>Varchar2</td>
+                                                                <td>INHERENTRATING</td>
+                                                                <td>InherentRating</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>31</td>
+                                                                <td>RESIDUAL_RATING</td>                                                                <td>Varchar2</td>
+                                                                <td>RESIDUALRATING</td>
+                                                                <td>ResidualRating</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>32</td>
+                                                                <td>BUBBLE_SIZE_RESIDUAL</td>                                                                <td>Number</td>
+                                                                <td>BUBBLE_SIZE_RESIDUAL</td>
+                                                                <td>BUBBLE_SIZE_RESIDUAL</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>33</td>
+                                                                <td>BUBBLE_SHAPE_RESIDUAL</td>                                                                <td>Number</td>
+                                                                <td>BUBBLE_SHAPE_RESIDUAL</td>
+                                                                <td>BUBBLE_SHAPE_RESIDUAL</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>34</td>
+                                                                <td>BUBBLE_COLOR_RESIDUAL</td>                                                                <td>Varchar2</td>
+                                                                <td>BUBBLE_COLOR_RESIDUAL</td>
+                                                                <td>BUBBLE_COLOR_RESIDUAL</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>35</td>
+                                                                <td>SCENARIO_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>SCENARIO_ID</td>
+                                                                <td>SCENARIO_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>36</td>
+                                                                <td>PREV_RESIDUAL_RATING</td>                                                                <td>Varchar2</td>
+                                                                <td>PREVIOUSRESIDUALRATING</td>
+                                                                <td>PreviousResidualRating</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>37</td>
+                                                                <td>PREV_INHERENT_RATING</td>                                                                <td>Varchar2</td>
+                                                                <td>PREVIOUSINHERENTRATING</td>
+                                                                <td>PreviousInherentRating</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>38</td>
+                                                                <td>TREND_SIGN_INHERENT</td>                                                                <td>Varchar2</td>
+                                                                <td>TREND_SIGN_INHERENT</td>
+                                                                <td>TREND_SIGN_INHERENT</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>39</td>
+                                                                <td>TREND_SIGN_RESIDUAL</td>                                                                <td>Varchar2</td>
+                                                                <td>TREND_SIGN_RESIDUAL</td>
+                                                                <td>TREND_SIGN_RESIDUAL</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>40</td>
+                                                                <td>FLAG</td>                                                                <td>Varchar2</td>
+                                                                <td>FLAG</td>
+                                                                <td>FLAG</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>ASSESSMENT_TYPE</td>                                                                <td>Varchar2</td>
+                                                                <td>ASSESSMENT_TYPE</td>
+                                                                <td>ASSESSMENT_TYPE</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>43</td>
+                                                                <td>LEVEL_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>LEVEL_NAME</td>
+                                                                <td>Level Name</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="filters-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-fnr">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Expression</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Perspective</td>
+                                                                <td>(trim(SCENARIO_ID) = :Perspective)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Organizations</td>
+                                                                <td>Instr(','||(nvl(:Organizations, org_id))||',',','||org_id||',') >0</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Levels</td>
+                                                                <td>Instr(','||(nvl(:Levels, LevelNumber))||',',','||LevelNumber||',') >0</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Flag</td>
+                                                                <td>(trim(FLAG) = :Flag)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Core Objects</td>
+                                                                <td>Instr(','||(nvl(:Core Objects, CORE_OBJECT_ID))||',',','||CORE_OBJECT_ID||',') >0</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Risks</td>
+                                                                <td>Instr(','||(nvl(:Risks, RISK_ID))||',',','||RISK_ID||',') >0</td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="params-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-pnr">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Mandatory</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>LOGIN_ID</td>
+                                                                <td>N</td>
+                                                                <td>LOGIN_ID</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="usedin-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-r">
+                                                        <thead>
+                                                            <th>Used In</th>
+                                                            <th>Usage Type</th>
+                                                            <th>User</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_COR_OBJ_INH_NAME_RPT</td>
+                                                                <td>Report Parameter Input</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_COR_OBJ_INH_NAME_RPT</td>
+                                                                <td>Report</td>
+                                                                <td>pfadmin</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_COR_OBJ_RES_NAME_RPT</td>
+                                                                <td>Report Parameter Input</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_COR_OBJ_RES_NAME_RPT</td>
+                                                                <td>Report</td>
+                                                                <td>pfadmin</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_ORG_INH_NAME_RPT</td>
+                                                                <td>Report Parameter Input</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_ORG_INH_NAME_RPT</td>
+                                                                <td>Report</td>
+                                                                <td>pfadmin</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_ORG_RES_NAME_RPT</td>
+                                                                <td>Report Parameter Input</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_ORG_RES_NAME_RPT</td>
+                                                                <td>Report</td>
+                                                                <td>pfadmin</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_RISK_INH_NAME_RPT</td>
+                                                                <td>Report Parameter Input</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_RISK_INH_NAME_RPT</td>
+                                                                <td>Report</td>
+                                                                <td>pfadmin</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_RISK_RES_NAME_RPT</td>
+                                                                <td>Report Parameter Input</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_RSK_HM_RISK_RES_NAME_RPT</td>
+                                                                <td>Report</td>
+                                                                <td>pfadmin</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="query-pill">
+                                            <div class="modal-dialog"">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-sql')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-sql">
+                                                        SELECT 
+ASSESSMENT_TYPE, 
+SCENARIO_NAME, 
+ORG_ID, 
+ORG_NAME, 
+CORE_OBJECT_ID, 
+CORE_OBJECT_NAME, 
+RISK_ID, 
+RISK_NAME, 
+PREV_INHERENT_SCORE, 
+CURR_INHERENT_SCORE, 
+SHORT_NAME, 
+TREND_VALUE_INHERENT, 
+CREATED_BY, 
+CREATION_DATE, 
+LAST_UPDATED_BY, 
+LAST_UPDATE_DATE, 
+X_AXIS_INHERENT, 
+Y_AXIS_INHERENT, 
+BUBBLE_SIZE_INHERENT, 
+BUBBLE_SHAPE_INHERENT, 
+BUBBLE_COLOR_INHERENT, 
+TREND_INHERENT, 
+CURR_RESIDUAL_SCORE, 
+PREV_RESIDUAL_SCORE, 
+LEVEL_NUM, 
+X_AXIS_RESIDUAL, 
+Y_AXIS_RESIDUAL, 
+TREND_RESIDUAL, 
+TREND_VALUE_RESIDUAL, 
+INHERENT_RATING, 
+RESIDUAL_RATING, 
+BUBBLE_SIZE_RESIDUAL, 
+BUBBLE_SHAPE_RESIDUAL, 
+BUBBLE_COLOR_RESIDUAL, 
+SCENARIO_ID, 
+PREV_RESIDUAL_RATING, 
+PREV_INHERENT_RATING, 
+TREND_SIGN_INHERENT, 
+TREND_SIGN_RESIDUAL, 
+FLAG,
+'View' AS VIEW_ASSESSMENT1,
+ASSESSMENT_TYPE1 as ASSESSMENT_TYPE1,
+LEVEL_NAME,
+RISK_CATEGORIES,
+OBJECT_OWNERS,
+CORE_OBJECT_URL,
+RISK_NAME_URL
+FROM
+  (SELECT (SELECT Ms_Apps_Utilities.Get_Display_Values (Ms_Grc_Utilities.Active_Ent_Id, 'MS RSK List of Assessment Types', Assessment_Type, ',') FROM DUAL) AS ASSESSMENT_TYPE,
+    SCENARIO_NAME,
+    ORG_ID,
+    ORG_NAME,
+    CORE_OBJECT_ID,
+    CORE_OBJECT_NAME,
+    RISK_ID,
+    RISK_NAME,
+    PREV_INHERENT_SCORE,
+    CURR_INHERENT_SCORE,
+    SHORT_NAME,
+    TREND_VALUE_INHERENT,
+    CREATED_BY,
+    CREATION_DATE,
+    LAST_UPDATED_BY,
+    LAST_UPDATE_DATE,
+    X_AXIS_INHERENT,
+    Y_AXIS_INHERENT,
+    BUBBLE_SIZE_INHERENT,
+    BUBBLE_SHAPE_INHERENT,
+    BUBBLE_COLOR_INHERENT,
+    TREND_INHERENT,
+    CURR_RESIDUAL_SCORE,
+    PREV_RESIDUAL_SCORE,
+    LEVEL_NUM,
+    X_AXIS_RESIDUAL,
+    Y_AXIS_RESIDUAL,
+    TREND_RESIDUAL,
+    TREND_VALUE_RESIDUAL,
+    INHERENT_RATING,
+    RESIDUAL_RATING,
+    BUBBLE_SIZE_RESIDUAL,
+    BUBBLE_SHAPE_RESIDUAL,
+    BUBBLE_COLOR_RESIDUAL,
+    SCENARIO_ID,
+    PREV_RESIDUAL_RATING,
+    PREV_INHERENT_RATING,
+    (SELECT DECODE( TREND_SIGN_INHERENT,1,'&lt;img border=&quot;0&quot; src=&quot;/images/icons/Upward.png&quot;&gt;', -1,'&lt;img border=&quot;0&quot; src=&quot;/images/icons/Downward.png&quot;&gt;', 0,'&lt;img border=&quot;0&quot; src=&quot;/images/icons/No_Change.png&quot;&gt;', 2, NULL, TREND_SIGN_INHERENT) FROM DUAL) AS TREND_SIGN_INHERENT,
+    (SELECT DECODE( TREND_SIGN_RESIDUAL,1,'&lt;img border=&quot;0&quot; src=&quot;/images/icons/Upward.png&quot;&gt;', -1,'&lt;img border=&quot;0&quot; src=&quot;/images/icons/Downward.png&quot;&gt;', 0,'&lt;img border=&quot;0&quot; src=&quot;/images/icons/No_Change.png&quot;&gt;', 2, NULL, TREND_SIGN_RESIDUAL) FROM DUAL) AS TREND_SIGN_RESIDUAL,
+    Flag,
+    'View',
+    ASSESSMENT_TYPE                                                                                       AS ASSESSMENT_TYPE1,
+    (SELECT ms_apps_utilities.get_display_values (MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_LEVEL', LEVEL_NUM, ',') FROM DUAL) AS LEVEL_NAME,
+    RISK_CATEGORIES,
+    OBJECT_OWNERS,
+    (SELECT Ms_Rsk_Rpt_Utils.build_form_Url_Heatmap_ass_ent('MS_GRC_PROCESS', NULL, NULL,Core_Object_Id,'PRC','N',Core_Object_Name ) FROM DUAL) AS Core_Object_Url,
+    (SELECT Ms_Rsk_Rpt_Utils.Build_Form_Url_Heatmap('MS_GRC_RISK', NULL, NULL,Risk_Id,'RSK','N',Risk_Name )  FROM DUAL)               AS Risk_Name_Url,
+    (SELECT Ms_Concat(Object_Id)
+    FROM TABLE(Ms_Rsk_Rpt_Utils.Rsk_Hm_Return_Object_Id(Scenario_Id,:1,'1,2,3,4',Flag) )
+    ) AS Object_Id
+  FROM Ms_Rsk_Hm_Master
+  )
+WHERE Instr(','
+  ||NVL(Object_Id,'OBJ')
+  ||',',','
+  ||NVL(Risk_Id,'RISK')
+  ||',') &gt;0
+OR Instr(','
+  ||NVL(Object_Id,'OBJ')
+  ||',',','
+  ||NVL(Core_Object_Id,'PRCS')
+  ||',') &gt;0
+OR Instr(','
+  ||NVL(Object_Id,'OBJ')
+  ||',',','
+  ||NVL(Org_Id,'ORG')
+  ||',') &gt;0
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <div class="tab-pane fade" id="xml-pill">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-xml')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-xml">
+                                                        &lt;?xml version=&quot;1.0&quot;?&gt;&lt;METRIC_DEPLOYMENT&gt;&lt;METRIC       PROCESS=&quot;0&quot;  INSTANCE=&quot;0&quot;  NOTIFY=&quot;YES&quot;   RETURN=&quot;RESULTSET&quot; &gt;&lt;RESULTMAP &gt;&lt;/RESULTMAP&gt;&lt;/METRIC&gt;&lt;/METRIC_DEPLOYMENT&gt;
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                </div>
+                                <!--panel-default -->
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
+                                    </thead>
+                                        <tr>
+                                            <td><a href="../reports/100337.html">MS_RSK_HM_RISK_RES_NAME_RPT</a></td>
+                                            <td><a href="../reports/100333.html">MS_RSK_HM_ORG_RES_NAME_RPT</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../reports/100330.html">MS_RSK_HM_ORG_INH_NAME_RPT</a></td>
+                                            <td><a href="../reports/100325.html">MS_RSK_HM_COR_OBJ_INH_NAME_RPT</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../reports/100327.html">MS_RSK_HM_COR_OBJ_RES_NAME_RPT</a></td>
+                                            <td><a href="../reports/100335.html">MS_RSK_HM_RISK_INH_NAME_RPT</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-info -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.infolet-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.infolet-table-c').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-cnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-f').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-fnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-p').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-pnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-r').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-rnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                    ]
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

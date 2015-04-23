@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_RSK_LND_ASSMNT_STATUS_RPT_V">MS_RSK_LND_ASSMNT_STATUS_RPT_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_RSK_LND_ASSMNT_STATUS_RPT_V" ("PLAN_NAME", "ASSMNT_ID", "ASSMNT_STATUS", "ASSMNT_ASSESSOR", "ASSMNT_APPROVER", "ASSMNT_ASSIGNED_ON", "ASSMNT_ASSESSED_ON", "ASSMNT_APPROVED_ON", "ASSMNT_DUE_DATE", "ASSMNT_PUBLISHED_ON", "SCENERIO", "ORGANIZATIONS", "CORE_OBJECTS", "RISKS", "VIEW_LINK", "ASSMNT_ID_VALUE", "ASSMNT_TYPE", "DUMMY1", "DUMMY2", "DUMMY3", "NO_OF_DAYS_DELAYED", "NEW_PLAN_ID", "NEW_PLAN_NAME", "ASSMNT_ASSESSOR_NAME", "ASSMNT_APPROVER_NAME", "FINAL_APPROVER_NAME", "ASSESSMENT_NAME", "FINAL_APPROVER_APPROVED_ON", "ASSMNT_TRIGD_FROM", "SECURITY_OWNER_ORGS", "RESTRICT_ACCESS_TO", "FINAL_APPROVER", "REVIEWER", "RESP_OWNER", "I_ASSMNT_STATUS", "I_PLAN_NAME", "I_ASSMNT_NAME", "PLAN_OWNER_ORG") AS 
+  SELECT
+    (SELECT MS_RSK_LND_REPORTING_UTILS.BUILD_FORM_URL ('MS_RSK_SCHEDULE_RISK_ASSMN', PLAN_ID,'PLAN','Y',PLAN_NAME,PLAN_PID,PLAN_INSTANCE_ID)
+    FROM DUAL
+    ) AS PLAN_NAME,
+    (SELECT MS_RSK_LND_REPORTING_UTILS.BUILD_FORM_URL('MS_RSK_RISK_ASSESSMENT',ASSMNT_ID,'ASSMNT','Y',ASSMNT_ID,ASSMNT_PID , ASSMNT_INSTANCE_ID )
+    FROM DUAL
+    ) AS ASSMNT_ID,
+    ASSMNT_STATUS,
+    assmnt_assessor,
+    ASSMNT_APPROVER,
+    TRUNC(ASSMNT_ASSIGNED_ON)  AS ASSMNT_ASSIGNED_ON,
+    TRUNC(ASSMNT_ASSESSED_ON)  AS ASSMNT_ASSESSED_ON,
+    TRUNC(ASSMNT_APPROVED_ON)  AS ASSMNT_APPROVED_ON,
+    TRUNC(ASSMNT_DUE_DATE)     AS ASSMNT_DUE_DATE,
+    TRUNC(assmnt_published_on) AS assmnt_published_on,
+    SCENERIO,
+    SUBSTR(ORGANIZATIONS,instr(ORGANIZATIONS,',')+1,LENGTH(ORGANIZATIONS)) AS ORGANIZATIONS,
+    SUBSTR(CORE_OBJECTS,instr(CORE_OBJECTS,',')  +1,LENGTH(CORE_OBJECTS))  AS CORE_OBJECTS,
+    SUBSTR(RISKS,INSTR(RISKS,',')                +1,LENGTH(RISKS))         AS RISKS,
+    'View'                                                                 AS VIEW_LINK,
+    ASSMNT_ID                                                              AS ASSMNT_ID_VALUE,
+    ASSMNT_TYPE ,
+    (
+    CASE
+      WHEN(TRUNC(assmnt_due_date) > TRUNC(assmnt_published_on))
+      THEN 'GREEN'
+      WHEN(TRUNC(assmnt_due_date) < TRUNC(assmnt_published_on))
+      THEN 'RED'
+      WHEN(TRUNC(assmnt_due_date) = TRUNC(assmnt_published_on))
+      THEN 'GREEN'
+      ELSE NULL
+    END) AS DUMMY1,
+    NULL AS DUMMY2,
+    NULL AS Dummy3,
+    CASE
+      WHEN TRUNC(assmnt_due_date)     - TRUNC(assmnt_published_on) < 0
+      THEN ABS(TRUNC(assmnt_due_date) - TRUNC(assmnt_published_on))
+    END       AS NO_OF_DAYS_DELAYED,
+    PLAN_ID   AS NEW_PLAN_ID,
+    PLAN_NAME AS NEW_PLAN_NAME,
+    (SELECT MS_RSK_LND_REPORTING_UTILS.GET_COMMA_SEPARATED_FULL_NAME(ASSMNT_ASSESSOR)
+    FROM DUAL
+    ) AS ASSMNT_ASSESSOR_NAME,
+   /* (SELECT MS_RSK_LND_REPORTING_UTILS.GET_FINAL_APPROVER_FULL_NAME(ASSMNT_ID,'FA_NAME',ASSMNT_PID,ASSMNT_INSTANCE_ID)
+    FROM DUAL
+    ) AS ASSMNT_APPROVER_NAME,*/
+      MS_RSK_LND_REPORTING_UTILS.GET_COMMA_SEPARATED_FULL_NAME(ASSMNT_APPROVER) AS ASSMNT_APPROVER_NAME,
+    (
+    SELECT MS_RSK_LND_REPORTING_UTILS.GET_FINAL_APPROVER_FULL_NAME(ASSMNT_ID,'FINAL_APPROVER',ASSMNT_PID,ASSMNT_INSTANCE_ID)
+    FROM DUAL
+    ) AS FINAL_APPROVER_NAME,
+    (SELECT MS_RSK_LND_REPORTING_UTILS.GET_FINAL_APPROVER_FULL_NAME(ASSMNT_ID,'ASSMNT_NAME',ASSMNT_PID,ASSMNT_INSTANCE_ID)
+    FROM DUAL
+    )                          AS ASSESSMENT_NAME,
+    TRUNC(ASSMNT_PUBLISHED_ON) AS FINAL_APPROVER_APPROVED_ON,
+    ASSMNT_TRIGD_FROM,
+    (SELECT MS_RSK_LND_REPORTING_UTILS.MS_RSK_GET_PLAN_SECURITY_ORGS(PLAN_ID)
+    FROM DUAL
+    ) AS SECURITY_OWNER_ORGS,
+    (SELECT MS_RSK_LND_REPORTING_UTILS.MS_RSK_GET_PLAN_SECURITY_RAT(PLAN_ID)
+    FROM DUAL
+    ) AS RESTRICT_ACCESS_TO,
+    (SELECT MS_RSK_LND_REPORTING_UTILS.GET_FINAL_APPROVER_FULL_NAME(ASSMNT_ID,'FA_NAME',ASSMNT_PID,ASSMNT_INSTANCE_ID)
+    FROM DUAL
+    ) AS FINAL_APPROVER,
+    (SELECT MS_RSK_LND_REPORTING_UTILS.GET_FINAL_APPROVER_FULL_NAME(ASSMNT_ID,'REVIEWER',ASSMNT_PID,ASSMNT_INSTANCE_ID)
+    FROM DUAL
+    ) AS REVIEWER,
+    (SELECT MS_RSK_LND_REPORTING_UTILS.GET_FINAL_APPROVER_FULL_NAME(ASSMNT_ID,'RESP_ONWER',ASSMNT_PID,ASSMNT_INSTANCE_ID)
+    FROM DUAL
+    )             AS RESP_OWNER,
+    ASSMNT_STATUS AS I_ASSMNT_STATUS,
+    PLAN_NAME     AS I_PLAN_NAME,
+    (SELECT MS_RSK_LND_REPORTING_UTILS.GET_FINAL_APPROVER_FULL_NAME(ASSMNT_ID,'ASSMNT_NAME',ASSMNT_PID,ASSMNT_INSTANCE_ID)
+    FROM DUAL
+    ) as I_ASSMNT_NAME,
+    PLAN_OWNER_ORG
+  FROM MS_RSK_ASSMNT_RPT_DTLS
+
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

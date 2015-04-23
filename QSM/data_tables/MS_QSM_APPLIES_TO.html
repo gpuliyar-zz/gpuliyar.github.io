@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Data Tables</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+     <script src="../js/jquery-1.11.1.min.js"></script>
+	<script src="../dist/js/searchInfoletJavaScript.js"></script>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> <a style="text-decoration: none; " id="MS_QSM_APPLIES_TO" href="../db_tables/MS_QSM_APPLIES_TO.html">MS_QSM_APPLIES_TO</a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>Will store values for Questionnaire Applies To field.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    <br/>
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#data-pill" data-toggle="tab">Data</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover dataTable-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Title<br>Name</th>
+                                                                <th>Type</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>
+                                                                Object ID<br>OBJECT_ID
+                                                                 </td>
+                                                                <td>Varchar2(100 char)</td>
+                                                                <td>Will store object id.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>
+                                                                Object Name<br>OBJECT_NAME
+                                                                 </td>
+                                                                <td>Varchar2(500 char)</td>
+                                                                <td>Will store object name.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>
+                                                                Locale ID<br>LOCALE_ID
+                                                                 </td>
+                                                                <td>Number(10)</td>
+                                                                <td>Will store locale specific values.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>
+                                                                Display Order<br>DISPLAY_ORDER
+                                                                 </td>
+                                                                <td>Number(10)</td>
+                                                                <td>Will store ordering of display of objects.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>
+                                                                Active<br>IS_ACTIVE
+                                                                 </td>
+                                                                <td>Varchar2(1 char)</td>
+                                                                <td>Will store Y/N for each object.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>
+                                                                CONTACT_USER_AVAILABLE<br>CONTACT_USER_AVAILABLE
+                                                                 </td>
+                                                                <td>Varchar2(1 char)</td>
+                                                                <td>Contact User available in the respective module</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>
+                                                                CONTEXT_FIELD_HOOK<br>CONTEXT_FIELD_HOOK
+                                                                 </td>
+                                                                <td>Varchar2(4000 char)</td>
+                                                                <td>Context Field Hook - Function unit to update the context field values</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>
+                                                                ENABLE_CONTEXT_FIELD_HOOK<br>ENABLE_CONTEXT_FIELD_HOOK
+                                                                 </td>
+                                                                <td>Varchar2(1 char)</td>
+                                                                <td>This field enables the Context Field Hook column</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td>
+                                                                OBJECT_TYPE<br>OBJECT_TYPE
+                                                                 </td>
+                                                                <td>Varchar2(4000 char)</td>
+                                                                <td>this column stores the GRC object type of the entiy</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="data-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <div class="modal-body" style="overflow:auto;">
+                                                        <table class="table table-hover data-table-d">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>DISPLAY_ORDER</th>
+                                                                    <th>OBJECT_ID</th>
+                                                                    <th>CONTACT_USER_AVAILABLE</th>
+                                                                    <th>ENABLE_CONTEXT_FIELD_HOOK</th>
+                                                                    <th>CONTEXT_FIELD_HOOK</th>
+                                                                    <th>OBJECT_NAME</th>
+                                                                    <th>LOCALE_ID</th>
+                                                                    <th>IS_ACTIVE</th>
+                                                                    <th>OBJECT_TYPE</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>1</td>
+                                                                    <td>N</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Ad-hoc</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2</td>
+                                                                    <td>2</td>
+                                                                    <td>N</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Areas of Compliance</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3</td>
+                                                                    <td>3</td>
+                                                                    <td>N</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Assets</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4</td>
+                                                                    <td>4</td>
+                                                                    <td>N</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Asset Classes</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>5</td>
+                                                                    <td>5</td>
+                                                                    <td>N</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Auditable Entities</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>6</td>
+                                                                    <td>6</td>
+                                                                    <td>N</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Commodities</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>10</td>
+                                                                    <td>10</td>
+                                                                    <td>N</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Organizations</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>11</td>
+                                                                    <td>11</td>
+                                                                    <td>N</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Processes</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>12</td>
+                                                                    <td>12</td>
+                                                                    <td>N</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Risks</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>13</td>
+                                                                    <td>13</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Suppliers</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>7</td>
+                                                                    <td>7</td>
+                                                                    <td>N</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Controls</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>8</td>
+                                                                    <td>8</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Facilities</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>9</td>
+                                                                    <td>9</td>
+                                                                    <td>N</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Objectives</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>14</td>
+                                                                    <td>14</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>Audit</td>
+                                                                    <td>1009</td>
+                                                                    <td>Y</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- tab-content -->
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Infolets</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../infolets/MS_QSM_GET_APPLIES_TO.html">MS_QSM_GET_APPLIES_TO</a></td>
+                                            <td><a href="../infolets/MS_QSM_QUESTIONNAIRE_RPT_APPLIESTO_FLT.html">MS_QSM_QUESTIONNAIRE_RPT_APPLIESTO_FLT</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_QSM_APPLIES_TO.html">MS_QSM_APPLIES_TO</a></td>
+                                            <td><a href="../infolets/MS_QSM_OPEN_SURVEY_RPT.html">MS_QSM_OPEN_SURVEY_RPT</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_QSM_CONTACT_USER_AVLBL_ITEMS.html">MS_QSM_CONTACT_USER_AVLBL_ITEMS</a></td>
+                                            <td></td>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.data-table-d').DataTable({
+                    destroy:true,
+                    "responsive": true
+                });
+                $('.data-table-dnr').DataTable({
+                    destroy:true,
+                    "responsive": false
+                });
+                $('.tooltip-dt').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.dataTable-table').DataTable({
+                    responsive: true,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "15%" },     // 3rd column width 
+                        { "sWidth": "45%" }      // 4th column width 
+                    ]
+                });
+                $('.dataTable-table-nr').DataTable({
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "15%" },     // 3rd column width 
+                        { "sWidth": "45%" }      // 4th column width 
+                    ]
+                });
+            });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

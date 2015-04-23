@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_RSK_CONTROL_ASSMNT_REPORT_V">MS_RSK_CONTROL_ASSMNT_REPORT_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_RSK_CONTROL_ASSMNT_REPORT_V" ("ORGANIZATION_ID", "APPLIES_TO_ORGANIZATION", "I_ORG_NAME", "APPLIES_TO_ASSESSABLE_ENTITY", "I_ASSESSABLE_ENTITY_NAME", "PROCESS_ID", "RISK_ID", "RISK_LEVEL", "RISK_NAME", "I_RISK_NAME", "PARENT_RISK", "CONTROL_ID", "I_CONTROL_NAME", "CONTROL_NAME", "KEY_CONTROL", "CONTROL_OWNERS", "EFFECTIVENESS_SCORE", "ADEQUECY_WEIGHTING", "REDUCTION", "MITIGATES", "PERSPECTIVE_ID", "OBJECT_ID", "CONTROL_RATING", "CONTROL_OWNERS_FULL_NAME", "SECURITY_OWNER_ORGS", "RESTRICT_ACCESS_TO", "PERSPECTIVE") AS 
+  SELECT DISTINCT v.organization_id                   AS Organization_ID,
+    MS_RSK_UTILS.get_organizations(v.organization_id) AS Applies_to_Organization,
+    MS_RSK_UTILS.get_organizations(v.organization_id) AS I_ORG_NAME,
+    (SELECT REPLACE(REPLACE(REPLACE(show_details,'     <FONT color=#0000FF>',''),'JavaScript','"JavaScript'),')>',')">')
+    FROM ms_rsk_risk_assessment_prc
+    WHERE process_id=v.Assessable_Entity
+    AND rownum      =1
+    )                   AS Applies_to_Assessable_Entity,
+    a.PROCESS_NAME      AS I_ASSESSABLE_ENTITY_NAME,
+    v.Assessable_Entity AS Process_ID,
+    v.RISK_ID,
+    'Level-'
+    ||c.object_level                                                                                                      AS RISK_LEVEL,
+    MS_RSK_LND_REPORTING_UTILS.BUILD_FORM_URL('MS_GRC_RISK',V.RISK_ID,'RSK','Y',MS_RSK_UTILS.FN_GET_RISK_NAME(V.RISK_ID)) AS RISK_NAME,
+    MS_RSK_UTILS.FN_GET_RISK_NAME(V.RISK_ID)                                                                              AS I_RISK_NAME,
+        (SELECT ms_concat(object_name)
+    FROM ms_grc_risk
+    WHERE object_id IN
+      (SELECT pri_object_parent FROM MS_GRC_RISK_PRI WHERE object_id=v.risk_id
+      )
+    )   AS Parent_Risk,
+	
+   -- (SELECT object_name FROM ms_grc_risk WHERE object_id= c.object_parent)             AS Parent_Risk,
+    V.CONTROL_ID                                                                                                             AS CONTROL_ID,
+    NVL(B.CTL_DUMMY2,B.AD_HOC_CONTROL_NAME)                                                                                  AS I_CONTROL_NAME, -- CHANGE FOR THE BUG ID 91803
+    DECODE(B.CTRL_FLAG,3,B.CONTROL_NAME,MS_RSK_LND_REPORTING_UTILS.BUILD_FORM_URL('MS_GRC_CONTROL',B.CTL_ID,'CTL','Y',NULL)) AS CONTROL_NAME,
+    CASE
+      WHEN lower(b.key_control) ='no'
+      THEN 'No'
+      WHEN lower(b.key_control) IS NULL
+      THEN 'No'
+      ELSE 'Yes'
+    END AS KEY_CONTROL,
+    --ms_rsk_lnd_reporting_utils.get_control_owners(v.control_id) as Control_Owners,
+    d.owners                      AS Control_Owners,
+    b.score_ctl                   AS Effectiveness_Score,
+    b.WEIGHTING_CTL               AS Adequecy_Weighting,
+    b.CONTROL_EFFECTIVENESS_SCORE AS Reduction,
+    b.mitigation_percent          AS Mitigates,
+    v.perspective                 AS Perspective_ID,
+    B.OBJECT_ID,
+    e.DISPLAY_VALUE AS CONTROL_RATING,
+    (SELECT MS_CONCAT(MS_APPS_UTILITIES.GET_USER_FULL_NAME(OWNERS))
+      --SELECT MS_CONCAT(OWNERS)
+    FROM MS_GRC_CONTROL_OWN
+    WHERE OBJECT_ID = V.CONTROL_ID
+    ) AS CONTROL_OWNERS_FULL_NAME,
+    d.OWNER_ORGANIZATIONS
+    ||','
+    || MS_RSK_LND_REPORTING_UTILS.ms_rsk_get_orb_relations(d.dd_object_type,'MS_GRC_ORGANIZATION',d.OBJECT_ID) AS SECURITY_OWNER_ORGS,
+    f.RESTRICT_ACCESS_TO                                                                                       AS RESTRICT_ACCESS_TO,
+    v.perspective                                                                                              AS Perspective
+  FROM
+    (SELECT MAX(A.object_id) AS Object_id,
+      A.scenario_name        AS Perspective,
+      b.risk_id,
+      c.process_id AS Assessable_Entity ,
+      d.organization_id,
+      e.ctl_id AS Control_ID,
+      A.risk_assessment_type
+    FROM ms_rsk_risk_assessment a,
+      ms_rsk_risk_assessment_rsk b,
+      ms_rsk_risk_assessment_prc c,
+      ms_rsk_risk_assessment_org d,
+      MS_RSK_RISK_ASSESSMENT_CTL E
+    WHERE a.object_id                =b.object_id
+    AND a.objecT_id                  =c.object_id
+    AND a.object_id                  =d.object_id
+    AND A.OBJECT_ID                  =E.OBJECT_ID
+    AND NVL(b.RISK_ID,'www')         = NVL(e.ctrl_risk_id,'www')
+    AND NVL(c.process_id,'xxx')      = NVL(e.ctrl_proc_id,'xxx')
+    AND NVL(d.ORGANIZATION_ID,'yyy') =NVL(e.CTRL_ORG_ID,'yyy')
+    GROUP BY ORGANIZATION_ID,
+      PROCESS_ID,
+      RISK_ID,
+      ctl_id,
+      risk_assessment_type,
+      scenario_name
+    ) V,
+    MS_RSK_RISK_ASSESSMENT_CTL B,
+    MS_RSK_RISK_ASSESSMENT_PRC A,
+    MS_GRC_RISK C,
+    MS_GRC_CONTROL_PUB_V d,
+    MS_RSK_CONTROL_EFFECTIVENESS e,
+    MS_GRC_COMPLIANCE_OBJE f
+  WHERE B.OBJECT_ID                  = V.OBJECT_ID
+  AND V.OBJECT_ID                    = A.OBJECT_ID(+)
+  AND V.ASSESSABLE_ENTITY            = A.PROCESS_ID(+)
+  AND V.RISK_ID                      = C.OBJECT_ID
+  AND V.CONTROL_ID                   = D.OBJECT_ID(+)
+  AND B.CONTROL_EFFECTIVENESS_RATING = E.STORE_VALUE
+  AND V.CONTROL_ID                   = f.OBJECT_ID(+)
+  AND NVL(B.CTRL_RISK_ID,'www')      = NVL(V.RISK_ID,'www')
+  AND NVL(B.CTRL_PROC_ID,'xxx')      = NVL(V.ASSESSABLE_ENTITY,'xxx')
+  AND NVL(B.CTRL_ORG_ID,'yyy')       = NVL(V.ORGANIZATION_ID,'yyy')
+  AND NVL(B.CTL_ID,'zzz')            = NVL(V.CONTROL_ID,'zzz')
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

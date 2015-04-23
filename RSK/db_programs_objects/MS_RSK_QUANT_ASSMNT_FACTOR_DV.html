@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_RSK_QUANT_ASSMNT_FACTOR_DV">MS_RSK_QUANT_ASSMNT_FACTOR_DV</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_RSK_QUANT_ASSMNT_FACTOR_DV" ("SCR_OBJECT_ID", "RTG_OBJECT_ID", "MNR_OBJECT_ID", "UPLOAD_STATUS", "DEFAULT_INPUT_TYPE", "APPLICABLE_FOR", "RATING", "INPUT_TYPE", "DEFAULT_RATING", "NOT_APPLICABLE_SCR", "NOT_APPLICABLE_RTG", "NOT_APPLICABLE_MNR", "CURRENCY", "QUAN_CUSTOM_DUMMY5", "QUAN_CUSTOM_DUMMY4", "QUAN_CUSTOM_DUMMY3", "QUAN_CUSTOM_DUMMY2", "QUAN_CUSTOM_DUMMY1", "RTG_CUSTOM_DUMMY3", "RTG_CUSTOM_DUMMY2", "RTG_CUSTOM_DUMMY1", "MNR_CUSTOM_DUMMY3", "MNR_CUSTOM_DUMMY2", "MNR_CUSTOM_DUMMY1", "SCR_CUSTOM_DUMMY3", "SCR_CUSTOM_DUMMY2", "SCR_CUSTOM_DUMMY1", "DEFAULT_RESPONSE_RTG", "RTG_PK", "RESPONSE_DESC_RTG", "SCORE_RTG", "RESPONSE_RTG", "MODIFIED_BY_HIDN", "CONFIGURE_OWNER_APPROVERS", "CONTROL_SCORING", "VERSION_NUMBER", "SCOR_RULE_DESC", "RESP_DESC", "MOD_REQ_ON", "MOD_REQ_BY", "CREATD_ON", "CREATD_BY", "PREV_STAGE_ACTION", "OWNER_ORGANIZATIONS", "OWNERS", "RISK_CATEGORY", "MNR_PK", "SCR_PK", "QNT_DESC_1", "QNT_SORT_ORDER", "RESPONSIBLE_OWNER", "CONFIGURE", "PREVIOUS_STAGE", "ATTACHMENTS", "LEVEL_1_APPROVER", "LEVEL_2_APPROVER", "OBJECT_ACTION", "PROGRESS_STATUS", "RESTRICT_ACCESS_TO", "VALID_FROM", "VALID_UNTIL", "ACRONYM", "RTF_MULTI_ATTACHMENT", "ACTION_COMMENTS", "DEFAULT_RESPONSE", "DEFAULT_SCORE", "DEFAULT_WEIGHTING_FACTOR", "DESCRIPTION", "FACTOR_CONTRIBUTION", "FACTOR_TYPE", "MNR_SCORE", "OBJECT_ID", "OBJECT_NAME", "RESPONSE", "SCORING_TYPE", "SCR_SCORE", "VALUE_1", "VALUE_2", "DD_PROCESS_CODE", "DD_CURRENT_STAGE", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_CURRENT_USER_NAME", "DD_OBJECT_TYPE", "INSTANCE_REC_NUM", "INSTANCE_ID", "METRIC_ID", "METRIC_RUN_DATE", "METRIC_COMPLETED_DATE", "LATEST_FLAG", "CREATED_BY", "CREATION_DATE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "MULTIROW_GROUP_NAME", "ELECTRONICALLY_SIGNED", "MULTIROW_REGION_ID", "DESCRIPTION_HTM", "QNT_DESC_1_HTM", "RESP_DESC_HTM", "SCOR_RULE_DESC_HTM", "RESPONSE_DESC_RTG_HTM") AS 
+  SELECT "SCR_OBJECT_ID",
+    "RTG_OBJECT_ID",
+    "MNR_OBJECT_ID",
+    "UPLOAD_STATUS",
+    "DEFAULT_INPUT_TYPE",
+    "APPLICABLE_FOR",
+    "RATING",
+    "INPUT_TYPE",
+    "DEFAULT_RATING",
+    "NOT_APPLICABLE_SCR",
+    "NOT_APPLICABLE_RTG",
+    "NOT_APPLICABLE_MNR",
+    "CURRENCY",
+    "QUAN_CUSTOM_DUMMY5",
+    "QUAN_CUSTOM_DUMMY4",
+    "QUAN_CUSTOM_DUMMY3",
+    "QUAN_CUSTOM_DUMMY2",
+    "QUAN_CUSTOM_DUMMY1",
+    "RTG_CUSTOM_DUMMY3",
+    "RTG_CUSTOM_DUMMY2",
+    "RTG_CUSTOM_DUMMY1",
+    "MNR_CUSTOM_DUMMY3",
+    "MNR_CUSTOM_DUMMY2",
+    "MNR_CUSTOM_DUMMY1",
+    "SCR_CUSTOM_DUMMY3",
+    "SCR_CUSTOM_DUMMY2",
+    "SCR_CUSTOM_DUMMY1",
+    "DEFAULT_RESPONSE_RTG",
+    "RTG_PK",
+    "RESPONSE_DESC_RTG",
+    "SCORE_RTG",
+    "RESPONSE_RTG",
+    "MODIFIED_BY_HIDN",
+    "CONFIGURE_OWNER_APPROVERS",
+    "CONTROL_SCORING",
+    "VERSION_NUMBER",
+    "SCOR_RULE_DESC",
+    "RESP_DESC",
+    "MOD_REQ_ON",
+    "MOD_REQ_BY",
+    "CREATD_ON",
+    "CREATD_BY",
+    "PREV_STAGE_ACTION",
+    ms_rsk_utils.get_organizations (owner_organizations) "OWNER_ORGANIZATIONS",
+    ms_rsk_utils.get_owners (owners) "OWNERS",
+    ms_apps_utilities.get_display_values (100000, 'MS RSK List of Risk Categories', risk_category, ',' ) RISK_CATEGORY,
+    "MNR_PK",
+    "SCR_PK",
+    "QNT_DESC_1",
+    "QNT_SORT_ORDER",
+    (SELECT ms_apps_utilities.get_user_full_name (ms_apps_utilities.get_user_id (responsible_owner) ) FROM DUAL ) AS RESPONSIBLE_OWNER,
+    "CONFIGURE",
+    "PREVIOUS_STAGE",
+    "ATTACHMENTS",
+    (SELECT ms_apps_utilities.get_user_full_name (ms_apps_utilities.get_user_id (level_1_approver) ) FROM DUAL ) AS LEVEL_1_APPROVER,
+    (SELECT ms_apps_utilities.get_user_full_name (ms_apps_utilities.get_user_id (level_2_approver) ) FROM DUAL ) AS LEVEL_2_APPROVER,
+    (SELECT DISTINCT display_value FROM ms_rsk_quan_actions_v  WHERE stored_value = object_action  ) OBJECT_ACTION,
+    DECODE (progress_status, 'N', 'New', 'A', 'Approval Pending', 'R', 'Clarification Requested', 'P', 'Active', 'C', 'Cancelled', progress_status ) progress_status,
+    ms_apps_utilities.get_display_value (100000, 'MS RSK Restrict Access To', restrict_access_to ) RESTRICT_ACCESS_TO,
+    "VALID_FROM",
+    "VALID_UNTIL",
+    "ACRONYM",
+    "RTF_MULTI_ATTACHMENT",
+    NVL (action_comments, ' ') "ACTION_COMMENTS",
+    "DEFAULT_RESPONSE",
+    "DEFAULT_SCORE",
+    "DEFAULT_WEIGHTING_FACTOR",
+    "DESCRIPTION",
+    ms_apps_utilities.get_display_value (100000, 'MS RSK List of Factor Categorization', factor_contribution ) FACTOR_CONTRIBUTION,
+    ms_apps_utilities.get_display_value (100000, 'MS RSK Type of Factor', factor_type ) FACTOR_TYPE,
+    "MNR_SCORE",
+    "OBJECT_ID",
+    "OBJECT_NAME",
+    "RESPONSE",
+    ms_apps_utilities.get_display_value (100000, 'MS RSK List of Scoring Rules', scoring_type ) SCORING_TYPE,
+    "SCR_SCORE",
+    "VALUE_1",
+    "VALUE_2",
+    "DD_PROCESS_CODE",
+    "DD_CURRENT_STAGE",
+    "DD_ENTERPRISE_INFO",
+    (SELECT ms_apps_utilities.get_user_full_name (ms_apps_utilities.get_user_id (dd_event_user_name) ) FROM DUAL ) AS DD_EVENT_USER_NAME,
+    "DD_CURRENT_USER_NAME",
+    "DD_OBJECT_TYPE",
+    "INSTANCE_REC_NUM",
+    "INSTANCE_ID",
+    "METRIC_ID",
+    "METRIC_RUN_DATE",
+    "METRIC_COMPLETED_DATE",
+    "LATEST_FLAG",
+    "CREATED_BY",
+    "CREATION_DATE",
+    "PROCESS_FLOW_STATUS",
+    "PROCESS_INSTANCE_ID",
+    "MULTIROW_GROUP_NAME",
+    "ELECTRONICALLY_SIGNED",
+    "MULTIROW_REGION_ID",
+    "DESCRIPTION_HTM",
+    "QNT_DESC_1_HTM",
+    "RESP_DESC_HTM",
+    "SCOR_RULE_DESC_HTM",
+    "RESPONSE_DESC_RTG_HTM"
+  FROM ms_rsk_quant_assmnt_factor_v
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_QSM_QUESTNR_RESP_RPT_V">MS_QSM_QUESTNR_RESP_RPT_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_QSM_QUESTNR_RESP_RPT_V" ("QUE_RESPONSE_ID", "QUE_REQUEST_ID", "PROCESS_INSTANCE_ID", "INSTANCE_ID", "DD_OBJECT_TYPE", "ENT_ID", "QUE_REQUEST_NAME", "RESPONDENT", "RESPONDENT_DISP", "CREATION_DATE", "RESPONDED_ON", "DUE_DATE", "RESP_STATUS", "QUE_REQUEST_TYPE", "RESP_GRADE", "RESP_SCORE", "APPLIES_TO", "APPLIES_TO_OBJECT", "RESPONSE_APPROVER", "RESPONSE_APPROVER_DISP", "NO_OF_FINDINGS", "DUE_FLAG", "ISM_YN", "ASSIGNEE") AS 
+  SELECT A.QUE_RESPONSE_ID,
+          A.QUE_REQUEST_ID,
+          A.PROCESS_INSTANCE_ID,
+          A.INSTANCE_ID,
+          DD_OBJECT_TYPE,
+          A.ENT_ID,
+          a.QUE_REQUEST_NAME,
+          a.RESPONDENT,
+          case when length(A.RESPONDENT)-length(replace(A.RESPONDENT,',')) >0 then 
+          nvl(MS_APPS_UTILITIES.GET_USER_FULL_NAME (A.RESPONDED_BY),'Assigned to Role') else
+          NVL (
+             MS_APPS_UTILITIES.GET_USER_FULL_NAME (A.RESPONDENT),
+             (SELECT MS_CONCAT (
+                        MS_APPS_UTILITIES.GET_USER_FULL_NAME (COLUMN_VALUE))
+                FROM TABLE (
+                        ms_apps_utilities.parse_string (A.RESPONDENT, ',')))) end
+             AS RESPONDENT_DISP,
+          a.CREATION_DATE,
+          a.RESPONDED_ON,
+          a.DUE_DATE,
+          a.RESP_STATUS,
+          --RESP_STATUS_DISP,
+          A.QUE_REQUEST_TYPE,
+          --MS_APPS_UTILITIES.GET_DISPLAY_VALUES(a.ent_id,'MS_QSM_Init_Questionnaire_Type',A.QUE_REQUEST_TYPE,',') AS QUE_REQUEST_TYPE_DISP,
+          A.RESP_GRADE,
+          A.RESP_SCORE,
+          A.APPLIES_TO,
+          A.APPLIES_TO_OBJECT,
+          a.RESPONSE_APPROVER,
+          (SELECT MS_CONCAT (
+                        MS_APPS_UTILITIES.GET_USER_FULL_NAME (COLUMN_VALUE))
+                FROM TABLE (
+                        ms_apps_utilities.parse_string (a.RESPONSE_APPROVER, ','))) RESPONSE_APPROVER_DISP,
+          --MS_APPS_UTILITIES.GET_USER_FULL_NAME (a.RESPONSE_APPROVER)             AS RESPONSE_APPROVER_DISP,
+          A.NO_OF_FINDINGS,
+          a.DUE_FLAG,
+          a.ISM_YN,
+          a.ASSIGNEE
+     FROM (  SELECT rv.que_response_id,
+                    rv.que_request_id,
+                    rv.process_instance_id,
+                    rv.instance_id,
+                    rv.dd_object_type,
+                    ms_apps_utilities.
+                    get_enterprise_id (
+                       ms_apps_utilities.get_infolet_id (rv.dd_object_type))
+                       AS ent_id,
+                    RV.QUE_REQUEST_NAME,
+                    RV.RESPONDENT,
+                    RV.CREATION_DATE,
+                    RESPONDED_ON,
+                    RV.DUE_DATE,
+                    RV.RESP_STATUS,
+                    --(SELECT status_name FROM MS_QSM_STATUS WHERE status_id=rv.resp_status) AS resp_status_disp,
+                    IQ.QUE_REQUEST_TYPE,
+                    (SELECT GRADE_NAME
+                       FROM MS_QSM_GRADE_CONFIG
+                      WHERE GRADE_ID = RV.OVERALL_GRADE)
+                       AS RESP_GRADE,
+                    RV.OVERALL_SCORE AS RESP_SCORE,
+                    rv.applies_to,
+                    rv.applies_to_object,
+                    RV.RESPONSE_APPROVER,
+                    --                    (SELECT DECODE (I.ISM_YN,
+                    --                                    'Y', COUNT (DISTINCT Finding_Id),
+                    --                                    NULL)
+                    --                       --From Ms_Qsm_Questnr_Response_V
+                    --                       FROM Ms_Qsm_Questnr_Response_ALL_V
+                    --                      WHERE     Que_Request_Id = Rv.Que_Request_Id
+                    --                            AND Process_Instance_Id = Rv.Process_Instance_Id
+                    --                            AND INSTANCE_ID = RV.INSTANCE_ID
+                    --                            AND i.ISM_YN = 'Y')
+                    --                       AS NO_OF_FINDINGS,
+                    (SELECT DECODE (I.ISM_YN, 'Y', COUNT (FINDING_ID), NULL)
+                       FROM MS_QSM_RESP_ISSUE
+                      WHERE FINDING_FK = RV.QUE_RESPONSE_ID)
+                       AS NO_OF_FINDINGS,
+                    CASE
+                       WHEN TRUNC (rv.DUE_DATE) IS NULL
+                       THEN
+                          'ERR'
+                       WHEN TRUNC (NVL (rv.RESPONDED_ON, SYSDATE)) <=
+                               TRUNC ( (rv.DUE_DATE))
+                       THEN
+                          'BD'
+                       WHEN TRUNC (NVL (rv.RESPONDED_ON, SYSDATE)) <=
+                               TRUNC ( (rv.DUE_DATE + 7))
+                       THEN
+                          'L7'
+                       ELSE
+                          'G7'
+                    END
+                       DUE_FLAG,
+                    I.ISM_YN,
+                    --From Ms_Qsm_Questnr_Response_V Rv, Ms_Qsm_Init_Questnr Iq
+                    --From Ms_Qsm_Questnr_Resp_Dup_V Rv, Ms_Qsm_Init_Questnr Iq
+                    RV.RESPONDED_BY,
+                    ASSIGNEE
+               FROM Ms_Qsm_Questnr_Response_ALL_V Rv,
+                    Ms_Qsm_Init_Questnr Iq,
+                    (SELECT DECODE (COUNT (*), 0, 'N', 'Y') ISM_YN
+                       FROM ms_apps_events
+                      WHERE EVENT_NAME = 'TRIGGER_ISSUE') I
+              WHERE rv.que_request_id = iq.que_request_id
+           ORDER BY RV.QUE_REQUEST_NAME) a
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

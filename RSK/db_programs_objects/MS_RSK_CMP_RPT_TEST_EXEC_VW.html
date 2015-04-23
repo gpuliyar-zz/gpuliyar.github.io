@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_RSK_CMP_RPT_TEST_EXEC_VW">MS_RSK_CMP_RPT_TEST_EXEC_VW</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_RSK_CMP_RPT_TEST_EXEC_VW" ("TEST_EXECUTION_ID", "TEST_PLAN_NAME", "TEST_COMPLETION_STATUS", "DUE_BY", "TESTED_ORGANIZATION", "TEST_FREQUENCY", "SAMPLES_FAILED", "TEST_RESULT", "PENALTY", "CONTROL_ID", "CONTROL_NAME", "CONTROL_NAME_URL", "CONTROL_DESC", "KEY_CONTROL", "CONTROL_FREQUENCY", "FUNCTION_REL_TO_CONTROL", "CONTROL_TYPE", "CONTROL_CATEGORY", "PHYSICAL_LOCATION", "CONTROL_APPLIES_TO", "CONTROL_OWNER_ORG", "CONTROL_OWNER", "ISSUES", "OPEN_ISSUES", "CLOSED_ISSUES") AS 
+  SELECT   per.test_execution_id AS test_execution_id,
+                        per.test_plan_name AS test_plan_name,
+                        /*ms_cmp_utils.fn_get_form_url
+                                       (per.dd_object_type,
+                                        per.dd_process_instance_id,
+                                        per.dd_instance_id,
+                                        'Y',
+                                        per.test_plan_name
+                                       ) AS test_plan_name_url,*/
+                       /* ms_cmp_utils.fn_get_test_status
+                                    (per.test_execution_id,
+                                     per.dd_process_instance_id
+                                    ) AS test_completion_status,*/
+                                    (select status_Desc from Ms_Cmp_Status where status_code=per.progress_status) AS test_completion_status
+                                    ,
+                        per.due_date AS due_by, tstorg.org_name AS tested_organization,
+                        ms_apps_utilities.get_display_value
+                                         (100000,
+                                          'MS_CMP_TEST_PLAN_FREQUENCY',
+                                          tstpln.frequency
+                                         ) AS test_frequency,
+                        (tst.no_of_samples_tested - tst.no_of_samples_passed
+                        ) AS samples_failed,
+                        --tqp.testing_results AS test_result
+                         DECODE (tst.operating_effectively, '1', 'Passed', '3', 'Passed', '2', 'Failed', '4', 'Failed' ) as test_result,
+                        NULL AS penalty,
+                        
+                        ctrl.object_id AS control_id, ctrl.object_name AS control_name,
+                        CASE ctrl.dd_object_type
+                           WHEN 'MS_GRC_CONTROL'
+                              THEN 
+                              /*ms_cmp_utils.fn_get_form_url
+                                        (ctrl.dd_object_type,
+                                         ctrl.dd_process_instance_id,
+                                         ctrl.dd_instance_id,
+                                         'Y',
+                                         ctrl.object_name
+                                        )*/
+                            ms_rsk_rpt_utils.get_view_edit_url (ctrl.dd_object_type, ctrl.dd_process_instance_id,ctrl.object_name )
+                        END AS control_name_url,
+                        --NULL AS control_desc,          
+                        ctrl.description AS control_desc,
+                                             --NULL AS key_control,
+                        
+            --ms_apps_utilities.get_display_value((SELECT enterprise_id FROM si_ent),'MS GRC Expired Yes No',ctrl.key_compliance) key_control,
+             DECODE (ctrl.key_compliance,'yes','Yes','no','No')as key_control,
+                        --NULL AS control_frequency,
+                        
+              ms_apps_utilities.get_display_value(100000,'MS_GRC_Frequency', ctrl.frequency ) AS control_frequency,
+                        CASE ctrl.dd_object_type
+         WHEN 'MS_GRC_CONTROL' THEN
+
+          /*ms_grc_utilities.get_relationships(tst.control_id,
+
+                                             ctrl.dd_object_type,
+                                             'MS_GRC_FUNCTION')*/                                           
+       (select rel_function_obj_name_agg
+            from ms_grc_control_rel_summary
+           where object_id = tst.control_id)
+
+
+       END AS function_rel_to_control,
+                                         --NULL AS control_type,
+            
+            ms_apps_utilities.get_display_values(100000,'MS_GRC_COMPLIANCE_TYPE',(select ms_concat(NATURE_TYPE) from MS_GRC_CONTROL_NRE  where object_id = tst.control_id),',' ) AS control_type,
+
+                        --NULL AS control_category,          
+            ms_apps_utilities.get_display_values(100000,'MS_GRC_COMPLIANCE_CATEGORY',(select ms_concat(purpose) from MS_GRC_CONTROL_PUR  where object_id = tst.control_id),',' ) AS control_category,
+
+                        NULL AS physical_location, --NULL AS control_applies_to,
+                        
+            ms_apps_utilities.get_display_values(100000,'ORGENTITY', ctrl.owner_organizations,',' ) AS control_applies_to,
+                        --NULL AS control_owner_org,
+            ms_apps_utilities.get_display_values(100000,'ORGENTITY', ctrl.owner_organizations,',' ) AS control_owner_org,
+                                                  ctrl.owners AS control_owner,
+                        0 AS issues, 0 AS open_issues, 0 AS closed_issues
+                   FROM ms_cmp_perform_test per,
+                        ms_cmp_perform_test_org tstorg,
+                        ms_cmp_plan tstpln,
+                        ms_cmp_perform_test_tst tst,
+                        ms_cmp_perform_test_tqp tqp,
+                       -- ms_grc_area_of_complia_pub_v comp,
+                       -- ms_grc_requirement_pub_v req,
+                       -- ms_grc_process_pub_v proc,
+                        ms_grc_control_pub_v ctrl
+                  WHERE per.test_execution_id = tstorg.test_execution_id
+                    AND tstpln.test_plan_id = per.test_plan_id
+                    AND per.test_execution_id = tst.test_execution_id
+                    AND per.test_execution_id = tqp.test_execution_id
+                    AND tst.test_org_id = tstorg.org_id        
+                    AND ctrl.object_id = tst.control_id
+               ORDER BY per.test_plan_id, per.test_execution_id
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

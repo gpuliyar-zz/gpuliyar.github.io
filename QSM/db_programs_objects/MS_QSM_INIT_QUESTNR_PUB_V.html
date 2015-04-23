@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_QSM_INIT_QUESTNR_PUB_V">MS_QSM_INIT_QUESTNR_PUB_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_QSM_INIT_QUESTNR_PUB_V" ("QUE_REQUEST_ID", "QUE_REQUEST_NAME", "QUE_REQUEST_TYPE", "QUE_REQUEST_TYPE_DISP", "QUESTIONNAIRE_ID", "QUE_APPLIES_TO", "QUE_APPLIES_TO_DISP", "SURVEY_SCOPE_SELECTION", "SURVEY_SCOPE_SELECTION_DISP", "QUE_SEND_TO", "QUE_SEND_TO_DISP", "SEND_OPTION", "SEND_OPTION_DISP", "RESPONSE_APPROVER", "COLLABORATIVE_RESPONSE", "COLLABORATIVE_RESPONSE_DISP", "INSTRUCTIONS", "SUB_CERTIFICATION_FOR", "SUB_CERTIFICATION_FOR_DISP", "CONSDR_NO_OF_PAST_MONTHS", "LEVEL_1_APPROVER", "LEVEL_2_APPROVER", "RESTRICT_ACCESS_TO", "RESTRICT_ACCESS_TO_DISP", "INIT_COMMENTS", "REPORTING_PERIOD_TYPE", "REPORTING_PERIOD_TYPE_DISP", "REPORTING_PERIOD", "REPORTING_PERIOD_DISP", "SURVEY_SOURCE_TYPE", "SURVEY_SOURCE_REF", "MANAGE_SURVEY", "MANAGE_SURVEY_DISP", "OVERALL_APPROVER", "PUBLISHED", "APPROVAL_BASED_ON_RESPONSE", "SCH_DUE_AFTER", "SCH_START_DATE", "SCH_CLOSE_DATE", "SCH_FREQUENCY", "SCH_FREQUENCY_DISP", "SCH_END_BY", "SCH_NEXT_DATE", "OWNER_ORGANIZATIONS", "OWNERS") AS 
+  SELECT QUE_REQUEST_ID,QUE_REQUEST_NAME,QUE_REQUEST_TYPE,DECODE(QUE_REQUEST_TYPE,'2','Survey','3','Certification','4','Scorecard','')QUE_REQUEST_TYPE_DISP,
+QUESTIONNAIRE_ID,QUE_APPLIES_TO,(SELECT OBJECT_NAME FROM MS_QSM_APPLIES_TO WHERE OBJECT_ID=QUE_APPLIES_TO AND LOCALE_ID=(SELECT LOCALE_ID FROM SI_LOCALES WHERE LOCALE_STRING='en_US'))QUE_APPLIES_TO_DISP,
+SURVEY_SCOPE_SELECTION, ms_apps_utilities.get_display_value(i_enterprise_id=>(select enterprise_id from si_ent where rownum <=1),i_lov_name=>'MS_QSM_Scope_Selection',i_stored_value=>SURVEY_SCOPE_SELECTION)SURVEY_SCOPE_SELECTION_DISP,
+QUE_SEND_TO,ms_apps_utilities.get_display_value(i_enterprise_id=>(select enterprise_id from si_ent where rownum <=1),i_lov_name=>'MS_QSM_Send_To',i_stored_value=>QUE_SEND_TO)QUE_SEND_TO_DISP,
+SEND_OPTION,ms_apps_utilities.get_display_value(i_enterprise_id=>(select enterprise_id from si_ent where rownum <=1),i_lov_name=>'MS_QSM_Send_Option',i_stored_value=>SEND_OPTION) SEND_OPTION_DISP
+,RESPONSE_APPROVER,COLLABORATIVE_RESPONSE,DECODE(COLLABORATIVE_RESPONSE,'1','Yes','2','No','')COLLABORATIVE_RESPONSE_DISP,INSTRUCTIONS,
+SUB_CERTIFICATION_FOR,(SELECT QUE_REQUEST_NAME FROM MS_QSM_INIT_QUESTNR WHERE QUE_REQUEST_ID=SUB_CERTIFICATION_FOR)SUB_CERTIFICATION_FOR_DISP,
+CONSDR_NO_OF_PAST_MONTHS,LEVEL_1_APPROVER,LEVEL_2_APPROVER,RESTRICT_ACCESS_TO,DECODE(RESTRICT_ACCESS_TO,'N','No Restriction','Y','O','Owner Organization','')RESTRICT_ACCESS_TO_DISP,
+INIT_COMMENTS,REPORTING_PERIOD_TYPE,(SELECT PERIOD_TYPE FROM MS_QSM_REPORTING_PERIOD_TYPE WHERE PERIOD_TYPE_ID=REPORTING_PERIOD_TYPE)REPORTING_PERIOD_TYPE_DISP,
+REPORTING_PERIOD,(SELECT PERIOD_NAME  FROM MS_QSM_REPORTING_PERIOD WHERE PERIOD_TYPE=REPORTING_PERIOD_TYPE AND PERIOD_ID=REPORTING_PERIOD)REPORTING_PERIOD_DISP,
+SURVEY_SOURCE_TYPE,SURVEY_SOURCE_REF,MANAGE_SURVEY, ms_apps_utilities.get_display_value(i_enterprise_id=>(select enterprise_id from si_ent where rownum <=1),i_lov_name=>'MS_QSM_MANAGE_SURVEY',i_stored_value=>MANAGE_SURVEY)MANAGE_SURVEY_DISP,
+OVERALL_APPROVER,PUBLISHED,APPROVAL_BASED_ON_RESPONSE,SCH_DUE_AFTER,SCH_START_DATE,SCH_CLOSE_DATE,
+SCH_FREQUENCY,ms_apps_utilities.get_display_value(i_enterprise_id=>(select enterprise_id from si_ent where rownum <=1),i_lov_name=>'MS_QSM_Frequency',i_stored_value=>SCH_FREQUENCY)SCH_FREQUENCY_DISP,
+SCH_END_BY,SCH_NEXT_DATE,
+(SELECT MS_CONCAT(OWNER_ORGANIZATIONS)FROM MS_QSM_INIT_QUESTNR_OWO B WHERE B.QUE_REQUEST_ID=A.QUE_REQUEST_ID)OWNER_ORGANIZATIONS,
+(SELECt MS_CONCAT(OWNERS) FROM MS_QSM_INIT_QUESTNR_OWS C WHERE C.QUE_REQUEST_ID=A.QUE_REQUEST_ID)OWNERS
+FROM MS_QSM_INIT_QUESTNR A,MS_QSM_QUESTNR_SCH B
+WHERE A.QUE_REQUEST_ID=B.SCH_REQ_ID
+ 
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

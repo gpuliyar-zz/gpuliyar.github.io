@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_RSK_ONGOING_TREND_RPT_V">MS_RSK_ONGOING_TREND_RPT_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "NOVT_DEV"."MS_RSK_ONGOING_TREND_RPT_V" ("VERSION_NO", "PUBLISHED_ON", "ASSMNT_ID", "ORGANIZATION_ID", "ORGANIZATION_NAME", "CORE_OBJECT_ID", "RISK_ID", "RISK_OWNER", "INHERENT_SCORE", "INHERENT_RATING", "INH_RAT_TREND", "INH_RAT_TREND_COMMENTS", "TOTAL_NO_OF_CONTROLS", "NO_OF_NEW_CONTROLS", "NO_OF_CONTROLS_ASSESSED", "OVERALL_CONTROL_SCORE", "OVERALL_CONTROL_EFFECTIVENESS", "RESIDUAL_SCORE", "RESIDUAL_RATING", "RES_RAT_TREND", "RES_RAT_TREND_COMMENTS", "LAST_ASSESSED_ON", "LAST_ASSESSED_BY", "LAST_APPROVED_ON", "LAST_APPROVED_BY", "NO_OF_ISSUES", "NO_OF_OPEN_ISSUES", "NO_OF_OVERDUE_ISSUES", "PLAN_ID", "ASSMNT_NAME", "PLAN_NAME", "CORE_OBJECT_NAME", "RISK_NAME", "ASSMNT_PID", "ASSMNT_INSTANCE_ID", "INHERENT_SCORE_ORG", "INHERENT_RATING_ORG", "INHERENT_SCORE_CORE", "INHERENT_RATING_CORE", "INHERENT_SCORE_RSK", "INHERENT_RATING_RSK", "RESIDUAL_SCORE_ORG", "RESIDUAL_RATING_ORG", "RESIDUAL_SCORE_CORE", "RESIDUAL_RATING_CORE", "RESIDUAL_SCORE_RSK", "RESIDUAL_RATING_RSK", "SCENARIO_ID", "ASSMNT_TYPE", "SCH_ATS_PK", "RESTRICT_ACCESS_TO", "PLAN_OWNER_ORGS", "DD_OBJECT_TYPE", "CURRENT_STAGE", "DUMMY1", "DUMMY2", "DUMMY3", "DUMMY4", "DUMMY5", "DUMMY6", "DUMMY7", "DUMMY8", "DUMMY9", "DUMMY10", "DUMMY11", "DUMMY12", "DUMMY13", "DUMMY14", "DUMMY15", "DUMMY16", "DUMMY17", "DUMMY18", "DUMMY19", "DUMMY20", "DUMMY21", "DUMMY22", "DISP_RSK_SCOR", "ADC_LIB_RISK_ADDED", "ORG_SEQ", "PRC_SEQ", "RSK_SEQ", "RSK_OVERRIDE_SCORE_INH", "RSK_OVERRIDE_SCORE_RES") AS 
+  SELECT a.version_no,
+    a.PUBLISHED_ON,
+    a.ASSMNT_ID,
+    a.ORGANIZATION_ID,
+    MS_RSK_UTILS.get_organizations(a.ORGANIZATION_ID) AS ORGANIZATION_NAME,
+    a.CORE_OBJECT_ID,
+    a.RISK_ID,
+    ms_rsk_utils. get_risk_owners(a.risk_id) AS RISK_OWNER,
+    NULL                                     AS inherent_score,
+    NULL                                     AS inherent_rating,
+    a.INH_RAT_TREND,
+    a.INH_RAT_TREND_COMMENTS,
+    a.TOTAL_NO_OF_CONTROLS,
+    a.NO_OF_NEW_CONTROLS,
+    a.NO_OF_CONTROLS_ASSESSED,
+    a.OVERALL_CONTROL_SCORE,
+    a.OVERALL_CONTROL_EFFECTIVENESS,
+    NULL AS RESIDUAL_SCORE,
+    NULL AS RESIDUAL_RATING,
+    a.RES_RAT_TREND,
+    a.RES_RAT_TREND_COMMENTS,
+    a.LAST_ASSESSED_ON,
+    Ms_apps_utilities.get_user_full_name(a.LAST_ASSESSED_BY) AS LAST_ASSESSED_BY,
+    a.LAST_APPROVED_ON,
+    Ms_apps_utilities.get_user_full_name(a.LAST_APPROVED_BY) AS LAST_APPROVED_BY,
+    a.NO_OF_ISSUES,
+    a.NO_OF_OPEN_ISSUES,
+    a.NO_OF_OVERDUE_ISSUES,
+    NULL AS PLAN_ID,
+    (SELECT DISTINCT assmnt_name
+    FROM ms_rsk_ongoing_assmnt_rpt e
+    WHERE a.sch_ats_pk = e.sch_ats_pk
+    AND a.ASSMNT_ID    =e.assmnt_id
+    AND rownum         =1
+    ) AS ASSMNT_NAME,
+    (SELECT DISTINCT plan_name
+    FROM ms_rsk_ongoing_assmnt_rpt e
+    WHERE a.sch_ats_pk = e.sch_ats_pk
+    AND a.ASSMNT_ID    =e.assmnt_id
+    AND rownum         =1
+    ) AS plan_name,
+    (SELECT DISTINCT core_object_url
+    FROM ms_rsk_ongoing_assmnt_rpt c
+    WHERE a.core_object_id = c.core_object_id
+    AND a.sch_ats_pk       = c.sch_ats_pk
+    AND a.ASSMNT_ID        =c.assmnt_id
+    AND rownum             =1
+    )
+    /*b.core_object_name*/
+    AS CORE_OBJECT_NAME,
+    (SELECT DISTINCT risk_url
+    FROM ms_rsk_ongoing_assmnt_rpt d
+    WHERE a.risk_id  = d.risk_id
+    AND a.sch_ats_pk =d.sch_ats_pk
+    AND a.ASSMNT_ID  =d.assmnt_id
+    AND rownum       =1
+    )
+    /*b.risk_name*/
+         AS RISK_NAME,
+    NULL AS ASSMNT_PID,
+    a.ASSMNT_INSTANCE_ID,
+    --    a.INHERENT_SCORE_ORG,
+    --    a.INHERENT_RATING_ORG,
+    --    a.INHERENT_SCORE_CORE,
+    --    a.INHERENT_RATING_CORE,
+    --    a.INHERENT_SCORE_RSK,
+    --    a.INHERENT_RATING_RSK,
+    --    a.RESIDUAL_SCORE_ORG,
+    --    a.RESIDUAL_RATING_ORG,
+    --    a.RESIDUAL_SCORE_CORE,
+    --    a.RESIDUAL_RATING_CORE,
+    --    a.RESIDUAL_SCORE_RSK,
+    --    a.RESIDUAL_RATING_RSK,
+    NVL(a.inherent_score_org,0) ,
+    ms_rsk_assessments_task.fn_get_previous_range(NVL(a.inherent_score_org,0)),
+    --a.INHERENT_RATING_ORG,
+    NVL(a.inherent_score_core,0),
+    ms_rsk_assessments_task.fn_get_previous_range(NVL(a.inherent_score_core,0)),
+    -- a.INHERENT_RATING_CORE,
+    NVL(a.inherent_score_rsk,0),
+    ms_rsk_assessments_task.fn_get_previous_range(NVL(a.inherent_score_rsk,0)),
+    --a.INHERENT_RATING_RSK,
+    NVL(a.residual_score_org,0),
+    ms_rsk_assessments_task.fn_get_previous_range(NVL(a.residual_score_org,0)),
+    --  a.RESIDUAL_RATING_ORG,
+    NVL(a.residual_score_core,0),
+    ms_rsk_assessments_task.fn_get_previous_range(NVL(a.residual_score_core,0)),
+    --   a.RESIDUAL_RATING_CORE,
+    NVL(a.residual_score_rsk,0),
+    ms_rsk_assessments_task.fn_get_previous_range(NVL(a.residual_score_rsk,0)),
+    --a.RESIDUAL_RATING_RSK,
+    a.SCENARIO_ID,
+    a.ASSMNT_TYPE,
+    a.SCH_ATS_PK,
+    a.RESTRICT_ACCESS_TO,
+    a.PLAN_OWNER_ORGS,
+    a.DD_OBJECT_TYPE,
+    a.CURRENT_STAGE,
+    a.prv_inherent_score_org      AS dummy1,
+    a.prv_residual_score_org      AS dummy2,
+    a.prv_inherent_score_core     AS dummy3,
+    a.prv_residual_score_core     AS dummy4,
+    a.prv_inherent_score_risk     AS dummy5,
+    a.prv_residual_score_risk     AS dummy6,
+    NULL                          AS dummy7,
+    NULL                          AS dummy8,
+    assmnt_instance_rec_num       AS dummy9,
+    NULL                          AS dummy10,
+    a.inherent_justification_org  AS dummy11,
+    a.residual_justification_org  AS dummy12,
+    a.INHERENT_JUSTIFICATION_CORE AS dummy13,
+    a.residual_justification_core AS dummy14,
+    a.inherent_justification_risk AS dummy15,
+    a.RESIDUAL_JUSTIFICATION_RISK AS dummy16,
+    disp_overall_rsk_rat                          AS dummy17,
+    DISP_RES_RATING                          AS dummy18,
+    NULL                          AS dummy19,
+    NULL                          AS dummy20,
+    NULL                          AS dummy21,
+    NULL                          AS dummy22,
+    a.disp_rsk_scor,
+    a.adc_lib_risk_added AS adc_lib_risk_added,
+    a.org_seq,
+    a.prc_seq,
+    a.rsk_seq,
+    a.rsk_override_score_inh,
+    a.rsk_override_score_res
+  FROM ms_rsk_ongoing_trend_rpt a
+    /*,
+    ms_rsk_ongoing_assmnt_rpt_v b*/
+    /*where a.sch_ats_pk = b.sch_ats_pk
+    and   a.plan_id    = b.plan_id*/
+    /*and   a.organization_id = b.organization_id
+    and   a.core_object_id = b.core_object_id
+    and a.risk_id = b.risk_id*/
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
