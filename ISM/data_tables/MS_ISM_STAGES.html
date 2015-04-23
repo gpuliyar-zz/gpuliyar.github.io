@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Data Tables</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+     <script src="../js/jquery-1.11.1.min.js"></script>
+	<script src="../dist/js/searchInfoletJavaScript.js"></script>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span> <a style="text-decoration: none; " id="MS_ISM_STAGES" href="../db_tables/MS_ISM_STAGES.html">MS_ISM_STAGES</a><button class="btn btn-outline btn-success btn-xs dfBtn" type="button"  data-toggle="modal" data-target="#data-Modal" >Data</button> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This Data Table to store Stages of issue and action form</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    <br/>
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#data-pill" data-toggle="tab">Data</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover dataTable-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Title<br>Name</th>
+                                                                <th>Type</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>
+                                                                Stage Type<br>STAGE_TYPE
+                                                                 </td>
+                                                                <td>Number(3)</td>
+                                                                <td>1 for Issue, 2 for Actions</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>
+                                                                Stage Id<br>STAGE_ID
+                                                                 </td>
+                                                                <td>Number(3)</td>
+                                                                <td>Capture Stage IDs here</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>
+                                                                Stage Name<br>STAGE_NAME
+                                                                 </td>
+                                                                <td>Varchar2(30 char)</td>
+                                                                <td>Capture the stage Name here</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>
+                                                                Status<br>STATUS
+                                                                 </td>
+                                                                <td>Varchar2(30 char)</td>
+                                                                <td>Capture the stage statuses here</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>
+                                                                Active<br>ACTIVE
+                                                                 </td>
+                                                                <td>Varchar2(1 char)</td>
+                                                                <td>Y / N</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>
+                                                                Locale ID<br>LOCALE_ID
+                                                                 </td>
+                                                                <td>Number(10)</td>
+                                                                <td>Will store Locale specific details.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="data-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <div class="modal-body" style="overflow:auto;">
+                                                        <table class="table table-hover data-table-d">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>STAGE_TYPE</th>
+                                                                    <th>STATUS</th>
+                                                                    <th>STAGE_NAME</th>
+                                                                    <th>ACTIVE</th>
+                                                                    <th>LOCALE_ID</th>
+                                                                    <th>STAGE_ID</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>None</td>
+                                                                    <td>None</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>0</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>New</td>
+                                                                    <td>Initiate Issue</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>New</td>
+                                                                    <td>Review Issue</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>2</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Open</td>
+                                                                    <td>Approve Issue</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>3</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Open</td>
+                                                                    <td>Manage Issue</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>4</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Action Plan Developed</td>
+                                                                    <td>Approve Action Plan</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>5</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Action Plan Implementation</td>
+                                                                    <td>Implement_Action</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>6</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Action Plan Implementation</td>
+                                                                    <td>Monitor Issue</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>7</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Pending Final Approval</td>
+                                                                    <td>Final Approval</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>8</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Closed</td>
+                                                                    <td>Closure</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>9</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Cancelled</td>
+                                                                    <td>Cancel Issue</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>10</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td></td>
+                                                                    <td>Remediated</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>11</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td></td>
+                                                                    <td>Issue Due Date Extension</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>12</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td></td>
+                                                                    <td>Cancel Issue with Approval</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>14</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td></td>
+                                                                    <td>Action Due Date Extension</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>15</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>None</td>
+                                                                    <td>None</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>19</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Take Action</td>
+                                                                    <td>Implement Action</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>20</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Action Reviewed</td>
+                                                                    <td>Review Action</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>21</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Action Approved</td>
+                                                                    <td>Approve Action</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>22</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td></td>
+                                                                    <td>Confirm Action Approval</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>23</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td></td>
+                                                                    <td>Action Approved</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>24</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td></td>
+                                                                    <td>Issue Due Date Closure</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>25</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td></td>
+                                                                    <td>Action Due Date Closure</td>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>26</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- tab-content -->
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Infolets</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../infolets/MS_ISM_ACTIONS.html">MS_ISM_ACTIONS</a></td>
+                                            <td><a href="../infolets/MS_ISM_ISSUE_ACTIONS.html">MS_ISM_ISSUE_ACTIONS</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_ISM_Stages_Actions_Mapping_Report.html">MS_ISM_Stages_Actions_Mapping_Report</a></td>
+                                            <td><a href="../infolets/MS_ISM_ISSUE_ACT.html">MS_ISM_ISSUE_ACT</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_ISM_Stages_Actions_Status_Mapping.html">MS_ISM_Stages_Actions_Status_Mapping</a></td>
+                                            <td></td>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.data-table-d').DataTable({
+                    destroy:true,
+                    "responsive": true
+                });
+                $('.data-table-dnr').DataTable({
+                    destroy:true,
+                    "responsive": false
+                });
+                $('.tooltip-dt').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.dataTable-table').DataTable({
+                    responsive: true,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "15%" },     // 3rd column width 
+                        { "sWidth": "45%" }      // 4th column width 
+                    ]
+                });
+                $('.dataTable-table-nr').DataTable({
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "15%" },     // 3rd column width 
+                        { "sWidth": "45%" }      // 4th column width 
+                    ]
+                });
+            });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

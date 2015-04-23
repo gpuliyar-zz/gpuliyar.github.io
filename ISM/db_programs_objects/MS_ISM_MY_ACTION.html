@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_ISM_MY_ACTION">MS_ISM_MY_ACTION</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "ISM_61_SP2_DEV"."MS_ISM_MY_ACTION" ("ACTION_TITLE", "ACTION_STATUS", "ACTION_OWNER", "ISSUE_TITLE", "ISSUE_SOURCE", "ACTION_DUE_DATE", "ISSUE_DUE_DATE", "DAYS_PAST_DUE", "NO_OF_EXTENSION", "USER_NAME", "ACTION_DELEGATEE", "ISSUE_ID", "DD_CREATED_ON") AS 
+  SELECT (SELECT ms_ism_helper.
+               get_link_url_for_my_actions ('ACTION',
+                                            A.DD_PROCESS_INSTANCE_ID,
+                                            A.ACTION_STATUS,
+                                            A.ACTION_TITLE)
+          FROM DUAL)
+          AS ACTION_TITLE,
+       ms_ism_helper.get_status_display_name(A.ACTION_STATUS) AS ACTION_STATUS,
+       MS_APPS_UTILITIES.GET_USER_FULL_NAME (A.ACTION_OWNER) AS ACTION_OWNER,
+       (SELECT ms_ism_helper.
+               get_link_url_for_my_actions ('ISS',
+                                            B.DD_PROCESS_INSTANCE_ID,
+                                            B.ISSUE_STATUS,
+                                            B.ISSUE_TITLE)
+          FROM DUAL)
+          AS ISSUE_TITLE,
+       decode(a.issue_source_type,'0',a.delegatee_comments,MS_ISM_HELPER.get_Issue_Source_Title(a.issue_source,a.issue_source_type))  AS ISSUE_SOURCE,
+       A.ACTION_DUE_DATE,
+       B.ISSUE_DUE_DATE,
+       NVL ((SELECT (TO_DATE (SYSDATE, 'DD/MM/RRRR')- TO_DATE (A.ACTION_DUE_DATE, 'DD/MM/RRRR'))AS days_past_due
+             FROM DUAL
+            WHERE (TO_DATE (SYSDATE, 'DD/MM/RRRR')
+                   - TO_DATE (A.ACTION_DUE_DATE, 'DD/MM/RRRR')) > 0),
+          0)
+          As Days_Past_Due,
+      --decode((TO_DATE (SYSDATE, 'DD/MM/RRRR')- TO_DATE (A.ACTION_DUE_DATE, 'DD/MM/RRRR')),sign(TO_DATE (SYSDATE, 'DD/MM/RRRR')- TO_DATE (A.ACTION_DUE_DATE, 'DD/MM/RRRR'))=1,(TO_DATE (SYSDATE, 'DD/MM/RRRR')- TO_DATE (A.ACTION_DUE_DATE, 'DD/MM/RRRR')),0) as due_days,
+      A.NO_OF_EXTENSIONS AS NO_OF_EXTENSIONS,
+       A.ACTION_OWNER AS USER_NAME,
+       A.ACTION_DELEGATEE,
+       A.Issue_Id,
+       a.dd_created_on
+  From Ms_Ism_Action A, Ms_Ism_Issue B
+ Where A.Issue_Id = B.Issue_Id 
+and action_status != '20'
+ 
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
