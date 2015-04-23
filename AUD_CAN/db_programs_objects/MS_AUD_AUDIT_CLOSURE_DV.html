@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_AUD_AUDIT_CLOSURE_DV">MS_AUD_AUDIT_CLOSURE_DV</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "AUDDEVSP3"."MS_AUD_AUDIT_CLOSURE_DV" ("ACTIONS", "AE_AUDITABLE_ENTITY", "AE_CLOSING_COMMENTS", "AE_CLOSING_COMMENTS_HTM", "AE_ID", "AE_RISK_RATING", "ASSIGNEE", "ATTACHMENTS", "AUDIT_DATE", "AUDIT_ID", "AUDIT_MANAGER", "AUDIT_TITLE", "AUE_AUDIT_ID", "CLOSING_COMMENTS", "CLOSING_COMMENTS_HTM", "COM", "CONDUCTED_BY_ORG", "CREATED_BY", "CREATION_DATE", "DD_CURRENT_STAGE", "DD_CURRENT_USER_NAME", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_OBJECT_TYPE", "DD_PROCESS_CODE", "DOC_AUDIT_ID", "DOC_CATEGORY", "DOC_COMMENTS", "DOC_COMMENTS_HTM", "DOC_ID", "DOC_NAME", "DOC_SELECT_DOCUMENT", "DOC_TYPE", "ELECTRONICALLY_SIGNED", "FOLLOW_UP_AUDITOR", "FOLLOW_UP_DATE", "FOLLOW_UP_STATUS", "FORM_NAME", "INSTANCE_ID", "INSTANCE_REC_NUM", "KEY_COL_NAME", "LATEST_FLAG", "LEAD_AUDITOR", "METRIC_COMPLETED_DATE", "METRIC_ID", "METRIC_RUN_DATE", "MULTIROW_GROUP_NAME", "MULTIROW_REGION_ID", "ORG_AUDIT_ID", "ORG_CLOSING_COMMENTS", "ORG_CLOSING_COMMENTS_HTM", "ORG_ID", "ORG_ORGANIZATION", "ORG_RISK_RATING", "PID", "PREVIOUS_STAGE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "RE_AUDIT_START_DATE", "RE_AUD_LEAD_AUDITOR", "RSK_AUDIT_ID", "RS_CLOSING_COMMENTS", "RS_CLOSING_COMMENTS_HTM", "RS_ID", "RS_RISK_NAME", "RS_RISK_RATING", "RTF_ATTACH", "SCOPE_BASED_ON", "TEMP_CONFIG_FLAG", "TMP_PK_ID") AS 
+  select actions, ae_auditable_entity, ae_closing_comments, ae_closing_comments_htm, ae_id, ae_risk_rating, assignee, attachments, audit_date,
+          audit_id, audit_manager, audit_title, aue_audit_id, closing_comments, closing_comments_htm, com,ms_aud_utilities.fn_get_org_display_value(conducted_by_org), created_by,
+          creation_date, dd_current_stage, dd_current_user_name, dd_enterprise_info, dd_event_user_name, dd_object_type, dd_process_code,
+          doc_audit_id, doc_category, doc_comments, doc_comments_htm, doc_id, doc_name, doc_select_document, doc_type, electronically_signed,
+          follow_up_auditor, follow_up_date, follow_up_status, form_name, instance_id, instance_rec_num, key_col_name, latest_flag, lead_auditor,
+          metric_completed_date, metric_id, metric_run_date, multirow_group_name, multirow_region_id, org_audit_id, org_closing_comments,
+          org_closing_comments_htm, org_id, org_organization, org_risk_rating, pid, previous_stage, process_flow_status, process_instance_id,
+          re_audit_start_date, re_aud_lead_auditor, rsk_audit_id, rs_closing_comments, rs_closing_comments_htm, rs_id, rs_risk_name, rs_risk_rating,
+          rtf_attach, scope_based_on, temp_config_flag, tmp_pk_id
+     FROM ms_aud_audit_closure_v
+ 
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

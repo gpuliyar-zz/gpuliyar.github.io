@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_AUD_MANAGE_AUDIT_V">MS_AUD_MANAGE_AUDIT_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "AUDDEVSP3"."MS_AUD_MANAGE_AUDIT_V" ("CHK_USER_FOR_APP_REOPEN_ACT", "APS_RISKS", "OPEN_FLAG", "DC_SAVE_STATUS", "OPEN_ASSGNMT", "UPLOAD_FLAG", "LEGACY_ID", "DATA_CORRECTION_FLAG", "EDITABLE_FIELDS_JSON", "REOPEN_SAVE_STATUS", "LAST_REOPENED_DATE", "CHK_USER_FOR_REOPEN_ACTIVITY", "NUM_OF_AUDIT_REOPEN", "UPDATE_FLAG", "SETUP_REPORT_TEMPLATE", "APPROVE_FLAG", "COPY_AUDIT", "REFERENCE_ID", "SUBMIT_STATUS", "PERF_CONFIG_FLAG", "ADHOC_ACTIVITY", "TMP_PK_ID", "MILESTONE_JSON_STR", "MILESTONE_TEMP_ID_2", "MILESTONE_TEMP_ID_1", "APPROVER", "INITIATOR", "AUD_TRANS_STATUS", "APS_TESTS", "APS_CONTROLS", "FINAL_AUDIT_REPORT", "AUDIT_CLOSURE_DATE", "CONFIG_FLAG_PARAM", "CONFIG_FLAG", "CALL_AUDIT_CLOSURE_INFOLET", "LOAD_AUDIT_CLOSURE", "CLOSURE_FLAG", "SETUP_AUDITEE_RESP_REQUIRED", "CANDIDATE_ID", "FORM_NAME", "KEY_COL_NAME", "EMAIL_FLAG", "RTF_ATTACH", "AUDIT_INSTANCE_NUM", "NEXT_AUDIT_ID", "NEXT_RECURRENCE_AUDIT", "SETUP_SINGLE_AUDITOR_PROCESS", "INTERNAL_STATUS", "ASSIGNEE", "OPENED_FORM", "PREVIOUS_STAGE", "TEMP_CONFIG_FLAG", "STATUS", "ANNUAL_PLAN_ID", "AUDIT_ID", "AUDIT_STAGE", "INTERNAL_PLAN_ID", "PLAN_ID", "RESTRICTED_ACCESS_TO", "SETUP_PLANNING_SCOPING", "SCHEDULE_ID", "SETUP_QUALITY_REVIEWER", "AUDIT_COMMENTS", "AUDIT_ACTION", "PDF_CONV_FLAG_FOR_IN_PROCESS", "PDF_CONV_FLAG", "ID_FOR_PDF_CONVERTER", "DO_NUMBER_FOR_MANAGED", "DOC_AUDIT_ID", "DO_LINK", "DO_ID", "DO_COMMENTS", "DO_NAME", "DO_NAME_FOR_MANAGED", "DO_DOCUMENT", "DO_CATEGORY", "DO_TYPE", "KMS_AUDIT_ID", "KM_EVENT_IN_SYSTEM", "KM_ATTACHMENTS", "KM_COMMENTS", "KM_ACTUAL_DATE", "KM_PROPOSED_DATE", "KM_MILESTONES", "HDN_MNG_SELECT_USER", "CON_AUDIT_ID", "CO_CONTACT_ID", "CO_COMMENTS", "CO_AUDITEE_CONTACT", "CO_TITLE", "CO_PHONE", "CO_EMAIL", "CO_NAME", "CO_NOTIFICATION_OPTIONS", "CO_USER", "CO_USER_IN_SYSTEM", "RSM_TEAM_MEMBER", "TEAM_MEMBER", "PLAN_TITLE", "PURPOSE", "ACTUAL_EFFORT", "PLANNED_AUDIT_LENGTH", "LOCATIONS", "TMP_ORGANIZATIONS", "TMP_RELATED_RISKS", "TMP_CORE_OBJECTS", "RELATED_RISKS", "CORE_OBJECTS", "MANAGE_ORGANIZATIONS", "SCOPE_BASED_ON", "NEXT_AUDIT_DATE", "SCHEDULE_END_DATE", "SCHEDULE_START_DATE", "AUDIT_RECURRENCE_NUMBER", "AUDIT_RECURRENCE", "SETUP_AUDTIORS_ADD_ADDITI_QUES", "SETUP_ENABLE_AUDIT_SCORING", "SETUP_TASK_SPECIFIED_DATES", "SETUP_AUDITORS_CREATE_TASKS", "SETUP_ACTION_PLAN_CAN_CREATED", "SETUP_AUDITOR_SEND_ISSUES", "SETUP_APPROVALS_REQUIRED", "SETUP_AUDITOR_TASK_REVIEW", "MILESTONE_TEMPLATE", "AU_NOTIFICATION", "RESTRICT_ACCESS_TO", "AUDIT_MANAGER_MLOV", "LEAD_AUDITOR_MLOV", "AUDIT_MANAGER", "LEAD_AUDITOR", "AUDIT_STATUS", "AUDIT_TYPE", "AUDIT_CLASSIFICATION", "CONDUCTED_BY_ORG", "AUDIT_START_DATE", "AUDIT_TITLE", "DD_PROCESS_CODE", "DD_CURRENT_STAGE", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_CURRENT_USER_NAME", "DD_OBJECT_TYPE", "INSTANCE_REC_NUM", "INSTANCE_ID", "METRIC_ID", "METRIC_RUN_DATE", "METRIC_COMPLETED_DATE", "LATEST_FLAG", "CREATED_BY", "CREATION_DATE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "MULTIROW_GROUP_NAME", "ELECTRONICALLY_SIGNED", "MULTIROW_REGION_ID", "PURPOSE_HTM", "APS_CONTROLS_HTM", "APS_TESTS_HTM") AS 
+  SELECT "CHK_USER_FOR_APP_REOPEN_ACT","APS_RISKS","OPEN_FLAG","DC_SAVE_STATUS","OPEN_ASSGNMT","UPLOAD_FLAG","LEGACY_ID","DATA_CORRECTION_FLAG","EDITABLE_FIELDS_JSON","REOPEN_SAVE_STATUS","LAST_REOPENED_DATE","CHK_USER_FOR_REOPEN_ACTIVITY","NUM_OF_AUDIT_REOPEN","UPDATE_FLAG","SETUP_REPORT_TEMPLATE","APPROVE_FLAG","COPY_AUDIT","REFERENCE_ID","SUBMIT_STATUS","PERF_CONFIG_FLAG","ADHOC_ACTIVITY","TMP_PK_ID","MILESTONE_JSON_STR","MILESTONE_TEMP_ID_2","MILESTONE_TEMP_ID_1","APPROVER","INITIATOR","AUD_TRANS_STATUS","APS_TESTS","APS_CONTROLS","FINAL_AUDIT_REPORT","AUDIT_CLOSURE_DATE","CONFIG_FLAG_PARAM","CONFIG_FLAG","CALL_AUDIT_CLOSURE_INFOLET","LOAD_AUDIT_CLOSURE","CLOSURE_FLAG","SETUP_AUDITEE_RESP_REQUIRED","CANDIDATE_ID","FORM_NAME","KEY_COL_NAME","EMAIL_FLAG","RTF_ATTACH","AUDIT_INSTANCE_NUM","NEXT_AUDIT_ID","NEXT_RECURRENCE_AUDIT","SETUP_SINGLE_AUDITOR_PROCESS","INTERNAL_STATUS","ASSIGNEE","OPENED_FORM","PREVIOUS_STAGE","TEMP_CONFIG_FLAG","STATUS","ANNUAL_PLAN_ID","AUDIT_ID","AUDIT_STAGE","INTERNAL_PLAN_ID","PLAN_ID","RESTRICTED_ACCESS_TO","SETUP_PLANNING_SCOPING","SCHEDULE_ID","SETUP_QUALITY_REVIEWER","AUDIT_COMMENTS","AUDIT_ACTION","PDF_CONV_FLAG_FOR_IN_PROCESS","PDF_CONV_FLAG","ID_FOR_PDF_CONVERTER","DO_NUMBER_FOR_MANAGED","DOC_AUDIT_ID","DO_LINK","DO_ID","DO_COMMENTS","DO_NAME","DO_NAME_FOR_MANAGED","DO_DOCUMENT","DO_CATEGORY","DO_TYPE","KMS_AUDIT_ID","KM_EVENT_IN_SYSTEM","KM_ATTACHMENTS","KM_COMMENTS","KM_ACTUAL_DATE","KM_PROPOSED_DATE","KM_MILESTONES","HDN_MNG_SELECT_USER","CON_AUDIT_ID","CO_CONTACT_ID","CO_COMMENTS","CO_AUDITEE_CONTACT","CO_TITLE","CO_PHONE","CO_EMAIL","CO_NAME","CO_NOTIFICATION_OPTIONS","CO_USER","CO_USER_IN_SYSTEM","RSM_TEAM_MEMBER","TEAM_MEMBER","PLAN_TITLE","PURPOSE","ACTUAL_EFFORT","PLANNED_AUDIT_LENGTH","LOCATIONS","TMP_ORGANIZATIONS","TMP_RELATED_RISKS","TMP_CORE_OBJECTS","RELATED_RISKS","CORE_OBJECTS","MANAGE_ORGANIZATIONS","SCOPE_BASED_ON","NEXT_AUDIT_DATE","SCHEDULE_END_DATE","SCHEDULE_START_DATE","AUDIT_RECURRENCE_NUMBER","AUDIT_RECURRENCE","SETUP_AUDTIORS_ADD_ADDITI_QUES","SETUP_ENABLE_AUDIT_SCORING","SETUP_TASK_SPECIFIED_DATES","SETUP_AUDITORS_CREATE_TASKS","SETUP_ACTION_PLAN_CAN_CREATED","SETUP_AUDITOR_SEND_ISSUES","SETUP_APPROVALS_REQUIRED","SETUP_AUDITOR_TASK_REVIEW","MILESTONE_TEMPLATE","AU_NOTIFICATION","RESTRICT_ACCESS_TO","AUDIT_MANAGER_MLOV","LEAD_AUDITOR_MLOV","AUDIT_MANAGER","LEAD_AUDITOR","AUDIT_STATUS","AUDIT_TYPE","AUDIT_CLASSIFICATION","CONDUCTED_BY_ORG","AUDIT_START_DATE","AUDIT_TITLE","DD_PROCESS_CODE","DD_CURRENT_STAGE","DD_ENTERPRISE_INFO","DD_EVENT_USER_NAME","DD_CURRENT_USER_NAME","DD_OBJECT_TYPE","INSTANCE_REC_NUM","INSTANCE_ID","METRIC_ID","METRIC_RUN_DATE","METRIC_COMPLETED_DATE","LATEST_FLAG","CREATED_BY","CREATION_DATE","PROCESS_FLOW_STATUS","PROCESS_INSTANCE_ID","MULTIROW_GROUP_NAME","ELECTRONICALLY_SIGNED","MULTIROW_REGION_ID","PURPOSE_HTM","APS_CONTROLS_HTM","APS_TESTS_HTM" FROM SI_102001_V
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
