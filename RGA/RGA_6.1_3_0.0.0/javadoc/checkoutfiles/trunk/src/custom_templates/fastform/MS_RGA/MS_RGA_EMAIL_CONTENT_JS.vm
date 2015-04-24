@@ -1,0 +1,32 @@
+<script>
+
+F.onLoad(function()
+{ 
+
+var fldDiv=document.getElementById("FEED_BODY_field__div");
+var imgfld=fldDiv.getElementsByTagName("img");
+imgfld[0].style.display="none";
+
+
+document.getElementById('ACTIONS_field__div').style.wordWrap = "break-word";
+document.getElementById('ACTIONS_field__div').style.width = "720px"; 
+
+F.DD_PROCESS_CODE.write('MS_RGA_EMAIL_CONTENT');
+F.DD_CURRENT_STAGE.write('CREATE_EDIT'); 	
+F.FEED_BODY.disable();
+F.EMAIL_SUBJECT.disable();
+F.FEED_BODY.makeNotRequired();
+
+var fldelm=document.getElementById('ATTACHMENTS_field__div');
+var aArr=fldelm.getElementsByTagName('a');
+
+for (i=0;i<aArr.length;i++) {
+	var l1=aArr[i];
+	l1.className='msai_hyperlink';
+	}
+
+});
+
+		
+
+</script>

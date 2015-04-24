@@ -1,0 +1,67 @@
+<project name="feedagg" default="dist" basedir=".">
+    <description>
+        simple example build file
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="dist"/>
+  <property name="config"  location="config"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init" description="compile the source ">
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}">
+	<classpath>
+        	<pathelement location="./lib/"/>
+		<fileset dir="lib">
+        		<include name="**/*.jar"/>
+      		</fileset>        
+      	</classpath>
+    </javac>
+  </target>
+
+  <target name="dist" depends="compile" description="generate the distribution" >
+    <!-- Create the distribution directory -->
+    <mkdir dir="${dist}/lib"/>
+  	<copy todir="${build}">
+  	  	    	      <fileset dir="${config}">
+  	  	    	      	<include name="**/log.properties"/>
+  	  	    	      </fileset>
+  	 </copy>
+    <!-- Put everything in ${build} into the feedagg-${DSTAMP}.jar file -->
+    <jar jarfile="${dist}/lib/feedagg-${DSTAMP}.jar" basedir="${build}"/>
+    <copy todir="./lib">
+      <fileset dir="${dist}/lib"/>
+    </copy>
+
+    <!-- Rename project jar file.-->
+    <move file="./lib/feedagg-${DSTAMP}.jar" tofile="./lib/feedagg.jar"/>
+
+    <!-- Delete all files and subdirectories of $(build), including $(build) itself. -->
+    <delete includeemptydirs="true">
+      <fileset dir="${build}" defaultexcludes="false"/>
+    </delete>
+    <!-- Delete all files and subdirectories of $(dist), including $(dist) itself. -->
+    <delete includeemptydirs="true">
+      <fileset dir="${dist}" defaultexcludes="false"/>
+    </delete>
+  </target>
+
+  <target name="clean" depends="dist" description="clean up" >
+    <!-- Delete all files and subdirectories of $(build), including $(build) itself. -->
+    <delete includeemptydirs="true">
+      <fileset dir="${build}" defaultexcludes="false"/>
+    </delete>
+    <!-- Delete all files and subdirectories of $(dist), including $(dist) itself. -->
+    <delete includeemptydirs="true">
+      <fileset dir="${dist}" defaultexcludes="false"/>
+    </delete>
+  </target>
+</project>

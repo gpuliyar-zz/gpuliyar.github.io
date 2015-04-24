@@ -1,0 +1,1356 @@
+<?xml version="1.0" encoding="UTF-8"?><PACKAGE_SPEC xmlns="http://www.metricstream.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metricstream.com ms_application_schema.xsd">
+<!--$Revision: 1.30.2.12.2.2.2.9.2.8 $-->
+<!--$Author: prao $-->
+<PLATFORM_DETAILS>
+<PLATFORM_VERSION>6.1</PLATFORM_VERSION>
+<BUILD_VERSION>4.2.2.0</BUILD_VERSION>
+</PLATFORM_DETAILS>
+<STORED_PROCEDURE_NAME>MS_RGA_PROCESS_CHANNEL_RESP</STORED_PROCEDURE_NAME>
+<OBJECT_ID>MS_RGA_PROCESS_CHANNEL_RESP</OBJECT_ID>
+<OBJECT_TYPE>PACKAGE</OBJECT_TYPE>
+<TEXT>PACKAGE Ms_Rga_Process_Channel_Resp
+IS
+  /**************************************************************************************
+  | Package     : Ms_Rga_Populate_Feeds
+  | Module      : RGALERTS
+  | Purpose     : Contain procedures to support Insertion of feeds into corresponding
+  |               Channel tables viz. Ms_Rga_Channel_Response_Hdr and
+  |               Ms_Rga_Channel_Response_Dtls.
+  | Process     : For each response considered in Ms_Rga_Feed_Aggregator_V, all
+  |               Sources matching the Server Address will be identified and for each
+  |               Source a record will be inserted into Ms_Rga_Channel_Response_Dtls.
+  | Author      : SUMITL
+  | Start Date  : 06/14/2010
+  | ------------------------------------------------------------------------------------
+  | Change History
+  | ------------------------------------------------------------------------------------
+  | Date               Change_Tag(s)      Client    Bug_Description
+  | ------------------------------------------------------------------------------------
+  | 15-July-2011   HMSA_UAT_#20512_Start   HMSA    Palmetto and DMERC alerts -
+  |                HMSA_UAT_#20512_End             Reference links to be enabled
+  |                                                in the alert content.
+  **************************************************************************************/
+    Type Ty_Ms_Rga_Chnl_Resp_Hdr_Tbl
+    IS TABLE OF Ms_Rga_Channel_Response_Hdr%Rowtype INDEX BY Pls_Integer;
+    
+    Type Ty_Ms_Rga_Chnl_Resp_Dtl_Tbl
+    IS TABLE OF Ms_Rga_Channel_Response_Dtls%Rowtype INDEX BY Pls_Integer;
+    
+    TYPE Ty_Ms_Rga_Chnl_Notif_Tbl
+    IS TABLE OF Ms_Rga_Channel_Notifications%Rowtype INDEX BY Pls_Integer;
+    
+    TYPE Ty_Feed_Aggregator_V
+    IS TABLE OF Ms_Rga_Feed_Aggregator_V%Rowtype INDEX BY Pls_Integer;
+
+FUNCTION Fn_Send_Chnl_Notificatns(o_Error_Code OUT NUMBER,
+                                  o_Error_Desc OUT VARCHAR2) RETURN BOOLEAN;
+  
+PROCEDURE Pr_Populate_Channel_Response(o_Error_Code OUT NUMBER,
+                                       o_Error_Desc OUT VARCHAR2);
+
+FUNCTION En_Enrich_Existing_Alerts(o_Error_Code OUT VARCHAR2,
+                                   o_Error_Desc OUT VARCHAR2) RETURN BOOLEAN;
+
+PROCEDURE Fn_Populate_Attachment_Alerts(o_Error_Code OUT VARCHAR2,
+                                        o_Error_Desc OUT VARCHAR2);
+END Ms_Rga_Process_Channel_Resp;
+  </TEXT>
+<TEXT_BODY>PACKAGE Body Ms_Rga_Process_Channel_Resp
+IS
+    g_Success_Code         CONSTANT NUMBER        := Ms_Rga_Utilities.g_Success_Code;
+    g_Success_Mesg         CONSTANT VARCHAR2(100) := Ms_Rga_Utilities.g_Success_Mesg;
+    g_Module               CONSTANT VARCHAR2(10)  := Ms_Rga_Utilities.g_Module_Name;
+    g_Package_Name         CONSTANT VARCHAR2(50)  := 'Ms_Rga_Process_Channel_Resp';
+    g_Action               VARCHAR2(12)           := 'CHNLRESP';
+    g_Chnl_Resp_Id_Prefix  CONSTANT VARCHAR2(10)  := 'RSP_';
+    g_Chnl_Notif_Id_Prefix CONSTANT VARCHAR2(12)  := 'CHNL_NOTIF_';
+    g_High                 CONSTANT NUMBER        := Ms_Rga_Utilities.g_High;
+    g_Medium               CONSTANT NUMBER        := Ms_Rga_Utilities.g_Medium;
+    g_Low                  CONSTANT NUMBER        := Ms_Rga_Utilities.g_Low;
+    g_PkgDebugPriority     CONSTANT NUMBER                 := Ms_Rga_Utilities.g_High;--g_High; --g_Medium; -- set to medium, logging relaxed at pkg level
+    g_Err                  CONSTANT VARCHAR2(100) := Ms_Apps_Utilities.g_err;
+  CURSOR Ms_Rga_Chnl_Resp_Hdr_Cur
+  IS  -- All Unprocessed Channels which are being processed for the first time.
+    SELECT DISTINCT z.Response_Start_Date Response_Start_Date,
+      z.Channel_Id Channel_Id,
+      DECODE(z.Channel_Active, 1, NULL, NVL(z.Modified_On, z.Created_On)) Channel_Expiry_Date,
+      z.Channel_Description Comments,
+      1 Created_By,
+      NULL Modified_By,
+      NULL Pid
+    FROM
+      (                                                                                             -- All Unprocessed Feeds and corresponding Channel details.
+      SELECT MIN(Created_On) Over(Partition BY Channel_Id Order By Channel_Id) Response_Start_Date, -- Channel's min. start date should be the response_date in Chnl_Resp_Hdr.
+        Channel_Description,
+        CHANNEL_ID,
+        Created_On,
+        CHANNEL_ACTIVE,
+        Modified_On
+      FROM Ms_Rga_Unprocessd_Chnl_Feeds_v
+      WHERE (Processed_Flag IS NULL
+      OR Processed_Flag      = 'U') -- Consider all 'U'nprocessed records.
+        --And    Created_On &lt; SYSDATE - (1800/(24*60*60))         -- Bug 20512, 29240, 29457. To prevent race condition, pick only those records that have been inserted half an hour ago
+      ) z
+  WHERE/* z.Created_On = z.Response_Start_Date
+  AND*/ NOT EXISTS
+    (SELECT 1
+    FROM Ms_Rga_Channel_Response_Hdr y
+    WHERE y.Channel_Id = z.Channel_Id
+    );
+    
+  CURSOR Ms_Rga_Chnl_Resp_Dtl_Cur
+  IS
+    SELECT
+      /*+ Index(c MS_RGA_FEEDAGG_V_IDX_02)
+      Index(d MS_RGA_CHNL_DTLS_IDX_01)
+      */
+      e.Channel_Id Channel_Id,
+      e.Channel_Name Channel_Name,
+      e.Channel_Type Channel_Type,
+      e.Infolet_Name StructContent_Infolet,
+      e.Channel_Description Channel_Description,
+      e.Active Channel_Active,
+      d.Source_Id Source_Id,
+      d.Source_Type Source_Type,
+      d.Server_Add_Url Server_Add_Url,
+      d.Scr_User_Name Scr_User_Name,
+      d.Scr_Password Scr_Password,
+      Lower(d.Email_From) Email_From,
+      d.Keywords Keywords,
+      d.Source_Description Source_Description,
+      DECODE(d.Active, 1, 'Y', 0, 'N') Source_Active,
+      d.Server_Parameters Server_Parameters,
+      d.Username Chnl_Dtls_Username,
+      c.Recipient_Username Feed_Aggtr_Username,
+      c.Recipient_Mail_Id Feed_Aggtr_MailId,
+      c.Recipient_Mail_Id_2 Feed_Aggtr_MailId_2,
+      c.Creation_Date Response_Date,
+      c.Body Body,
+      c.Subject Title_Subject,
+      c.Attachment Attachments,
+      c.Creation_Date Created_On,
+      c.Creation_Date Modified_On,
+      NVL(C.PROCESSED_FLAG, 'U') PROCESSED_FLAG,
+   --   c.Instance_Id Instance_Id,
+   --   c.Instance_Rec_Num Instance_Rec_Num,
+      c.Feed_Id Feed_Data_Id,
+      c.MailReceivedFrom MailReceivedFrom,
+      --ms_rga_feed_sequence.nextval feed_sequence
+      c.feed_sequence feed_sequence
+    FROM
+      (SELECT Ms_Rga_Utilities.Get_Next_Feed_Id(z.Rowid) Feed_Id,
+        z.*,
+        Lower(Recipient) Recipient_Mail_Id,
+        Lower(SUBSTR(Recipient, Instr(Recipient, '&lt;', 1, 1) + 1, (Instr(Recipient, '@', Instr(Recipient, '&lt;', 1, 1) + 1, 1) - (Instr(Recipient, '&lt;', 1, 1) + 1)))) Recipient_Username,
+        Lower(SUBSTR(Recipient, (Instr(Recipient, '&lt;', 1, 1)  + 1), (Instr(Recipient, '&gt;', 1, 1) - Instr(Recipient, '&lt;', 1, 1) - 1))) AS Recipient_Mail_Id_2,
+        Lower(REPLACE(SUBSTR(Sender, Instr(Sender, '&lt;', 1, 1) + 1), '&gt;', '')) MailReceivedFrom
+      FROM Ms_Rga_Feed_Aggregator_V z
+      WHERE (Processed_Flag IS NULL
+      OR Processed_Flag      = 'U')
+      ORDER BY Creation_Date DESC
+      ) c,
+    (SELECT u.*, Lower(u.Scr_User_Name) Username FROM Ms_Rga_Channel_Details u
+    ) d,
+    Ms_Rga_Channel_Master e
+  WHERE d.Channel_Id = e.Channel_Id
+  AND d.Channel_Id = c.Channel_Id
+  AND c.Server       = d.Server_Add_Url
+   AND c.src_pk =d.source_id
+  AND c.src_pk =e.Src_Pk
+ -- AND c.Metric_Run_Date IS NOT NULL
+  AND d.Active           = '1';
+  
+    Type Ty_Ms_Rga_ChnlHdr_V_Cur
+    IS TABLE OF Ms_Rga_Chnl_Resp_Hdr_Cur%Rowtype INDEX BY Pls_Integer;
+    
+    Type Ty_Ms_Rga_ChnlDtl_V_Cur
+    IS TABLE OF Ms_Rga_Chnl_Resp_Dtl_Cur%Rowtype INDEX BY Pls_Integer;
+    
+    Type Ty_Si_Users
+    IS TABLE OF Si_Users_t%Rowtype INDEX BY VARCHAR2(100);
+
+PROCEDURE Dbg(i_Msg          IN VARCHAR2,
+              i_Msg_Priority IN NUMBER DEFAULT g_PkgDebugPriority,
+              i_Msg_Type     IN VARCHAR2 DEFAULT Ms_Apps_Utilities.g_stmt)
+IS
+    x_Msg VARCHAR2(4000) := NULL;
+BEGIN
+    IF i_Msg_Priority &lt;= g_PkgDebugPriority THEN
+        x_Msg           := g_package_name || '.';
+        x_Msg           := x_Msg || i_Msg;
+        Ms_Rga_Utilities.Pr_Monitor_Progress(x_Msg, i_Msg_Priority, i_Msg_Type);
+    END IF;
+END Dbg;
+-- This procedure has been written to handle the insert channel notification : split from the function Fn_Push_Notifs_ToMailQ to ensure a moderate cyclomatic complexity in PMD reports.
+
+procedure Pr_send_mail (io_Send_Email_Tbl IN OUT Ms_Rga_Process_Subscrptn_Resp.Ty_Send_Email_Rec,
+                        i_Chnl_Notif_Recs IN Ms_Rga_Channel_Notifications%Rowtype) is 
+x_Proc_Name VARCHAR2(100) := 'Pr_send_mail =&gt; ';
+BEGIN
+  Ms_Rga_Utilities.Send_Email(x_priority =&gt; io_Send_Email_Tbl.Priority, x_recipients =&gt; io_Send_Email_Tbl.Recipients, x_enterprise_id =&gt; io_Send_Email_Tbl.Enterprise_Id, x_subject =&gt; io_Send_Email_Tbl.Subject, x_template =&gt; io_Send_Email_Tbl.Template, x_param_names =&gt; io_Send_Email_Tbl.Param_Names, x_param_values =&gt; io_Send_Email_Tbl.Param_Values, x_error_code =&gt; io_Send_Email_Tbl.Error_code, x_error_message =&gt; io_Send_Email_Tbl.Error_message);
+        IF (io_Send_Email_Tbl.Error_code IS NULL AND io_Send_Email_Tbl.Error_message IS NULL) OR (io_Send_Email_Tbl .Error_code = g_Success_Code AND io_Send_Email_Tbl.Error_message = g_Success_Mesg) THEN
+            INSERT INTO Ms_Rga_Channel_Notifications VALUES i_Chnl_Notif_Recs;
+          END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        Dbg(x_Proc_Name || Dbms_Utility.format_error_backtrace);
+END;		  
+
+FUNCTION Fn_Push_Notifs_ToMailQ(i_Send_Email_Tbl  IN OUT Ms_Rga_Process_Subscrptn_Resp.Ty_Send_Email_Tbl,
+    i_Chnl_Notif_Recs IN Ms_Rga_Process_Channel_Resp.Ty_Ms_Rga_Chnl_Notif_Tbl,
+    o_Error_Code OUT NUMBER,
+    o_Error_Mesg OUT VARCHAR2)
+  RETURN BOOLEAN
+IS
+  x_Proc_Name VARCHAR2(100) := 'Fn_Push_Notifs_ToMailQ=&gt; ';
+BEGIN
+  IF i_Send_Email_Tbl.Count &gt; 0 THEN
+    FOR i                  IN i_Send_Email_Tbl.First .. i_Send_Email_Tbl.Last
+    LOOP
+      IF i_Send_Email_Tbl(i).Send_Email = 'Y' THEN
+        BEGIN 
+        /*
+          Ms_Rga_Utilities.Send_Email(x_priority =&gt; i_Send_Email_Tbl(i) .Priority, x_recipients =&gt; i_Send_Email_Tbl(i) .Recipients, x_enterprise_id =&gt; i_Send_Email_Tbl(i) .Enterprise_Id, x_subject =&gt; i_Send_Email_Tbl(i) .Subject, x_template =&gt; i_Send_Email_Tbl(i) .Template, x_param_names =&gt; i_Send_Email_Tbl(i) .Param_Names, x_param_values =&gt; i_Send_Email_Tbl(i) .Param_Values, x_error_code =&gt; i_Send_Email_Tbl(i) .Error_code, x_error_message =&gt; i_Send_Email_Tbl(i) .Error_message);
+          -- Track notification if email has been sent successfully.
+          -- Not possible becoz of Foreign Key
+          IF (i_Send_Email_Tbl(i) .Error_code IS NULL AND i_Send_Email_Tbl(i) .Error_message IS NULL) OR (i_Send_Email_Tbl(i) .Error_code = g_Success_Code AND i_Send_Email_Tbl(i) .Error_message = g_Success_Mesg) THEN
+            INSERT INTO Ms_Rga_Channel_Notifications VALUES i_Chnl_Notif_Recs
+              (i
+              );
+          END IF;  */
+          -- procedure call to handle cyclomatic complexity.
+          Pr_send_mail(i_Send_Email_Tbl(i),i_Chnl_Notif_Recs(i)); 
+        EXCEPTION
+        WHEN OTHERS THEN
+          Dbg(x_Proc_Name || Dbms_Utility.format_error_backtrace);
+        END;
+      END IF;
+    END LOOP;
+  END IF;
+  RETURN True;
+EXCEPTION
+WHEN OTHERS THEN
+  Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_High, g_Err);
+  Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm, g_High, g_Err);
+  o_Error_Code := SQLCODE;
+  o_Error_Mesg := 'Failed while sending/tracking notification';
+  RETURN False;
+END Fn_Push_Notifs_ToMailQ;
+-- This procedure can be invoked for sending notifications to
+-- users specified by Admin against a Structured-Content Channel.
+FUNCTION Fn_Send_Chnl_Notificatns
+  (
+    o_Error_Code OUT NUMBER,
+    o_Error_Desc OUT VARCHAR2
+  )
+  RETURN BOOLEAN
+IS
+  CURSOR NotifsToBeSent
+  IS
+    SELECT
+      /*+ Index(x MS_RGA_CHNL_RESP_DTLS_IDX_01)
+      Index(w MS_RGA_CHNL_NOTIF_USR_IDX_01)
+      */
+      z.Channel_Id,
+      z.Channel_Name,
+      z.Channel_Type,
+      w.User_Id User_Id,
+      y.Subject Subject,
+      y.Body Chnl_Resp_Content,
+      y.Feed_Data_Id Feed_Data_Id,
+      x.Response_Id Response_Id,
+      x.Response_Date Response_Date
+    FROM Ms_Rga_Channel_Notify_Users w,
+      Ms_Rga_Channel_Response_Dtls x,
+      Ms_Rga_Feed_Aggregator_v y,
+      Ms_Rga_Channel_Master z
+    WHERE w.Channel_Id   = x.Channel_Id
+    AND x.Channel_Id     = z.Channel_Id
+    AND w.Channel_Id     = z.Channel_Id
+    AND x.Feed_Data_Id   = y.Feed_Data_Id
+    AND y.Processed_Flag = 'P' -- Consider Emails/Feeds that have been processed at the Channel level.
+    AND z.Channel_Type   = '2' -- Consider only Structured Content channels.
+    AND x.Processed      = 'U' -- Consider only those channel responses that have passed keyword and email_from filter.
+      -- Send notifications against those channel_responses which do not have
+      -- corresponding entry in Ms_Rga_Subscrptn_Notifications table.
+    AND NOT EXISTS
+      (SELECT 1
+      FROM Ms_Rga_Channel_Notifications
+      WHERE Chnl_Response_Id = x.Response_Id
+      );
+Type Ty_Send_Notifs
+IS
+  TABLE OF NotifsToBeSent%Rowtype INDEX BY Pls_Integer;
+  x_Send_Notifs Ty_Send_Notifs;
+  x_Proc_Name VARCHAR2(100) := 'Fn_Send_Chnl_Notificatns=&gt; ';
+  x_Send_Email_Tbl Ms_Rga_Process_Subscrptn_Resp.Ty_Send_Email_Tbl;
+  x_Chnl_Notif_Recs Ms_Rga_Process_Channel_Resp.Ty_Ms_Rga_Chnl_Notif_Tbl;
+  x_Notifications_Cnt  NUMBER         := 1;
+  x_Last_Iteration_Cnt NUMBER         := 0;
+  x_Msg                VARCHAR2(1000) := NULL;
+  x_Chnl_Noficatn_Id Ms_Rga_Channel_Notifications.Notification_Id%Type;
+  x_Param_Names Varchar2_Array := Varchar2_Array();
+  x_Param_Values Clob_Array    := Clob_Array();
+  x_Recipients Varchar2_Array  := Varchar2_Array();
+  x_Email_Note Si_Sp_Email_Info.Param_Value%Type;
+  x_Boiler_Plate Si_Sp_Email_Info.Param_Value%Type;
+  x_Copyright Si_Sp_Email_Info.Param_Value%Type;
+  x_Si_Users Ty_Si_Users;
+  x_User_Full_Name VARCHAR2(1000) := NULL;
+  x_User_Id        NUMBER         := 0;
+BEGIN
+  -- Build type to get all Application Users. Type to be indexed by User_Id.
+  -- Required for getting mail-id, full-name, and enterprise-id.
+  FOR each_rec IN
+  (SELECT * FROM Si_Users_t
+  ) -- Do I need to consider all-users without any condition?
+  LOOP
+    x_Si_Users(each_rec.User_Id) := each_rec;
+  END LOOP;
+  -- Initialize email related static parameters.
+  x_Email_Note   := 'Note : This message and all attachments should be considered confidential and proprietary to Quality Stream.';
+  x_Boiler_Plate := 'Alert automatically generated by MetricStream.';
+  x_Copyright    := 'Copyright @ MetricStream Inc. 1999-2013 All rights reserved.';
+  x_Param_Names.Extend(8);
+  /* Set up the parameter names array */
+  x_Param_Names(1) := 'USER_FULL_NAME';
+  x_Param_Names(2) := 'EMAIL_NOTE';
+  x_Param_Names(3) := 'BOILERPLATE_TEXT';
+  x_Param_Names(4) := 'COPYRIGHT_INFORMATION';
+  x_Param_Names(5) := 'SUBJECT_HEADER';
+  x_Param_Names(6) := 'SUBJECT_BODY';
+  x_Param_Names(7) := 'PROC_INSTANCE_ID';
+  x_Param_Names(8) := 'PUSH_INFO_ID';
+  x_Param_Values.Extend(8);
+  /* Initialize Param Values array */
+  x_Param_Values(2) := x_Email_Note;
+  x_Param_Values(3) := x_Boiler_Plate;
+  x_Param_Values(4) := x_Copyright;
+  x_Param_Values(5) := NULL; --Subject;
+  x_Param_Values(6) := NULL; --Subject_Body;
+  x_Param_Values(7) := NULL; --To_Char(Pid);
+  x_Param_Values(8) := TO_CHAR(Ms_Apps_Utilities.Get_Infolet_Id('MS RGA Populate Channel Response'));
+  x_Recipients.Extend;
+  OPEN NotifsToBeSent;
+  LOOP
+    FETCH NotifsToBeSent Bulk Collect INTO x_Send_Notifs Limit 1000;
+    FOR I IN x_Send_Notifs.First .. x_Send_Notifs.Last
+    LOOP
+      BEGIN
+        -- Build Email subtypes
+        x_User_Id         := x_Send_Notifs(i).User_Id;
+        x_User_Full_Name  := Ms_Apps_Utilities.Get_User_Full_Name(x_User_Id);
+        x_Recipients(1)   := x_Si_Users(x_User_Id).User_Name; --Email_Address;
+        x_Param_Values(1) := x_User_Full_Name;
+        x_Param_Values(5) := x_Send_Notifs(i).Subject;
+        x_Param_Values(6) := x_Send_Notifs(i).Chnl_Resp_Content;
+        x_Param_Values(7) := TO_CHAR(x_Send_Notifs(i).Feed_Data_Id);
+        -- Build Email Rec
+        x_Send_Email_Tbl(x_Notifications_Cnt).Priority      := 2;
+        x_Send_Email_Tbl(x_Notifications_Cnt).Recipients    := x_Recipients;
+        x_Send_Email_Tbl(x_Notifications_Cnt).Enterprise_Id := x_Si_Users(x_User_Id) .Enterprise_Id;
+        x_Send_Email_Tbl(x_Notifications_Cnt).Subject       := x_Send_Notifs(i) .Subject;
+        x_Send_Email_Tbl(x_Notifications_Cnt).Template      := Ms_Rga_Utilities.g_Email_Template;
+        x_Send_Email_Tbl(x_Notifications_Cnt).Param_names   := x_Param_Names;
+        x_Send_Email_Tbl(x_Notifications_Cnt).Param_values  := x_Param_Values;
+        x_Send_Email_Tbl(x_Notifications_Cnt).Error_code    := NULL;
+        x_Send_Email_Tbl(x_Notifications_Cnt).Error_message := NULL;
+        x_Send_Email_Tbl(x_Notifications_Cnt).Send_Email    := 'Y';
+        -- Generate Notification_Id
+        SELECT g_Chnl_Notif_Id_Prefix
+          || Lpad(Ms_Rga_Subs_Notif_Seq.Nextval, 10, 0)
+        INTO x_Chnl_Noficatn_Id
+        FROM Dual;
+        -- Build Notification Rec
+        x_Chnl_Notif_Recs(x_Notifications_Cnt).Chnl_Response_Id  := x_Send_Notifs(i) .Response_Id;
+        x_Chnl_Notif_Recs(x_Notifications_Cnt).Notification_Id   := x_Chnl_Noficatn_Id;
+        x_Chnl_Notif_Recs(x_Notifications_Cnt).Notification_Date := x_Send_Notifs(i) .Response_Date;
+        x_Chnl_Notif_Recs(x_Notifications_Cnt).Comments          := x_Send_Notifs(i) .Subject;
+        x_Chnl_Notif_Recs(x_Notifications_Cnt).Feed_Data_Id      := x_Send_Notifs(i) .Feed_Data_Id;
+        x_Notifications_Cnt                                      := x_Notifications_Cnt + 1;
+      EXCEPTION
+      WHEN OTHERS THEN
+        Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_Low);
+        Dbg(x_Proc_Name || 'Failed to build Email/Notif rec type for subscription response id ' || x_Send_Notifs(i) .Response_Id || ' and pid ' || x_Send_Notifs(i) .Feed_Data_Id, g_Low);
+      END;
+      -- Initialize variables for next iteration.
+      x_Chnl_Noficatn_Id := NULL;
+      x_Recipients(1)    := NULL;
+      x_User_Full_Name   := NULL;
+      x_User_Id          := 0;
+      x_Recipients(1)    := NULL;
+      x_Param_Values(1)  := NULL;
+      x_Param_Values(5)  := NULL;
+      x_Param_Values(6)  := NULL;
+      x_Param_Values(7)  := NULL;
+    END LOOP;
+    IF NOT Fn_Push_Notifs_ToMailQ(x_Send_Email_Tbl, x_Chnl_Notif_Recs, o_Error_Code, o_Error_Desc) THEN
+      x_Msg := 'Failed to send some notifications.';
+    ELSE
+      x_Msg := (x_Notifications_Cnt - x_Last_Iteration_Cnt) || ' notifications successfully sent.';
+    END IF;
+    Dbg(x_proc_name || x_Msg);
+    x_Last_Iteration_Cnt := x_Notifications_Cnt;
+    -- Clear collection for next iteration.
+    x_Send_Notifs.Delete;
+    x_Send_Email_Tbl.Delete;
+    x_Chnl_Notif_Recs.Delete;
+    EXIT
+  WHEN NotifsToBeSent%Notfound;
+  END LOOP;
+  o_Error_Code := g_success_code;
+  o_Error_Desc := g_Success_Mesg;
+  RETURN True;
+EXCEPTION
+WHEN OTHERS THEN
+  Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_High, g_Err);
+  Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm, g_High, g_Err);
+  o_Error_Code := SQLCODE;
+  o_Error_Desc := 'Failed to resend notifications.';
+  RETURN False;
+END Fn_Send_Chnl_Notificatns;
+
+FUNCTION Fn_Update_Si_Table(
+    io_Chnl_Resp_Dtl_Feeds IN Ty_Ms_Rga_ChnlDtl_V_Cur,
+    o_Error_Code OUT VARCHAR2,
+    o_Error_Desc OUT VARCHAR2)
+  RETURN BOOLEAN
+IS
+  x_Proc_Name VARCHAR2(30)  := 'Fn_Update_Si_Table=&gt; ';
+  x_Rec_Key   VARCHAR2(100) := NULL;
+BEGIN
+  Dbg(x_Proc_Name || 'Entered.');
+  Dbg(x_Proc_Name || 'io_Chnl_Resp_Dtl_Feeds.Count - ' || io_Chnl_Resp_Dtl_Feeds.Count);
+  FOR i IN io_Chnl_Resp_Dtl_Feeds.First .. io_Chnl_Resp_Dtl_Feeds.Last
+  LOOP
+    BEGIN
+      UPDATE Ms_Rga_Feed_Aggregator_V a
+      SET Feed_Data_Id     = io_Chnl_Resp_Dtl_Feeds(i).Feed_Data_Id,
+        Processed_Flag     = 'P' -- 'P' indicates processed, 'U' indicates unprocessed.
+    --  WHERE Instance_Id    = io_Chnl_Resp_Dtl_Feeds(i) .Instance_Id
+    --  AND Instance_Rec_Num = io_Chnl_Resp_Dtl_Feeds(i) .Instance_Rec_Num
+        WHERE channel_id    = io_Chnl_Resp_Dtl_Feeds(i) .channel_id
+          and feed_sequence=io_Chnl_Resp_Dtl_Feeds(i).feed_sequence;
+        /*AND subject = io_Chnl_Resp_Dtl_Feeds(i) .Title_Subject
+      AND EXISTS
+        (SELECT 1
+        FROM Ms_Rga_Channel_Response_Dtls b
+        WHERE b.Feed_Data_Id = io_Chnl_Resp_Dtl_Feeds(i) .Feed_Data_Id
+        );*/
+    EXCEPTION
+    WHEN OTHERS THEN
+      x_Rec_Key := io_Chnl_Resp_Dtl_Feeds(i) .Feed_Data_Id;
+      Dbg(x_Proc_Name || 'Failed to update Ms_Rga_Feed_Aggregator_V for instance_id and rec_num : ' || x_Rec_Key);
+      x_Rec_Key := NULL; -- Set to null for next iteration.
+    END;
+  END LOOP;
+  o_Error_Code := g_success_code;
+  o_Error_Desc := g_Success_Mesg;
+  RETURN True;
+EXCEPTION
+WHEN OTHERS THEN
+  Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_high);
+  Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm, g_high);
+  o_Error_Code := SQLCODE;
+  o_Error_Desc := 'Failed to update Si table. ' || SUBSTR(Sqlerrm, 1, 250);
+  RETURN False;
+END Fn_Update_Si_Table;
+
+FUNCTION Fn_Build_ChnlDtl_Type(
+    io_Chnl_Resp_Dtl_Feeds IN OUT Nocopy Ty_Ms_Rga_ChnlDtl_V_Cur,
+    o_Chnl_Resp_Dtl_Recs OUT Ty_Ms_Rga_Chnl_Resp_Dtl_Tbl,
+    o_Error_Code OUT VARCHAR2,
+    o_Error_Desc OUT VARCHAR2)
+  RETURN BOOLEAN
+IS
+  x_Proc_Name VARCHAR2(100) := 'Fn_Build_ChnlDtl_Type=&gt; ';
+  x_Return    BOOLEAN       := True;
+  x_Response_Id Ms_Rga_Channel_Response_Dtls.Response_Id%Type;
+  x_Keyword_List Ms_Rga_Channel_Details.Keywords%Type;
+  x_Regexed_List      VARCHAR2(4000);
+  x_Keyword_Match_Cnt NUMBER;
+  x_Dtl_Rec_Cnt       NUMBER                                        := 0;
+  x_Email_From Ms_Rga_Channel_Details.Email_From%Type               := NULL;
+  x_MailReceivedFrom Ms_Rga_Feed_Aggregator_v.Sender%Type           := NULL;
+  x_EmailFrom_Flag Ms_Rga_Channel_Response_Dtls.Processed%Type      := NULL;
+  x_EmailFrmErr_Msg Ms_Rga_Channel_Response_Dtls.Error_Message%Type := NULL;
+  x_KywrdMatch_Flag Ms_Rga_Channel_Response_Dtls.Processed%Type     := NULL;
+  x_KywrdErr_Msg Ms_Rga_Channel_Response_Dtls.Error_Message%Type    := NULL;
+  x_Proc_Flag Ms_Rga_Channel_Response_Dtls.Processed%Type           := NULL;
+  x_Err_Msg Ms_Rga_Channel_Response_Dtls.Error_Message%Type         := NULL;
+BEGIN
+  Dbg(x_Proc_Name || 'Process Started. Record Count in io_Chnl_Resp_Dtl_Feeds is ' || io_Chnl_Resp_Dtl_Feeds.Count);
+  FOR I IN io_Chnl_Resp_Dtl_Feeds.First .. io_Chnl_Resp_Dtl_Feeds.Last
+  LOOP
+    BEGIN
+      -- Initialize variables for current iteration.
+      x_Keyword_Match_Cnt := 0;
+      x_Keyword_List      := NULL;
+      x_Regexed_List      := NULL;
+      x_Response_Id       := NULL;
+      x_Email_From        := NULL;
+      x_MailReceivedFrom  := NULL;
+      x_EmailFrom_Flag    := NULL;
+      x_EmailFrmErr_Msg   := NULL;
+      x_KywrdMatch_Flag   := NULL;
+      x_KywrdErr_Msg      := NULL;
+      x_Proc_Flag         := NULL;
+      x_Err_Msg           := NULL;
+      -- If Email_From is specified, check whether it matches
+      -- Sender's-Id in Feed_Aggregator
+      x_Email_From       := io_Chnl_Resp_Dtl_Feeds(i).Email_From;
+      x_MailReceivedFrom := io_Chnl_Resp_Dtl_Feeds(i).MailReceivedFrom;
+      -- Email_From not specified - pass the record.
+      IF x_Email_From     IS NULL THEN
+        x_EmailFrom_Flag  := io_Chnl_Resp_Dtl_Feeds(i).Processed_Flag;
+        x_EmailFrmErr_Msg := NULL;
+        -- Email_From has been specified and matches Sender's Id - pass the record.
+      Elsif x_MailReceivedFrom LIKE '%' || x_Email_From || '%' THEN
+        x_EmailFrom_Flag  := io_Chnl_Resp_Dtl_Feeds(i).Processed_Flag;
+        x_EmailFrmErr_Msg := NULL;
+        -- Email_From has been specified but it doesn't match Sender's Id - discard the record.
+      ELSE
+        x_EmailFrom_Flag  := 'D'; -- Entry to be discarded
+        x_EmailFrmErr_Msg := 'Specified Email_From ' || x_Email_From || ' does not match sender id ' || x_MailReceivedFrom;
+      END IF;
+      -- Now, check whether specified keyword(s) exist in content.
+      x_Keyword_List    := io_Chnl_Resp_Dtl_Feeds(i).Keywords;
+      IF x_Keyword_List IS NOT NULL THEN
+        x_Regexed_List  := Ms_Rga_Utilities.Fn_Enrich_Keyword_List(x_Keyword_List, ',');
+        --Below Code Added By vishnu on 12/05/2012 to resolve the bug id 68065
+        -- Below Code will help in matching the exact keyword
+        SELECT COUNT(1)
+        INTO x_Keyword_Match_Cnt
+        FROM
+          (SELECT io_Chnl_Resp_Dtl_Feeds(i) .Body    AS Body,
+            io_Chnl_Resp_Dtl_Feeds(i) .Title_Subject AS Title_Subject
+          FROM Dual
+          ) z
+        WHERE (
+          /*Regexp_Like(z.Body,x_Regexed_List,'i') Or
+          Regexp_Like(z.Title_Subject,x_Regexed_List,'i') Or*/
+          Regexp_Like(z.Body, '[^A-Za-z1-9]'
+          || x_Regexed_List
+          || '[^A-Za-z1-9]', 'i')
+        OR Regexp_Like(z.Title_Subject, '[^A-Za-z1-9]'
+          || x_Regexed_List
+          || '[^A-Za-z1-9]', 'i')
+        OR Regexp_Like(z.Body, '( )'
+          || x_Regexed_List
+          || '$', 'i')
+        OR Regexp_Like(z.Title_Subject, '( )'
+          || x_Regexed_List
+          || '$', 'i')
+        OR Regexp_Like(z.Body, '^'
+          || x_Regexed_List
+          || '( )', 'i')
+        OR Regexp_Like(z.Title_Subject, '^'
+          || x_Regexed_List
+          || '( )', 'i')
+        OR Regexp_Like(z.Body, '^'
+          ||x_Regexed_List
+          ||'$', 'i')
+        OR Regexp_Like(z.Title_Subject, '^'
+          ||x_Regexed_List
+          ||'$', 'i'));
+        /*
+        select * from PERSON WHERE PERSON_NAME LIKE '%[^A-Za-z1-9]sachin[^A-Za-z1-9]%' or
+        PERSON_NAME LIKE '%[^A-Za-z1-9]sachin' or
+        PERSON_NAME LIKE 'sachin[^A-Za-z1-9]%' or
+        PERSON_NAME ='sachin' ;
+        */
+      END IF;
+      -- If keyword is found, consider the response for further processing by marking it 'U'
+      -- else discard the response by marking it as 'D'.
+      IF x_Keyword_Match_Cnt &gt; 0 OR x_Keyword_List IS NULL THEN
+        Dbg(x_Proc_Name || 'Feed_Data_Id - ' || io_Chnl_Resp_Dtl_Feeds(i).Feed_Data_Id);
+        x_KywrdMatch_Flag := io_Chnl_Resp_Dtl_Feeds(i).Processed_Flag;
+        x_KywrdErr_Msg    := NULL;
+      ELSE
+        Dbg(x_Proc_Name || 'Specified keywords not found in content.');
+        x_KywrdMatch_Flag := 'D'; -- Discard : will not be considered for Subscription_Response
+        x_KywrdErr_Msg    := 'Keywords ' || SUBSTR(x_Keyword_List, 1, 3000) || ' not found in content.';
+      END IF;
+      IF x_EmailFrom_Flag     = 'D' THEN
+        x_Proc_Flag          := 'D';
+        x_Err_Msg            := x_EmailFrmErr_Msg;
+      Elsif x_KywrdMatch_Flag = 'D' THEN
+        x_Proc_Flag          := 'D';
+        x_Err_Msg            := x_KywrdErr_Msg;
+      ELSE
+        x_Proc_Flag := io_Chnl_Resp_Dtl_Feeds(i).Processed_Flag;
+        x_Err_Msg   := NULL;
+      END IF;
+      -- Generate Response_Id
+      SELECT g_Chnl_Resp_Id_Prefix
+        || Lpad(Ms_Rga_Chnl_Resp_Seq.Nextval, 15, 0)
+      INTO x_Response_Id
+      FROM Dual;
+      x_Dtl_Rec_Cnt                                     := x_Dtl_Rec_Cnt + 1;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Feed_Data_Id  := io_Chnl_Resp_Dtl_Feeds(i) .Feed_Data_Id;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Response_Id   := x_Response_Id;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Channel_Id    := io_Chnl_Resp_Dtl_Feeds(i) .Channel_Id;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Response_Date := io_Chnl_Resp_Dtl_Feeds(i) .Response_Date;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Source_Id     := io_Chnl_Resp_Dtl_Feeds(i) .Source_Id;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Title_Subject := io_Chnl_Resp_Dtl_Feeds(i) .Title_Subject;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Attachments   := io_Chnl_Resp_Dtl_Feeds(i) .Attachments;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Created_On    := io_Chnl_Resp_Dtl_Feeds(i) .Created_On;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Modified_On   := io_Chnl_Resp_Dtl_Feeds(i) .Modified_On;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Active        := io_Chnl_Resp_Dtl_Feeds(i) .Source_Active;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Processed     := x_Proc_Flag;
+      o_Chnl_Resp_Dtl_Recs(x_Dtl_Rec_Cnt).Error_Message := x_Err_Msg;
+      Dbg(x_Proc_Name || 'o_Chnl_Resp_Dtl_Recs.Count - ' || o_Chnl_Resp_Dtl_Recs.Count, g_Low);
+    EXCEPTION
+    WHEN OTHERS THEN
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace);
+      Dbg(x_Proc_Name || 'Failed to build Channel_Response_Rec for Channel_Id ' || io_Chnl_Resp_Dtl_Feeds(i) .Channel_Id || ', Source_Id ' || io_Chnl_Resp_Dtl_Feeds(i) .Source_Id || ' and Keyword_List ' || x_Keyword_List);
+    END;
+  END LOOP;
+  o_Error_Code := g_success_code;
+  o_Error_Desc := g_Success_Mesg;
+  Dbg(x_Proc_Name || g_Success_Mesg || ' Record Count in o_Chnl_Resp_Dtl_Recs is ' || o_Chnl_Resp_Dtl_Recs.Count);
+  RETURN x_Return;
+EXCEPTION
+WHEN OTHERS THEN
+  Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace|| ' In Others exception - ' || Sqlerrm, g_high);
+  o_Error_Code := SQLCODE;
+  o_Error_Desc := 'Failed to translate type. ' || SUBSTR(Sqlerrm, 1, 250);
+  RETURN False;
+END Fn_Build_ChnlDtl_Type;
+/* Function meant for translating source-type(SI table) into
+*  target-type(RGA Channel Response Hdr table).
+*/
+FUNCTION Fn_Build_ChnlHdr_Type(io_Distinct_FeedAgg_Recs IN OUT Nocopy Ty_Ms_Rga_ChnlHdr_V_Cur,
+                               o_ChnlHdr_Resp_Recs      OUT           Ty_Ms_Rga_Chnl_Resp_Hdr_Tbl,
+                               o_Error_Code             OUT           VARCHAR2,
+                               o_Error_Desc             OUT           VARCHAR2) RETURN BOOLEAN
+IS
+      x_Proc_Name   VARCHAR2(100) := 'Fn_Build_ChnlHdr_Type=&gt; ';
+      x_Return      BOOLEAN       := True;
+BEGIN
+      FOR I IN io_Distinct_FeedAgg_Recs.First .. io_Distinct_FeedAgg_Recs.Last
+      LOOP
+          o_ChnlHdr_Resp_Recs(i).Response_Start_Date := io_Distinct_FeedAgg_Recs(i) .Response_Start_Date;
+          o_ChnlHdr_Resp_Recs(i).Channel_Id          := io_Distinct_FeedAgg_Recs(i) .Channel_Id;
+          o_ChnlHdr_Resp_Recs(i).Channel_Expiry_Date := io_Distinct_FeedAgg_Recs(i) .Channel_Expiry_Date;
+          o_ChnlHdr_Resp_Recs(i).Comments            := io_Distinct_FeedAgg_Recs(i) .Comments;
+          o_ChnlHdr_Resp_Recs(i).Created_By          := io_Distinct_FeedAgg_Recs(i) .Created_By;
+          o_ChnlHdr_Resp_Recs(i).Modified_By         := io_Distinct_FeedAgg_Recs(i) .Modified_By;
+          o_ChnlHdr_Resp_Recs(i).Pid                 := io_Distinct_FeedAgg_Recs(i).Pid;
+      END LOOP;
+          o_Error_Code := g_success_code;
+          o_Error_Desc := g_Success_Mesg;
+      RETURN x_Return;
+EXCEPTION
+WHEN OTHERS THEN
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_high);
+      Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm, g_high);
+      o_Error_Code := SQLCODE;
+      o_Error_Desc := 'Failed to translate type. ' || SUBSTR(Sqlerrm, 1, 250);
+      RETURN False;
+END Fn_Build_ChnlHdr_Type;
+
+FUNCTION Fn_Insert_Update_Chnl_Resp_Dtl(
+    io_Chnl_Resp_Dtl_Recs IN OUT Nocopy Ty_Ms_Rga_Chnl_Resp_Dtl_Tbl,
+    o_Error_Code OUT VARCHAR2,
+    o_Error_Desc OUT VARCHAR2)
+  RETURN BOOLEAN
+IS
+  x_Proc_Name VARCHAR2(100) := 'Fn_Insert_Update_Chnl_Resp_Dtl=&gt; ';
+  x_Proceed   BOOLEAN       := True;
+  x_Return    BOOLEAN       := True;
+  x_Response_Id Ms_Rga_Channel_Response_Dtls.Response_Id%TYPE;
+  x_msg       varchar2 (4000);
+BEGIN
+  Dbg(x_Proc_Name || 'Process started.');
+  FOR i IN io_Chnl_Resp_Dtl_Recs.First .. io_Chnl_Resp_Dtl_Recs.Last
+  LOOP
+    -- Applicable in case of new records being inserted.
+    IF io_Chnl_Resp_Dtl_Recs(i).Response_Id IS NULL THEN
+      SELECT g_Chnl_Resp_Id_Prefix
+        || Lpad(Ms_Rga_Chnl_Resp_Seq.Nextval, 15, 0)
+      INTO x_Response_Id
+      FROM Dual;
+      io_Chnl_Resp_Dtl_Recs(i).Response_Id := x_Response_Id;
+    END IF;
+    Dbg(x_Proc_Name || 'Generated Response_Id as ' || x_Response_Id);
+    x_Response_Id := NULL; -- Set to Null for next iteration.
+    BEGIN
+      Merge INTO Ms_Rga_Channel_Response_Dtls x USING
+      (SELECT io_Chnl_Resp_Dtl_Recs(i) .Feed_Data_Id Feed_Data_Id,
+        io_Chnl_Resp_Dtl_Recs(i) .Response_Id Response_Id
+      FROM Dual
+      ) y ON (x.Feed_Data_Id = y.Feed_Data_Id AND x.Response_Id = y.Response_Id)
+    WHEN Matched THEN
+      UPDATE
+      SET Channel_Id  = io_Chnl_Resp_Dtl_Recs(i).Channel_Id,
+        Response_Date = io_Chnl_Resp_Dtl_Recs(i).Response_Date,
+        Source_Id     = io_Chnl_Resp_Dtl_Recs(i).Source_Id,
+        Title_Subject = io_Chnl_Resp_Dtl_Recs(i).Title_Subject,
+        Attachments   = io_Chnl_Resp_Dtl_Recs(i).Attachments,
+        Error_Message = io_Chnl_Resp_Dtl_Recs(i).Error_Message,
+        Error_Code    = io_Chnl_Resp_Dtl_Recs(i).Error_Code,
+        Modified_On   = io_Chnl_Resp_Dtl_Recs(i).Modified_On WHEN NOT Matched THEN
+      INSERT VALUES io_Chnl_Resp_Dtl_Recs
+        (
+          i
+        );
+      COMMIT;
+      x_Proceed := True;
+    EXCEPTION
+    WHEN OTHERS THEN
+      -- Log this exception
+      x_msg := substr (sqlerrm, 1, 3000) || DBMS_UTILITY.FORMAT_ERROR_BACKTRACE;
+      Dbg(x_Proc_Name || 'Msg   '|| x_msg  ||'     Failed to insert rec into Channel_Resp_Dtl. Feed_Data_Id : ' || io_Chnl_Resp_Dtl_Recs(i).Feed_Data_Id);
+      x_Proceed := False;
+    END;
+    IF NOT x_Proceed THEN
+      --x_Return     := False;
+      o_Error_Code := -1;
+      o_Error_Desc := 'Failed while inserting some recs into Channel Response Dtl.';
+    END IF;
+  END LOOP;
+  IF x_Return THEN
+    o_Error_Code := g_success_code;
+    o_Error_Desc := g_Success_Mesg;
+  END IF;
+  Dbg(x_Proc_Name || o_Error_Desc);
+  RETURN x_Return;
+EXCEPTION
+WHEN OTHERS THEN
+  Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_High);
+  Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm, g_High);
+  o_Error_Code := SQLCODE;
+  o_Error_Desc := 'Failed while performing merge on table Ms_Rga_Channel_Response_Hdr.';
+  RETURN False;
+END Fn_Insert_Update_Chnl_Resp_Dtl;
+
+FUNCTION Fn_Insert_Update_Chnl_Resp_Hdr(io_Chnl_Resp_Hdr_Recs IN OUT Nocopy Ty_Ms_Rga_Chnl_Resp_Hdr_Tbl,
+                                        o_Error_Code OUT VARCHAR2,
+                                        o_Error_Desc OUT VARCHAR2) RETURN BOOLEAN
+IS
+      x_Proc_Name VARCHAR2(100) := 'Fn_Insert_Update_Chnl_Resp_Hdr=&gt; ';
+      x_Proceed   BOOLEAN       := True;
+      x_Return    BOOLEAN       := True;
+BEGIN
+      Dbg(x_Proc_Name || 'Process started to insert record into HDR table', g_high);
+      -- Loop through all records in io_Chnl_Resp_Hdr_Recs.
+      FOR I IN io_Chnl_Resp_Hdr_Recs.First .. io_Chnl_Resp_Hdr_Recs.Last
+      LOOP
+            BEGIN
+                Merge INTO Ms_Rga_Channel_Response_Hdr a USING (SELECT io_Chnl_Resp_Hdr_Recs(I) .Channel_Id Channel_Id FROM Dual) b
+                ON (a.Channel_Id = b.Channel_Id AND b.Channel_Id IS NOT NULL)
+                WHEN NOT Matched THEN
+                INSERT VALUES io_Chnl_Resp_Hdr_Recs(I);
+                x_Proceed := True;
+            EXCEPTION
+            WHEN OTHERS THEN
+                Dbg(x_Proc_Name || 'Failed to insert Channel_Id : ' || io_Chnl_Resp_Hdr_Recs(I).Channel_Id, g_high);
+                x_Proceed := False;
+            END;
+            
+            IF NOT x_Proceed THEN
+                  x_Return     := False;
+                  o_Error_Code := -1;
+                  o_Error_Desc := 'Failed while inserting recs into Channel Response Hdr.';
+            END IF;      
+      END LOOP;
+      
+      IF x_Return THEN
+            o_Error_Code := g_success_code;
+            o_Error_Desc := g_Success_Mesg;
+      END IF;
+      
+      Dbg(x_Proc_Name || o_Error_Desc, g_high);
+      RETURN x_Return;
+EXCEPTION
+WHEN OTHERS THEN
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_high);
+      Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm, g_high);
+      o_Error_Code := SQLCODE;
+      o_Error_Desc := 'Failed while performing merge on table Ms_Rga_Channel_Response_Hdr.';
+      RETURN False;
+END Fn_Insert_Update_Chnl_Resp_Hdr;
+
+FUNCTION Fn_Populate_Chnl_Resp_Dtl
+  (
+    io_Chnl_Resp_Dtl_Feeds IN OUT Nocopy Ty_Ms_Rga_ChnlDtl_V_Cur,
+    o_Chnl_Resp_Dtl_Recs OUT Ty_Ms_Rga_Chnl_Resp_Dtl_Tbl,
+    o_Error_Code OUT VARCHAR2,
+    o_Error_Desc OUT VARCHAR2
+  )
+  RETURN BOOLEAN
+IS
+  x_Return BOOLEAN      := True;
+  x_Proc   VARCHAR2(30) := 'Fn_Populate_Chnl_Resp_Dtl=&gt; ';
+BEGIN
+  IF NOT Fn_Build_ChnlDtl_Type(io_Chnl_Resp_Dtl_Feeds, o_Chnl_Resp_Dtl_Recs, o_Error_Code, o_Error_Desc) THEN
+    x_Return := False;
+    Dbg(x_Proc || 'Call to function Fn_Build_ChnlDtl_Type failed.');
+  ELSE
+    IF o_Chnl_Resp_Dtl_Recs.Count &gt; 0 THEN
+      Dbg(x_Proc || 'Going to insert Channel_resp_dtl recs.');
+      IF NOT Fn_Insert_Update_Chnl_Resp_Dtl(o_Chnl_Resp_Dtl_Recs, o_Error_Code, o_Error_Desc) THEN
+        x_Return := False;
+        Dbg(x_Proc || 'Call to function Fn_Insert_Update_Chnl_Resp_Dtl failed.');
+      ELSE
+        NULL;
+      END IF;
+    ELSE
+      x_Return := False;
+      Dbg(x_Proc || 'Base table Dtl type contains 0 recs.');
+    END IF;
+  END IF;
+  IF x_Return THEN
+    o_Error_Code := g_success_code;
+    o_Error_Desc := g_Success_Mesg;
+  END IF;
+  RETURN x_Return;
+EXCEPTION
+WHEN OTHERS THEN
+  Dbg(x_Proc || Dbms_Utility.Format_Error_Backtrace, g_High);
+  Dbg(x_Proc || 'In Others exception - ' || Sqlerrm, g_High);
+  o_Error_Code := SQLCODE;
+  o_Error_Desc := 'Failed while populating Ms_Rga_Channel_Response_Dtls.';
+  RETURN False;
+END Fn_Populate_Chnl_Resp_Dtl;
+
+FUNCTION Fn_Populate_Chnl_Resp_Hdr (io_Distinct_FeedAgg_Recs  IN OUT Nocopy Ty_Ms_Rga_ChnlHdr_V_Cur,
+                                    o_Chnl_Resp_Hdr_Recs      OUT           Ty_Ms_Rga_Chnl_Resp_Hdr_Tbl,
+                                    o_Error_Code              OUT           VARCHAR2,
+                                    o_Error_Desc              OUT           VARCHAR2) RETURN BOOLEAN
+IS
+    x_Return    BOOLEAN      := TRUE;
+    x_Proc      VARCHAR2(30) := 'Fn_Populate_Chnl_Resp_Hdr=&gt; ';
+BEGIN
+    Dbg(x_Proc || 'Entered',g_high);
+    IF NOT Fn_Build_ChnlHdr_Type(io_Distinct_FeedAgg_Recs, o_Chnl_Resp_Hdr_Recs, o_Error_Code, o_Error_Desc) THEN
+        x_Return := FALSE;
+        Dbg(x_Proc || 'Call to function Fn_Build_ChnlHdr_Type failed.',g_high);
+    ELSE
+        IF o_Chnl_Resp_Hdr_Recs.Count &gt; 0 THEN
+            IF NOT Fn_Insert_Update_Chnl_Resp_Hdr(o_Chnl_Resp_Hdr_Recs, o_Error_Code, o_Error_Desc) THEN
+                x_Return := FALSE;
+                Dbg(x_Proc || 'Call to function Fn_Insert_Update_Chnl_Resp_Hdr failed.',g_high);
+            ELSE
+                NULL;
+            END IF;
+        ELSE
+            x_Return := False;
+            Dbg(x_Proc || 'Base table Hrd type contains 0 recs.');
+        END IF;
+    END IF;
+    IF x_Return THEN
+        o_Error_Code := g_success_code;
+        o_Error_Desc := g_Success_Mesg;
+    END IF;
+    RETURN x_Return;
+EXCEPTION
+WHEN OTHERS THEN
+    Dbg(x_Proc || Dbms_Utility.Format_Error_Backtrace, g_High);
+    Dbg(x_Proc || 'In Others exception - ' || Sqlerrm, g_High);
+    o_Error_Code := SQLCODE;
+    o_Error_Desc := 'Failed while populating Ms_Rga_Channel_Response_Hdr.';
+    RETURN False;
+END Fn_Populate_Chnl_Resp_Hdr;
+
+FUNCTION Fn_Enrich_Mail_Body
+  (
+    pInClob IN CLOB,
+    pOutClob OUT CLOB,
+    pWhatHttpPattern IN VARCHAR2,
+    pWithHttpPattern IN VARCHAR2,
+    pWhatWwwPattern  IN VARCHAR2,
+    pWithWwwPattern  IN VARCHAR2
+  )
+  RETURN BOOLEAN
+IS
+  l_No_Of_Iterations  NUMBER          := 0;
+  l_NoOfCharacters    NUMBER          := 0;
+  l_Clob_Len          NUMBER          := 0;
+  l_Temp              VARCHAR2(32000) := NULL;
+  l_Temp1             VARCHAR2(32000) := NULL;
+  l_Ideal_Data_Size   NUMBER          := 2000; -- Size of data chunk to be considered for enrichment.
+  l_What_Http_Pattern VARCHAR2(100)   := pWhatHttpPattern;
+  l_With_Http_Pattern VARCHAR2(100)   := pWithHttpPattern;
+  l_What_Www_Pattern  VARCHAR2(100)   := pWhatWwwPattern;
+  l_With_Www_Pattern  VARCHAR2(100)   := pWithWwwPattern;
+  l_proc              VARCHAR2(1000)  := 'Fn_Enrich_Mail_Body=&gt; ';
+  --l_Pos                    Number;
+BEGIN
+  -- Determine the length of Clob to be enriched.
+  l_Clob_Len := LENGTH(pInClob);
+  -- Determine the no. of iterations required depending on the clob length and the ideal data chunk size.
+  l_No_Of_Iterations   := ROUND(Ceil(l_Clob_Len / l_Ideal_Data_Size));
+  IF l_No_Of_Iterations &lt; 1 THEN
+    l_No_Of_Iterations := 1;
+  END IF;
+  -- Iterate over clob, split content, enrich data chunk under consideration and form a new clob by merging enriched data chunks.
+  FOR h IN 1 .. l_No_Of_Iterations
+  LOOP
+    IF (l_Clob_Len &gt;= l_Ideal_Data_Size)
+    THEN
+      l_NoOfCharacters := l_Ideal_Data_Size;
+    ELSE
+      SELECT Mod(l_Clob_Len, l_Ideal_Data_Size) INTO l_NoOfCharacters FROM Dual;
+    END IF;
+    l_Clob_Len           := l_Clob_Len - l_NoOfCharacters;
+    l_Temp               := NULL;
+    WHILE (LENGTH(l_Temp) &lt; l_NoOfCharacters OR l_Temp IS NULL)
+    LOOP
+      IF l_Temp IS NULL THEN
+        l_Temp  := Dbms_Lob.Substr(pInClob, l_NoOfCharacters, (((h - 1) * l_Ideal_Data_Size) + 1));
+      ELSE
+        l_Temp := l_Temp || Dbms_Lob.Substr(pInClob, (l_NoOfCharacters - LENGTH(l_Temp)), (LENGTH(l_Temp) + 1));
+      END IF;
+    END LOOP;
+    -- Enrich "http" and "www" hyperlinks with &lt;a href&gt; tags in the data chunk under consideration.
+    BEGIN
+      IF l_What_Http_Pattern IS NOT NULL AND l_With_Http_Pattern IS NOT NULL THEN
+        l_Temp1              := NULL;
+        l_Temp1              := l_Temp;
+        l_Temp               := NULL;
+        SELECT Regexp_Replace(l_Temp1, l_What_Http_Pattern, l_With_Http_Pattern)
+        INTO l_Temp
+        FROM Dual;
+      END IF;
+    EXCEPTION
+    WHEN OTHERS THEN
+      Dbg(l_Proc || 'Encountered Others exception while replacing http - ' || l_Temp);
+      l_Temp := l_Temp1; -- If unable to enrich, return back original content without enrichment.
+    END;
+    -- Enrich data chunk by prefixing "http://" to HREF tag for all links starting with "www".
+    BEGIN
+      IF l_What_Www_Pattern IS NOT NULL AND l_With_Www_Pattern IS NOT NULL THEN
+        l_Temp1             := NULL;
+        l_Temp1             := l_Temp;
+        l_Temp              := NULL;
+        SELECT Regexp_Replace(l_Temp1, l_What_Www_Pattern, l_With_Www_Pattern)
+        INTO l_Temp
+        FROM Dual;
+      END IF;
+    EXCEPTION
+    WHEN OTHERS THEN
+      Dbg(l_Proc || 'Encountered Others exception while replacing www - ' || l_Temp);
+      l_Temp := l_Temp1; -- If unable to enrich, return back original content without enrichment.
+    END;
+    -- Form new clob by merging enriched data chunks.
+    IF h        = 1 THEN
+      pOutClob := '~';
+      Dbms_lob.Write(pOutClob, LENGTH(l_Temp), 1, l_Temp);
+    ELSE
+      Dbms_lob.Writeappend(pOutClob, LENGTH(l_Temp), l_Temp);
+    END IF;
+  END LOOP;
+  RETURN True;
+EXCEPTION
+WHEN OTHERS THEN
+  Dbg(Dbms_Utility.Format_Error_Backtrace);
+  pOutClob := NULL;
+  RETURN False;
+END Fn_Enrich_Mail_Body;
+-- HMSA_UAT_#20512_Existing_Alert_Start
+-- Resolution for bug # 20512 (HMSA UAT) &gt; Changes start.
+FUNCTION En_Enrich_Existing_Alerts(
+    o_Error_Code OUT VARCHAR2,
+    o_Error_Desc OUT VARCHAR2)
+  RETURN BOOLEAN
+IS
+  CURSOR Processed_Alerts
+  IS
+    SELECT z.*,
+      Body    AS Enriched_Body,
+      Subject AS Enriched_Subject
+    FROM Ms_Rga_Feed_Aggregator_V z
+    WHERE (Body IS NOT NULL) -- Needless to say, theres no need to enrich null :-)
+    AND (Lower(Body) LIKE '%http%'
+    OR Lower(Body) LIKE '%www%')         -- Consider only those mail recs which have hyperlinks in Body.
+    AND (Lower(Body) NOT LIKE '%href=%') -- Do not consider those mails which have even a single enriched link in body.
+    AND Server IN
+      (SELECT Server_Add_Url FROM Ms_Rga_Channel_Details WHERE Source_Type = '1') -- Only mail alerts will be considered since RSS Feeds are already enriched.
+   AND (Processed_Flag = 'P'); -- Consider those mail recs which have been received previously and have been processed.
+  Pragma Autonomous_Transaction;
+Type TyProcessedAlerts IS TABLE OF Processed_Alerts%Rowtype INDEX BY Pls_Integer;
+  x_Existing_Alerts TyProcessedAlerts;
+  x_Proc           VARCHAR2(1000) := 'En_Enrich_Existing_Alerts=&gt; ';
+  x_What_Http_Ptrn VARCHAR2(4000) := '((http|www)[^[:blank:][:space:' || CHR(93) || CHR(93) || '+)\';    
+  x_With_Http_Ptrn Varchar2(4000) := '&lt;a href=\1&gt;\1&lt;/a&gt;';    
+  x_What_Www_Ptrn  Varchar2(4000) := '(&lt;a href=www)\';
+  x_With_Www_Ptrn  VARCHAR2(4000) := '&lt;a href=http://www';
+  x_Err_Code       VARCHAR2(4000);
+  x_Err_Mesg       VARCHAR2(4000);
+BEGIN
+  -- Content enrichment should not affect the normal modus-operandi of RGA in any case. Hence, handling complete process in an anonymous block below and returning true in all cases.
+   BEGIN
+    IF Processed_Alerts%Isopen THEN
+      CLOSE Processed_Alerts;
+    END IF;
+    OPEN Processed_Alerts;
+    LOOP
+      FETCH Processed_Alerts Bulk Collect INTO x_Existing_Alerts Limit 50;
+      Dbg(x_Proc || 'x_Existing_Alerts.Count - ' || x_Existing_Alerts.Count);
+      IF x_Existing_Alerts.Count &gt; 0 THEN  -- Iterate through all recs in x_Unprocessed_Mails and enrich Body.
+         FOR y IN x_Existing_Alerts.First .. x_Existing_Alerts.Last
+         LOOP
+          x_Existing_Alerts(y).Enriched_Body    := NULL;
+          x_Existing_Alerts(y).Enriched_Subject := NULL;
+          x_Err_Code                            := NULL;
+          x_Err_Mesg                            := NULL;
+          -- Enrich mail body. Since body is clob, it is being enriched by cautiously splitting content.
+          IF NOT FN_ENRICH_MAIL_BODY(X_EXISTING_ALERTS(Y).BODY, X_EXISTING_ALERTS(Y).ENRICHED_BODY, X_WHAT_HTTP_PTRN, X_WITH_HTTP_PTRN, X_WHAT_WWW_PTRN, X_WITH_WWW_PTRN) THEN
+            Dbg(x_Proc || 'Failed to process rec ' || x_Existing_Alerts(y) .Feed_Data_Id || '~' || x_Err_Mesg);
+          ELSE
+            Dbg(x_Proc || 'Successfully processed rec ' || x_Existing_Alerts(y) .Feed_Data_Id);
+          END IF;
+        END LOOP;
+        -- Update Feed-Aggregator view with enriched content.
+        BEGIN
+          FOR k IN x_Existing_Alerts.First .. x_Existing_Alerts.Last
+          LOOP
+            Dbg(x_Proc || 'Length of mail-body is ' || LENGTH(x_Existing_Alerts(k).Body));
+            Dbg(x_Proc || 'Length of enriched mail-body is ' || LENGTH(x_Existing_Alerts(k).Enriched_Body));
+            -- Anonymous block to ensure that 1 or 2 records in the bulk do not prevent other records from failing.
+            BEGIN
+              -- Update content only if it has got enriched.
+              IF NULLIF(LENGTH(X_EXISTING_ALERTS(K).ENRICHED_BODY), 0) IS NOT NULL AND (LENGTH(X_EXISTING_ALERTS(K).ENRICHED_BODY) &gt; LENGTH(X_EXISTING_ALERTS(K).BODY)) THEN
+                Dbg(x_Proc || 'For rec ' || x_Existing_Alerts(k) .Feed_Data_Id || ', enriched body is not null.');
+                UPDATE Ms_Rga_Feed_Aggregator_V
+                SET Body =x_Existing_Alerts(k) .Enriched_Body,
+                  Subject            = NVL(x_Existing_Alerts(k).Enriched_Subject, x_Existing_Alerts(k).Subject)
+                WHERE Processed_Flag = 'P'
+                AND Feed_Data_Id      = x_Existing_Alerts(k) .Feed_Data_Id;
+              END IF;
+            EXCEPTION
+            WHEN OTHERS THEN
+              Dbg(x_Proc || 'Encountered Others exception while updating rec - ' || x_Existing_Alerts(k) .Feed_Data_Id);
+            END;
+          END LOOP;
+          COMMIT; -- Commit atleast the successful records.
+        EXCEPTION
+        WHEN OTHERS THEN
+          Dbg(x_Proc || 'Encountered Others exception while updating recs.');
+        END;
+        -- Clear collection for next iteration.
+        x_Existing_Alerts.Delete;
+      ELSE
+        Dbg(x_Proc || 'No records to process in collection x_Existing_Alerts.');
+      END IF;
+      EXIT
+    WHEN Processed_Alerts%Notfound;
+    END LOOP;
+  EXCEPTION
+  WHEN OTHERS THEN
+    Dbg(x_Proc || 'Error while fetching cursor:-&gt;Processed_Alerts.');
+  END;
+  RETURN True;
+EXCEPTION
+WHEN OTHERS THEN
+  Dbg(x_Proc || Dbms_Utility.Format_Error_Backtrace|| 'In Others exception - ' || Sqlerrm);
+  o_Error_Code := SQLCODE;
+  o_Error_Desc := 'Failed while enriching existing alerts.';
+  RETURN False;
+END En_Enrich_Existing_Alerts;
+-- Resolution for bug # 20512 (HMSA UAT) &gt; Changes end.
+-- HMSA_UAT_#20512_Existing_Alert_End
+FUNCTION Fn_Enrich_Unprocessed_Mails(o_Error_Code OUT VARCHAR2,
+                                     o_Error_Desc OUT VARCHAR2) RETURN BOOLEAN
+IS
+      CURSOR Unprocessed_Mails IS
+          SELECT z.*,
+          Body    AS Enriched_Body,
+          Subject AS Enriched_Subject
+          FROM Ms_Rga_Feed_Aggregator_V z
+          WHERE (Body IS NOT NULL)
+          AND (Lower(Body) LIKE '%http%'
+          OR Lower(Body) LIKE '%www%')         -- Consider only those mail recs which have hyperlinks in Body.
+          AND (Lower(Body) NOT LIKE '%href=%') -- Do not consider those mails which have even a single enriched link in body.
+          AND Server IN
+          (SELECT Server_Add_Url FROM Ms_Rga_Channel_Details WHERE Source_Type = '1' )  -- Only mail alerts will be considered since RSS Feeds are already enriched.
+          AND (Processed_Flag IS NULL); -- Consider those mail recs which have been received recently and have not been processed.                      
+      Pragma Autonomous_Transaction;    
+  
+      Type TyUnprocessedMails IS TABLE OF Unprocessed_Mails%Rowtype INDEX BY Pls_Integer;
+ 
+      x_Unprocessed_Mails TyUnprocessedMails;
+      x_Proc           VARCHAR2(1000) := 'Fn_Enrich_Unprocessed_Mails=&gt; ';
+      x_What_Http_Ptrn VARCHAR2(4000) := '((http|www)[^[:blank:][:space:' || CHR(93) || CHR(93) || '+)\';   
+      x_With_Http_Ptrn Varchar2(4000) := '&lt;a href=\1&gt;\1&lt;/a&gt;';    
+      x_What_Www_Ptrn  Varchar2(4000) := '(&lt;a href=www)\';
+      x_With_Www_Ptrn  VARCHAR2(4000) := '&lt;a href=http://www';
+      x_Err_Code       VARCHAR2(4000);
+      x_Err_Mesg       VARCHAR2(4000);
+BEGIN
+  -- Content enrichment should not affect the normal modus-operandi of RGA in any case,Hence, handling complete process in an anonymous block below and returning true in all cases.
+      BEGIN
+          IF Unprocessed_Mails%Isopen THEN  
+              CLOSE Unprocessed_Mails;
+          end if;
+          OPEN Unprocessed_Mails;
+      LOOP
+          FETCH Unprocessed_Mails BULK COLLECT INTO x_Unprocessed_Mails LIMIT 50;
+          Dbg(x_Proc || 'x_Unprocessed_Mails.Count - ' || x_Unprocessed_Mails.Count);
+          IF x_Unprocessed_Mails.Count &gt; 0 THEN   -- Iterate through all recs in x_Unprocessed_Mails and enrich Body.
+                FOR y IN x_Unprocessed_Mails.First .. x_Unprocessed_Mails.Last
+                LOOP
+                    x_Unprocessed_Mails(y).Enriched_Body    := NULL;
+                    x_Unprocessed_Mails(y).Enriched_Subject := NULL;
+                    x_Err_Code                              := NULL;
+                    x_Err_Mesg                              := NULL;
+                    -- Enrich mail body. Since body is clob, it is being enriched by cautiously splitting content.
+                    IF NOT Fn_Enrich_Mail_Body(x_Unprocessed_Mails(y).Body, x_Unprocessed_Mails(y).Enriched_Body, x_What_Http_Ptrn, x_With_Http_Ptrn, x_What_Www_Ptrn, x_With_Www_Ptrn) THEN
+                        Dbg(x_Proc || 'Failed to process rec ' || x_Unprocessed_Mails(y) .Feed_Data_Id || '~' || x_Err_Mesg);
+                    ELSE
+                        Dbg(x_Proc || 'Successfully processed rec ' || x_Unprocessed_Mails(y) .Feed_Data_Id);
+                    END IF;
+                END LOOP;
+                -- Update Feed-Aggregator view with enriched content.
+                BEGIN
+                    FOR k IN x_Unprocessed_Mails.First .. x_Unprocessed_Mails.Last
+                    LOOP
+                        Dbg(x_Proc || 'Length of mail-body is ' || LENGTH(x_Unprocessed_Mails(k).Body));
+                        Dbg(x_Proc || 'Length of enriched mail-body is ' || LENGTH(x_Unprocessed_Mails(k).Enriched_Body));
+                        -- Anonymous block to ensure that 1 or 2 records in the bulk do not prevent other records from failing.
+                         BEGIN
+                            -- Update content only if it has got enriched.
+                            IF NULLIF(LENGTH(x_Unprocessed_Mails(k).Enriched_Body), 0) IS NOT NULL AND (LENGTH(x_Unprocessed_Mails(k).Enriched_Body) &gt; LENGTH(x_Unprocessed_Mails(k).Body)) THEN
+                                Dbg(x_Proc || 'For rec ' || x_Unprocessed_Mails(k) .Feed_Data_Id || ', enriched body is not null.');
+                                UPDATE Ms_Rga_Feed_Aggregator_V
+                                SET Body       = x_Unprocessed_Mails(k) .Enriched_Body ,
+                                Subject        = NVL(x_Unprocessed_Mails(k) .Enriched_Subject, x_Unprocessed_Mails(k).Subject),
+                                Processed_Flag = 'U' -- 'U' indicates unprocessed so that record gets pulled for Channel processing.
+                                WHERE (Processed_Flag IS NULL)
+                                AND Feed_Data_Id      = x_Unprocessed_Mails(k) .Feed_Data_Id;
+                            END IF;
+                        EXCEPTION
+                        WHEN OTHERS THEN
+                            Dbg(x_Proc || 'Encountered Others exception while updating rec - ' || x_Unprocessed_Mails(k) .Feed_Data_Id);
+                        END;
+                    END LOOP;
+                COMMIT; -- Commit atleast the successful records.
+                EXCEPTION
+                WHEN OTHERS THEN
+                    Dbg(x_Proc || ' Encountered Others exception while updating recs.');
+                END;
+                -- Clear collection for next iteration.
+                x_Unprocessed_Mails.Delete;
+          ELSE
+                Dbg(x_Proc || 'No records to process in collection x_Unprocessed_Mails.');
+          END IF;
+      EXIT WHEN Unprocessed_Mails%Notfound;
+      END LOOP;
+      EXCEPTION
+          WHEN OTHERS THEN
+          Dbg(x_Proc ||Dbms_Utility.Format_Error_Backtrace||'  Encountered Others exception while enriching unprocessed mails.');
+      END;
+      RETURN True;
+EXCEPTION
+WHEN OTHERS THEN
+    Dbg(x_Proc || Dbms_Utility.Format_Error_Backtrace|| 'In Others exception - ' || Sqlerrm);
+    o_Error_Code := SQLCODE;
+    o_Error_Desc := 'Failed while enriching unprocessed mails.';
+    RETURN False;
+END Fn_Enrich_Unprocessed_Mails;
+
+PROCEDURE Fn_Populate_Attachment_Alerts(
+    o_Error_Code OUT VARCHAR2,
+    o_Error_Desc OUT VARCHAR2)
+IS
+  CURSOR CUR_DATA_CURRENT
+  IS
+    SELECT M.FEED_DATA_ID,
+      M.ATTACHMENT,
+      'SYSTEMI' AS CREATED_BY,
+      M.CREATION_DATE
+    FROM MS_RGA_FEED_AGGREGATOR_V M
+    WHERE NOT EXISTS
+      (SELECT 1 FROM MS_RGA_ATTACHMENT_V M1 WHERE M.FEED_DATA_ID = M1.FEED_DATA_ID
+      )
+  AND M.ATTACHMENT IS NOT NULL;
+  vMetric_Id NUMBER;
+BEGIN
+  SELECT metric_id
+  INTO vMetric_Id
+  FROM si_metrics_t
+  WHERE metric_name = 'MS_RGA_ATTACHMENT';
+  FOR i            IN CUR_DATA_CURRENT
+  LOOP
+    INSERT
+    INTO MS_RGA_ATTACHMENT_V
+      (
+        attachment,
+        feed_data_id,
+        created_by,
+        creation_date,
+        metric_id,
+        instance_id,
+        process_instance_id
+      )
+      VALUES
+      (
+        i.attachment,
+        i.feed_data_id,
+        i.created_by,
+        i.creation_date,
+        vMetric_Id,
+        MS_RGA_ATTACH_INS.NEXTVAL,
+        MS_RGA_ATTACH_PID.NEXTVAL
+      );
+  END LOOP;
+  COMMIT;
+EXCEPTION
+WHEN OTHERS THEN
+  o_Error_Code := SQLCODE;
+  o_Error_Desc := SQLERRM;
+  dbms_output.put_line('Error Encountered');
+END Fn_Populate_Attachment_Alerts;
+
+PROCEDURE Pr_Populate_Channel_Response (o_Error_Code OUT NUMBER,
+                                        o_Error_Desc OUT VARCHAR2)
+IS
+      x_Proc_Name             VARCHAR2(100)                   := 'Pr_Populate_Channel_Response=&gt; ';
+      x_Chnl_Resp_Hdr_Feeds   Ty_Ms_Rga_ChnlHdr_V_Cur;
+      x_Chnl_Resp_Dtl_Feeds   Ty_Ms_Rga_ChnlDtl_V_Cur;
+      x_Chnl_Resp_Hdr_Recs    Ty_Ms_Rga_Chnl_Resp_Hdr_Tbl;
+      x_Chnl_Resp_Dtl_Recs    Ty_Ms_Rga_Chnl_Resp_Dtl_Tbl;
+      x_Enrich_Hyperlinks     VARCHAR2(100)                   := 'N';
+      x_Err_Code              VARCHAR2(100)                   := NULL;
+      x_Err_Mesg              VARCHAR2(100)                   := NULL;
+BEGIN
+      Dbg(x_Proc_Name || 'Process started.', g_high);
+      Dbms_Application_Info.Set_Module(g_Module, g_Action);
+
+      BEGIN
+          SELECT Ms_Apps_Utilities.Get_Parameter_Value(0, 'MS RGA Config', 'Enrich_Hyperlinks')
+          INTO x_Enrich_Hyperlinks
+          FROM Dual;
+      EXCEPTION
+      WHEN OTHERS THEN
+          x_Enrich_Hyperlinks := 'N';
+      END;
+
+      IF Upper(x_Enrich_Hyperlinks) = 'Y' THEN       -- Enriching mail-content if it has been activated by Admin.
+          BEGIN
+              -- Enrich http and www hyperlinks in order to ensure that user is able to click on them.
+              IF NOT Fn_Enrich_Unprocessed_Mails(x_Err_Code, x_Err_Mesg) THEN
+                  Dbg(x_Proc_Name || 'Error, if any, encountered while enriching content - ' || x_Err_Code || '~' || x_Err_Mesg, g_high);
+              ELSE
+                  Dbg(x_Proc_Name || 'No error encountered while enriching content - ' || x_Err_Code || '~' || x_Err_Mesg, g_high);
+              END IF;          
+          EXCEPTION
+          WHEN OTHERS THEN
+              Dbg(x_Proc_Name || 'Error,encountered while enriching content - ' || x_Err_Code || '~' || x_Err_Mesg, g_high); -- Failure in content enrichment should not affect the flow of Regulatory Alerts.
+          END;
+      END IF;
+
+      IF Ms_Rga_Chnl_Resp_Hdr_Cur%Isopen THEN
+          CLOSE Ms_Rga_Chnl_Resp_Hdr_Cur;
+      END IF;
+      
+      OPEN Ms_Rga_Chnl_Resp_Hdr_Cur;
+      LOOP
+          FETCH Ms_Rga_Chnl_Resp_Hdr_Cur Bulk Collect INTO x_Chnl_Resp_Hdr_Feeds;
+              IF x_Chnl_Resp_Hdr_Feeds.Count &gt; 0 THEN
+                  IF NOT Fn_Populate_Chnl_Resp_Hdr(x_Chnl_Resp_Hdr_Feeds, x_Chnl_Resp_Hdr_Recs, o_Error_Code, o_Error_Desc) THEN
+                      Dbg(x_Proc_Name || 'Failed while populating Channel_Response_Hdr.', g_high);
+                  ELSE
+                      Dbg(x_Proc_Name || 'Successfully populated Channel_Response_Hdr.', g_high);
+                  END IF;
+                  x_Chnl_Resp_Hdr_Feeds.Delete;
+                  x_Chnl_Resp_Hdr_Recs.Delete;
+              ELSE
+                  Dbg(x_Proc_Name || 'No record considered for insertion into Channel_Response_Hdr.', g_high);
+              END IF;
+          EXIT
+          WHEN Ms_Rga_Chnl_Resp_Hdr_Cur%Notfound;
+      END LOOP;
+      Dbg(x_Proc_Name || 'Completed processing Channel_Response_Hdr. Will now process Channel_Response_Dtl', g_high);
+
+      IF Ms_Rga_Chnl_Resp_Dtl_Cur%Isopen THEN
+          CLOSE Ms_Rga_Chnl_Resp_Dtl_Cur;
+      END IF;
+      
+      OPEN Ms_Rga_Chnl_Resp_Dtl_Cur;
+      LOOP
+          FETCH Ms_Rga_Chnl_Resp_Dtl_Cur Bulk Collect
+          INTO x_Chnl_Resp_Dtl_Feeds LIMIT 1000;
+          Dbg(x_Proc_Name || 'Rec Count  '||x_Chnl_Resp_Dtl_Feeds.Count, g_high);
+          IF x_Chnl_Resp_Dtl_Feeds.Count &gt; 0 THEN
+              IF NOT Fn_Populate_Chnl_Resp_Dtl(x_Chnl_Resp_Dtl_Feeds, x_Chnl_Resp_Dtl_Recs, o_Error_Code, o_Error_Desc) THEN
+                  Dbg(x_Proc_Name || 'Failed while populating Channel_Response_Dtls.', g_high);
+              ELSE
+                  Dbg(x_Proc_Name || 'Successfully populated Channel_Response_Dtls.', g_high);
+                  Dbg(x_Proc_Name || 'About to update Si table.');
+                  
+                  IF NOT Fn_Update_Si_Table(x_Chnl_Resp_Dtl_Feeds, o_Error_Code, o_Error_Desc) THEN
+                      Dbg(x_Proc_Name || 'Failed to update Si table with Feed_Data_Id.', g_high);
+                  ELSE
+                      Dbg(x_Proc_Name || 'Successfully updated Si table with Feed_Data_Id.', g_high);
+                      Dbg(x_Proc_Name || 'Sending Structured content notifications', g_high);
+                      
+                      IF NOT Fn_Send_Chnl_Notificatns(o_Error_Code, o_Error_Desc) THEN
+                          Dbg(x_Proc_Name || 'Failed to send Structured content notifications.', g_high);
+                      ELSE
+                          Dbg(x_Proc_Name || 'Successfully sent Structured content notifications.', g_high);
+                      END IF;
+                  END IF;
+              END IF;
+
+              x_Chnl_Resp_Dtl_Feeds.Delete;
+              x_Chnl_Resp_Dtl_Recs.Delete;
+              COMMIT;
+          ELSE
+              Dbg(x_Proc_Name || 'No record considered for insertion into Channel_Response_Dtls.', g_Medium);
+          END IF;
+      EXIT
+      WHEN Ms_Rga_Chnl_Resp_Dtl_Cur%Notfound;
+      END LOOP;
+      
+      Fn_Populate_Attachment_Alerts(o_Error_Code,o_Error_Desc);
+      IF o_Error_Code IS NULL OR o_Error_Code &lt;&gt; g_success_code THEN
+          Dbg(x_Proc_Name || 'Failed to populate Channel Response.', g_high);
+      ELSE
+          Dbg(x_Proc_Name || 'Successfully populated Channel Response.', g_high);
+          o_Error_Code := g_success_code;
+          o_Error_Desc := g_Success_Mesg;
+      END IF;
+      Dbg(x_Proc_Name || o_Error_Code || ' : ' || o_Error_Desc, g_high);
+EXCEPTION
+WHEN No_Data_Found THEN
+    Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_High);
+    Dbg(x_Proc_Name || 'No_Data_Found exception encountered - ' || Sqlerrm, g_High);
+    
+    IF Ms_Rga_Chnl_Resp_Hdr_Cur%Isopen THEN
+        CLOSE Ms_Rga_Chnl_Resp_Hdr_Cur;
+    END IF;
+    
+    IF Ms_Rga_Chnl_Resp_Dtl_Cur%Isopen THEN
+        CLOSE Ms_Rga_Chnl_Resp_Dtl_Cur;
+    END IF;
+    o_Error_Code := SQLCODE;
+WHEN Too_Many_Rows THEN
+    Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_High);
+    Dbg(x_Proc_Name || 'Too_Many_Rows exception encountered - ' || Sqlerrm, g_High);
+    
+    IF Ms_Rga_Chnl_Resp_Hdr_Cur%Isopen THEN
+        CLOSE Ms_Rga_Chnl_Resp_Hdr_Cur;
+    END IF;
+    
+    IF Ms_Rga_Chnl_Resp_Dtl_Cur%Isopen THEN
+        CLOSE Ms_Rga_Chnl_Resp_Dtl_Cur;
+    END IF;
+    o_Error_Code := SQLCODE;
+WHEN OTHERS THEN
+    Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_High);
+    Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm, g_High);
+    IF Ms_Rga_Chnl_Resp_Hdr_Cur%Isopen THEN
+       CLOSE Ms_Rga_Chnl_Resp_Hdr_Cur;
+    END IF;
+    
+    IF Ms_Rga_Chnl_Resp_Dtl_Cur%Isopen THEN
+        CLOSE Ms_Rga_Chnl_Resp_Dtl_Cur;
+    END IF;
+    o_Error_Code := SQLCODE;
+END Pr_Populate_Channel_Response;
+
+END Ms_Rga_Process_Channel_Resp; </TEXT_BODY>
+</PACKAGE_SPEC>

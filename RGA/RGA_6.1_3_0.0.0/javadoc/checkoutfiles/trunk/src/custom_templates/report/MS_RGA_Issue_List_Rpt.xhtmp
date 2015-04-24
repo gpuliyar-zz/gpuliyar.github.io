@@ -1,0 +1,1184 @@
+<html>
+<head>
+<title>@title@</title>
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=@CHARACTER_SET@">
+<LINK REL="stylesheet" TYPE="text/css" HREF="@WEBROOT@/gui_styles.css"/>
+<LINK REL="stylesheet" TYPE="text/css" HREF="@WEBROOT@/commonui_new.css"/>
+<LINK REL="stylesheet" TYPE="text/css" HREF="@WEBROOT@/css/DynamicDashboard.css"/>
+
+<!--
+/*
+ * SYSTEMi Copyright (c) 2000-2012, MetricStream, Inc. All rights reserved.
+ * $Id:GridPlainExpander.xhtmp $
+ */
+-->
+
+@%'report/include/reports_include_style_section.htmp'@
+<style TYPE='text/css'>
+.topbarCls{background: #ffffff}
+td.ux-grid-hd-group-cell {
+    background: url(@WEBROOT@/ext/resources/images/default/grid/grid3-hrow.gif) repeat-x bottom;
+}
+</style>
+</head>
+@reqNotFromZaplet(
+<body onload="javascript:@ENABLE_JS(onLoadBehaviors();)@ loadViewList();" bgcolor="#ffffff" text="#000000" link="#000099" vlink="#000099" alink="#000099" >
+)@
+@reqFromZaplet(
+<body bgcolor="#ffffff" text="#000000" link="#000099" vlink="#000099" alink="#000099">
+)@
+<SCRIPT src="@WEBROOT@/calenderfunctions.js" language="Javascript">
+</SCRIPT>
+<SCRIPT src="@WEBROOT@/generic.js" language="Javascript">
+</SCRIPT>
+<SCRIPT src="@WEBROOT@/reportFunctions.js" language="Javascript">
+</SCRIPT>
+<SCRIPT src="@WEBROOT@/ext/RowExpander.js" language="Javascript">
+</SCRIPT>
+<SCRIPT src="@WEBROOT@/ext/GridSummary.js" language="Javascript">
+</SCRIPT>
+<SCRIPT src="@WEBROOT@/ext/GroupViewPrinter.js" language="Javascript">
+</SCRIPT>
+<SCRIPT src="@WEBROOT@/ext/MultiGroupingView.js" language="Javascript">
+</SCRIPT>
+<SCRIPT src="@WEBROOT@/ext/MultiGroupingStore.js" language="Javascript">
+</SCRIPT>
+<SCRIPT src="@WEBROOT@/ext/ColumnHeaderGroup.js" language="Javascript">
+</SCRIPT>
+
+<!-- Grid Filter Start --->
+<!-- overrides to base library -->
+<link rel="stylesheet" type="text/css" href="@WEBROOT@/ext/GridFilters/css/GridFilters.css" />
+<link rel="stylesheet" type="text/css" href="@WEBROOT@/ext/GridFilters/css/RangeMenu.css" />
+
+ <!-- extensions -->
+<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/menu/RangeMenu.js"></script>
+<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/menu/ListMenu.js"></script>
+
+@LANG{
+@""(
+<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/GridFilters.js"></script>
+)@
+@"en_US"(
+<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/GridFilters.js"></script>
+)@
+@(
+<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/@LANG@/GridFilters.js"></script>
+)@}@
+<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/Filter.js"></script>
+	@LANG{
+	@""(
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/StringFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/DateFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/ListFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/NumericFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/BooleanFilter.js"></script>
+	)@
+	@"en_US"(
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/StringFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/DateFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/ListFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/NumericFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/BooleanFilter.js"></script>
+	)@
+	@(
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/@LANG@/StringFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/@LANG@/DateFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/@LANG@/ListFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/@LANG@/NumericFilter.js"></script>
+	<script type="text/javascript" src="@WEBROOT@/ext/GridFilters/filter/@LANG@/BooleanFilter.js"></script>
+	)@}@
+<!-- Grid Filter End --->
+<script language = "javascript">
+
+function callreportdetails(paramone)
+{   
+
+    var p1;
+	//Added by Lawrence 
+	try{
+		//var parametersForReq = Ext.getCmp('grid').store.reader.paramsForReq; 
+		var parametersForReq = document.contextform.PARAMETERS_FOR_REQ.value;
+		//parametersForReq = parametersForReq.indexOf('&') >-1 ? encodeURIComponent(parametersForReq) : parametersForReq; 
+		parametersForReq = parametersForReq.replace(/%25/gi,'%2525'); 
+	}catch(e){}
+	
+	/*var paramValues='';
+	var reportFiletrs='@PARAMETERS_FOR_REQ_DISP@';
+	var count = reportFiletrs.match(/%3D0/g);  //Getting the count of Filter Parameters
+
+	for (var i=0;i<count.length;i++){
+			paramValues=paramValues+"&CP_pV"+i+"=";
+			var temp=reportFiletrs.substring(reportFiletrs.indexOf("pValue_"+i+"%3D")+11, reportFiletrs.indexOf("%26filtId_"+i));
+			paramValues=paramValues+""+temp;
+			j=i+1;
+			paramValues=paramValues+"&CP_pS"+i+"="+j;
+	} */
+    //var tmp=escape("@REPORT_PARAMS(@parameter_value@)@");    
+    var def_tag1="CP_REPORT_ID=@REPORT_ID@&CP_PARAMETERS_FOR_REQ="+parametersForReq+"&CP_METRIC_ID=@METRIC_ID@&CP_POPUP_FOR_BLANK_PARAMS=true&CP_DATE_CODE=2&CP_name=Infocenter&CP_CURRENT_FORM=2&CP_pN=1&";
+
+    paramone=paramone+'&x_edit_mode=Yes'+"&submit_back=yes&bare=@SERVLET_URL@/Pushreportinline&"+def_tag1;
+    p1=paramone.substring(0,2000);   
+   //window.location=p1;   
+		 top.openPage(p1); 
+}
+function callreportdetails1(paramone)
+{   
+
+    var p1;
+	//Added by Lawrence 
+	try{
+		//var parametersForReq = Ext.getCmp('grid').store.reader.paramsForReq; 
+		var parametersForReq = document.contextform.PARAMETERS_FOR_REQ.value;
+		//parametersForReq = parametersForReq.indexOf('&') >-1 ? encodeURIComponent(parametersForReq) : parametersForReq; 
+		parametersForReq = parametersForReq.replace(/%25/gi,'%2525'); 
+	}catch(e){}
+	
+	/*var paramValues='';
+	var reportFiletrs='@PARAMETERS_FOR_REQ_DISP@';
+	var count = reportFiletrs.match(/%3D0/g);  //Getting the count of Filter Parameters
+
+	for (var i=0;i<count.length;i++){
+			paramValues=paramValues+"&CP_pV"+i+"=";
+			var temp=reportFiletrs.substring(reportFiletrs.indexOf("pValue_"+i+"%3D")+11, reportFiletrs.indexOf("%26filtId_"+i));
+			paramValues=paramValues+""+temp;
+			j=i+1;
+			paramValues=paramValues+"&CP_pS"+i+"="+j;
+	} */
+    //var tmp=escape("@REPORT_PARAMS(@parameter_value@)@");    
+    var def_tag1="CP_REPORT_ID=@REPORT_ID@&CP_PARAMETERS_FOR_REQ="+parametersForReq+"&CP_METRIC_ID=@METRIC_ID@&CP_POPUP_FOR_BLANK_PARAMS=true&CP_DATE_CODE=2&CP_name=Infocenter&CP_CURRENT_FORM=2&CP_pN=1&";
+
+    paramone=paramone+'&x_edit_mode=Yes'+"&submit_back=yes&bare=@SERVLET_URL@/Pushreportinline&"+def_tag1;
+    p1=paramone.substring(0,2000);   
+   //window.location=p1;   
+		 top.openPage(p1); 
+}
+
+</script>
+<script language = "javascript" >
+
+var enableSelectableWeekendsAndHolidays=@ENABLE_SELECTABLE_WEEKENDS_AND_HOLIDAYS@;
+function showInfo(show){
+	if(show==true) dynamicFilterMessageOn=true;
+	if(Ext.getCmp('CmbID').getValue()=='@^label.show_all_records@' || Ext.getCmp('grid').store.reader.totalRowCount < Ext.getCmp('CmbID').getValue()) show=false;//message need not be shown as all the records are loaded.
+	if(show==true){
+		Ext.getCmp('dynamic-filter-msg').setVisible(true);
+	}else{
+		Ext.getCmp('dynamic-filter-msg').setVisible(false);
+	}
+}
+function onLoadBehaviors() {
+    // resize the window only if the report is opened in a new window
+    //@OUTPUT_WINDOW{@NEW_WINDOW(
+        setWindowSize();
+    //)@}@
+}
+
+function setWindowSize() {
+    // only resize for Internet Explorer
+    if (navigator.userAgent.indexOf("MSIE") > -1) {
+        window.resizeTo(550, 500);
+        window.moveTo(150, 100);
+    }
+}
+
+function uniquesselectedrows(selectedrow1,deselectedvalue){
+	var selrowsarr = selectedrow1.split(",");
+	var selrowsnew = [];
+	var oldrows ={};
+	
+	for(var i=0;i<selrowsarr.length;i++) {
+		if (selrowsarr[i] != deselectedvalue) {
+			oldrows[selrowsarr[i]]=true;
+			selrowsnew.push(selrowsarr[i]);
+		}
+	}
+	return selrowsnew.join(",");
+	
+}
+
+var selectedrows='';
+var selectDispRows= '';
+function checkboxChange(seqno)
+{
+  var cbox=document.getElementById(seqno);
+  
+  
+		selectedrows = cbox.id;
+		selectDispRows = cbox.value;
+	
+}
+
+
+function SelecttoParent()
+{
+  try
+  {	
+    parent.window.opener.callParent(selectedrows,selectDispRows);
+	parent.window.opener.focus();
+	parent.window.close();
+  } 
+  catch(e){
+	alert("You don't have permission to select the issues/actions. Please close this report and generate again.")
+   document.getElementById("select_id").style.display ="none";
+  }
+  //window.close();
+}
+function doCancel()
+{
+  parent.window.close();
+}
+
+		var dynamicWindow;
+		
+		var object_id = '@REPORT_ID@';
+		var objectType = 2;
+		
+		var viewDetails={};
+		var viewid=1;
+		var viewcount=0;
+		var currentViewid = 1;
+		var selectedView='';
+		var virtual = @CUSTOMIZE_BUTTON_SECTION{@""(true)@@(false)@}@;
+		
+		var listView;
+		var dashViewsAdded = {};
+		
+		function loadViewList(){
+			if('@#loadFusionCharts@' != 'true'){
+				return;
+			}			
+			listView = new Ext.menu.Menu({
+					//plain:true
+					//maxHeight: 130
+					hideBorders: true
+					,cls:'dynaWin'					
+				});
+			
+			var baseparams = {};
+			Ext.apply(baseparams,{'objectid':'@REPORT_ID@'});
+			Ext.apply(baseparams,{'isvirtual':virtual});
+			Ext.apply(baseparams,{'objecttype':'2'});
+					Ext.Ajax.request({
+							url: 'Dynamicdashboard/ajax/FetchDynamicChart',
+							method: 'POST',
+							params: baseparams,
+							success: function(response, options){
+								if(response.responseText == "success")
+										return;
+								var views = Ext.decode(response.responseText);						
+								viewcount = views['viewcount'];
+								viewDetails = views['views'];								
+								for(var i=0; i<viewcount; i++){
+									viewid = i+1;									
+									listView.add(new Ext.menu.Item({id:'infocenter'+viewid, text:viewDetails[viewid]['viewtitle'], handler:loadSelectedView}));
+									if(viewid ==1){
+										listView.items.items[i].setIconClass('dynamic-chart-save');
+										selectedView = viewDetails[viewid]['viewtitle'];
+									}
+									if(!dashViewsAdded[listView.items.items[i].text]){
+										dashViewsAdded[listView.items.items[i].text] = 1;
+									}
+								}
+						}
+					});	
+		}
+		
+		function loadSelectedView(item, event){
+				selectedView = item.text;
+				var itemId = item.id;
+				currentViewid = itemId.substring(itemId.indexOf('infocenter')+10);
+				if(!Ext.isDefined(dynamicWindow)){
+					createDynamicChart();
+				}else{
+					dynamicWindow.show();
+					window.document.getElementById('dynamic-dashboard').contentWindow.currentViewid = currentViewid;
+					window.document.getElementById('dynamic-dashboard').contentWindow.loadView(item, event);
+				}
+		}
+		var iframeWidth = screen.width - 95;
+		var iframeHeight = screen.height - 335;
+		var mask;
+		function createDynamicChart(){			
+			if(Ext.isDefined(dynamicWindow)){
+				dynamicWindow.show();
+				return;
+			}
+			if(!storeLoaded){
+				return;
+			}
+			dynamicWindow = new Ext.Window({
+							id:'createChartPopup'
+							,autoScroll: true
+							,shadow:'drop'
+							,shadowOffset:8
+							//,layout:'border'
+							,bodyBorder:false
+							,border:false
+							,hideBorders:false
+							,draggable:false
+							,resizable:false
+							,header:false
+							,bodyCfg: {
+								cls:'dynaWin'
+								}
+							,width: iframeWidth + 15
+							,height: iframeHeight + 15
+							,closable:false
+							//,closeAction:'hide'
+							,plain: true
+							//,title: 'Dynamic chart'
+							,modal: true
+							,html:'<iframe id="dynamic-dashboard" name="dynamic-dashboard" width="'+iframeWidth+'" height="'+iframeHeight+'" src="Dynamicdashboard" scrolling="auto" frameborder="0"></iframe>'
+							//,items:[topbar, portalCol]
+							,listeners:{					
+									show: function(t){	
+												var i=0;
+												while(i < window.frames.length){
+													if(window.frames[i].name == 'dynamic-dashboard' && window.frames[i].configureDynamicChart){
+														window.frames[i].configureDynamicChart(false);
+														break;
+													}
+													i++;
+												}
+											}
+								}
+					});				
+			dynamicWindow.show();
+			mask = new Ext.LoadMask(dynamicWindow.el, {id:'mask', msg:"@^label.loading@"});
+			mask.show();
+			}
+function getUX(){
+	return saveUX();
+}
+</SCRIPT>
+
+<script language = "javascript" >
+
+var contextParams= {};
+var prefCombo;
+var group;
+var headerGroupingDetails = {};
+var headerGroupingDetailsSet = false;
+var originalColLayout = [];
+var dynamicFilterMessageOn=false;
+var storeLoaded=false;
+var recordModel;
+</script>
+
+<script language = "javascript" >
+
+//
+// This is the main layout definition.
+//
+Ext.onReady(function(){
+	
+	Ext.QuickTips.init();
+    
+    
+var allowRefresh=true;
+var ppop = null;
+// Store reportid for future use
+var report_id = '@#REPORT_ID@';
+var metric_id = '@#METRIC_ID@';
+
+// Global instances for storing session data
+var parReqDisplay = '@PARAMETERS_FOR_REQ_DISP@';
+var parReq = decodeHtmlContent('@#PARAMETERS_FOR_REQ@');
+var rtSortColSeq='@RUNTIME_SORT_COL_SEQ@';
+var rtSortDir='@#RUNTIME_SORT_DIR@';
+var srchCond='@SEARCH_COND@';
+var numRows='@NUM_ROWS@';
+var baseparams = {
+"REPORT_ID":"@#REPORT_ID@",
+"METRIC_ID":"@#METRIC_ID@",
+"INSTANCE_ID":"@#INSTANCE_ID@",
+"INSTANCE_ID_2":"@INSTANCE_ID_2@",
+"REP_MODE":"@REP_MODE@",
+'ENTERPRISE_ID':'@#ENTERPRISE_ID@',
+"REPORT_NAME":decodeHtmlContent("@#REPORT_NAME@"),
+"replaceTitle":decodeHtmlContent('@#replaceTitle@')
+};
+
+var baseparams2 = {
+'PARAMETERS_FOR_REQ':decodeHtmlContent('@#PARAMETERS_FOR_REQ@'),
+'RUNTIME_SORT_COL_SEQ':'@RUNTIME_SORT_COL_SEQ@',
+'SEARCH_COND': '@SEARCH_COND@',
+'RUNTIME_SORT_DIR':'@#RUNTIME_SORT_DIR@'
+};
+
+var toolparams = Ext.apply({}, baseparams);
+
+// For options - baseparams & baseparams2
+// For scrolling - baseparams & baseparams2 & pageu
+
+// Filter Parameters data
+// This has each parameters separately. and not required for normal report functionality
+var filterparams = Ext.apply({},baseparams);
+
+Ext.apply(filterparams, {
+"metricid":"@metricid@",
+"STARTING_INSTANCE_ID":"@STARTING_INSTANCE_ID@",
+"OFFSET_INSTANCE_ID":"@OFFSET_INSTANCE_ID@",
+"REP_ACTION":"@REP_ACTION@",
+"RELATED_MODE":"@RELATED_MODE@",
+"DISPLAY_SET_NUM":"@DISPLAY_SET_NUME@",
+"NAME_OF_SUBMIT_TARGET":"@NAME_OF_SUBMIT_TARGET@",
+"CORRECTIVE_ACTION_ID":"@CORRECTIVE_ACTION_ID@",
+"ACTION_TYPE_ID":"@ACTION_TYPE_ID@",
+"REPORT_TYPE":"@REPORT_TYPE@",
+"OUTPUT_WINDOW":"@#OUTPUT_WINDOW@",
+"wrapper":"@wrapper@",
+"PARAMS_CODE":"@PARAMS_CODE@",
+"CURRENT_FORM":"@#CURRENT_FORM@",
+"METRIC_ID_REF":"@METRIC_ID_REF@",
+"INSTANCE_ID_REF":"@INSTANCE_ID_REF@",
+"HISTORY_DATE1":"@HISTORY_DATE1@",
+"HISTORY_DATE2":"@HISTORY_DATE2@",
+"HISTORY_DATE_ERR":"@HISTORY_DATE_ERR@",
+"ERR_MSG":"@ERR_MSG@",
+"templ":"@templatename@",
+"REPORT_LAYOUT":"@REPORT_LAYOUT@",
+"errorHidden":"@ERR_MSG@",
+"output":"@output@",
+"copyright_needed":"@copyright_needed@",submit_x:16});
+
+var recPerPage = @RECORDS_PER_PAGE@;
+
+@CONTEXT_SENSITIVE_FUNC(
+    contextParams= Ext.apply({}, baseparams);
+
+    Ext.apply(contextParams, {
+        'PARAMETERS_FOR_REQ':decodeHtmlContent('@#PARAMETERS_FOR_REQ@'),
+        'SELSTR':'@SELSTR@',
+        'METRIC_VIEW':'@METRIC_VIEW@',
+        'wrapper':'@wrapper@',
+        'OUTPUT_WINDOW':'@#OUTPUT_WINDOW@',
+        'output':'@output@',
+        'copyright_needed':'@copyright_needed@'
+    });
+)@
+
+
+
+// Include common grid section
+@%'report/include/reports_include_common_grid.xhtmp'@    
+
+// Include filter section
+@%'report/include/reports_include_filter_section_grid.xhtmp'@
+
+
+    
+
+    function summaryrenderer(v, params, data) {
+           // params.attr = 'ext:qtip="Total no. of companies"'; // summary column tooltip example
+           if(store.reader.summaryData)
+            var summary = store.reader.summaryData[params.id];
+            if(summary) {
+                v= summary.desc + ' ' + summary.value;
+            }
+            return v? v  : '';
+    }
+
+    function colRenderer(val, meta, record, rowIndex, colIndex, store) {
+        val = val || '';
+        var rv = val.split('_$$');
+		var applyColorCondition=true;
+        if(rv.length >1) {
+            val = rv[1];
+			var iconPos=rv[0].indexOf('icon:');//if condition is met and icon is chosen to be shown, icon will be shown instead of data.
+			if(iconPos!=-1){
+				var icon=rv[0].substring(iconPos+5);
+				if(icon != ''){
+					val = '<img src="'+icon+'"/>';
+					applyColorCondition = false;//no color condition if icon is shown.
+				}
+				rv[0]=rv[0].substring(0,iconPos);
+			}
+			if(applyColorCondition == true && meta) {
+                meta.attr= 'style="'+ rv[0]+ '"';
+            }
+        }
+       
+        try {
+        
+        //meta.attr = 'style="background-color:yellow;color:red;"';
+        }catch(e) {}
+      
+        
+
+        return val;
+
+    }
+
+    var expander = new Ext.ux.grid.RowExpander({
+        tpl : new Ext.XTemplate('<br>'
+            @HEADER_INFO(@HEADER_ROW(@MORE_DATA{@""()@@(@HROW(,'<p><b>@#USER_NAME@:</b> {[this.renderdata(values[@DATA_COL_SEQ@])]}</p><br>'
+)@)@}@)@)@
+,
+    {
+        renderdata: function(val){
+            val = val || '';
+            var rv = val.split('_$$');
+            if(rv.length >1) {
+                val = rv[1];
+                val= '<span style="'+ rv[0]+ '">' + rv[1] + '</span>';
+            }
+            return val;
+        }
+    }
+        )
+    });
+
+        var gridColumnModel = new Ext.grid.ColumnModel({columns:[expander
+@HEADER_INFO(@HEADER_ROW[0](@MORE_DATA{@""(@HROW(,{header: '@#USER_NAME@', tooltip: '@#USER_NAME@',sortable:@SORT_LINK{@""(false)@@(true)@}@, renderer:colRenderer,summaryRenderer: summaryrenderer, dataIndex:'@DATA_COL_SEQ@',width:@COL_WIDTH@,align:'@ALIGN_HDG@',type:'@COL_TYPE@'}
+)@)@}@)@@HEADER_ROW[1..](@MORE_DATA{@""(@HROW(,{header: '@#USER_NAME@', tooltip: '@#USER_NAME@',sortable:@SORT_LINK{@""(false)@@(true)@}@, renderer:colRenderer, summaryRenderer: summaryrenderer, dataIndex:'@DATA_COL_SEQ@',width:@COL_WIDTH@,align:'@ALIGN_HDG@',type:'@COL_TYPE@'}
+)@)@}@
+)@
+)@ ],
+                   setHidden : function(colIndex, hidden){
+									
+										if(hidden){
+										var totalColCount = this.getColumnCount();
+										var hiddenColCount = 0;
+											for(var i=1;i<totalColCount;i++) {
+												if(this.config[i] && this.config[i].hidden)
+													hiddenColCount++;
+											}
+											var c = this.config[colIndex];
+											if(c.hidden !== hidden && totalColCount-hiddenColCount!=2){
+													c.hidden = hidden;
+													this.totalWidth = null;
+													this.fireEvent("hiddenchange", this, colIndex, hidden);
+											} else {
+
+                                             //setTimeout('Ext.getCmp("grid").view.hmenu.activeI em.menu.activeItem.checked = true', 1);
+												Ext.getCmp('grid').view.hmenu.hide();
+											}
+
+									}else{
+										var c = this.config[colIndex];										
+										c.hidden = hidden;
+										this.totalWidth = null;
+										this.fireEvent("hiddenchange", this, colIndex, hidden);
+                
+                
+                
+                }
+
+                },
+
+
+ listeners: {
+			columnmoved: function(cm, oldIndex, newIndex){
+				columnmoved=true;//make it intelligent enough to set columnmoved to true only if there is a change in column order
+			}
+		}
+});
+
+	<!-- filters for Grid -->
+	var filters = new Ext.ux.grid.GridFilters({local: true,filters:[
+				@HEADER_INFO(@HEADER_ROW[0](@HROW({type:'@COL_TYPE@' ,   dataIndex: '@DATA_COL_SEQ@'})@)@
+				@HEADER_ROW[1..](@HROW(,{type:'@COL_TYPE@',   dataIndex: '@DATA_COL_SEQ@'})@)@)@
+	]});
+
+    var groupView = new Ext.ux.grid.MultiGroupingView({
+			hideGroupedColumn :true
+			,forceFit: true
+			,emptyGroupText: 'All Group Fields Empty'
+			,displayEmptyFields: true //you can choose to show the group fields, even when they have no values
+			,enableNoGroups:true
+			,groupTextTpl: '{text} : {group} ({[values.rs.length]} {[values.rs.length == 1 ? "Record" : "Records"]})'
+			,displayFieldSeperator: ', ' //you can control how the display fields are seperated
+	});   
+    recordModel= [
+    @HEADER_INFO(@HEADER_ROW[0](@HROW({name:'@DATA_COL_SEQ@',mapping:'col@DATA_COL_SEQ@'})@)@
+    @HEADER_ROW[1..](@HROW(,{name:'@DATA_COL_SEQ@',mapping:'col@DATA_COL_SEQ@'})@)@
+    )@ ];
+
+       var store = new Ext.ux.grid.MultiGroupingStore({
+            reader: new Ext.data.CFQueryReader({
+                id: 'NAME', // This is supposed to match the 'mapping'
+                fields:recordModel,
+				remoteSort: true
+            }),
+            fields: recordModel,
+            remoteSort: true,
+            url:'Reportsstart/ajax/ReportStart?REPORT_ID=@#REPORT_ID@&templ=Tabularjson.xhtmp&isAjax=true'
+            ,id:'dataStoreId'
+        });
+
+        store.on('beforeload', function(store, options) {
+
+            options.params || (options.params = {}); //assert params
+            var start=options.params.start ;
+            var limit= options.params.limit;
+
+            //limit=(limit==0) ? 1: limit;
+            var pageu = 'all';
+            if (limit != -1) {
+                pageu = Math.floor(start/limit)+1;
+                Ext.apply(options.params, {
+                    RECORDS_PER_PAGE : limit
+                });
+
+            }
+            Ext.apply(options.params, {
+                //apply stuff to params
+                //assuming pageNumber has been calculated into this var
+                pageu:pageu
+            });
+
+            if(store.sortInfo) {
+                if(Ext.isArray(store.sortInfo)) {
+                    rtSortDir = store.sortInfo[0].direction;
+                    rtSortColSeq = store.sortInfo[0].field;
+                } else {
+                    rtSortDir = store.sortInfo.direction;
+                    rtSortColSeq = store.sortInfo.field;
+                }
+            }
+            if (!options.params.submit_x) {
+                Ext.apply(options.params, baseparams);
+
+                Ext.apply(options.params, {
+                    'PARAMETERS_FOR_REQ':parReq,
+                    'RUNTIME_SORT_COL_SEQ':rtSortColSeq,
+                    'SEARCH_COND': srchCond,
+                    'RUNTIME_SORT_DIR':rtSortDir
+                });
+            }
+			if(group && headerGroupingDetailsSet == false){
+				var cm = Ext.getCmp('grid').colModel;
+				var x=-1;
+				for(var i=0; i< groupModel.length; i++){
+					if(groupModel[i].header != ''){
+						for(var j=0; j< groupModel[i].colspan; j++){
+							x++;
+							headerGroupingDetails[cm.getDataIndex(x)] = groupModel[i];
+						}
+					}else{
+						x+=groupModel[i].colspan;
+					}
+				}
+				headerGroupingDetailsSet = true;
+			}
+          
+        });
+        store.on('load', function(store, recs, options) {
+			if(recs.length <= 0){
+				Ext.getCmp('email').hide();
+				Ext.getCmp('export').hide();
+				Ext.getCmp('print').hide();
+				/*for(var i=0; i<repToolsMenu.items.items.length;i++){
+					if(repToolsMenu.items.items[i].id=='email' || repToolsMenu.items.items[i].id=='export' || repToolsMenu.items.items[i].id=='print')
+						repToolsMenu.items.items[i].hide();
+				}*/
+			}else{
+				Ext.getCmp('email').show();
+				Ext.getCmp('export').show();
+				Ext.getCmp('print').show();
+				/*for(var i=0; i<repToolsMenu.items.items.length;i++){
+					if(repToolsMenu.items.items[i].id=='email' || repToolsMenu.items.items[i].id=='export' || repToolsMenu.items.items[i].id=='print')
+						repToolsMenu.items.items[i].show();
+				}*/
+			}
+            parReqDisplay = store.reader.paramsForReqDisp;
+            parReq= decodeHtmlContent(store.reader.paramsForReq);
+            showError(decodeHtmlContent(store.reader.errmsg));
+			showInfo(dynamicFilterMessageOn);
+            baseparams.INSTANCE_ID = store.reader.currentInstanceId; 
+            numRows = store.reader.totalRowCount;
+            contextParams.INSTANCE_ID = store.reader.currentInstanceId;
+            contextParams.REPORT_ID = report_id;
+            document.contextform.INSTANCE_ID.value = store.reader.currentInstanceId;
+            document.contextform.PARAMETERS_FOR_REQ.value = decodeHtmlContent(store.reader.paramsForReq);
+			document.contextform.METRIC_VIEW.value = store.reader.metricView;
+			contextParams.METRIC_ID = metric_id;
+
+            //Ext.getCmp('grid').setTitle(store.reader.dtTime);
+			if(Ext.getCmp('report_data_as_of'))Ext.getCmp('report_data_as_of').el.update(store.reader.dtTime);
+			if(store.reader.replaceTitle == 'true'){
+				if(Ext.getCmp('title').el && store.reader.reportName != '')Ext.getCmp('title').el.update(store.reader.reportName);
+			}else{
+				baseparams.replaceTitle = true;
+			}
+            // Since the pageSize is not known for 'all' update with totalrowcount
+            if(options.params.pageu=='all') {
+                bbar.pageSize=store.reader.totalRowCount;
+            }
+
+            // If the parameters were submitted using form submit
+            // Then we should clear it, because clicking on 'sort' uses
+            // cached information, and it will go to validateFormData()
+            if(options.params.submit_x) {
+                store.lastOptions.params = {};
+            }
+			allowRefresh=recs.length==0?false:true;
+			if(recs.length==0){
+				bbar.bindStore([]);
+				Ext.getCmp('CmbID').disable();
+			}
+			else{
+				bbar.bindStore(store);
+				Ext.getCmp('CmbID').enable();
+			}
+			if(window.parent.reportOutputReportNames){
+				window.parent.reportOutputReportNames[store.reader.actualReportName]=1;
+			}
+		storeLoaded=true;
+        });
+       
+ 
+
+var combo = new Ext.form.ComboBox({
+  name : 'perpage',
+  id   :'CmbID',
+  width: 60,
+  store: new Ext.data.SimpleStore({
+    fields: ['id'],
+    data  : [
+      ['20'],
+      ['40'],
+      ['80'],
+      ['@^label.show_all_records@']
+    ]
+  }),
+  mode : 'local',
+  value: recPerPage,
+
+  listWidth     : 40,
+  triggerAction : 'all',
+  displayField  : 'id',
+  valueField    : 'id',
+  editable      : false,
+  forceSelection: true,
+  listeners:{
+	afterrender: function(c){
+		var cel=c.el;
+		cel.on('mouseover', function(){rppTT.showAt([cel.getX(),cel.getY()-28])});
+		cel.on('mouseout', function(){rppTT.hide()});
+	}
+  }
+});
+
+var rppTT=new Ext.ToolTip({
+			target:Ext.get('CmbID')
+			,html:'@^label.recordsperpage@'
+			,renderTo: Ext.getBody()
+		}).render();
+
+var bbar= new Ext.PagingToolbar({
+            store: store,
+            pageSize : recPerPage,
+            displayInfo: true,
+            items   :    [
+                    '-'                    
+                    @output{@"infoport"()@@(,'@^label.recordsperpage@: ')@}@
+                    ,combo
+					@output{@"infoport"()@@(
+					,{xtype:'spacer',width:25}
+					,{xtype:'box', id:'report_data_as_of', autoEl:{tag:'div', html:'&nbsp;&nbsp;&nbsp;@^label.report_data_as_of@ @TIMESTAMP_1@ @TIMESTAMP_VS@ @TIMESTAMP_2@'}}
+                    )@}@
+					,{xtype:'box', id:'dynamic-filter-msg', hidden: true, autoEl:{tag:'div', html:'&nbsp&nbsp<img src="/images/exclamation--frame.png" title="@^label.dynamic_filter_message@"/>'}}
+            ],
+            displayMsg     :'@^label.dispayingrecords@ '+'{0} - {1} '+'@^label.of@ '+'{2}', 
+            emptyMsg       :'@^label.norecordstodisplay@',
+			doRefresh: function(){if(allowRefresh) {this.doLoad(this.cursor);}}	
+        });
+
+    combo.on('select', function(combo, record) {
+        if('@^label.show_all_records@' == record.get('id')) {
+            bbar.pageSize =-1;
+        } else {
+            bbar.pageSize = parseInt(record.get('id'), 10);
+        }
+            recPerPage = bbar.pageSize;
+        bbar.doLoad(0);
+
+    }, this);
+
+////////////////////////////////////////////////////////////////////headergroup///////////////////////////////////////////////////////////////////////////////
+  var columnGroupLabels = @.COLUMN_GROUP_LABELS@;
+  var label;
+  var columnCount=0;
+  var colspan=0;
+  var groupModel =	[];
+  var tempColumnGroupLabels=[];
+  for(var i=0; i<columnGroupLabels.length; i++){
+	if(columnGroupLabels[i]!='##BOTTOM##')
+		tempColumnGroupLabels.push(columnGroupLabels[i]);
+  }
+  columnGroupLabels=tempColumnGroupLabels;
+  groupModel.push({header: '', colspan: 1});
+	for(var i=0; i<columnGroupLabels.length; i++){
+		if(columnGroupLabels[i]){
+			if(label){
+				if(label==columnGroupLabels[i]){
+					colspan++;
+					if(i==columnGroupLabels.length-1){
+						groupModel.push({header: label, colspan: colspan, align: 'center'});
+					}
+				}else{
+					groupModel.push({header: label, colspan: colspan, align: 'center'});
+					label=columnGroupLabels[i];
+					colspan=1;
+				}
+			}else{
+				label=columnGroupLabels[i];
+				colspan++;
+			}
+		}else{
+			if(colspan>0){
+				groupModel.push({header: label, colspan: colspan, align: 'center'});
+				label=columnGroupLabels[i];
+				colspan=0;
+			}
+			groupModel.push({header: '', colspan: 1, align: 'center'});
+		}
+	}
+    @HEADER_GROUPING{@true(
+		group = new Ext.ux.grid.ColumnHeaderGroup({
+	        rows: [groupModel]
+	    });
+	)@}@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    var summary = new Ext.ux.grid.GridSummary();
+
+    var mainPanel = {
+    	xtype: 'panel',
+        id: 'main-panel',
+		layout: 'border',
+		region: 'center',
+        items :[
+            // If report has parameters add in the north
+            paramForm1
+            @HEADER_INFO{@""(
+            ,{
+                xtype: 'panel',
+                region: 'center'
+            }
+            )@@(
+                ,{
+                xtype: 'grid',
+                region: 'center',
+                //anchor: '0 -30',
+                layout: 'fit',
+                id:'grid',
+				header:false,
+                repid:decodeHtmlContent('@#REPORT_NAME@'),
+                //margin: '5 5 5 5',
+                viewConfig: {
+                    forceFit:true,
+                    emptyText: '@^label.norecordstodisplay@'
+                },    
+                colModel:gridColumnModel,
+                store: store,
+                plugins: [@SHOW_SUMMARY{@true(summary,)@}@
+                expander,filters @HEADER_GROUPING{@true(, group)@}@],
+
+                stripeRows: true,
+                bbar: bbar,
+				view: groupView,
+                @output{@"infoport"()@@(
+                tools:[/*,{
+                   id:'gear',
+                   handler: function(event, toolEl, panel){
+                        repToolsMenu.show(toolEl, 'tr-bl'); 
+                   }
+                }*/],
+                )@}@
+                // Add a listener to load the data only after the grid is rendered:
+                listeners: {
+                    render: function(t){
+                        var infoport_report_preference = '@#infoport_report_preference@';
+						if(infoport_report_preference == '' || infoport_report_preference == 'null'){//Load report data from here only if there is no default preference for the report.  This condition  is always  true when report is run explicitly .
+							onGridRender(t);
+						}
+                    }
+                }
+            }
+            )@
+            }@
+            // Add Grid in the center
+
+        ]
+    };
+	
+	//Below function is added for the hiding the Channel Name and Issue Status filter	
+// this function is not being called as it was decided to expose all filters and give user the freedom to play around
+	 function closeFiltersSection(){
+		try{
+		             //paramForm1.hide();
+		    for (var i=0;i<=paramForm1.form.items.items.length;i++){
+				if (paramForm1.form.items.items[i].helpText=='Channel Name'){
+					paramForm1.form.items.items[i].hidden=true;
+					paramForm1.form.items.items[i].hideLabel=true;
+				}
+
+				if (paramForm1.form.items.items[i].helpText=='Issue Status'){
+
+					paramForm1.form.items.items[i].hidden=true;
+					paramForm1.form.items.items[i].hideLabel=true;
+				}
+		
+		
+		    }
+	 
+	//debugger;
+		
+		}catch(er){}
+		//topbar.hide();
+	}
+   // closeFiltersSection();
+
+	
+	
+	function onGridRender(t){
+		var rpp;
+		if(Ext.getCmp('CmbID')){
+			var value=Ext.getCmp('CmbID').getValue();
+			if(value=='@^label.show_all_records@'){
+				rpp=-1;
+			}else{
+				rpp=value;
+			}
+		}else{
+			rpp=recPerPage;
+		}
+		
+		if(Ext.getCmp('paramForm') && Ext.getCmp('paramForm').getForm().items){
+			var params = Ext.getCmp('paramForm').getForm().items.items;
+			if(typeof parReq=='undefined' || parReq == null || parReq == ''){
+				for(var j = 0; j<params.length;j++){
+					if(!params[j].allowBlank && params[j].value==''){
+						return;
+					}
+				}
+			}else{		
+				var parForReq = decodeParamForReq(parReq);
+				var i=0;
+				for(v in parForReq) {
+					if (v.indexOf('pName_')!=-1) {
+						i++;
+					}
+				}
+				for(var j = 0; j<params.length;j++){
+					if(!params[j].allowBlank){
+						for(var k=0;k<i;k++){
+							if(params[j].id == parForReq['filtId_'+k]+'_'+parForReq['pName_'+k] && parForReq['pValue_'+k] =='')
+								return;
+						}
+					}
+					
+				}
+			}
+		}
+
+		var initParams = Ext.apply({}, {start:0, limit:rpp});                                                
+		t.store.load({params:initParams});
+		if(originalColLayout.length==0){//to ensure only one time population.
+			getTemplateType();
+			var cm = t.colModel;
+			for(var i=dataColStart; i<cm.getColumnCount(); i++){
+				originalColLayout[i-dataColStart]=cm.getDataIndex(i);
+			}
+		}
+	}
+    var filterTip= ['@^label.show_filters@', '@^label.hide_filters@'];
+
+    var errormsg = "@ERR_MSG@";
+    var errorbar = {
+                //xtype: 'box',
+                id: 'errmsg',
+                xtype: 'tbfilltext',
+                style:' background-color: #ffffff; border: 1px solid #ee0000; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #ee0000; padding: 5px 0 5px 0; margin-bottom: 5px; width: 100%; text-align: center; ',
+                hidden:true,
+                autoEl: {
+                    html: errormsg
+                }
+            };
+        if(errormsg) {
+           errorbar.hidden = false;
+        }
+        
+    var topbar = new Ext.Toolbar({
+        region : 'north',
+        height:30,
+        margins: '0 0 0 5',
+		cls: 'topbarCls',
+        items:[
+            {
+            xtype: 'box',
+            id: 'title',
+            autoEl: {
+            html: '@#REPORT_NAME@'
+            }
+            }
+            ,{xtype: 'tbfillspacer'}
+            ,errorbar
+            ,'->'
+			,{id:'dynamic_dashboards', text:'',tooltip:'@^label.dynamic_dashboards@',iconCls:'dynamic-chart-configure', hidden:true, handler:function() {createDynamicChart();}}
+			,{id:'saved_views', text:'',tooltip:'@^label.view_list@',iconCls:'dynamic-chart-listview', hidden:true, handler:availableViewList}
+            ,{xtype: 'tbfillspacer'}
+			,prefCombo
+			,'-'
+			,{xtype: 'button',
+				id:'prefSave',
+				text: '@^label.save@',
+			handler: savePreferenceAs
+			}
+			,'-'
+			,{xtype: 'button',
+				id:'prefDelete',
+				text: '@^label.delete@',
+				disabled: true,
+			handler: removePreferences
+			}
+			 @reqNotFromZaplet(
+		        @CUSTOMIZE_BUTTON_SECTION(
+			    ,{
+					xtype:'tbspacer'
+					,width:16
+				}
+				/*,{
+					iconCls:'chart-customize',
+					tooltip: '@^label.customize@',
+					id:'customize',
+					handler: menuItemHandler
+			    }*/
+				,{
+					xtype:'tbspacer'
+					,width:16
+				}
+		        )@
+		        ,{
+		            iconCls:'reassignlink',
+		            tooltip: '@^label.email@',
+		            id:'email',
+		            handler: menuItemHandler
+		        }
+		        ,{
+		            iconCls:'report-export-excel',
+		            tooltip: '@^label.exportxl@',
+		            id:'export',
+		            handler: menuItemHandler
+		        }
+		        ,{
+		            iconCls:'report-export-pdf',
+		            tooltip: '@^label.exportpdf@',
+		            id:'print',
+		            handler: menuItemHandler
+		        }
+		        ,{
+		            iconCls:'chart-print',
+		            tooltip: '@^label.printprvw@',
+		            id:'printpreview',
+		            handler: menuItemHandler
+		        }
+				,{
+					xtype:'tbspacer'
+					,width:5
+				}
+				,{xtype: 'button',
+				id:'doneBtn',
+				/*text: '@^label.done@',
+				tooltip: '@^label.done@',*/
+				text: 'Close',
+				tooltip: 'Close',
+				handler: function(){parent.window.close()}
+				}
+			)@
+            /*{
+                text:'@title.popup_filters@',
+                id: 'toggleFilter',
+                tooltip: filterTip[0],
+                enableToggle: true,
+                hidden: !hasParams,
+                toggleHandler: onItemToggle
+            },
+            {
+                text: '@^label.done@',
+                id: 'doneBtn',
+                tooltip: '@^label.done@',
+                handler: backToReports
+            }*/
+            
+        ]
+        
+    });
+	
+    function availableViewList(){
+			if(listView && listView.items){
+				for(var i=0; i<listView.items.items.length; i++){					
+					if(listView.items.items[i].text == selectedView)
+						listView.items.items[i].setIconClass('dynamic-chart-save');
+					else
+						listView.items.items[i].setIconClass('');
+				}
+			}	
+			var dynamicDashListView = window.document.getElementById('dynamic-dashboard')?window.document.getElementById('dynamic-dashboard').contentWindow.listViewMenu : null;
+			if(dynamicDashListView && dynamicDashListView.items){
+				for(var i=1; i<dynamicDashListView.items.items.length; i++){
+					if(!dashViewsAdded[dynamicDashListView.items.items[i].text]){
+						dashViewsAdded[dynamicDashListView.items.items[i].text] = 1;
+						var iconCls = (dynamicDashListView.items.items[i].text == selectedView)? 'dynamic-chart-save' : '';
+						if(listView && listView.items && listView.items.items.length >0){
+							if(i<= listView.items.items.length){
+								continue;
+							}
+							viewid = i;						
+							listView.add(new Ext.menu.Item({id:'infocenter'+viewid, text: dynamicDashListView.items.items[i].text, iconCls:iconCls, handler:loadSelectedView}));
+						}else{
+							viewid = i;
+							listView.add(new Ext.menu.Item({id:'infocenter'+viewid, text: dynamicDashListView.items.items[i].text, iconCls:iconCls, handler:loadSelectedView}));
+						}
+					}
+				}
+			}
+			if(listView && listView.items && listView.items.items.length >0){
+				var posArr = Ext.getCmp('saved_views').getPosition();
+				listView.showAt([posArr[0],25]);
+			}
+		}
+
+	// Finally, build the main layout once all the pieces are ready.  This is also a good
+	// example of putting together a full-screen BorderLayout within a Viewport.
+    var viewPort = new Ext.Viewport({
+		layout: 'border',
+		title: 'Ext Layout Browser',
+        defaults:{
+            @output{@"infoport"()@@(
+                margins: '5 0 0 5'
+            )@}@
+        },
+		items: [
+            @output{@"infoport"()@@(
+            topbar,
+            )@}@
+			mainPanel
+		],
+        renderTo:Ext.getBody()
+		,listeners: {
+                    afterrender: function(t){
+						if('@#loadFusionCharts@' == 'true'){
+							if(Ext.getCmp('dynamic_dashboards'))Ext.getCmp('dynamic_dashboards').setVisible(true);
+							if(Ext.getCmp('saved_views'))Ext.getCmp('saved_views').setVisible(true);
+						}
+                    }
+					,resize:function(t){
+						iframeHeight = t.getHeight() - 20;
+						iframeWidth = t.getWidth() - 30;
+					}
+                }
+    });
+    viewPort.doLayout();
+
+});
+
+</SCRIPT>
+@%'report/include/reports_include_contextform_grid.xhtmp'@
+</body>
+</html>

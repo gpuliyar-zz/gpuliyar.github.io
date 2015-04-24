@@ -1,0 +1,30 @@
+  declare
+
+  verror_code varchar2(4000);
+  verror_desc varchar2(4000);
+
+begin
+
+  execute immediate ('create table MS_RGA_SUBSC_RESP_TEMP as select * from MS_RGA_SUBSCRIPTION_RESPONSE');
+
+  execute immediate ('truncate table MS_RGA_SUBSCRIPTION_RESPONSE reuse storage');
+  
+  execute immediate ('delete from MS_RGA_SUBSCRIPTION_RESPONSE');
+
+  execute immediate ('alter table MS_RGA_SUBSCRIPTION_RESPONSE modify user_id varchar2(4000)');
+
+  execute immediate('insert into MS_RGA_SUBSCRIPTION_RESPONSE select * from MS_RGA_SUBSC_RESP_TEMP');
+
+  execute immediate ('drop table MS_RGA_SUBSC_RESP_TEMP');
+  
+  dbms_output.put_line('Success');
+
+exception
+  when others then
+  
+    verror_code := sqlcode;
+    verror_desc := sqlerrm;
+    dbms_output.put_line('Error encountered...' || verror_code ||
+                         '.......' || verror_desc);
+  
+end;

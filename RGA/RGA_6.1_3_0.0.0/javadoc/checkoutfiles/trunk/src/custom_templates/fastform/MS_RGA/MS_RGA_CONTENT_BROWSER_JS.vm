@@ -1,0 +1,297 @@
+#parse("fastform/MS_RGA/MS_RGA_COMMON_JS.js")
+<style>
+
+.x-processed-class{
+        text-decoration: line-through;
+        color: #777;
+    }
+
+
+</style>
+
+
+<script>
+
+
+F.onLoad(function (){
+
+
+showToolbar_new();
+
+//F.getTab('MSAI_26').goToTab(1);
+F.CONTENT_TITLE.disable();
+F.CONTENT_DESCRIPTION.disable();
+
+F.CONTENT_PROVIDER.makeRequired();
+F.CONTENT_CATEGORY.makeRequired();
+F.CONTENT_VERSION.makeRequired();
+
+F.AOC_OWNER_ORG.makeRequired();
+F.AOC_OWNER.makeRequired();
+F.AOC_COMMENTS.makeRequired();
+F.AOC_RESTRICT_ACCESS_TO.makeRequired();
+
+F.REQ_OWNER_ORG.makeRequired();
+F.REQ_OWNER.makeRequired();
+F.REQ_COMMENTS.makeRequired();
+F.REQ_RESTRICT_ACCESS_TO.makeRequired();
+
+F.DD_PROCESS_CODE.write('MS_RGA_CONTENT_BROWSER_WORKFLOW');
+
+});
+
+
+
+F.onSubmit(function (){
+     
+     if (!Ext.getCmp('myTree')){ 
+     alert('$NoContentTreeGridErrorMsg');
+     return false;
+     }
+     
+    var json=getContentJSON();
+
+
+     if(json.length===0){
+     alert('$ZeroNodeErrorMsg');
+     return false; 
+     }
+      
+     var jsonStr=JSON.stringify(json);
+     //console.log(jsonStr);
+     F.CONTENT_JSON.write(jsonStr);
+     //console.log(F.CONTENT_JSON.read());
+     return true;
+     
+});
+
+
+function fnCreateTreePanel()
+{
+
+
+if(F.CONTENT_PROVIDER.read()=='' || F.CONTENT_CATEGORY.read()=='' || F.CONTENT_VERSION.read()=='' ){
+  if(F.CONTENT_PROVIDER.read()==''){
+     alert('$ContentProviderCheck');}
+  else if(F.CONTENT_CATEGORY.read()==''){
+     alert('$ContentCategoryCheck');}
+  else if(F.CONTENT_VERSION.read()==''){
+     alert('$ContentVersionCheck');}
+}
+else{
+if(Ext.getCmp('myTree')){ 
+   Ext.getCmp('myTree').destroy();
+   }
+
+Ext.onReady(function(){
+   makeTreePanel();
+   });
+}
+}
+
+
+function makeTreePanel(){
+var vContentProvider=F.CONTENT_PROVIDER.read();
+var vContentCategory=F.CONTENT_CATEGORY.read();
+var vContentVersion =F.CONTENT_VERSION.read();
+
+toggleAccordion(document.getElementById("MSAI_103"));
+
+var tree = new Ext.tree.TreePanel({
+    id:'myTree',
+    renderTo:'MSAI_60',
+    useArrows: true,
+    autoScroll: true,
+    animate: true,
+    //enableDD: true,
+    containerScroll: true,
+    //border: false,
+    // auto create TreeLoader
+    //dataUrl: 'get-nodes.php',
+    height:400,
+    width:650,
+    containerScroll: true,
+    root: {
+        nodeType: 'async',
+        text: 'Ext JS Sample Root of Content Browser Tree Panel',
+        draggable: false,
+        id: 'myTreeRoot'
+        //,children: pRootJSON
+    },
+    rootVisible: false,
+    multiSelect: true,
+
+    loader: new Ext.tree.TreeLoader({
+
+                                dataUrl:'Grciajaxservlet/ajax/ContentBrowserDetails',
+
+                                   
+                                      listeners:{
+                                                  beforeload: function(store, operation, eOpts) {
+                                                  //console.log('in TreeLoader->Listeners:beforeload');
+                                                  
+                                                  //console.log(operation);
+                                                  this.baseParams.contentProvider=vContentProvider;
+                                                  this.baseParams.title=vContentCategory;
+                                                  this.baseParams.version=vContentVersion;
+                                                  
+                                                  if(operation.id!=='myTreeRoot') {
+                                                    this.baseParams.parentName=operation.id;
+                                                    }else {
+                                                    this.baseParams.parentName='';
+                                                    }
+                                                    //console.log(this.baseParams);
+                                                                                                }
+                                                 }
+                                              , createNode: function(attr) {
+                                                     //code to expand the nodes if children exists in the response
+                                                     if(attr.children){
+                                                        if(attr.children.length>0){
+                                                           attr.expanded=true;
+                                                         }
+                                                      }
+                                                 
+                                               //assign initial attribute values of checked and checkAllChilds
+
+                                               //attr.checked=false;
+                                               //attr.cls='x-processed-class';
+
+                                                 attr.checkAllChilds=false;
+                                                 if(typeof attr.checked==='undefined'){
+                                                      attr.checked=false;
+                                                    }  
+                                                    var newNode=Ext.tree.TreeLoader.prototype.createNode.call(this, attr);
+                                                   
+                                                    var parNode=Ext.getCmp('myTree').getNodeById(this.baseParams.parentName);
+                                                    
+                                                    if(parNode){
+                                                      
+                                                      if(parNode.attributes.checkAllChilds===true) {
+                                                       newNode.attributes.checked=true;
+                                                       newNode.attributes.checkAllChilds=true;
+                                                      }
+                                                    }
+
+                                                    return newNode;
+                                                }
+                                                
+                                     }),
+
+    listeners: {
+        
+         checkchange: function(node, checkedStatus, options) {
+					if(checkedStatus) { 
+					     //node.expand(true);  //commented because no need to expand the child nodes
+                          F.CONTENT_ID.write(node.id);
+                          F.CONTENT_TITLE.write(node.text);
+                          F.CONTENT_ID.callInfolet();}
+					else {
+                          F.CONTENT_ID.write('');
+                          F.CONTENT_TITLE.write('');
+                          F.CONTENT_DESCRIPTION.write('');
+                         }
+						 
+						 //if checked then prompt user to confirm to select all the childs
+						 if(checkedStatus){
+								//Ext.Msg.confirm('$nodeSelectionConfirmTitle', 
+												//'$nodeSelectionConfirmMsg', 
+												//function(btn, text){
+												//	if (btn === 'yes'){
+													//node.attributes.checkAllChilds=true;
+														node.cascade(function(nn) { 
+																tree.suspendEvents(false);
+																var ui = nn.getUI();
+																ui.toggleCheck(checkedStatus);
+																nn.attributes.checkAllChilds=checkedStatus;
+																tree.resumeEvents();
+															});
+													//}
+												});
+						 }else {
+						 //un-check all the child nodes if the current node is un-checked
+						  node.cascade(function(nn) { 
+									var ui = nn.getUI();
+									tree.suspendEvents();
+									ui.toggleCheck(checkedStatus);
+                                                                        nn.attributes.checkAllChilds=false;
+									tree.resumeEvents();
+								});
+						 }
+						 },
+           click:function( node, e ) {
+                 F.CONTENT_ID.write(node.id);
+                 F.CONTENT_TITLE.write(node.text);
+                 F.CONTENT_ID.callInfolet();
+                 },
+           afterrender:function(){
+				//console.log('afterrender');
+
+				}
+	 ,load:function(node){
+              //console.log('in load');
+				
+				 var delay=500;//.5 seconds
+				 var GraphEditor = {};
+					GraphEditor.mask = new Ext.LoadMask(Ext.getBody(), {msg:'${CrtChnValidationMsgLoad}'});
+					GraphEditor.mask.show();
+					tree.getRootNode().collapse();
+					setTimeout(function(){
+				
+					GraphEditor.mask.hide();
+					tree.getRootNode().expand();
+		
+		
+    //your code to be executed after 1 seconds
+    },delay);
+             }	
+            } //listeners ends here
+           });  //Tree Panel ends here
+			
+	
+      //tree.getRootNode().expand();
+	 // GraphEditor.mask.hide();
+
+}
+
+function getMyNode(node){
+    var myNode=new Object();
+    myNode.text=node.text;
+    myNode.id=node.id;
+    myNode.leaf=node.leaf;
+    myNode.checked=node.attributes.checked;
+    myNode.grcfobjectType=node.attributes.grcfobjectType;
+    myNode.expanded=node.expanded
+
+  return myNode;
+}
+
+ 
+
+
+function getContentJSON(){
+
+
+
+//console.log('in populateContentJSON()');
+var selNodes=Ext.getCmp('myTree').getChecked();
+var selCount=0;
+var selNodesInfoArr = new Array(); 
+
+//console.log(selNodes);
+
+Ext.each(selNodes, function(node){
+               selCount++;
+               selNodesInfoArr.push(getMyNode(node));
+              });
+
+//console.log(selCount);
+//console.log(selNodesInfoArr);
+
+
+
+return selNodesInfoArr;
+
+
+}
+
+</script>

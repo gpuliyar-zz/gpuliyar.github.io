@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><VIEWS_SPEC xmlns="http://www.metricstream.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metricstream.com ms_application_schema.xsd">
+<!--$Revision: 1.30.2.12.2.2.2.9.2.8 $-->
+<!--$Author: prao $-->
+<PLATFORM_DETAILS>
+<PLATFORM_VERSION>6.0</PLATFORM_VERSION>
+<BUILD_VERSION>4.11.0</BUILD_VERSION>
+</PLATFORM_DETAILS>
+<VIEW_NAME>MS_RGA_VIEW_SUBSCRP_V</VIEW_NAME>
+<OBJECT_ID>MS_RGA_VIEW_SUBSCRP_V</OBJECT_ID>
+<VIEW_TEXT>(CHANNEL_ID,CHANNEL_NAME,CHANNEL_TYPE_DISP,SOURCE_ID,SOURCE_STATUS,SOURCE_TYPE_DISP,INFOLET_NAME,NOTIFY_USERS,CHANNEL_ACTIVE_DISP,EDIT_URL,CHANNEL_DESCRIPTION,SERVER_ADD_URL,SCR_USER_NAME,EMAIL_FROM,KEYWORDS,SOURCE_DESCRIPTION,SERVER_PARAMETERS,USER_ID,PID,CUST_COL1,CUST_COL2,CUST_COL3,CUST_COL4,CUST_COL5) AS SELECT cnlmaster.channel_id, cnlmaster.channel_name,
+          (SELECT ms_apps_utilities.get_display_value
+                                 (users.enterprise_id,
+                                  'MS RGA Channel Type',
+                                  cnlmaster.channel_type
+                                 )
+             FROM DUAL) AS channel_type_disp,
+          details.source_id,
+          (SELECT ms_apps_utilities.get_display_value
+                                   (users.enterprise_id,
+                                    'MS RGA Channel Status',
+                                    details.active
+                                   )
+             FROM DUAL) AS source_status,
+          (SELECT ms_apps_utilities.get_display_value
+                           (users.enterprise_id,
+                            'MS RGA Channel Source Type',
+                            details.source_type
+                           )
+             FROM DUAL) AS source_type_disp,
+          DECODE (cnlmaster.channel_type,
+                  '1', 'N/A',
+                  cnlmaster.infolet_name
+                 ) AS infolet_name,
+          DECODE
+             (cnlmaster.channel_type,
+              '1', 'N/A',
+              (SELECT ms_concat
+                              (ms_apps_utilities.get_user_full_name (a.user_id)
+                              )
+                 FROM ms_rga_channel_notify_users a
+                WHERE channel_id = cnlmaster.channel_id)
+             ) AS notify_users,
+          (SELECT ms_apps_utilities.get_display_value
+                             (users.enterprise_id,
+                              'MS RGA Channel Status',
+                              cnlmaster.active
+                             )
+             FROM DUAL) AS channel_active_disp,
+          ms_apps_utilities.get_edit_url
+             (ms_apps_utilities.get_infolet_id ('MS RGA CREATE CHANNEL'),
+              cnlmaster.pid
+             ) edit_url,
+          cnlmaster.channel_description, details.server_add_url,
+          details.scr_user_name, details.email_from, details.keywords,
+          details.source_description, details.server_parameters, user_id, pid,
+           (select ms_rga_utilities.get_user_name(user_id) from dual) AS cust_col1, NULL AS cust_col2, NULL AS cust_col3,
+          NULL AS cust_col4, NULL AS cust_col5
+     FROM ms_rga_channel_master cnlmaster,
+          ms_rga_channel_details details,
+          si_users_t users
+    WHERE cnlmaster.channel_id = details.channel_id
+     AND cnlmaster.created_by = users.user_id
+      AND cnlmaster.active = details.active
+     AND cnlmaster.channel_id IN (SELECT request.channel_id
+                                   FROM ms_rga_subscription_request request ) </VIEW_TEXT>
+</VIEWS_SPEC>

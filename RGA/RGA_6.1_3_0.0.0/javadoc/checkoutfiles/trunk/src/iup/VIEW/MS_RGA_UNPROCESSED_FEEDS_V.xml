@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><VIEWS_SPEC xmlns="http://www.metricstream.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metricstream.com ms_application_schema.xsd">
+<!--$Revision: 1.30.2.12.2.2.2.9.2.8 $-->
+<!--$Author: prao $-->
+<PLATFORM_DETAILS>
+<PLATFORM_VERSION>6.1</PLATFORM_VERSION>
+<BUILD_VERSION>4.1.1.0</BUILD_VERSION>
+</PLATFORM_DETAILS>
+<VIEW_NAME>MS_RGA_UNPROCESSED_FEEDS_V</VIEW_NAME>
+<OBJECT_ID>MS_RGA_UNPROCESSED_FEEDS_V</OBJECT_ID>
+<VIEW_TEXT>("BODY","SUBJECT","RECIPIENT","SENDER","SERVER") AS SELECT Feed.Body,
+    Feed.Subject,
+    Feed.Recipient,
+    Feed.Sender, 
+    FEED.SERVER
+  FROM Ms_Rga_Feed_Aggregator_v Feed</VIEW_TEXT>
+</VIEWS_SPEC>

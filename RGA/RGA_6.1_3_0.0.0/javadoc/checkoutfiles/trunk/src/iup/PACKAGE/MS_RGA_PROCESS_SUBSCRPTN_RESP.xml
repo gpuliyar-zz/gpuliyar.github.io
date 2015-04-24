@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="UTF-8"?><PACKAGE_SPEC xmlns="http://www.metricstream.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metricstream.com ms_application_schema.xsd">
+<!--$Revision: 1.30.2.12.2.2.2.9.2.8 $-->
+<!--$Author: prao $-->
+<PLATFORM_DETAILS>
+<PLATFORM_VERSION>6.1</PLATFORM_VERSION>
+<BUILD_VERSION>4.2.2.0</BUILD_VERSION>
+</PLATFORM_DETAILS>
+<STORED_PROCEDURE_NAME>MS_RGA_PROCESS_SUBSCRPTN_RESP</STORED_PROCEDURE_NAME>
+<OBJECT_ID>MS_RGA_PROCESS_SUBSCRPTN_RESP</OBJECT_ID>
+<OBJECT_TYPE>PACKAGE</OBJECT_TYPE>
+<TEXT>Package ms_rga_process_subscrptn_resp As
+/**
+* ======================================================================&lt;br/&gt;
+* Project: GRC Intelligence&lt;br/&gt;
+* Description: Processes the unprocessed channel response alerts in Ms_Rga_Channel_Response_Dtls,sends notification and updates the processed flag accordingly  &lt;br/&gt;
+* DB impact: YES&lt;br/&gt;
+* Commit inside: YES&lt;br/&gt;
+* Rollback inside: NO&lt;br/&gt;
+* ----------------------------------------------------------------------&lt;br/&gt;
+* * ======================================================================&lt;br/&gt;
+* @headcom
+* */
+/**
+* Associative array-Ms_Rga_Subscription_Response Rowtype
+*/
+  Type Ty_Ms_Rga_Scrptn_Resp_Tbl Is Table Of Ms_Rga_Subscription_Response%Rowtype Index By Pls_Integer;
+/**
+* Associative array-Ms_Rga_Subscrptn_Notifications Rowtype
+*/
+  Type Ty_Ms_Rga_Scrptn_Notif_Tbl Is Table Of Ms_Rga_Subscrptn_Notifications%Rowtype Index By Pls_Integer;
+/**
+* Send Email record type.
+*/
+  Type Ty_Send_Email_Rec Is Record(
+    Priority        Si_Email_Queue.Priority%Type, /* 3-Low, 2-Normal, 1-High */
+    Recipients      Varchar2_Array,
+    Enterprise_Id   Si_Ent.Enterprise_Id%Type,
+    Subject         Si_Email_Queue.Subject%Type,
+    Template        Si_Email_Queue.Template%Type,
+    Param_names     Varchar2_Array,
+    Param_values    Clob_Array,
+    Error_code      Number,
+    Error_message   Varchar2(100),
+    Send_Email      Char(1) Default 'N',
+    Notify_By_Email Char(1) Default 'N');
+/**
+* Associative array-Send email record type
+*/
+  Type Ty_Send_Email_Tbl Is Table Of Ty_Send_Email_Rec Index By Pls_Integer;
+-- no comments
+  Procedure Pr_Populate_Subscrptn_Resp(o_Error_Code Out Number,
+                                       o_Error_Desc Out Varchar2);
+/**
+* Processes the unprocessed channel alerts,sends notification and updates the status of processed alerts. &lt;br/&gt;
+* @param o_Error_Code Error code
+* @param o_Error_Desc Error description
+* @param i_Suppress_Notifications Email suppress flag (No emails, if its 'Y')
+* @throws No_Data_found, if  there are no channel records to be processed.&lt;br/&gt;
+* @throws Others , when any other exception encountered in processing, updates o_Error_Code with error code and o_Error_Desc with error message.
+*/ 
+  Procedure Pr_Populate_Subscrptn_Resp(o_Error_Code             Out Number,
+                                       o_Error_Desc             Out Varchar2,
+                                       i_Suppress_Notifications In Char);
+
+  --Procedure Pr_Resend_Notificatns(o_Error_Code            Out Number,
+  --                                o_Error_Desc            Out Varchar2,
+ --                                 i_Considr_Todays_Notifs In Boolean Default True);
+
+End Ms_Rga_Process_Subscrptn_Resp; </TEXT>
+<TEXT_BODY>Package Body ms_rga_process_subscrptn_resp As
+
+  g_Success_Code Constant Number := Ms_Rga_Utilities.g_Success_Code;
+  g_Success_Mesg Constant Varchar2(100) := Ms_Rga_Utilities.g_Success_Mesg;
+  g_Module       Constant Varchar2(10) := Ms_Rga_Utilities.g_Module_Name;
+  g_Package_Name Constant Varchar2(50) := 'Ms_Rga_Process_Subscrptn_Resp';
+  g_Action Varchar2(12) := 'SUBSRESP';
+  g_Scrptn_Resp_Id_Prefix  Constant Varchar2(10) := 'SUBS_RESP_';
+  g_Scrptn_Notif_Id_Prefix Constant Varchar2(20) := 'SUBS_NOTIF_';
+  g_Suppress_Notification Char(1);
+
+  g_High   Constant Number := Ms_Rga_Utilities.g_High;
+  g_Medium Constant Number := Ms_Rga_Utilities.g_Medium;
+  g_Low    Constant Number := Ms_Rga_Utilities.g_Low;
+  g_Err    Constant Varchar2(100) := Ms_Apps_Utilities.g_err;
+  g_PkgDebugPriority Number := g_High; -- set to medium, logging relaxed at pkg level
+
+  Cursor Ms_Rga_Unproc_Scrptn_Resp_Cur Is
+    Select /*+ Index(a MS_RGA_CHNL_RESP_DTLS_IDX_01)
+                                   Index(a MS_RGA_CHNL_RESP_DTLS_IDX_02)
+                                   Index(b MS_RGA_SCRPTN_REQ_IDX_01)
+                               */
+     g_Scrptn_Resp_Id_Prefix || Lpad(Ms_Rga_Subs_Resp_Seq.Nextval, 10, 0) Subs_Response_Id,
+     b.Subscription_Id Subscription_Id,
+     A.Response_Id Channel_Response_Id,
+     b.chn_created_by User_Id,
+     a.Response_Date Response_Date,
+     0 Reviewed,
+     Null Reviewed_Date,
+     0 Follow_Up,
+     Null Follow_Up_Date,
+     Null Actions,
+     A.Feed_Data_Id Pid,
+     b.Filter_Keywords Filter_Keywords,
+     b.Notify_By_Email Notify_By_Email,
+     c.Body Chnl_Resp_Content,
+     c.Subject Subject
+      FROM Ms_Rga_Channel_Response_Dtls A,
+           ms_rga_subs_channel_chn      b,
+           Ms_Rga_Feed_Aggregator_V     c
+     Where a.Channel_Id = b.channel_name -- Get the list of Subscribers for a Channel.
+       And a.Feed_Data_Id = c.Feed_Data_Id -- Consider Content(Body) for Keyword filtering.
+       AND c.Processed_Flag = c.Processed_Flag -- This condition is used for invoking index.
+       And b.status = 1 --This condition is used to identify only those subscriptions which are active i,e status='Subscribe'
+          --Commented by vishnu since the subscription is active by default
+          --And    b.Status         = 'O'                         -- Consider only Active or Opened subscription requests.
+          --And    Response_Id = 'RSP_000000000024713'          -- For Testing
+          --And    a.created_on &lt; SYSDATE-(1800/(24*60*60))       -- Bug 20512, 29240, 29457. To prevent race condition, pick only those records that have been inserted half an hour ago
+       And (a.Processed Is Null Or a.Processed = 'U'); -- Consider all unprocessed Channel_Response entries.
+
+  Type Ty_Unproc_Scrptn_Resp_Cur Is Table Of Ms_Rga_Unproc_Scrptn_Resp_Cur%Rowtype Index By Pls_Integer;
+  Type Ty_Si_Users Is Table Of Si_Users_t%Rowtype Index By Varchar2(100);
+
+  /*Procedure meant for logging progress, errors and exceptions.*/
+  Procedure Dbg(i_Msg          In Varchar2,
+                i_Msg_Priority In Number Default g_PkgDebugPriority,
+                i_Msg_Type     In Varchar2 Default Ms_Apps_Utilities.g_stmt) Is
+    x_Msg Varchar2(4000) := Null;
+  Begin
+    If i_Msg_Priority &lt;= g_PkgDebugPriority Then
+      x_Msg := g_package_name || '.';
+      x_Msg := x_Msg || i_Msg;
+      Ms_Rga_Utilities.Pr_Monitor_Progress(x_Msg,
+                                           i_Msg_Priority,
+                                           i_Msg_Type);
+    Else
+      Null;
+    End If;
+  Exception
+    When Others Then
+      Null;
+  End Dbg;
+
+  -- Build type for Subscription_Response, the type for sending Email and
+  -- the type for tracking notifications.
+  Function Fn_Build_Requisite_Types(io_Unproc_Scrptn_Resp_Recs In Out Nocopy Ty_Unproc_Scrptn_Resp_Cur,
+                                    o_Scrptn_Resp_Recs         Out Ty_Ms_Rga_Scrptn_Resp_Tbl,
+                                    o_Send_Email_Tbl           Out Ty_Send_Email_Tbl,
+                                    o_Scrptn_Notif_Recs        Out Ty_Ms_Rga_Scrptn_Notif_Tbl,
+                                    o_Error_Code               Out Number,
+                                    o_Error_Desc               Out Varchar2)
+    Return Boolean Is
+    x_Proc_Name          Varchar2(100) := 'Fn_Build_Requisite_Types=&gt; ';
+    x_Return             Boolean := True;
+    x_Keyword_List       Ms_Rga_Subscription_Request.Filter_Keywords%Type;
+    x_Regexed_List       Varchar2(4000);
+    x_Keyword_Match_Cnt  Number;
+    x_Scrptn_Rec_Cnt     Number := 0;
+    x_Notifications_Cnt  Number := 0;
+    x_Scrptn_Noficatn_Id Ms_Rga_Subscrptn_Notifications.Notification_Id%Type;
+    x_Param_Names        Varchar2_Array := Varchar2_Array();
+    x_Param_Values       Clob_Array := Clob_Array();
+    x_Recipients         Varchar2_Array := Varchar2_Array();
+    x_Email_Note         Si_Sp_Email_Info.Param_Value%Type;
+    x_Boiler_Plate       Si_Sp_Email_Info.Param_Value%Type;
+    x_Copyright          Si_Sp_Email_Info.Param_Value%Type;
+    x_Si_Users           Ty_Si_Users;
+    x_User_Full_Name     Varchar2(1000) := Null;
+    x_User_Id            Si_Users_T.User_Name%Type := Null;
+    x_attachment         varchar2(4000) := ' ';
+    V_Metric_ID          NUMBER;
+    v_flag               number(1);
+    v_instance_id        MS_RGA_ATTACHMENT_V.instance_id%type;
+    vpid                 MS_RGA_ATTACHMENT_V.process_instance_id%type;
+    v_column_seq         SI_METRIC_COLUMNS.Column_Sequence%type;
+    v_Enterprise_id      SI_USERS.enterprise_id%type;
+  Begin
+    -- Build type to get all Application Users. Type to be indexed by User_Id.
+    -- Required for getting mail-id, full-name, and enterprise-id.
+    For each_rec In (Select * From Si_Users_t) -- Do I need to consider all-users without any condition?
+     Loop
+      x_Si_Users(each_rec.User_Id) := each_rec;
+    End Loop;
+  
+    -- Initialize email related static parameters.
+    x_Email_Note   := 'Note : This message and all attachments should be considered confidential and proprietary to Quality Stream.';
+    x_Boiler_Plate := 'Alert automatically generated by MetricStream.';
+    x_Copyright    := 'Copyright @ MetricStream Inc. 1999-2013 All rights reserved.';
+  
+    x_Param_Names.Extend(9);
+    /* Set up the parameter names array */
+    x_Param_Names(1) := 'USER_FULL_NAME';
+    x_Param_Names(2) := 'EMAIL_NOTE';
+    x_Param_Names(3) := 'BOILERPLATE_TEXT';
+    x_Param_Names(4) := 'COPYRIGHT_INFORMATION';
+    x_Param_Names(5) := 'SUBJECT_HEADER';
+    x_Param_Names(6) := 'SUBJECT_BODY';
+    x_Param_Names(7) := 'PROC_INSTANCE_ID';
+    x_Param_Names(8) := 'PUSH_INFO_ID';
+    x_Param_Names(9) := 'ATTACH_FILE';
+  
+    x_Param_Values.Extend(9);
+    /* Initialize Param Values array */
+    x_Param_Values(2) := x_Email_Note;
+    x_Param_Values(3) := x_Boiler_Plate;
+    x_Param_Values(4) := x_Copyright;
+    x_Param_Values(5) := Null; --Subject;
+    x_Param_Values(6) := Null; --Subject_Body;
+    x_Param_Values(7) := Null; --To_Char(Pid);
+    x_Param_Values(8) := To_Char(Ms_Apps_Utilities.Get_Infolet_Id('MS RGA Populate Subscription Response'));
+    x_Param_Values(9) := x_attachment; --Attach_File
+  
+    x_Recipients.Extend;
+  
+    For i In io_Unproc_Scrptn_Resp_Recs.First .. io_Unproc_Scrptn_Resp_Recs.Last Loop
+      Dbg(x_Proc_Name || 'Inside main loop.');
+      Begin
+        x_Keyword_List := io_Unproc_Scrptn_Resp_Recs(i).Filter_Keywords; -- Subscriber's preferred keywords
+      
+        -- Determine if "Channel_Response_Dtls.(Body/Subject)" contains Subscriber's preferred keywords.
+        If x_Keyword_List Is Not Null Then
+          x_Regexed_List := Ms_Rga_Utilities.Fn_Enrich_Keyword_List(x_Keyword_List,
+                                                                    ',');
+        
+          --Below Code Added By vishnu on 12/05/2012 to resolve the bug id 68065 
+          -- Below Code will help in matching the exact keyword
+        
+          Select Count(1)
+            Into x_Keyword_Match_Cnt
+            From (Select io_Unproc_Scrptn_Resp_Recs(i) .Chnl_Resp_Content As Chnl_Resp_Content,
+                         io_Unproc_Scrptn_Resp_Recs(i) .Subject As Subject
+                    From Dual) z
+           Where (Regexp_Like(z.Chnl_Resp_Content,
+                              '[^A-Za-z1-9]' || x_Regexed_List ||
+                              '[^A-Za-z1-9]',
+                              'i') or
+                 Regexp_Like(z.Subject,
+                              '[^A-Za-z1-9]' || x_Regexed_List ||
+                              '[^A-Za-z1-9]',
+                              'i') or
+                 Regexp_Like(z.Chnl_Resp_Content,
+                              '( )' || x_Regexed_List || '$',
+                              'i') or
+                 Regexp_Like(z.Subject,
+                              '( )' || x_Regexed_List || '$',
+                              'i') or
+                 Regexp_Like(z.Chnl_Resp_Content,
+                              '^' || x_Regexed_List || '( )',
+                              'i') or
+                 Regexp_Like(z.Subject,
+                              '^' || x_Regexed_List || '( )',
+                              'i') or
+                 Regexp_Like(z.Chnl_Resp_Content,
+                              '^' || x_Regexed_List || '$',
+                              'i') or
+                 Regexp_Like(z.Subject, '^' || x_Regexed_List || '$', 'i'));
+        
+        End If;
+      
+        If x_Keyword_Match_Cnt &gt; 0 Or x_Keyword_List Is Null Then
+          x_Scrptn_Rec_Cnt := x_Scrptn_Rec_Cnt + 1;
+        
+          o_Scrptn_Resp_Recs(x_Scrptn_Rec_Cnt).Subs_Response_Id := io_Unproc_Scrptn_Resp_Recs(i)
+                                                                  .Subs_Response_Id;
+          o_Scrptn_Resp_Recs(x_Scrptn_Rec_Cnt).Subscription_Id := io_Unproc_Scrptn_Resp_Recs(i)
+                                                                 .Subscription_Id;
+          o_Scrptn_Resp_Recs(x_Scrptn_Rec_Cnt).Channel_Response_Id := io_Unproc_Scrptn_Resp_Recs(i)
+                                                                     .Channel_Response_Id;
+          o_Scrptn_Resp_Recs(x_Scrptn_Rec_Cnt).User_Id := io_Unproc_Scrptn_Resp_Recs(i)
+                                                         .User_Id;
+          o_Scrptn_Resp_Recs(x_Scrptn_Rec_Cnt).Response_Date := io_Unproc_Scrptn_Resp_Recs(i)
+                                                               .Response_Date;
+          o_Scrptn_Resp_Recs(x_Scrptn_Rec_Cnt).Reviewed := io_Unproc_Scrptn_Resp_Recs(i)
+                                                          .Reviewed;
+          o_Scrptn_Resp_Recs(x_Scrptn_Rec_Cnt).Reviewed_Date := io_Unproc_Scrptn_Resp_Recs(i)
+                                                               .Reviewed_Date;
+          o_Scrptn_Resp_Recs(x_Scrptn_Rec_Cnt).Follow_Up := io_Unproc_Scrptn_Resp_Recs(i)
+                                                           .Follow_Up;
+          o_Scrptn_Resp_Recs(x_Scrptn_Rec_Cnt).Follow_Up_Date := io_Unproc_Scrptn_Resp_Recs(i)
+                                                                .Follow_Up_Date;
+          o_Scrptn_Resp_Recs(x_Scrptn_Rec_Cnt).Actions := io_Unproc_Scrptn_Resp_Recs(i)
+                                                         .Actions;
+          o_Scrptn_Resp_Recs(x_Scrptn_Rec_Cnt).Pid := io_Unproc_Scrptn_Resp_Recs(i).Pid;
+        
+          x_Notifications_Cnt := x_Notifications_Cnt + 1;
+        
+          -- Consider sending notification only when
+          -- Notify_By_Email is set to 1(1 indicates Yes and 0 indicates No).
+          If (io_Unproc_Scrptn_Resp_Recs(i).Notify_By_Email = 1) And
+             (g_Suppress_Notification = 'N' Or
+             g_Suppress_Notification Is Null) Then
+            o_Send_Email_Tbl(x_Notifications_Cnt).Notify_By_Email := 'Y';
+          Else
+            o_Send_Email_Tbl(x_Notifications_Cnt).Notify_By_Email := 'N';
+          End If;
+        
+          -- Build Email subtypes
+          x_User_Id := io_Unproc_Scrptn_Resp_Recs(i).User_Id;
+          x_User_Full_Name := x_User_Id;
+          x_Recipients(1) := x_User_Id; --x_Si_Users(x_User_Id).User_Name; -- Commented by vishnu  since User_Name is already retrieved
+          x_Param_Values(1) := x_User_Full_Name;
+          x_Param_Values(5) := io_Unproc_Scrptn_Resp_Recs(i).Subject;
+          x_Param_Values(6) := io_Unproc_Scrptn_Resp_Recs(i)
+                              .Chnl_Resp_Content;
+          x_Param_Values(7) := To_Char(io_Unproc_Scrptn_Resp_Recs(i).Pid);
+        
+          /*
+          Bug #64423 - Attachments are missing in the triggered mail for Notify Users in Alert Summary report
+          Added below code to construct x_attachment parameter value.
+          */
+          begin
+          
+            v_flag := 0;
+          
+            select 1, instance_id, process_instance_id
+              into v_flag, v_instance_id, vpid
+              from MS_RGA_ATTACHMENT_V
+             where feed_data_id = io_Unproc_Scrptn_Resp_Recs(i).Pid;
+          
+            select metric_id
+              into V_Metric_ID
+              from si_metrics_t
+             where metric_name = 'MS_RGA_ATTACHMENT';
+          
+            select sm.column_sequence
+              into v_column_seq
+              from si_metric_columns sm
+             where sm.metric_id = V_Metric_ID
+               and sm.column_name = 'ATTACHMENT';
+          
+            if (v_flag = 1) then
+              SI_ALERT_SV.ATTACH_FILE_PATTERN(V_Metric_ID,
+                                              vpid,
+                                              v_instance_id,
+                                              v_column_seq,
+                                              x_attachment);
+            
+              x_Param_Values(9) := x_attachment;
+            end if;
+          
+          exception
+            when others then
+            
+              o_error_code := SQLCODE;
+              o_error_Desc := SQLERRM;
+            
+          end;
+          
+          
+          select nvl(enterprise_id,'') into v_enterprise_id
+          from si_users_t sut
+          where sut.user_name=x_User_Id;
+        
+          -- Build Email Rec
+          o_Send_Email_Tbl(x_Notifications_Cnt).Priority := 2;
+          o_Send_Email_Tbl(x_Notifications_Cnt).Recipients := x_Recipients;
+          o_Send_Email_Tbl(x_Notifications_Cnt).Enterprise_Id := v_enterprise_id;
+          --x_Si_Users(x_User_Id).Enterprise_Id;
+          o_Send_Email_Tbl(x_Notifications_Cnt).Subject := io_Unproc_Scrptn_Resp_Recs(i)
+                                                          .Subject;
+          o_Send_Email_Tbl(x_Notifications_Cnt).Template := Ms_Rga_Utilities.g_Email_Template;
+          o_Send_Email_Tbl(x_Notifications_Cnt).Param_names := x_Param_Names;
+          o_Send_Email_Tbl(x_Notifications_Cnt).Param_values := x_Param_Values;
+          o_Send_Email_Tbl(x_Notifications_Cnt).Error_code := Null;
+          o_Send_Email_Tbl(x_Notifications_Cnt).Error_message := Null;
+          o_Send_Email_Tbl(x_Notifications_Cnt).Send_Email := 'N';
+        
+          -- Generate Notification_Id
+          Select g_Scrptn_Notif_Id_Prefix ||
+                 Lpad(Ms_Rga_Subs_Notif_Seq.Nextval, 10, 0)
+            Into x_Scrptn_Noficatn_Id
+            From Dual;
+        
+          -- Build Notification Rec
+          o_Scrptn_Notif_Recs(x_Notifications_Cnt).Subs_Response_Id := io_Unproc_Scrptn_Resp_Recs(i)
+                                                                      .Subs_Response_Id;
+          o_Scrptn_Notif_Recs(x_Notifications_Cnt).Notification_Id := x_Scrptn_Noficatn_Id;
+          o_Scrptn_Notif_Recs(x_Notifications_Cnt).Notification_Date := io_Unproc_Scrptn_Resp_Recs(i)
+                                                                       .Response_Date;
+          o_Scrptn_Notif_Recs(x_Notifications_Cnt).Comments := io_Unproc_Scrptn_Resp_Recs(i)
+                                                              .Subject;
+          o_Scrptn_Notif_Recs(x_Notifications_Cnt).Pid := io_Unproc_Scrptn_Resp_Recs(i).Pid;
+        End If;
+      Exception
+        When Others Then
+          Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_Low);
+          Dbg(x_Proc_Name ||
+              'Failed to build Scrptn_Resp/Email_Rec type for subscription id ' ||
+              io_Unproc_Scrptn_Resp_Recs(i).Subscription_Id || ' and pid ' ||
+              io_Unproc_Scrptn_Resp_Recs(i).Pid,
+              g_Low);
+      End;
+    
+      -- Initialize variables for next iteration.
+      x_Keyword_Match_Cnt := 0;
+      x_Keyword_List := Null;
+      x_Regexed_List := Null;
+      x_Scrptn_Noficatn_Id := Null;
+      x_Recipients(1) := Null;
+      x_User_Full_Name := Null;
+      x_User_Id := Null;
+      x_Recipients(1) := Null;
+      x_Param_Values(5) := Null;
+      x_Param_Values(6) := Null;
+      x_Param_Values(7) := Null;
+      x_Param_Values(9) := ' ';
+    End Loop;
+  
+    o_Error_Code := g_success_code;
+    o_Error_Desc := g_Success_Mesg;
+  
+    Dbg(x_Proc_Name || 'Record Count in o_Scrptn_Resp_Recs is ' ||
+        o_Scrptn_Resp_Recs.Count,
+        g_High);
+    Return x_Return;
+  
+  Exception
+    When Others Then
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace,
+          g_High,
+          g_Err);
+      Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm,
+          g_High,
+          g_Err);
+      o_Error_Code := Sqlcode;
+      o_Error_Desc := 'Failed to translate type. ' ||
+                      Substr(Sqlerrm, 1, 250);
+      Return False;
+  End Fn_Build_Requisite_Types;
+
+  -- Insert Subscription_Response type values into Ms_Rga_Subscription_Response.
+  Function Fn_Insert_Scrptn_Resp(i_Scrptn_Resp_Recs In Ty_Ms_Rga_Scrptn_Resp_Tbl,
+                                 io_Send_Email_Tbl  In Out Nocopy Ty_Send_Email_Tbl,
+                                 o_Error_Code       Out Number,
+                                 o_Error_Desc       Out Varchar2)
+    Return Boolean Is
+    x_Proc_Name Varchar2(100) := 'Fn_Insert_Scrptn_Resp=&gt; ';
+  Begin
+    For i In i_Scrptn_Resp_Recs.First .. i_Scrptn_Resp_Recs.Last Loop
+      Begin
+       /* --As per new logic stopped insertion 
+       Insert Into Ms_Rga_Subscription_Response
+        Values i_Scrptn_Resp_Recs
+          (i);*/
+          
+        -- Consider sending email only when Subscription_Response
+        -- has been successfully registered and user has requested
+        -- for notification.
+        If io_Send_Email_Tbl(i).Notify_By_Email = 'Y' Then
+          io_Send_Email_Tbl(i).Send_Email := 'Y';
+        End If;
+      Exception
+        When Others Then
+          Dbg(x_Proc_Name || dbms_utility.format_error_backtrace);
+          Dbg(x_Proc_Name || 'Failed to insert rec with subscriptn_id ' ||
+              i_Scrptn_Resp_Recs(i)
+              .Subscription_Id || ' and pid ' || i_Scrptn_Resp_Recs(i).Pid);
+      End;
+    End Loop;
+  
+    o_Error_Code := g_success_code;
+    o_Error_Desc := g_Success_Mesg;
+  
+    Return True;
+  
+  Exception
+    When Others Then
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_Err);
+      Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm, g_Err);
+      o_Error_Code := Sqlcode;
+      o_Error_Desc := 'Failed while performing insert into table Ms_Rga_Subscription_Response.';
+      Return False;
+  End Fn_Insert_Scrptn_Resp;
+
+  -- Function for sending emails.
+  Function Fn_Send_Notification(i_Send_Email_Tbl    In Out Nocopy Ty_Send_Email_Tbl,
+                                i_Scrptn_Notif_Recs In Ty_Ms_Rga_Scrptn_Notif_Tbl,
+                                o_Error_Code        Out Number,
+                                o_Error_Mesg        Out Varchar2)
+    Return Boolean Is
+    x_Proc_Name Varchar2(100) := 'Fn_Send_Notification=&gt; ';
+  Begin
+    For i In i_Send_Email_Tbl.First .. i_Send_Email_Tbl.Last Loop
+      If i_Send_Email_Tbl(i).Send_Email = 'Y' Then
+        Begin
+          Ms_Rga_Utilities.Send_Email(x_priority      =&gt; i_Send_Email_Tbl(i)
+                                                        .Priority,
+                                      x_recipients    =&gt; i_Send_Email_Tbl(i)
+                                                        .Recipients,
+                                      x_enterprise_id =&gt; i_Send_Email_Tbl(i)
+                                                        .Enterprise_Id,
+                                      x_subject       =&gt; i_Send_Email_Tbl(i)
+                                                        .Subject,
+                                      x_template      =&gt; i_Send_Email_Tbl(i)
+                                                        .Template,
+                                      x_param_names   =&gt; i_Send_Email_Tbl(i)
+                                                        .Param_Names,
+                                      x_param_values  =&gt; i_Send_Email_Tbl(i)
+                                                        .Param_Values,
+                                      x_error_code    =&gt; i_Send_Email_Tbl(i)
+                                                        .Error_code,
+                                      x_error_message =&gt; i_Send_Email_Tbl(i)
+                                                        .Error_message);
+        
+          -- Track notification if email has been sent successfully.
+          If (i_Send_Email_Tbl(i).Error_code Is Null And i_Send_Email_Tbl(i)
+             .Error_message Is Null) Or
+             (i_Send_Email_Tbl(i)
+             .Error_code = g_Success_Code And i_Send_Email_Tbl(i)
+             .Error_message = g_Success_Mesg) Then
+            Insert Into Ms_Rga_Subscrptn_Notifications
+            Values i_Scrptn_Notif_Recs
+              (i);
+          End If;
+        Exception
+          When Others Then
+            Dbg(x_Proc_Name || Dbms_Utility.format_error_backtrace);
+        End;
+      End If;
+    End Loop;
+  
+    Return True;
+  
+  Exception
+    When Others Then
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace,
+          g_High,
+          g_Err);
+      Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm,
+          g_High,
+          g_Err);
+      o_Error_Code := Sqlcode;
+      o_Error_Mesg := 'Failed while sending/tracking notification';
+      Return False;
+  End Fn_Send_Notification;
+
+  -- For all new entries populated in Ms_Rga_Subscription_Response,
+  -- update Processed flag in Ms_Rga_Channel_Response_Dtls.
+  Function Fn_Update_Chnl_Resp_Dtls(i_Scrptn_Resp_Recs In Ty_Ms_Rga_Scrptn_Resp_Tbl,
+                                    o_Error_Code Out Number,
+                                    o_Error_Desc Out Varchar2) Return Boolean Is
+    x_Proc_Name Varchar2(100) := 'Fn_Update_Chnl_Resp_Dtls=&gt; ';
+  Begin
+  --below lines comented for performance tuning
+   /* Update Ms_Rga_Channel_Response_Dtls a
+       Set Processed = 'P' -- Processed
+     Where (Processed Is Null Or Processed = 'U') -- Unprocessed
+       And Exists (Select 1
+              From Ms_Rga_Subscription_Response b
+             Where b.Channel_Response_Id = a.Response_Id
+               And b.Pid = a.Feed_Data_Id);
+  */  
+  --below lines added for performance tuning
+  For i In i_Scrptn_Resp_Recs.First .. i_Scrptn_Resp_Recs.Last Loop
+  Update Ms_Rga_Channel_Response_Dtls a
+       Set Processed = 'P' -- Processed
+     Where (Processed Is Null Or Processed = 'U') -- Unprocessed
+       And a.Response_Id= i_Scrptn_Resp_Recs(i).Channel_Response_Id  
+       And a.Feed_Data_Id=i_Scrptn_Resp_Recs(i).Pid;
+  End Loop;
+  
+    o_Error_Code := g_success_code;
+    o_Error_Desc := g_Success_Mesg;
+  
+    Return True;
+  
+  Exception
+    When Others Then
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace,
+          g_High,
+          g_Err);
+      Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm,
+          g_High,
+          g_Err);
+      o_Error_Code := Sqlcode;
+      o_Error_Desc := 'Failed while updating table Ms_Rga_Channel_Response_Dtls.';
+      Return False;
+  End Fn_Update_Chnl_Resp_Dtls;
+
+  Procedure Pr_Populate_Subscrptn_Resp(o_Error_Code Out Number,
+                                       o_Error_Desc Out Varchar2) Is
+    x_Proc_Name Varchar2(100) := 'Pr_Populate_Subscrptn_Resp1=&gt; ';
+  
+    vmetric_id si_metrics.METRIC_ID%type;
+  
+  Begin
+  
+  
+  
+  
+    Dbg(x_Proc_Name || 'Calling Pr_Populate_Subscrptn_Resp...');
+    Pr_Populate_Subscrptn_Resp(o_Error_Code, o_Error_Desc, 'N');
+    Commit; -- Fix for race condition.
+  
+    --Started 10/10/2012
+    --Added by vishnu for improving the performance by filtering only latest n records from Aggregator table
+  
+/*  COMMENTED AS   MS_RGA_SUBCRIPTION_SCHEDULER.ARCH_Ms_RGA_FEED_AGG IS DEPRECATED AND THIS IS HANDLED DIFFERENTLY SINCE PERFORMANCE TUNING OF GRCI
+    Begin
+      Dbg(x_Proc_Name ||
+          'Calling MS_RGA_SUBCRIPTION_SCHEDULER.ARCH_Ms_RGA_FEED_AGG ...');
+      Ms_Rga_Subcription_Scheduler.ARCH_Ms_RGA_FEED_AGG(o_Error_Code,
+                                                        o_Error_Desc);
+      Commit;
+    Exception
+      When Others Then
+        Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace,
+            g_High,
+            g_Err);
+        Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm,
+            g_High,
+            g_Err);
+        o_Error_Code := Sqlcode;
+        o_Error_Desc := 'Failed to filter the latest data from MS_RGA_FEED_AGGREGATOR TABLE.';
+      
+    End;
+  
+  */
+   
+  
+  Exception
+    When Others Then
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace,
+          g_High,
+          g_Err);
+      Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm,
+          g_High,
+          g_Err);
+      o_Error_Code := Sqlcode;
+      o_Error_Desc := 'Failed while populating Subscription Response.';
+  End Pr_Populate_Subscrptn_Resp;
+
+  -- Process Subscription_Response.
+  Procedure Pr_Populate_Subscrptn_Resp(o_Error_Code             Out Number,
+                                       o_Error_Desc             Out Varchar2,
+                                       i_Suppress_Notifications In Char) -- Emails won't be sent if this parameter is set to 'Y'
+   Is
+    x_Proc_Name               Varchar2(100) := 'Pr_Populate_Subscrptn_Resp=&gt; ';
+    x_Unproc_Scrptn_Resp_Recs Ty_Unproc_Scrptn_Resp_Cur;
+    x_Scrptn_Resp_Recs        Ty_Ms_Rga_Scrptn_Resp_Tbl;
+    x_Msg                     Varchar2(1000) := Null;
+    x_Send_Email_Tbl          Ty_Send_Email_Tbl;
+    x_Scrptn_Notif_Recs       Ty_Ms_Rga_Scrptn_Notif_Tbl;
+  Begin
+    Dbg(x_Proc_Name || 'Entered.', g_High);
+    g_Suppress_Notification := i_Suppress_Notifications;
+    Dbms_Application_Info.Set_Module(g_Module, g_Action);
+    -- Ensure that cursor is not already open.
+    If Ms_Rga_Unproc_Scrptn_Resp_Cur%Isopen Then
+      Close Ms_Rga_Unproc_Scrptn_Resp_Cur;
+    End If;
+    Open Ms_Rga_Unproc_Scrptn_Resp_Cur;
+    Loop
+      Fetch Ms_Rga_Unproc_Scrptn_Resp_Cur Bulk Collect
+        INTO x_Unproc_Scrptn_Resp_Recs LIMIT 1000;
+        Dbg(x_Proc_Name || 'Rec Count is  ' || x_Unproc_Scrptn_Resp_Recs.Count);    
+      If x_Unproc_Scrptn_Resp_Recs.Count &gt; 0 Then
+        -- Build Subscription_Response type.
+        If Not Fn_Build_Requisite_Types(x_Unproc_Scrptn_Resp_Recs,x_Scrptn_Resp_Recs,x_Send_Email_Tbl,x_Scrptn_Notif_Recs,o_Error_Code,o_Error_Desc) Then
+          x_Msg := 'Failed to build BaseTable type.';
+          Exit;
+        Else
+          If x_Scrptn_Resp_Recs.Count &gt; 0 Then
+            -- Insert Subscription_Response type values into Ms_Rga_Subscription_Response.
+            If Not Fn_Insert_Scrptn_Resp(x_Scrptn_Resp_Recs,x_Send_Email_Tbl,o_Error_Code,o_Error_Desc) Then
+              x_Msg := 'Failed to insert into Ms_Rga_Subscription_Response table.';
+              Exit;
+            Else
+              If Not Fn_Send_Notification(x_Send_Email_Tbl,x_Scrptn_Notif_Recs,o_Error_Code,o_Error_Desc) Then
+                x_Msg := 'Failed to send notifications.';
+                Exit;
+              Else
+                -- For all new entries populated in Ms_Rga_Subscription_Response,update Processed flag in Ms_Rga_Channel_Response_Dtls.
+                If Not Fn_Update_Chnl_Resp_Dtls(x_Scrptn_Resp_Recs,o_Error_Code, o_Error_Desc) Then
+                  x_Msg := 'Failed to update Processed flag of Ms_Rga_Channel_Response_Dtls';
+                  Exit;
+                End If;
+              End If;
+            End If;
+          End If;
+        End If;
+        -- Clear collections for next iteration
+        x_Unproc_Scrptn_Resp_Recs.Delete;
+        x_Scrptn_Resp_Recs.Delete;
+      
+        -- If any error is not encountered in the process,Commit the current set of records under consideration.
+        Commit;
+      Else
+        Dbg(x_Proc_Name ||'No record to process.');
+      End If;
+      Exit When Ms_Rga_Unproc_Scrptn_Resp_Cur%Notfound;
+    End Loop;
+  
+    If o_Error_Code Is Not Null And o_Error_Code &lt;&gt; g_success_code Then
+      Dbg(x_Proc_Name || 'Failed to process Subscription Response - ' ||x_Msg,g_High);
+    Else
+      Dbg(x_Proc_Name ||'Successfully completed populating Subscription Response - ' ||x_Msg, g_High);
+      o_Error_Code := g_success_code;
+      o_Error_Desc := g_Success_Mesg;
+    End If;
+    Dbg(x_Proc_Name || o_Error_Code || ' : ' || o_Error_Desc);
+  Exception
+    When No_Data_Found Then
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace,g_High,g_Err);
+      Dbg(x_Proc_Name || 'No_Data_Found exception encountered - ' || Sqlerrm,g_High,g_Err);
+      If Ms_Rga_Unproc_Scrptn_Resp_Cur%Isopen Then
+        Close Ms_Rga_Unproc_Scrptn_Resp_Cur;
+      End If;
+      o_Error_Code := Sqlcode;
+    
+    When Too_Many_Rows Then
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace || ' Too_Many_Rows exception encountered - ',g_High,g_Err);
+      If Ms_Rga_Unproc_Scrptn_Resp_Cur%Isopen Then
+        Close Ms_Rga_Unproc_Scrptn_Resp_Cur;
+      End If;
+      o_Error_Code := Sqlcode;
+    
+    When Others Then
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace||' Others exception encountered - ' || Sqlerrm,
+          g_High,
+          g_Err);
+      If Ms_Rga_Unproc_Scrptn_Resp_Cur%Isopen Then
+        Close Ms_Rga_Unproc_Scrptn_Resp_Cur;
+      End If;
+      o_Error_Code := Sqlcode;
+      
+  End Pr_Populate_Subscrptn_Resp;
+
+  -- If emails are not sent but Subscription Response has been populated,
+  -- this procedure can be invoked for sending only emails.
+  Procedure Pr_Resend_Notificatns(o_Error_Code            Out Number,
+                                  o_Error_Desc            Out Varchar2,
+                                  i_Considr_Todays_Notifs In Boolean Default True) Is
+  
+    Cursor Alerts_Received(i_Response_Date In Date Default Null) Is
+      Select a.User_Id          User_Id,
+             b.Subject          Subject,
+             b.Body             Chnl_Resp_Content,
+             a.Pid              Pid,
+             a.Subs_Response_Id Subs_Response_Id,
+             a.Response_Date    Response_Date
+        From Ms_Rga_Subscription_Response a, Ms_Rga_Feed_Aggregator_v b
+       Where Trunc(a.Response_Date) =
+             Nvl(i_Response_Date, Trunc(a.Response_Date))
+         And a.Pid = b.Feed_Data_Id
+         And b.Processed_Flag = 'P';
+  
+    Type Ty_Alerts_Received Is Table Of Alerts_Received%Rowtype Index By Pls_Integer;
+    x_Alerts_Received Ty_Alerts_Received;
+  
+    x_Proc_Name         Varchar2(100) := 'Pr_Resend_Notificatns=&gt; ';
+    x_Send_Email_Tbl    Ty_Send_Email_Tbl;
+    x_Scrptn_Notif_Recs Ty_Ms_Rga_Scrptn_Notif_Tbl;
+  
+    x_Notifications_Cnt  Number := 1;
+    x_Last_Iteration_Cnt Number := 0;
+    x_Response_Date      Date;
+    x_Msg                Varchar2(1000) := Null;
+  
+    x_Scrptn_Noficatn_Id Ms_Rga_Subscrptn_Notifications.Notification_Id%Type;
+    x_Param_Names        Varchar2_Array := Varchar2_Array();
+    x_Param_Values       Clob_Array := Clob_Array();
+    x_Recipients         Varchar2_Array := Varchar2_Array();
+    x_Email_Note         Si_Sp_Email_Info.Param_Value%Type;
+    x_Boiler_Plate       Si_Sp_Email_Info.Param_Value%Type;
+    x_Copyright          Si_Sp_Email_Info.Param_Value%Type;
+    x_Si_Users           Ty_Si_Users;
+    x_User_Full_Name     Varchar2(1000) := Null;
+    x_User_Id            Si_Users_T.User_Name%Type := Null;
+  
+  Begin
+  
+    -- Build type to get all Application Users. Type to be indexed by User_Id.
+    -- Required for getting mail-id, full-name, and enterprise-id.
+    For each_rec In (Select * From Si_Users_t) -- Do I need to consider all-users without any condition?
+     Loop
+      x_Si_Users(each_rec.User_Id) := each_rec;
+    End Loop;
+  
+    -- Initialize email related static parameters.
+    x_Email_Note   := 'Note : This message and all attachments should be considered confidential and proprietary to Quality Stream.';
+    x_Boiler_Plate := 'Alert automatically generated by MetricStream.';
+    x_Copyright    := 'Copyright @ MetricStream Inc. 1999-2013 All rights reserved.';
+  
+    x_Param_Names.Extend(8);
+    /* Set up the parameter names array */
+    x_Param_Names(1) := 'USER_FULL_NAME';
+    x_Param_Names(2) := 'EMAIL_NOTE';
+    x_Param_Names(3) := 'BOILERPLATE_TEXT';
+    x_Param_Names(4) := 'COPYRIGHT_INFORMATION';
+    x_Param_Names(5) := 'SUBJECT_HEADER';
+    x_Param_Names(6) := 'SUBJECT_BODY';
+    x_Param_Names(7) := 'PROC_INSTANCE_ID';
+    x_Param_Names(8) := 'PUSH_INFO_ID';
+  
+    x_Param_Values.Extend(8);
+    /* Initialize Param Values array */
+    x_Param_Values(2) := x_Email_Note;
+    x_Param_Values(3) := x_Boiler_Plate;
+    x_Param_Values(4) := x_Copyright;
+    x_Param_Values(5) := Null; --Subject;
+    x_Param_Values(6) := Null; --Subject_Body;
+    x_Param_Values(7) := Null; --To_Char(Pid);
+    x_Param_Values(8) := To_Char(Ms_Apps_Utilities.Get_Infolet_Id('MS RGA SUBSCRPTN NOTIFICATIONS'));
+  
+    x_Recipients.Extend;
+  
+    If i_Considr_Todays_Notifs Then
+      x_Response_Date := Trunc(Sysdate);
+    End If;
+  
+    Open Alerts_Received(x_Response_Date);
+    Loop
+      Fetch Alerts_Received Bulk Collect
+        Into x_Alerts_Received Limit 2000;
+      For I In x_Alerts_Received.First .. x_Alerts_Received.Last Loop
+        Begin
+          -- Build Email subtypes
+          x_User_Id := x_Alerts_Received(i).User_Id;
+          x_User_Full_Name := ms_apps_utilities.get_user_full_name(x_User_Id);
+          x_Recipients(1) := x_User_Id ;--x_Si_Users(x_User_Id).User_Name; -- COmmented by vishnu since User_Name is already retreivd
+          x_Param_Values(1) := x_User_Full_Name;
+          x_Param_Values(5) := x_Alerts_Received(i).Subject;
+          x_Param_Values(6) := x_Alerts_Received(i).Chnl_Resp_Content;
+          x_Param_Values(7) := To_Char(x_Alerts_Received(i).Pid);
+        
+          -- Build Email Rec
+          x_Send_Email_Tbl(x_Notifications_Cnt).Priority := 2;
+          x_Send_Email_Tbl(x_Notifications_Cnt).Recipients := x_Recipients;
+          x_Send_Email_Tbl(x_Notifications_Cnt).Enterprise_Id := x_Si_Users(x_User_Id)
+                                                                .Enterprise_Id;
+          x_Send_Email_Tbl(x_Notifications_Cnt).Subject := x_Alerts_Received(i)
+                                                          .Subject;
+          x_Send_Email_Tbl(x_Notifications_Cnt).Template := Ms_Rga_Utilities.g_Email_Template;
+          x_Send_Email_Tbl(x_Notifications_Cnt).Param_names := x_Param_Names;
+          x_Send_Email_Tbl(x_Notifications_Cnt).Param_values := x_Param_Values;
+          x_Send_Email_Tbl(x_Notifications_Cnt).Error_code := Null;
+          x_Send_Email_Tbl(x_Notifications_Cnt).Error_message := Null;
+          x_Send_Email_Tbl(x_Notifications_Cnt).Send_Email := 'N';
+        
+          -- Generate Notification_Id
+          Select g_Scrptn_Notif_Id_Prefix ||
+                 Lpad(Ms_Rga_Subs_Notif_Seq.Nextval, 10, 0)
+            Into x_Scrptn_Noficatn_Id
+            From Dual;
+        
+          -- Build Notification Rec
+          x_Scrptn_Notif_Recs(x_Notifications_Cnt).Subs_Response_Id := x_Alerts_Received(i)
+                                                                      .Subs_Response_Id;
+          x_Scrptn_Notif_Recs(x_Notifications_Cnt).Notification_Id := x_Scrptn_Noficatn_Id;
+          x_Scrptn_Notif_Recs(x_Notifications_Cnt).Notification_Date := x_Alerts_Received(i)
+                                                                       .Response_Date;
+          x_Scrptn_Notif_Recs(x_Notifications_Cnt).Comments := x_Alerts_Received(i)
+                                                              .Subject;
+          x_Scrptn_Notif_Recs(x_Notifications_Cnt).Pid := x_Alerts_Received(i).Pid;
+        
+          x_Notifications_Cnt := x_Notifications_Cnt + 1;
+        Exception
+          When Others Then
+            Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace, g_Low);
+            Dbg(x_Proc_Name ||
+                'Failed to build Email/Notif rec type for subscription response id ' ||
+                x_Alerts_Received(i)
+                .Subs_Response_Id || ' and pid ' || x_Alerts_Received(i).Pid,
+                g_Low);
+        End;
+      
+        -- Initialize variables for next iteration.
+        x_Scrptn_Noficatn_Id := Null;
+        x_Recipients(1) := Null;
+        x_User_Full_Name := Null;
+      End Loop;
+    
+      If Not Fn_Send_Notification(x_Send_Email_Tbl,
+                                  x_Scrptn_Notif_Recs,
+                                  o_Error_Code,
+                                  o_Error_Desc) Then
+        x_Msg := 'Failed to send some notifications.';
+      Else
+        x_Msg := (x_Notifications_Cnt - x_Last_Iteration_Cnt) ||
+                 ' notifications successfully sent.';
+      End If;
+    
+      Dbg(x_proc_name || x_Msg);
+      x_Last_Iteration_Cnt := x_Notifications_Cnt;
+    
+      -- Clear collection for next  iteration.
+      x_Alerts_Received.Delete;
+      x_Send_Email_Tbl.Delete;
+      x_Scrptn_Notif_Recs.Delete;
+    
+      Exit When Alerts_Received%Notfound;
+    
+    End Loop;
+  
+    o_Error_Code := g_success_code;
+    o_Error_Desc := g_Success_Mesg;
+  
+  Exception
+    When Others Then
+      Dbg(x_Proc_Name || Dbms_Utility.Format_Error_Backtrace,
+          g_High,
+          g_Err);
+      Dbg(x_Proc_Name || 'In Others exception - ' || Sqlerrm,
+          g_High,
+          g_Err);
+      o_Error_Code := Sqlcode;
+      o_Error_Desc := 'Failed to resend notifications.';
+  End Pr_Resend_Notificatns;
+--end;
+End Ms_Rga_Process_Subscrptn_Resp; </TEXT_BODY>
+</PACKAGE_SPEC>

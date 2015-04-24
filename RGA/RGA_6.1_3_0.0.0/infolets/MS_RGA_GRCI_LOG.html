@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Infolets</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">                                <h4 class="infolet-tooltip"><span class="fa fa-gears fa-fw"></span>  
+                                <span data-toggle="tooltip" data-placement="top" title="Category: Assets" class="fa fa-cubes fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Output Type: Graph and Report" class="fa fa-sign-out fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Type: Text File" class="fa fa-file-text-o fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="No History" class="fa fa-clock-o fa-fw"></span>
+                                <a style="text-decoration: none; " id="MS_RGA_GRCI_LOG">MS_RGA_GRCI_LOG</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>Infolet for maintaining GRCI logs in the path log/grci/aggr-stats.csv</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#xml-pill" data-toggle="tab">XML</a></li>
+                                        <li><a href="#params-pill" data-toggle="tab">Parameters</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-c">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Type</th>
+                                                            <th>Result Column Name</th>
+                                                            <th>User Column Name</th>
+                                                            <th>Default Infolet/<br>Input Infolet</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>THREAD</td>                                                                <td>Varchar2</td>
+                                                                <td>THREAD</td>
+                                                                <td>THREAD</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>TYPE</td>                                                                <td>Varchar2</td>
+                                                                <td>TYPE</td>
+                                                                <td>TYPE</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>SERVER</td>                                                                <td>Varchar2</td>
+                                                                <td>SERVER</td>
+                                                                <td>SERVER</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>PREV</td>                                                                <td>Long Varchar</td>
+                                                                <td>PREV</td>
+                                                                <td>PREV</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>STAR</td>                                                                <td>Varchar2</td>
+                                                                <td>STAR</td>
+                                                                <td>STAR</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>END</td>                                                                <td>Varchar2</td>
+                                                                <td>END</td>
+                                                                <td>END</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>ELAPSE</td>                                                                <td>Varchar2</td>
+                                                                <td>ELAPSE</td>
+                                                                <td>ELAPSE</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>Updates</td>                                                                <td>Varchar2</td>
+                                                                <td>UPDATES</td>
+                                                                <td>Updates</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td>Acceptd</td>                                                                <td>Varchar2</td>
+                                                                <td>ACCEPTD</td>
+                                                                <td>Acceptd</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>Rejectd</td>                                                                <td>Varchar2</td>
+                                                                <td>REJECTD</td>
+                                                                <td>Rejectd</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>Missed</td>                                                                <td>Varchar2</td>
+                                                                <td>MISSED</td>
+                                                                <td>Missed</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>Status</td>                                                                <td>Varchar2</td>
+                                                                <td>STATUS</td>
+                                                                <td>Status</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>13</td>
+                                                                <td>Reason</td>                                                                <td>Long Varchar</td>
+                                                                <td>REASON</td>
+                                                                <td>Reason</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="params-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-p">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Mandatory</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>THREAD</td>
+                                                                <td>N</td>
+                                                                <td>THREAD</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>TYPE</td>
+                                                                <td>N</td>
+                                                                <td>TYPE</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>SERVER</td>
+                                                                <td>N</td>
+                                                                <td>SERVER</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>PREV</td>
+                                                                <td>N</td>
+                                                                <td>PREV-RUN</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>STAR</td>
+                                                                <td>N</td>
+                                                                <td>START</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>END</td>
+                                                                <td>N</td>
+                                                                <td>END</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>ELAPSE</td>
+                                                                <td>N</td>
+                                                                <td>ELAPSE </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Updates</td>
+                                                                <td>N</td>
+                                                                <td>Updates</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Acceptd</td>
+                                                                <td>N</td>
+                                                                <td>Acceptd</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Rejectd</td>
+                                                                <td>N</td>
+                                                                <td>Rejectd</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Missed</td>
+                                                                <td>N</td>
+                                                                <td>Missed</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Status</td>
+                                                                <td>N</td>
+                                                                <td>Status</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Reason</td>
+                                                                <td>N</td>
+                                                                <td>Reason</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="xml-pill">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-xml')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-xml">
+                                                        &lt;?xml version=&quot;1.0&quot;?&gt;&lt;METRIC_DEPLOYMENT&gt;&lt;METRIC   MODE=&quot;FILE&quot;     PROCESS=&quot;0&quot;  INSTANCE=&quot;0&quot;  NOTIFY=&quot;YES&quot;   RETURN=&quot;RESULTSET&quot; &gt;&lt;QUERY&gt;log/grci/aggr-stats.csv&lt;/QUERY&gt;&lt;LOCATION  TYPE=&quot;AGENT&quot;&gt;Non SQL channel&lt;/LOCATION&gt;&lt;RESULTMAP  TYPE=&quot;CSV&quot;&gt;&lt;/RESULTMAP&gt;&lt;/METRIC&gt;&lt;/METRIC_DEPLOYMENT&gt;
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                </div>
+                                <!--panel-default -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.infolet-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.infolet-table-c').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-cnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-f').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-fnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-p').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-pnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-r').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-rnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                    ]
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

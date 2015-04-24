@@ -1,0 +1,500 @@
+<HIDDEN>#parse("fastform/generated_javascript_template.vm")</HIDDEN>
+<HIDDEN>#parse("fastform/ms_appstudio_mpower_def.vm")</HIDDEN>
+<head><link id="msai_theme_link" type="text/css" href="$!{WEBROOT}/appssdk/dlo/aside.css" rel="stylesheet"></link></head>
+<body>
+<script>function getCustomMultirowRowContent(multiId,rowSeq,addCheckbox) { 
+if(multiId==#foreach ($group in $groups)#if($group.name=='ACT')${group.id}#end#end) return "<table cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"><tbody><tr><td width=\"50px\" class=\"msai_mullink msai_rightborder msai_global_hide\"><input id=\"mrrowdb"+rowSeq+"id"+multiId+"\" class=\"msai_mulrow_delete\" type=\"checkbox\" name=\"_"+multiId+"_multirow_deletebox"+rowSeq+"\" value=\"\" onClick=\"setTimeout('F.ACT.markRowForDelete("+rowSeq+",this)',0)\"></td><td><table class=\"msai_field_mulcolumn\" cellspacing=\"0\" cellpadding=\"0\"><tbody class=\"\" style=\"\"><tr id=\"MSAI_590_"+rowSeq+"\" asidespan=\"1:1:1:1:1:1:1:1\"><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_565_"+rowSeq+"\" asidespan=\"1:1:1:1:1:1:1:1\"><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\" id=\"MSAI_TD_ACTION_NAME_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"ACT msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,24)+"</div><div class=\"ACT msai_celldiv msai_field_field\">"+addField(rowSeq,24)+"</div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\" id=\"MSAI_TD_ACTION_NOTES_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"ACT msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,25)+"</div><div class=\"ACT msai_celldiv msai_field_field\">"+addField(rowSeq,25)+"</div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\" id=\"MSAI_TD_ACTION_OWNER_ORG_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"ACT msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,26)+"</div><div class=\"ACT msai_celldiv msai_field_field\">"+addField(rowSeq,26)+"</div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\" id=\"MSAI_TD_ACTION_OWNER_USER_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"ACT msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,27)+"</div><div class=\"ACT msai_celldiv msai_field_field\">"+addField(rowSeq,27)+"</div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\" id=\"MSAI_TD_DUE_DATE_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"ACT msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,28)+"</div><div class=\"ACT msai_celldiv msai_field_field\">"+addField(rowSeq,28)+"</div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\" id=\"MSAI_TD_SEND_REMINDER_BEFORE_DUE_DATE_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"ACT msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,29)+"</div><div class=\"ACT msai_celldiv msai_field_field\">"+addField(rowSeq,29)+"</div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\" id=\"MSAI_TD_ACTION_COMPLETE_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"ACT msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,30)+"</div><div class=\"ACT msai_celldiv msai_field_field\">"+addField(rowSeq,30)+"</div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:12%\" colspan=\"1\" id=\"MSAI_TD_ACTION_STATUS_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"ACT msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,31)+"</div><div class=\"ACT msai_celldiv msai_field_field\">"+addField(rowSeq,31)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_517_"+rowSeq+"\" asidespan=\"8\"><td class=\"msai_mulcolumn msai_column8\" style=\"width:96%\" colspan=\"8\" id=\"MSAI_TD_ACTION_ID_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"ACT msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,32)+"</div><div class=\"ACT msai_celldiv msai_field_field\">"+addField(rowSeq,32)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_519_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"8\"><td class=\"msai_mulcolumn msai_hidden_column msai_column8\" style=\"width:100%\" colspan=\"8\" id=\"MSAI_TD_ACT_OBJECT_ID_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"ACT msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,33)+"</div><div class=\"ACT msai_celldiv msai_field_field\">"+addField(rowSeq,33)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr></tbody></table></td></tr></tbody></table>";
+}</script>
+
+<script>function initStrategy() { 
+ var multiRegArr=new Array(); multiRegArr[multiRegArr.length] = new MultiRegion(#foreach ($group in $groups)#if($group.name=='ACT')${group.id}#end#end,'MSAI_MULTI_DIV_#foreach ($group in $groups)#if($group.name=='ACT')${group.id}#end#end',multirRowContent);  setJSONStrategy(multiRegArr); 
+}</script>
+
+<script>function multirRowContent(multirowId,start_row, end_row) { 
+  if(multirowId==#foreach ($group in $groups)#if($group.name=='ACT')${group.id}#end#end) {var multiRow='<table id=mrTableid#foreach ($group in $groups)#if($group.name=='ACT')${group.id}#end#end cellspacing=0 cellpadding=0 nowrap width=100% id=#foreach ($group in $groups)#if($group.name=='ACT')${group.id}#end#end class=msai_multi_table>'; for (rowSeq = start_row; rowSeq <= end_row; rowSeq++) { multiRow = multiRow + '<tr id=mrrow' + rowSeq + 'id#foreach ($group in $groups)#if($group.name=='ACT')${group.id}#end#end><td>'+getCustomMultirowRowContent(#foreach ($group in $groups)#if($group.name=='ACT')${group.id}#end#end,rowSeq)+'</td></tr>'; } multiRow = multiRow + '</table>'; return  multiRow;}
+ 
+}</script>
+
+<script>function displaymrHeaderLinks (multiId,pageNum,secId) { 
+  if(multiId==#foreach ($group in $groups)#if($group.name=='ACT')${group.id}#end#end) { return '<table cellspacing="0" cellpadding="0" nowrap="" width="100%"><tbody><tr class="msai_mulheader"><td width="50px" class="msai_rightborder msai_global_hide">Delete</td><td><a href="javascript:F.ACT.addRow(true,true);" class="msai_mullink">Add Row</a></td><td><a href="javascript:F.ACT.deleteRow();" class="msai_mullink">Delete Last Row</a></td><td><div class="msai_mullink"></div></td><td><div id="mrrdid'+multiId+'" class="msai_mullink"></div></td><td><div class="msai_mullink msai_pages_num"></div></td><td nowrap="" width="10%"><div id="mrpdid'+multiId+'" class="msai_mullink">'+writemrPageDesc(multiId,pageNum,secId)+'</div></td><td><div class="msai_muldefinition_edit"></div></td></tr></tbody></table>';; }
+ 
+}</script>
+
+<form name="pushform" method="post" action="$WEBSERVICES_DESTINATION/infolet_stream" enctype="multipart/form-data">
+<HIDDEN>#parse("fastform/header_content_template.vm")</HIDDEN>
+<div id="main_container" class="msai_main_container" style="width:720px">
+<table class="msai_field_column" cellspacing="0" cellpadding="1">
+<tbody class="">
+<tr id="MSAI_2" class="msai_hidden_column" asidespan="8">
+<td class="msai_column msai_hidden_column msai_column8" style="width:100%" colspan="8" id="MSAI_TD_OBJECT_ID_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,7)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,7)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_328" class="msai_hidden_column" asidespan="8">
+<td class="msai_column msai_hidden_column msai_column8" style="width:100%" colspan="8" id="MSAI_TD_FEED_DATA_ID_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,8)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,8)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_428" class="msai_hidden_column" asidespan="8">
+<td class="msai_column msai_hidden_column msai_column8" style="width:100%" colspan="8" id="MSAI_TD_OWNER_ORG_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,9)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,9)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_427" asidespan="8">
+<td class="msai_column msai_column8" style="width:96%" colspan="8">
+<span class="msai_form_label" id="MSAI_572">${formMetaData.Label}</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_1" class="msai_accordion_row" asidespan="8">
+<td style="WIDTH: 100%" class="msai_column msai_formheading msai_column8" colspan="8">
+<div class="msai_accordion_probable"></div>
+<span class="msai_form_section" id="MSAI_4">${ReviewAlerts}</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_478" asidespan="4:4">
+<td class="msai_column msai_column4" style="width:48%" colspan="4" id="MSAI_TD_ALERT_TITLE_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,10)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,10)</SCRIPT></div></td>
+<td class="msai_column msai_column4" style="width:48%" colspan="4" id="MSAI_TD_ALERT_DATE_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,11)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,11)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_7" class="msai_hidden_column" asidespan="8">
+<td class="msai_column msai_hidden_column msai_column8" style="width:100%" colspan="8" id="MSAI_TD_DD_OBJECT_TYPE_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,1)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,1)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_8" class="msai_hidden_column" asidespan="8">
+<td class="msai_column msai_hidden_column msai_column8" style="width:100%" colspan="8" id="MSAI_TD_DD_CURRENT_USER_NAME_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,2)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,2)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_9" class="msai_hidden_column" asidespan="8">
+<td class="msai_column msai_hidden_column msai_column8" style="width:100%" colspan="8" id="MSAI_TD_DD_EVENT_USER_NAME_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,3)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,3)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_10" class="msai_hidden_column" asidespan="8">
+<td class="msai_column msai_hidden_column msai_column8" style="width:100%" colspan="8" id="MSAI_TD_DD_ENTERPRISE_INFO_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,4)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,4)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_11" class="msai_hidden_column" asidespan="8">
+<td class="msai_column msai_hidden_column msai_column8" style="width:100%" colspan="8" id="MSAI_TD_DD_CURRENT_STAGE_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,5)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,5)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_12" class="msai_hidden_column" asidespan="8">
+<td class="msai_column msai_hidden_column msai_column8" style="width:100%" colspan="8" id="MSAI_TD_DD_PROCESS_CODE_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,6)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,6)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_476" asidespan="4:4">
+<td class="msai_column msai_column4" style="width:48%" colspan="4" id="MSAI_TD_TYPES_OF_REVIEW_CONDUCTED_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,12)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,12)</SCRIPT></div></td>
+<td class="msai_column msai_column4" style="width:48%" colspan="4" id="MSAI_TD_STATUS_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,13)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,13)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_19" asidespan="4:4">
+<td class="msai_column msai_column4" style="width:48%" colspan="4" id="MSAI_TD_KEY_RELEVANT_KEYWORDS_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,14)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,14)</SCRIPT></div></td>
+<td class="msai_column msai_column4" style="width:48%" colspan="4" id="MSAI_TD_LAST_REVIEWED_BY_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,15)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,15)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_22" asidespan="4:4">
+<td class="msai_column msai_column4" style="width:48%" colspan="4"></td>
+<td class="msai_column msai_column4" style="width:48%" colspan="4"></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_295" asidespan="3:1:4">
+<td class="msai_column msai_column3" style="width:36%" colspan="3"></td>
+<td class="msai_column msai_column1" style="width:12%" colspan="1"></td>
+<td class="msai_column msai_column4" style="width:48%" colspan="4"></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_227" asidespan="8">
+<td class="msai_column msai_column8" style="width:96%" colspan="8">
+<table id="MSAI_228" class="msai_tabs" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td class="msai_tab_leaf msai_tab_align_left">
+<div class="msai_tab_align"></div>
+<span id="MSAI_229" class="msai_tab_open" onClick="msai_tab_hideAll('MSAI_228');msai_tab_show('MSAI_228','MSAI_229');" onmouseenter="msai_tab_hover(this);" onmouseleave="msai_tab_unhover(this);">
+<span>${Assessment} </span>
+<div class="msai_tab_rearrange_icon"></div>
+<div class="msai_tab_del"></div></span>
+<span id="MSAI_231" class="msai_tab_close" onClick="msai_tab_hideAll('MSAI_228');msai_tab_show('MSAI_228','MSAI_231');" onmouseenter="msai_tab_hover(this);" onmouseleave="msai_tab_unhover(this);">
+<span>${Tasks} </span>
+<div class="msai_tab_rearrange_icon"></div>
+<div class="msai_tab_del"></div></span>
+<span id="MSAI_232" class="msai_tab_close" onClick="msai_tab_hideAll('MSAI_228');msai_tab_show('MSAI_228','MSAI_232');" onmouseenter="msai_tab_hover(this);" onmouseleave="msai_tab_unhover(this);">
+<span>${Attributes} </span>
+<div class="msai_tab_rearrange_icon"></div>
+<div class="msai_tab_del"></div>
+<div class="msai_tab_add"></div></span></td></tr>
+<tr>
+<td class="msai_tab_display">
+<table class="msai_field_column" cellspacing="1" cellpadding="1">
+<tbody class="" style="">
+<tr id="MSAI_464" asidespan="3:1:1">
+<td class="msai_column msai_column3" style="width:60%" colspan="3" id="MSAI_TD_ANALYSIS_IMPACT_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,16)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,16)</SCRIPT></div></td>
+<td class="msai_column msai_column1" style="width:20%" colspan="1" id="MSAI_TD_LIKELIHOOD_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,17)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,17)</SCRIPT></div></td>
+<td class="msai_column msai_column1" style="width:20%" colspan="1"></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_551" asidespan="5">
+<td class="msai_column msai_column5" style="width:100%" colspan="5">
+<span class="msai_form_section" id="MSAI_552">${ImpactCategories}</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_235" asidespan="2:2:1">
+<td class="msai_column msai_column2" style="width:40%" colspan="2" id="MSAI_TD_FINANCIAL_IMPACT_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,18)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,18)</SCRIPT></div></td>
+<td class="msai_column msai_column2" style="width:40%" colspan="2" id="MSAI_TD_REPUTATIONAL_IMPACT_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,19)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,19)</SCRIPT></div></td>
+<td class="msai_column msai_column1" style="width:20%" colspan="1" id="MSAI_TD_OVERALL_IMPACT_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,20)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,20)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_279" asidespan="3:2">
+<td class="msai_column msai_column3" style="width:0%" colspan="3" id="MSAI_TD_IMPACT_COMMENT_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,21)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,21)</SCRIPT></div></td>
+<td class="msai_column msai_column2" style="width:20%" colspan="2" id="MSAI_TD_ATTACH_EVIDENCE_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,22)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,22)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_505" asidespan="5">
+<td class="msai_column msai_column5" style="width:100%" colspan="5" id="MSAI_TD_APPROVAL_REQUIRED_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,23)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,23)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_239" asidespan="5">
+<td class="msai_column msai_column5" style="width:100%" colspan="5">
+<span class="msai_form_static" id="MSAI_475">Note: Submitting changes the Alert Status to 'No Impact'.</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr></tbody></table></td></tr>
+<tr>
+<td class="msai_tab_display_none">
+<table class="msai_field_column" cellspacing="1" cellpadding="1">
+<tbody class="" style="">
+<tr id="MSAI_512" asidespan="5">
+<td class="msai_column msai_column5" style="width:100%" colspan="5" id="MSAI_MULTI_ACT">
+<div id="MSAI_MULTI_DIV_#foreach ($group in $groups)#if($group.name=='ACT')${group.id}#end#end" class="msai_multirow_container" nowrap="">
+<div class="msai_multirow_name msai_json" strategy="JSON" displayoption="Both">ACT</div><hidden>#foreach ($group in $groups)</hidden><hidden>#if (${group.name} == 'ACT')</hidden><hidden>#if('1' == '0')</hidden>
+<table cellspacing="0" cellpadding="0" nowrap="" width="100%" id="mrTableid${group.id}" class="msai_multi_table msai_json">
+<tbody>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" nowrap="" width="100%">
+<tbody>
+<tr class="msai_mulheader">
+<td width="50px" class="msai_rightborder msai_global_hide">Delete</td>
+<td><a aside_href="javascript:F.ACT.addRow(true,true);" class="msai_mullink" href="javascript:F.ACT.addRow(true,true);">Add Row</a></td>
+<td><a aside_href="javascript:F.ACT.deleteRow();" class="msai_mullink" href="javascript:F.ACT.deleteRow();">Delete Last Row</a></td>
+<td>
+<div class="msai_mullink">Total Rows</div></td>
+<td>
+<div id="mrrdid${group.id}" class="msai_mullink">${group.rowsCount}</div></td>
+<td>
+<div class="msai_mullink msai_pages_num">$label_pages</div></td>
+<td nowrap="" width="10%">
+<div id="mrpdid${group.id}" class="msai_mullink"><SCRIPT>writemrPageDesc($group.id,1)</SCRIPT></div></td>
+<td>
+<div class="msai_muldefinition_edit"></div></td></tr></tbody></table></td></tr><hidden>#set ($rowCount = 0)</hidden><hidden>#foreach ($row in $group.Rows)</hidden><hidden>#set ($rowSeq=$rowCount+1)</hidden>
+<tr id="mrrow${rowSeq}id$group.id" class="msai_repeatable_row">
+<td>
+<table cellspacing="0" cellpadding="0" width="100%">
+<tbody>
+<tr>
+<td width="50px" class="msai_mullink msai_rightborder msai_global_hide">
+<input id="mrrowdb${rowSeq}id$group.id" class="msai_mulrow_delete" type="checkbox" name="_${group.id}_multirow_deletebox$rowSeq" value="" aside_onclick="setTimeout('F.ACT.markRowForDelete($rowSeq,this)',0)" onclick="setTimeout('F.ACT.markRowForDelete($rowSeq,this)',0)"></td>
+<td>
+<table class="msai_field_mulcolumn" cellspacing="0" cellpadding="0">
+<tbody class="" style="">
+<tr id="MSAI_590_$rowSeq" asidespan="1:1:1:1:1:1:1:1">
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1"></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1"></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1"></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1"></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1"></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1"></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1"></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1"></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_565_$rowSeq" asidespan="1:1:1:1:1:1:1:1">
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1" id="MSAI_TD_ACTION_NAME_$rowSeq">
+<div class="ACT msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,24)</SCRIPT></div>
+<div class="ACT msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,24)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1" id="MSAI_TD_ACTION_NOTES_$rowSeq">
+<div class="ACT msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,25)</SCRIPT></div>
+<div class="ACT msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,25)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1" id="MSAI_TD_ACTION_OWNER_ORG_$rowSeq">
+<div class="ACT msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,26)</SCRIPT></div>
+<div class="ACT msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,26)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1" id="MSAI_TD_ACTION_OWNER_USER_$rowSeq">
+<div class="ACT msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,27)</SCRIPT></div>
+<div class="ACT msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,27)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1" id="MSAI_TD_DUE_DATE_$rowSeq">
+<div class="ACT msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,28)</SCRIPT></div>
+<div class="ACT msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,28)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1" id="MSAI_TD_SEND_REMINDER_BEFORE_DUE_DATE_$rowSeq">
+<div class="ACT msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,29)</SCRIPT></div>
+<div class="ACT msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,29)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1" id="MSAI_TD_ACTION_COMPLETE_$rowSeq">
+<div class="ACT msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,30)</SCRIPT></div>
+<div class="ACT msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,30)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column1" style="width:12%" colspan="1" id="MSAI_TD_ACTION_STATUS_$rowSeq">
+<div class="ACT msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,31)</SCRIPT></div>
+<div class="ACT msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,31)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_517_$rowSeq" asidespan="8">
+<td class="msai_mulcolumn msai_column8" style="width:96%" colspan="8" id="MSAI_TD_ACTION_ID_$rowSeq">
+<div class="ACT msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,32)</SCRIPT></div>
+<div class="ACT msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,32)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_519_$rowSeq" class="msai_hidden_column" asidespan="8">
+<td class="msai_mulcolumn msai_hidden_column msai_column8" style="width:100%" colspan="8" id="MSAI_TD_ACT_OBJECT_ID_$rowSeq">
+<div class="ACT msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,33)</SCRIPT></div>
+<div class="ACT msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,33)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr><hidden>#set ($rowCount=$rowCount+1)</hidden><hidden>#end</hidden></tbody></table><hidden>#end</hidden><hidden>#end</hidden><hidden>#end</hidden></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_413" asidespan="3:2">
+<td class="msai_column msai_column3" style="width:60%" colspan="3">
+<span class="msai_form_static" id="MSAI_414">Note: Completing all actions changes Alert Status to 'Addressed'.</span></td>
+<td class="msai_column msai_column2" style="width:40%" colspan="2"></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr></tbody></table></td></tr>
+<tr>
+<td class="msai_tab_display_none">
+<table class="msai_field_column" cellspacing="1" cellpadding="1">
+<tbody class="">
+<tr id="MSAI_323" asidespan="5">
+<td class="msai_column msai_column5" style="width:100%" colspan="5" id="MSAI_TD_REGULATORY_AUTHORITIES_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,34)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,34)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_262" asidespan="5">
+<td class="msai_column msai_column5" style="width:100%" colspan="5" id="MSAI_TD_RELEVANT_KEYWORDS_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,35)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,35)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_345" asidespan="5">
+<td class="msai_column msai_column5" style="width:100%" colspan="5">
+<span class="msai_form_static" id="MSAI_344">Note: Information entered/updated here becomes the metadata for the alert.</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_346" asidespan="4:1">
+<td class="msai_column msai_column4" style="width:80%" colspan="4" id="MSAI_TD_UPDATE_METADATA_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,36)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,36)</SCRIPT></div></td>
+<td class="msai_column msai_column1" style="width:20%" colspan="1">
+<span class="msai_form_static" id="MSAI_347">Next Step: Save Alert Metadata</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_263" asidespan="1:2:2">
+<td class="msai_column msai_column1" style="width:20%" colspan="1"></td>
+<td class="msai_column msai_column2" style="width:%" colspan="2"></td>
+<td class="msai_column msai_column2" style="width:%" colspan="2"></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_554" asidespan="8">
+<td class="msai_column msai_column8" style="width:96%" colspan="8">
+<table id="MSAI_555" class="msai_tabs" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td class="msai_tab_leaf msai_tab_align_left">
+<div class="msai_tab_align"></div>
+<span id="MSAI_556" class="msai_tab_open" onClick="msai_tab_hideAll('MSAI_555');msai_tab_show('MSAI_555','MSAI_556');" onmouseenter="msai_tab_hover(this);" onmouseleave="msai_tab_unhover(this);">
+<span>${ReviewApprove} </span>
+<div class="msai_tab_rearrange_icon"></div>
+<div class="msai_tab_del"></div>
+<div class="msai_tab_add"></div></span></td></tr>
+<tr>
+<td class="msai_tab_display">
+<table class="msai_field_column" cellspacing="1" cellpadding="1">
+<tbody class="">
+<tr id="MSAI_558" asidespan="3:5">
+<td class="msai_column msai_column3" style="width:36%" colspan="3" id="MSAI_TD_LEVEL1_APPROVER_ORG_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,37)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,37)</SCRIPT></div></td>
+<td class="msai_column msai_column5" style="width:60%" colspan="5" id="MSAI_TD_LEVEL1_APPROVER_USER_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,38)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,38)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_559" asidespan="3:5">
+<td class="msai_column msai_column3" style="width:36%" colspan="3" id="MSAI_TD_LEVEL2_APPROVER_ORG_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,39)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,39)</SCRIPT></div></td>
+<td class="msai_column msai_column5" style="width:60%" colspan="5" id="MSAI_TD_LEVEL2_APPROVER_USER_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,40)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,40)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_560" asidespan="8">
+<td class="msai_column msai_column8" style="width:96%" colspan="8" id="MSAI_TD_INI_ACTION_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,41)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,41)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_561" asidespan="8">
+<td class="msai_column msai_column8" style="width:96%" colspan="8" id="MSAI_TD_COMMENT_OR_CLARIFICATION_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,42)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,42)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_602" asidespan="8">
+<td class="msai_column msai_column8" style="width:100%" colspan="8">
+<div class="msai_celldiv" id="MSAI_353">
+<span class="msai_attached_report_id">100227</span><hidden>#foreach ($report in $reports) #if (${report.name} == 'MS_RGA_ORB_COMMENT_HISTORY' || ${report.name} == 'ORB Comment History')</hidden><span class="msai_attached_report_name" onclick="javascript:getReport($report.metricId,$report.reportId)">Comment History</span><hidden>#end #end</hidden>
+<span class="msai_attached_report_type">1</span></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_562" asidespan="8">
+<td class="msai_column msai_column8" style="width:96%" colspan="8">
+<span class="msai_form_static" id="MSAI_335">Note: Saving the assessment changes the alert status to 'Under Review'. Submitting the assessment for approval changes the alert status to 'Needs Approval'</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_605" class="msai_hidden_column" asidespan="8">
+<td class="msai_column msai_hidden_column msai_column8" style="width:100%" colspan="8" id="MSAI_TD_RESTRICT_ACCESS_TO_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,43)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,43)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr></tbody></table></div>
+<HIDDEN>#parse("fastform/esignature_template.vm")</HIDDEN>
+</form>
+<SCRIPT>/*608*/</SCRIPT>
+<!--MSAI_VERSION>1</MSAI_VERSION-->
+<textarea id="MSAI_LOG" class="msai_log_area" rows=15 readonly></textarea>
+<script>{zones: []}</script>
+<HIDDEN>#parse("fastform/ms_appstudio_mpower_init.vm")</HIDDEN>
+<script></script>
+<script>F.OBJECT_ID.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_OBJECT_ID'+row); return true;};F.OBJECT_ID.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_OBJECT_ID'+row); return true;};F.DD_OBJECT_TYPE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_OBJECT_TYPE'+row); return true;};F.DD_OBJECT_TYPE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_OBJECT_TYPE'+row); return true;};F.DD_CURRENT_USER_NAME.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_CURRENT_USER_NAME'+row); return true;};F.DD_CURRENT_USER_NAME.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_CURRENT_USER_NAME'+row); return true;};F.DD_EVENT_USER_NAME.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_EVENT_USER_NAME'+row); return true;};F.DD_EVENT_USER_NAME.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_EVENT_USER_NAME'+row); return true;};F.DD_ENTERPRISE_INFO.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_ENTERPRISE_INFO'+row); return true;};F.DD_ENTERPRISE_INFO.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_ENTERPRISE_INFO'+row); return true;};F.DD_CURRENT_STAGE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_CURRENT_STAGE'+row); return true;};F.DD_CURRENT_STAGE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_CURRENT_STAGE'+row); return true;};F.DD_PROCESS_CODE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_PROCESS_CODE'+row); return true;};F.DD_PROCESS_CODE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_PROCESS_CODE'+row); return true;};F.ALERT_TITLE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ALERT_TITLE'+row); return true;};F.ALERT_TITLE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ALERT_TITLE'+row); return true;};F.ALERT_DATE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ALERT_DATE'+row); return true;};F.ALERT_DATE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ALERT_DATE'+row); return true;};F.TYPES_OF_REVIEW_CONDUCTED.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_TYPES_OF_REVIEW_CONDUCTED'+row); return true;};F.TYPES_OF_REVIEW_CONDUCTED.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_TYPES_OF_REVIEW_CONDUCTED'+row); return true;};F.STATUS.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_STATUS'+row); return true;};F.STATUS.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_STATUS'+row); return true;};F.KEY_RELEVANT_KEYWORDS.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_KEY_RELEVANT_KEYWORDS'+row); return true;};F.KEY_RELEVANT_KEYWORDS.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_KEY_RELEVANT_KEYWORDS'+row); return true;};F.LAST_REVIEWED_BY.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_LAST_REVIEWED_BY'+row); return true;};F.LAST_REVIEWED_BY.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_LAST_REVIEWED_BY'+row); return true;};F.ANALYSIS_IMPACT.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ANALYSIS_IMPACT'+row); return true;};F.ANALYSIS_IMPACT.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ANALYSIS_IMPACT'+row); return true;};F.LIKELIHOOD.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_LIKELIHOOD'+row); return true;};F.LIKELIHOOD.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_LIKELIHOOD'+row); return true;};F.FINANCIAL_IMPACT.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_FINANCIAL_IMPACT'+row); return true;};F.FINANCIAL_IMPACT.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_FINANCIAL_IMPACT'+row); return true;};F.OVERALL_IMPACT.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_OVERALL_IMPACT'+row); return true;};F.OVERALL_IMPACT.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_OVERALL_IMPACT'+row); return true;};F.REPUTATIONAL_IMPACT.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_REPUTATIONAL_IMPACT'+row); return true;};F.REPUTATIONAL_IMPACT.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_REPUTATIONAL_IMPACT'+row); return true;};F.IMPACT_COMMENT.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_IMPACT_COMMENT'+row); return true;};F.IMPACT_COMMENT.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_IMPACT_COMMENT'+row); return true;};F.ATTACH_EVIDENCE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ATTACH_EVIDENCE'+row); return true;};F.ATTACH_EVIDENCE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ATTACH_EVIDENCE'+row); return true;};F.RELEVANT_KEYWORDS.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_RELEVANT_KEYWORDS'+row); return true;};F.RELEVANT_KEYWORDS.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_RELEVANT_KEYWORDS'+row); return true;};F.LEVEL1_APPROVER_USER.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_LEVEL1_APPROVER_USER'+row); return true;};F.LEVEL1_APPROVER_USER.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_LEVEL1_APPROVER_USER'+row); return true;};F.LEVEL1_APPROVER_ORG.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_LEVEL1_APPROVER_ORG'+row); return true;};F.LEVEL1_APPROVER_ORG.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_LEVEL1_APPROVER_ORG'+row); return true;};F.REGULATORY_AUTHORITIES.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_REGULATORY_AUTHORITIES'+row); return true;};F.REGULATORY_AUTHORITIES.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_REGULATORY_AUTHORITIES'+row); return true;};F.FEED_DATA_ID.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_FEED_DATA_ID'+row); return true;};F.FEED_DATA_ID.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_FEED_DATA_ID'+row); return true;};F.UPDATE_METADATA.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_UPDATE_METADATA'+row); return true;};F.UPDATE_METADATA.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_UPDATE_METADATA'+row); return true;};F.OWNER_ORG.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_OWNER_ORG'+row); return true;};F.OWNER_ORG.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_OWNER_ORG'+row); return true;};F.INI_ACTION.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_INI_ACTION'+row); return true;};F.INI_ACTION.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_INI_ACTION'+row); return true;};F.LEVEL2_APPROVER_ORG.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_LEVEL2_APPROVER_ORG'+row); return true;};F.LEVEL2_APPROVER_ORG.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_LEVEL2_APPROVER_ORG'+row); return true;};F.LEVEL2_APPROVER_USER.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_LEVEL2_APPROVER_USER'+row); return true;};F.LEVEL2_APPROVER_USER.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_LEVEL2_APPROVER_USER'+row); return true;};F.COMMENT_OR_CLARIFICATION.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_COMMENT_OR_CLARIFICATION'+row); return true;};F.COMMENT_OR_CLARIFICATION.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_COMMENT_OR_CLARIFICATION'+row); return true;};F.APPROVAL_REQUIRED.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_APPROVAL_REQUIRED'+row); return true;};F.APPROVAL_REQUIRED.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_APPROVAL_REQUIRED'+row); return true;};F.ACT_OBJECT_ID.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ACT_OBJECT_ID'+row); return true;};F.ACT_OBJECT_ID.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ACT_OBJECT_ID'+row); return true;};F.ACTION_ID.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ACTION_ID'+row); return true;};F.ACTION_ID.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ACTION_ID'+row); return true;};F.ACTION_NAME.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ACTION_NAME'+row); return true;};F.ACTION_NAME.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ACTION_NAME'+row); return true;};F.ACTION_NOTES.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ACTION_NOTES'+row); return true;};F.ACTION_NOTES.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ACTION_NOTES'+row); return true;};F.ACTION_OWNER_ORG.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ACTION_OWNER_ORG'+row); return true;};F.ACTION_OWNER_ORG.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ACTION_OWNER_ORG'+row); return true;};F.ACTION_OWNER_USER.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ACTION_OWNER_USER'+row); return true;};F.ACTION_OWNER_USER.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ACTION_OWNER_USER'+row); return true;};F.DUE_DATE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DUE_DATE'+row); return true;};F.DUE_DATE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DUE_DATE'+row); return true;};F.SEND_REMINDER_BEFORE_DUE_DATE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_SEND_REMINDER_BEFORE_DUE_DATE'+row); return true;};F.SEND_REMINDER_BEFORE_DUE_DATE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_SEND_REMINDER_BEFORE_DUE_DATE'+row); return true;};F.ACTION_COMPLETE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ACTION_COMPLETE'+row); return true;};F.ACTION_COMPLETE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ACTION_COMPLETE'+row); return true;};F.ACTION_STATUS.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ACTION_STATUS'+row); return true;};F.ACTION_STATUS.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ACTION_STATUS'+row); return true;};F.RESTRICT_ACCESS_TO.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_RESTRICT_ACCESS_TO'+row); return true;};F.RESTRICT_ACCESS_TO.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_RESTRICT_ACCESS_TO'+row); return true;};</script>
+<script> F.printLayoutConfig = {"placeHolders":[{"id":"Header","t":"TAB"},{"id":"OBJECT_ID","t":"FIELD","c":[],"n":"OBJECT_ID"},{"id":"FEED_DATA_ID","t":"FIELD","c":[],"n":"FEED_DATA_ID"},{"id":"OWNER_ORG","t":"FIELD","c":[],"n":"OWNER_ORG"},{"id":"MSAI_1","t":"ACCORDION","c":[{"id":"ALERT_TITLE","t":"FIELD","c":[],"n":"ALERT_TITLE"},{"id":"ALERT_DATE","t":"FIELD","c":[],"n":"ALERT_DATE"},{"id":"DD_OBJECT_TYPE","t":"FIELD","c":[],"n":"DD_OBJECT_TYPE"},{"id":"DD_CURRENT_USER_NAME","t":"FIELD","c":[],"n":"DD_CURRENT_USER_NAME"},{"id":"DD_EVENT_USER_NAME","t":"FIELD","c":[],"n":"DD_EVENT_USER_NAME"},{"id":"DD_ENTERPRISE_INFO","t":"FIELD","c":[],"n":"DD_ENTERPRISE_INFO"},{"id":"DD_CURRENT_STAGE","t":"FIELD","c":[],"n":"DD_CURRENT_STAGE"},{"id":"DD_PROCESS_CODE","t":"FIELD","c":[],"n":"DD_PROCESS_CODE"},{"id":"TYPES_OF_REVIEW_CONDUCTED","t":"FIELD","c":[],"n":"TYPES_OF_REVIEW_CONDUCTED"},{"id":"STATUS","t":"FIELD","c":[],"n":"STATUS"},{"id":"KEY_RELEVANT_KEYWORDS","t":"FIELD","c":[],"n":"KEY_RELEVANT_KEYWORDS"},{"id":"LAST_REVIEWED_BY","t":"FIELD","c":[],"n":"LAST_REVIEWED_BY"},{"id":"MSAI_229","t":"TAB","c":[{"id":"ANALYSIS_IMPACT","t":"FIELD","c":[],"n":"ANALYSIS_IMPACT"},{"id":"LIKELIHOOD","t":"FIELD","c":[],"n":"LIKELIHOOD"},{"id":"FINANCIAL_IMPACT","t":"FIELD","c":[],"n":"FINANCIAL_IMPACT"},{"id":"REPUTATIONAL_IMPACT","t":"FIELD","c":[],"n":"REPUTATIONAL_IMPACT"},{"id":"OVERALL_IMPACT","t":"FIELD","c":[],"n":"OVERALL_IMPACT"},{"id":"IMPACT_COMMENT","t":"FIELD","c":[],"n":"IMPACT_COMMENT"},{"id":"ATTACH_EVIDENCE","t":"FIELD","c":[],"n":"ATTACH_EVIDENCE"},{"id":"APPROVAL_REQUIRED","t":"FIELD","c":[],"n":"APPROVAL_REQUIRED"}]},{"id":"MSAI_231","t":"TAB","c":[{"id":"ACT","t":"MULTIROW","c":[{"id":"ACTION_NAME","t":"FIELD","c":[],"n":"ACTION_NAME"},{"id":"ACTION_NOTES","t":"FIELD","c":[],"n":"ACTION_NOTES"},{"id":"ACTION_OWNER_ORG","t":"FIELD","c":[],"n":"ACTION_OWNER_ORG"},{"id":"ACTION_OWNER_USER","t":"FIELD","c":[],"n":"ACTION_OWNER_USER"},{"id":"DUE_DATE","t":"FIELD","c":[],"n":"DUE_DATE"},{"id":"SEND_REMINDER_BEFORE_DUE_DATE","t":"FIELD","c":[],"n":"SEND_REMINDER_BEFORE_DUE_DATE"},{"id":"ACTION_COMPLETE","t":"FIELD","c":[],"n":"ACTION_COMPLETE"},{"id":"ACTION_STATUS","t":"FIELD","c":[],"n":"ACTION_STATUS"},{"id":"ACTION_ID","t":"FIELD","c":[],"n":"ACTION_ID"},{"id":"ACT_OBJECT_ID","t":"FIELD","c":[],"n":"ACT_OBJECT_ID"}]}]},{"id":"MSAI_232","t":"TAB","c":[{"id":"REGULATORY_AUTHORITIES","t":"FIELD","c":[],"n":"REGULATORY_AUTHORITIES"},{"id":"RELEVANT_KEYWORDS","t":"FIELD","c":[],"n":"RELEVANT_KEYWORDS"},{"id":"UPDATE_METADATA","t":"FIELD","c":[],"n":"UPDATE_METADATA"}]},{"id":"MSAI_556","t":"TAB","c":[{"id":"LEVEL1_APPROVER_ORG","t":"FIELD","c":[],"n":"LEVEL1_APPROVER_ORG"},{"id":"LEVEL1_APPROVER_USER","t":"FIELD","c":[],"n":"LEVEL1_APPROVER_USER"},{"id":"LEVEL2_APPROVER_ORG","t":"FIELD","c":[],"n":"LEVEL2_APPROVER_ORG"},{"id":"LEVEL2_APPROVER_USER","t":"FIELD","c":[],"n":"LEVEL2_APPROVER_USER"},{"id":"INI_ACTION","t":"FIELD","c":[],"n":"INI_ACTION"},{"id":"COMMENT_OR_CLARIFICATION","t":"FIELD","c":[],"n":"COMMENT_OR_CLARIFICATION"}]},{"id":"RESTRICT_ACCESS_TO","t":"FIELD","c":[],"n":"RESTRICT_ACCESS_TO"}]}]}</script>
+<script>{rules:[]}</script>
+<script></script>
+<script> F.onLoad(function(){ 
+getRef("mrrpid"+F.ACT.getID()).value =1;
+F.ACT.showFirstPage();
+F.ACT.setAttributes("Grid",F.ACTION_ID,F.ACT_OBJECT_ID);
+F.ACT.setNodeProperties("/appssdk/aqua/images/information.png",[F.ACTION_NOTES,F.SEND_REMINDER_BEFORE_DUE_DATE,F.DUE_DATE,F.ACTION_OWNER_ORG,F.ACTION_OWNER_USER,F.ACTION_COMPLETE,F.ACTION_STATUS,F.ACTION_NAME],[F.ACT_OBJECT_ID]);
+ var options_ACT = {"title":false,"headerHeight":"22px","tooltip":true,"toolbar":{"toolbar":true,"searchFilter":true,"buttons":{"Add":true,"Delete":true,"Duplicate":true}},"duplicateRow":{"copy":true},"addRow":{"insertTop":true,"insertRowTop":true,"insertRowBottom":true,"insertBottom":true,"insertAt":"end","insertMidPos":0,"firstInsert":false},"paginator":{"paginator":true,"rowsPerPage":5}};
+F.ACT.useAsDataGrid(options_ACT); 
+}); </script>
+<script> F.ACT.hide = function(){(document.getElementById('MSAI_MULTI_ACT')).style.display='none';};  F.ACT.show = function(){(document.getElementById('MSAI_MULTI_ACT')).style.display='';}; </script>
+<SCRIPT>
+F.getObject("MSAI_MULTI_DIV_#foreach ($group in $groups)#if($group.name=='ACT')${group.id}#end#end").innerHTML = "";
+</SCRIPT>
+<HIDDEN>#parse("fastform/MS_RGA/MS_RGA_MY_ALERTS_JS.vm")</HIDDEN>
+#if ($offline != "true") <script>$(".saveandsyncbutton").hide();$(".savesynccontinuebutton").hide();$(".saveputonlinebutton").hide();</script> #end
+#if ($offline == "true") <script>$(".savebutton").text("Save Changes"); $(".cancelbutton").text("Cancel Changes");</script> #end
+</body>
+<script>F.isAccessibilityEnabled = false;</script>
+<script>initial();</script><!--
+-----------------------------------------------------------
+Row IDs :
+These can be used to access individual rows in the template
+-----------------------------------------------------------
+MSAI_2
+MSAI_87
+MSAI_88
+MSAI_89
+MSAI_91
+MSAI_93
+MSAI_94
+MSAI_95
+MSAI_96
+MSAI_97
+MSAI_115
+MSAI_226
+MSAI_328
+MSAI_428
+MSAI_427
+MSAI_1
+MSAI_478
+MSAI_7
+MSAI_8
+MSAI_9
+MSAI_10
+MSAI_11
+MSAI_12
+MSAI_476
+MSAI_19
+MSAI_22
+MSAI_295
+MSAI_227
+MSAI_554
+MSAI_605
+MSAI_464
+MSAI_551
+MSAI_235
+MSAI_279
+MSAI_505
+MSAI_239
+MSAI_512
+MSAI_413
+MSAI_323
+MSAI_262
+MSAI_345
+MSAI_346
+MSAI_263
+MSAI_558
+MSAI_559
+MSAI_560
+MSAI_561
+MSAI_602
+MSAI_562
+MSAI_590_$rowSeq
+MSAI_565_$rowSeq
+MSAI_517_$rowSeq
+MSAI_519_$rowSeq
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+Title IDs :
+These can be used to access the form title(s)
+-----------------------------------------------------------
+-----------------------------------------------------------
+MSAI_572
+
+-----------------------------------------------------------
+Heading IDs :
+These can be used to access form section headings
+-----------------------------------------------------------
+-----------------------------------------------------------
+MSAI_4
+MSAI_552
+
+-----------------------------------------------------------
+Static Text IDs :
+These can be used to access each of the static text
+-----------------------------------------------------------
+-----------------------------------------------------------
+MSAI_347
+MSAI_335
+MSAI_344
+MSAI_414
+MSAI_475
+
+-----------------------------------------------------------
+Button IDs :
+These can be used to access the buttons
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+Link IDs :
+These can be used to access the hyperlinks
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+Tab IDs :
+These can be used to access the tabs. 
+-----------------------------------------------------------
+-----------------------------------------------------------
+MSAI_228MSAI_555
+-----------------------------------------------------------
+Report IDs :
+These can be used to access the reports. 
+-----------------------------------------------------------
+MSAI_353
+
+-----------------------------------------------------------
+
+-->

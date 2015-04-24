@@ -1,0 +1,464 @@
+<html>
+<head>
+<title>@title@</title>
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=@CHARACTER_SET@">
+<LINK REL="stylesheet" TYPE="text/css" HREF="@WEBROOT@/gui_styles.css"/>
+<LINK REL="stylesheet" TYPE="text/css" HREF="@WEBROOT@/commonui_new.css"/>
+<!--
+/*
+ * SYSTEMi Copyright (c) 2000-2003, MetricStream, Inc. All rights reserved.
+ * @@Author: <Vikas Jaitly(vjaitly@@metricstream.com)>
+ * @@Created: <05/12/2009>
+ * $Id:GridPlain.xhtmp $
+ */
+-->
+
+@%'report/include/reports_include_style_section.htmp'@
+
+</head>
+@reqNotFromZaplet(
+<body @ENABLE_JS(onload="javascript:onLoadBehaviors()")@ bgcolor="#ffffff" text="#000000" link="#000099" vlink="#000099" alink="#000099" >
+)@
+@reqFromZaplet(
+<body bgcolor="#ffffff" text="#000000" link="#000099" vlink="#000099" alink="#000099">
+)@
+<SCRIPT src="@WEBROOT@/calenderfunctions.js" language="Javascript">
+</SCRIPT>
+<SCRIPT src="@WEBROOT@/generic.js" language="Javascript">
+</SCRIPT>
+<SCRIPT src="@WEBROOT@/reportFunctions.js" language="Javascript">
+</SCRIPT>
+<SCRIPT src="@WEBROOT@/ext/GridSummary.js" language="Javascript">
+</SCRIPT>
+<script language = "javascript" >
+function onLoadBehaviors() {
+    // resize the window only if the report is opened in a new window
+    //@OUTPUT_WINDOW{@NEW_WINDOW(
+        setWindowSize();
+    //)@}@
+}
+
+function setWindowSize() {
+    // only resize for Internet Explorer
+    if (navigator.userAgent.indexOf("MSIE") > -1) {
+        window.resizeTo(550, 500);
+        window.moveTo(150, 100);
+    }
+}
+
+</SCRIPT>
+
+<script language = "javascript" >
+
+var contextParams= {};
+
+</script>
+
+<script language = "javascript" >
+
+//
+// This is the main layout definition.
+//
+Ext.onReady(function(){
+	
+	Ext.QuickTips.init();
+    
+    
+
+var ppop = null;
+// Store reportid for future use
+var report_id = '@REPORT_ID@';
+
+// Global instances for storing session data
+var parReqDisplay = '@PARAMETERS_FOR_REQ_DISP@';
+var parReq = '@.PARAMETERS_FOR_REQ@';
+var rtSortColSeq='@RUNTIME_SORT_COL_SEQ@';
+var rtSortDir='@RUNTIME_SORT_DIR@';
+var srchCond='@SEARCH_COND@';
+var numRows='@NUM_ROWS@';
+var baseparams = {
+"REPORT_ID":"@REPORT_ID@",
+"METRIC_ID":"@METRIC_ID@",
+"INSTANCE_ID":"@INSTANCE_ID@",
+"INSTANCE_ID_2":"@INSTANCE_ID_2@",
+"REP_MODE":"@REP_MODE@",
+'ENTERPRISE_ID':'@ENTERPRISE_ID@',
+"REPORT_NAME":"@REPORT_NAME@"
+};
+
+var baseparams2 = {
+'PARAMETERS_FOR_REQ':'@.PARAMETERS_FOR_REQ@',
+'RUNTIME_SORT_COL_SEQ':'@RUNTIME_SORT_COL_SEQ@',
+'SEARCH_COND': '@SEARCH_COND@',
+'RUNTIME_SORT_DIR':'@RUNTIME_SORT_DIR@'
+};
+
+var toolparams = Ext.apply({}, baseparams);
+
+// For options - baseparams & baseparams2
+// For scrolling - baseparams & baseparams2 & pageu
+
+// Filter Parameters data
+// This has each parameters separately. and not required for normal report functionality
+var filterparams = Ext.apply({},baseparams);
+
+Ext.apply(filterparams, {
+"metricid":"@metricid@",
+"STARTING_INSTANCE_ID":"@STARTING_INSTANCE_ID@",
+"OFFSET_INSTANCE_ID":"@OFFSET_INSTANCE_ID@",
+"REP_ACTION":"@REP_ACTION@",
+"RELATED_MODE":"@RELATED_MODE@",
+"DISPLAY_SET_NUM":"@DISPLAY_SET_NUME@",
+"NAME_OF_SUBMIT_TARGET":"@NAME_OF_SUBMIT_TARGET@",
+"CORRECTIVE_ACTION_ID":"@CORRECTIVE_ACTION_ID@",
+"ACTION_TYPE_ID":"@ACTION_TYPE_ID@",
+"REPORT_TYPE":"@REPORT_TYPE@",
+"OUTPUT_WINDOW":"@OUTPUT_WINDOW@",
+"wrapper":"@wrapper@",
+"PARAMS_CODE":"@PARAMS_CODE@",
+"CURRENT_FORM":"@CURRENT_FORM@",
+"METRIC_ID_REF":"@METRIC_ID_REF@",
+"INSTANCE_ID_REF":"@INSTANCE_ID_REF@",
+"HISTORY_DATE1":"@HISTORY_DATE1@",
+"HISTORY_DATE2":"@HISTORY_DATE2@",
+"HISTORY_DATE_ERR":"@HISTORY_DATE_ERR@",
+"ERR_MSG":"@ERR_MSG@",
+"templ":"@templatename@",
+"REPORT_LAYOUT":"@REPORT_LAYOUT@",
+"errorHidden":"@ERR_MSG@",
+"output":"@output@",
+"copyright_needed":"@copyright_needed@",submit_x:16});
+
+var recPerPage = @RECORDS_PER_PAGE@;
+
+@CONTEXT_SENSITIVE_FUNC(
+    contextParams= Ext.apply({}, baseparams);
+
+    Ext.apply(contextParams, {
+        'PARAMETERS_FOR_REQ':'@.PARAMETERS_FOR_REQ@',
+        'SELSTR':'@SELSTR@',
+        'METRIC_VIEW':'@METRIC_VIEW@',
+        'wrapper':'@wrapper@',
+        'OUTPUT_WINDOW':'@OUTPUT_WINDOW@',
+        'output':'@output@',
+        'copyright_needed':'@copyright_needed@'
+    });
+)@
+
+
+
+// Include common grid section
+@%'report/include/reports_include_common_grid.xhtmp'@    
+
+// Include filter section
+@%'report/include/reports_include_filter_section_grid.xhtmp'@
+
+
+
+    function summaryrenderer(v, params, data) {
+           // params.attr = 'ext:qtip="Total no. of companies"'; // summary column tooltip example
+           if(store.reader.summaryData)
+            var summary = store.reader.summaryData[params.id];
+            if(summary) {
+                v= summary.desc + ' ' + summary.value;
+            }
+            return v? v  : '';
+    }
+
+    function colRenderer(val, meta, record, rowIndex, colIndex, store) {
+        val = val || '';
+        var rv = val.split('_$$');
+        if(rv.length >1) {
+            val = rv[1];
+            if(meta) {
+                meta.attr= 'style="'+ rv[0]+ '"';
+            }
+        }
+       
+        try {
+        
+        //meta.attr = 'style="background-color:yellow;color:red;"';
+        }catch(e) {}
+      
+        
+
+        return val;
+
+    }
+
+        var gridColumnModel = new Ext.grid.ColumnModel([
+@HEADER_INFO(@HEADER_ROW[0](@HROW({header: '@USER_NAME@',sortable:@SORT_LINK{@""(false)@@(true)@}@, renderer:colRenderer,summaryRenderer: summaryrenderer, dataIndex:'@DATA_COL_SEQ@',width:@COL_WIDTH@,align:'@ALIGN_HDG@'}
+)@)@@HEADER_ROW[1..](@HROW(,{header: '@USER_NAME@',sortable:@SORT_LINK{@""(false)@@(true)@}@, renderer:colRenderer, summaryRenderer: summaryrenderer, dataIndex:'@DATA_COL_SEQ@',width:@COL_WIDTH@,align:'@ALIGN_HDG@'})@
+)@
+)@ ]);
+
+
+       
+    var recordModel= [
+    @HEADER_INFO(@HEADER_ROW[0](@HROW({name:'@DATA_COL_SEQ@',mapping:'col@DATA_COL_SEQ@'})@)@
+    @HEADER_ROW[1..](@HROW(,{name:'@DATA_COL_SEQ@',mapping:'col@DATA_COL_SEQ@'})@)@
+    )@ ];
+
+       var store = new Ext.data.Store({
+            reader: new Ext.data.CFQueryReader({
+                id: 'NAME', // This is supposed to match the 'mapping'
+                fields:recordModel
+            }),
+            fields: recordModel,
+            remoteSort: true,
+            url:'Reportsstart/ajax/ReportStart?REPORT_ID=@REPORT_ID@&templ=Tabularjson.xhtmp'
+            ,id:'dataStoreId'
+        });
+
+        store.on('beforeload', function(store, options) {
+
+            options.params || (options.params = {}); //assert params
+            var start=options.params.start ;
+            var limit= options.params.limit;
+
+            //limit=(limit==0) ? 1: limit;
+            var pageu = 'all';
+            if (limit != -1) {
+                pageu = Math.floor(start/limit)+1;
+                Ext.apply(options.params, {
+                    RECORDS_PER_PAGE : limit
+                });
+
+            }
+            Ext.apply(options.params, {
+                //apply stuff to params
+                //assuming pageNumber has been calculated into this var
+                pageu:pageu
+            });
+
+            if(store.sortInfo) {
+                rtSortDir = store.sortInfo.direction;
+                rtSortColSeq = store.sortInfo.field;
+            }
+            if (!options.params.submit_x) {
+                Ext.apply(options.params, baseparams);
+
+                Ext.apply(options.params, {
+                    'PARAMETERS_FOR_REQ':parReq,
+                    'RUNTIME_SORT_COL_SEQ':rtSortColSeq,
+                    'SEARCH_COND': srchCond,
+                    'RUNTIME_SORT_DIR':rtSortDir
+                });
+            }
+
+          
+        });
+        store.on('load', function(store, recs, options) {
+            parReqDisplay = store.reader.paramsForReqDisp;
+            parReq= store.reader.paramsForReq;
+            showError(store.reader.errmsg);
+            baseparams.INSTANCE_ID = store.reader.currentInstanceId; 
+            numRows = store.reader.totalRowCount;
+            contextParams.INSTANCE_ID = store.reader.currentInstanceId;
+            document.contextform.INSTANCE_ID.value = store.reader.currentInstanceId;
+            document.contextform.PARAMETERS_FOR_REQ.value = store.reader.paramsForReq;
+            Ext.getCmp('grid').setTitle(store.reader.dtTime);
+
+            // Since the pageSize is not known for 'all' update with totalrowcount
+            if(options.params.pageu=='all') {
+                bbar.pageSize=store.reader.totalRowCount;
+            }
+            // If the parameters were submitted using form submit
+            // Then we should clear it, because clicking on 'sort' uses
+            // cached information, and it will go to validateFormData()
+            if(options.params.submit_x) {
+                store.lastOptions.params = {};
+            }
+
+        });
+       
+ 
+
+var combo = new Ext.form.ComboBox({
+  name : 'perpage',
+  width: 60,
+  store: new Ext.data.SimpleStore({
+    fields: ['id'],
+    data  : [
+      ['20'],
+      ['40'],
+      ['80'],
+      ['All']
+    ]
+  }),
+  mode : 'local',
+  value: recPerPage,
+
+  listWidth     : 40,
+  triggerAction : 'all',
+  displayField  : 'id',
+  valueField    : 'id',
+  editable      : false,
+  forceSelection: true
+});
+
+var bbar= new Ext.PagingToolbar({
+            store: store,
+            pageSize : recPerPage,
+            displayInfo: true,
+            items   :    [
+                    '-'
+                    @output{@"infoport"()@@(
+                    ,'Records per page: '
+                    ,combo
+                    )@}@
+            ],
+            displayMsg: 'Displaying records {0} - {1} of {2}',
+            emptyMsg: "No records to display"
+        });
+
+    combo.on('select', function(combo, record) {
+        if('All' == record.get('id')) {
+            bbar.pageSize =-1;
+        } else {
+            bbar.pageSize = parseInt(record.get('id'), 10);
+        }
+            recPerPage = bbar.pageSize;
+        bbar.doLoad(0);
+
+    }, this);
+
+
+    var summary = new Ext.ux.grid.GridSummary();
+    var mainPanel = {
+    	xtype: 'panel',
+        id: 'main-panel',
+		layout: 'border',
+		region: 'center',
+        items :[
+            // If report has parameters add in the north
+            paramForm1
+            @HEADER_INFO{@""(
+            ,{
+                xtype: 'panel',
+                region: 'center'
+            }
+            )@@(
+                ,{
+                xtype: 'grid',
+                @output{@"infoport"()@@(
+                    title : '@label.report_data_as_of@ @TIMESTAMP_1@ @TIMESTAMP_VS@ @TIMESTAMP_2@',
+                )@}@
+                region: 'center',
+                //anchor: '0 -30',
+                layout: 'fit',
+                id:'grid',
+                repid:"@REPORT_NAME@",
+                //margin: '5 5 5 5',
+                viewConfig: {
+                    forceFit:true,
+                    emptyText: 'No records to display'
+                },    
+                colModel:gridColumnModel,
+                store: store,
+                @DISPLAY_SETS(@REPORT_FOOTER(
+                plugins: [summary],
+                )@)@
+                stripeRows: true,
+                bbar: bbar,
+                tools:[{
+                   id:'gear',
+                   handler: function(event, toolEl, panel){
+                        repToolsMenu.show(toolEl, 'tr-bl'); 
+                   }
+                }],
+                // Add a listener to load the data only after the grid is rendered:
+                listeners: {
+                    render: function(){
+                        var initParams = Ext.apply({}, {start:0, limit:recPerPage});                                                
+                        this.store.load({params:initParams});
+                    }
+                }
+            }
+            )@
+            }@
+            // Add Grid in the center
+
+        ]
+    };
+
+
+    var filterTip= ['Show Filters', 'Hide Filters'];
+
+    var errormsg = "@ERR_MSG@";
+    var errorbar = {
+                //xtype: 'box',
+                id: 'errmsg',
+                xtype: 'tbfilltext',
+                style:' background-color: #ffffff; border: 1px solid #ee0000; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #ee0000; padding: 5px 0 5px 0; margin-bottom: 5px; width: 100%; text-align: center; ',
+                hidden:true,
+                autoEl: {
+                    html: errormsg
+                }
+            };
+        if(errormsg) {
+           errorbar.hidden = false;
+        }
+        
+    var topbar = new Ext.Toolbar({
+        region : 'north',
+        height:30,
+        margins: '0 0 0 5',
+        items:[
+            {
+            xtype: 'box',
+            id: 'title',
+            autoEl: {
+            html: "@REPORT_NAME@"
+            }
+            },
+            {xtype: 'tbfillspacer'},
+            errorbar,
+            '->',
+            {xtype: 'tbfillspacer'},
+            {
+                text: 'Filters',
+                id: 'toggleFilter',
+                tooltip: filterTip[0],
+                enableToggle: true,
+                hidden: !hasParams,
+                toggleHandler: onItemToggle
+            },
+            {
+                text: 'Done',
+                id: 'doneBtn',
+                tooltip: 'Done',
+                handler: backToReports
+            }
+            
+        ]
+        
+    });
+    
+
+	// Finally, build the main layout once all the pieces are ready.  This is also a good
+	// example of putting together a full-screen BorderLayout within a Viewport.
+    var viewPort = new Ext.Viewport({
+		layout: 'border',
+		title: 'Ext Layout Browser',
+        defaults:{
+            @output{@"infoport"()@@(
+                margins: '5 0 0 5'
+            )@}@
+        },
+		items: [
+            @output{@"infoport"()@@(
+            topbar,
+            )@}@
+			mainPanel
+		],
+        renderTo:Ext.getBody()
+    });
+    viewPort.doLayout();
+});
+</SCRIPT>
+@%'report/include/reports_include_contextform_grid.xhtmp'@
+</body>
+</html>

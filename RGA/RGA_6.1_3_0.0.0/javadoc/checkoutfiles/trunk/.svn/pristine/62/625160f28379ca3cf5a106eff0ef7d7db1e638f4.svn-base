@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><VIEWS_SPEC xmlns="http://www.metricstream.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metricstream.com ms_application_schema.xsd">
+<!--$Revision: 1.30.2.12.2.2.2.9.2.8 $-->
+<!--$Author: prao $-->
+<PLATFORM_DETAILS>
+<PLATFORM_VERSION>6.0</PLATFORM_VERSION>
+<BUILD_VERSION>4.11.0</BUILD_VERSION>
+</PLATFORM_DETAILS>
+<VIEW_NAME>MS_RGA_SERVER_URL_TSTAMP_V</VIEW_NAME>
+<OBJECT_ID>MS_RGA_SERVER_URL_TSTAMP_V</OBJECT_ID>
+<VIEW_TEXT>(SERVER_ADD_URL,LAST_RESPONSE_TIMESTAMP,SOURCE) AS Select Distinct Server_Add_Url,
+       Nvl(Last_Response_Timestamp,'0') Last_Response_Timestamp,
+       Decode(Source_Type,'1','email','2','rss') Source
+From   Ms_Rga_Channel_Details Left Outer Join Ms_Rga_Url_Latest_Timestamp
+Using  (Server_Add_Url)
+Where  Active = '1'
+</VIEW_TEXT>
+</VIEWS_SPEC>

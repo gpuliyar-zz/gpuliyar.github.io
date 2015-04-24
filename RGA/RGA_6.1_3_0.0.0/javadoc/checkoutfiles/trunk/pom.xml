@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		<modelVersion>4.0.0</modelVersion>
+		<groupId>com.metricstream.rga</groupId>
+		<artifactId>ms-rga</artifactId>
+		<version>ProductVersion-SNAPSHOT</version>
+		<name>ms-rga</name>
+
+<!-- Metricstream maven repository -->
+	<repositories>
+		<repository>
+			<id>artifactory</id>
+			<name>artifactory</name>
+			<url>http://msi-vmplaftool:8081/artifactory/simple/repo/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+<!--Dependency details-->
+	<dependencies>
+		<dependency>	
+			<groupId>com.metricstream.deps</groupId>
+			<artifactId>persistence-deps</artifactId>
+			<version>1.0</version>
+			<type>pom</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<directory>lib</directory>
+		<finalName>${project.name}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<proc>none</proc>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<targetPath>com/metricstream/systemi/rga/resource</targetPath>
+				<directory>src/main/java/com/metricstream/systemi/rga/resource/</directory>
+				<includes>
+					<include>*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/</directory>
+			</resource>
+		</resources>
+	</build>
+        <distributionManagement>
+		<repository>
+			<id>deploytoartifact</id>
+			<name>Internal Releases</name>
+			<url>http://msi-vmplaftool:8081/artifactory/simple/libs-snapshot-local/</url>
+		</repository>
+	</distributionManagement>
+</project>
+
+

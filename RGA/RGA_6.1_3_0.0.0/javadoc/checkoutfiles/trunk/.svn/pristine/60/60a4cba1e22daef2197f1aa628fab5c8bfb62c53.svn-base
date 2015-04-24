@@ -1,0 +1,277 @@
+#parse("fastform/MS_RGA/MS_RGA_COMMON_JS.js")
+
+<SCRIPT src="/json2.js" language="Javascript"></SCRIPT>  
+
+<script>          
+var global_var=F.CHN.getRowCount();
+function custom_platform_redirect()
+{
+	if(g_edit_mode=='1')
+	{
+		var  paramone="$SERVLET_URL/Pushinfoletstatuspage?x_process_id=$proc&x_title=${formMetaData.Label}&msg=";
+		document.getElementsByName('#!redirect-ok')[0].value = paramone;
+	}    
+}
+
+F.onLoad = function()
+{    
+
+	var obj_id = F.OBJECT_ID.read();
+	 var div = document.createElement('testDiv');
+	 div.innerHTML = '$subMessage';
+	 document.getElementById('main_container').appendChild(div);
+//	 F.CHANNEL_NAME.callInfolet();
+	for (var row in F.CHN.rows())                     //for each row in the CHN multirow.
+	{
+//F.CUSTOM_FIELD10.callInfolet(row);
+//F.CHANNEL_NAME.callInfolet();
+   // alert(" channel name : "+ F.CHANNEL_NAME.read(row));
+//F.CHANNEL_NAME.writeLov(F.CUSTOM_FIELD10.read(row),row);  // alert(F.CUSTOM_FIELD1.readStoredValue(row));
+	if(F.SUBSCRIPTION_ID.read(row) !== '')	
+		F.CHN_OBJECT_ID.write(obj_id,row);
+	}
+	if(F.OBJECT_ID.read()==='')
+	{ F.CUSTOM_FIELD1.write(1);
+     }
+	else 
+	{ F.CUSTOM_FIELD1.write(2);
+    
+	}	
+	F.DD_PROCESS_CODE.write('MS_RGA_MY_SUBSCRIPTION');
+       F.DD_CURRENT_STAGE.write('CREATE_EDIT');
+	showToolbar_new();
+	g_edit_mode = F.getFormParameter("emd");
+	F.CHN.showPage(1);
+	F.CHN.preventZeroRows();
+	F.CHANNEL_NAME.makeLabelRequired();
+	F.NOTIFY_BY_EMAIL.makeLabelRequired();
+	F.STATUS.makeLabelRequired();
+	rowNum=F.CHN.getRowCount();
+	
+	if (F.NOTIFY_BY_EMAIL.read(rowNum)===""){
+		F.NOTIFY_BY_EMAIL.write('0',rowNum);
+	}
+	
+	if (F.STATUS.read(rowNum)===""){
+		F.STATUS.write('1',rowNum);
+		}
+	
+};
+F.CHN.afterPageLoad = function(srow, erow)                  
+{ 
+
+	//alert(" srow " + srow + " erow " + erow);
+	for(var j=srow; j<= erow; j++)//loop is required to check all the associated factors
+	{ 	 
+		//alert(" F.CUSTOM_FIELD8.read(j) " + F.CHANNEL_NAME.readLov(j));
+		if(F.CUSTOM_FIELD8.read(j)=='2')
+		{ 
+			//F.getObject('mrrow'+j+'id'+F.CHN.id).style.display='none';
+			F.FILTER_KEYWORDS.disable(j);
+			F.NOTIFY_BY_EMAIL.disable(j);
+			//F.CHANNEL_NAME.writeLov(F.CUSTOM_FIELD10.read(row),row);
+			F.STATUS.disable(j);
+			//F.CHANNEL_NAME.writeLov(F.CUSTOM_FIELD6.read(j),j);
+			var sss = "mrrow"+j+"id"+F.CHN.getID();
+			//alert(" ssss " +sss);
+			if(document.getElementById(sss)!==null)
+				document.getElementById(sss).style.display="none";
+		}
+		
+		if(F.SUBSCRIPTION_ID.read(j)!== '')
+		{ 
+			document.getElementById("mrrowdb"+j+"id"+F.CHN.getID()).disabled = true;
+		}   
+	  F.CHANNEL_NAME.makeLabelRequired(j);
+	  F.NOTIFY_BY_EMAIL.makeLabelRequired(j);
+	  F.STATUS.makeLabelRequired(j);
+	}
+   if(global_var>=1)
+   {
+		for(var row = srow; row <= global_var; row++)                 //To validate the conditions for each row of the multirow, after each multirow page loads    
+		{
+			if(F.CHANNEL_NAME.read(row) !== "" && F.SUBSCRIPTION_ID.read(row)!== '')   {                //To do the validation only for the Scenario List Report.
+				 F.CHANNEL_NAME.disable(row);
+             }       
+        }
+	}
+
+};
+F.CHN.afterAddRow = function()
+{
+
+	rowNum=F.CHN.getRowCount();
+	 F.CHANNEL_NAME.callInfolet(rowNum);
+	F.CHANNEL_NAME.makeLabelRequired(rowNum);
+	F.NOTIFY_BY_EMAIL.makeLabelRequired(rowNum);
+	F.STATUS.makeLabelRequired(rowNum);
+	if (F.NOTIFY_BY_EMAIL.read(rowNum)===""){
+		F.NOTIFY_BY_EMAIL.write('0',rowNum);
+		
+	}
+	
+	if (F.STATUS.read(rowNum)===""){
+		F.STATUS.write('1',rowNum);
+		
+	}
+	
+	
+};
+
+
+F.CHN.onDeleteRow = function()
+{ 
+	
+		var rc = F.CHN.getRowCount();
+		
+		for(var row = rc; row>= 1; row--)                //Checking the condition for each row of the SCN multirow.
+		{	
+		
+			var sss = "mrrow"+row+"id"+F.CHN.getID();
+			
+			if(document.getElementById(sss)!==null){
+						if(F.SUBSCRIPTION_ID.read(row) !== '')            //Conditional validation to check only on the published multirows.
+						{
+							alert('${SubsDelMsg}');
+							
+							return false;
+						}
+						else
+							return true;
+						
+				
+				}else{
+			if(F.SUBSCRIPTION_ID.read(row) !== '')            //Conditional validation to check only on the published multirows.
+			{
+				alert('${SubsDelMsg}');
+                
+				return false;
+			}
+			else
+				return true;
+			}
+		}
+	return false;
+};
+
+/* Start 
+     *   @Purpose:-   The following function used for creating an alert message same as the ECP alert message for mandatory fields.
+     *   @Reference:- 1. onSubmit function
+    */    
+function showRequiredMessage(fields)     //To create an alert message which is displayed same as the alert message displayed by the ECP for mandatory. 
+{
+	var arr = fields.split(",");
+	var i, msg='${SubsValidateMsg}';
+	for(i=0; i<arr.length; i++)
+		msg= msg+'\n'+arr[i];
+
+	alert(msg);
+}
+    /*end*/
+	
+F.onSubmit = function()
+{   
+//alert(F.CUSTOM_FIELD1.read());
+	var rowCount=F.CHN.getRowCount();
+	var x_Return;
+	var x_Channel_Name_i;
+	var x_Channel_Name_j;
+	var field ='';
+	
+		var x_created_by =F.DD_CURRENT_USER_NAME.read();
+		for (var row in F.CHN.rows())                     //for each row in the CHN multirow.
+	{   
+	               //To execute the given statements only for a published row.
+		F.CHN_CREATED_BY.write(x_created_by,row);
+	}
+	
+	
+	
+	// Code block for preventing blank and duplicate Channel names.
+	for(var i = 1; i <= rowCount; i++){
+		x_Channel_Name_i = F.CHANNEL_NAME.read(i);
+		if(F.CHANNEL_NAME.readDisplayedValue(i)!=="")
+			F.CUSTOM_FIELD6.write(F.CHANNEL_NAME.readDisplayedValue(i),i) ;
+		x_NotifyByEMail_i = F.NOTIFY_BY_EMAIL.read(i);
+		x_Status_i = F.STATUS.read(i);
+		
+		 if (((x_Channel_Name_i===null) || (x_Channel_Name_i==="")) && (!F.CHN.isMarkedForDeletion(i))){
+				
+				field = field + '${CrtChnName}'+' '+'(${Row} '+i+'),';
+				
+			} 
+			
+		if (((x_NotifyByEMail_i===null) || (x_NotifyByEMail_i==="")) && (!F.CHN.isMarkedForDeletion(i))){
+				
+				field = field + '${SubsNotiMail}'+' '+'(${Row} '+i+'),';
+				
+			}
+
+		if (((x_Status_i===null) || (x_Status_i==="")) && (!F.CHN.isMarkedForDeletion(i))){
+				
+				field = field + '${SubsStatus}'+' '+'(${Row} '+i+'),';
+				
+			}	
+			
+		
+
+		
+		for(var j = i+1; j <= rowCount; j++){
+			x_Channel_Name_j = F.CHANNEL_NAME.read(j);
+
+			if (x_Channel_Name_i !== "" && x_Channel_Name_j !== "" && (x_Channel_Name_i==x_Channel_Name_j) && (!F.CHN.isMarkedForDeletion(j))){
+				//alert('Duplicate Channel Names are not allowed.');
+				  alert('${CrtChnName}'+' '+F.CHANNEL_NAME.readDisplayedValue(j)+' '+'${SubsDupChanName}');
+				x_Return = 0;
+				break;
+			}
+
+			if(x_Return===0){
+				break;
+			} 
+		}
+
+		if(x_Return===0){
+			break;
+		}
+	}
+
+	
+	//alert(F.CUSTOM_FIELD1.read());
+		
+	if(x_Return===0){
+		return false;
+	}
+	else if(field !== "")                      //checking if the value in the variable field is not null to do the conditional validation for the mandatory fields.
+	{
+		showRequiredMessage(field);
+		return false;
+	}else
+		return true;
+	
+};
+
+
+
+function customCancel(){
+	if(g_edit_mode=='1'){
+		top.window.close();
+	}
+	else
+	{
+		goCancel();
+	}
+}
+
+
+
+
+F.FILTER_KEYWORDS.onChange=function(row)
+{
+	if(F.FILTER_KEYWORDS.read(row).length>4000)
+				{
+					F.FILTER_KEYWORDS.write(F.FILTER_KEYWORDS.read(row).substring(0,4000),row);
+					alert('${maxlimitmsg}'+' ${CrtFltrKeywrds} '+'${maxlimitwarning}');
+				}
+};
+</script>

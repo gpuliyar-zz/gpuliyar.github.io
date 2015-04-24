@@ -1,0 +1,33 @@
+ declare
+
+  vmetric_id si_metrics_t.metric_id%type;
+
+begin
+
+  select metric_id
+    into vmetric_id
+    from si_metrics_t
+   where metric_name = 'MS_RGA_LOG_SUMMARY_REPORT';
+
+  update si_metrics_t
+     set metric_sql = 'select decode(STATUS, ''PASS'', NULL,to_char(REASON)) REASON,STATUS,
+       MISSED,REJECTD,
+       ACCEPTD,UPDATES,
+       ELAPSE,END,
+       STAR,PREV,
+       SERVER,TYPE,
+       THREAD
+from MS_RGA_LOG_SUMMARY_V
+where STATUS <> ''Status''
+and MISSED <> ''Missed'''
+  --and END<> ''END''
+   where metric_id = vmetric_id;
+
+  commit;
+
+exception
+  when others then
+  
+    dbms_output.put_line('error encountered');
+  
+end;

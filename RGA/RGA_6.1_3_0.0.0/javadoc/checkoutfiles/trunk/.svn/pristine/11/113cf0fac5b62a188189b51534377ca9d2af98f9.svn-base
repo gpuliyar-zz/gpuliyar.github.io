@@ -1,0 +1,320 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="Adobe RoboHelp - www.adobe.com">
+<title>Manage Organization Role Pairs</title>
+<link rel="stylesheet" href="../MetricStream_ns.css"><script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='../MetricStream.css'>");}
+//-->
+</script>
+<script language=javascript><!--
+if (navigator.appName=="Netscape")
+{   document.write("<LINK rel='StyleSheet' href='defa_ns.css'>");}
+else
+{   document.write("<LINK rel='StyleSheet' href='default.css'>");}
+//--></script>
+<script language="JavaScript" src="./bsscdht1.js"></script>
+<script language="JavaScript" src="./bsscdht2.js"></script>
+<script language=JavaScript><!-- 
+//////////BSSCDHTML Section Embedded Code//////////
+var s_strAgent = navigator.userAgent.toLowerCase();
+var s_nVer	   = parseInt(navigator.appVersion);
+
+var s_bIE  = (s_strAgent.indexOf('msie') != -1);
+var s_bNS  = (s_strAgent.indexOf('mozilla') != -1) && ((s_strAgent.indexOf('spoofer') == -1) && (s_strAgent.indexOf('compatible') == -1));
+var s_bOpera	= (s_strAgent.indexOf('opera') != -1);
+
+var s_bIE3Before = ((s_bIE) && (s_nVer <= 2));
+var s_bNS3Before = ((s_bNS) && (s_nVer <= 3));
+
+var s_bNS2		= ((s_bNS) && (s_nVer <= 2));
+var s_bNS3		= ((s_bNS) && (s_nVer == 3));
+var s_bIE300301	= ((s_bIE) && (s_nVer == 2) && ((s_strAgent.indexOf("3.00") != -1)||(s_strAgent.indexOf("3.0a") != -1)||(s_strAgent.indexOf("3.0b")!=-1)||(s_strAgent.indexOf("3.01")!=-1)));
+var s_bIE302	= ((s_bIE) && (s_nVer == 2) && (s_strAgent.indexOf("3.02") != -1));
+
+
+function HasExtJs()
+{
+	if (s_bIE3Before) { return false;}
+	if (s_bNS3Before) {	return false;}
+	if (typeof (_BSSCOnLoad) == "undefined"){ return false; }
+	return true;
+}
+
+function BSSCOnLoad()
+{
+	if (HasExtJs()) { _BSSCOnLoad(); }
+}
+
+function BSSCOnUnload()
+{
+	if (HasExtJs()) { _BSSCOnUnload(); }
+}
+
+function BSSCOnClick()
+{
+	if (HasExtJs()) { _BSSCOnClick(); }
+}
+
+function WritePopupMenuLayer()
+{
+	if (HasExtJs()) {_WritePopupMenuLayer();}
+}
+
+function BSSCCreatePopupDiv()
+{
+	if (HasExtJs()) {_BSSCCreatePopupDiv();	}
+}
+
+function BSSCPopup(strURL)
+{
+	if (HasExtJs())	{ 
+		_BSSCPopup(strURL);
+	}else{
+		//Create a temporary window first to ensure the real popup comes up on top
+		var wndTemp = null;
+		if (!s_bNS3) {
+			wndTemp = window.open("", "temp", "titlebar=no,toolbar=no,status=no,location=no,menubar=no,resizable=yes,scrollbars=yes,height=3,width=4");
+		}
+		// Create the real popup window
+		var wndPopup = window.open(strURL, "PopupWindow", "titlebar=no,toolbar=no,status=no,location=no,menubar=no,resizable=yes,scrollbars=yes,height=300,width=400");
+		// Close the temporary
+		if (!s_bNS3) {
+			wndTemp.close();
+		} else {
+			wndPopup.focus();
+		}
+	}
+}
+
+
+function PopupMenu_Invoke()
+{
+	if (HasExtJs()) {
+		return _PopupMenu_Invoke(PopupMenu_Invoke.arguments);
+	}
+	if (s_bNS3Before || s_bIE3Before )	{
+		var argLen 	= PopupMenu_Invoke.arguments.length;
+		if (argLen < 5) {
+			window.document.location.href = PopupMenu_Invoke.arguments[3];
+			return false;
+		}
+		var nHeight = argLen * 15;
+		var nWidth = 400;
+		var strParam = "titlebar=no,toolbar=no,status=no,location=no,menubar=no,resizable=yes,scrollbars=auto";
+		strParam += ",height=" + nHeight + ",width=200,resizable";
+		
+		//Create a temporary window first to ensure the real popup comes up on top
+		var wndTemp = null;
+		if (!s_bNS3) {
+			wndTemp = window.open("", "temp", "titlebar=no,toolbar=no,status=no,location=no,menubar=no,resizable=yes,scrollbars=yes,height=3,width=4");
+		}
+
+		var wndPopupLinks = window.open("", "popuplinks", strParam);
+		wndPopupLinks.document.open("text/html");
+		wndPopupLinks.document.write("<html><head>");
+		if (s_bNS2 || s_bOpera) {
+			wndPopupLinks.document.write("<base href=\"" + location +"\">");
+		} else {
+			//YJ: IE301,302 and NS3.x works fine
+			wndPopupLinks.document.write("<");
+			wndPopupLinks.document.write("script>");
+			wndPopupLinks.document.write("function gotoUrl(aUrl) {opener.window.location=aUrl; close();}");
+			wndPopupLinks.document.write("<");
+			wndPopupLinks.document.write("/script>");
+		}
+		wndPopupLinks.document.write("</head><body onBlur=\'self.focus();\'>");
+		var strParaLine = "";
+		for (var i = 0; i < (argLen - 2) / 2; i++) {
+			strParaLine = "";
+			if (s_bNS2 || s_bOpera){
+				strParaLine += "<a href=\"";
+				strParaLine += PopupMenu_Invoke.arguments[2 * i + 3];
+				strParaLine += "\">"
+				strParaLine += PopupMenu_Invoke.arguments[2 * i + 2];
+				strParaLine += "</a>";
+			} else {
+				strParaLine += "<a href=\"javascript:";
+				strParaLine += "gotoUrl(\'";
+				strParaLine += PopupMenu_Invoke.arguments[2 * i + 3];
+				strParaLine += "\');\"";
+				if (PopupMenu_Invoke.arguments[1] != '') {
+					strParaLine += " TARGET='" + PopupMenu_Invoke.arguments[1] + "'";
+				}
+				strParaLine += ">";
+				strParaLine += PopupMenu_Invoke.arguments[2 * i + 2];
+				strParaLine += "</a>";
+			}
+			strParaLine += "<br>";
+			wndPopupLinks.document.write(strParaLine);
+		}
+		wndPopupLinks.document.write("</body></html>");
+		wndPopupLinks.document.close();
+
+		// Close the temporary
+		if (!s_bNS3) {
+			wndTemp.close();
+		}else {
+			wndPopupLinks.focus();
+		}
+
+		return true;
+	}
+	return false;
+}
+  
+
+ 
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) >= 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+ 
+//--></script>
+
+<style type="text/css">
+<!--
+div.whs1 { width:100%; background-color:#ffffa3; border-left-style:Solid; border-top-style:Solid; border-right-style:Solid; border-bottom-style:Solid; border-left-width:1px; border-right-width:1px; border-top-width:1px; border-bottom-width:1px; }
+p.whs2 { vertical-align:Super; margin-top:0.5pt; margin-bottom:0.5pt; font-size:8pt; font-family:Verdana, sans-serif; color:#dd6d00; font-weight:bold; }
+p.whs3 { font-family:Verdana, sans-serif; font-size:10pt; }
+p.whs4 { margin-bottom:0; }
+div.whs5 { width:100%; }
+hr.whs6 { color:#ba4f01; float:aligncenter; }
+p.whs7 { font-size:8pt; text-align:center; mso-bookmark:_Toc266377284; font-family:Verdana, sans-serif; }
+-->
+</style><script type="text/javascript" language="JavaScript">
+<!--
+if ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) == 4))
+{
+  var strNSS = "<style type='text/css'>";
+  strNSS += "p.whs2 {margin-top:1pt;margin-bottom:1pt; }";
+  strNSS += "p.whs4 {margin-bottom:1pt; }";
+  strNSS +="</style>";
+  document.write(strNSS);
+}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute; left:0px; top:0px; z-index:4; visibility:hidden; }
+-->
+</style><script type="text/javascript" language="javascript1.2" src="../whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="../whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js"></script>
+</head>
+<body><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Managing Setup\nManage Organization Role Pairs");
+addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	if(1)
+	{
+	document.write("<p style=\"font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: left\"> ");
+AddMasterBreadcrumbs("../MS_EGCRP_60_OnlineHelp.htm", "font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: left", "&gt;", "Home", "../EGCRP_Home_Page.htm");
+document.write("<a style=\"font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: left\" href=\"Intro_to_Application_Setup.htm\">Managing Setup</a> &gt; Manage Organization Role Pairs</p>");
+
+	}
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("../MS_EGCRP_60_OnlineHelp.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+//-->
+</script>
+<div placeholder id="header" class="whs1">
+ <p class="whs2">&nbsp;</p>
+ <p class="whs2">This is the online help for MetricStream 
+ GRC Platform 6.0.</p>
+ <p class="whs2">&nbsp;</p>
+ <p class="whs2">For more information on products, visit 
+ <a href="http://www.metricstream.com/" target=_blank>MetricStream</a> 
+ web site</p>
+ <p class="whs2">&nbsp;</p>
+</div>
+<h6>Manage Organization Role Pairs</h6>
+<p class="whs3">Use the <span 
+ style="font-weight: bold;"><B><b>Manage Organization Role Pairs</b></B></span> 
+ page to assign users to one or more organization-role pairs.</p>
+<p class="whs3">To assign 
+ users to one or more organization-role pairs, click the pencil icon in 
+ the <span style="font-weight: bold;"><B><b>Assign Users</b></B></span> column, 
+ in line with a specific organization-role pair.</p>
+<p class="whs3">In the <span 
+ style="font-weight: bold;"><B><b>Manage Organization Role Pairs</b></B></span> 
+ page all the existing organizations and role pairs are listed in a tabular 
+ format.</p>
+<p class="whs3">To create 
+ an organization role pair, click the <span style="font-weight: bold;"><B><b>Create 
+ Organization - Role Pair</b></B></span> button.</p>
+<p class="whs4"><span style="font-family: Verdana, sans-serif; font-size: 10pt;"><font size=2 style="font-size:10pt;">To 
+ access the </font></span><span style="font-weight: bold;"><B><b style="font-family: Verdana, sans-serif; font-size: 10pt;">Manage 
+ Roles</b></B></span><span style="font-family: Verdana, sans-serif; font-size: 10pt;"><font size=2 style="font-size:10pt;"> 
+ page, click the </font></span><span style="font-weight: bold;"><B><b style="font-family: Verdana, sans-serif; font-size: 10pt;">Manage 
+ Roles</b></B></span><span style="font-family: Verdana, sans-serif; font-size: 10pt;"><font size=2 style="font-size:10pt;"> 
+ button.</font></span> </p>
+<div placeholder id="footer" class="whs5"><hr color="#BA4F01" align="center" class="whs6">
+
+ <p align="center" class="whs7">Copyright © 
+ 2011MetricStream Inc., All Rights Reserved.</p>
+</div>
+<script type="text/javascript" language="javascript1.2">
+<!--
+highlightSearch();
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+if(0)
+{
+document.write("<p style=\"font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: left\"> ");
+AddMasterBreadcrumbs("../MS_EGCRP_60_OnlineHelp.htm", "font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: left", "&gt;", "Home", "../EGCRP_Home_Page.htm");
+document.write("<a style=\"font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: left\" href=\"Intro_to_Application_Setup.htm\">Managing Setup</a> &gt; Manage Organization Role Pairs</p>");
+
+}
+//-->
+</script>
+</body>
+</html>

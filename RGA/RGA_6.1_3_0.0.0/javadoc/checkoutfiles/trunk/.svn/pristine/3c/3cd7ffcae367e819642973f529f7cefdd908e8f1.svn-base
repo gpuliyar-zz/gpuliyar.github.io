@@ -1,0 +1,572 @@
+<!doctype HTML public "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" 
+ xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="generator" content="Adobe RoboHelp - www.adobe.com">
+<title>Managing Alerts</title>
+<link rel="File-List" href="Managing%20Alerts_files/filelist.xml">
+<link rel="Edit-Time-Data" href="Managing%20Alerts_files/editdata.mso">
+<link rel="stylesheet" href="MetricStream_ns.css"><script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MetricStream.css'>");}
+//-->
+</script>
+<style>
+<!--
+; @font-face { font-family:Book Antiqua; panose-1:2 4 6 2 5 3 5 3 3 4; mso-font-charset:0; mso-generic-font-family:roman; mso-font-pitch:variable; mso-font-signature:647 0 0 0 159 0; }
+; @page Section1 { x-size:8.5in 11.0in; margin:1.0in 1.25in 1.0in 1.25in; mso-header-margin:.5in; mso-footer-margin:.5in; mso-paper-source:0; }
+; @list l0 { mso-list-id:-125; mso-list-type:simple; mso-list-template-ids:-1805899464; }
+; @list l0:level1 { mso-level-number-format:bullet; mso-level-style-link:Bullet 1; mso-level-text:; mso-level-tab-stop:.5in; mso-level-number-position:left; text-indent:-.25in; font-family:Symbol; mso-bidi-font-family:Times New Roman; }
+; @list l1 { mso-list-id:1230117485; mso-list-type:hybrid; mso-list-template-ids:1177559150 -235380324 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693; }
+; @list l1:level1 { mso-level-number-format:bullet; mso-level-style-link:Note; mso-level-text:; mso-level-tab-stop:.65in; mso-level-number-position:left; margin-left:.65in; text-indent:-.3in; mso-ansi-font-size:12.0pt; font-family:Wingdings; }
+; @list l2 { mso-list-id:1957250247; mso-list-type:hybrid; mso-list-template-ids:-307993228 278935890 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715; }
+; @list l2:level1 { mso-level-style-link:Table List; mso-level-tab-stop:.3in; mso-level-number-position:left; margin-left:.3in; text-indent:-.3in; }
+; p.MsoNormal { margin:0in; margin-bottom:.0001pt; mso-pagination:widow-orphan; font-size:12.0pt; font-family:Times New Roman; mso-fareast-font-family:Times New Roman; }
+li.MsoNormal { margin:0in; margin-bottom:.0001pt; mso-pagination:widow-orphan; font-size:12.0pt; font-family:Times New Roman; mso-fareast-font-family:Times New Roman; }
+div.MsoNormal { margin:0in; margin-bottom:.0001pt; mso-pagination:widow-orphan; font-size:12.0pt; font-family:Times New Roman; mso-fareast-font-family:Times New Roman; }
+LI.p-MsoNormal { mso-pagination:widow-orphan; font-size:12.0pt; font-family:Times New Roman; mso-fareast-font-family:Times New Roman; mso-pagination:widow-orphan; font-size:12.0pt; font-family:Times New Roman; mso-fareast-font-family:Times New Roman; mso-pagination:widow-orphan; font-size:12.0pt; font-family:Times New Roman; mso-fareast-font-family:Times New Roman; mso-pagination:widow-orphan; font-size:12.0pt; font-family:Times New Roman; mso-fareast-font-family:Times New Roman; }
+h2 { mso-style-name:Heading 2,HD2; mso-style-next:Normal; margin-top:12.0pt; margin-right:0in; margin-bottom:6.0pt; margin-left:0in; mso-pagination:widow-orphan; page-break-after:avoid; mso-outline-level:2; font-size:16.0pt; font-family:Book Antiqua; }
+LI.h2 { mso-style-name:Heading 2,HD2; mso-style-next:Normal; mso-pagination:widow-orphan; mso-outline-level:2; font-size:16.0pt; font-family:Book Antiqua; }
+h3 { mso-style-link:Heading 3 Char; mso-style-next:Normal; margin-top:12.0pt; margin-right:0in; margin-bottom:6.0pt; margin-left:0in; mso-pagination:widow-orphan; page-break-after:avoid; mso-outline-level:3; font-size:14.0pt; font-family:Book Antiqua; }
+LI.h3 { mso-style-link:Heading 3 Char; mso-style-next:Normal; mso-pagination:widow-orphan; mso-outline-level:3; font-size:14.0pt; font-family:Book Antiqua; }
+p.MsoBodyText { mso-style-name:Body Text,body text,bt,Text; mso-style-link:Body Text Char,body text Char,bt Char,Text Char; margin-top:4.0pt; margin-right:0in; margin-bottom:4.0pt; margin-left:.25in; text-align:justify; line-height:150%; mso-pagination:widow-orphan; font-size:10.0pt; mso-bidi-font-size:12.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+li.MsoBodyText { mso-style-name:Body Text,body text,bt,Text; mso-style-link:Body Text Char,body text Char,bt Char,Text Char; margin-top:4.0pt; margin-right:0in; margin-bottom:4.0pt; margin-left:.25in; text-align:justify; line-height:150%; mso-pagination:widow-orphan; font-size:10.0pt; mso-bidi-font-size:12.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+div.MsoBodyText { mso-style-name:Body Text,body text,bt,Text; mso-style-link:Body Text Char,body text Char,bt Char,Text Char; margin-top:4.0pt; margin-right:0in; margin-bottom:4.0pt; margin-left:.25in; text-align:justify; line-height:150%; mso-pagination:widow-orphan; font-size:10.0pt; mso-bidi-font-size:12.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+LI.p-MsoBodyText { mso-style-name:Body Text,body text,bt,Text; mso-style-link:Body Text Char,body text Char,bt Char,Text Char; text-align:justify; line-height:150%; mso-pagination:widow-orphan; font-size:10.0pt; mso-bidi-font-size:12.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Body Text,body text,bt,Text; mso-style-link:Body Text Char,body text Char,bt Char,Text Char; text-align:justify; line-height:150%; mso-pagination:widow-orphan; font-size:10.0pt; mso-bidi-font-size:12.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Body Text,body text,bt,Text; mso-style-link:Body Text Char,body text Char,bt Char,Text Char; text-align:justify; line-height:150%; mso-pagination:widow-orphan; font-size:10.0pt; mso-bidi-font-size:12.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Body Text,body text,bt,Text; mso-style-link:Body Text Char,body text Char,bt Char,Text Char; text-align:justify; line-height:150%; mso-pagination:widow-orphan; font-size:10.0pt; mso-bidi-font-size:12.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+a:link { color:#0000ff; text-underline:single; text-decoration:underline; color:#0000ff; }
+span.MsoHyperlink { color:#0000ff; text-underline:single; text-decoration:underline; }
+a:visited { color:#800080; text-underline:single; text-decoration:underline; color:#800080; }
+span.MsoHyperlinkFollowed { color:#800080; text-underline:single; text-decoration:underline; }
+p.Bullet1 { mso-style-name:Bullet 1; margin-top:4.0pt; margin-right:0in; margin-bottom:4.0pt; margin-left:.5in; text-align:justify; text-indent:-.25in; line-height:150%; mso-pagination:widow-orphan; mso-list:l0 level1 lfo1; tab-stops:list .5in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+li.Bullet1 { mso-style-name:Bullet 1; margin-top:4.0pt; margin-right:0in; margin-bottom:4.0pt; margin-left:.5in; text-align:justify; text-indent:-.25in; line-height:150%; mso-pagination:widow-orphan; mso-list:l0 level1 lfo1; tab-stops:list .5in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+div.Bullet1 { mso-style-name:Bullet 1; margin-top:4.0pt; margin-right:0in; margin-bottom:4.0pt; margin-left:.5in; text-align:justify; text-indent:-.25in; line-height:150%; mso-pagination:widow-orphan; mso-list:l0 level1 lfo1; tab-stops:list .5in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+LI.p-Bullet1 { mso-style-name:Bullet 1; text-align:justify; text-indent:-.25in; line-height:150%; mso-pagination:widow-orphan; mso-list:l0 level1 lfo1; tab-stops:list .5in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Bullet 1; text-align:justify; text-indent:-.25in; line-height:150%; mso-pagination:widow-orphan; mso-list:l0 level1 lfo1; tab-stops:list .5in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Bullet 1; text-align:justify; text-indent:-.25in; line-height:150%; mso-pagination:widow-orphan; mso-list:l0 level1 lfo1; tab-stops:list .5in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Bullet 1; text-align:justify; text-indent:-.25in; line-height:150%; mso-pagination:widow-orphan; mso-list:l0 level1 lfo1; tab-stops:list .5in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+p.TableList { mso-style-name:Table List; margin-top:2.0pt; margin-right:0in; margin-bottom:2.0pt; margin-left:.3in; text-indent:-.3in; mso-pagination:widow-orphan; mso-list:l2 level1 lfo3; tab-stops:list .3in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+li.TableList { mso-style-name:Table List; margin-top:2.0pt; margin-right:0in; margin-bottom:2.0pt; margin-left:.3in; text-indent:-.3in; mso-pagination:widow-orphan; mso-list:l2 level1 lfo3; tab-stops:list .3in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+div.TableList { mso-style-name:Table List; margin-top:2.0pt; margin-right:0in; margin-bottom:2.0pt; margin-left:.3in; text-indent:-.3in; mso-pagination:widow-orphan; mso-list:l2 level1 lfo3; tab-stops:list .3in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+LI.p-TableList { mso-style-name:Table List; text-indent:-.3in; mso-pagination:widow-orphan; mso-list:l2 level1 lfo3; tab-stops:list .3in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Table List; text-indent:-.3in; mso-pagination:widow-orphan; mso-list:l2 level1 lfo3; tab-stops:list .3in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Table List; text-indent:-.3in; mso-pagination:widow-orphan; mso-list:l2 level1 lfo3; tab-stops:list .3in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Table List; text-indent:-.3in; mso-pagination:widow-orphan; mso-list:l2 level1 lfo3; tab-stops:list .3in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+p.TableText { mso-style-name:Table Text; margin:0in; margin-bottom:.0001pt; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+li.TableText { mso-style-name:Table Text; margin:0in; margin-bottom:.0001pt; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+div.TableText { mso-style-name:Table Text; margin:0in; margin-bottom:.0001pt; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+LI.p-TableText { mso-style-name:Table Text; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Table Text; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Table Text; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-style-name:Table Text; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; }
+p.TableHeading { mso-style-name:Table Heading; mso-style-next:Normal; margin:0in; margin-bottom:.0001pt; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; font-weight:bold; }
+li.TableHeading { mso-style-name:Table Heading; mso-style-next:Normal; margin:0in; margin-bottom:.0001pt; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; font-weight:bold; }
+div.TableHeading { mso-style-name:Table Heading; mso-style-next:Normal; margin:0in; margin-bottom:.0001pt; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; font-weight:bold; }
+LI.p-TableHeading { mso-style-name:Table Heading; mso-style-next:Normal; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; font-weight:bold; mso-style-name:Table Heading; mso-style-next:Normal; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; font-weight:bold; mso-style-name:Table Heading; mso-style-next:Normal; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; font-weight:bold; mso-style-name:Table Heading; mso-style-next:Normal; mso-pagination:none; mso-layout-grid-align:none; text-autospace:none; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; font-weight:bold; }
+p.Note { mso-style-name:Note; mso-style-link:Note Char; margin-top:4.0pt; margin-right:0in; margin-bottom:4.0pt; margin-left:.65in; text-indent:-.3in; line-height:150%; mso-pagination:widow-orphan; mso-list:l1 level1 lfo2; tab-stops:list .65in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-bidi-font-weight:bold; font-style:italic; mso-bidi-font-style:normal; }
+li.Note { mso-style-name:Note; mso-style-link:Note Char; margin-top:4.0pt; margin-right:0in; margin-bottom:4.0pt; margin-left:.65in; text-indent:-.3in; line-height:150%; mso-pagination:widow-orphan; mso-list:l1 level1 lfo2; tab-stops:list .65in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-bidi-font-weight:bold; font-style:italic; mso-bidi-font-style:normal; }
+div.Note { mso-style-name:Note; mso-style-link:Note Char; margin-top:4.0pt; margin-right:0in; margin-bottom:4.0pt; margin-left:.65in; text-indent:-.3in; line-height:150%; mso-pagination:widow-orphan; mso-list:l1 level1 lfo2; tab-stops:list .65in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-bidi-font-weight:bold; font-style:italic; mso-bidi-font-style:normal; }
+LI.p-Note { mso-style-name:Note; mso-style-link:Note Char; text-indent:-.3in; line-height:150%; mso-pagination:widow-orphan; mso-list:l1 level1 lfo2; tab-stops:list .65in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-bidi-font-weight:bold; font-style:italic; mso-bidi-font-style:normal; mso-style-name:Note; mso-style-link:Note Char; text-indent:-.3in; line-height:150%; mso-pagination:widow-orphan; mso-list:l1 level1 lfo2; tab-stops:list .65in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-bidi-font-weight:bold; font-style:italic; mso-bidi-font-style:normal; mso-style-name:Note; mso-style-link:Note Char; text-indent:-.3in; line-height:150%; mso-pagination:widow-orphan; mso-list:l1 level1 lfo2; tab-stops:list .65in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-bidi-font-weight:bold; font-style:italic; mso-bidi-font-style:normal; mso-style-name:Note; mso-style-link:Note Char; text-indent:-.3in; line-height:150%; mso-pagination:widow-orphan; mso-list:l1 level1 lfo2; tab-stops:list .65in; font-size:10.0pt; font-family:Book Antiqua; mso-fareast-font-family:Times New Roman; mso-bidi-font-family:Times New Roman; mso-bidi-font-weight:bold; font-style:italic; mso-bidi-font-style:normal; }
+span.Heading3Char { mso-style-name:Heading 3 Char; mso-style-locked:yes; mso-style-link:Heading 3; mso-ansi-font-size:14.0pt; mso-bidi-font-size:14.0pt; font-family:Book Antiqua; mso-ascii-font-family:Book Antiqua; mso-hansi-font-family:Book Antiqua; mso-ansi-language:EN-US; mso-fareast-language:EN-US; mso-bidi-language:AR-SA; font-weight:bold; }
+span.BodyTextChar { mso-style-name:Body Text Char,body text Char,bt Char,Text Char; mso-style-locked:yes; mso-style-link:Body Text,body text,bt,Text; mso-bidi-font-size:12.0pt; font-family:Book Antiqua; mso-ascii-font-family:Book Antiqua; mso-hansi-font-family:Book Antiqua; mso-ansi-language:EN-US; mso-fareast-language:EN-US; mso-bidi-language:AR-SA; }
+span.NoteChar { mso-style-name:Note Char; mso-style-locked:yes; mso-style-link:Note; font-family:Book Antiqua; mso-ascii-font-family:Book Antiqua; mso-hansi-font-family:Book Antiqua; mso-ansi-language:EN-US; mso-fareast-language:EN-US; mso-bidi-language:AR-SA; mso-bidi-font-weight:bold; font-style:italic; mso-bidi-font-style:normal; }
+span.SpellE { mso-spl-e:yes; }
+span.GramE { mso-gram-e:yes; }
+div.Section1 { page:Section1; }
+ol { margin-bottom:0in; }
+ul { margin-bottom:0in; }
+-->
+</style><style type="text/css">
+<!--
+div.whs1 { width:100%; }
+p.whs2 { font-size:8pt; vertical-align:Super; text-align:center; }
+img_whs3 { border:none; width:367px; height:40px; float:none; border-style:none; }
+ul.whs4 { list-style:square; }
+h3.whs5 { page-break-before:always; }
+tr.whs6 { mso-yfti-irow:0; mso-yfti-firstrow:yes; }
+td.whs7 { x-cell-content-align:top; border:solid #000000 1.0pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; background-color:#b3b3b3; }
+td.whs8 { x-cell-content-align:top; border:solid #000000 1.0pt; border-left:none; mso-border-left-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; background-color:#b3b3b3; }
+tr.whs9 { mso-yfti-irow:1; }
+td.whs10 { x-cell-content-align:top; border:solid #000000 1.0pt; border-top:none; mso-border-top-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs11 { x-cell-content-align:top; border-top:none; border-left:none; border-bottom:solid #000000 1.0pt; border-right:solid #000000 1.0pt; mso-border-top-alt:solid windowtext .5pt; mso-border-left-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+tr.whs12 { mso-yfti-irow:2; }
+tr.whs13 { mso-yfti-irow:3; }
+tr.whs14 { mso-yfti-irow:4; }
+tr.whs15 { mso-yfti-irow:5; page-break-inside:avoid; }
+td.whs16 { x-cell-content-align:top; width:118.1pt; border:solid #000000 1.0pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs17 { x-cell-content-align:top; width:118.15pt; border:solid #000000 1.0pt; border-left:none; mso-border-left-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs18 { x-cell-content-align:top; width:118.1pt; border:solid #000000 1.0pt; border-top:none; mso-border-top-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs19 { x-cell-content-align:top; width:118.15pt; border-top:none; border-left:none; border-bottom:solid #000000 1.0pt; border-right:solid #000000 1.0pt; mso-border-top-alt:solid windowtext .5pt; mso-border-left-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+tr.whs20 { mso-yfti-irow:3; mso-yfti-lastrow:yes; }
+tr.whs21 { mso-yfti-irow:6; height:125.5pt; }
+td.whs22 { x-cell-content-align:top; border:solid #000000 1.0pt; border-top:none; mso-border-top-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; height:125.5pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs23 { x-cell-content-align:top; border-top:none; border-left:none; border-bottom:solid #000000 1.0pt; border-right:solid #000000 1.0pt; mso-border-top-alt:solid windowtext .5pt; mso-border-left-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; height:125.5pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+tr.whs24 { mso-yfti-irow:7; }
+tr.whs25 { mso-yfti-irow:8; page-break-inside:avoid; }
+img_whs26 { border:none; width:25px; height:19px; float:none; border-style:none; }
+tr.whs27 { mso-yfti-irow:9; }
+tr.whs28 { mso-yfti-irow:2; mso-yfti-lastrow:yes; }
+tr.whs29 { mso-yfti-irow:10; mso-yfti-lastrow:yes; page-break-inside:avoid; }
+td.whs30 { x-cell-content-align:top; width:136.35pt; border:solid #000000 1.0pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs31 { x-cell-content-align:top; width:123.8pt; border:solid #000000 1.0pt; border-left:none; mso-border-left-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs32 { x-cell-content-align:top; width:143.05pt; border:solid #000000 1.0pt; border-left:none; mso-border-left-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+tr.whs33 { mso-yfti-irow:1; mso-yfti-lastrow:yes; }
+td.whs34 { x-cell-content-align:top; width:136.35pt; border:solid #000000 1.0pt; border-top:none; mso-border-top-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs35 { x-cell-content-align:top; width:123.8pt; border-top:none; border-left:none; border-bottom:solid #000000 1.0pt; border-right:solid #000000 1.0pt; mso-border-top-alt:solid windowtext .5pt; mso-border-left-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+td.whs36 { x-cell-content-align:top; width:143.05pt; border-top:none; border-left:none; border-bottom:solid #000000 1.0pt; border-right:solid #000000 1.0pt; mso-border-top-alt:solid windowtext .5pt; mso-border-left-alt:solid windowtext .5pt; mso-border-alt:solid windowtext .5pt; padding:0in 5.4pt 0in 5.4pt; padding-left:0px; padding-top:0px; padding-right:0px; padding-bottom:0px; }
+hr.whs37 { color:#ba4f01; float:aligncenter; }
+p.whs38 { font-size:8pt; text-align:center; font-family:Arial, sans-serif; }
+-->
+</style><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute; left:0px; top:0px; z-index:4; visibility:hidden; }
+-->
+</style><script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whlang.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+<body lang="EN-US" style="tab-interval: .5in;"><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("GRC Feeds\nManaging Alerts");
+addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	if(1)
+	{
+	document.write("<p style=\"font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right\"> ");
+AddMasterBreadcrumbs("OnlineHelp_for_GRC_Feeds.htm", "font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right", "|", "Home", "GRC_Feeds.htm");
+document.write("<a style=\"font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right\" href=\"GRC_Feeds.htm\">GRC Feeds</a> | Managing Alerts</p>");
+
+	}
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("OnlineHelp_for_GRC_Feeds.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+//-->
+</script><script type="text/javascript" language="JavaScript1.2" x-save-method="compute-relative" src="./ehlpdhtm.js" name="EHELP_DHTM"></script>
+<script type="text/javascript" language=JavaScript1.2>
+<!-- 
+if( typeof( FilePopupInit ) != 'function' ) FilePopupInit = new Function();if( typeof( TextPopupInit ) != 'function' ) TextPopupInit = new Function();
+ //-->
+</script>
+
+
+
+<div placeholder id="header" class="whs1">
+ <p align="center" class="whs2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="new_website_06.jpg" x-maintain-ratio="TRUE" width="367px" height="40px" border="0" class="img_whs3"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span 
+ style="font-family: Verdana, sans-serif;"><a href="mailto:docteam@metricStream.com">Feedback</a></span> 
+ &nbsp;</p>
+</div><div class=Section1>
+<h1><a name=_Toc269803420>Managing Alerts</a></h1>
+<p class=Bullet1 style="margin-left: .25in; text-indent: 0in; mso-list: none; tab-stops: .5in;">To 
+ access the appropriate help content, click the specific link. </p>
+<p class=Bullet1 style="margin-left: .25in; text-indent: 0in; mso-list: none; tab-stops: .5in;
+	font-weight: bold;">Managing Alerts</p>
+<ul type="square" class="whs4">
+	<li class=p-MsoBodyText><p class=MsoBodyText><a href="MS_RGA_VIEW__MANAGE_CHANNEL_ALERTS_HELP.htm#intro">Introduction</a></p></li>
+	<li class=p-MsoBodyText><p class=MsoBodyText><a href="MS_RGA_VIEW__MANAGE_CHANNEL_ALERTS_HELP.htm#_Toc269803421">Applicable 
+ Roles</a></p></li>
+	<li class=p-MsoBodyText><p class=MsoBodyText><a href="MS_RGA_VIEW__MANAGE_CHANNEL_ALERTS_HELP.htm#_Toc269803422">Prerequisite</a> 
+ </p></li>
+	<li class=p-MsoBodyText><p class=MsoBodyText><a href="MS_RGA_VIEW__MANAGE_CHANNEL_ALERTS_HELP.htm#_Toc269803423">Accessing 
+ The View/Manage Alerts Form</a></p></li>
+	<li class=p-MsoBodyText><p class=MsoBodyText><a href="MS_RGA_VIEW__MANAGE_CHANNEL_ALERTS_HELP.htm#_Toc269803424">Procedure 
+ To Manage Alerts</a></p></li>
+	<li class=p-MsoBodyText><p class=MsoBodyText><a href="MS_RGA_VIEW__MANAGE_CHANNEL_ALERTS_HELP.htm#_Toc269803425">Resultant 
+ Assignments And Emails</a></p></li>
+	<li class=p-MsoBodyText><p class=MsoBodyText><a href="MS_RGA_VIEW__MANAGE_CHANNEL_ALERTS_HELP.htm#_Toc269803426">Impacted 
+ Reports</a></p></li>
+	<li style="margin-left: -20px;" class=p-MsoBodyText><p class=MsoBodyText 
+ style="font-weight: bold;"><a HREF="MS_RGA_NOTIFY_USERS_HELP.htm">Notifying 
+ Users</a></p></li>
+	<li style="margin-left: -20px;" class=p-MsoBodyText><p class=MsoBodyText 
+ style="font-weight: bold;"><a HREF="MS_RGA_SUBSCRIPTION_ISSUES_HELP.htm">Logging 
+ Issues</a></p></li>
+</ul>
+<h3><a name=intro>Introduction</a></h3>
+<p class=MsoBodyText>Using the <b style="mso-bidi-font-weight: normal;">View/Manage 
+ <a class="glossterm" href="javascript:TextPopup(this)" id="HotSpot13598">Alerts</a><span class=glosstext style="display: 'none';" id=POPUP188485327 >   These are email updates of the latest relevant results (web, news, etc.) 
+ based on your choice of query or topic.</span></b> 
+ form, you can view/manage the subscribed alerts from the different channels.</p>
+<p class=MsoBodyText>You can generate the <span style="font-weight: bold;"><B>View</B></span><b 
+ style="mso-bidi-font-weight: normal;"> Manage Alerts</b> report. The <b 
+ style="mso-bidi-font-weight: normal;">View Mange Alerts</b> report displays 
+ the list of alerts based on the filters entered in this form. Using the 
+ <b style="mso-bidi-font-weight: normal;">View Manage Alerts</b> report, 
+ you can notify internal and external users about an alert, log an issue, 
+ and view the details of the alert.</p>
+<p class=MsoBodyText>To manage an alert, use the <b style="mso-bidi-font-weight: normal;">View</b>/<b>Manage 
+ Alerts</b> form.</p>
+<p class=Note><span style="font-size: 12.0pt; mso-bidi-font-size: 10.0pt; line-height: 150%; font-family: Wingdings;
+										mso-fareast-font-family: Wingdings; mso-bidi-font-family: Wingdings; font-style: normal;"><font size=3 style="font-size:12pt;"><span 
+ style="mso-list: Ignore;">F<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></font></span> 
+ To access and work on the <b>View</b>/<b style="mso-bidi-font-weight: normal;">Manage 
+ Alerts</b> form, the system administrator must to assign you to the appropriate 
+ organization-role pair combination.</p>
+<h3><a name=_Toc269803421>Applicable Roles</a></h3>
+<p class=Bullet1><span style="font-family: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol; mso-bidi-font-weight: bold;"><span 
+ style="mso-list: Ignore;">·<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ <b>GRC Feed User</b></p>
+<p class=Bullet1><span style="font-family: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol; mso-bidi-font-weight: bold;"><span 
+ style="mso-list: Ignore;">·<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ <b>GRC Feed Administrator</b></p>
+<h3><a name=_Toc269803422>Prerequisite</a></h3>
+<p class=Bullet1><span style="font-family: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol;"><span 
+ style="mso-list: Ignore;">·<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ One or more existing active channels</p>
+<h3><a name=_Toc269803423>Accessing</a> <span class=GramE><span style="mso-bookmark: _Toc269803423;">The</span></span> 
+ <span style="mso-bookmark: _Toc269803423;">View/Manage Alerts Form</span></h3>
+<p class=MsoBodyText>To access the <b style="mso-bidi-font-weight: normal;">View</b>/<b>Manage 
+ Alerts</b> form, click the <b style="mso-bidi-font-weight: normal;">View</b>/<b>Manage 
+ Alerts</b> link in the <b>My Forms</b> <a class="glossterm" href="javascript:TextPopup(this)" id="HotSpot14746">infoport</a><span class=glosstext style="display: 'none';" id=POPUP189009825 >   All related user objects, which are grouped in a single section of the 
+ infocenter, that facilitate work</span> of 
+ the <b>GRC Alerts</b> <a class="glossterm" href="javascript:TextPopup(this)" id="HotSpot39893">infocenter</a><span class=glosstext style="display: 'none';" id=POPUP188878242 >   One common and user specific page that appears to users once they login 
+ to the application</span><b>.</b></p>
+<h3 class="whs5"><a name=_Toc269803424></a><a name=_Procedure_To_Mange_Alerts></a><span 
+ style="mso-bookmark: _Toc269803424;">Procedure <span class=GramE>To</span> 
+ Manage Alerts</span></h3>
+<p class=MsoBodyText>To manage alerts, perform the following steps:</p>
+<table class=MsoNormalTable x-use-null-cells style="margin-left: .25in; border: none; mso-border-alt: solid windowtext .5pt; mso-padding-alt: 0in 5.4pt 0in 5.4pt;
+		mso-border-insideh: .5pt solid windowtext; mso-border-insidev: .5pt solid windowtext; x-border-left: 1px table-solid;
+		x-border-top: 1px table-solid; x-border-right: 1px table-solid; x-border-bottom: 1px table-solid;
+		border-collapse: separate; border-spacing: 0px; border-spacing: 0px;" 
+ cellspacing=0>
+<col>
+<col>
+<col>
+
+<tr class="whs6">
+<td bgcolor="#B3B3B3" valign="top" class="whs7">
+<p class=TableHeading>Step No.</td>
+<td bgcolor="#B3B3B3" valign="top" class="whs8">
+<p class=TableHeading>Field Name</td>
+<td bgcolor="#B3B3B3" valign="top" class="whs8">
+<p class=TableHeading>Action</td></tr>
+<tr class="whs9">
+<td valign="top" class="whs10">
+<p class=TableList style="mso-list: l2 level1 lfo4;"><span 
+ style="mso-fareast-font-family: 'Book Antiqua'; mso-bidi-font-family: 'Book Antiqua';"><span 
+ style="mso-list: Ignore;">1.<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ &nbsp;</td>
+<td valign="top" class="whs11">
+<p class=TableText>&nbsp;</td>
+<td valign="top" class="whs11">
+<p class=TableText>Open the <b style="mso-bidi-font-weight: normal;">View/<span 
+ style="mso-bidi-font-weight: bold;">Manage</span> Alerts</b> form.</td></tr>
+<tr class="whs12">
+<td valign="top" class="whs10">
+<p class=TableList><span style="mso-fareast-font-family: 'Book Antiqua'; mso-bidi-font-family: 'Book Antiqua';"><span 
+ style="mso-list: Ignore;">2.<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ &nbsp;</td>
+<td valign="top" class="whs11">
+<p class=TableText><b style="font-weight: bold;">Alert Text</b></td>
+<td valign="top" class="whs11">
+<p class=TableText>Enter the alert text which you want to view/manage.</td></tr>
+<tr class="whs13">
+<td valign="top" class="whs10">
+<p class=TableList><span style="mso-fareast-font-family: 'Book Antiqua'; mso-bidi-font-family: 'Book Antiqua';"><span 
+ style="mso-list: Ignore;">3.<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ &nbsp;</td>
+<td valign="top" class="whs11">
+<p class=TableText><b style="font-weight: bold;">Received After</b></td>
+<td valign="top" class="whs11">
+<p class=TableText>Select the date after which one or more alerts were 
+ received.</td></tr>
+<tr class="whs14">
+<td valign="top" class="whs10">
+<p class=TableList><span style="mso-fareast-font-family: 'Book Antiqua'; mso-bidi-font-family: 'Book Antiqua';"><span 
+ style="mso-list: Ignore;">4.<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ &nbsp;</td>
+<td valign="top" class="whs11">
+<p class=TableText><b style="font-weight: bold;">Received Before</b></td>
+<td valign="top" class="whs11">
+<p class=TableText>Select the date before which one or more alerts were 
+ received.</td></tr>
+<tr class="whs15">
+<td valign="top" class="whs10">
+<p class=TableList><span style="mso-fareast-font-family: 'Book Antiqua'; mso-bidi-font-family: 'Book Antiqua';"><span 
+ style="mso-list: Ignore;">5.<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ &nbsp;</td>
+<td valign="top" class="whs11">
+<p class=TableText><b style="font-weight: bold;">Show ( Reviewed Alerts)</b></td>
+<td valign="top" class="whs11">
+<p class=TableText>To select an appropriate view manage alert report selection, 
+ refer to the following table.</p>
+<div align=center>
+<table class=MsoNormalTable x-use-null-cells style="border-collapse: collapse; border: none; x-border-left: 1px table-solid; x-border-top: 1px table-solid;
+		x-border-right: 1px table-solid; x-border-bottom: 1px table-solid; float: aligncenter;
+		border-spacing: 0px; border-spacing: 0px;" cellspacing=0>
+
+<tr class="whs6">
+<td valign="top" width="118.1pt" class="whs16">
+<p class=TableText><b style="font-weight: bold;">To get the report list 
+ of</b></td>
+<td valign="top" width="118.2pt" class="whs17">
+<p class=TableText><b style="font-weight: bold;">Select</b></td></tr>
+<tr class="whs9">
+<td valign="top" width="118.1pt" class="whs18">
+<p class=TableText>All the alerts</td>
+<td valign="top" width="118.2pt" class="whs19">
+<p class=TableText><b style="font-weight: bold;">All Alerts</b></td></tr>
+<tr class="whs12">
+<td valign="top" width="118.1pt" class="whs18">
+<p class=TableText>Reviewed alerts</td>
+<td valign="top" width="118.2pt" class="whs19">
+<p class=TableText><b style="font-weight: bold;">Reviewed Alerts</b></td></tr>
+<tr class="whs20">
+<td valign="top" width="118.1pt" class="whs18">
+<p class=TableText><span class=SpellE>Unreviewed</span> alerts</td>
+<td valign="top" width="118.2pt" class="whs19">
+<p class=TableText><span class=SpellE><b style="font-weight: bold; mso-bidi-font-weight: normal;">Unreviewed</b></span> 
+ <b style="mso-bidi-font-weight: normal;">Alerts</b></td></tr>
+</table>
+</div>
+
+<p class=TableText>&nbsp;</td></tr>
+<tr class="whs21">
+<td height="167" valign="top" class="whs22">
+<p class=TableList><span style="mso-fareast-font-family: 'Book Antiqua'; mso-bidi-font-family: 'Book Antiqua';"><span 
+ style="mso-list: Ignore;">6.<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ &nbsp;</td>
+<td height="167" valign="top" class="whs23">
+<p class=TableText><b style="font-weight: bold;">Show (<span class=SpellE>FollowUp</span>)</b></td>
+<td height="167" valign="top" class="whs23">
+<p class=TableText>To select an appropriate view manage alert report selection, 
+ refer to the following table.</p>
+<div align=center>
+<table class=MsoNormalTable x-use-null-cells style="border-collapse: collapse; border: none; x-border-left: 1px table-solid; x-border-top: 1px table-solid;
+		x-border-right: 1px table-solid; x-border-bottom: 1px table-solid; float: aligncenter;
+		border-spacing: 0px; border-spacing: 0px;" cellspacing=0>
+
+<tr class="whs6">
+<td valign="top" width="118.1pt" class="whs16">
+<p class=TableText><b style="font-weight: bold;">To get the report list 
+ of</b></td>
+<td valign="top" width="118.2pt" class="whs17">
+<p class=TableText><b style="font-weight: bold;">Select</b></td></tr>
+<tr class="whs9">
+<td valign="top" width="118.1pt" class="whs18">
+<p class=TableText>All the alerts</td>
+<td valign="top" width="118.2pt" class="whs19">
+<p class=TableText><b style="font-weight: bold;">All Alerts</b></td></tr>
+<tr class="whs12">
+<td valign="top" width="118.1pt" class="whs18">
+<p class=TableText>All the alerts which are not tagged for follow-up</td>
+<td valign="top" width="118.2pt" class="whs19">
+<p class=TableText><b style="font-weight: bold;">Alerts not tagged for 
+ <span class=SpellE>Followup</span></b></td></tr>
+<tr class="whs20">
+<td valign="top" width="118.1pt" class="whs18">
+<p class=TableText>All the alerts which are tagged for follow-up</td>
+<td valign="top" width="118.2pt" class="whs19">
+<p class=TableText><b style="font-weight: bold;">Alerts tagged for <span 
+ class=SpellE>Followup</span></b></td></tr>
+</table>
+</div>
+
+<p class=TableText>&nbsp;</td></tr>
+<tr class="whs24">
+<td valign="top" class="whs10">
+<p class=TableList><span style="mso-fareast-font-family: 'Book Antiqua'; mso-bidi-font-family: 'Book Antiqua';"><span 
+ style="mso-list: Ignore;">7.<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ &nbsp;</td>
+<td valign="top" class="whs11">
+<p class=TableText><b style="font-weight: bold;">Channels</b></td>
+<td valign="top" class="whs11">
+<p class=TableText>Select the channels for which you want to view the report.</td></tr>
+<tr class="whs25">
+<td valign="top" class="whs10">
+<p class=TableList><span style="mso-fareast-font-family: 'Book Antiqua'; mso-bidi-font-family: 'Book Antiqua';"><span 
+ style="mso-list: Ignore;">8.<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ &nbsp;</td>
+<td valign="top" class="whs11">
+<p class=TableText><b style="font-weight: bold;">Show Report</b></td>
+<td valign="top" class="whs11">
+<p class=TableText>Click the <b style="mso-bidi-font-weight: normal;">Show 
+ Report</b> button to view the report.</p>
+<p class=TableText>&nbsp;</p>
+<p class=TableText>Result: The <b style="mso-bidi-font-weight: normal;">View 
+ Manage Report</b> page appears.</p>
+<p class=TableText>Select the alerts which you want to review or follow-up.</p>
+<p class=TableText>On form submission, the selected alerts are checked.</p>
+<p class=TableText>Using this report you can:</p>
+<p class=Bullet1><span style="font-family: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol; mso-bidi-font-weight: bold;
+											mso-list: Ignore;">·&nbsp;&nbsp;</span><span 
+ style="mso-bidi-font-weight: bold;">Log an issue for a particular alert. 
+ For more information, refer to the <a HREF="MS_RGA_SUBSCRIPTION_ISSUES_HELP.htm">Logging 
+ an Issue</a> procedure.</span></p>
+<p class=Bullet1><span style="font-family: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol; mso-list: Ignore;">·&nbsp;&nbsp;</span><span 
+ style="mso-bidi-font-weight: bold;">Notify the internal and external users 
+ about a particular alert. For more information, refer to the <a HREF="MS_RGA_NOTIFY_USERS_HELP.htm">Notifying 
+ users</a> procedure.</span></p>
+<p class=Bullet1><span style="mso-list: Ignore;">·</span><span 
+ style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span> 
+ <span style="mso-bidi-font-weight: bold;">To view the details 
+ of the alerts,</span> click the envelope shaped icon <img src="Notify_icon.jpg" x-maintain-ratio="TRUE" width="25px" height="19px" border="0" class="img_whs26"><span style="mso-spacerun: yes;">&nbsp;</span>in 
+ the <b style="mso-bidi-font-weight: normal;">Content</b> column.</p>
+<p class=TableText>To</p>
+<p class=Bullet1><span style="font-family: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol;"><span 
+ style="mso-list: Ignore;">·<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ select all the alerts to mark for review, click the <b style="mso-bidi-font-weight: normal;">Review 
+ All</b> button</p>
+<p class=Bullet1><span style="font-family: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol;"><span 
+ style="mso-list: Ignore;">·<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ Uncheck all the alerts that are marked for review, click the 
+ <b style="mso-bidi-font-weight: normal;">Review None</b> button.</p>
+<p class=Bullet1><span style="font-family: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol;"><span 
+ style="mso-list: Ignore;">·<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ Select all the alerts to mark for a follow-up, click the <span 
+ class=SpellE><b style="mso-bidi-font-weight: normal;">Followup</b></span> 
+ <b style="mso-bidi-font-weight: normal;">All</b> button.</p>
+<p class=Bullet1><span style="font-family: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol;"><span 
+ style="mso-list: Ignore;">·<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ Uncheck all the alerts which are marked for <span class=SpellE>followup</span>, 
+ click the <span class=SpellE><b style="mso-bidi-font-weight: normal;">Followup</b></span> 
+ <b style="mso-bidi-font-weight: normal;">None</b> button.</p>
+<p class=TableText>&nbsp;</td></tr>
+<tr class="whs27">
+<td valign="top" class="whs10">
+<p class=TableList><span style="mso-fareast-font-family: 'Book Antiqua'; mso-bidi-font-family: 'Book Antiqua';"><span 
+ style="mso-list: Ignore;">9.<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ &nbsp;</td>
+<td valign="top" class="whs11">
+<p class=TableText>&nbsp;</td>
+<td valign="top" class="whs11">
+<p class=TableText>To provide a suitable disposition for the <b>View/Manage 
+ Alerts</b> form, refer to the following table.</p>
+<div align=center>
+<table class=MsoNormalTable x-use-null-cells style="border-collapse: collapse; border: none; x-border-left: 1px table-solid; x-border-top: 1px table-solid;
+		x-border-right: 1px table-solid; x-border-bottom: 1px table-solid; float: aligncenter;
+		border-spacing: 0px; border-spacing: 0px;" cellspacing=0>
+
+<tr class="whs6">
+<td valign="top" width="118.1pt" class="whs16">
+<p class=TableText><b style="font-weight: bold;">To</b></td>
+<td valign="top" width="118.2pt" class="whs17">
+<p class=TableText><b style="font-weight: bold;">Click the</b></td></tr>
+<tr class="whs9">
+<td valign="top" width="118.1pt" class="whs18">
+<p class=TableText>Submit the form</td>
+<td valign="top" width="118.2pt" class="whs19">
+<p class=TableText><b style="font-weight: bold;">Submit</b> button</td></tr>
+<tr class="whs28">
+<td valign="top" width="118.1pt" class="whs18">
+<p class=TableText>Cancel the changes made to the form</td>
+<td valign="top" width="118.2pt" class="whs19">
+<p class=TableText><b style="font-weight: bold;">Cancel</b> button</td></tr>
+</table>
+</div>
+
+<p class=TableText>&nbsp;</td></tr>
+<tr class="whs29">
+<td colspan="3" valign="top" class="whs10">
+<p class=TableText><b style="font-weight: bold;">Result</b>: You have now 
+ managed your alerts.</td>
+</tr>
+</table>
+<b style="font-weight: bold;"><span style="font-size: 14.0pt; font-family: 'Book Antiqua'; mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman';
+												mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><font size=4 style="font-size:14pt;"><br 
+ style="clear: all; page-break-before: always;" clear=all>
+</font></span></b> 
+<h3><a name=_Toc269803425>Resultant Assignments</a> <span class=GramE><span 
+ style="mso-bookmark: _Toc269803425;">And</span></span> <span style="mso-bookmark: _Toc269803425;">Emails</span></h3>
+<p class=MsoBodyText>On submission of the <b>View/Manage Alerts</b> form, 
+ the following assignments and emails are generated:</p>
+<table class=MsoNormalTable x-use-null-cells style="margin-left: .25in; border: none; mso-border-alt: solid windowtext .5pt; mso-padding-alt: 0in 5.4pt 0in 5.4pt;
+		mso-border-insideh: .5pt solid windowtext; mso-border-insidev: .5pt solid windowtext; x-border-left: 1px table-solid;
+		x-border-top: 1px table-solid; x-border-right: 1px table-solid; x-border-bottom: 1px table-solid;
+		border-collapse: separate; border-spacing: 0px; border-spacing: 0px;" 
+ cellspacing=0>
+
+<tr class="whs6">
+<td valign="top" width="136.4pt" class="whs30">
+<p class=TableHeading>Assignment Made To</td>
+<td valign="top" width="123.8pt" class="whs31">
+<p class=TableHeading>Form Assigned</td>
+<td valign="top" width="143.1pt" class="whs32">
+<p class=TableHeading>Email Sent To</td></tr>
+<tr class="whs33">
+<td valign="top" width="136.4pt" class="whs34">
+<p class=TableText>None</td>
+<td valign="top" width="123.8pt" class="whs35">
+<p class=TableText>None</td>
+<td valign="top" width="143.1pt" class="whs36">
+<p class=TableText>None</td></tr>
+</table>
+<h3><a name=_Toc269803426>Impacted Reports</a></h3>
+<p class=MsoBodyText>On submission of the <b>View/Manage Alerts</b> form, 
+ the following reports are impacted:</p>
+<p class=Bullet1><span style="font-family: Symbol; mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol; mso-bidi-font-weight: bold;"><span 
+ style="mso-list: Ignore;">·<span style="font: 7.0pt 'Times New Roman';"><font size=1 style="font-size:7pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></span></span></span> 
+ <b style="mso-bidi-font-weight: normal;">View Manage Alerts</b></p>
+<p class=Note><span style="font-size: 12.0pt; mso-bidi-font-size: 10.0pt; font-family: Wingdings; mso-fareast-font-family: Wingdings;
+										mso-bidi-font-family: Wingdings; font-style: normal; mso-list: Ignore;"> 
+ 
+<font size=3 style="font-size:12pt;"><a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','GRC Feeds Reports','GRC_Feeds_Reports.htm','Logging Issues','MS_RGA_SUBSCRIPTION_ISSUES_HELP.htm','Notifying Users','MS_RGA_NOTIFY_USERS_HELP.htm');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=92 alt="Related Topics"></a>
+
+
+ </font></span></p>
+<p class=MsoBodyText style="text-align: right;" align=right><a href="MS_RGA_VIEW__MANAGE_CHANNEL_ALERTS_HELP.htm#_Toc269803420">Top</a></p>
+<p class=MsoNormal>&nbsp;</p>
+</div>
+<div placeholder id="footer" class="whs1">
+
+<hr color="#BA4F01" align="center" class="whs37">
+
+ <p align="center" class="whs38"><span><font size=1 style="font-size:8pt;"><span style="mso-bookmark: _Toc266377284;">Copyright 
+ © 2010 MetricStream Inc., All Rights Reserved.</span></font></span></p>
+</div>
+<script language="javascript1.2" type="text/javascript"><!--
+TextPopupInit('HotSpot13598','POPUP188485327');
+//--></script><script language="javascript1.2" type="text/javascript"><!--
+TextPopupInit('HotSpot14746','POPUP189009825');
+//--></script><script language="javascript1.2" type="text/javascript"><!--
+TextPopupInit('HotSpot39893','POPUP188878242');
+//--></script><script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+highlightSearch();
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+if(0)
+{
+document.write("<p style=\"font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right\"> ");
+AddMasterBreadcrumbs("OnlineHelp_for_GRC_Feeds.htm", "font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right", "|", "Home", "GRC_Feeds.htm");
+document.write("<a style=\"font-family: Verdana; font-size: 10pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right\" href=\"GRC_Feeds.htm\">GRC Feeds</a> | Managing Alerts</p>");
+
+}
+//-->
+</script>
+</body>
+</html>

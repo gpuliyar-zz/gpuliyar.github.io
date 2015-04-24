@@ -1,0 +1,462 @@
+<HIDDEN>#parse("fastform/generated_javascript_template.vm")</HIDDEN>
+<HIDDEN>#parse("fastform/ms_appstudio_mpower_def.vm")</HIDDEN>
+<head><link id="msai_theme_link" type="text/css" href="$!{WEBROOT}/appssdk/dlo/aside.css" rel="stylesheet"></link></head>
+<body>
+<script>function getCustomMultirowRowContent(multiId,rowSeq,addCheckbox) { 
+if(multiId==#foreach ($group in $groups)#if($group.name=='FND')${group.id}#end#end) return "<table cellspacing=\"0\" cellpadding=\"0\" width=\"100%\"><tbody><tr><td width=\"50px\" class=\"msai_mullink msai_rightborder msai_global_hide\"><input id=\"mrrowdb"+rowSeq+"id"+multiId+"\" class=\"msai_mulrow_delete\" type=\"checkbox\" name=\"_"+multiId+"_multirow_deletebox"+rowSeq+"\" value=\"\" onClick=\"setTimeout('F.FND.markRowForDelete("+rowSeq+",this)',0)\"></td><td><table class=\"msai_field_mulcolumn\" cellspacing=\"0\" cellpadding=\"0\"><tbody class=\"\"><tr id=\"MSAI_87_"+rowSeq+"\" class=\"msai_accordion_row\" asidespan=\"3\"><td style=\"WIDTH: 100%\" class=\"msai_mulcolumn msai_formheading msai_column3\" colspan=\"3\"><div class=\"msai_trashicon msai_trashicon_hide\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\" ext:qwidth=\"200\" ext:qtitle=\"Delete\"></div><div class=\"msai_accordion_probable\"></div><span class=\"msai_form_section\" id=\"MSAI_88_"+rowSeq+"\">$Row# "+rowSeq+"</span></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_18_"+rowSeq+"\" class=\"msai_accordion_row\" asidespan=\"3\"><td style=\"WIDTH: 100%\" class=\"msai_mulcolumn msai_formheading msai_column3\" colspan=\"3\"><div class=\"msai_trashicon msai_trashicon_hide\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\" ext:qwidth=\"200\" ext:qtitle=\"Delete\"></div><div class=\"msai_accordion\" id=\"MSAI_109\" onclick=\"toggleAccordion(this)\"></div><span class=\"msai_form_section\" id=\"MSAI_19_"+rowSeq+"\">$AlertDetails</span></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_20_"+rowSeq+"\" asidespan=\"1:1:1\"><td class=\"msai_mulcolumn msai_column1\" style=\"width:33%\" colspan=\"1\" id=\"MSAI_TD_ALERT_TITLE_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,7)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,7)+"</div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:33%\" colspan=\"1\" id=\"MSAI_TD_CHANNEL_NAME_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,8)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,8)+"</div></td><td class=\"msai_mulcolumn msai_column1\" style=\"width:33%\" colspan=\"1\" id=\"MSAI_TD_CUSTOM_FIELD1_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,9)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,9)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_21_"+rowSeq+"\" class=\"msai_accordion_row\" asidespan=\"3\"><td style=\"WIDTH: 100%\" class=\"msai_mulcolumn msai_formheading msai_column3\" colspan=\"3\"><div class=\"msai_trashicon msai_trashicon_hide\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\" ext:qwidth=\"200\" ext:qtitle=\"Delete\"></div><div class=\"msai_accordion\" id=\"MSAI_110\" onclick=\"toggleAccordion(this)\"></div><span class=\"msai_form_section\" id=\"MSAI_22_"+rowSeq+"\">$IssueDetails</span></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_23_"+rowSeq+"\" asidespan=\"1:2\"><td class=\"msai_mulcolumn msai_column1\" style=\"width:33%\" colspan=\"1\" id=\"MSAI_TD_ISSUE_TITLE_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon msai_trashicon_hide\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,10)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,10)+"</div></td><td class=\"msai_mulcolumn msai_column2\" style=\"width:66%\" colspan=\"2\" id=\"MSAI_TD_ISSUE_RATING_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,11)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,11)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_70_"+rowSeq+"\" asidespan=\"1:2\"><td class=\"msai_mulcolumn msai_column1\" style=\"width:33%\" colspan=\"1\" id=\"MSAI_TD_ISSUE_TYPE_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon msai_trashicon_hide\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,12)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,12)+"</div></td><td class=\"msai_mulcolumn msai_column2\" style=\"width:66%\" colspan=\"2\" id=\"MSAI_TD_ISSUE_EXCEPTION_TYPE_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon msai_trashicon_hide\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,13)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,13)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_25_"+rowSeq+"\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_ISSUE_DETAILS_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon msai_trashicon_hide\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,14)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,14)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_26_"+rowSeq+"\" class=\"msai_accordion_row\" asidespan=\"3\"><td style=\"WIDTH: 100%\" class=\"msai_mulcolumn msai_formheading msai_column3\" colspan=\"3\"><div class=\"msai_trashicon msai_trashicon_hide\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\" ext:qwidth=\"200\" ext:qtitle=\"Delete\"></div><div class=\"msai_accordion\" id=\"MSAI_111\" onclick=\"toggleAccordion(this)\"></div><span class=\"msai_form_section\" id=\"MSAI_30_"+rowSeq+"\">$ResolutionIssueDueDate</span></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_27_"+rowSeq+"\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_ISSUE_DUE_DATE_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,15)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,15)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_28_"+rowSeq+"\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_RECOMMENDATION_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon msai_trashicon_hide\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,16)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,16)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_31_"+rowSeq+"\" class=\"msai_accordion_row\" asidespan=\"3\"><td style=\"WIDTH: 100%\" class=\"msai_mulcolumn msai_formheading msai_column3\" colspan=\"3\"><div class=\"msai_trashicon msai_trashicon_hide\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\" ext:qwidth=\"200\" ext:qtitle=\"Delete\"></div><div class=\"msai_accordion\" id=\"MSAI_112\" onclick=\"toggleAccordion(this)\"></div><span class=\"msai_form_section\" id=\"MSAI_34_"+rowSeq+"\">$Ownership</span></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_32_"+rowSeq+"\" asidespan=\"1:2\"><td class=\"msai_mulcolumn msai_column1\" style=\"width:33%\" colspan=\"1\" id=\"MSAI_TD_OWNER_ORG_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,17)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,17)+"</div></td><td class=\"msai_mulcolumn msai_column2\" style=\"width:66%\" colspan=\"2\" id=\"MSAI_TD_ISSUE_OWNER_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,18)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,18)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_33_"+rowSeq+"\" asidespan=\"1:2\"><td class=\"msai_mulcolumn msai_column1\" style=\"width:33%\" colspan=\"1\" id=\"MSAI_TD_APPROVER_ORG_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,19)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,19)+"</div></td><td class=\"msai_mulcolumn msai_column2\" style=\"width:66%\" colspan=\"2\" id=\"MSAI_TD_ISSUE_APPROVER_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,20)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,20)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_35_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_ISSUE_ID_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,21)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,21)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_36_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_ISSUE_REQUEST_DATE_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,22)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,22)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_37_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_FEED_DATA_ID_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,23)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,23)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_38_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_ISSUE_ASSIGNED_TO_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,24)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,24)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_39_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_ISSUE_CREATED_BY_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,25)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,25)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_40_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_ISSUE_CREATED_ON_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,26)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,26)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_41_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_42_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_SUBS_RESPONSE_ID_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,27)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,27)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_43_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_CUSTOM_FIELD2_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,28)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,28)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_44_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_CUSTOM_FIELD3_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,29)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,29)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_45_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_CUSTOM_FIELD4_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,30)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,30)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_46_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_RELATED_ORG_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,31)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,31)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_47_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_RELATED_CORE_OBJ_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,32)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,32)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_48_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_REGULATORY_BODY_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,33)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,33)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_49_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_AREA_OF_COMP_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,34)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,34)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_50_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_STANDARDS_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,35)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,35)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_51_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_FND_OBJECT_ID_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,36)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,36)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_52_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_REQUIREMENTS_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,37)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,37)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_77_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_RECEIVED_ON_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,38)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,38)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_91_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_ATTACHMENT_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,39)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,39)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_96_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\" id=\"MSAI_TD_ISSUE_RESOLUTION_GRCI_"+rowSeq+"\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div><div class=\"FND msai_celldiv msai_field_label\">"+addFieldLabel(rowSeq,40)+"</div><div class=\"FND msai_celldiv msai_field_field\">"+addField(rowSeq,40)+"</div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr><tr id=\"MSAI_104_"+rowSeq+"\" class=\"msai_hidden_column\" asidespan=\"3\"><td class=\"msai_mulcolumn msai_hidden_column msai_column3\" style=\"width:100%\" colspan=\"3\"><div class=\"msai_trashicon\" ext:qtitle=\"Delete\" ext:qwidth=\"200\" ext:qtip=\"Click to delete the contents of this cell. Warning! This action cannot be undone.\"></div></td><td class=\"msai_column_rowdel\">&nbsp;</td></tr></tbody></table></td></tr></tbody></table>";
+}</script>
+
+<script>function initStrategy() { 
+ var multiRegArr=new Array(); multiRegArr[multiRegArr.length] = new MultiRegion(#foreach ($group in $groups)#if($group.name=='FND')${group.id}#end#end,'MSAI_MULTI_DIV_#foreach ($group in $groups)#if($group.name=='FND')${group.id}#end#end',multirRowContent);  setJSONStrategy(multiRegArr); 
+}</script>
+
+<script>function multirRowContent(multirowId,start_row, end_row) { 
+  if(multirowId==#foreach ($group in $groups)#if($group.name=='FND')${group.id}#end#end) {var multiRow='<table id=mrTableid#foreach ($group in $groups)#if($group.name=='FND')${group.id}#end#end cellspacing=0 cellpadding=0 nowrap width=100% id=#foreach ($group in $groups)#if($group.name=='FND')${group.id}#end#end class=msai_multi_table>'; for (rowSeq = start_row; rowSeq <= end_row; rowSeq++) { multiRow = multiRow + '<tr id=mrrow' + rowSeq + 'id#foreach ($group in $groups)#if($group.name=='FND')${group.id}#end#end><td>'+getCustomMultirowRowContent(#foreach ($group in $groups)#if($group.name=='FND')${group.id}#end#end,rowSeq)+'</td></tr>'; } multiRow = multiRow + '</table>'; return  multiRow;}
+ 
+}</script>
+
+<script>function displaymrHeaderLinks (multiId,pageNum,secId) { 
+  if(multiId==#foreach ($group in $groups)#if($group.name=='FND')${group.id}#end#end) { return '<table cellspacing="0" cellpadding="0" nowrap="" width="100%"><tbody><tr class="msai_mulheader"><td width="50px" class="msai_rightborder msai_global_hide">Delete</td><td><a href="javascript:F.FND.addRow(true,true);" class="msai_mullink">Add Row</a></td><td><a href="javascript:F.FND.deleteRow();" class="msai_mullink">Delete Last Row</a></td><td><div class="msai_mullink"></div></td><td><div id="mrrdid'+multiId+'" class="msai_mullink"></div></td><td><div class="msai_mullink msai_pages_num"></div></td><td nowrap="" width="10%"><div id="mrpdid'+multiId+'" class="msai_mullink">'+writemrPageDesc(multiId,pageNum,secId)+'</div></td><td><div class="msai_muldefinition_edit"></div></td></tr></tbody></table>';; }
+ 
+}</script>
+
+<form name="pushform" method="post" action="$WEBSERVICES_DESTINATION/infolet_stream" enctype="multipart/form-data">
+<HIDDEN>#parse("fastform/header_content_template.vm")</HIDDEN>
+<div id="main_container" class="msai_main_container" style="width:720px">
+<table class="msai_field_column" cellspacing="0" cellpadding="1">
+<tbody class="">
+<tr id="MSAI_180" class="msai_accordion_row" asidespan="3">
+<td style="WIDTH: 100%" class="msai_column msai_formheading msai_column3" colspan="3">
+<div class="msai_accordion_probable"></div>
+<span class="msai_form_label" id="MSAI_186">${formMetaData.Label}</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_14" asidespan="3">
+<td class="msai_column msai_column3" style="width:100%" colspan="3">
+<table id="MSAI_15" class="msai_tabs" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td class="msai_tab_leaf msai_tab_align_left">
+<div class="msai_tab_align"></div>
+<span id="MSAI_16" class="msai_tab_open" onClick="msai_tab_hideAll('MSAI_15');msai_tab_show('MSAI_15','MSAI_16');" onmouseenter="msai_tab_hover(this);" onmouseleave="msai_tab_unhover(this);">
+<span>$Issues </span>
+<div class="msai_tab_rearrange_icon"></div>
+<div class="msai_tab_del"></div>
+<div class="msai_tab_add"></div></span></td></tr>
+<tr>
+<td class="msai_tab_display">
+<table class="msai_field_column" cellspacing="1" cellpadding="1">
+<tbody class="">
+<tr id="MSAI_17" asidespan="3">
+<td class="msai_column msai_column3" style="width:100%" colspan="3" id="MSAI_MULTI_FND">
+<div id="MSAI_MULTI_DIV_#foreach ($group in $groups)#if($group.name=='FND')${group.id}#end#end" class="msai_multirow_container" nowrap="">
+<div class="msai_multirow_name msai_json" strategy="JSON" displayoption="Both">FND</div><hidden>#foreach ($group in $groups)</hidden><hidden>#if (${group.name} == 'FND')</hidden><hidden>#if('1' == '0')</hidden>
+<table cellspacing="0" cellpadding="0" nowrap="" width="100%" id="mrTableid${group.id}" class="msai_multi_table msai_json">
+<tbody>
+<tr>
+<td>
+<table cellspacing="0" cellpadding="0" nowrap="" width="100%">
+<tbody>
+<tr class="msai_mulheader">
+<td width="50px" class="msai_rightborder msai_global_hide">Delete</td>
+<td><a aside_href="javascript:F.FND.addRow(true,true);" class="msai_mullink" href="javascript:F.FND.addRow(true,true);">Add Row</a></td>
+<td><a aside_href="javascript:F.FND.deleteRow();" class="msai_mullink" href="javascript:F.FND.deleteRow();">Delete Last Row</a></td>
+<td>
+<div class="msai_mullink">Total Rows</div></td>
+<td>
+<div id="mrrdid${group.id}" class="msai_mullink">${group.rowsCount}</div></td>
+<td>
+<div class="msai_mullink msai_pages_num">$label_pages</div></td>
+<td nowrap="" width="10%">
+<div id="mrpdid${group.id}" class="msai_mullink"><SCRIPT>writemrPageDesc($group.id,1)</SCRIPT></div></td>
+<td>
+<div class="msai_muldefinition_edit"></div></td></tr></tbody></table></td></tr><hidden>#set ($rowCount = 0)</hidden><hidden>#foreach ($row in $group.Rows)</hidden><hidden>#set ($rowSeq=$rowCount+1)</hidden>
+<tr id="mrrow${rowSeq}id$group.id" class="msai_repeatable_row">
+<td>
+<table cellspacing="0" cellpadding="0" width="100%">
+<tbody>
+<tr>
+<td width="50px" class="msai_mullink msai_rightborder msai_global_hide">
+<input id="mrrowdb${rowSeq}id$group.id" class="msai_mulrow_delete" type="checkbox" name="_${group.id}_multirow_deletebox$rowSeq" value="" aside_onclick="setTimeout('F.FND.markRowForDelete($rowSeq,this)',0)" onclick="setTimeout('F.FND.markRowForDelete($rowSeq,this)',0)"></td>
+<td>
+<table class="msai_field_mulcolumn" cellspacing="0" cellpadding="0">
+<tbody class="">
+<tr id="MSAI_87_$rowSeq" class="msai_accordion_row" asidespan="3">
+<td style="WIDTH: 100%" class="msai_mulcolumn msai_formheading msai_column3" colspan="3">
+<div class="msai_accordion_probable"></div>
+<span class="msai_form_section" id="MSAI_88_$rowSeq">$Row# $rowSeq</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_18_$rowSeq" class="msai_accordion_row" asidespan="3">
+<td style="WIDTH: 100%" class="msai_mulcolumn msai_formheading msai_column3" colspan="3">
+<div class="msai_accordion" id="MSAI_109" onclick="toggleAccordion(this)"></div>
+<span class="msai_form_section" id="MSAI_19_$rowSeq">$AlertDetails</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_20_$rowSeq" asidespan="1:1:1">
+<td class="msai_mulcolumn msai_column1" style="width:33%" colspan="1" id="MSAI_TD_ALERT_TITLE_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,7)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,7)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column1" style="width:33%" colspan="1" id="MSAI_TD_CHANNEL_NAME_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,8)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,8)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column1" style="width:33%" colspan="1" id="MSAI_TD_CUSTOM_FIELD1_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,9)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,9)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_21_$rowSeq" class="msai_accordion_row" asidespan="3">
+<td style="WIDTH: 100%" class="msai_mulcolumn msai_formheading msai_column3" colspan="3">
+<div class="msai_accordion" id="MSAI_110" onclick="toggleAccordion(this)"></div>
+<span class="msai_form_section" id="MSAI_22_$rowSeq">$IssueDetails</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_23_$rowSeq" asidespan="1:2">
+<td class="msai_mulcolumn msai_column1" style="width:33%" colspan="1" id="MSAI_TD_ISSUE_TITLE_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,10)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,10)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column2" style="width:66%" colspan="2" id="MSAI_TD_ISSUE_RATING_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,11)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,11)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_70_$rowSeq" asidespan="1:2">
+<td class="msai_mulcolumn msai_column1" style="width:33%" colspan="1" id="MSAI_TD_ISSUE_TYPE_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,12)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,12)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column2" style="width:66%" colspan="2" id="MSAI_TD_ISSUE_EXCEPTION_TYPE_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,13)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,13)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_25_$rowSeq" asidespan="3">
+<td class="msai_mulcolumn msai_column3" style="width:100%" colspan="3" id="MSAI_TD_ISSUE_DETAILS_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,14)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,14)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_26_$rowSeq" class="msai_accordion_row" asidespan="3">
+<td style="WIDTH: 100%" class="msai_mulcolumn msai_formheading msai_column3" colspan="3">
+<div class="msai_accordion" id="MSAI_111" onclick="toggleAccordion(this)"></div>
+<span class="msai_form_section" id="MSAI_30_$rowSeq">$ResolutionIssueDueDate</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_27_$rowSeq" asidespan="3">
+<td class="msai_mulcolumn msai_column3" style="width:100%" colspan="3" id="MSAI_TD_ISSUE_DUE_DATE_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,15)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,15)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_28_$rowSeq" asidespan="3">
+<td class="msai_mulcolumn msai_column3" style="width:100%" colspan="3" id="MSAI_TD_RECOMMENDATION_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,16)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,16)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_31_$rowSeq" class="msai_accordion_row" asidespan="3">
+<td style="WIDTH: 100%" class="msai_mulcolumn msai_formheading msai_column3" colspan="3">
+<div class="msai_accordion" id="MSAI_112" onclick="toggleAccordion(this)"></div>
+<span class="msai_form_section" id="MSAI_34_$rowSeq">$Ownership</span></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_32_$rowSeq" asidespan="1:2">
+<td class="msai_mulcolumn msai_column1" style="width:33%" colspan="1" id="MSAI_TD_OWNER_ORG_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,17)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,17)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column2" style="width:66%" colspan="2" id="MSAI_TD_ISSUE_OWNER_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,18)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,18)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_33_$rowSeq" asidespan="1:2">
+<td class="msai_mulcolumn msai_column1" style="width:33%" colspan="1" id="MSAI_TD_APPROVER_ORG_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,19)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,19)</SCRIPT></div></td>
+<td class="msai_mulcolumn msai_column2" style="width:66%" colspan="2" id="MSAI_TD_ISSUE_APPROVER_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,20)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,20)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_35_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_ISSUE_ID_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,21)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,21)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_36_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_ISSUE_REQUEST_DATE_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,22)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,22)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_37_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_FEED_DATA_ID_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,23)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,23)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_38_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_ISSUE_ASSIGNED_TO_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,24)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,24)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_39_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_ISSUE_CREATED_BY_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,25)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,25)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_40_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_ISSUE_CREATED_ON_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,26)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,26)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_41_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3"></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_42_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_SUBS_RESPONSE_ID_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,27)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,27)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_43_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_CUSTOM_FIELD2_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,28)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,28)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_44_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_CUSTOM_FIELD3_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,29)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,29)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_45_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_CUSTOM_FIELD4_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,30)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,30)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_46_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_RELATED_ORG_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,31)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,31)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_47_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_RELATED_CORE_OBJ_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,32)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,32)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_48_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_REGULATORY_BODY_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,33)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,33)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_49_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_AREA_OF_COMP_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,34)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,34)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_50_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_STANDARDS_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,35)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,35)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_51_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_FND_OBJECT_ID_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,36)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,36)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_52_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_REQUIREMENTS_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,37)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,37)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_77_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_RECEIVED_ON_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,38)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,38)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_91_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_ATTACHMENT_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,39)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,39)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_96_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_ISSUE_RESOLUTION_GRCI_$rowSeq">
+<div class="FND msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel($rowSeq,40)</SCRIPT></div>
+<div class="FND msai_celldiv msai_field_field"><SCRIPT>writeField($rowSeq,40)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_104_$rowSeq" class="msai_hidden_column" asidespan="3">
+<td class="msai_mulcolumn msai_hidden_column msai_column3" style="width:100%" colspan="3"></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td></tr><hidden>#set ($rowCount=$rowCount+1)</hidden><hidden>#end</hidden></tbody></table><hidden>#end</hidden><hidden>#end</hidden><hidden>#end</hidden></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr></tbody></table></td></tr></tbody></table></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_53" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_DD_OBJECT_TYPE_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,1)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,1)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_54" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_DD_CURRENT_USER_NAME_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,2)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,2)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_55" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_DD_EVENT_USER_NAME_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,3)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,3)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_56" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_DD_ENTERPRISE_INFO_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,4)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,4)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_57" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_DD_CURRENT_STAGE_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,5)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,5)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_58" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_DD_PROCESS_CODE_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,6)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,6)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_59" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_OBJECT_ID_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,41)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,41)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_60" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_INITIATOR_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,42)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,42)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_61" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_RTF_MULTI_ATTACHMENT_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,43)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,43)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_62" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3" id="MSAI_TD_CUSTOM_FIELD5_1">
+<div class="___nonmultirow___ msai_celldiv msai_field_label"><SCRIPT>writeFieldLabel(1,44)</SCRIPT></div>
+<div class="___nonmultirow___ msai_celldiv msai_field_field"><SCRIPT>writeField(1,44)</SCRIPT></div></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_101" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3"></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr>
+<tr id="MSAI_102" class="msai_hidden_column" asidespan="3">
+<td class="msai_column msai_hidden_column msai_column3" style="width:100%" colspan="3"></td>
+<td class="msai_column_rowdel">&nbsp;</td></tr></tbody></table></div>
+<HIDDEN>#parse("fastform/esignature_template.vm")</HIDDEN>
+</form>
+<SCRIPT>/*186*/</SCRIPT>
+<!--MSAI_VERSION>386</MSAI_VERSION-->
+<textarea id="MSAI_LOG" class="msai_log_area" rows=15 readonly></textarea>
+<script>{zones: []}</script>
+<HIDDEN>#parse("fastform/ms_appstudio_mpower_init.vm")</HIDDEN>
+<script></script>
+<script>F.ALERT_TITLE_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ALERT_TITLE_GRCI'+row); return true;};F.ALERT_TITLE_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ALERT_TITLE_GRCI'+row); return true;};F.CHANNEL_NAME_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_CHANNEL_NAME_GRCI'+row); return true;};F.CHANNEL_NAME_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_CHANNEL_NAME_GRCI'+row); return true;};F.CUSTOM_FIELD1.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_CUSTOM_FIELD1'+row); return true;};F.CUSTOM_FIELD1.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_CUSTOM_FIELD1'+row); return true;};F.ISSUE_TITLE_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_TITLE_GRCI'+row); return true;};F.ISSUE_TITLE_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_TITLE_GRCI'+row); return true;};F.ISSUE_RATING_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_RATING_GRCI'+row); return true;};F.ISSUE_RATING_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_RATING_GRCI'+row); return true;};F.ISSUE_TYPE_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_TYPE_GRCI'+row); return true;};F.ISSUE_TYPE_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_TYPE_GRCI'+row); return true;};F.ISSUE_EXCEPTION_TYPE_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_EXCEPTION_TYPE_GRCI'+row); return true;};F.ISSUE_EXCEPTION_TYPE_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_EXCEPTION_TYPE_GRCI'+row); return true;};F.ISSUE_DETAILS_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_DETAILS_GRCI'+row); return true;};F.ISSUE_DETAILS_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_DETAILS_GRCI'+row); return true;};F.ISSUE_DUE_DATE_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_DUE_DATE_GRCI'+row); return true;};F.ISSUE_DUE_DATE_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_DUE_DATE_GRCI'+row); return true;};F.RECOMMENDATION_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_RECOMMENDATION_GRCI'+row); return true;};F.RECOMMENDATION_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_RECOMMENDATION_GRCI'+row); return true;};F.OWNER_ORG_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_OWNER_ORG_GRCI'+row); return true;};F.OWNER_ORG_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_OWNER_ORG_GRCI'+row); return true;};F.ISSUE_OWNER_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_OWNER_GRCI'+row); return true;};F.ISSUE_OWNER_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_OWNER_GRCI'+row); return true;};F.APPROVER_ORG_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_APPROVER_ORG_GRCI'+row); return true;};F.APPROVER_ORG_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_APPROVER_ORG_GRCI'+row); return true;};F.ISSUE_APPROVER_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_APPROVER_GRCI'+row); return true;};F.ISSUE_APPROVER_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_APPROVER_GRCI'+row); return true;};F.ISSUE_ID.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_ID'+row); return true;};F.ISSUE_ID.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_ID'+row); return true;};F.ISSUE_REQUEST_DATE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_REQUEST_DATE'+row); return true;};F.ISSUE_REQUEST_DATE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_REQUEST_DATE'+row); return true;};F.FEED_DATA_ID.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_FEED_DATA_ID'+row); return true;};F.FEED_DATA_ID.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_FEED_DATA_ID'+row); return true;};F.ISSUE_ASSIGNED_TO.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_ASSIGNED_TO'+row); return true;};F.ISSUE_ASSIGNED_TO.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_ASSIGNED_TO'+row); return true;};F.ISSUE_CREATED_BY.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_CREATED_BY'+row); return true;};F.ISSUE_CREATED_BY.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_CREATED_BY'+row); return true;};F.ISSUE_CREATED_ON.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_CREATED_ON'+row); return true;};F.ISSUE_CREATED_ON.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_CREATED_ON'+row); return true;};F.SUBS_RESPONSE_ID_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_SUBS_RESPONSE_ID_GRCI'+row); return true;};F.SUBS_RESPONSE_ID_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_SUBS_RESPONSE_ID_GRCI'+row); return true;};F.CUSTOM_FIELD2.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_CUSTOM_FIELD2'+row); return true;};F.CUSTOM_FIELD2.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_CUSTOM_FIELD2'+row); return true;};F.CUSTOM_FIELD3.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_CUSTOM_FIELD3'+row); return true;};F.CUSTOM_FIELD3.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_CUSTOM_FIELD3'+row); return true;};F.CUSTOM_FIELD4.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_CUSTOM_FIELD4'+row); return true;};F.CUSTOM_FIELD4.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_CUSTOM_FIELD4'+row); return true;};F.RELATED_ORG_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_RELATED_ORG_GRCI'+row); return true;};F.RELATED_ORG_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_RELATED_ORG_GRCI'+row); return true;};F.RELATED_CORE_OBJ_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_RELATED_CORE_OBJ_GRCI'+row); return true;};F.RELATED_CORE_OBJ_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_RELATED_CORE_OBJ_GRCI'+row); return true;};F.REGULATORY_BODY_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_REGULATORY_BODY_GRCI'+row); return true;};F.REGULATORY_BODY_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_REGULATORY_BODY_GRCI'+row); return true;};F.AREA_OF_COMP_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_AREA_OF_COMP_GRCI'+row); return true;};F.AREA_OF_COMP_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_AREA_OF_COMP_GRCI'+row); return true;};F.STANDARDS_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_STANDARDS_GRCI'+row); return true;};F.STANDARDS_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_STANDARDS_GRCI'+row); return true;};F.FND_OBJECT_ID.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_FND_OBJECT_ID'+row); return true;};F.FND_OBJECT_ID.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_FND_OBJECT_ID'+row); return true;};F.REQUIREMENTS_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_REQUIREMENTS_GRCI'+row); return true;};F.REQUIREMENTS_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_REQUIREMENTS_GRCI'+row); return true;};F.RECEIVED_ON_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_RECEIVED_ON_GRCI'+row); return true;};F.RECEIVED_ON_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_RECEIVED_ON_GRCI'+row); return true;};F.ATTACHMENT.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ATTACHMENT'+row); return true;};F.ATTACHMENT.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ATTACHMENT'+row); return true;};F.ISSUE_RESOLUTION_GRCI.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_ISSUE_RESOLUTION_GRCI'+row); return true;};F.ISSUE_RESOLUTION_GRCI.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_ISSUE_RESOLUTION_GRCI'+row); return true;};F.DD_OBJECT_TYPE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_OBJECT_TYPE'+row); return true;};F.DD_OBJECT_TYPE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_OBJECT_TYPE'+row); return true;};F.DD_CURRENT_USER_NAME.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_CURRENT_USER_NAME'+row); return true;};F.DD_CURRENT_USER_NAME.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_CURRENT_USER_NAME'+row); return true;};F.DD_EVENT_USER_NAME.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_EVENT_USER_NAME'+row); return true;};F.DD_EVENT_USER_NAME.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_EVENT_USER_NAME'+row); return true;};F.DD_ENTERPRISE_INFO.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_ENTERPRISE_INFO'+row); return true;};F.DD_ENTERPRISE_INFO.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_ENTERPRISE_INFO'+row); return true;};F.DD_CURRENT_STAGE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_CURRENT_STAGE'+row); return true;};F.DD_CURRENT_STAGE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_CURRENT_STAGE'+row); return true;};F.DD_PROCESS_CODE.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_DD_PROCESS_CODE'+row); return true;};F.DD_PROCESS_CODE.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_DD_PROCESS_CODE'+row); return true;};F.OBJECT_ID.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_OBJECT_ID'+row); return true;};F.OBJECT_ID.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_OBJECT_ID'+row); return true;};F.INITIATOR.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_INITIATOR'+row); return true;};F.INITIATOR.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_INITIATOR'+row); return true;};F.RTF_MULTI_ATTACHMENT.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_RTF_MULTI_ATTACHMENT'+row); return true;};F.RTF_MULTI_ATTACHMENT.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_RTF_MULTI_ATTACHMENT'+row); return true;};F.CUSTOM_FIELD5.hidePrivate = function(row){row='_'+row; F.hideFormCell('MSAI_TD_CUSTOM_FIELD5'+row); return true;};F.CUSTOM_FIELD5.showPrivate = function(row){row='_'+row; F.showFormCell('MSAI_TD_CUSTOM_FIELD5'+row); return true;};</script>
+<script> F.printLayoutConfig = {"placeHolders":[{"id":"Header","t":"TAB"},{"id":"MSAI_180","t":"ACCORDION","c":[{"id":"MSAI_16","t":"TAB","c":[{"id":"FND","t":"MULTIROW","c":[{"id":"MSAI_87","t":"ACCORDION","c":[]},{"id":"MSAI_18","t":"ACCORDION","c":[{"id":"ALERT_TITLE_GRCI","t":"FIELD","c":[],"n":"ALERT_TITLE_GRCI"},{"id":"CHANNEL_NAME_GRCI","t":"FIELD","c":[],"n":"CHANNEL_NAME_GRCI"},{"id":"CUSTOM_FIELD1","t":"FIELD","c":[],"n":"CUSTOM_FIELD1"}]},{"id":"MSAI_21","t":"ACCORDION","c":[{"id":"ISSUE_TITLE_GRCI","t":"FIELD","c":[],"n":"ISSUE_TITLE_GRCI"},{"id":"ISSUE_RATING_GRCI","t":"FIELD","c":[],"n":"ISSUE_RATING_GRCI"},{"id":"ISSUE_TYPE_GRCI","t":"FIELD","c":[],"n":"ISSUE_TYPE_GRCI"},{"id":"ISSUE_EXCEPTION_TYPE_GRCI","t":"FIELD","c":[],"n":"ISSUE_EXCEPTION_TYPE_GRCI"},{"id":"ISSUE_DETAILS_GRCI","t":"FIELD","c":[],"n":"ISSUE_DETAILS_GRCI"}]},{"id":"MSAI_26","t":"ACCORDION","c":[{"id":"ISSUE_DUE_DATE_GRCI","t":"FIELD","c":[],"n":"ISSUE_DUE_DATE_GRCI"},{"id":"RECOMMENDATION_GRCI","t":"FIELD","c":[],"n":"RECOMMENDATION_GRCI"}]},{"id":"MSAI_31","t":"ACCORDION","c":[{"id":"OWNER_ORG_GRCI","t":"FIELD","c":[],"n":"OWNER_ORG_GRCI"},{"id":"ISSUE_OWNER_GRCI","t":"FIELD","c":[],"n":"ISSUE_OWNER_GRCI"},{"id":"APPROVER_ORG_GRCI","t":"FIELD","c":[],"n":"APPROVER_ORG_GRCI"},{"id":"ISSUE_APPROVER_GRCI","t":"FIELD","c":[],"n":"ISSUE_APPROVER_GRCI"},{"id":"ISSUE_ID","t":"FIELD","c":[],"n":"ISSUE_ID"},{"id":"ISSUE_REQUEST_DATE","t":"FIELD","c":[],"n":"ISSUE_REQUEST_DATE"},{"id":"FEED_DATA_ID","t":"FIELD","c":[],"n":"FEED_DATA_ID"},{"id":"ISSUE_ASSIGNED_TO","t":"FIELD","c":[],"n":"ISSUE_ASSIGNED_TO"},{"id":"ISSUE_CREATED_BY","t":"FIELD","c":[],"n":"ISSUE_CREATED_BY"},{"id":"ISSUE_CREATED_ON","t":"FIELD","c":[],"n":"ISSUE_CREATED_ON"},{"id":"SUBS_RESPONSE_ID_GRCI","t":"FIELD","c":[],"n":"SUBS_RESPONSE_ID_GRCI"},{"id":"CUSTOM_FIELD2","t":"FIELD","c":[],"n":"CUSTOM_FIELD2"},{"id":"CUSTOM_FIELD3","t":"FIELD","c":[],"n":"CUSTOM_FIELD3"},{"id":"CUSTOM_FIELD4","t":"FIELD","c":[],"n":"CUSTOM_FIELD4"},{"id":"RELATED_ORG_GRCI","t":"FIELD","c":[],"n":"RELATED_ORG_GRCI"},{"id":"RELATED_CORE_OBJ_GRCI","t":"FIELD","c":[],"n":"RELATED_CORE_OBJ_GRCI"},{"id":"REGULATORY_BODY_GRCI","t":"FIELD","c":[],"n":"REGULATORY_BODY_GRCI"},{"id":"AREA_OF_COMP_GRCI","t":"FIELD","c":[],"n":"AREA_OF_COMP_GRCI"},{"id":"STANDARDS_GRCI","t":"FIELD","c":[],"n":"STANDARDS_GRCI"},{"id":"FND_OBJECT_ID","t":"FIELD","c":[],"n":"FND_OBJECT_ID"},{"id":"REQUIREMENTS_GRCI","t":"FIELD","c":[],"n":"REQUIREMENTS_GRCI"},{"id":"RECEIVED_ON_GRCI","t":"FIELD","c":[],"n":"RECEIVED_ON_GRCI"},{"id":"ATTACHMENT","t":"FIELD","c":[],"n":"ATTACHMENT"},{"id":"ISSUE_RESOLUTION_GRCI","t":"FIELD","c":[],"n":"ISSUE_RESOLUTION_GRCI"}]}]}]},{"id":"DD_OBJECT_TYPE","t":"FIELD","c":[],"n":"DD_OBJECT_TYPE"},{"id":"DD_CURRENT_USER_NAME","t":"FIELD","c":[],"n":"DD_CURRENT_USER_NAME"},{"id":"DD_EVENT_USER_NAME","t":"FIELD","c":[],"n":"DD_EVENT_USER_NAME"},{"id":"DD_ENTERPRISE_INFO","t":"FIELD","c":[],"n":"DD_ENTERPRISE_INFO"},{"id":"DD_CURRENT_STAGE","t":"FIELD","c":[],"n":"DD_CURRENT_STAGE"},{"id":"DD_PROCESS_CODE","t":"FIELD","c":[],"n":"DD_PROCESS_CODE"},{"id":"OBJECT_ID","t":"FIELD","c":[],"n":"OBJECT_ID"},{"id":"INITIATOR","t":"FIELD","c":[],"n":"INITIATOR"},{"id":"RTF_MULTI_ATTACHMENT","t":"FIELD","c":[],"n":"RTF_MULTI_ATTACHMENT"},{"id":"CUSTOM_FIELD5","t":"FIELD","c":[],"n":"CUSTOM_FIELD5"}]}]}</script>
+<script>{rules:[]}</script>
+<script></script>
+<script> F.onLoad(function(){ F.FND.showFirstPage();
+ }); </script>
+<script> F.onLoad(function(){ 
+ 
+}); </script>
+<script> F.FND.hide = function(){(document.getElementById('MSAI_MULTI_FND')).style.display='none';};  F.FND.show = function(){(document.getElementById('MSAI_MULTI_FND')).style.display='';}; </script>
+<SCRIPT>
+F.getObject("MSAI_MULTI_DIV_#foreach ($group in $groups)#if($group.name=='FND')${group.id}#end#end").innerHTML = "";
+</SCRIPT>
+<HIDDEN>#parse("fastform/MS_RGA/MS_RGA_LOG_ISSUES_JS.vm")</HIDDEN>
+#if ($offline != "true") <script>$(".saveandsyncbutton").hide();$(".savesynccontinuebutton").hide();$(".saveputonlinebutton").hide();</script> #end
+#if ($offline == "true") <script>$(".savebutton").text("Save Changes"); $(".cancelbutton").text("Cancel Changes");</script> #end
+</body>
+<script>F.isAccessibilityEnabled = false;</script>
+<script>initial();</script><!--
+-----------------------------------------------------------
+Row IDs :
+These can be used to access individual rows in the template
+-----------------------------------------------------------
+MSAI_180
+MSAI_14
+MSAI_53
+MSAI_54
+MSAI_55
+MSAI_56
+MSAI_57
+MSAI_58
+MSAI_59
+MSAI_60
+MSAI_61
+MSAI_62
+MSAI_101
+MSAI_102
+MSAI_17
+MSAI_87_$rowSeq
+MSAI_18_$rowSeq
+MSAI_20_$rowSeq
+MSAI_21_$rowSeq
+MSAI_23_$rowSeq
+MSAI_70_$rowSeq
+MSAI_25_$rowSeq
+MSAI_26_$rowSeq
+MSAI_27_$rowSeq
+MSAI_28_$rowSeq
+MSAI_31_$rowSeq
+MSAI_32_$rowSeq
+MSAI_33_$rowSeq
+MSAI_35_$rowSeq
+MSAI_36_$rowSeq
+MSAI_37_$rowSeq
+MSAI_38_$rowSeq
+MSAI_39_$rowSeq
+MSAI_40_$rowSeq
+MSAI_41_$rowSeq
+MSAI_42_$rowSeq
+MSAI_43_$rowSeq
+MSAI_44_$rowSeq
+MSAI_45_$rowSeq
+MSAI_46_$rowSeq
+MSAI_47_$rowSeq
+MSAI_48_$rowSeq
+MSAI_49_$rowSeq
+MSAI_50_$rowSeq
+MSAI_51_$rowSeq
+MSAI_52_$rowSeq
+MSAI_77_$rowSeq
+MSAI_91_$rowSeq
+MSAI_96_$rowSeq
+MSAI_104_$rowSeq
+
+-----------------------------------------------------------
+-----------------------------------------------------------
+Title IDs :
+These can be used to access the form title(s)
+-----------------------------------------------------------
+-----------------------------------------------------------
+MSAI_186
+
+-----------------------------------------------------------
+Heading IDs :
+These can be used to access form section headings
+-----------------------------------------------------------
+-----------------------------------------------------------
+MSAI_88_$rowSeq
+MSAI_19_$rowSeq
+MSAI_22_$rowSeq
+MSAI_30_$rowSeq
+MSAI_34_$rowSeq
+
+-----------------------------------------------------------
+Static Text IDs :
+These can be used to access each of the static text
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+Button IDs :
+These can be used to access the buttons
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+Link IDs :
+These can be used to access the hyperlinks
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+Tab IDs :
+These can be used to access the tabs. 
+-----------------------------------------------------------
+-----------------------------------------------------------
+MSAI_15
+-----------------------------------------------------------
+Report IDs :
+These can be used to access the reports. 
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+
+-->

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_RGA_UNPROCESSD_CHNL_FEEDS_V">MS_RGA_UNPROCESSD_CHNL_FEEDS_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "GRCIDEV"."MS_RGA_UNPROCESSD_CHNL_FEEDS_V" ("CHANNEL_ID", "CHANNEL_NAME", "CHANNEL_TYPE", "STRUCTCONTENT_INFOLET", "CHANNEL_DESCRIPTION", "CHANNEL_ACTIVE", "SOURCE_ID", "SOURCE_TYPE", "SERVER_ADD_URL", "SCR_USER_NAME", "SCR_PASSWORD", "EMAIL_FROM", "KEYWORDS", "SOURCE_DESCRIPTION", "SOURCE_ACTIVE", "SERVER_PARAMETERS", "CHNL_DTLS_USERNAME", "FEED_AGGTR_USERNAME", "FEED_AGGTR_MAILID", "FEED_AGGTR_MAILID_2", "RESPONSE_DATE", "BODY", "TITLE_SUBJECT", "ATTACHMENTS", "CREATED_ON", "MODIFIED_ON", "PROCESSED_FLAG", "ORG_FEED_DATA_ID") AS 
+  SELECT
+    /*+ Index(c MS_RGA_FEEDAGG_V_IDX_02)
+    Index(d MS_RGA_CHNL_DTLS_IDX_01)
+    */
+    e.Channel_Id Channel_Id, 
+    e.Channel_Name Channel_Name,
+    e.Channel_Type Channel_Type,
+    e.Infolet_Name StructContent_Infolet,
+    e.Channel_Description Channel_Description,
+    e.Active Channel_Active,
+    d.Source_Id Source_Id,
+    d.Source_Type Source_Type,
+    d.Server_Add_Url Server_Add_Url,
+    d.Scr_User_Name Scr_User_Name,
+    d.Scr_Password Scr_Password,
+    d.Email_From Email_From,
+    d.Keywords Keywords,
+    d.Source_Description Source_Description,
+    DECODE(d.Active,1,'Y',0,'N') Source_Active,
+    d.Server_Parameters Server_Parameters,
+    d.Username Chnl_Dtls_Username,
+    c.Recipient_Username Feed_Aggtr_Username,
+    c.Recipient_Mail_Id Feed_Aggtr_MailId,
+    C.RECIPIENT_MAIL_ID_2 FEED_AGGTR_MAILID_2, -- Added by SumitL on 12-May-2011
+    c.Creation_Date Response_Date,
+    c.Body Body,
+    c.Subject Title_Subject,
+    C.ATTACHMENT ATTACHMENTS,
+    c.Creation_Date Created_On,
+    c.Creation_Date Modified_On,
+    NVL(C.PROCESSED_FLAG,'U') PROCESSED_FLAG,
+    --   C.INSTANCE_ID INSTANCE_ID,
+    --   c.Instance_Rec_Num Instance_Rec_Num,
+    c.Feed_Data_Id Org_Feed_Data_Id
+  FROM
+    (SELECT z.*,
+      Lower(Recipient) Recipient_Mail_Id,
+      Lower(SUBSTR(Recipient, Instr(Recipient,'<',1,1)+1, -- Start Position
+      (Instr(Recipient,'@',Instr(Recipient,'<',1,1)   +1,1)-(Instr(Recipient,'<',1,1)+1)))) Recipient_Username,
+      -- Changed by SumitL on 12-May-2011 > Derived "Recepient_Mail_Id_2".
+      -- Purpose > to address recipient mail id with format ("User Full Name" <User_Mail_Id@SomeServer.com>).
+      Lower(SUBSTR(Recipient, (Instr(Recipient,'<',1,1)+1), (Instr(Recipient,'>',1,1)-Instr(Recipient,'<',1,1)-1) )) AS Recipient_Mail_Id_2
+    FROM Ms_Rga_Feed_Aggregator_V z
+    ) c,
+    (SELECT u.*, Lower(u.Scr_User_Name) Username FROM Ms_Rga_Channel_Details u
+    ) d,
+    Ms_Rga_Channel_Master e
+  WHERE d.Channel_Id = e.Channel_Id
+  AND c.Server       = d.Server_Add_Url
+    --And    ((e.Channel_Type = '1' And c.Username = d.Username) Or (e.Channel_Type = '2'))--c.Username   = d.Username
+    --And    ((d.Source_Type = '1' And c.Username = d.Username) Or (d.Source_Type = '2'))
+    --And    ((d.Source_Type = '1' And (c.Recipient_Username = d.Username or c.Recipient_Mail_Id = d.Username)) Or (d.Source_Type = '2')) -- Changed by SumitL on 12-May-2011 > Commented this line.
+  AND ((d.Source_Type       = '1'
+  AND (c.Recipient_Username = d.Username
+  OR c.Recipient_Mail_Id    = d.Username
+  OR c.Recipient_Mail_Id_2  = d.Username))
+  OR (d.Source_Type         = '2')
+  OR (d.Source_Type         = '3')) -- Changed by SumitL on 12-May-2011 > Added this line for matching Recepient_Mail_Id_2 with Username.
+    -- AND c.Metric_Run_Date    IS NOT NULL
+  AND d.Active = '1'
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

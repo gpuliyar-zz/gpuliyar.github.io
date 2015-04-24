@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="request_common.xsd"/>
+	<xs:element name="datapacket">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="MsgHdr" type="MsgHdrType" maxOccurs="1"
+				minOccurs="1">
+				</xs:element>
+				<xs:element name="MsgBody" type="MsgBodyType" maxOccurs="1"
+				minOccurs="1">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="MsgHdrType">
+		<xs:sequence>
+			<xs:element name="msgId" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="creDtm" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="NbOfObj" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="GrpTyp" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+			<xs:element name="source" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="MsgBodyType">
+		<xs:sequence>
+			<xs:element name="Data" type="DataType" maxOccurs="2"
+					minOccurs="1">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="DataType">
+		<xs:sequence>
+			<xs:element name="DataHdr" type="DataHdrType" maxOccurs="1"
+					minOccurs="1">
+			</xs:element>
+			<xs:element name="DataLines" type="DataLinesType" maxOccurs="1"
+					minOccurs="1">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="DataHdrType">
+		<xs:sequence>
+			<xs:element name="MsgType" type="xs:string" maxOccurs="1"
+				minOccurs="1">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="DataLinesType">
+		<xs:sequence>
+			<xs:element name="AocDataLine" type="AocDataLineType" maxOccurs="10"
+				minOccurs="0">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AocDataLineType">
+		<xs:complexContent>
+			<xs:extension base="headerType">
+				<xs:sequence>
+					<xs:element type="classification_ListType" name="types"
+						maxOccurs="1" minOccurs="0" />
+					<xs:element name="relationship_type" type="relationshipType"
+						maxOccurs="1" minOccurs="0" />
+				</xs:sequence>
+				<!-- <xs:attribute name="SrNo" type="xs:int" use="required"/> -->
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="classification_ListType">
+		<xs:sequence>
+			<xs:element name="AocType" type="xs:string" maxOccurs="unbounded"
+				minOccurs="0">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="relationshipType">
+		<xs:sequence>
+			<xs:element name="related" type="relatedType"
+				minOccurs="1" maxOccurs="unbounded"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

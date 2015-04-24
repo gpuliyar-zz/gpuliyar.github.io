@@ -1,0 +1,242 @@
+<xs:schema targetNamespace="http://www.rdc.com/batch/rdc_rib.xsd"
+           xmlns:ns="http://www.rdc.com/batch/rdc_rib.xsd"
+           xmlns="http://www.rdc.com/batch/rdc_rib.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+
+  <xs:element name="RibRequest" type="ns:RibRequest"/>
+  <xs:complexType name="RibRequest">
+    <xs:sequence>
+      <xs:element name="header" type="ns:RequestHeader"/>
+      <xs:element name="inquiries" type="ns:Inquiries"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RequestHeader">
+    <xs:sequence>
+      <xs:element name="version" type="xs:string"/>
+      <xs:element name="firmNumber" type="xs:string"/>
+      <xs:element name="datetime" type="xs:string"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Inquiries">
+    <xs:sequence>
+      <xs:element name="inquiry" type="ns:Inquiry" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Inquiry">
+    <xs:sequence>
+      <xs:element name="actionType" type="xs:string"/>
+      <xs:element name="portfolioMonitoring" type="xs:boolean"/>
+      <xs:element name="trackingId" type="xs:string"/>
+      <xs:element name="reportingId" type="xs:string" minOccurs="0"/>
+      <xs:element name="inquiryNotes" type="xs:string" minOccurs="0"/>
+      <xs:element name="inquiryType" type="xs:string"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="address1" type="xs:string" minOccurs="0"/>
+      <xs:element name="city" type="xs:string" minOccurs="0"/>
+      <xs:element name="province" type="xs:string" minOccurs="0"/>
+      <xs:element name="postalCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="country" type="xs:string" minOccurs="0"/>
+      <xs:element name="dateOfBirth" type="xs:string" minOccurs="0"/>
+      <xs:element name="globalSearch" type="xs:boolean" minOccurs="0"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="RibResponse" type="ns:RibResponse"/>
+  <xs:complexType name="RibResponse">
+    <xs:sequence>
+      <xs:element name="header" type="ns:ResponseHeader"/>
+      <xs:element name="inquiryDispositions" type="ns:InquiryDispositions"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ResponseHeader">
+    <xs:sequence>
+      <xs:element name="version" type="xs:string"/>
+      <xs:element name="firmNumber" type="xs:string"/>
+      <xs:element name="datetime" type="xs:string"/>
+      <xs:element name="inputFileName" type="xs:string" minOccurs="0"/>
+      <xs:element name="responseType" type="xs:string"/>
+      <xs:element name="batchType" type="xs:string"/>
+      <xs:element name="batchId" type="xs:string"/>
+      <xs:element name="batchDate" type="xs:string"/>
+      <xs:element name="inquiryCount" type="xs:int" minOccurs="0"/>
+      <xs:element name="gridMatchCount" type="xs:int" minOccurs="0"/>
+      <xs:element name="alertCount" type="xs:int" minOccurs="0"/>
+
+
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="InquiryDispositions">
+    <xs:sequence>
+      <xs:element name="inquiryDisposition" type="ns:InquiryDisposition" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="InquiryDisposition">
+    <xs:sequence>
+      <xs:element name="reviewStatus" type="xs:string"/>
+      <xs:element name="inquiryId" type="xs:string"/>
+      <xs:element name="portfolioMonitoring" type="xs:boolean"/>
+      <xs:element name="monitoredSince" type="xs:string" minOccurs="0"/>       
+      <xs:element name="trackingId" type="xs:string"/>
+      <xs:element name="reportingId" type="xs:string" minOccurs="0"/>
+      <xs:element name="inquiryNotes" type="xs:string" minOccurs="0"/>        
+      <xs:element name="inquiryType" type="xs:string"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="address1" type="xs:string" minOccurs="0"/>
+      <xs:element name="city" type="xs:string" minOccurs="0"/>
+      <xs:element name="province" type="xs:string" minOccurs="0"/>
+      <xs:element name="postalCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="country" type="xs:string" minOccurs="0"/>
+      <xs:element name="dateOfBirth" type="xs:string" minOccurs="0"/>
+      <xs:element name="alert" type="ns:Alert" minOccurs="0"/>
+      <xs:element name="legacyIdentifier" type="xs:string" minOccurs="0"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Alert">
+    <xs:sequence>
+      <xs:element name="alertId" type="xs:string"/>
+      <xs:element name="alertDate" type="xs:string"/>
+      <xs:element name="entities" type="ns:AlertEntities"/>
+      <xs:element name="alertScore" type="xs:int" minOccurs="0"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntities">
+    <xs:sequence>
+      <xs:element name="entity" type="ns:AlertEntity" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntity">
+    <xs:sequence>
+      <xs:element name="entityId" type="xs:string"/>
+      <xs:element name="entityType" type="xs:string"/>
+      <xs:element name="entityName" type="xs:string"/>
+      <xs:element name="rdcUrl" type="xs:string"/>
+      <xs:element name="source" type="ns:AlertEntitySource"/>
+      <xs:element name="events" type="ns:AlertEntityEvents"/>
+      <xs:element name="aliases" type="ns:AlertEntityAliases" minOccurs="0"/>
+      <xs:element name="addresses" type="ns:AlertEntityAddresses" minOccurs="0"/>
+      <xs:element name="dobs" type="ns:AlertEntityDobs" minOccurs="0"/>
+      <xs:element name="attributes" type="ns:AlertEntityAttributes" minOccurs="0"/>
+      <xs:element name="riskScore" type="xs:int" minOccurs="0"/>
+      <xs:element name="alertNote" type="xs:string" minOccurs="0"/>
+      <xs:element name="systemId" type="xs:string"/>
+      <xs:element name="cvipCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="recentEvents" type="ns:AlertEntityEvents" minOccurs="0"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntitySource">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="publication" type="xs:string" minOccurs="0"/>
+      <xs:element name="publicationDate" type="xs:string" minOccurs="0"/>
+      <xs:element name="sourceUrl" type="xs:string" minOccurs="0"/>
+      <xs:element name="referenceSources"  type="ns:AlertEntityReferenceSource" minOccurs="0"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntityEvents">
+    <xs:sequence>
+      <xs:element name="event" type="ns:AlertEntityEvent" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntityReferenceSource">
+    <xs:sequence>
+      <xs:element name="referenceSource" type="ns:AlertEntitySource" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntityEvent">
+    <xs:sequence>
+      <xs:element name="category" type="xs:string" minOccurs="0"/>
+      <xs:element name="subcategory" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="date" type="xs:string" minOccurs="0"/>
+      <xs:element name="endDate" type="xs:string" minOccurs="0"/>
+      <xs:element name="eventSource" type="ns:AlertEntitySource" minOccurs="0"/>        
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntityAliases">
+    <xs:sequence>
+      <xs:element name="alias" type="ns:AlertEntityAlias" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntityAlias">
+    <xs:sequence>
+      <xs:element name="aliasType" type="xs:string"/>
+      <xs:element name="aliasName" type="xs:string"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntityAddresses">
+    <xs:sequence>
+      <xs:element name="address" type="ns:AlertEntityAddress" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntityAddress">
+    <xs:sequence>
+      <xs:element name="type" type="xs:string" minOccurs="0"/>
+      <xs:element name="address1" type="xs:string" minOccurs="0"/>
+      <xs:element name="address2" type="xs:string" minOccurs="0"/>
+      <xs:element name="city" type="xs:string" minOccurs="0"/>
+      <xs:element name="province" type="xs:string" minOccurs="0"/>
+      <xs:element name="postalCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="country" type="xs:string" minOccurs="0"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntityDobs">
+    <xs:sequence>
+      <xs:element name="dateOfBirth" type="ns:AlertEntityDob" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntityDob">
+    <xs:sequence>
+      <xs:element name="year" type="xs:int"/>
+      <xs:element name="month" type="xs:int" minOccurs="0"/>
+      <xs:element name="day" type="xs:int" minOccurs="0"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntityAttributes">
+    <xs:sequence>
+      <xs:element name="attribute" type="ns:AlertEntityAttribute" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AlertEntityAttribute">
+    <xs:sequence>
+      <xs:element name="code" type="xs:string"/>
+      <xs:element name="value" type="xs:string"/>
+      <xs:any namespace="##targetNamespace" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

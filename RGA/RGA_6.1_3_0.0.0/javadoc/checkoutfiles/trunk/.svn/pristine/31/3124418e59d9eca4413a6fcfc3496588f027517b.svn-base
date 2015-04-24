@@ -1,0 +1,1265 @@
+<?xml version="1.0" encoding="UTF-8"?><PACKAGE_SPEC xmlns="http://www.metricstream.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metricstream.com ms_application_schema.xsd">
+<!--$Revision: 1.30.2.12.2.2.2.9.2.8 $-->
+<!--$Author: prao $-->
+<PLATFORM_DETAILS>
+<PLATFORM_VERSION>6.0</PLATFORM_VERSION>
+<BUILD_VERSION>4.6.4</BUILD_VERSION>
+</PLATFORM_DETAILS>
+<STORED_PROCEDURE_NAME>MS_MDF_MS_RGA_L_CONTROL_PKG</STORED_PROCEDURE_NAME>
+<OBJECT_ID>MS_MDF_MS_RGA_L_CONTROL_PKG</OBJECT_ID>
+<OBJECT_TYPE>PACKAGE</OBJECT_TYPE>
+<TEXT>PACKAGE ms_mdf_ms_rga_l_control_pkg
+IS   
+    ----------------------------------------------------------------------------------------------------
+    --                        MetricStream (India) InfoTech Private Limited
+    ----------------------------------------------------------------------------------------------------
+    -- Package Name         : ms_mdf_ms_rga_l_control_pkg
+    -- 
+    -- Author               : AppStudio
+    --
+    -- Comments             : Contains code generated to be used by the flow named
+    --                        MS_RGA_LOG_ISSUE [MS_RGA_LOG_ISSUE]
+    --                        This code should NOT be modified as it will be over-written
+    --                        in the event of a re-deployment
+    ----------------------------------------------------------------------------------------------------
+    
+    ----------------------------------------------------------------------------------------------------
+    --  Procedure Declarations
+    ----------------------------------------------------------------------------------------------------    
+    PROCEDURE make_transition(pn_pid              IN NUMBER
+                             ,pn_max_instance_id  IN NUMBER
+							 ,pc_process_code     IN VARCHAR2
+                             ,pn_metric_id        IN NUMBER
+                             ,xn_error_handle_id  IN OUT NUMBER
+                             ,pn_error_seq        IN OUT NUMBER
+                             ,xn_error_code       OUT NUMBER
+                             );
+                             
+    ----------------------------------------------------------------------------------------------------
+    --  Globals
+    ----------------------------------------------------------------------------------------------------                               
+    gc_namespace VARCHAR2(100) := 'xmlns="http://www.metricstream.com/appstudio/mdf"';
+                       
+END ms_mdf_ms_rga_l_control_pkg;
+ </TEXT>
+<TEXT_BODY>PACKAGE BODY             ms_mdf_ms_rga_l_control_pkg
+IS   
+
+    ----------------------------------------------------------------------------------------------------
+    -- Procedure Name       : make_transition
+    -- 
+    -- Author               : AppStudio
+    --
+    -- Comments             : Auto generated code. Do NOT modify
+    ----------------------------------------------------------------------------------------------------
+    PROCEDURE make_transition(pn_pid              IN NUMBER
+                             ,pn_max_instance_id  IN NUMBER
+							 ,pc_process_code     IN VARCHAR2
+                             ,pn_metric_id        IN NUMBER
+                             ,xn_error_handle_id  IN OUT NUMBER
+                             ,pn_error_seq        IN OUT  NUMBER
+                             ,xn_error_code       OUT NUMBER
+                             )
+    IS
+        lc_modulename               VARCHAR2(100) := '[ ms_mdf_ms_rga_l_control_pkg.make_transition ] ';
+        lx_flow                     XMLTYPE;
+		lx_stages                   XMLTYPE;
+        lc_stage                    CLOB;
+        lc_tostage                  CLOB;
+        lc_emailtemplates           CLOB;
+		lc_transition_process_xml   CLOB;
+        le_abort                    EXCEPTION;
+        lc_enterprise               VARCHAR2(100);
+        ln_enterprise_id            NUMBER;
+        lb_transition_status        BOOLEAN;
+        ln_flow_version             NUMBER := 1;
+        ln_error_code               NUMBER;        
+        lc_current_stage            VARCHAR2(100);
+        ln_current_stage_approval   NUMBER;
+        ln_index                    VARCHAR2(4000);    
+        ln_pointer                  VARCHAR2(1000);
+        lt_pid                      ms_apps_mdf_engine_pkg.datapacket_table;
+        ln_target_pid               NUMBER;
+        ln_orig_target_pid          NUMBER;        
+        lt_parameters               ms_apps_mdf_engine_pkg.parameter_lookup_tabletype;
+        lt_rules                    ms_apps_mdf_engine_pkg.rule_lookup_tabletype;
+        lt_assignees                ms_apps_mdf_engine_pkg.assignee_lookup_tabletype;
+        lv_err_variable             VARCHAR2(100);
+        CURSOR  lcu_stages
+        IS
+        SELECT  stages.EXTRACT('stage/code/text()',gc_namespace).GETSTRINGVAL() stage_code
+               ,stages.EXTRACT('stage/type/text()',gc_namespace).GETSTRINGVAL() stage_type
+               ,stages.EXTRACT('stage/approvaltype/text()',gc_namespace).GETSTRINGVAL() stage_approvaltype
+        FROM TABLE(XMLSEQUENCE((SELECT lx_flow.EXTRACT('flow/stages/stage[enabled="Y"]',gc_namespace) FROM DUAL))) stages;   
+
+        CURSOR  lcu_transitions
+        IS
+        SELECT  transitions.EXTRACT('transition/code/text()',gc_namespace).GETSTRINGVAL() transition_code
+               ,transitions.EXTRACT('transition/to/text()',gc_namespace).GETSTRINGVAL() transition_to
+               ,transitions.GETCLOBVAL() transition
+        FROM TABLE(XMLSEQUENCE((SELECT lx_flow.EXTRACT('flow/transitions/transition[enabled="Y" and from="'||lc_current_stage||'"]',gc_namespace) FROM DUAL))) transitions;
+
+        CURSOR  lcu_parameters
+        IS
+        SELECT  fparameters.EXTRACT('parameter/code/text()',gc_namespace).GETSTRINGVAL() parameter_code
+               ,fparameters.EXTRACT('parameter/sourcetype/text()',gc_namespace).GETSTRINGVAL() parameter_sourcetype
+               ,fparameters.EXTRACT('parameter/source/text()',gc_namespace).GETSTRINGVAL() parameter_source
+        FROM TABLE(XMLSEQUENCE((SELECT lx_flow.EXTRACT('flow/parameters/parameter',gc_namespace) FROM DUAL))) fparameters;      
+        
+        CURSOR  lcu_rules
+        IS
+        SELECT  rules.EXTRACT('rule/code/text()',gc_namespace).GETSTRINGVAL() rule_code
+               ,rules.EXTRACT('rule/type/text()',gc_namespace).GETSTRINGVAL() rule_type
+               ,rules.EXTRACT('rule/object1/text()',gc_namespace).GETSTRINGVAL() rule_object1
+               ,rules.EXTRACT('rule/object2/text()',gc_namespace).GETSTRINGVAL() rule_object2
+               ,rules.EXTRACT('rule/object3/text()',gc_namespace).GETSTRINGVAL() rule_object3
+        FROM TABLE(XMLSEQUENCE((SELECT lx_flow.EXTRACT('flow/rules/rule',gc_namespace) FROM DUAL))) rules;
+        
+        CURSOR  lcu_assignees
+        IS
+        SELECT  assignees.EXTRACT('assignee/code/text()',gc_namespace).GETSTRINGVAL() assignee_code
+               ,assignees.EXTRACT('assignee/sourcetype/text()',gc_namespace).GETSTRINGVAL() assignee_sourcetype
+               ,assignees.EXTRACT('assignee/source/text()',gc_namespace).GETSTRINGVAL() assignee_source
+        FROM TABLE(XMLSEQUENCE((SELECT lx_flow.EXTRACT('flow/assignees/assignee',gc_namespace) FROM DUAL))) assignees;   
+
+        CURSOR  lcu_stage_rules(px_stage XMLTYPE)
+        IS
+        SELECT  rules.EXTRACT('rule/code/text()',gc_namespace).GETSTRINGVAL() rule_code
+               ,rules.EXTRACT('rule/type/text()',gc_namespace).GETSTRINGVAL() rule_type
+               ,rules.EXTRACT('rule/object1/text()',gc_namespace).GETSTRINGVAL() rule_object1
+               ,rules.EXTRACT('rule/object2/text()',gc_namespace).GETSTRINGVAL() rule_object2
+               ,rules.EXTRACT('rule/object3/text()',gc_namespace).GETSTRINGVAL() rule_object3
+        FROM TABLE(XMLSEQUENCE((SELECT px_stage.EXTRACT('stage/rules/rule',gc_namespace) FROM DUAL))) rules;             
+    BEGIN
+        SAVEPOINT start_of_code;
+        xn_error_code := 0;
+
+        IF xn_error_handle_id IS NULL THEN
+            SELECT ms_apps_mdf_error_handle_id_s.nextval INTO xn_error_handle_id FROM DUAL;
+            pn_error_seq := 1;
+        END IF;
+
+        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                         ,pn_error_sequence =&gt; pn_error_seq
+                                         ,pc_error_type =&gt; 'I'
+                                         ,pc_error_text =&gt; lc_modulename||'Entered the Control Package with Process Instance Id ['||pn_pid||'] and Instance id ['||pn_max_instance_id||']'
+										 ,pn_pid =&gt; pn_pid
+                                         );  
+        
+        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                         ,pn_error_sequence =&gt; pn_error_seq
+                                         ,pc_error_type =&gt; 'D'
+                                         ,pc_error_text =&gt; lc_modulename||'Fetching XML for the Blueprint [MS_RGA_LOG_ISSUES]'
+                                         ,pn_pid =&gt; pn_pid);         
+        BEGIN
+            SELECT  XMLTYPE(blueprint_xml)
+            INTO    lx_flow
+            FROM    ms_apps_mdf_blueprint
+            WHERE   blueprint_code = 'MS_RGA_LOG_ISSUES'
+            AND     blueprint_version = ln_flow_version;
+
+            ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                             ,pn_error_sequence =&gt; pn_error_seq
+                                             ,pc_error_type =&gt; 'D'
+                                             ,pc_error_text =&gt; lc_modulename||'XML for the Blueprint obtained'
+                                             ,pn_pid =&gt; pn_pid);
+        EXCEPTION
+            WHEN le_abort THEN  
+                RAISE le_abort;
+            WHEN NO_DATA_FOUND THEN
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'E'
+                                                 ,pc_error_text =&gt; lc_modulename||'XML for the Flow could not be obtained. Cannot Continue.'||SQLERRM
+                                                 ,pn_pid =&gt; pn_pid);
+                                                 
+                lv_err_variable := 'APPS-CTRL-01' ;
+                                                            
+                RAISE le_abort;
+            WHEN OTHERS THEN
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'E'
+                                                 ,pc_error_text =&gt; lc_modulename||'XML for the Flow could not be obtained Oracle error'||SQLERRM
+                                                 ,pn_pid =&gt; pn_pid);            
+                lv_err_variable := 'APPS-CTRL-02' ;
+                
+                RAISE le_abort;    
+        END;
+        
+		ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                         ,pn_error_sequence =&gt; pn_error_seq
+                                         ,pc_error_type =&gt; 'D'
+                                         ,pc_error_text =&gt; lc_modulename||'Fetching Stages XML for Process '||pc_process_code
+                                         ,pn_pid =&gt; pn_pid);         
+        BEGIN
+            SELECT  XMLTYPE(flow_xml),enterprise
+            INTO    lx_stages, lc_enterprise
+            FROM    ms_apps_mdf_flow_xml
+            WHERE   flow_code = pc_process_code
+            AND     flow_version = ln_flow_version;
+
+            ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                             ,pn_error_sequence =&gt; pn_error_seq
+                                             ,pc_error_type =&gt; 'D'
+                                             ,pc_error_text =&gt; lc_modulename||'XML for the Process obtained'
+                                             ,pn_pid =&gt; pn_pid);
+        EXCEPTION
+            WHEN le_abort THEN  
+                RAISE le_abort;
+            WHEN NO_DATA_FOUND THEN
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'E'
+                                                 ,pc_error_text =&gt; lc_modulename||'XML for the Process could not be obtained. Cannot Continue.'||SQLERRM
+                                                 ,pn_pid =&gt; pn_pid); 
+                
+                lv_err_variable := 'APPS-CTRL-03' ;
+                                                                                             
+                RAISE le_abort;
+           WHEN OTHERS THEN
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'E'
+                                                 ,pc_error_text =&gt; lc_modulename||'XML for the Process could not be obtained from Flow_xml.Oracle Error '||SQLERRM
+                                                 ,pn_pid =&gt; pn_pid); 
+                                                 
+                lv_err_variable := 'APPS-CTRL-04' ;                                            
+                RAISE le_abort;     
+        END;
+		    ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'D'
+                                                 ,pc_error_text =&gt; lc_modulename||' lc_enterprise  = '||lc_enterprise
+                                                 ,pn_pid =&gt; pn_pid);   
+        BEGIN                      
+            SELECT enterprise_id
+            INTO   ln_enterprise_id
+            FROM   si_ent
+            WHERE  enterprise_name = lc_enterprise;      
+        EXCEPTION
+            WHEN OTHERS THEN
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'E'
+                                                 ,pc_error_text =&gt; lc_modulename||'Error while obtaining Flow Enterprise. Cannot Continue'
+                                                 ,pn_pid =&gt; pn_pid);               
+                lv_err_variable := 'APPS-CTRL-05' ;
+                RAISE le_abort;
+        END;   
+
+        BEGIN
+            ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                             ,pn_error_sequence =&gt; pn_error_seq
+                                             ,pc_error_type =&gt; 'D'
+                                             ,pc_error_text =&gt; lc_modulename||'Obtaining Current Stage Information'
+                                             ,pn_pid =&gt; pn_pid);    
+            BEGIN
+                SELECT  current_stage
+                       ,current_stage_approval
+					   ,instance_id
+                INTO    lc_current_stage
+                       ,ln_current_stage_approval
+					   ,lt_pid(1).orig_iid
+                FROM    ms_apps_mdf_flow_history
+                WHERE   flow_code = pc_process_code
+                AND     flow_version = ln_flow_version
+                AND     pid = pn_pid
+                AND     instance_id = (
+                                        SELECT  MAX(instance_id)
+                                        FROM    ms_apps_mdf_flow_history
+                                        WHERE   flow_code = pc_process_code
+                                        AND     flow_version = ln_flow_version
+                                        AND     pid = pn_pid
+                                      ); 
+
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'D'
+                                                 ,pc_error_text =&gt; lc_modulename||'Flow is currently at Stage ['||lc_current_stage||']'
+                                                 ,pn_pid =&gt; pn_pid); 
+           
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                    ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'D'
+                                                     ,pc_error_text =&gt; lc_modulename||'No Flow History. The start stage will be determined '||SQLERRM
+                                                     ,pn_pid =&gt; pn_pid);  
+                    BEGIN
+                        FOR lcu_stages_rec IN lcu_stages
+                        LOOP
+                            IF lcu_stages_rec.stage_type = 4 THEN                            
+                                lc_current_stage := lcu_stages_rec.stage_code;
+                                ln_current_stage_approval := lcu_stages_rec.stage_approvaltype;
+                            END IF;                            
+                        END LOOP;
+                        BEGIN
+                            ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                             ,pn_error_sequence =&gt; pn_error_seq
+                                                             ,pc_error_type =&gt; 'D'
+                                                             ,pc_error_text =&gt; lc_modulename||'Recording Current Stage as '||lc_current_stage
+                                                             ,pn_pid =&gt; pn_pid);    
+
+                            ms_apps_mdf_engine_pkg.set_stage(pc_process_code
+                                                            ,ln_flow_version
+                                                            ,NULL
+															,NULL
+                                                            ,pn_pid
+                                                            ,pn_max_instance_id
+                                                            ,lc_current_stage
+                                                            ,ln_current_stage_approval
+                                                            ,xn_error_handle_id
+                                                            ,pn_error_seq
+                                                            ,ln_error_code
+                                                            );
+                                                            
+                            IF ln_error_code &lt;&gt; 0 THEN
+                                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                                 ,pc_error_type =&gt; 'E'
+                                                                 ,pc_error_text =&gt; lc_modulename||'Errors occurred during execution of ms_apps_mdf_engine_pkg.set_stage. Cannot continue'
+                                                                 ,pn_pid =&gt; pn_pid);                              
+                                
+                                RAISE le_abort;                             
+                            END IF;
+                            
+                        EXCEPTION
+                            WHEN le_abort THEN
+                                RAISE le_abort;
+                            WHEN OTHERS THEN
+                                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                                 ,pc_error_type =&gt; 'E'
+                                                                 ,pc_error_text =&gt; lc_modulename||'Unable to save current stage for flow progress. Cannot continue. Oracle Error ='||SQLERRM
+                                                                 ,pn_pid =&gt; pn_pid);                              
+                                RAISE le_abort;                                  
+                        END;                        
+                    END;
+            WHEN OTHERS THEN
+                  ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                   ,pn_error_sequence =&gt; pn_error_seq
+                                                   ,pc_error_type =&gt; 'E'
+                                                   ,pc_error_text =&gt; lc_modulename||'Failed while Obtaining Current Stage Information.Oracle Error ='||SQLERRM
+                                                   ,pn_pid =&gt; pn_pid);                              
+                  RAISE le_abort; 
+            END;
+        EXCEPTION
+            WHEN le_abort THEN
+                RAISE le_abort;        
+            WHEN OTHERS THEN
+                xn_error_code := -1;
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'E'
+                                                 ,pc_error_text =&gt; lc_modulename||'Exceptional Error while obtaining Stage Information. Oracle Error = '||SQLERRM
+                                                 ,pn_pid =&gt; pn_pid); 
+                RAISE le_abort;         
+        END;
+        
+        DECLARE
+            ln_parent_id    NUMBER;
+            lb_continue     BOOLEAN;
+            ln_assignment_count NUMBER;
+            ln_total_count  NUMBER;
+            ln_open_count   NUMBER;
+            
+            CURSOR lcu_siblings(pn_parent_pid NUMBER, pn_current_pid  NUMBER)
+            IS
+            SELECT  child_pid, submit_id
+            FROM    ms_apps_mdf_flow_hierarchy
+            WHERE   parent_pid = pn_parent_pid
+            AND     child_pid &lt;&gt; pn_current_pid;
+        BEGIN
+        
+            lt_pid(1).pid := pn_pid;
+            lt_pid(1).iid := pn_max_instance_id;
+            ln_target_pid := pn_pid;
+        
+            IF ln_current_stage_approval = 1 THEN
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'D'
+                                                 ,pc_error_text =&gt; lc_modulename||'Stage Approval Type is Normal. Continuing.'
+                                                 ,pn_pid =&gt; pn_pid); 
+            ELSIF ln_current_stage_approval = 2 THEN
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'D'
+                                                 ,pc_error_text =&gt; lc_modulename||'Stage Approval Type is Any. Attempting to find Parent PID for '||pn_pid
+                                                 ,pn_pid =&gt; pn_pid);             
+                BEGIN
+                    SELECT  parent_pid
+                    INTO    ln_parent_id
+                    FROM    ms_apps_mdf_flow_hierarchy
+                    WHERE   child_pid = pn_pid;
+                    
+                    ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'D'
+                                                     ,pc_error_text =&gt; lc_modulename||'Parent PID is '||ln_parent_id||'. All other sibling assignments will be deleted'
+                                                     ,pn_pid =&gt; pn_pid);                    
+                    
+                    FOR lcu_siblings_rec IN lcu_siblings(ln_parent_id,pn_pid)
+                    LOOP    
+                        DELETE FROM si_event_assignments
+                        WHERE process_instance_id = lcu_siblings_rec.child_pid
+                        AND   infolet_id = pn_metric_id;
+                        
+                        lt_pid(lt_pid.COUNT+1).pid := lcu_siblings_rec.child_pid;
+                        lt_pid(lt_pid.COUNT).iid := lcu_siblings_rec.submit_id;                        
+                    END LOOP;
+
+                    ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'D'
+                                                     ,pc_error_text =&gt; lc_modulename||'Deleting information from ms_apps_mdf_flow_hierarchy'
+                                                     ,pn_pid =&gt; pn_pid);                    
+
+                    
+                    DELETE FROM ms_apps_mdf_flow_hierarchy
+                    WHERE parent_pid = ln_parent_id;
+                    
+                    ln_target_pid := ln_parent_id;                    
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                         ,pn_error_sequence =&gt; pn_error_seq
+                                                         ,pc_error_type =&gt; 'E'
+                                                         ,pc_error_text =&gt; lc_modulename||'Failed to get parent id from ms_apps_mdf_flow_hierarchy for child_pid = '||pn_pid ||SQLERRM
+                                                         ,pn_pid =&gt; pn_pid);            
+                        
+                        lv_err_variable := 'APPS-CTRL-06' ;
+                                                 
+                        RAISE le_abort;
+                    WHEN OTHERS THEN
+                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                         ,pn_error_sequence =&gt; pn_error_seq
+                                                         ,pc_error_type =&gt; 'E'
+                                                         ,pc_error_text =&gt; lc_modulename||'Exceptional Error when checking Approval Type. Oracle Error = '||SQLERRM
+                                                         ,pn_pid =&gt; pn_pid);            
+                        lv_err_variable := 'APPS-CTRL-07' ;
+                        RAISE le_abort;     
+                END;
+            ELSIF ln_current_stage_approval = 3 THEN
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'D'
+                                                 ,pc_error_text =&gt; lc_modulename||'Stage Approval Type is All. Attempting to find Parent PID for '||pn_pid
+                                                 ,pn_pid =&gt; pn_pid);             
+                BEGIN
+                    SELECT  parent_pid
+                    INTO    ln_parent_id
+                    FROM    ms_apps_mdf_flow_hierarchy
+                    WHERE   child_pid = pn_pid;
+
+                    ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'D'
+                                                     ,pc_error_text =&gt; lc_modulename||'Parent PID is '||ln_parent_id||'. All other sibling assignments will be deleted'
+                                                     ,pn_pid =&gt; pn_pid);                    
+                    
+                    lb_continue := TRUE;
+                    
+                    FOR lcu_siblings_rec IN lcu_siblings(ln_parent_id,pn_pid)
+                    LOOP    
+                        SELECT  COUNT(assignment_id)
+                        INTO    ln_assignment_count
+                        FROM    si_event_assignments
+                        WHERE   process_instance_id = lcu_siblings_rec.child_pid
+                        AND     infolet_id = pn_metric_id;
+                        
+                        IF ln_assignment_count &gt; 0 THEN
+                            lb_continue := FALSE;
+                        END IF;
+                                               
+                        lt_pid(lt_pid.COUNT+1).pid := lcu_siblings_rec.child_pid;
+                        lt_pid(lt_pid.COUNT).iid := lcu_siblings_rec.submit_id;                        
+                    END LOOP;
+                    
+                    IF lb_continue = TRUE THEN
+                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                         ,pn_error_sequence =&gt; pn_error_seq
+                                                         ,pc_error_type =&gt; 'D'
+                                                         ,pc_error_text =&gt; lc_modulename||'Deleting information from ms_apps_mdf_flow_hierarchy'
+                                                         ,pn_pid =&gt; pn_pid);                     
+                        DELETE FROM ms_apps_mdf_flow_hierarchy
+                        WHERE parent_pid = ln_parent_id;                    
+                        ln_target_pid := ln_parent_id;
+                    ELSE
+                        UPDATE ms_apps_mdf_flow_hierarchy
+                        SET    submit_id = pn_max_instance_id
+                        WHERE  child_pid = pn_pid;
+                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                        ,pn_error_sequence =&gt; pn_error_seq
+                                                        ,pc_error_type =&gt; 'D'
+                                                        ,pc_error_text =&gt; lc_modulename||'Sibling assignments exist. Will continue after they are closed'
+                                                        ,pn_pid =&gt; pn_pid);                 
+                        COMMIT;
+                        RETURN;       
+                    END IF;
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                         ,pn_error_sequence =&gt; pn_error_seq
+                                                         ,pc_error_type =&gt; 'E'
+                                                         ,pc_error_text =&gt; lc_modulename||'Failed to get parent id from ms_apps_mdf_flow_hierarchy for child_pid = '||pn_pid ||SQLERRM
+                                                         ,pn_pid =&gt; pn_pid);            
+                        
+                        
+                        lv_err_variable := 'APPS-CTRL-08' ;
+                        
+                        RAISE le_abort;
+                     WHEN OTHERS THEN
+                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                         ,pn_error_sequence =&gt; pn_error_seq
+                                                         ,pc_error_type =&gt; 'E'
+                                                         ,pc_error_text =&gt; lc_modulename||'Exceptional Error when checking Approval Type. Oracle Error = '||SQLERRM
+                                                         ,pn_pid =&gt; pn_pid);            
+
+                        lv_err_variable := 'APPS-CTRL-09' ;
+                        RAISE le_abort;   
+
+                END;
+            ELSIF ln_current_stage_approval = 4 THEN
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'D'
+                                                 ,pc_error_text =&gt; lc_modulename||'Stage Approval Type is Majority. Attempting to find Parent PID for '||pn_pid
+                                                 ,pn_pid =&gt; pn_pid);             
+                BEGIN
+                    SELECT  parent_pid
+                    INTO    ln_parent_id
+                    FROM    ms_apps_mdf_flow_hierarchy
+                    WHERE   child_pid = pn_pid;
+                    
+                    ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'D'
+                                                     ,pc_error_text =&gt; lc_modulename||'Parent PID is '||ln_parent_id||'. All other sibling assignments will be deleted if majority approvals have been reached.'
+                                                     ,pn_pid =&gt; pn_pid);                     
+
+                    --lb_continue := TRUE;
+                    ln_total_count := 0;
+                    ln_open_count := 0;
+
+                    FOR lcu_siblings_rec IN lcu_siblings(ln_parent_id,pn_pid)
+                    LOOP
+                        ln_total_count := ln_total_count + 1;
+                        
+                        SELECT  COUNT(assignment_id)
+                        INTO    ln_assignment_count
+                        FROM    si_event_assignments
+                        WHERE   process_instance_id = lcu_siblings_rec.child_pid
+                        AND     infolet_id = pn_metric_id;
+
+                        IF ln_assignment_count &gt; 0 THEN
+                            --lb_continue := FALSE;
+                            ln_open_count := ln_open_count + 1;
+                        END IF;
+
+                        lt_pid(lt_pid.COUNT+1).pid := lcu_siblings_rec.child_pid;
+                        lt_pid(lt_pid.COUNT).iid := lcu_siblings_rec.submit_id;
+                    END LOOP;
+
+                    IF ln_open_count &lt;= (ln_total_count / 2) THEN
+						ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'D'
+                                                     ,pc_error_text =&gt; lc_modulename||'Majority approvals have been reached. All other sibling assignments will be deleted.'
+                                                     ,pn_pid =&gt; pn_pid);
+													 
+                        FOR lcu_siblings_rec IN lcu_siblings(ln_parent_id,pn_pid)
+                        LOOP                    
+                            BEGIN                               
+                                DELETE FROM si_event_assignments
+                                WHERE process_instance_id = lcu_siblings_rec.child_pid
+                                AND   infolet_id = pn_metric_id;
+								
+								ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'D'
+                                                     ,pc_error_text =&gt; lc_modulename||'Sibling assignment with PID '|| lcu_siblings_rec.child_pid||' is deleted.'
+                                                     ,pn_pid =&gt; pn_pid);
+								
+                            EXCEPTION
+                                WHEN OTHERS THEN
+									ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'D'
+                                                     ,pc_error_text =&gt; lc_modulename||'Sibling assignment with PID '|| lcu_siblings_rec.child_pid||'is not deleted due the exception : '||substr(sqlerrm,1,200)
+                                                     ,pn_pid =&gt; pn_pid);
+
+                            END;
+                        END LOOP;
+                        
+                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                         ,pn_error_sequence =&gt; pn_error_seq
+                                                         ,pc_error_type =&gt; 'D'
+                                                         ,pc_error_text =&gt; lc_modulename||'Deleting information from ms_apps_mdf_flow_hierarchy'
+                                                         ,pn_pid =&gt; pn_pid);                        
+
+                        DELETE FROM ms_apps_mdf_flow_hierarchy
+                        WHERE parent_pid = ln_parent_id;
+                    
+                        ln_target_pid := ln_parent_id;
+                    ELSE
+						ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'D'
+                                                     ,pc_error_text =&gt; lc_modulename||'Majority approvals have not been reached.'
+                                                     ,pn_pid =&gt; pn_pid);
+													 
+                        UPDATE ms_apps_mdf_flow_hierarchy
+                        SET    submit_id = pn_max_instance_id
+                        WHERE  child_pid = pn_pid;
+                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                        ,pn_error_sequence =&gt; pn_error_seq
+                                                        ,pc_error_type =&gt; 'D'
+                                                        ,pc_error_text =&gt; lc_modulename||'Sibling assignments exist. Will continue after they are closed'
+                                                        ,pn_pid =&gt; pn_pid);
+                        COMMIT;
+                        RETURN;
+                    END IF;
+                EXCEPTION
+                    WHEN NO_DATA_FOUND THEN
+                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                         ,pn_error_sequence =&gt; pn_error_seq
+                                                         ,pc_error_type =&gt; 'E'
+                                                         ,pc_error_text =&gt; lc_modulename||'Failed to get parent id from ms_apps_mdf_flow_hierarchy for child_pid = '||pn_pid ||SQLERRM
+                                                         ,pn_pid =&gt; pn_pid);            
+                        
+                        lv_err_variable := 'APPS-CTRL-10' ;
+                        RAISE le_abort;
+                    WHEN OTHERS THEN
+                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                         ,pn_error_sequence =&gt; pn_error_seq
+                                                         ,pc_error_type =&gt; 'E'
+                                                         ,pc_error_text =&gt; lc_modulename||'Exceptional Error when checking Approval Type. Oracle Error = '||SQLERRM
+                                                         ,pn_pid =&gt; pn_pid);            
+                        
+                        lv_err_variable := 'APPS-CTRL-11' ;
+                        RAISE le_abort;
+
+                END;
+            END IF;
+        EXCEPTION
+            WHEN OTHERS THEN
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'E'
+                                                 ,pc_error_text =&gt; lc_modulename||'Error while determining stage approvals '||SQLERRM
+                                                 ,pn_pid =&gt; pn_pid);            
+                RAISE le_abort;
+        END;
+        
+        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                        ,pn_error_sequence =&gt; pn_error_seq
+                                        ,pc_error_type =&gt; 'D'
+                                        ,pc_error_text =&gt; lc_modulename||'Obtaining the Flow level Parameters'
+                                        ,pn_pid =&gt; pn_pid);        
+        
+        FOR lcu_parameters_rec IN lcu_parameters
+        LOOP
+            IF lcu_parameters_rec.parameter_sourcetype = 1 THEN
+                lt_parameters(lcu_parameters_rec.parameter_code) := ms_apps_mdf_engine_pkg.get_system_parameter(lcu_parameters_rec.parameter_source);
+            ELSIF lcu_parameters_rec.parameter_sourcetype = 2 THEN
+                lt_parameters(lcu_parameters_rec.parameter_code) := ms_apps_mdf_engine_pkg.get_lov(lcu_parameters_rec.parameter_source);
+            ELSIF lcu_parameters_rec.parameter_sourcetype = 3 THEN
+                lt_parameters(lcu_parameters_rec.parameter_code) := lcu_parameters_rec.parameter_source;
+            ELSIF lcu_parameters_rec.parameter_sourcetype = 4 THEN
+                DECLARE
+                    lc_output VARCHAR2(4000);
+                BEGIN
+                    EXECUTE IMMEDIATE 'SELECT '||lcu_parameters_rec.parameter_source||'('''||pc_process_code||''','||pn_pid||','||pn_max_instance_id||') FROM DUAL' INTO lc_output;
+                    lt_parameters(lcu_parameters_rec.parameter_code) := lc_output;
+                EXCEPTION
+                    WHEN OTHERS THEN
+                        lt_parameters(lcu_parameters_rec.parameter_code) := NULL;
+                END;
+            END IF;
+        END LOOP;
+
+        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                         ,pn_error_sequence =&gt; pn_error_seq
+                                         ,pc_error_type =&gt; 'D'
+                                         ,pc_error_text =&gt; lc_modulename||'Parameters List ...'
+                                         ,pn_pid =&gt; pn_pid);        
+        ln_pointer := lt_parameters.FIRST;
+		
+		IF ln_pointer IS NULL
+		THEN
+			ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                             ,pn_error_sequence =&gt; pn_error_seq
+                                             ,pc_error_type =&gt; 'D'
+                                             ,pc_error_text =&gt; lc_modulename||'No Parameters found.'
+                                             ,pn_pid =&gt; pn_pid);
+		END IF;
+		
+        WHILE ln_pointer IS NOT NULL
+        LOOP        
+            ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                             ,pn_error_sequence =&gt; pn_error_seq
+                                             ,pc_error_type =&gt; 'D'
+                                             ,pc_error_text =&gt; lc_modulename||'Parameter ['||ln_pointer||'] Value = '||lt_parameters(ln_pointer)
+                                             ,pn_pid =&gt; pn_pid); 
+            ln_pointer := lt_parameters.NEXT(ln_pointer);            
+        END LOOP;        
+
+        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                        ,pn_error_sequence =&gt; pn_error_seq
+                                        ,pc_error_type =&gt; 'D'
+                                        ,pc_error_text =&gt; lc_modulename||'Obtaining the Flow level Rules'
+                                        ,pn_pid =&gt; pn_pid); 
+        
+        FOR lcu_rules_rec IN lcu_rules
+        LOOP
+            DECLARE
+                lc_object1 VARCHAR2(1000) := NULL;
+            BEGIN
+                IF lcu_rules_rec.rule_type = 1 THEN
+                    lc_object1 := ms_apps_mdf_engine_pkg.get_system_parameter(lcu_rules_rec.rule_object1);
+                ELSIF lcu_rules_rec.rule_type = 2 THEN
+                    lc_object1 := ms_apps_mdf_engine_pkg.get_lov(lcu_rules_rec.rule_object1);
+                ELSIF lcu_rules_rec.rule_type = 3 THEN
+                    BEGIN
+                        EXECUTE IMMEDIATE 'SELECT '||lcu_rules_rec.rule_object1||'('''||pc_process_code||''','||pn_pid||','||pn_max_instance_id||') FROM DUAL' INTO lc_object1;
+                    EXCEPTION
+                        WHEN OTHERS THEN
+                            ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                            ,pn_error_sequence =&gt; pn_error_seq
+                                                            ,pc_error_type =&gt; 'E'
+                                                            ,pc_error_text =&gt; lc_modulename||'Could not obtain the value from function '||lcu_rules_rec.rule_object1
+                                                            ,pn_pid =&gt; pn_pid);
+                            RAISE le_abort;
+                    END;
+                END IF;
+
+                IF lcu_rules_rec.rule_object2 = 1 THEN
+                    IF lc_object1 = lcu_rules_rec.rule_object3 THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;
+                ELSIF lcu_rules_rec.rule_object2 = 2 THEN
+                    IF lc_object1 &lt;&gt; lcu_rules_rec.rule_object3 THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;
+                ELSIF lcu_rules_rec.rule_object2 = 3 THEN
+                    IF lc_object1 LIKE '%'||lcu_rules_rec.rule_object3||'%' THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;
+                ELSIF lcu_rules_rec.rule_object2 = 4 THEN
+                    IF lc_object1 NOT LIKE '%'||lcu_rules_rec.rule_object3||'%' THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;
+                ELSIF lcu_rules_rec.rule_object2 = 5 THEN
+                    IF ','||lcu_rules_rec.rule_object3||',' LIKE '%,'||lc_object1||',%' THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;
+                ELSIF lcu_rules_rec.rule_object2 = 6 THEN
+                    IF ','||lcu_rules_rec.rule_object3||',' NOT LIKE '%,'||lc_object1||',%' THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;     
+                ELSIF lcu_rules_rec.rule_object2 = 7 THEN
+                    IF lc_object1 &gt; lcu_rules_rec.rule_object3 THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;
+                ELSIF lcu_rules_rec.rule_object2 = 8 THEN
+                    IF lc_object1 &gt;= lcu_rules_rec.rule_object3 THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;
+                ELSIF lcu_rules_rec.rule_object2 = 9 THEN
+                    IF lc_object1 &lt; lcu_rules_rec.rule_object3 THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;
+                ELSIF lcu_rules_rec.rule_object2 = 10 THEN
+                    IF lc_object1 &lt;= lcu_rules_rec.rule_object3 THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;
+                ELSIF lcu_rules_rec.rule_object2 = 11 THEN
+                    IF lc_object1 IS NULL THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;
+                ELSIF lcu_rules_rec.rule_object2 = 12 THEN
+                    IF lc_object1 IS NOT NULL THEN
+                        lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                    ELSE
+                        lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                    END IF;                    
+                ELSE
+                    ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                    ,pn_error_sequence =&gt; pn_error_seq
+                                                    ,pc_error_type =&gt; 'E'
+                                                    ,pc_error_text =&gt; lc_modulename||'Invalid operator in Flow Meta Data'
+                                                    ,pn_pid =&gt; pn_pid);
+                    
+                    lv_err_variable := 'APPS-CTRL-12' ;
+                    RAISE le_abort;                    
+                END IF;                    
+
+            EXCEPTION
+                WHEN OTHERS THEN
+                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+            END;            
+        END LOOP;
+        
+        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                         ,pn_error_sequence =&gt; pn_error_seq
+                                         ,pc_error_type =&gt; 'D'
+                                         ,pc_error_text =&gt; lc_modulename||'Rules List ...'
+                                         ,pn_pid =&gt; pn_pid); 
+                                         
+        ln_pointer := lt_rules.FIRST;
+		
+		IF ln_pointer IS NULL
+		THEN
+			ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                             ,pn_error_sequence =&gt; pn_error_seq
+                                             ,pc_error_type =&gt; 'D'
+                                             ,pc_error_text =&gt; lc_modulename||'No Rules found.'
+                                             ,pn_pid =&gt; pn_pid);
+		END IF;
+		
+        WHILE ln_pointer IS NOT NULL
+        LOOP        
+            ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                             ,pn_error_sequence =&gt; pn_error_seq
+                                             ,pc_error_type =&gt; 'D'
+                                             ,pc_error_text =&gt; lc_modulename||'Rule ['||ln_pointer||'] Value = '||lt_rules(ln_pointer)
+                                             ,pn_pid =&gt; pn_pid); 
+            ln_pointer := lt_rules.NEXT(ln_pointer);            
+        END LOOP;        
+        
+        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                        ,pn_error_sequence =&gt; pn_error_seq
+                                        ,pc_error_type =&gt; 'D'
+                                        ,pc_error_text =&gt; lc_modulename||'Obtaining the Flow level Assignees'
+                                        ,pn_pid =&gt; pn_pid);         
+
+        FOR lcu_assignees_rec IN lcu_assignees
+        LOOP
+            IF lcu_assignees_rec.assignee_sourcetype = 1 THEN
+                DECLARE
+                    ln_count        NUMBER := 1;
+                    lt_splitdata    ms_apps_mdf_engine_pkg.stringarray_tabletype;
+                BEGIN
+                    ms_apps_mdf_engine_pkg.split(lcu_assignees_rec.assignee_source
+                                                ,lt_splitdata
+                                                );
+                    FOR i IN 1..lt_splitdata.COUNT
+                    LOOP
+                        lt_assignees(lcu_assignees_rec.assignee_code)(ln_count) := lt_splitdata(i);
+                        ln_count := ln_count + 1;
+                    END LOOP;
+                END;
+            ELSIF lcu_assignees_rec.assignee_sourcetype = 2 THEN
+                -- Write this piece of code
+                NULL;
+            ELSIF lcu_assignees_rec.assignee_sourcetype = 3 THEN
+                -- Write this piece of code
+                NULL;
+            ELSIF lcu_assignees_rec.assignee_sourcetype = 4 THEN
+                DECLARE
+                    lc_assignees    VARCHAR2(32000);
+                    ln_count        NUMBER := 1;
+                    lt_splitdata    ms_apps_mdf_engine_pkg.stringarray_tabletype;
+                BEGIN
+                    EXECUTE IMMEDIATE 'SELECT '||lcu_assignees_rec.assignee_source||'('''||pc_process_code||''','||pn_pid||','||pn_max_instance_id||') FROM DUAL' INTO lc_assignees;
+                    ms_apps_mdf_engine_pkg.split(lc_assignees
+                                                ,lt_splitdata
+                                                );
+                    FOR i IN 1..lt_splitdata.COUNT
+                    LOOP
+                        lt_assignees(lcu_assignees_rec.assignee_code)(ln_count) := lt_splitdata(i);
+                        ln_count := ln_count + 1;
+                    END LOOP;                        
+                EXCEPTION
+                    WHEN OTHERS THEN
+                        NULL;
+                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                        ,pn_error_sequence =&gt; pn_error_seq
+                                        ,pc_error_type =&gt; 'W'
+                                        ,pc_error_text =&gt; lc_modulename||'Exception case of lcu_assignees_rec.assignee_sourcetype = 4'
+                                        ,pn_pid =&gt; pn_pid);  
+                END;
+            END IF;            
+        END LOOP;
+        
+        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                         ,pn_error_sequence =&gt; pn_error_seq
+                                         ,pc_error_type =&gt; 'D'
+                                         ,pc_error_text =&gt; lc_modulename||'Assignees List ...'
+                                         ,pn_pid =&gt; pn_pid); 
+                                         
+        ln_pointer := lt_assignees.FIRST;
+
+		IF ln_pointer IS NULL
+		THEN
+			ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                             ,pn_error_sequence =&gt; pn_error_seq
+                                             ,pc_error_type =&gt; 'D'
+                                             ,pc_error_text =&gt; lc_modulename||'No Assignees found.'
+                                             ,pn_pid =&gt; pn_pid);
+		END IF;
+		
+        WHILE ln_pointer IS NOT NULL
+        LOOP        
+            FOR i IN 1..lt_assignees(ln_pointer).COUNT
+            LOOP
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'D'
+                                                 ,pc_error_text =&gt; lc_modulename||'Assignee ['||ln_pointer||'] Value = '||lt_assignees(ln_pointer)(i)
+                                                 ,pn_pid =&gt; pn_pid); 
+            END LOOP;
+            ln_pointer := lt_assignees.NEXT(ln_pointer);            
+        END LOOP; 
+
+        BEGIN
+        SELECT  stages.GETCLOBVAL() stage_xml
+        INTO    lc_stage
+        FROM TABLE(XMLSEQUENCE((SELECT lx_stages.EXTRACT('process/stages/stage[enabled="Y" and code="'||lc_current_stage||'"]',gc_namespace) FROM DUAL))) stages;                
+        EXCEPTION WHEN OTHERS THEN
+        xn_error_code := -1;
+            
+            ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                             ,pn_error_sequence =&gt; pn_error_seq
+                                             ,pc_error_type =&gt; 'E'
+                                             ,pc_error_text =&gt; lc_modulename||'Error while obtaining stage info. Oracle Error = '||SQLERRM
+                                             ,pn_pid =&gt; pn_pid);
+                                             
+           lv_err_variable := 'APPS-CTRL-13' ;
+           ROLLBACK TO start_of_code;                                  
+        END;
+        
+        IF XMLTYPE(lc_stage).EXTRACT('stage/object/text()',gc_namespace).GETSTRINGVAL() IS NOT NULL THEN
+        
+            BEGIN
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'D'
+                                                 ,pc_error_text =&gt; lc_modulename||'Finding Rules at the Stage Level'
+                                                 ,pn_pid =&gt; pn_pid);   
+
+                FOR i IN 1..lt_pid.COUNT
+                LOOP
+                    FOR lcu_rules_rec IN lcu_stage_rules(XMLTYPE(lc_stage))
+                    LOOP
+                        DECLARE
+                            lc_object1 VARCHAR2(1000) := NULL;
+                        BEGIN
+                            IF lcu_rules_rec.rule_type = 1 THEN
+                                BEGIN
+                                    EXECUTE IMMEDIATE 'SELECT '||lcu_rules_rec.rule_object1||' FROM '||XMLTYPE(lc_stage).EXTRACT('stage/view/text()',gc_namespace).GETSTRINGVAL()||' WHERE process_instance_id = '||lt_pid(i).pid||' AND instance_id = '||lt_pid(i).iid||' AND instance_rec_num = 1' INTO lc_object1;
+                                EXCEPTION
+                                    WHEN OTHERS THEN
+                                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                                        ,pn_error_sequence =&gt; pn_error_seq
+                                                                        ,pc_error_type =&gt; 'E'
+                                                                        ,pc_error_text =&gt; lc_modulename||'Could not obtain the value of '||lcu_rules_rec.rule_object1||' from the view '||XMLTYPE(lc_stage).EXTRACT('stage/view/text()',gc_namespace).GETSTRINGVAL()
+                                                                        ,pn_pid =&gt; pn_pid);
+                                        RAISE le_abort;
+                                END;
+                            ELSIF lcu_rules_rec.rule_type = 2 THEN
+                                BEGIN
+                                    EXECUTE IMMEDIATE 'SELECT '||lcu_rules_rec.rule_object1||'('''||pc_process_code||''','''||lc_current_stage||''','||lt_pid(i).pid||','||lt_pid(i).iid||') FROM DUAL' INTO lc_object1;
+                                EXCEPTION
+                                    WHEN OTHERS THEN
+                                        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                                        ,pn_error_sequence =&gt; pn_error_seq
+                                                                        ,pc_error_type =&gt; 'E'
+                                                                        ,pc_error_text =&gt; lc_modulename||'Could not obtain the value from function '||lcu_rules_rec.rule_object1
+                                                                        ,pn_pid =&gt; pn_pid);
+                                        RAISE le_abort;
+                                END;
+                            END IF;  
+
+                            IF lcu_rules_rec.rule_object2 = 1 THEN
+                                IF lc_object1 = lcu_rules_rec.rule_object3 THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;
+                            ELSIF lcu_rules_rec.rule_object2 = 2 THEN
+                                IF lc_object1 &lt;&gt; lcu_rules_rec.rule_object3 THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;
+                            ELSIF lcu_rules_rec.rule_object2 = 3 THEN
+                                IF lc_object1 LIKE '%'||lcu_rules_rec.rule_object3||'%' THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;
+                            ELSIF lcu_rules_rec.rule_object2 = 4 THEN
+                                IF lc_object1 NOT LIKE '%'||lcu_rules_rec.rule_object3||'%' THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;
+                            ELSIF lcu_rules_rec.rule_object2 = 5 THEN
+                                IF ','||lcu_rules_rec.rule_object3||',' LIKE '%,'||lc_object1||',%' THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;
+                            ELSIF lcu_rules_rec.rule_object2 = 6 THEN
+                                IF ','||lcu_rules_rec.rule_object3||',' NOT LIKE '%,'||lc_object1||',%' THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;     
+                            ELSIF lcu_rules_rec.rule_object2 = 7 THEN
+                                IF lc_object1 &gt; lcu_rules_rec.rule_object3 THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;
+                            ELSIF lcu_rules_rec.rule_object2 = 8 THEN
+                                IF lc_object1 &gt;= lcu_rules_rec.rule_object3 THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;
+                            ELSIF lcu_rules_rec.rule_object2 = 9 THEN
+                                IF lc_object1 &lt; lcu_rules_rec.rule_object3 THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;
+                            ELSIF lcu_rules_rec.rule_object2 = 10 THEN
+                                IF lc_object1 &lt;= lcu_rules_rec.rule_object3 THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;
+                            ELSIF lcu_rules_rec.rule_object2 = 11 THEN
+                                IF lc_object1 IS NULL THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;
+                            ELSIF lcu_rules_rec.rule_object2 = 12 THEN
+                                IF lc_object1 IS NOT NULL THEN
+                                    lt_rules(lcu_rules_rec.rule_code) := 'PASSED';
+                                ELSE
+                                    lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                                END IF;                            
+                            ELSE
+                                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                                ,pn_error_sequence =&gt; pn_error_seq
+                                                                ,pc_error_type =&gt; 'E'
+                                                                ,pc_error_text =&gt; lc_modulename||'Invalid operator in Flow Meta Data for rule [ '||lcu_rules_rec.rule_code||']'
+                                                                ,pn_pid =&gt; pn_pid);
+                                
+                                lv_err_variable := 'APPS-CTRL-12' ;
+                                                 
+                                RAISE le_abort;                    
+                            END IF;
+                        EXCEPTION
+                            WHEN OTHERS THEN
+                                lt_rules(lcu_rules_rec.rule_code) := 'FAILED';
+                        END;            
+                    END LOOP;
+                END LOOP;
+
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'D'
+                                                 ,pc_error_text =&gt; lc_modulename||'Stage Rules ...'
+                                                 ,pn_pid =&gt; pn_pid); 
+                                                 
+                ln_pointer := lt_rules.FIRST;
+
+				IF ln_pointer IS NULL
+				THEN
+					ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+													 ,pn_error_sequence =&gt; pn_error_seq
+													 ,pc_error_type =&gt; 'D'
+													 ,pc_error_text =&gt; lc_modulename||'No Stage Rules found.'
+													 ,pn_pid =&gt; pn_pid);
+				END IF;
+				
+                WHILE ln_pointer IS NOT NULL
+                LOOP        
+                    ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'D'
+                                                     ,pc_error_text =&gt; lc_modulename||'Rule ['||ln_pointer||'] Value = '||lt_rules(ln_pointer)
+                                                     ,pn_pid =&gt; pn_pid); 
+                    ln_pointer := lt_rules.NEXT(ln_pointer);            
+                END LOOP;        
+            END;
+        
+        END IF;
+        BEGIN
+        SELECT  templates.GETCLOBVAL() templates_xml
+        INTO    lc_emailtemplates
+        FROM TABLE(XMLSEQUENCE((SELECT lx_flow.EXTRACT('flow/emailtemplates',gc_namespace) FROM DUAL))) templates;     
+        EXCEPTION 
+        WHEN OTHERS THEN
+            xn_error_code := -1;
+            
+            ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                             ,pn_error_sequence =&gt; pn_error_seq
+                                             ,pc_error_type =&gt; 'E'
+                                             ,pc_error_text =&gt; lc_modulename||'Error while obtaining email Templates.Oracle error ='||SQLERRM
+                                             ,pn_pid =&gt; pn_pid); 
+            lv_err_variable := 'APPS-CTRL-14' ;  
+            ROLLBACK TO start_of_code;                                   
+        END;                                     
+        ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                         ,pn_error_sequence =&gt; pn_error_seq
+                                         ,pc_error_type =&gt; 'D'
+                                         ,pc_error_text =&gt; lc_modulename||'Obtained XML necessary to pass control to Transition Procedures'
+                                         ,pn_pid =&gt; pn_pid);           
+                       
+        lb_transition_status := FALSE;
+        ln_orig_target_pid := ln_target_pid;
+        
+        FOR lcu_transitions_rec IN lcu_transitions
+        LOOP
+
+		                        
+            IF lcu_transitions_rec.transition_code = 'CREATE_EDIT_TO_PUBLISH' THEN  
+
+                BEGIN
+                SELECT  stages.GETCLOBVAL() as stage_xml
+                INTO    lc_tostage
+                FROM TABLE(XMLSEQUENCE((SELECT lx_stages.EXTRACT('process/stages/stage[enabled="Y" and code="'||lcu_transitions_rec.transition_to||'"]',gc_namespace) FROM DUAL))) stages;                
+				        EXCEPTION
+                WHEN OTHERS THEN
+                  xn_error_code := -1;
+                  ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                   ,pn_error_sequence =&gt; pn_error_seq
+                                                   ,pc_error_type =&gt; 'E'
+                                                   ,pc_error_text =&gt; lc_modulename||' Error while obtaining TO stage info. Oracle Error = '||SQLERRM
+                                                   ,pn_pid =&gt; pn_pid); 
+                lv_err_variable := 'APPS-CTRL-15' ;
+                ROLLBACK TO start_of_code;
+                END;
+                BEGIN
+                                             
+				        SELECT  transitions.GETCLOBVAL() as transition_process_xml
+                INTO    lc_transition_process_xml
+                FROM TABLE(XMLSEQUENCE((SELECT lx_stages.EXTRACT('process/transitions/transition[code="'||lcu_transitions_rec.transition_code||'"]',gc_namespace) FROM DUAL))) transitions;                
+                EXCEPTION
+                WHEN OTHERS THEN
+                  xn_error_code := -1;
+                  ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                   ,pn_error_sequence =&gt; pn_error_seq
+                                                   ,pc_error_type =&gt; 'E'
+                                                   ,pc_error_text =&gt; lc_modulename||'Error while obtaining Transition info. Oracle Error = '||SQLERRM
+                                                   ,pn_pid =&gt; pn_pid); 
+                  lv_err_variable := 'APPS-CTRL-16' ;
+                  ROLLBACK TO start_of_code;
+                END;
+
+                IF lb_transition_status = TRUE THEN
+                    ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'D'
+                                                     ,pc_error_text =&gt; lc_modulename||'This is an additional transition from current stage. New Process Instance Id will be generated'
+                                                     ,pn_pid =&gt; pn_pid);            
+
+                
+                    SELECT  si_process_instance_id_s.nextval
+                    INTO    ln_target_pid
+                    FROM    DUAL;
+
+                END IF;                
+                
+                ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'D'
+                                                 ,pc_error_text =&gt; lc_modulename||'Attempting to call procedure [ms_mdf_ms_rga_l_tran_1_pkg.create_edit_to_publish] for Transition [CREATE_EDIT_TO_PUBLISH]'
+                                                 ,pn_pid =&gt; pn_pid);            
+                
+                
+                ms_mdf_ms_rga_l_tran_1_pkg.create_edit_to_publish
+                            (
+                             'MS_RGA_LOG_ISSUES'
+                            ,ln_flow_version
+                            ,lt_pid
+                            ,ln_target_pid
+                            ,ln_orig_target_pid
+							,pc_process_code
+							,pn_metric_id
+                            ,lt_parameters
+                            ,lt_rules
+                            ,lt_assignees
+                            ,XMLTYPE(lc_emailtemplates)
+                            ,XMLTYPE(lc_stage)
+                            ,XMLTYPE(lc_tostage)
+                            ,XMLTYPE(lcu_transitions_rec.transition)
+							,XMLTYPE(lc_transition_process_xml)
+                            ,ln_enterprise_id
+                            ,lb_transition_status
+                            ,xn_error_handle_id
+                            ,pn_error_seq
+                            ,ln_error_code
+                            );
+                            
+                IF ln_error_code &lt;&gt; 0 THEN
+                    ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                     ,pn_error_sequence =&gt; pn_error_seq
+                                                     ,pc_error_type =&gt; 'E'
+                                                     ,pc_error_text =&gt; lc_modulename||'Errors occurred during execution of procedure ms_mdf_ms_rga_l_tran_1_pkg.create_edit_to_publish. Cannot continue'
+                                                     ,pn_pid =&gt; pn_pid);                              
+                    RAISE le_abort;                             
+                END IF;
+
+            END IF;
+            
+                            END LOOP;
+        
+		ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                                 ,pn_error_sequence =&gt; pn_error_seq
+                                                 ,pc_error_type =&gt; 'I'
+                                                 ,pc_error_text =&gt; lc_modulename||'Exiting the Control Package Successfully'
+                                                 ,pn_pid =&gt; pn_pid);
+		
+        COMMIT;
+        
+    EXCEPTION
+        WHEN le_abort THEN
+            IF ms_apps_mdf_engine_pkg.gc_err_variable IS NULL THEN
+			ms_apps_mdf_engine_pkg.gc_err_variable := lv_err_variable;
+			END IF;
+            xn_error_code := -1;
+            ROLLBACK TO start_of_code;
+        WHEN OTHERS THEN
+            xn_error_code := -1;
+            ROLLBACK TO start_of_code;
+            ms_apps_mdf_errors_pkg.insert_log(pn_error_handle_id =&gt; xn_error_handle_id
+                                             ,pn_error_sequence =&gt; pn_error_seq
+                                             ,pc_error_type =&gt; 'E'
+                                             ,pc_error_text =&gt; lc_modulename||'Exceptional Error. Oracle Error = '||SQLERRM
+                                             ,pn_pid =&gt; pn_pid);         
+    END make_transition;  
+    --==================================================================================================
+    
+END ms_mdf_ms_rga_l_control_pkg;  </TEXT_BODY>
+</PACKAGE_SPEC>

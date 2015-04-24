@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><VIEWS_SPEC xmlns="http://www.metricstream.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metricstream.com ms_application_schema.xsd">
+<!--$Revision: 1.30.2.12.2.2.2.9.2.8 $-->
+<!--$Author: prao $-->
+<PLATFORM_DETAILS>
+<PLATFORM_VERSION>6.0</PLATFORM_VERSION>
+<BUILD_VERSION>4.11.0</BUILD_VERSION>
+</PLATFORM_DETAILS>
+<VIEW_NAME>MS_RGA_LOV_DISPLAY_VALUES_V</VIEW_NAME>
+<OBJECT_ID>MS_RGA_LOV_DISPLAY_VALUES_V</OBJECT_ID>
+<VIEW_TEXT>(DISPLAYED_VALUE,LOV_NAME,STORED_VALUE,LOCALE_ID,DISPLAY_ORDER,ORG_ENTITY_ID,ENTERPRISE_ID) AS SELECT a.displayed_value,b.lov_name,a.stored_value,a.locale_id,a.display_order,
+a.org_entity_id,b.enterprise_id
+FROM ms_qs_list_of_values a,ms_qs_lov_names_v b
+WHERE b.lov_name LIKE '%RGA%' AND a.lov_id = b.lov_id   
+AND NVL(TRUNC(a.start_date),TRUNC(SYSDATE)) &lt;= TRUNC(SYSDATE)
+AND NVL(TRUNC(a.end_date),TRUNC(SYSDATE)) &gt;= TRUNC(SYSDATE)
+AND NVL(TRUNC(b.start_date),SYSDATE) &lt;= SYSDATE
+AND NVL(TRUNC(b.end_date),TRUNC(SYSDATE)) &gt;= TRUNC(SYSDATE) </VIEW_TEXT>
+</VIEWS_SPEC>

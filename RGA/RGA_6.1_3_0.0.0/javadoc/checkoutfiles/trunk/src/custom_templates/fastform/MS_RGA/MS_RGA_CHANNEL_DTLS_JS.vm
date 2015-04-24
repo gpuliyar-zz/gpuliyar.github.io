@@ -1,0 +1,3584 @@
+<SCRIPT src="/json2.js" language="Javascript"></SCRIPT>
+
+<script>
+
+var g_edit_mode, flag = 1;
+var invokedFromDataBrowser = false;
+var firstValue=0;
+var alignFlag_Validate='false';
+var temprow;
+var alignFlag_PageLoad = 'false';
+var G_ENCRYPT="encrypt";
+var G_DECRYPT="decrypt";
+
+
+F.SRC.onDeleteRow=function(row){
+	
+	
+	var rownum = F.SRC.getRowCount();
+	if(F.QUEUE_NAME.read(rownum)!==""){
+		alert("$cannotDelete");
+		return false;
+	
+	}
+	return true;
+};
+F.SRC.afterPageLoad = function(startRow,endRow)
+{
+
+
+	var srow = startRow, erow = endRow, rrcount = 0, i = 0, inputs, rowseq, id,e1,e2,e3;
+scroll(0,0);
+
+	alignButton();
+	alignTextBoxes();
+        function onchangefunction(pId){
+         var fn=function(){fnChangePass(pId);};
+         return fn;
+        }
+	if (Number(F.CHANNEL_TYPE.read()) === 0){	
+			if(document.getElementById("MSAI_299_1")!==null){
+				document.getElementById("MSAI_299_1").style.display="none";
+			}
+	}
+	for (i = srow; i <= erow; i++)
+	{
+	
+		
+		F.CHANNEL_PASSWORD.makePasswordField(i);
+			e1 = document.getElementById('MSAI_252_'+i);
+			e2 = document.getElementById('MSAI_98_'+i);
+			
+			e1.title = "$ValidateTooltip";
+			e2.title = "$ValidateTooltip";
+			
+			
+									
+		if (i == 1)
+		{
+			inputs = document.getElementById("CHANNEL_PASSWORD_field__div").getElementsByTagName("input");
+			e3 = document.getElementById("ACTIVATION_CODE_label__div");
+		}
+		else
+		{
+			inputs = document.getElementById("_"+(i-1)+"__CHANNEL_PASSWORD_field__div").getElementsByTagName("input");
+			e3 = document.getElementById("_"+(i-1)+"__ACTIVATION_CODE_label__div");
+		}
+	
+		inputs[1].id = 'Password_field_'+i;
+		//inputs[1].onchange = function(){fnChangePass(inputs[1].id);};
+        inputs[1].onchange = onchangefunction(inputs[1].id);
+    
+    				
+		if (Number(F.CHANNEL_TYPE.read())=== 3 && (F.FLAG_SUBMITTED.read(i) ||F.QUEUE_NAME.read(i)!==""))
+		{
+			//F.SOURCE_TYPE.disable(i);
+			if (e1 !== null)
+			{
+			
+			e1.style.display='none';//.innerHTML = "$Refresh";
+			e1.title="$RefreshToolTip";
+			}
+			if (e3 !== null)
+			e3.innerHTML = "$acCode";			
+		}
+
+		
+		F.CUSTOM_FIELD9.write(1,i);
+		if (F.SOURCE_TYPE.read(i) == '2')		
+			F.EMAIL_FROM.hide(i);
+		
+		
+	channelType = F.CHANNEL_TYPE.read();
+	if (channelType == '2')
+		{
+			for (j = 1;j <= rowseq; j++)
+			{
+					if(F.SOURCE_TYPE.read(j) == '1' || F.SOURCE_TYPE.read(j) == '2')
+						{
+							//jQuery('#MSAI_106').show();
+							break;
+						}
+			}
+		}
+	else
+		jQuery('#MSAI_106').hide();	
+		//stop
+
+	
+	
+		if(Number(F.CHANNEL_TYPE.read(i))=== 3 ){
+		disableAllFields(i);
+			if(F.CONTENT_TYPE.read(i)!=="")
+				{
+					F.ACTIVATION_CODE.disable(i);			
+					if (e2 !== null){			
+						if( F.FLAG_SUBMITTED.read(i))
+							e2.style.display='none';//.innerHTML = "$Refresh";
+						else
+							e2.innerHTML = "$Re-enter";
+						
+					}
+				}else
+				{
+					if (e2 !== null){
+						if(document.getElementById("MSAI_284_"+i)!==null){
+							document.getElementById("MSAI_284_"+i).style.display="none";
+						}
+						e2.innerHTML = "$ValidateSource";
+						
+					}
+				}
+			}
+			
+		}		
+		
+		
+		if (F.CHANNEL_TYPE.read() === "2")
+		{
+			rowseq = F.SRC.getRowCount();
+			for (j = 1;j <= rowseq;j++)
+			{
+				if(document.getElementById('MSAI_284_'+i)!== null)
+				document.getElementById('MSAI_284_'+i).style.display='none';
+				F.SOURCE_TYPE.makeLabelRequired(j);
+				F.SERVER_ADDRESS.makeLabelRequired(j);
+				id = 'MSAI_TD_CHANNEL_KEYWORDS_'+j;
+				jQuery('#'+id).hide();
+			}	
+		}	
+	
+		// start
+		var text1,text2,text3,text4;
+		
+		if (F.CHANNEL_TYPE.read() === "1")
+	        {
+		F.SRC.show();	
+		if(document.getElementById('MSAI_284_'+i)!== null)
+				document.getElementById('MSAI_284_'+i).style.display='none';
+		rowseq = F.SRC.getRowCount();
+		var rownum_1=1;
+		for (rownum_1 = 1;rownum_1 <= rowseq; rownum_1++)
+		{
+			if(document.getElementById('MSAI_284_'+rownum_1)!== null)
+				document.getElementById('MSAI_284_'+rownum_1).style.display='none';
+			 text1 = document.getElementById('MSAI_98_'+rownum_1);
+			 text2 = document.getElementById('MSAI_252_'+rownum_1);
+			 text3 = document.getElementById('MSAI_299_'+rownum_1);
+			 text4 = document.getElementById('MSAI_84_'+rownum_1);
+			F.SOURCE_TYPE.makeLabelRequired(rownum_1);		
+			F.SERVER_ADDRESS.makeLabelRequired(rownum_1);
+			F.SOURCE_TYPE.makeLabelRequired(rownum_1);
+			F.SERVER_ADDRESS.show(rownum_1);
+			F.EMAIL_FROM.hide(rownum_1);
+			F.CHANNEL_USERNAME.show(rownum_1);
+			F.EMAIL_SEC.show(rownum_1);
+			F.EMAIL_TYPE.show(rownum_1);
+			F.CHANNEL_PASSWORD.show(rownum_1);
+			//F.SERVER_PARAMETERS.show(rownum_1);
+			F.CHANNEL_KEYWORDS.show(rownum_1);
+			F.ACTIVATION_CODE.hide(rownum_1);
+			F.SOURCE_TYPE.show(rownum_1);
+			
+			
+			// hiding the channel type 3 items.
+			F.CONTENT_TYPE.hide(rownum_1);
+			F.DELIVERY_SCHEDULE.hide(rownum_1);
+			F.EXPIRY_DATE.hide(rownum_1);
+			F.SUBSCRIPTION_STATUS.hide(rownum_1);
+			F.CONTENT_CATEGORY.hide(rownum_1);
+			F.DELIVERY_FORMAT.hide(rownum_1);
+			
+			if (text1 !== null)
+				text1.style.display = "block";
+
+			if (text2 !== null)
+				text2.style.display = "none";
+
+			if (text3 !== null)
+			{
+	//			e3.style.display = "block";
+	//          e3.style.color = "#5882FA";
+				//e3.style.display = "block";
+				
+				text2.style.display = "none";
+			}			
+				
+			F.ACTIVATION_CODE.disable(rownum_1);			
+			if (text2 !== null){
+				text2.innerHTML = "$ValidateSource";
+			}
+			
+		
+			jQuery('#MSAI_106').hide();
+			if(text4 !== null)
+				text4.innerHTML = '$Row# '+rownum_1;	
+			
+			var keywords='MSAI_TD_CHANNEL_KEYWORDS_'+rownum_1;
+			jQuery('#'+keywords).show();
+			
+			onSourceTypeChange(rownum_1);
+		}	
+		
+			 text1 = "";
+			 text2 = "";
+			 text3 = "";
+			 text4 = "";
+		
+	}
+	else if(F.CHANNEL_TYPE.read()=== "2")
+	{
+	
+
+
+		F.SRC.show();  
+
+
+		rowseq = F.SRC.getRowCount();
+		var rownum_2=1;
+		for (rownum_2 = 1;rownum_2 <= rowseq; rownum_2++)
+		{		
+			
+			if(document.getElementById('MSAI_284_'+rownum_2)!== null)
+				document.getElementById('MSAI_284_'+rownum_2).style.display='none';
+				
+			 text1 = document.getElementById('MSAI_98_'+rownum_2);
+			 text2 = document.getElementById('MSAI_252_'+rownum_2);
+			 text3 = document.getElementById('MSAI_299_'+rownum_2);
+			 text4 = document.getElementById('MSAI_84_'+rownum_2);
+			 
+			F.SOURCE_TYPE.makeLabelRequired(rownum_2);
+			F.SERVER_ADDRESS.makeLabelRequired(rownum_2);
+			F.SOURCE_TYPE.makeLabelRequired(rownum_2);
+			F.SERVER_ADDRESS.show(rownum_2);
+			F.EMAIL_FROM.show(rownum_2);
+			F.CHANNEL_USERNAME.show(rownum_2);
+			F.EMAIL_SEC.show(rownum_2);
+			F.EMAIL_TYPE.show(rownum_2);
+			F.CHANNEL_PASSWORD.show(rownum_2);
+			//F.SERVER_PARAMETERS.show(rownum_2);
+			F.CHANNEL_KEYWORDS.show(rownum_2);
+			F.ACTIVATION_CODE.hide(rownum_2);
+			F.SOURCE_TYPE.show(rownum_2);
+			
+			// hiding the channel type 3 items.
+			F.CONTENT_TYPE.hide(rownum_2);
+			F.DELIVERY_SCHEDULE.hide(rownum_2);
+			F.EXPIRY_DATE.hide(rownum_2);
+			F.SUBSCRIPTION_STATUS.hide(rownum_2);
+			F.CONTENT_CATEGORY.hide(rownum_2);
+			F.DELIVERY_FORMAT.hide(rownum_2);
+			
+			if (text1 !== null)
+				text1.style.display = "block";
+
+			if (text2 !== null)
+				text2.style.display = "none";
+
+			if (text3 !== null)
+			{
+	//			e3.style.display = "block";
+	//          e3.style.color = "#5882FA";
+				text2.style.display = "none";
+			}			
+						
+			if (text2 !== null)
+				text2.innerHTML = "$ValidateSource";
+			
+		
+			//jQuery('#MSAI_106').hide();
+			if(text4 !== null)
+				text4.innerHTML = '$Row# '+rownum_2;	
+			
+			id = 'MSAI_TD_CHANNEL_KEYWORDS_'+rownum_2;
+			jQuery('#'+id).hide();
+			
+			onSourceTypeChange(rownum_2);
+		}	
+			 text1 = "";
+			 text2 = "";
+			 text3 = "";
+			 text4 = "";
+	}
+	
+	else if(F.CHANNEL_TYPE.read()==="3")
+	{
+	
+		
+		rowseq = F.SRC.getRowCount();
+		var rownum_3b1=1;
+		for (rownum_3b1 = 1;rownum_3b1 <= rowseq;rownum_3b1++)
+		{
+		
+			 text1 = document.getElementById('MSAI_98_'+rownum_3b1);
+			 text2 = document.getElementById('MSAI_252_'+rownum_3b1);
+			 text3 = document.getElementById('MSAI_299_'+rownum_3b1);
+			 text4 = document.getElementById('MSAI_84_'+rownum_3b1);
+			
+			//F.SOURCE_TYPE.makeLabelNotRequired(rownum_3);	
+			F.SOURCE_TYPE.write(3,rownum_3b1);
+			F.SOURCE_TYPE.makeLabelRequired(rownum_3b1);
+			F.SERVER_ADDRESS.hide(rownum_3b1);
+			F.EMAIL_FROM.hide(rownum_3b1);
+			F.CHANNEL_USERNAME.hide(rownum_3b1);
+			F.EMAIL_SEC.hide(rownum_3b1);
+			F.EMAIL_TYPE.hide(rownum_3b1);
+			F.CHANNEL_PASSWORD.hide(rownum_3b1);
+			//F.SERVER_PARAMETERS.hide(rownum_3b1);
+			F.CHANNEL_KEYWORDS.hide(rownum_3b1);
+			F.ACTIVATION_CODE.enable(rownum_3b1);
+			F.ACTIVATION_CODE.show(rownum_3b1);
+			F.SOURCE_TYPE.hide(rownum_3b1);
+			F.ACTIVATION_CODE.makeLabelRequired(rownum_3b1);
+			
+			if(document.getElementById("MSAI_252_"+rownum_3b1)!== null){
+			
+				var iddd="#MSAI_252_"+rownum_3b1;
+				if(document.getElementById("myspace_"+rownum_3b1)===null)
+					$(iddd).after( "<div id=\"myspace_"+rownum_3b1+"\" style=\"height:10px;\"></div>" );
+			}
+			
+			if(F.EXPIRY_DATE.read(rownum_3b1) === "" || F.EXPIRY_DATE.read(rownum_3b1) === null)
+			{
+				F.CONTENT_TYPE.hide(rownum_3b1);
+				F.DELIVERY_SCHEDULE.hide(rownum_3b1);
+				F.EXPIRY_DATE.hide(rownum_3b1);
+				F.SUBSCRIPTION_STATUS.hide(rownum_3b1);
+				F.CONTENT_CATEGORY.hide(rownum_3b1);
+				F.DELIVERY_FORMAT.hide(rownum_3b1);
+				F.SOURCE_TYPE.hide(rownum_3b1);	
+			}else
+			{
+				F.CONTENT_TYPE.show(rownum_3b1);
+				F.DELIVERY_SCHEDULE.show(rownum_3b1);
+				F.EXPIRY_DATE.show(rownum_3b1);
+				F.SUBSCRIPTION_STATUS.show(rownum_3b1);
+				F.CONTENT_CATEGORY.show(rownum_3b1);
+				F.DELIVERY_FORMAT.show(rownum_3b1);
+				F.SOURCE_TYPE.hide(rownum_3b1);	
+			}
+			
+			if (text1 !== null)
+				text1.style.display = "none";
+
+			if (text2 !== null)
+				text2.style.display = "block";
+			if(text3!== null){
+					//console.log(" e444 " + e3.innerHTML);
+					text3.style.display='none';
+				}
+			if(text4!== null)
+					text4.innerHTML = '$Row# '+rownum_3b1+': '+F.CHANNEL_NAME.read()+': ';
+			if(document.getElementById('MSAI_284_'+rownum_3b1)!==null)
+					document.getElementById('MSAI_284_'+rownum_3b1).style.display='none';	
+			
+			if(F.CONTENT_TYPE.read(rownum_3b1)!== "")
+			{
+			
+				if(document.getElementById("MSAI_203_"+rownum_3b1)!==null){
+							var tdCount=document.getElementById("MSAI_203_"+rownum_3b1).getElementsByTagName('td').length;
+							
+							
+						 }
+				if(text4!== null)
+					text4.innerHTML = '$Row# '+rownum_3b1+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(rownum_3b1);	
+				F.ACTIVATION_CODE.disable(rownum_3b1);			
+				if (text2 !== null){
+					if( F.FLAG_SUBMITTED.read(rownum_3b1) ||  F.FLAG_SUBMITTED.read(rownum_3b1) || F.QUEUE_NAME.read(rownum_3b1)!== ""){
+						if(document.getElementById('MSAI_284_'+rownum_3b1)!==null)
+							document.getElementById('MSAI_284_'+rownum_3b1).style.display='none';
+							
+						text2.style.display='none';//.innerHTML = "$Refresh";
+						
+						
+						/*F.CONTENT_TYPE.disable(rownum_3b1);
+						F.DELIVERY_SCHEDULE.disable(rownum_3b1);
+						F.EXPIRY_DATE.disable(rownum_3b1);
+						F.SUBSCRIPTION_STATUS.disable(rownum_3b1);
+						F.CONTENT_CATEGORY.disable(rownum_3b1);
+						F.DELIVERY_FORMAT.disable(rownum_3b1);
+						//F.SOURCE_TYPE.disable(rownum_3b1);*/
+						F.ACTIVATION_CODE.disable(rownum_3b1);	
+						var checkId= 'mrrowdb'+rownum_3b1+'id'+F.SRC.getID();
+						
+						if(document.getElementById(checkId)!==null)
+							document.getElementById(checkId).disabled = true;
+						
+						text4.innerHTML = '$Row# '+rownum_3b1+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(rownum_3b1);	
+						
+						if(document.getElementById("MSAI_299"+rownum_3b1)!==null)
+							document.getElementById("MSAI_299"+rownum_3b1).style.display='block';
+							
+						}
+					else{
+						text2.innerHTML = "$Re-enter";
+						}
+						
+					if (text3 !== null)
+						{
+						
+							text3.style.display = "block";
+
+						}
+				}
+			}else
+			{
+				if (text2 !== null){
+					if(document.getElementById("MSAI_284_"+rownum_3b1)!==null){
+						document.getElementById("MSAI_284_"+rownum_3b1).style.display="none";
+					}
+					text2.innerHTML = "$ValidateSource";
+					
+				}
+			}
+			
+			jQuery('#MSAI_106').hide();
+			//if(e4!=null)
+			//e4.innerHTML = '$Row# '+rownum_3b1+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(rownum_3b1);
+			if(rownum_3b1>5)
+			{
+			alignFlag_PageLoad = 'true';
+			alignFlag_Validate = 'true';
+			alignTextBoxes();	
+			}
+		}
+	
+	 disableAllFields(rownum_3b1);
+	 hideAndShowLabel();
+			 text1 = "";
+			 text2 = "";
+			 text3 = "";
+			 text4 = "";
+	}
+var rowCount1 = F.SRC.getRowCount();
+			var rownum1=1;
+			for( rownum1=1; rownum1<=rowCount1; rownum1++){
+			disableAllFields(rownum1);
+			
+			}
+			
+if(document.getElementById("id31")!==null){
+document.getElementById("id31").size = 50;
+document.getElementById("id31").style.marginLeft = '-5px';
+document.getElementById("id31").style.color='#4E6585';
+document.getElementById("id31").style.fontSize= '11px';
+}	
+
+if(document.getElementById("id30")!==null){
+document.getElementById("id30").style.marginLeft = '-5px';
+document.getElementById("id30").style.color='#4E6585';
+document.getElementById("id30").style.fontSize= '11px';
+}
+if(document.getElementById("id32")!==null){
+document.getElementById("id32").style.marginLeft = '-5px';
+document.getElementById("id32").style.color='#4E6585';
+document.getElementById("id32").style.fontSize= '11px';
+}	
+
+if(document.getElementById("id33")!==null){
+document.getElementById("id33").style.marginLeft = '-5px';
+document.getElementById("id33").style.color='#4E6585';
+document.getElementById("id33").style.fontSize= '11px';
+}
+if(document.getElementById("id34")!==null){
+document.getElementById("id34").style.marginLeft = '-5px';
+document.getElementById("id34").style.color='#4E6585';
+document.getElementById("id34").style.fontSize= '11px';
+}	
+
+if(document.getElementById("id35")!==null){
+document.getElementById("id35").style.marginLeft = '-5px';
+document.getElementById("id35").style.color='#4E6585';
+document.getElementById("id35").style.fontSize= '11px';
+}
+
+	
+};
+function alignButton(){
+jQuery("span[id*='MSAI_98_']").each ( function() {
+   
+    jQuery(this).css("margin-top","16px");
+	});
+jQuery("span[id*='MSAI_252_']").each ( function() {
+   
+    jQuery(this).css("margin-top","14px");
+	});
+
+	jQuery("td[id*='MSAI_TD_CHANNEL_PASSWORD_']").each ( function() {
+   
+    jQuery(this).css("width","20%");
+	});
+	
+
+}
+
+function alignTextBoxes(){
+	
+	var count=F.SRC.getRowCount();
+	//alert(" F.CHANNEL_TYPE.read() " + F.CHANNEL_TYPE.read());
+	if(F.CHANNEL_TYPE.read()==2 ||F.CHANNEL_TYPE.read()==="2"||F.CHANNEL_TYPE.read()==1||F.CHANNEL_TYPE.read()==="1" || F.CHANNEL_TYPE.read()==3 ||F.CHANNEL_TYPE.read()==="3"){
+		for(var rownum1=1; rownum1<=count; rownum1++){
+			
+			if(document.getElementById("MSAI_TD_CHANNEL_USERNAME_"+rownum1)!==null){
+				//console.log(" here i am  user name");
+				document.getElementById("MSAI_TD_CHANNEL_USERNAME_"+rownum1).style.width="30%";
+				}
+			//document.getElementById("MSAI_TD_CHANNEL_USERNAME_1").style.width="30%";
+			if(document.getElementById("MSAI_TD_CHANNEL_PASSWORD_"+rownum1)!==null){
+				document.getElementById("MSAI_TD_CHANNEL_PASSWORD_"+rownum1).style.width="30%";
+				//console.log(" here i am  user password");
+				}
+			//document.getElementById("MSAI_TD_CHANNEL_PASSWORD_1").style.width="30%";
+			
+			if(document.getElementById("MSAI_TD_SERVER_PARAMETERS_"+rownum1)!==null){
+				//console.log(" here i am  user parameter");
+				document.getElementById("MSAI_TD_SERVER_PARAMETERS_"+rownum1).style.paddingRight="10px";
+			}
+		//	alert(rownum1);
+		if(alignFlag_Validate && ( F.CHANNEL_TYPE.read()==3 ||F.CHANNEL_TYPE.read()=== "3"))
+		{
+			var rown = rownum1;
+			
+			if(rown == temprow || alignFlag_PageLoad == 'true')
+			{
+		
+			if((document.getElementsByName("_"+rown+"__CONTENT_CATEGORY")).length >0)
+			{
+				(document.getElementsByName("_"+rown+"__CONTENT_CATEGORY"))[0].size = 50;
+				(document.getElementsByName("_"+rown+"__CONTENT_CATEGORY"))[0].style.marginLeft = '-5px';
+				(document.getElementsByName("_"+rown+"__CONTENT_CATEGORY"))[0].style.color='#4E6585';
+				(document.getElementsByName("_"+rown+"__CONTENT_CATEGORY"))[0].style.fontSize= '11px';			
+				
+				(document.getElementsByName("_"+rown+"__CONTENT_TYPE"))[0].style.marginLeft = '-5px';
+				(document.getElementsByName("_"+rown+"__CONTENT_TYPE"))[0].style.color='#4E6585';
+				(document.getElementsByName("_"+rown+"__CONTENT_TYPE"))[0].style.fontSize= '11px';				
+					
+				(document.getElementsByName("_"+rown+"__DELIVERY_SCHEDULE"))[0].style.marginLeft = '-5px';
+				(document.getElementsByName("_"+rown+"__DELIVERY_SCHEDULE"))[0].style.color='#4E6585';
+				(document.getElementsByName("_"+rown+"__DELIVERY_SCHEDULE"))[0].style.fontSize= '11px';
+					
+				(document.getElementsByName("_"+rown+"__DELIVERY_FORMAT"))[0].style.marginLeft = '-5px';
+				(document.getElementsByName("_"+rown+"__DELIVERY_FORMAT"))[0].style.color='#4E6585';
+				(document.getElementsByName("_"+rown+"__DELIVERY_FORMAT"))[0].style.fontSize= '11px';
+					
+				(document.getElementsByName("_"+rown+"__EXPIRY_DATE"))[0].style.marginLeft = '-5px';
+				(document.getElementsByName("_"+rown+"__EXPIRY_DATE"))[0].style.color='#4E6585';
+				(document.getElementsByName("_"+rown+"__EXPIRY_DATE"))[0].style.fontSize= '11px';
+				
+				(document.getElementsByName("_"+rown+"__SUBSCRIPTION_STATUS"))[0].style.marginLeft = '-5px';
+				(document.getElementsByName("_"+rown+"__SUBSCRIPTION_STATUS"))[0].style.color='#4E6585';
+				(document.getElementsByName("_"+rown+"__SUBSCRIPTION_STATUS"))[0].style.fontSize= '11px';
+				if(alignFlag_PageLoad == 'false')
+				alignFlag_Validate = 'false';
+				
+				rown = '';
+			}	
+			}
+		
+		}		
+		}
+	}
+				if(alignFlag_PageLoad == 'true')
+				{alignFlag_Validate = 'false';
+				alignFlag_PageLoad = 'false';
+				}
+}
+function hideAndShowLabel(){
+
+//var trigerList =jQuery("div[id*='CONTENT_TYPE']");
+
+var count=F.SRC.getRowCount();
+
+for(var rownum1=0; rownum1<count; rownum1++){
+			
+			
+		/**
+		F.CONTENT_TYPE.disable(rowNum);
+	F.DELIVERY_SCHEDULE.disable(rowNum);
+	F.EXPIRY_DATE.disable(rowNum);
+	F.SUBSCRIPTION_STATUS.disable(rowNum);
+	F.CONTENT_CATEGORY.disable(rowNum);
+	F.DELIVERY_FORMAT.disable(rowNum);
+		**/
+	
+		//document.getElementById("MSAI_TD_SERVER_PARAMETERS_1").style.paddingRight="10px";
+		
+		
+		var list;
+		if(Number(rownum1)===0)
+			list = document.getElementsByName("CONTENT_TYPE")[0];
+		else
+			list = document.getElementsByName("_"+rownum1+"__CONTENT_TYPE")[0];
+		if(list!==null ){
+			if(F.CONTENT_TYPE.read(rownum1+1)!==""){
+				list.readOnly = true;
+				list.style.outline='none';
+				list.style.borderStyle ='solid';
+				list.style.borderColor ='transparent';
+				list.style.border='1px';
+				list.style.background='none';
+				list.style.boxShadow='none';
+				
+				
+			}
+		}
+		
+		var list1;
+		if(Number(rownum1)===0)
+		 list1 = document.getElementsByName("DELIVERY_SCHEDULE")[0];
+		 else
+		 list1 = document.getElementsByName("_"+rownum1+"__DELIVERY_SCHEDULE")[0];
+		
+		if(list1!==null ){
+			if(F.DELIVERY_SCHEDULE.read(rownum1+1)!==""){
+				list1.readOnly = true;
+				list1.style.outline='none';
+				list1.style.borderStyle ='solid';
+				list1.style.borderColor ='transparent';
+				list1.style.border='1px';
+				list1.style.background='none';
+				list1.style.boxShadow='none';
+				
+			}
+		}
+		
+		var list2;
+		if(Number(rownum1)===0)
+		 list2 = document.getElementsByName("EXPIRY_DATE")[0];
+		 else
+		 list2 = document.getElementsByName("_"+rownum1+"__EXPIRY_DATE")[0];
+		if(list2!==null ){
+			if(F.EXPIRY_DATE.read(rownum1+1)!==""){
+				list2.readOnly = true;
+				list2.style.outline='none';
+				list2.style.borderStyle ='solid';
+				list2.style.borderColor ='transparent';
+				list2.style.border='1px';
+				list2.style.background='none';
+				list2.style.boxShadow='none';
+				
+			}
+		}
+		
+		var list3;
+		if(Number(rownum1)===0)
+		 list3 = document.getElementsByName("SUBSCRIPTION_STATUS")[0];
+		 else
+		 list3 = document.getElementsByName("_"+rownum1+"__SUBSCRIPTION_STATUS")[0];
+		if(list3!==null ){
+			if(F.SUBSCRIPTION_STATUS.read(rownum1+1)!==""){
+				list3.readOnly = true;
+				list3.style.outline='none';
+				list3.style.borderStyle ='solid';
+				list3.style.borderColor ='transparent';
+				list3.style.border='1px';
+				list3.style.background='none';
+				list3.style.boxShadow='none';
+				
+			}
+		}
+		
+		var list4;
+		if(Number(rownum1)===0)
+		 list4 = document.getElementsByName("CONTENT_CATEGORY")[0];
+		 else
+		 list4 = document.getElementsByName("_"+rownum1+"__CONTENT_CATEGORY")[0];
+		if(list4!==null ){
+			if(F.CONTENT_CATEGORY.read(rownum1+1)!==""){
+                                
+				list4.readOnly = true;
+				list4.style.outline='none';
+				list4.style.borderStyle ='solid';
+				list4.style.borderColor ='transparent';
+                          	list4.style.border='1px';
+                         	list4.style.background='none';
+                        	list4.style.boxShadow='none';
+                                
+				
+			}
+		}
+		
+		var list5;
+		if(Number(rownum1)===0)
+		 list5 = document.getElementsByName("DELIVERY_FORMAT")[0];
+		 else
+		 list5 = document.getElementsByName("_"+rownum1+"__DELIVERY_FORMAT")[0];
+		if(list5!==null ){
+			if(F.DELIVERY_FORMAT.read(rownum1+1)!==""){
+				list5.readOnly = true;
+				list5.style.outline='none';
+				list5.style.borderStyle ='solid';
+				list5.style.borderColor ='transparent';
+				list5.style.border='1px';
+				list5.style.background='none';
+				list5.style.boxShadow='none';
+				
+			}
+		}
+	}
+}
+ function isNull()
+{
+	/* if (F.STATUS_TYPE == 'NULL')
+		return false;
+	else 
+		return true; */
+}
+ 
+F.onLoad = function()
+{   
+    var obj_id, row, rowCount, i, q, row1, x_created_by;
+	F.NOTIFY_USERS_SUCCESSFUL.hide();
+	F.DD_PROCESS_CODE.write('MS_RGA_CHANNEL_DTLS');
+
+	if(document.getElementById("MSAI_284_1")!==null)
+		document.getElementById("MSAI_284_1").style.display='none';
+
+	if (F.OBJECT_ID.read() === "")
+
+		F.DD_CURRENT_STAGE.write('CREATE_EDIT'); 	
+
+
+
+	obj_id = F.OBJECT_ID.read();
+
+	
+
+	for (row in F.SRC.rows())
+	{  
+     if (F.SRC.rows().hasOwnProperty(row))
+		F.SRC_OBJECT_ID.write(obj_id,row);
+	}
+
+	g_edit_mode = F.getFormParameter("emd");
+
+	F.CHANNEL_NAME.makeLabelRequired();
+	F.CHANNEL_TYPE.makeLabelRequired();
+	F.CHANNEL_STATUS.makeLabelRequired();
+	
+			
+      
+	if (location.href.indexOf('wrapper=no') < 1)
+	{
+		if (location.href.indexOf('wrapper=yes') < 1 && location.href.indexOf('uniqueid=') < 1)
+		{
+			showToolbar1(); 
+			F.toolBar.updateTitle('${CrtChnChannelTitle}');
+			F.toolBar.hideControl("edit");
+			F.toolBar.hideControl("viewreport");
+			F.toolBar.hideControl("saveandclose");
+			F.toolBar.hideControl("save");
+		}
+
+
+	}
+
+
+	F.SRC.preventZeroRows();
+
+	SourceMultiId = F.SRC.id;
+
+
+	//F.SRC.showPage(1);
+	if (g_edit_mode != '1')
+	{
+		F.CHANNEL_TYPE.write(1);
+		F.CHANNEL_STATUS.write(1);
+		firstValue=1;
+	}
+
+	onChannelTypeChange(); 
+
+	if (F.OBJECT_ID.read() !=="")
+	{  
+		F.DD_CURRENT_STAGE.write('END_FLOW'); 	  
+
+	    F.CHANNEL_STATUS.write(F.CHANNEL_STATUS.read());
+		F.toolBar.updateTitle(''+'${CrtChnChannelTitle}'+' '+ F.CHANNEL_NAME.read().substring(0,60));
+		//console.log('$chanelUpdate'+'${CrtChnChannelTitle}'+' '+ F.CHANNEL_NAME.read().substring(0,60));
+		F.CHANNEL_NAME.disable();
+		F.CHANNEL_TYPE.write(F.CHANNEL_TYPE.read());
+		F.CHANNEL_TYPE.disable();
+
+	}
+
+	row1 = F.SRC.getRowCount();
+
+	for (q = 1;q <= row1;q++)
+	{ 
+		F.CUSTOM_FIELD6.write('N',q);
+		if (F.SOURCE_SEQ_ID.read(q) !=="")
+		{
+			F.SOURCE_TYPE.write(F.SOURCE_TYPE.read(q),q);
+		}
+
+	}
+
+	if (F.OBJECT_ID.read() ==="")
+		F.CUSTOM_FIELD2.write(1);
+
+	else 
+
+		F.CUSTOM_FIELD2.write(2);
+
+		
+
+	x_created_by = F.DD_CURRENT_USER_NAME.read();
+	for (row in F.SRC.rows())
+	{   			
+		if(F.SRC.rows().hasOwnProperty(row))
+		F.SRC_CREATED_BY.write(x_created_by,row);
+	}
+
+	if (F.OBJECT_ID.read() ==="")
+
+		F.SAVE_ATTACHMENTS.write('yes');
+
+
+if (g_edit_mode == 1 )
+	{				
+		rowCount = F.SRC.getRowCount();
+	    for (i = 1;i <= rowCount;i++)
+		{
+			//jQuery("#MSAI_284_"+i).unbind("click");
+			if(F.CHANNEL_TYPE.read()=== "3")
+				refreshSubscription(i,F.ACTIVATION_CODE.read(i));
+			var sse1 = document.getElementById('MSAI_252_'+i);
+			if(sse1!==null)
+				sse1.style.display='none';//.innerHTML = "$Refresh";
+			
+			if(document.getElementById("MSAI_284_"+i)!==null){
+					
+					var actButtonSpan="#MSAI_284_"+i;
+					jQuery(actButtonSpan).css('display','none');
+					//document.getElementById("MSAI_284_"+i).disabled = true;
+			}
+		}
+
+	}
+	
+	channelType = F.CHANNEL_TYPE.read();
+	if (channelType == '2')
+				jQuery('#MSAI_106').show();
+				/*document.getElementById("MSAI_TD_CHANNEL_USERNAME_1").style.width="30%";
+				document.getElementById("MSAI_TD_CHANNEL_PASSWORD_1").style.width="30%";
+				document.getElementById("MSAI_TD_SERVER_PARAMETERS_1").style.width="60%";*/
+	else
+		jQuery('#MSAI_106').hide();	
+		//stop
+	var attach = document.getElementById("MSAI_TD_SAVE_ATTACHMENTS_1");
+	attach.style.width = "50%";
+	
+	attach = document.getElementById("MSAI_TD_STRUCT_CONT_HAND_INFOLET_1");
+	attach.style.width = "50%";
+	
+	var count=F.SRC.getRowCount();
+	if(count >1 && channelType == 3)
+	{
+		    alignFlag_PageLoad = 'true';
+			alignFlag_Validate = 'true';
+			alignTextBoxes();	
+	}
+  populateEncryptedPassword(G_DECRYPT); 
+	
+};
+
+
+
+F.SRC.onAddRow = function(row)
+{
+	
+	var rownum = F.SRC.getRowCount();
+	/*F.CONTENT_TYPE.disable(rownum);
+	F.DELIVERY_SCHEDULE.disable(rownum);
+	F.EXPIRY_DATE.disable(rownum);
+	F.SUBSCRIPTION_STATUS.disable(rownum);
+	F.CONTENT_CATEGORY.disable(rownum);
+	F.DELIVERY_FORMAT.disable(rownum);*/
+
+	if (F.OBJECT_ID.read() ==="")
+		F.CUSTOM_FIELD2.write(1);
+	else 
+		F.CUSTOM_FIELD2.write(2); 
+	
+	if(F.CHANNEL_TYPE.read()==="1" ||F.CHANNEL_TYPE.read()==="2"){ 
+		if(document.getElementById('MSAI_284_'+row)!==null)
+				document.getElementById('MSAI_284_'+row).style.display='none';
+		if(document.getElementById('MSAI_284_'+rownum)!==null)
+				document.getElementById('MSAI_284_'+rownum).style.display='none';
+	}
+	if(F.CHANNEL_TYPE.read()==="3")
+	{
+
+			
+			row = F.SRC.getRowCount();
+			var e1 = document.getElementById('MSAI_98_'+rownum);
+			var e2 = document.getElementById('MSAI_252_'+rownum);
+			var e3 = document.getElementById('MSAI_299_'+rownum);
+			var e4 = document.getElementById('MSAI_84_'+rownum);
+			F.SOURCE_TYPE.makeLabelNotRequired(rownum);	
+			F.SOURCE_TYPE.write(3,rownum);
+			F.SOURCE_TYPE.makeLabelRequired(rownum);
+			F.SERVER_ADDRESS.hide(rownum);
+			F.EMAIL_FROM.hide(rownum);
+			F.CHANNEL_USERNAME.hide(rownum);
+			F.EMAIL_SEC.hide(rownum);
+			F.EMAIL_TYPE.hide(rownum);
+			F.CHANNEL_PASSWORD.hide(rownum);
+			//F.SERVER_PARAMETERS.hide(rownum);
+			F.CHANNEL_KEYWORDS.hide(rownum);
+			F.ACTIVATION_CODE.show(rownum);
+			F.SOURCE_TYPE.hide(rownum);
+			
+			if (e1 !== null)
+				e1.style.display = "none";
+
+			if (e2 !== null)
+				e2.style.display = "block";
+
+			if (e3 !== null)
+			{
+	//			e3.style.display = "block";
+	//          e3.style.color = "#5882FA";
+				e3.style.display = "none";
+			}			
+				
+			if(F.CONTENT_TYPE.read(rownum)!=="")
+			{
+				F.ACTIVATION_CODE.disable(rownum);			
+						if (e2 !== null){
+							if( F.FLAG_SUBMITTED.read(rownum) || F.QUEUE_NAME.read(rownum)!==""){
+								e2.style.display='none';//.innerHTML = "$Refresh";
+								}
+							else{
+								e2.innerHTML = "$Re-enter";
+								}
+						if(e3!==null)
+							e3.style.display='block';
+				}
+				// disable button
+				//if(document.getElementById("MSAI_284_"+rownum)!=null){
+					
+				//	document.getElementById("MSAI_284_"+rownum).disabled = true;
+				//}
+				if(e4!==null)
+				e4.innerHTML = '$Row# '+rownum+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(rownum);	
+				F.ACTIVATION_CODE.makeLabelRequired(rownum);
+			}
+			
+			jQuery('#MSAI_106').hide();
+			
+		
+	
+	}
+		var rowCount1 = F.SRC.getRowCount();
+			var rownum1=1;
+			for( rownum1=1; rownum1<=rowCount1; rownum1++){
+			disableAllFields(rownum1);
+			
+			}
+	return true;
+
+};
+
+
+F.SRC.afterDeleteRow = function()
+{
+		if(F.CHANNEL_TYPE.read()=== "3")
+		{
+			var rowCount = F.SRC.getRowCount();
+			var rownum=1;
+			for( rownum=1; rownum<=rowCount; rownum++)
+			{
+				var e1 = document.getElementById('MSAI_98_'+rownum);
+				var e2 = document.getElementById('MSAI_252_'+rownum);
+				var e3 = document.getElementById('MSAI_299_'+rownum);
+				var e4 = document.getElementById('MSAI_84_'+rownum);
+				//F.SOURCE_TYPE.makeLabelNotRequired(rownum);	
+				F.SOURCE_TYPE.makeLabelRequired(rownum);
+				F.SERVER_ADDRESS.hide(rownum);
+				F.EMAIL_FROM.hide(rownum);
+				F.CHANNEL_USERNAME.hide(rownum);
+				F.EMAIL_SEC.hide(rownum);
+				F.EMAIL_TYPE.hide(rownum);
+				F.CHANNEL_PASSWORD.hide(rownum);
+				//F.SERVER_PARAMETERS.hide(rownum);
+				F.CHANNEL_KEYWORDS.hide(rownum);
+				F.ACTIVATION_CODE.show(rownum);
+				if(F.EXPIRY_DATE.read(rownum) ==="" || F.EXPIRY_DATE.read(rownum) === null)
+				{
+					
+					F.CONTENT_TYPE.hide(rownum);
+					F.DELIVERY_SCHEDULE.hide(rownum);
+					F.EXPIRY_DATE.hide(rownum);
+					F.SUBSCRIPTION_STATUS.hide(rownum);
+					F.CONTENT_CATEGORY.hide(rownum);
+						
+					if (e3 !== null)
+						{
+							
+							e3.style.display = "none";
+						}
+					F.DELIVERY_FORMAT.hide(rownum);
+					F.SOURCE_TYPE.hide(rownum);	
+				}else
+				{   
+					F.CONTENT_TYPE.show(rownum);
+					F.DELIVERY_SCHEDULE.show(rownum);
+					F.EXPIRY_DATE.show(rownum);
+					
+					if (e3 !== null)
+						{
+							
+							e3.style.display = "block";
+						}
+					F.SUBSCRIPTION_STATUS.show(rownum);
+					F.CONTENT_CATEGORY.show(rownum);
+					F.DELIVERY_FORMAT.show(rownum);
+					F.SOURCE_TYPE.hide(rownum);	
+				}
+				
+				if (e1 !== null)
+					e1.style.display = "none";
+
+				if (e2 !== null)
+					e2.style.display = "block";
+
+						
+					
+				if(F.CONTENT_TYPE.read(rownum)!=="")
+				{
+				F.ACTIVATION_CODE.disable(rownum);			
+							if (e2 !== null){
+								if( F.FLAG_SUBMITTED.read(rownum) || F.QUEUE_NAME.read(rownum)!==""){
+									e2.style.display='none';//.innerHTML = "$Refresh";
+									}
+								else{
+									e2.innerHTML = "$Re-enter";
+									}
+								
+								}
+				}
+				
+				jQuery('#MSAI_106').hide();
+				if (e4 !== null)
+					e4.innerHTML = '$Row# '+rownum+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(rownum);
+					
+				disableAllFields(rownum);
+			}
+		}
+
+};
+
+function onDeleteRow(row)
+{
+
+	
+	var rownum = F.SRC.getRowCount();
+	if(F.QUEUE_NAME.read(row)!==""){
+		alert("$cannotDelete");
+		return false;
+	
+	}
+	//rownum = rownum - 1;
+	/*F.CONTENT_TYPE.disable(rownum);
+	F.DELIVERY_SCHEDULE.disable(rownum);
+	F.EXPIRY_DATE.disable(rownum);
+	F.SUBSCRIPTION_STATUS.disable(rownum);
+	F.CONTENT_CATEGORY.disable(rownum);
+	F.DELIVERY_FORMAT.disable(rownum);*/
+
+	if (F.OBJECT_ID.read() ==="")
+		F.CUSTOM_FIELD2.write(1);
+	else 
+		F.CUSTOM_FIELD2.write(2); 
+		
+	if(F.CHANNEL_TYPE.read()==="3")
+	{
+			//var rownum = F.SRC.getRowCount();
+			//rownum = rownum - 1;
+			var e1 = document.getElementById('MSAI_98_'+rownum);
+			var e2 = document.getElementById('MSAI_252_'+rownum);
+			var e3 = document.getElementById('MSAI_299_'+rownum);
+			var e4 = document.getElementById('MSAI_84_'+rownum);
+			//F.SOURCE_TYPE.makeLabelNotRequired(rownum);	
+			F.SOURCE_TYPE.write(3,rownum);
+			F.SOURCE_TYPE.makeLabelRequired(rownum);
+			F.SERVER_ADDRESS.hide(rownum);
+			F.EMAIL_FROM.hide(rownum);
+			F.CHANNEL_USERNAME.hide(rownum);
+			F.EMAIL_SEC.hide(rownum);
+			F.EMAIL_TYPE.hide(rownum);
+			F.CHANNEL_PASSWORD.hide(rownum);
+			//F.SERVER_PARAMETERS.hide(rownum);
+			F.CHANNEL_KEYWORDS.hide(rownum);
+			F.ACTIVATION_CODE.show(rownum);
+			F.SOURCE_TYPE.hide(rownum);
+			if(F.EXPIRY_DATE.read(rownum) ==="")
+			{
+				F.CONTENT_TYPE.hide(rownum);
+				F.DELIVERY_SCHEDULE.hide(rownum);
+				F.EXPIRY_DATE.hide(rownum);
+				F.SUBSCRIPTION_STATUS.hide(rownum);
+				F.CONTENT_CATEGORY.hide(rownum);
+				F.DELIVERY_FORMAT.hide(rownum);
+			}
+			
+			if (e1 !== null)
+				e1.style.display = "none";
+
+			if (e2 !== null)
+				e2.style.display = "block";
+
+			if (e3 !== null)
+			{
+	//			e3.style.display = "block";
+	//          e3.style.color = "#5882FA";
+				e3.style.display = "none";
+			}			
+				
+			if(F.CONTENT_TYPE.read(rownum)!=="")
+			{
+			F.ACTIVATION_CODE.disable(rownum);			
+						//if (e2 != null)
+				//e2.innerHTML = "$Re-enter";
+			}
+			
+			if(F.CONTENT_TYPE.read(rownum)!=="")
+			{
+				F.ACTIVATION_CODE.disable(rownum);			
+				if (e2 !== null) {
+					if( F.FLAG_SUBMITTED.read(rownum) || F.QUEUE_NAME.read(rownum)!==""){
+						e2.style.display='none';//.innerHTML = "$Refresh";
+						}
+					else{
+						e2.innerHTML = "$Re-enter";
+						}
+					
+				}
+			}else
+			{
+				if (e2 !== null){
+					if(document.getElementById("MSAI_284_"+rownum)!==null){
+						document.getElementById("MSAI_284_"+rownum).style.display="none";
+					}
+					e2.innerHTML = "$ValidateSource";
+					
+				}
+			}
+		
+			jQuery('#MSAI_106').hide();
+			if(null!==e4)
+				e4.innerHTML = '$Row# '+rownum+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(row);	
+			disableAllFields(rownum);
+	}
+
+	return true;
+}
+
+
+
+
+
+function onChannelTypeChange()
+{	
+
+
+	var rowseq, rownum = 0, id, channelType;
+	var e1,e2,e3,e4;
+	alignButton();
+	alignTextBoxes();
+	if (F.CHANNEL_TYPE.read() === "1")
+	{
+		F.SRC.show();	
+		rowseq = F.SRC.getRowCount();
+		for (rownum = 1;rownum <= rowseq; rownum++)
+		{
+			if(document.getElementById('MSAI_284_'+rownum)!==null)
+				document.getElementById('MSAI_284_'+rownum).style.display='none';
+			 e1 = document.getElementById('MSAI_98_'+rownum);
+			 e2 = document.getElementById('MSAI_252_'+rownum);
+			 e3 = document.getElementById('MSAI_299_'+rownum);
+			 e4 = document.getElementById('MSAI_84_'+rownum);
+			F.SOURCE_TYPE.makeLabelRequired(rownum);		
+			F.SERVER_ADDRESS.makeLabelRequired(rownum);
+			F.SOURCE_TYPE.makeLabelRequired(rownum);
+			F.SERVER_ADDRESS.show(rownum);
+			if(F.SOURCE_TYPE.read(rownum)=='1') 
+			{
+				F.EMAIL_FROM.show(rownum);
+				F.EMAIL_SEC.show(rownum);
+				F.EMAIL_TYPE.show(rownum);
+			}
+			else
+			{
+				F.EMAIL_FROM.hide(rownum);
+				F.EMAIL_SEC.hide(rownum);
+				F.EMAIL_TYPE.hide(rownum);
+			}
+			F.CHANNEL_USERNAME.show(rownum);
+			//F.EMAIL_SEC.show(rownum);
+			//F.EMAIL_TYPE.show(rownum);
+			F.CHANNEL_PASSWORD.show(rownum);
+			//F.SERVER_PARAMETERS.show(rownum);
+			F.CHANNEL_KEYWORDS.show(rownum);
+			F.ACTIVATION_CODE.hide(rownum);
+			F.SOURCE_TYPE.show(rownum);
+			
+			
+			// hiding the channel type 3 items.
+			F.CONTENT_TYPE.hide(rownum);
+			F.DELIVERY_SCHEDULE.hide(rownum);
+			F.EXPIRY_DATE.hide(rownum);
+			F.SUBSCRIPTION_STATUS.hide(rownum);
+			F.CONTENT_CATEGORY.hide(rownum);
+			F.DELIVERY_FORMAT.hide(rownum);
+			
+			if (e1 !== null)
+				e1.style.display = "block";
+
+			if (e2 !== null)
+				e2.style.display = "none";
+
+			if (e3 !== null)
+			{
+	//			e3.style.display = "block";
+	//          e3.style.color = "#5882FA";
+				//e3.style.display = "block";
+				e2.style.display = "none";
+			}			
+				
+			F.ACTIVATION_CODE.disable(rownum);			
+			if (e2 !== null){
+				e2.innerHTML = "$ValidateSource";
+			}
+			
+		
+			jQuery('#MSAI_106').hide();
+			if(e4 !==null)
+				e4.innerHTML = '$Row# '+rownum;	
+			
+			id='MSAI_TD_CHANNEL_KEYWORDS_'+rownum;
+			jQuery('#'+id).show();
+		}	
+		e1="";
+		e2="";
+		e3="";
+		e4="";
+	}
+	else if(F.CHANNEL_TYPE.read()==="2")
+	{
+
+
+		F.SRC.show();  
+		jQuery('#MSAI_106').show();
+		
+		//document.getElementById("id11").size="61";
+
+		rowseq = F.SRC.getRowCount();
+
+		for (rownum = 1;rownum <= rowseq; rownum++)
+		{		
+
+			 e1 = document.getElementById('MSAI_98_'+rownum);
+			 e2 = document.getElementById('MSAI_252_'+rownum);
+			 e3 = document.getElementById('MSAI_299_'+rownum);
+			 e4 = document.getElementById('MSAI_84_'+rownum);
+			F.SOURCE_TYPE.makeLabelRequired(rownum);
+			F.SERVER_ADDRESS.makeLabelRequired(rownum);
+			F.SOURCE_TYPE.makeLabelRequired(rownum);
+			F.SERVER_ADDRESS.show(rownum);
+			//F.EMAIL_FROM.show(rownum);
+			F.CHANNEL_USERNAME.show(rownum);
+			//F.EMAIL_SEC.show(rownum);
+			//F.EMAIL_TYPE.show(rownum);
+			F.CHANNEL_PASSWORD.show(rownum);
+			//F.SERVER_PARAMETERS.show(rownum);
+			F.CHANNEL_KEYWORDS.show(rownum);
+			F.ACTIVATION_CODE.hide(rownum);
+			F.SOURCE_TYPE.show(rownum);
+			
+			// hiding the channel type 3 items.
+			F.CONTENT_TYPE.hide(rownum);
+			F.DELIVERY_SCHEDULE.hide(rownum);
+			F.EXPIRY_DATE.hide(rownum);
+			F.SUBSCRIPTION_STATUS.hide(rownum);
+			F.CONTENT_CATEGORY.hide(rownum);
+			F.DELIVERY_FORMAT.hide(rownum);
+			
+			if (e1 !== null)
+				e1.style.display = "block";
+
+			if (e2 !== null)
+				e2.style.display = "none";
+
+			if (e3 !== null)
+			{
+	//			e3.style.display = "block";
+	//          e3.style.color = "#5882FA";
+				e2.style.display = "none";
+			}			
+						
+			if (e2 !== null)
+				e2.innerHTML = "$ValidateSource";
+			
+		
+			//jQuery('#MSAI_106').hide();
+			if(e4 !== null)
+				e4.innerHTML = '$Row# '+rownum;	
+			
+			id = 'MSAI_TD_CHANNEL_KEYWORDS_'+rownum;
+			jQuery('#'+id).hide();
+		}	
+		e1="";
+		e2="";
+		e3="";
+		e4="";
+	}
+	
+	else if(F.CHANNEL_TYPE.read()==="3")
+	{
+	
+		rowseq = F.SRC.getRowCount();
+		for (rownum = 1;rownum <= rowseq;rownum++)
+		{
+			 e1 = document.getElementById('MSAI_98_'+rownum);
+			 e2 = document.getElementById('MSAI_252_'+rownum);
+			 e3 = document.getElementById('MSAI_299_'+rownum);
+			 e4 = document.getElementById('MSAI_84_'+rownum);
+			//F.SOURCE_TYPE.makeLabelNotRequired(rownum);	
+			F.SOURCE_TYPE.write(3,rownum);
+			F.SOURCE_TYPE.makeLabelRequired(rownum);
+			F.SERVER_ADDRESS.hide(rownum);
+			F.EMAIL_FROM.hide(rownum);
+			F.CHANNEL_USERNAME.hide(rownum);
+			F.EMAIL_SEC.hide(rownum);
+			F.EMAIL_TYPE.hide(rownum);
+			F.CHANNEL_PASSWORD.hide(rownum);
+			//F.SERVER_PARAMETERS.hide(rownum);
+			F.CHANNEL_KEYWORDS.hide(rownum);
+			F.ACTIVATION_CODE.enable(rownum);
+			F.ACTIVATION_CODE.show(rownum);
+			F.SOURCE_TYPE.hide(rownum);
+			F.ACTIVATION_CODE.makeLabelRequired(rownum);
+			
+			if(document.getElementById("MSAI_252_"+rownum)!==null){
+			
+				var iddd="#MSAI_252_"+rownum;
+				if(document.getElementById("myspace_"+rownum)===null)
+					$(iddd).after( "<div id=\"myspace_"+rownum+"\" style=\"height:10px;\"></div>" );
+			}
+			
+			if(F.EXPIRY_DATE.read(rownum) ==="" || F.EXPIRY_DATE.read(rownum) === null)
+			{
+				F.CONTENT_TYPE.hide(rownum);
+				F.DELIVERY_SCHEDULE.hide(rownum);
+				F.EXPIRY_DATE.hide(rownum);
+				F.SUBSCRIPTION_STATUS.hide(rownum);
+				F.CONTENT_CATEGORY.hide(rownum);
+				F.DELIVERY_FORMAT.hide(rownum);
+				F.SOURCE_TYPE.hide(rownum);	
+			}else
+			{
+				F.CONTENT_TYPE.show(rownum);
+				F.DELIVERY_SCHEDULE.show(rownum);
+				F.EXPIRY_DATE.show(rownum);
+				F.SUBSCRIPTION_STATUS.show(rownum);
+				F.CONTENT_CATEGORY.show(rownum);
+				F.DELIVERY_FORMAT.show(rownum);
+				F.SOURCE_TYPE.hide(rownum);	
+			}
+			
+			if (e1 !== null)
+				e1.style.display = "none";
+
+			if (e2 !== null)
+				e2.style.display = "block";
+
+			/*if (e3 != null)
+			{
+	//			e3.style.display = "block";
+	//          e3.style.color = "#5882FA";
+				e3.style.display = "none";
+			}	*/		
+				
+			if(F.CONTENT_TYPE.read(rownum)!=="")
+			{
+				F.ACTIVATION_CODE.disable(rownum);			
+				if (e2 !== null){
+					if( F.FLAG_SUBMITTED.read(rownum) || F.QUEUE_NAME.read(rownum)!==""){
+						e2.style.display='none';//.innerHTML = "$Refresh";
+						}
+					else{
+						e2.innerHTML = "$Re-enter";
+					}
+						
+					if (e3 !== null)
+						e3.style.display = "block";
+						
+						/*	F.CONTENT_TYPE.disable(rownum);
+				F.DELIVERY_SCHEDULE.disable(rownum);
+				F.EXPIRY_DATE.disable(rownum);
+				F.SUBSCRIPTION_STATUS.disable(rownum);
+				F.CONTENT_CATEGORY.disable(rownum);
+				F.DELIVERY_FORMAT.disable(rownum);*/
+
+				F.ACTIVATION_CODE.disable(rownum);
+				}
+			}else
+			{
+				if (e2 !== null){
+					if(document.getElementById("MSAI_284_"+rownum)!==null){
+						document.getElementById("MSAI_284_"+rownum).style.display="none";
+					}
+					e2.innerHTML = "$ValidateSource";
+					
+				}
+			}
+		
+			jQuery('#MSAI_106').hide();
+			if(null!==e4)
+				e4.innerHTML = '$Row# '+rownum+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(rownum);	
+		}
+		e1="";
+		e2="";
+		e3="";
+		e4="";
+	
+	}
+	/* channelType = F.CHANNEL_TYPE.read();
+	if (channelType == 2)
+		{
+			for (j = 1;j <= rowseq; j++)
+			{
+					if(F.SOURCE_TYPE.read(j) ==1 || F.SOURCE_TYPE.read(j) ==2)
+						{
+							jQuery('#MSAI_106').show();
+							break;
+						}
+			}
+		}
+	else
+		jQuery('#MSAI_106').hide();	*/
+
+
+
+}
+
+F.SOURCE_TYPE.onChange = function(row)
+{
+	F.CUSTOM_FIELD7.write('',row);
+};
+
+function refreshSubscription(row,activationCode)
+{
+	
+	var e1 = document.getElementById('MSAI_252_'+row);
+	var e2 = document.getElementById('MSAI_299_'+row);
+	var e3 = document.getElementById('MSAI_84_'+row);	 
+	var GraphEditor = {};
+	GraphEditor.mask = new Ext.LoadMask(Ext.getBody(), {msg:'${CrtChnValidationMsgLoad}'});
+	GraphEditor.mask.show();
+	Ext.Ajax.request(
+	{
+		url : 'Grciajaxservlet/ajax/RefreshSubscriptionDetails',
+		method : 'POST',
+              
+		params : 
+		{
+			
+			activationCode:activationCode,
+			row:row,
+			sample:{"test":"test", "test1":"test1"}
+		},
+		success : function(response, options) 
+		{
+		
+			if('failure' == response.responseText)
+			{
+				GraphEditor.mask.hide();
+				 return;
+			}
+			
+			
+			if(e2!==null){
+			
+			
+				e2.style.display = "block";
+				
+				}
+			F.ACTIVATION_CODE.disable(row);					
+				if (e1 !== null )//&& e1.innerHTML != "$Refresh")
+				{	
+					e1.innerHTML = "$Re-enter";
+					e1.title = "$Re-enterToolTip";
+				}	
+				F.CONTENT_TYPE.show(row);
+				F.DELIVERY_SCHEDULE.show(row);
+				F.EXPIRY_DATE.show(row);
+				F.SUBSCRIPTION_STATUS.show(row);
+				F.CONTENT_CATEGORY.show(row);
+				F.DELIVERY_FORMAT.show(row);
+				/*F.CONTENT_CATEGORY.disable(row);
+				F.DELIVERY_FORMAT.disable(row);
+				F.CONTENT_TYPE.disable(row);
+				F.DELIVERY_SCHEDULE.disable(row);
+				F.EXPIRY_DATE.disable(row);
+				F.SUBSCRIPTION_STATUS.disable(row);*/
+			var details = response.responseText;
+			
+			var channeldetails;
+			if(null !== details && details.length >0)
+			channeldetails = details.split("#");
+			var contentType, contentCategory, contentDeliveryFormat, activationCodeStatus, contentDeliverySchedule, activationCodeExpiryDate =''
+;			
+			
+			if(channeldetails.length == '6')
+			{			
+			
+			 contentType = channeldetails[0];
+			 contentCategory = channeldetails[1];
+			 contentDeliveryFormat = channeldetails[2];
+			 activationCodeStatus = channeldetails[3];
+			 contentDeliverySchedule = channeldetails[4];
+			 activationCodeExpiryDate = channeldetails[5];			
+			}
+			if(null !== contentType && contentType.length >0)
+				F.CONTENT_TYPE.write(contentType,row);
+				
+			if(null !== contentCategory && contentCategory.length >0)
+			    
+				F.CONTENT_CATEGORY.write(contentCategory,row);
+				
+			if(null !== contentDeliveryFormat && contentDeliveryFormat.length >0)
+				F.DELIVERY_FORMAT.write(contentDeliveryFormat,row);
+				
+			if(null !== activationCodeStatus && activationCodeStatus.length >0)
+				F.SUBSCRIPTION_STATUS.write(activationCodeStatus,row);
+				
+			if(null !== contentDeliverySchedule && contentDeliverySchedule.length >0)
+				F.DELIVERY_SCHEDULE.write(contentDeliverySchedule,row);
+			
+			if(null !== activationCodeExpiryDate && activationCodeExpiryDate.length >0)
+				F.EXPIRY_DATE.write(activationCodeExpiryDate,row);
+
+			if(e3!==null)
+			e3.innerHTML = '$Row# '+row+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(row);	
+			
+			
+			GraphEditor.mask.hide();
+
+			//checkConnectCallBack(response.responseText, row);
+			return;
+		},
+		failure : function(response,options) 
+		{
+			alert("$networkFailed");
+			GraphEditor.mask.hide();
+
+			e3.innerHTML = "$Row# "+row+": "+F.CHANNEL_NAME.read()+": ";	
+			return;
+		}
+
+	});
+
+}
+var activateSub = function (row)
+{
+};
+F.SERVER_ADDRESS.onChange = function(row)
+{
+	if (F.SERVER_ADDRESS.read(row).length >= 4000)
+	{
+		F.SERVER_ADDRESS.write(F.SERVER_ADDRESS.read(row).substring(0,4000),row);
+		alert("${maxlimitmsg}"+" ${CrtChnServr} "+"${maxlimitwarning}");
+	}
+	F.CUSTOM_FIELD7.write('',row);
+};
+
+F.EMAIL_FROM.onChange = function(row)
+{
+	var email;
+	if (F.EMAIL_FROM.read(row) !=="")
+	{
+		if (F.EMAIL_FROM.read(row).length >= 4000)
+		{
+			F.EMAIL_FROM.write(F.EMAIL_FROM.read(row).substring(0,4000),row);
+			alert("${maxlimitmsg}"+" ${CrtChnEmailFrom} "+"${maxlimitwarning}");
+		}
+		email = F.EMAIL_FROM.read(row);
+		if (email.indexOf(',') != -1)
+			alert("${NotiUsrEmailIds}");
+		else if (!email.match(/^[a-zA-Z0-9_.@]+$/))				
+			alert("${NotiUsrMailValidateMsg}"+"\n" + email);
+	}
+};
+
+
+F.CHANNEL_USERNAME.onChange = function(row)
+
+{
+
+	if (F.CHANNEL_USERNAME.read(row).length >= 4000)
+	{
+		F.CHANNEL_USERNAME.write(F.CHANNEL_USERNAME.read(row).substring(0,4000),row);
+		alert("${maxlimitmsg}"+" ${CrtChnUsrName} "+"${maxlimitwarning}");
+	}
+	F.CUSTOM_FIELD7.write('',row);
+
+};
+
+F.CHANNEL_KEYWORDS.onChange = function(row)
+{
+	if (F.CHANNEL_KEYWORDS.read(row).length >= 4000)
+	{
+		F.CHANNEL_KEYWORDS.write(F.CHANNEL_KEYWORDS.read(row).substring(0,4000),row);
+		alert("${maxlimitmsg}"+" ${CrtChnServrKeywrds} "+"${maxlimitwarning}");
+	}
+};
+
+/*
+F.SERVER_PARAMETERS.onChange = function(row)
+{
+	if (F.SERVER_PARAMETERS.read(row).length >= 4000)
+	{
+		F.SERVER_PARAMETERS.write(F.SERVER_PARAMETERS.read(row).substring(0,4000),row);
+		alert("${maxlimitmsg}"+" ${CrtChnServrParam} "+"${maxlimitwarning}");
+	}
+	F.CUSTOM_FIELD7.write('',row);
+
+};
+*/
+
+var checkConnectivity = function (row)
+{
+
+
+	var address, userId, password, sourceType, field, activationCode = '',channelType;
+	var e1 = document.getElementById('MSAI_252_'+row);
+	var e2 = document.getElementById('MSAI_299_'+row);
+	var e3 = document.getElementById('MSAI_84_'+row);
+		field='';
+		channelType = F.CHANNEL_TYPE.read();
+		sourceType = F.SOURCE_TYPE.read(row);
+		if(channelType == '3')
+		{
+		
+		if(F.ACTIVATION_CODE.read(row)===""){
+			alert("$actCodeReq");
+			if(document.getElementById("MSAI_299_"+row)!==null)
+				document.getElementById("MSAI_299_"+row).style.display='none';
+			return;
+		}else{
+			F.ACTIVATION_CODE.makeLabelRequired(row);
+		}
+			sourceType = '3';
+			if (e1.innerHTML!='$Re-enter') 
+			{	
+
+				activationCode = F.ACTIVATION_CODE.read(row);	
+				validateContentServerAjaxCall(sourceType,activationCode, row);
+			}
+			else
+			{
+				
+				e2.innerHTML = "Subscription Details";	
+				e2.style.display = "none";
+				F.ACTIVATION_CODE.enable(row); 
+				F.ACTIVATION_CODE.write('',row);
+				F.CONTENT_TYPE.write('',row);
+				F.DELIVERY_SCHEDULE.write('',row);
+				F.EXPIRY_DATE.write('',row);
+				F.SUBSCRIPTION_STATUS.write('',row);
+				F.CONTENT_CATEGORY.write('',row);
+				F.DELIVERY_FORMAT.write('',row);
+				e1.innerHTML = "$ValidateSource";
+				e1.title = "$ValidateTooltip";
+				F.CONTENT_TYPE.hide(row);
+				F.DELIVERY_SCHEDULE.hide(row);
+				F.EXPIRY_DATE.hide(row);
+				F.SUBSCRIPTION_STATUS.hide(row);
+				F.CONTENT_CATEGORY.hide(row);
+				F.DELIVERY_FORMAT.hide(row);
+				if(document.getElementById("MSAI_284_"+row)!==null)
+					document.getElementById("MSAI_284_"+row).style.display="none";
+				e3.innerHTML = '$Row# '+row+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(row);		
+			}
+		}
+		else
+		{
+				
+
+			address = F.SERVER_ADDRESS.read(row);
+			userId = F.CHANNEL_USERNAME.read(row);
+			password = getFieldRef(getSeq(F.CHANNEL_PASSWORD.sequence,row)).value;
+                         
+			//serverParams = F.SERVER_PARAMETERS.read(row);
+			serverParams = F.EMAIL_SEC.read(row);
+			emailType = F.EMAIL_TYPE.read(row);
+			if (serverParams==1) 
+				serverParams='SSL';
+			else
+				serverParams='NONE';
+			
+			if (emailType==1) {
+			emailType='IMAP';
+			}
+			else if (emailType==2)  {
+				emailType='POP3';
+			}
+			else {
+			emailType='';
+			}
+			//alert(serverParams);
+			//alert(emailType);
+			
+			if (!F.SRC.isMarkedForDeletion(row))
+			{
+				if (F.SOURCE_TYPE.isEmpty(row))
+
+					field = field + "${CrtChnSrc}"+" (${Row} "+row+"),";  
+
+				
+				if (F.SERVER_ADDRESS.isEmpty(row) && F.SOURCE_TYPE.isEmpty(row))
+
+					field = field + "${CrtChnServr}"+" (${Row} "+row+"),";  		
+
+				 
+
+				if (sourceType == '1' )
+				{
+				
+                                        
+					if (F.CHANNEL_USERNAME.read(row) ==="" || password ==="" || F.SERVER_ADDRESS.read(row) ==="" || F.EMAIL_SEC.read(row) ==="" || F.EMAIL_TYPE.read(row)==="") 
+					{
+						if (F.SERVER_ADDRESS.read(row) ==="")
+
+							field = field + "${CrtChnServr}"+" (${Row} "+row+"),";
+				
+						if (F.CHANNEL_USERNAME.read(row) ==="")
+
+							field = field + "${CrtChnUsrName}"+" (${Row} "+row+"),";
+			
+
+						if (password ==="")
+
+							field = field + "${CrtChnPwd}"+" (${Row} "+row+"),";
+							
+						if (F.EMAIL_SEC.read(row) ==="")
+
+							field = field + "${CrtChnEmailsec}"+" (${Row} "+row+"),";
+						
+						if (F.EMAIL_TYPE.read(row) ==="")
+
+							field = field + "${CrtChnEmailtype}"+" (${Row} "+row+"),";
+					}										
+				}
+				
+
+
+
+				if (sourceType == '2' )
+				{
+                                          
+					if (F.SERVER_ADDRESS.read(row) ==="")
+
+						field = field + "${CrtChnServr}"+" (${Row} "+row+"),";
+				}
+
+
+
+			}
+
+
+			if (field !== '' && null !== field)
+			{
+
+				showRequiredMessage(field);
+				return false;
+			}
+			else if(!F.SRC.isMarkedForDeletion(row))
+				{
+				        
+					createSourceValidateAjaxCall(address, userId, password, serverParams, sourceType, row,emailType);
+                                        
+				}	
+		}		
+};
+
+function validateContentServerAjaxCall(sourceType,activationCode, row)
+{
+	var e1 = document.getElementById('MSAI_252_'+row);
+	var e2 = document.getElementById('MSAI_299_'+row);
+	var e3 = document.getElementById('MSAI_84_'+row);
+	var GraphEditor = {};
+	GraphEditor.mask = new Ext.LoadMask(Ext.getBody(), {msg:'${CrtChnValidationMsg}'});
+	GraphEditor.mask.show();
+	Ext.Ajax.request(
+	{
+		url : 'Grciajaxservlet/ajax/ValidateChannelSource',
+		method : 'POST',
+                timeout:3600000,
+		params : 
+		{
+			sourceType:sourceType,
+			activationCode:activationCode,
+			row:row,
+			sample:{"test":"test", "test1":"test1"}
+		},
+		success : function(response, options) 
+		{
+			if('failure' == response.responseText)
+			{
+				/*if (e1.innerHTML != "$Refresh")
+					{ style="font-size: 12pt; font-family: Arial, sans-serif; color: red;"*/ //style="font-size: 9pt; font-family: Arial, sans-serif; color: rgb(51, 51, 51);"
+					//var Errcode = '<h2><span >'+'$suberr1'+'</span></h2><p style="margin-bottom: 0pt; line-height: 12pt;"><b><span >'+'$suberr2'+'</span></b></p>';//<p style="margin-bottom: 0pt; line-height: 12pt;"><b><span style="font-size: 9pt; font-family: Arial, sans-serif; color: rgb(51, 51, 51);">or contact the storefront administrator.</span></b></p><p style="margin-bottom: 0pt;"></p>';
+					GraphEditor.mask.hide();
+					alert("$suberr1"+"\n"+"$suberr2");
+						
+				
+					  return;
+			}
+			
+			if(e2!==null){
+			e2.innerHTML = "Subscription Details";
+			
+			e2.style.display = "block";
+			}
+			F.ACTIVATION_CODE.disable(row);					
+				if (e1 !== null )//&& e1.innerHTML != "$Refresh")
+				{	
+
+					e1.innerHTML = "$Re-enter";
+					e1.title = "$Re-enterToolTip";
+				}	
+/*else
+				{
+				return;
+				}*/
+				F.CONTENT_TYPE.show(row);
+				F.DELIVERY_SCHEDULE.show(row);
+				F.EXPIRY_DATE.show(row);
+				F.SUBSCRIPTION_STATUS.show(row);
+				F.CONTENT_CATEGORY.show(row);
+				F.DELIVERY_FORMAT.show(row);
+				/*F.CONTENT_CATEGORY.disable(row);
+				F.DELIVERY_FORMAT.disable(row);
+				F.CONTENT_TYPE.disable(row);
+				F.DELIVERY_SCHEDULE.disable(row);
+				F.EXPIRY_DATE.disable(row);
+				F.SUBSCRIPTION_STATUS.disable(row);*/
+			var details = response.responseText;
+			var channeldetails;
+			if(null !== details && details.length >0)
+			channeldetails = details.split("#");
+			var contentType, contentCategory, contentDeliveryFormat, activationCodeStatus, contentDeliverySchedule, activationCodeExpiryDate =''
+;			
+			
+			if(channeldetails.length == 6)
+			{			
+			  
+			 contentType = channeldetails[0];
+			 contentCategory = channeldetails[1];
+			 contentDeliveryFormat = channeldetails[2];
+			 activationCodeStatus = channeldetails[3];
+			 contentDeliverySchedule = channeldetails[4];
+			 activationCodeExpiryDate = channeldetails[5];			
+			}
+			if(null !== contentType && contentType.length >0)
+				F.CONTENT_TYPE.write(contentType.charAt(0).toUpperCase()+ contentType.slice(1),row);
+
+			if(null !== contentCategory && contentCategory.length >0)
+				F.CONTENT_CATEGORY.write(contentCategory,row);
+                                
+				
+			if(null !== contentDeliveryFormat && contentDeliveryFormat.length >0)
+				F.DELIVERY_FORMAT.write(contentDeliveryFormat,row);
+				
+			if(null !== activationCodeStatus && activationCodeStatus.length >0)
+				F.SUBSCRIPTION_STATUS.write(activationCodeStatus,row);
+				
+			if(null !== contentDeliverySchedule && contentDeliverySchedule.length >0)
+				F.DELIVERY_SCHEDULE.write(contentDeliverySchedule,row);
+			
+			if(null !== activationCodeExpiryDate && activationCodeExpiryDate.length >0)
+				F.EXPIRY_DATE.write(activationCodeExpiryDate,row);
+
+			e3.innerHTML = "$Row# "+row+": "+F.CHANNEL_NAME.read()+": "+F.CONTENT_CATEGORY.read(row);	
+			
+			if(document.getElementById("MSAI_284_"+row)!==null){
+						document.getElementById("MSAI_284_"+row).style.display="none";
+					}
+			GraphEditor.mask.hide();
+			if(document.getElementById("MSAI_203_"+row)!==null){
+							
+							
+							
+						 }
+			//checkConnectCallBack(response.responseText, row);
+			hideAndShowLabel();
+			alignFlag_Validate='true';
+			if(row !=1)
+			{
+			temprow = row-1;
+			alignTextBoxes();
+			}
+			return;
+		},
+		failure : function(response,options) 
+		{
+			alert('$networkFailed');
+			GraphEditor.mask.hide();
+
+			e3.innerHTML = '$Row# '+row+': '+F.CHANNEL_NAME.read()+': ';	
+			return;
+		}
+
+	});
+}
+
+function createSourceValidateAjaxCall(address, userId, password, serverParams, sourceType, row, emailType)
+{
+
+	var GraphEditor = {};
+	GraphEditor.mask = new Ext.LoadMask(Ext.getBody(), {msg:'${CrtChnValidationMsg}'});
+	GraphEditor.mask.show();
+         
+	Ext.Ajax.request(
+	{
+		url : 'Grciajaxservlet/ajax/ValidateChannelSource',
+		method : 'POST',
+               
+		params : 
+		{
+			address:address,
+			userId:userId,
+			password:password,
+			serverParams:serverParams,
+			sourceType:sourceType,
+			row:row,
+			emailType:emailType,
+			sample:{"test":"test", "test1":"test1"}
+		},
+		success : function(response, options) 
+		{
+			GraphEditor.mask.hide();
+                        
+			checkConnectCallBack(response.responseText, row);
+                         
+			return;
+		},
+		failure : function(response,options) 
+		{
+			GraphEditor.mask.hide();
+                        
+			alert('${CrtChnAjxNew}');
+
+			return;
+		}
+
+	});
+} 
+
+function checkConnectCallBack(response, row)
+{
+	if (response == 'success')
+	{ 
+                
+		F.CUSTOM_FIELD7.write('true',row);
+		alert('${CrtChnConnSuccMsg}');
+		return true;
+	}	
+	else
+	{       
+               	alert("${CrtChnConnFailMsg}"+"\n"+"${CrtChnInvSrvrUrl}"+"\n"+"${CrtChnInvUsrPass}"+"\n"+"${CrtChnInvSrvrPrm}");
+		F.CUSTOM_FIELD7.write('false',row);
+		return false;
+	}
+
+}
+
+F.CHANNEL_TYPE.onChange=function()
+{	
+
+var isNotThere=false;
+var row,r;
+	if(Number(firstValue)!==0){
+		
+		if(Number(firstValue)===3){
+			//grcintellegence
+				for (row in F.SRC.rows()){ 
+						if (!F.SRC.isMarkedForDeletion(row)){
+							if(F.CONTENT_TYPE.read(row)!=='' && F.QUEUE_NAME.read(row)===""){
+								isNotThere=true;
+								 r = confirm("$navigateMsg");
+								if (r === true) {
+									if(F.CHANNEL_TYPE.read()==="0" || Number(F.CHANNEL_TYPE.read()) === 0)
+									{
+										firstValue=1;
+										F.CHANNEL_TYPE.write('1');
+									}else{
+										firstValue=F.CHANNEL_TYPE.read();
+									}
+									clearSRCFields();
+									
+									onChannelTypeChange();
+									break;
+								} else {
+									F.CHANNEL_TYPE.write(firstValue);
+									break;
+								}
+							}
+						}
+				}
+				
+			if(!isNotThere){
+				
+			
+				if(F.CHANNEL_TYPE.read()==="0" || Number(F.CHANNEL_TYPE.read())===0)
+				{
+					firstValue=1;
+					F.CHANNEL_TYPE.write('1');
+				}else{
+					firstValue=F.CHANNEL_TYPE.read();
+				}
+				clearSRCFields();
+				onChannelTypeChange();
+				
+			}
+		}
+		else if(firstValue==2 ||firstValue==1){
+		
+			for (row in F.SRC.rows()){ 
+						if (!F.SRC.isMarkedForDeletion(row)){
+							if(F.SERVER_ADDRESS.read(row)!==""){
+								isNotThere=true;
+								 r = confirm("$navigateMsg");
+								if (r === true) {
+									if(F.CHANNEL_TYPE.read()==="0" || Number(F.CHANNEL_TYPE.read())===0)
+									{
+										firstValue=1;
+										F.CHANNEL_TYPE.write('1');
+									}else{
+										firstValue=F.CHANNEL_TYPE.read();
+									}
+									clearSRCFields();
+									onChannelTypeChange();
+									break;
+									
+								} else {
+									F.CHANNEL_TYPE.write(firstValue);
+									break;
+								}
+							}
+						}
+				}
+				
+			if(!isNotThere){
+				if(F.CHANNEL_TYPE.read()==="0" || Number(F.CHANNEL_TYPE.read())===0)
+				{
+					firstValue=1;
+					F.CHANNEL_TYPE.write('1');
+				}else{
+					firstValue=F.CHANNEL_TYPE.read();
+				}
+				clearSRCFields();
+				onChannelTypeChange();
+				
+			}
+		
+		
+		}
+	
+	}else{
+	
+		firstValue=1;
+		clearSRCFields();
+		onChannelTypeChange();
+		F.CHANNEL_TYPE.write('1');
+		}
+
+};
+function clearSRCFields(){
+	var row = F.SRC.getRowCount();
+	
+	if(row>1){
+		//delete all rows except first row
+		var i=2;
+		for(i=2;i<=row;i++){
+			F.SRC.deleteRow();
+			}
+	}
+	F.SERVER_ADDRESS.write('',1);
+	F.SOURCE_TYPE.write('',1);
+	F.ACTIVATION_CODE.write('',1);
+	if(document.getElementById('MSAI_299_1')!==null)
+		document.getElementById('MSAI_299_1').style.display='none';
+	F.CHANNEL_PASSWORD.write('',1);
+	if(document.getElementById("Password_field_1")!==null){
+		document.getElementById("Password_field_1").value="";
+	}
+
+	//F.SERVER_PARAMETERS.write('',1);
+	F.EMAIL_FROM.write('',1);
+	//F.KEYWORDS.write('',1);
+	F.CHANNEL_USERNAME.write('',1);
+	F.CHANNEL_KEYWORDS.write('',1);
+	//clear type 3 fiedls
+	F.CONTENT_TYPE.write('',1);
+	F.DELIVERY_SCHEDULE.write('',1);
+	F.EXPIRY_DATE.write('',1);
+	F.SUBSCRIPTION_STATUS.write('',1);
+	F.CONTENT_CATEGORY.write('',1);
+	F.DELIVERY_FORMAT.write('',1);
+}
+F.SOURCE_TYPE.onChange=function(row)
+{
+	var rownum = row;
+	
+	onSourceTypeChange(rownum);
+};
+
+function onSourceTypeChange(rownum)
+{
+	var e1 = document.getElementById('MSAI_98_'+rownum);
+	var e2 = document.getElementById('MSAI_252_'+rownum);
+	var e3 = document.getElementById('MSAI_299_'+rownum);
+	var e4 = document.getElementById('MSAI_84_'+rownum);
+
+	if (F.CHANNEL_TYPE.read() == '2')
+	{
+		if(document.getElementById('MSAI_284_'+rownum)!==null)
+					document.getElementById('MSAI_284_'+rownum).style.display='none';
+
+			
+	}
+
+	
+	if (F.SOURCE_TYPE.read(rownum) == '2')
+	{
+		F.EMAIL_FROM.write('',rownum);		
+
+		
+		F.EMAIL_FROM.hide(rownum);
+		F.SERVER_ADDRESS.show(rownum);
+		F.CHANNEL_USERNAME.show(rownum);
+		F.EMAIL_SEC.hide(rownum);
+		F.EMAIL_TYPE.hide(rownum);
+		F.CHANNEL_PASSWORD.show(rownum);
+		//F.SERVER_PARAMETERS.show(rownum);
+		if(F.CHANNEL_TYPE.read()==2)
+		
+			F.CHANNEL_KEYWORDS.hide(rownum);
+		
+		else
+			F.CHANNEL_KEYWORDS.show(rownum);
+		
+		F.SOURCE_TYPE.makeLabelRequired(rownum);
+		F.SERVER_ADDRESS.makeLabelRequired(rownum);
+		F.CHANNEL_USERNAME.makeLabelNotRequired(rownum);
+		F.CHANNEL_PASSWORD.makeLabelNotRequired(rownum);
+		F.EMAIL_SEC.makeLabelNotRequired(rownum);
+		F.EMAIL_TYPE.makeLabelNotRequired(rownum);
+		F.ACTIVATION_CODE.hide(rownum);
+		F.CONTENT_TYPE.hide(rownum);
+		F.DELIVERY_SCHEDULE.hide(rownum);
+		F.EXPIRY_DATE.hide(rownum);
+		F.SUBSCRIPTION_STATUS.hide(rownum);
+		F.CONTENT_CATEGORY.hide(rownum);
+		F.DELIVERY_FORMAT.hide(rownum);
+
+		if (e1 !== null)
+			e1.style.display = "block";
+
+		if (e2 !== null)
+			e2.style.display = "none";
+
+		if (e3 !== null)
+			e3.style.display = "none";	
+		
+		if(e4 !==null)
+			e4.innerHTML = '$Row# '+rownum;
+
+	}
+	else if (F.SOURCE_TYPE.read(rownum) == '1')
+	{  	
+		F.SOURCE_TYPE.makeLabelRequired(rownum);
+		F.SERVER_ADDRESS.makeLabelRequired(rownum);
+		F.EMAIL_FROM.show(rownum);
+		F.SERVER_ADDRESS.show(rownum);
+		F.CHANNEL_USERNAME.show(rownum);
+		F.EMAIL_SEC.show(rownum);
+		F.EMAIL_TYPE.show(rownum);
+		F.CHANNEL_PASSWORD.show(rownum);
+		//F.SERVER_PARAMETERS.show(rownum);
+		if(F.CHANNEL_TYPE.read()==2)
+			F.CHANNEL_KEYWORDS.hide(rownum);
+		else
+			F.CHANNEL_KEYWORDS.show(rownum);
+		F.CHANNEL_USERNAME.makeLabelRequired(rownum);
+		F.CHANNEL_PASSWORD.makeLabelRequired(rownum);
+		F.EMAIL_SEC.makeLabelRequired(rownum);
+		F.EMAIL_TYPE.makeLabelRequired(rownum);
+		F.ACTIVATION_CODE.hide(rownum);
+		F.CONTENT_TYPE.hide(rownum);
+		F.DELIVERY_SCHEDULE.hide(rownum);
+		F.EXPIRY_DATE.hide(rownum);
+		F.SUBSCRIPTION_STATUS.hide(rownum);
+		F.CONTENT_CATEGORY.hide(rownum);
+		F.DELIVERY_FORMAT.hide(rownum);
+		F.EMAIL_FROM.show(rownum);
+		if (e1 !== null)
+			e1.style.display = "block";
+
+		if (e2 !== null)
+			e2.style.display = "none";
+
+		if (e3 !== null)
+			e3.style.display = "none";
+		
+		if (e4 !== null)
+			e4.innerHTML = '$Row# '+rownum;
+	
+	}
+	else if (F.SOURCE_TYPE.read(rownum) == '3')
+	{  	
+	
+	
+		F.SOURCE_TYPE.makeLabelRequired(rownum);
+		F.SERVER_ADDRESS.hide(rownum);
+		F.EMAIL_FROM.hide(rownum);
+		F.CHANNEL_USERNAME.hide(rownum);
+		F.EMAIL_SEC.hide(rownum);
+		F.EMAIL_TYPE.hide(rownum);
+		F.CHANNEL_PASSWORD.hide(rownum);
+		//F.SERVER_PARAMETERS.hide(rownum);
+		F.CHANNEL_KEYWORDS.hide(rownum);
+		F.ACTIVATION_CODE.show(rownum);
+		F.ACTIVATION_CODE.enable(rownum);
+
+		if (e1 !== null)
+			e1.style.display = "none";
+
+		if (e2 !== null)
+			e2.style.display = "block";
+
+		if (e3 !== null)
+		{
+//			e3.style.display = "block";
+//            e3.style.color = "#5882FA";
+		e3.style.display = "none";
+		}			
+			
+			if(F.CONTENT_TYPE.read(rownum)!=="")
+			{
+			F.ACTIVATION_CODE.disable(rownum);			
+						if (e2 !== null){
+							if( F.FLAG_SUBMITTED.read(rownum)|| F.QUEUE_NAME.read(rownum)!=="")
+								e2.style.display='none';//.innerHTML = "$Refresh";
+							else
+								e2.innerHTML = "$Re-enter";
+					}
+				}
+		
+			jQuery('#MSAI_106').hide();
+			if(null!==e4)
+				e4.innerHTML = '$Row# '+rownum+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(row);	
+
+	}
+	else
+	{
+		
+		F.SOURCE_TYPE.makeLabelRequired(rownum);
+		F.SERVER_ADDRESS.makeLabelRequired(rownum);
+		F.SERVER_ADDRESS.show(rownum);
+		F.CHANNEL_USERNAME.show(rownum);
+		F.CHANNEL_PASSWORD.show(rownum);
+		//F.EMAIL_SEC.show(rownum);
+		//F.EMAIL_TYPE.show(rownum);
+		F.EMAIL_SEC.hide(rownum);
+		F.EMAIL_TYPE.hide(rownum);
+		//F.SERVER_PARAMETERS.show(rownum);
+		if(F.CHANNEL_TYPE.read()==2)
+			F.CHANNEL_KEYWORDS.hide(rownum);
+		else
+			F.CHANNEL_KEYWORDS.show(rownum);
+		F.EMAIL_FROM.hide(rownum);
+		F.CHANNEL_USERNAME.makeLabelNotRequired(rownum);
+		F.CHANNEL_PASSWORD.makeLabelNotRequired(rownum);
+		F.ACTIVATION_CODE.hide(rownum);
+		F.CONTENT_TYPE.hide(rownum);
+		F.DELIVERY_SCHEDULE.hide(rownum);
+		F.EXPIRY_DATE.hide(rownum);
+		F.SUBSCRIPTION_STATUS.hide(rownum);
+		F.CONTENT_CATEGORY.hide(rownum);
+		F.DELIVERY_FORMAT.hide(rownum);
+
+		if (e1 !== null)
+			e1.style.display = "block";
+
+		if (e2 !== null)
+			e2.style.display = "none";
+
+		if	(e3 !== null)
+			e3.style.display = "none";
+		if (e4 !== null)
+			e4.innerHTML = '$Row# '+rownum;
+
+	}
+alignTextBoxes();
+
+}
+
+
+F.SRC.afterAddRow = function()
+{
+
+	
+	var inputs, rowseq, id;
+	
+	row = F.SRC.getRowCount();
+	
+	
+	if ((F.OBJECT_ID.read() ==="") || ((F.OBJECT_ID.read() !=="") && (F.SOURCE_TYPE.read(row) ==="")))
+		F.EMAIL_FROM.hide(row);
+
+	if (F.CUSTOM_FIELD9.read(row) != '1')
+	{
+		F.CHANNEL_PASSWORD.makePasswordField(row);									
+		if(document.getElementById('MSAI_284_'+row)!==null)
+				document.getElementById('MSAI_284_'+row).style.display='none';
+		if (row == 1)		
+			inputs = document.getElementById("CHANNEL_PASSWORD_field__div").getElementsByTagName("input");
+		else		
+			inputs = document.getElementById("_"+(row-1)+"__CHANNEL_PASSWORD_field__div").getElementsByTagName("input");
+
+		inputs[1].id='Password_field_'+row;
+		inputs[1].onchange = function(){fnChangePass(inputs[1].id);};
+	}
+
+	onSourceTypeChange(row);	
+
+	
+	rowseq = F.SRC.getRowCount();
+
+	if (F.CHANNEL_TYPE.read() == '2')
+	{
+		for (j = 1;j <= rowseq;j++)
+		{
+			if(document.getElementById('MSAI_284_'+row)!==null)
+				document.getElementById('MSAI_284_'+row).style.display='none';
+			F.SOURCE_TYPE.makeLabelRequired(j);
+			F.SERVER_ADDRESS.makeLabelRequired(j);
+			id = 'MSAI_TD_CHANNEL_KEYWORDS_'+j;
+			jQuery('#'+id).hide();
+			
+		}	
+		
+	}
+	
+	else if(F.CHANNEL_TYPE.read()=='3' || F.CHANNEL_TYPE.read()==3)
+	{
+		var rownum = F.SRC.getRowCount();
+
+		var e1 = document.getElementById('MSAI_98_'+rownum);
+		var e2 = document.getElementById('MSAI_252_'+rownum);
+		var e3 = document.getElementById('MSAI_299_'+rownum);
+		var e4 = document.getElementById('MSAI_84_'+rownum);
+		F.SOURCE_TYPE.makeLabelNotRequired(rownum);	
+		F.SOURCE_TYPE.write(3,rownum);
+		F.SOURCE_TYPE.makeLabelRequired(rownum);
+		F.SERVER_ADDRESS.hide(rownum);
+		F.EMAIL_FROM.hide(rownum);
+		F.CHANNEL_USERNAME.hide(rownum);
+		F.EMAIL_SEC.hide(rownum);
+		F.EMAIL_TYPE.hide(rownum);
+		F.CHANNEL_PASSWORD.hide(rownum);
+		//F.SERVER_PARAMETERS.hide(rownum);
+		F.CHANNEL_KEYWORDS.hide(rownum);
+		F.ACTIVATION_CODE.show(rownum);
+		F.SOURCE_TYPE.hide(rownum);	
+		F.CONTENT_TYPE.hide(rownum);
+		F.DELIVERY_SCHEDULE.hide(rownum);
+		F.EXPIRY_DATE.hide(rownum);
+		F.SUBSCRIPTION_STATUS.hide(rownum);
+		F.CONTENT_CATEGORY.hide(rownum);
+		F.DELIVERY_FORMAT.hide(rownum);
+		F.SOURCE_TYPE.hide(rownum);	
+
+		if(document.getElementById("MSAI_252_"+rownum)!==null){
+				
+				var iddd="#MSAI_252_"+rownum;
+				if(document.getElementById("myspace_"+rownum)===null)
+					$(iddd).after( "<div id=\"myspace_"+rownum+"\" style=\"height:10px;\"></div>" );
+			}
+		if (e1 !== null)
+			e1.style.display = "none";
+
+		if (e2 !== null)
+			e2.style.display = "block";
+
+		if (e3 !== null)
+		{
+//			e3.style.display = "block";
+//          e3.style.color = "#5882FA";
+			e3.style.display = "none";
+		}			
+		F.ACTIVATION_CODE.makeLabelRequired(rownum);	
+		if(F.CONTENT_TYPE.read(rownum)!=="")
+		{
+		F.ACTIVATION_CODE.disable(rownum);			
+					if (document.getElementById('MSAI_252_'+rownum) !== null){
+					
+					if( F.FLAG_SUBMITTED.read(rownum) || F.QUEUE_NAME.read(rownum)!==""){
+								document.getElementById('MSAI_252_'+rownum).style.display='none';//innerHTML =  "$Refresh";
+								}
+							else{
+								document.getElementById('MSAI_252_'+rownum).innerHTML = "$Re-enter";
+								
+								}
+					}
+					e4.innerHTML = '$Row# '+rownum+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(row);
+		}else{
+			if(document.getElementById("MSAI_284_"+rownum)!==null){
+						document.getElementById("MSAI_284_"+rownum).style.display="none";
+					}
+		if(e4!==null)
+			e4.innerHTML = '$Row# '+rownum+': '+F.CHANNEL_NAME.read()+': ';
+		}
+	
+		jQuery('#MSAI_106').hide();
+		//e4.innerHTML = '$Row# '+rownum+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(row);
+	}
+	alignButton();
+	alignTextBoxes();
+};
+
+
+
+F.CHANNEL_STATUS.onChange=function()
+{
+	if (g_edit_mode == '1')
+	{	
+		valueisthere(5);
+		if (F.CHANNEL_STATUS.read() == '2')
+		{
+
+			if (F.HDN_CIDCNTFRMSUBSREQ.read() > 0)
+			{
+
+				F.CHANNEL_STATUS.write(1);		
+				alert('${CrtChnName}' + ': ' + F.CHANNEL_NAME.read().substring(0,60) + '${CrtChnSubs}');
+			}	
+
+		}
+	}
+};
+   
+
+
+
+
+
+
+function showRequiredMessage(fields)
+{
+	var arr, i, msg;
+	arr = fields.split(",");
+	msg = '${CrtChnValidateMsg}';
+	for (i = 0; i < arr.length; i++)
+		msg = msg+'\n'+arr[i];
+
+	alert(msg);
+}
+
+
+function isAnySourceForSubmit()
+{
+	var isAnySourceForSubmitValue = '';
+
+	for (var row in F.SRC.rows())    
+	{ 
+
+		if (Number(F.SOURCE_TYPE.read(row)) !== 3 || (F.SUBSCRIPTION_STATUS.read(row) !=="" && F.SUBSCRIPTION_STATUS.read(row) !== "EXPIRED")) 
+
+			return true;     
+	}
+	return false;
+}
+
+//function checknsubmit(){
+
+F.onSubmit = function(){
+
+
+	var rownum = 0, field = '', rows = '', invalidGrcSources = false, sameurl = '', email, eusers;
+
+	var frowcount = F.SRC.getRowCount();
+	var row = F.SRC.getRowCount();
+	var actCodeArray='';
+	var listenflag = false;	
+	/**
+	if (F.CHANNEL_NAME.read() == '')
+				{
+					alert('${chanelNameValidation}');
+					return false;
+				}
+	*/
+	
+		if(F.CHANNEL_STATUS.read()=='2'){
+		if(!confirm("$cnfInactiveChn")) //Alert message if sources is not validated
+			return false;
+	}
+	
+	rownum = F.SRC.getRowCount();
+
+	if (!isAnySourceForSubmit())
+	{
+		alert('No GRC Subscription Details Found');
+		return false;
+
+	}
+
+	if (F.CHANNEL_NAME.read() ==="")
+		field = field + '${CrtChnName}'+' ,';
+	if (F.CHANNEL_TYPE.read() ==="") 
+		field = field + '${CrtChnChannelType}'+' ,';	
+	if (F.CHANNEL_STATUS.read() ==="") 
+		field = field + '${CrtChnChannelStatus}'+' ,';	
+   
+	for (row in F.SRC.rows())
+	{ 
+
+F.CUSTOM_FIELD8.write(F.CHANNEL_STATUS.read());
+		if(F.SRC.rows().hasOwnProperty(row))
+		{
+			if (F.CHANNEL_TYPE.read() == '2')
+			F.CHANNEL_KEYWORDS.write('',row);
+		if (!F.SRC.isMarkedForDeletion(row))
+		{
+			if (F.SOURCE_TYPE.isEmpty(row))                          		
+				field = field + '${CrtChnSrc}'+' (${Row} '+row+'),';  
+		    if (F.SERVER_ADDRESS.isEmpty(row) && F.SOURCE_TYPE.isEmpty(row))     		
+				field = field + '${CrtChnServr}'+' (${Row} '+row+'),';		
+
+
+			if (F.SOURCE_TYPE.read(row) == '1')
+			{
+
+				if (F.EMAIL_FROM.read(row) !=="")
+
+
+
+				{
+					email = F.EMAIL_FROM.read(row);
+					if (email.indexOf(',') != -1)
+					{
+						alert("${NotiUsrEmailIds}");
+						return false;
+					}
+					else if(!email.match(/^[a-zA-Z0-9_.@]+$/))
+					{				
+						alert("${NotiUsrMailValidateMsg}"+"\n" + email);
+						return false;					
+					}
+
+
+
+				}
+				
+
+
+				if (F.CHANNEL_USERNAME.read(row) === "" || F.CHANNEL_PASSWORD.read(row) === "" || F.SERVER_ADDRESS.read(row) === "" || F.EMAIL_SEC.read(row) === "" || F.EMAIL_TYPE.read(row)==="")
+
+
+
+				{
+					if (F.SERVER_ADDRESS.read(row) === "")
+						field = field + "${CrtChnServr}"+" (${Row} "+row+"),";
+
+					if (F.CHANNEL_USERNAME.read(row) === "")
+
+						field = field + "${CrtChnUsrName}"+" (${Row} "+row+"),";
+
+					if (F.CHANNEL_PASSWORD.read(row) === "")
+
+						field = field + "${CrtChnPwd}"+" (${Row} "+row+"),";
+						
+					if (F.EMAIL_SEC.read(row) === "")
+
+						field = field + "${CrtChnEmailsec}"+" (${Row} "+row+"),";
+						
+					if (F.EMAIL_TYPE.read(row) ==="")
+
+							field = field + "${CrtChnEmailtype}"+" (${Row} "+row+"),";
+                                               
+				}					
+												
+
+
+			}
+
+
+			if (F.SOURCE_TYPE.read(row) == '2' )
+			{
+				if (F.SERVER_ADDRESS.read(row) === "")
+					field = field + "${CrtChnServr}"+" (${Row} "+row+"),";				
+			}		
+		}
+		if (!F.SRC.isMarkedForDeletion(row))
+		{
+			if (F.CUSTOM_FIELD7.read(row) ==="" && Number(F.SOURCE_TYPE.read(row)) !== 3)
+				rows=rows+'(${Row} #'+row+') , ';
+
+			if (F.SOURCE_TYPE.read(row) == '3' && (F.SUBSCRIPTION_STATUS.read(row) ==="" || F.SUBSCRIPTION_STATUS.read(row) == 'EXPIRED')) 
+
+			{
+				invalidGrcSources = true;     
+				setMarkedDeleteRow(F.SRC.getID(),row,row);
+
+			}
+
+		}
+
+		}
+		
+		
+	}
+	
+	for (i = 1;i <= rownum;i++)
+
+	{
+		if (F.SOURCE_TYPE.read(i)!== '3')
+
+		{
+			for (j = i + 1; j <= rownum;j++)
+			{
+              if (!F.SRC.isMarkedForDeletion(j) )
+              {
+				if (F.SERVER_ADDRESS.read(i) == F.SERVER_ADDRESS.read(j) && //F.SERVER_PARAMETERS.read(i) == F.SERVER_PARAMETERS.read(j) && 
+				    F.SOURCE_TYPE.read(i) == F.SOURCE_TYPE.read(j) && F.CHANNEL_USERNAME.read(i) == F.CHANNEL_USERNAME.read(j) && 
+					F.CHANNEL_PASSWORD.read(i) == F.CHANNEL_PASSWORD.read(j) && F.EMAIL_FROM.read(i) == F.EMAIL_FROM.read(j))
+				{
+					sameurl = i + ' & ' + j + ', ';
+				}
+              }
+			}
+		}
+	}
+
+	if (F.CHANNEL_TYPE.read()!== "3"){
+		if (field !== "") 
+		{
+		
+			showRequiredMessage(field);
+			return false;
+		}	
+	}
+	
+	if (g_edit_mode != '1')
+	{
+		if (F.HDN_CHNL_ID_CNT.read() > 0)
+		{
+			alert('${Channel} \''+F.CHANNEL_NAME.read().substring(0,60)+'\' ${CrtChnCheck}');
+			return false;
+		}
+	}
+	
+	if (g_edit_mode == '1')
+	{		
+		if (F.CHANNEL_STATUS.read() === "2")
+		{
+			if (F.HDN_CIDCNTFRMSUBSREQ.read() > 0)
+			{
+				alert('${CrtChnName}' + ': ' + F.CHANNEL_NAME.read().substring(0,60)+'${CrtChnSubs}');
+				F.CHANNEL_STATUS.write(1);
+
+				return false;
+			}		
+		}	
+
+	}
+
+
+	if (F.CHANNEL_TYPE.read()!== "3"){
+		if (sameurl !== "")
+
+		{
+		
+			alert('${Row} ' + sameurl + ' ${isSame}' + '\n' + '${samesrc}');
+			return false;
+		}
+	}
+	if (F.CHANNEL_TYPE.read()!== "3"){
+		if (rows !== "" || invalidGrcSources )
+		{
+		
+		
+			if (invalidGrcSources === false)
+			{  
+
+				if (!confirm(rows+"${CrtChnNotValidated}"))
+				return false;
+			}
+
+			else
+			{
+
+				if (rows === "")
+				{
+
+					if (confirm("${CrtChnGrcNoVaildSubscr}"+"\n\n"+"${CrtChnProceedOrNot}"))
+						return false;
+				}
+
+				else 
+				{
+
+					if (!confirm("${CrtChnGrcNoVaildSubscr}"+"\n"+rows+"${CrtChnNotValidated}"))
+						return false;
+				}
+			}
+		}
+	}
+	if (F.CHANNEL_TYPE.read()=== "3"){
+		row=1;
+		for (row in F.SRC.rows())
+		{
+      if(F.SRC.rows().hasOwnProperty(row))
+      {
+        F.FLAG_SUBMITTED.write('true',row);
+        F.SOURCE_TYPE.write(3,row);
+        F.SERVER_ADDRESS.write('http://www.grcintelligence.com',row);
+      }
+		}
+
+		
+	}
+       assignNulltoPwd();
+	return true;
+};
+
+
+
+/*
+F.onSubmit = function()
+{
+	
+	//return true;
+}
+*/
+
+
+function ActivateSubscriptions()
+{
+	//alert('Activation Function Started');
+	var actCodeArray='';
+	var row;
+	for (row in F.SRC.rows())
+	{
+	
+		if(F.SOURCE_TYPE.read(row)==3 && F.CONTENT_TYPE.read(row).length>0)
+		{
+			actCodeArray =actCodeArray+ F.ACTIVATION_CODE.read(row)+'#';
+		}
+	}
+	createSourceActivateAjaxCall(actCodeArray);
+}
+
+function createSourceActivateAjaxCall(actCodeArray)
+{
+
+	var actCodes = actCodeArray;	
+	var channelName = F.CHANNEL_NAME.read();
+	var queueDetails = [];
+	
+	if(channelName.trim() !== null && (channelName.trim()).length >0 && null !== actCodes )
+	{
+	
+		
+		var GraphEditor = {};
+		GraphEditor.mask = new Ext.LoadMask(Ext.getBody(), {msg:'${CrtChnValidationMsg}'});
+		GraphEditor.mask.show();
+		
+		var detailsArray ;
+		
+		Ext.Ajax.request({
+			
+
+			url : 'Grciajaxservlet/ajax/ActivateChannelSource',
+			method : 'POST',
+			async: 'false',
+			params : 
+			{
+				actCodeArray:actCodeArray,
+				sample:{"test":"test", "test1":"test1"}
+			},
+			success : function(response, options) 
+			{
+				
+				detailsArray = (response.responseText).split(';');
+				
+				
+				var j;
+				for(var row in F.SRC.rows())
+				{
+					if(F.SRC.rows().hasOwnProperty(row))
+					{
+						for(j=0;j<=detailsArray.length-1;j++)	
+						{	
+							
+							if(F.CONTENT_TYPE.read(row).length>0)
+							{
+								
+								if(detailsArray[j].length > 0)
+								{
+				
+									var actDetails = detailsArray[j].split('#');
+
+									if(F.ACTIVATION_CODE.read(row) == actDetails[0])
+									{
+				
+										
+										F.QUEUE_NAME.write(actDetails[5],row);
+										F.QUEUE_URL.write(actDetails[6],row);
+										F.ACTIVATION_CODE.disable(row);			
+										if (document.getElementById('MSAI_252_'+row) !== null){
+											document.getElementById('MSAI_252_'+row).style.display='none';//innerHTML = "$Refresh";
+										}
+										if(document.getElementById("MSAI_284_"+row)!==null){
+													document.getElementById("MSAI_284_"+row).style.display="none";
+												}
+									
+										break;
+									}
+								}	
+							}
+						}
+					}		
+				}	
+				GraphEditor.mask.hide();
+				
+				//checkConnectCallBack(response.responseText, row);
+				//alert(queueDetails);
+				//checknsubmit();
+				return true;
+			},
+			failure : function(response,options) 
+			{
+				
+				GraphEditor.mask.hide();
+				alert("${CrtChnAjx}");
+
+				
+				return false;
+
+			}
+
+		});
+		/*Ext.Ajax.request(
+		{
+
+			url : 'Grciajaxservlet/ajax/ActivateChannelSource',
+			method : 'POST',
+			async: 'false',
+			params : 
+			{
+				actCodeArray:actCodeArray,
+				sample:{"test":"test", "test1":"test1"}
+			},
+			success : function(response, options) 
+			{
+				
+				detailsArray = (response.responseText).split(';');
+				
+				
+				var j;
+				for(var row in F.SRC.rows())
+				{
+					
+					for(j=0;j<=detailsArray.length-1;j++)	
+					{	
+						
+						if(F.CONTENT_TYPE.read(row).length>0)
+						{
+							
+							if(detailsArray[j].length > 0)
+							{
+			
+								var actDetails = detailsArray[j].split('#');
+
+								if(F.ACTIVATION_CODE.read(row) == actDetails[0])
+								{
+			
+									//writeActivationDetails(actDetails,row);	
+									F.QUEUE_NAME.write(actDetails[5],row);
+									F.QUEUE_URL.write(actDetails[6],row);
+									
+									//console.log(queueDetails);
+									//queueDetails[row] = [];
+									//queueDetails[row][0]=actDetails[5];
+									//queueDetails[row][1]=actDetails[6];
+									F.ACTIVATION_CODE.disable(row);			
+									if (document.getElementById('MSAI_252_'+row) != null){
+										document.getElementById('MSAI_252_'+row).style.display='none';//innerHTML = "$Refresh";
+									}
+									if(document.getElementById("MSAI_284_"+row)!=null){
+												document.getElementById("MSAI_284_"+row).style.display="none";
+												var tempId="#MSAI_284_"+row;
+												//jQuery(tempId).attr("disabled", "disabled");
+											}
+								
+									break;
+								}
+							}	
+						}
+					}		
+				}	
+				GraphEditor.mask.hide();
+				
+				//checkConnectCallBack(response.responseText, row);
+				//alert(queueDetails);
+				return true;
+			},
+			failure : function(response,options) 
+			{
+				
+				GraphEditor.mask.hide();
+				alert("${CrtChnAjx}");
+
+				
+				return false;
+
+			}
+
+		}); */
+		
+	}
+	
+} 
+
+function writeActivationDetails(actDetails,row)
+{
+	F.QUEUE_NAME.write(actDetails[5],row);
+	F.QUEUE_URL.write(actDetails[6],row);
+}
+
+
+function viewlink_function(url)
+{
+   window.open(url,'_blank',"scrollbars=yes, left =50,top=100,width=800, height=500,position=center,resizable=yes");
+}
+
+
+function customCancel()
+{
+	if (g_edit_mode == '1')
+		top.window.close();
+	else
+		goCancel();
+}
+
+function custom_checknsaveclose()                        
+{ 
+	if (F.CHANNEL_NAME.read()=== "")
+	{   
+
+		alert("${CrtChnFct}");
+
+		return false;
+	}
+
+	checknsaveclose();                        
+}
+
+function custom_checknsave()                      
+{            
+	checknsave();
+}
+
+
+function showToolbar1()
+{  
+	var editDisabled = false, edit_flag = 'Y', i;
+
+	var typeOfEditFlag = typeof(F.getFormParameter("edit_flag"));
+	var reportsMenu = [];	
+
+	F.activateToolBar();
+
+
+	if (typeof(F.getFormParameter("edit_flag")) != 'undefined') 
+	{   
+		edit_flag = F.getFormParameter("edit_flag");	
+
+
+
+
+        if (edit_flag == 'Y')
+        { 
+			invokedFromDataBrowser = true;
+			editDisabled = true;
+		}
+	}
+
+	if (accessCode != 99) 
+	{
+		if (edit_flag != "Y" || accessCode == 2)
+			editDisabled = true;
+	}
+
+
+
+
+
+
+
+
+
+	for (i = 0; i < relRepNameArr.length; i++) 
+	{
+		if (relRepNameArr[i] !== "") 
+		{
+			reportsMenu.push({ metricid: relRepMetricArr[i], 
+			reportid: relRepArr[i], 
+			text: relRepNameArr[i], 
+			//handler: function(rep) { getReport(rep.metricid, rep.reportid); } 
+            handler:repHandler()
+			});
+		}
+
+	}
+	reportsMenu = [];
+
+	for (i = 0; i < relRepNameArr.length; i++) 
+	{	
+		if (relRepNameArr[i] == 'Change History Report')
+		{
+		 	reportsMenu.push({ metricid: relRepMetricArr[i], 
+			reportid: relRepArr[i], 
+			text: relRepNameArr[i], 
+			//handler: function(rep) { getReport(rep.metricid, rep.reportid); } 
+            handler:repHandler()
+			});
+       
+		}
+	}
+
+ function repHandler(){
+    return function(rep) { getReport(rep.metricid, rep.reportid);} ;
+  }
+
+  
+  	var myConfiguration = 
+	[
+		{
+			iconCls: 'msai_tooldefault',
+			xtype:'button',
+			id: 'msai_tooldefault',
+			hidden: editDisabled || (!invokedFromDataBrowser),
+			tooltip:
+			{
+				text: "Enables editing the contents of this form",
+				title: "Edit",
+				xtype: "quicktip"
+			},
+			handler: function() 
+			{ 
+				editForm(); 
+			}
+		},
+		{
+			iconCls:'msai_toolsubmitnew',
+			xtype:'button',
+			id: 'msai_toolsubmit',
+			hidden: editDisabled || (invokedFromDataBrowser),
+			width: 30, 
+			tooltip:
+			{
+				text: "${ToolBarSubmitText}",
+				title: "${ToolBarSubmit}",
+				xtype: "quicktip"
+			},
+			handler: function() 
+			{ 	
+				//validation begin
+				var field='';
+				if (F.CHANNEL_NAME.read() === "")
+					field = field + '${CrtChnName}'+' ,';
+				if (F.CHANNEL_TYPE.read() === "") 
+					field = field + '${CrtChnChannelType}'+' ,';	
+				if (F.CHANNEL_STATUS.read() === "") 
+					field = field + '${CrtChnChannelStatus}'+' ,';	
+				
+				if(F.CHANNEL_TYPE.read()=== "3"){
+					if (field !== "") 
+						{
+						
+							showRequiredMessage(field);
+							return false;
+						}
+				}
+				// validation end
+				
+			    var actCodeArray='';
+				if(F.CHANNEL_TYPE.read()=== "3"){
+					var isNotValidated=false;
+					var actIsBlank=false;
+					var str='';
+					var act='';
+					row=1;
+					for (var row in F.SRC.rows())    
+					{ 
+						//(F.SUBSCRIPTION_STATUS.read(row) == '' || F.SUBSCRIPTION_STATUS.read(row) == 'EXPIRED')
+						if (!F.SRC.isMarkedForDeletion(row)){
+							if (F.ACTIVATION_CODE.read(row) === ""){
+								actIsBlank=true;     
+								if(act=== "")
+									act=act+ "$Row"+ " " +row+ " " + "$activationCodeMiss"+"\n";
+								else
+									act=act+""+ "$Row"+ " " +row+ " " + "$activationCodeMiss"+"\n";
+							}
+						}
+					}
+					if(actIsBlank){
+						alert("$SubsValidateMsg"+"\n"+act);
+						return false;
+					}
+					for (row in F.SRC.rows())    
+					{ 
+						//(F.SUBSCRIPTION_STATUS.read(row) == '' || F.SUBSCRIPTION_STATUS.read(row) == 'EXPIRED')
+						if (!F.SRC.isMarkedForDeletion(row)){
+							if (F.SUBSCRIPTION_STATUS.read(row) === "" || F.SUBSCRIPTION_STATUS.read(row) == "EXPIRED" || F.CONTENT_TYPE.read(row)===""){
+								isNotValidated=true;     
+								if(str==="")
+									str=str+ "$Row"+ "# " +row+": "+F.ACTIVATION_CODE.read(row)+"\n";
+								else
+									str=str+ "$Row"+ "# "+"" +row+": "+F.ACTIVATION_CODE.read(row)+"\n";
+							}
+						}
+					}
+					if(isNotValidated){
+						alert("$sourceNotValidated"+"\n"+str);
+						return false;
+					}
+					row=1;
+					for (row in F.SRC.rows())
+					{	
+						if (!F.SRC.isMarkedForDeletion(row)){
+							F.SOURCE_TYPE.write(3,row);
+							if(F.CONTENT_TYPE.read(row).length>0)
+							{
+								if(F.QUEUE_NAME.read(row)==="") 
+									actCodeArray =actCodeArray+ F.ACTIVATION_CODE.read(row)+',';
+							}
+						}
+					}
+				}
+				
+				//createSourceActivateAjaxCall(actCodeArray,row);
+				 if(F.CHANNEL_NAME.read() !== "" && F.CHANNEL_TYPE.read()=== "3")
+					{
+					
+					//added here the code
+					var GraphEditor = {};
+					GraphEditor.mask = new Ext.LoadMask(Ext.getBody(), {msg:'${CrtChnValidationMsgSubmit}'});
+					GraphEditor.mask.show();
+					
+					var detailsArray ;
+					//alert('activation codes ::' + actCodeArray);
+					//createSourceActivateAjaxCall(actCodeArray);
+					Ext.Ajax.request({
+						
+
+						url : 'Grciajaxservlet/ajax/ActivateChannelSource',
+						method : 'POST',
+						async: 'false',
+						params : 
+						{
+							actCodeArray:actCodeArray,
+							sample:{"test":"test", "test1":"test1"}
+						},
+						callback:function(response,success, options){
+							
+							if(success===true){
+								 //checknsubmit();
+                                                                  populateEncryptedPassword(G_ENCRYPT);
+							}
+						},
+						success : function(response, options) 
+						{
+							
+							detailsArray = (response.responseText).split(';');
+							
+							
+							var j;
+							row=1;
+							for(var row in F.SRC.rows())
+							{
+								if(F.SRC.rows().hasOwnProperty(row))
+								{
+									for(j=0;j<=detailsArray.length-1;j++)	
+									{	
+
+										
+										if(F.CONTENT_TYPE.read(row).length>0)
+										{
+											
+											if(detailsArray[j].length > 0)
+											{
+							
+												var actDetails = detailsArray[j].split('#');
+
+												if(F.ACTIVATION_CODE.read(row) == actDetails[0])
+												{
+		
+													
+													F.QUEUE_NAME.write(actDetails[5],row);
+													F.QUEUE_URL.write(actDetails[6],row);
+												
+													F.ACTIVATION_CODE.disable(row);			
+													if (document.getElementById('MSAI_252_'+row) !== null){
+														document.getElementById('MSAI_252_'+row).style.display='none';//innerHTML = "$Refresh";
+													}
+													if(document.getElementById("MSAI_284_"+row)!==null){
+																document.getElementById("MSAI_284_"+row).style.display="none";
+																var tempId="#MSAI_284_"+row;
+													}
+												
+													break;
+												}
+											}	
+										}
+									}		
+								}	
+							}	
+							GraphEditor.mask.hide();
+			
+						},
+						failure : function(response,options) 
+						{
+							
+							GraphEditor.mask.hide();
+							alert("${CrtChnAjx}");
+							return false;
+
+						}
+					});	 
+				}
+						
+			else{
+
+				//Added. Submits the form with more than 5 sources.
+                            //if(F.SRC.getRowCount() > 5)
+				 //checknsubmit();
+                                populateEncryptedPassword(G_ENCRYPT); 
+				}
+						
+			return true;
+			}
+		},
+		{
+			iconCls:'msai_toolsavenew',
+			xtype:'button',
+			id: 'msai_toolsave',
+			hidden: editDisabled || (invokedFromDataBrowser),
+			tooltip:
+			{
+				text: "Saves the content without processing it to the next step",
+				title: "Save Draft",
+				xtype: "quicktip"
+			},
+			handler: function() 
+			{ 
+				custom_checknsave(); 
+			}
+		},
+		{
+		iconCls:'msai_toolsavedraftandclose',
+			xtype:'button',
+			id: 'msai_toolsaveandclose',
+			hidden: editDisabled || (invokedFromDataBrowser),
+			width: 30,
+			tooltip:
+			{
+				text: "Saves the content and closes the form without processing it to the next step",
+				title: "Save Draft &amp; Close",
+				xtype: "quicktip"
+			},
+			handler: function() 
+			{ 
+				custom_checknsaveclose(); 
+			}
+		},
+		{
+			iconCls:'msai_toolreports',
+			menu : reportsMenu,
+			tooltip:
+			{
+				text: "View/Run the reports that are associated with this form",
+				title: "View Reports",
+				xtype: "quicktip"
+			},
+
+
+
+
+
+
+
+			handler: function() {}
+		},
+		{
+			iconCls:'msai_toolcancelnew',
+			xtype:'button',
+			id: 'msai_toolcancel',
+			hidden: false,
+			tooltip:
+			{
+				text: "${ToolBarCancelText}",
+				title: "${ToolBarCancel}",
+				xtype: "quicktip"
+			},
+			handler: function() 
+			{ 
+				goConfirmCancel(); 
+			}
+		}
+	];
+	F.toolBar.setupControls(myConfiguration );
+	F.toolBar.show();
+
+
+}
+
+
+F.onSave = function()
+{
+	showToolbar1();                                         
+
+};
+
+function callUpdateTitle()
+{
+
+	if (F.OBJECT_ID.read() === "" && F.CHANNEL_NAME.read() === "")
+
+		F.toolBar.updateTitle('${CrtChnChannelTitle}'+' '+ F.CHANNEL_NAME.read()+ ' ' );
+	else
+
+
+
+		F.toolBar.updateTitle('${CrtChnChannelTitle}'+' '+ F.CHANNEL_NAME.read() +' ' + F.OBJECT_ID.read() + '');
+
+}
+
+F.ACTIVATION_CODE.onChange=function(i) 
+{ 	
+var row=1;
+	for (row in F.SRC.rows())
+	{  		
+		if(i!=row){
+			if(F.ACTIVATION_CODE.read(row)==F.ACTIVATION_CODE.read(i)){
+				alert("$alreadyActCodeUsed");
+				F.ACTIVATION_CODE.write('',i);
+				break;
+			}
+		}	
+		
+	}
+	
+};
+
+F.CHANNEL_NAME.onChange = function()
+{
+		
+			var e1;
+
+	if	(F.CHANNEL_NAME.read().length >= 4000)
+	{
+		F.CHANNEL_NAME.write(F.CHANNEL_NAME.read().substring(0,4000));
+		alert('${maxlimitmsg}'+' ${CrtChnName} '+'${maxlimitwarning}');
+	}
+	F.toolBar.updateTitle( '${CrtChnChannelTitle}'+' '+ F.CHANNEL_NAME.read().substring(0,60)+' ' +F.OBJECT_ID.read() + '');
+	var row=1;
+	for (row in F.SRC.rows())
+	{    
+		if(F.CHANNEL_TYPE.read()==="3")
+			{
+				
+				e1 = document.getElementById('MSAI_84_'+row);
+				if(e1!==null)
+					e1.innerHTML = '$Row# '+row+': '+F.CHANNEL_NAME.read()+': '+F.CONTENT_CATEGORY.read(row);	
+			}
+	}
+
+};
+
+function fnChangePass(row)
+{
+	row_no = row.substring(15,16);
+	val = document.getElementById(row).value;
+	if (val.length > 4000)
+	{
+		document.getElementById(row).value='';
+		alert('${passmaxlimit}');
+	}	
+
+}
+
+
+
+function disableAllFields(rowNum){
+
+	/*F.CONTENT_TYPE.disable(rowNum);
+	F.DELIVERY_SCHEDULE.disable(rowNum);
+	F.EXPIRY_DATE.disable(rowNum);
+	F.SUBSCRIPTION_STATUS.disable(rowNum);
+	F.CONTENT_CATEGORY.disable(rowNum);
+	F.DELIVERY_FORMAT.disable(rowNum);*/
+
+}
+
+
+function populateEncryptedPassword(flag) 
+{           //F.SRC.showFirstPage();
+           var rowCount = F.SRC.getRowCount();
+           var pArr=[];
+           var pg=0;
+    	   var sourceStr;
+	    for (var i = 1;i <= rowCount;i++)
+		{  
+
+                    if(((i%5)==1)&& (flag===G_ENCRYPT)){ 
+		    pg=pg+1;
+		    if(pg==1 ){ try{gopage(F.SRC.getID(),1,'A');}catch(e){}}else {try{ gopage(F.SRC.getID(),4,'A');}catch(e){}} 
+                  //F.SRC.showPage(pg);
+                    //F.SRC.showPageWithRow(i);
+	         }
+            
+		
+			
+      var obj={};       
+                    if(flag === G_ENCRYPT)
+                    {	
+                      sourceStr = getFieldRef(getSeq(F.CHANNEL_PASSWORD.sequence,i)).value;
+                       				
+                      if ( sourceStr!== '')
+                         { 
+                             
+                          obj.dStr=sourceStr;
+                          pArr.push(obj);
+                         }  
+                    }
+                    else if(flag === G_DECRYPT)
+                    { 
+                      sourceStr = F.CHANNEL_PASSWORD_ENCR.read(i);
+                       
+		      if (sourceStr !== '')
+                         { 
+                         
+                          obj.eStr=sourceStr;
+                          pArr.push(obj);
+                         } 
+		    }	
+                  				
+    	        }
+            var pObj={};
+            pObj.pDetails=pArr;
+            var jStr=JSON.stringify(pObj);
+
+
+    Ext.Ajax.request({
+		url : 'Grciajaxservlet/ajax/getPasswordDetails',
+		method : 'POST',
+                async: 'false',
+                params : { passWordDetails:jStr	},
+		success : function(response, options) {
+                                     
+
+	                        assignEncryptDecryptValues(response.responseText,flag);
+
+				if(flag === G_ENCRYPT)  {
+				checknsubmit();
+				}
+				else if(flag === G_DECRYPT) {F.SRC.showPage(1);}
+                                  
+		},
+		failure : function(response,options) {
+		                alert("Failure");
+				return;
+		}
+	});
+}
+
+function assignEncryptDecryptValues(jStr,flag)
+{
+var enDeJsonObj=JSON.parse(jStr);  
+var enDeArr=enDeJsonObj.pDetails;
+var enDeMap={};
+var sourceStr;
+for(var i1=0;i1<enDeArr.length;i1++) 
+  { 
+    var key;
+    var val;
+
+    if(flag == G_ENCRYPT)
+    { 
+     key=enDeArr[i1].dStr;
+     val=enDeArr[i1].eStr;
+    }
+    else if(flag == G_DECRYPT)
+    {
+     key=enDeArr[i1].eStr;
+     val=enDeArr[i1].dStr;
+     }
+    
+   enDeMap[key]=val;
+  }
+
+var rowCount = F.SRC.getRowCount();
+var pg=0;
+for (var i2 = 1;i2 <= rowCount;i2++)
+{
+   
+              if(((i2%5)==1) && (flag===G_ENCRYPT)){
+		pg=pg+1;
+                if(pg==1){ try{gopage(F.SRC.getID(),1,'A');}catch(e){}}else {try{ gopage(F.SRC.getID(),4,'A');}catch(e){}}            
+		//F.SRC.showPage(pg);
+	         }
+    
+		
+ if(flag === G_ENCRYPT)
+  { 
+    sourceStr=getFieldRef(getSeq(F.CHANNEL_PASSWORD.sequence,i2)).value;
+    if ( sourceStr !== '')
+     { 
+      F.CHANNEL_PASSWORD_ENCR.write(enDeMap[sourceStr],i2);
+     }
+  }
+ else if(flag === G_DECRYPT)
+  {
+    sourceStr=F.CHANNEL_PASSWORD_ENCR.read(i2);
+   if (sourceStr !== '')
+     { 
+       write(getSeq(F.CHANNEL_PASSWORD.sequence,i2),enDeMap[sourceStr]);
+       F.CHANNEL_PASSWORD_ENCR.write('',i2);
+     }
+  }
+  
+}
+}
+
+function assignNulltoPwd()
+{
+    
+ var rowCount = F.SRC.getRowCount();
+  for (var i3 = 1;i3 <= rowCount;i3++)
+   {   
+     write(getSeq(F.CHANNEL_PASSWORD.sequence,i3),'');
+     
+   }
+}
+
+</script>

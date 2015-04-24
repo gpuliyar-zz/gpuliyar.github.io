@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><VIEWS_SPEC xmlns="http://www.metricstream.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metricstream.com ms_application_schema.xsd">
+<!--$Revision: 1.30.2.12.2.2.2.9.2.8 $-->
+<!--$Author: prao $-->
+<PLATFORM_DETAILS>
+<PLATFORM_VERSION>6.0</PLATFORM_VERSION>
+<BUILD_VERSION>4.11.0</BUILD_VERSION>
+</PLATFORM_DETAILS>
+<VIEW_NAME>MS_RGA_FEED_AGG_FILTERED_V</VIEW_NAME>
+<OBJECT_ID>MS_RGA_FEED_AGG_FILTERED_V</OBJECT_ID>
+<VIEW_TEXT>(MSG_UID,FEED_DATA_ID,PROCESSED_FLAG,ATTACHMENT,BODY,SUBJECT,RECIPIENT,SENDER,SERVER,INSTANCE_REC_NUM,INSTANCE_ID,METRIC_ID,METRIC_RUN_DATE,METRIC_COMPLETED_DATE,LATEST_FLAG,CREATED_BY,CREATION_DATE,PROCESS_FLOW_STATUS,PROCESS_INSTANCE_ID,MULTIROW_GROUP_NAME,ELECTRONICALLY_SIGNED,MULTIROW_REGION_ID) AS select msg_uid,
+feed_data_id,
+processed_flag,
+attachment,
+body,
+subject,
+recipient,
+sender,
+server,
+instance_rec_num,
+instance_id,
+metric_id,
+metric_run_date,
+metric_completed_date,
+latest_flag,
+created_by,
+creation_date,
+process_flow_status,
+process_instance_id,
+multirow_group_name,
+electronically_signed,
+multirow_region_id
+ from MS_RGA_FEED_AGG_FILTERED_T t
+</VIEW_TEXT>
+</VIEWS_SPEC>

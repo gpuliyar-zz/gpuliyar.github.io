@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?><PACKAGE_SPEC xmlns="http://www.metricstream.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metricstream.com ms_application_schema.xsd">
+<!--$Revision: 1.30.2.12.2.2.2.9.2.8 $-->
+<!--$Author: prao $-->
+<PLATFORM_DETAILS>
+<PLATFORM_VERSION>6.1</PLATFORM_VERSION>
+<BUILD_VERSION>4.2.2.0</BUILD_VERSION>
+</PLATFORM_DETAILS>
+<STORED_PROCEDURE_NAME>MS_RGA_PROCESS_NOTIFY_USERS</STORED_PROCEDURE_NAME>
+<OBJECT_ID>MS_RGA_PROCESS_NOTIFY_USERS</OBJECT_ID>
+<OBJECT_TYPE>PACKAGE</OBJECT_TYPE>
+<TEXT>PACKAGE ms_rga_process_notify_users
+IS
+/**
+* ======================================================================&lt;br/&gt;
+* Project: GRC Intelligence&lt;br/&gt;
+* Description:Package for sending emails to the users from NOTIFY USERS FORM &lt;br/&gt;
+* DB impact: YES&lt;br/&gt;
+* Commit inside: YES&lt;br/&gt;
+* Rollback inside: NO&lt;br/&gt;
+* ----------------------------------------------------------------------&lt;br/&gt;
+* * ======================================================================&lt;br/&gt;
+* @headcom
+* */
+/**
+* Subscription notification record type 
+*/
+   
+   TYPE subscriptn_notifi_header IS RECORD (
+      subs_response_id    ms_rga_subscrptn_notifications.subs_response_id%TYPE,
+      notification_id     ms_rga_subscrptn_notifications.notification_id%TYPE,
+      notification_date   ms_rga_subscrptn_notifications.notification_date%TYPE,
+      comments            ms_rga_subscrptn_notifications.comments%TYPE,
+      pid                 ms_rga_subscrptn_notifications.pid%TYPE
+   );
+/**
+* Subscription notification user details record type
+*/
+   
+   TYPE subscriptn_notifi_usrs_dtls IS RECORD (
+      subs_response_id   ms_rga_subscrptn_notify_users.subs_response_id%TYPE,
+      notification_id    ms_rga_subscrptn_notify_users.notification_id%TYPE,
+      user_type          ms_rga_notify_users_v.NOTIFY_OTHER_USERS%TYPE,
+      active             ms_rga_subscrptn_notify_users.active%TYPE,
+      --username           ms_rga_subscrptn_notify_users.user_name%TYPE,
+      username           ms_rga_notify_users_v.NOTIFY_SYSTEM_USERS%TYPE,
+      created_on         ms_rga_subscrptn_notify_users.created_on%TYPE,
+      created_by         ms_rga_subscrptn_notify_users.created_by%TYPE,
+      modified_on        ms_rga_subscrptn_notify_users.modified_on%TYPE,
+      modified_by        ms_rga_subscrptn_notify_users.modified_by%TYPE
+   );
+
+/**
+* Subscription notification details record type
+*/
+   TYPE create_notify_users_record IS RECORD (
+      sub_noti_hdr        subscriptn_notifi_header,
+     
+      sub_noti_dtls_tbl subscriptn_notifi_usrs_dtls
+   );
+   
+/**
+* Email The Users That Are Specified In Notify Users Form. &lt;br/&gt;
+* @param i_pf_id  Process instance id
+* @param o_error_code Error code
+* @param o_error_message Error message
+* @throws OTHERS/raise_excp, when there is an error encountered in execution, &lt;br/&gt;
+*                      logs are captured in ms_apps_message_log table with package name :Process_Notify_Users. &lt;br/&gt;
+*/ 
+   PROCEDURE process_notify_users (
+      i_pf_id           IN              NUMBER,
+      o_error_code      OUT NOCOPY      NUMBER,
+      o_error_message   OUT NOCOPY      VARCHAR2
+   );
+/**
+* records the notification details. &lt;br/&gt;
+* @param i_create_notify_users_rec user record type &lt;see above&gt;
+* @param o_error_code Error code
+* @param o_error_message Error message
+* @throws DUP_VAL_ON_INDEX, when there is notification already,returns the error message :SQLERRRM and code:SQLCODE &lt;br/&gt;
+* @throws OTHERS, when any other exception encountered,returns the error message :SQLERRRM and code:SQLCODE &lt;br/&gt;
+*/ 
+   PROCEDURE insert_subs_notifi_master (
+      i_create_notify_users_rec   IN              create_notify_users_record,
+      o_error_code                OUT NOCOPY      NUMBER,
+      o_error_message             OUT NOCOPY      VARCHAR2
+   );
+
+/**
+* Records The Notification Details On User Level. &lt;br/&gt;
+* @param i_create_notify_users_rec user record type &lt;see above&gt;
+* @param o_error_code Error code
+* @param o_error_message Error message
+* @throws DUP_VAL_ON_INDEX, when there is notification already,returns the error message :SQLERRRM and code:SQLCODE &lt;br/&gt;
+* @throws OTHERS, when any other exception encountered,returns the error message :SQLERRRM and code:SQLCODE &lt;br/&gt;
+*/ 
+   PROCEDURE insert_subs_notify_users (
+     i_create_notify_users_rec   IN              create_notify_users_record,
+      o_error_code      OUT NOCOPY      NUMBER,
+      o_error_message   OUT NOCOPY      VARCHAR2
+   );
+  /**
+* Builds the formatted email subject,body,user and other details.Sends email to the notified users. &lt;br/&gt;
+* @param i_pf_id process instance id
+* @param i_metric_id metric id
+* @param i_feed_data_id Feed data id
+* @param o_error_code Error code
+* @param o_error_message Error message
+* @throws send_email_excp/OTHERS, when any exception encountered during execution,returns the error message :SQLERRRM and code:SQLCODE &lt;br/&gt;
+*/ 
+      PROCEDURE email_notify_users (
+      i_pf_id           IN              NUMBER,
+      i_metric_id       IN              NUMBER,
+      i_feed_data_id    IN              NUMBER,
+      o_error_code      OUT NOCOPY      NUMBER,
+      o_error_message   OUT NOCOPY      VARCHAR2
+   );
+END ms_rga_process_notify_users; </TEXT>
+<TEXT_BODY>PACKAGE BODY ms_rga_process_notify_users
+IS
+   g_success_code   CONSTANT NUMBER        := ms_rga_utilities.g_success_code;
+   g_success_mesg   CONSTANT VARCHAR2 (100)
+                                           := ms_rga_utilities.g_success_mesg;
+   g_module         CONSTANT VARCHAR2 (10)  := ms_rga_utilities.g_module_name;
+   g_package_name   CONSTANT VARCHAR2 (50)  := 'MS_RGA_PROCESS_NOTIFY_USERS';
+   g_action                  VARCHAR2 (12)  := 'NOTIFUSR';
+
+   PROCEDURE process_notify_users (
+      i_pf_id           IN              NUMBER,
+      o_error_code      OUT NOCOPY      NUMBER,
+      o_error_message   OUT NOCOPY      VARCHAR2
+   )
+   AS
+      CURSOR cur_notify_users
+      IS
+         SELECT NOTIFY_OTHER_USERS, NOTIFY_SYSTEM_USERS, received_on, alert_title,
+                channel_id, org_entity_id, DD_ENTERPRISE_INFO enterprise_name, DD_ENTERPRISE_INFO enterprise_id,
+                creation_date current_user_date, dd_current_user_name, creation_date event_user_date,
+                dd_event_user_name, instance_rec_num, instance_id, metric_id,
+                metric_run_date, metric_completed_date, latest_flag,
+             DD_CURRENT_USER_NAME created_by, creation_date creation_on, process_flow_status,
+                process_instance_id, multirow_group_name,
+                electronically_signed, multirow_region_id, notification_id,
+               creation_date last_modified_on ,DD_CURRENT_USER_NAME last_modified_by, SUSB_RESPONSE_ID,FEED_DATA_ID
+           FROM ms_rga_notify_users_v
+          WHERE process_instance_id = i_pf_id
+            AND instance_id = (SELECT MAX (instance_id)
+                                 FROM ms_rga_notify_users_v
+                                WHERE process_instance_id = i_pf_id);
+--
+      x_error_code        NUMBER;
+      x_error_message     VARCHAR2 (4000);
+      x_stmt_number       PLS_INTEGER;
+      x_notification_id   VARCHAR2 (50);
+      x_metric_id         NUMBER;
+      x_max_instance_id   NUMBER;
+      x_feed_data_id       NUMBER;
+      x_create_notify_users_rec create_notify_users_record;
+       raise_excp                  EXCEPTION;
+   BEGIN
+      x_stmt_number := 10;
+      Dbms_Application_Info.set_module(g_module, g_action);
+
+      BEGIN
+         SELECT MAX (instance_id)
+           INTO x_max_instance_id
+           FROM ms_rga_notify_users_v
+          WHERE process_instance_id = i_pf_id;
+      EXCEPTION
+         WHEN NO_DATA_FOUND
+         THEN
+            o_error_code := SQLCODE;
+            o_error_message :=
+                  'Error in Procedure Process notify_users and statement number'
+               || x_stmt_number
+               || ' Error Msg is '
+               || SUBSTR (SQLERRM, 1, 250);
+      END;
+
+      x_stmt_number := 20;
+
+      FOR cur_rec IN cur_notify_users
+      LOOP
+         x_stmt_number := 30;
+         x_notification_id := cur_rec.notification_id;
+
+         IF x_notification_id IS NULL
+         THEN
+            x_stmt_number := 40;
+
+            SELECT 'NOT-' || ms_rga_notification_seq.NEXTVAL
+              INTO x_notification_id
+              FROM DUAL;
+
+            x_stmt_number := 50;
+
+            BEGIN
+               UPDATE ms_rga_notify_users_v
+                  SET notification_id = x_notification_id
+                WHERE process_instance_id = i_pf_id
+                  AND instance_id = x_max_instance_id;
+            EXCEPTION
+               WHEN NO_DATA_FOUND
+               THEN
+                  o_error_code := SQLCODE;
+                  o_error_message :=
+                        'Error in Procedure Process notify_users and statement number'
+                     || x_stmt_number
+                     || ' Error Msg is '
+                     || SUBSTR (SQLERRM, 1, 250);
+            END;
+         END IF;
+
+         x_stmt_number := 60;
+         x_create_notify_users_rec.sub_noti_hdr.subs_response_id :=
+                                                          cur_rec.susb_response_id;
+         x_create_notify_users_rec.sub_noti_hdr.notification_id :=
+                                                             x_notification_id;
+         x_create_notify_users_rec.sub_noti_hdr.notification_date :=
+                                   TO_DATE (cur_rec.received_on, 'dd/mm/yyyy');
+         x_create_notify_users_rec.sub_noti_hdr.comments := NULL;
+         x_create_notify_users_rec.sub_noti_hdr.pid :=
+                                                   cur_rec.process_instance_id;
+         x_create_notify_users_rec.sub_noti_dtls_tbl.subs_response_id :=
+                                                          cur_rec.susb_response_id;
+         x_create_notify_users_rec.sub_noti_dtls_tbl.notification_id :=
+                                                             x_notification_id;
+         x_create_notify_users_rec.sub_noti_dtls_tbl.user_type :=
+                                                       cur_rec.NOTIFY_OTHER_USERS;
+         x_create_notify_users_rec.sub_noti_dtls_tbl.active := 'Y';
+         x_create_notify_users_rec.sub_noti_dtls_tbl.username :=
+                                                       cur_rec.NOTIFY_SYSTEM_USERS;
+         x_create_notify_users_rec.sub_noti_dtls_tbl.created_on :=
+                                                         cur_rec.current_user_date;
+         x_create_notify_users_rec.sub_noti_dtls_tbl.created_by :=
+                                                            cur_rec.created_by;
+         x_create_notify_users_rec.sub_noti_dtls_tbl.modified_on :=
+                                                      cur_rec.last_modified_on;
+         x_create_notify_users_rec.sub_noti_dtls_tbl.modified_by := NULL;
+         x_metric_id := cur_rec.metric_id;
+         x_feed_data_id:=cur_rec.FEED_DATA_ID;
+      END LOOP;
+      
+            x_stmt_number := 70;
+
+-- TO EMAIL THE USERS THAT ARE SPECIFIED IN NOTIFY USERS FORM.
+      ms_rga_process_notify_users.email_notify_users
+                                           (i_pf_id              =&gt; i_pf_id,
+                                            i_metric_id          =&gt; x_metric_id,
+                                            i_feed_data_id       =&gt; x_feed_data_id,
+                                            o_error_code         =&gt; x_error_code,
+                                            o_error_message      =&gt; x_error_message);
+                                     
+           IF o_error_code IS NOT NULL AND o_error_code &lt;&gt; g_success_code
+               THEN
+                  RAISE raise_excp;
+           END IF;
+     x_stmt_number := 80;                
+ --INSERT INTO   ms_rga_subscrptn_notifications  TABLE                                    
+      ms_rga_process_notify_users.insert_subs_notifi_master
+                        (i_create_notify_users_rec      =&gt; x_create_notify_users_rec,
+                         o_error_code                   =&gt; x_error_code,
+                         o_error_message                =&gt; x_error_message
+                        );
+       IF o_error_code IS NOT NULL AND o_error_code &lt;&gt; g_success_code
+               THEN
+                  RAISE raise_excp;
+           END IF;                  
+                        
+     x_stmt_number := 90;
+    --INSERTS INTO ms_rga_subscrptn_notify_users TABLE                    
+                        
+      ms_rga_process_notify_users.insert_subs_notify_users
+                        (i_create_notify_users_rec      =&gt; x_create_notify_users_rec,
+                         o_error_code                   =&gt; x_error_code,
+                         o_error_message                =&gt; x_error_message
+                        );
+                        
+       IF o_error_code IS NOT NULL AND o_error_code &lt;&gt; g_success_code
+               THEN
+                  RAISE raise_excp;
+           END IF;                  
+      o_error_code := g_success_code;
+      o_error_message := g_success_mesg;      
+
+   EXCEPTION
+      WHEN raise_excp
+      THEN
+         o_error_message :=
+               'Error Occured in ms_rga_process_create_channel at statement number '
+            || x_stmt_number
+            || '. Error Message: '
+            || x_error_message;
+         o_error_code := SQLCODE;
+         ms_apps_utilities.insert_log (o_error_message,
+                                       g_module,
+                                       g_package_name
+                                      );
+      WHEN OTHERS
+      THEN
+         o_error_message :=
+               'Error Occurred in Procedure PROCESS_NOTIFY_USERS at statement number '
+            || x_stmt_number
+            || '. Error Message : '
+            || SUBSTR (SQLERRM, 1, 250);
+         o_error_code := SQLCODE;
+         DBMS_OUTPUT.put_line (o_error_code);
+         ms_apps_utilities.insert_log (o_error_message,
+                                       g_Module,
+                                       'PROCESS_NOTIFY_USERS'
+                                      );
+   END process_notify_users;
+
+   PROCEDURE insert_subs_notifi_master (
+      i_create_notify_users_rec   IN              create_notify_users_record,
+      o_error_code                OUT NOCOPY      NUMBER,
+      o_error_message             OUT NOCOPY      VARCHAR2
+   )
+   AS
+      x_stmt_number   NUMBER := 10;
+   BEGIN
+      INSERT INTO ms_rga_subscrptn_notifications
+                  (subs_response_id,
+                   notification_id,
+                   notification_date,
+                   comments,
+                   pid
+                  )
+           VALUES (i_create_notify_users_rec.sub_noti_hdr.subs_response_id,
+                   i_create_notify_users_rec.sub_noti_hdr.notification_id,
+                   i_create_notify_users_rec.sub_noti_hdr.notification_date,
+                   i_create_notify_users_rec.sub_noti_hdr.comments,
+                   i_create_notify_users_rec.sub_noti_hdr.pid
+                  );
+   EXCEPTION
+      WHEN DUP_VAL_ON_INDEX
+      THEN
+         o_error_message :=
+               'Error in INSERT_SUBS_NOTIFI_MASTER at statement number'
+            || x_stmt_number
+            || ' Error Msg is '
+            || SUBSTR (SQLERRM, 1, 250);
+         o_error_code := SQLCODE;
+      WHEN OTHERS
+      THEN
+         o_error_message :=
+               'Error Occurred in Procedure INSERT_SUBS_NOTIFI_MASTER at statement number '
+            || x_stmt_number
+            || '. Error Message : '
+            || SUBSTR (SQLERRM, 1, 250);
+         o_error_code := SQLCODE;
+         ms_apps_utilities.insert_log (o_error_message,
+                                       g_Module,
+                                       'INSERT_SUBS_NOTIFI_MASTER'
+                                      );
+   END;
+
+   PROCEDURE insert_subs_notify_users (
+      i_create_notify_users_rec   IN              create_notify_users_record,
+      o_error_code                OUT NOCOPY      NUMBER,
+      o_error_message             OUT NOCOPY      VARCHAR2
+   )
+   AS
+      x_notify_users   VARCHAR2 (4000);
+      x_stmt_number    NUMBER          := 0;
+   BEGIN
+      x_notify_users := i_create_notify_users_rec.sub_noti_dtls_tbl.username;
+--COMMA SEPARATED USERNAMES ARE SEPARATED AND INSERTED INTO THE ms_rga_subscrptn_notify_users TABLES
+      FOR i IN
+         (SELECT COLUMN_VALUE AS user_id
+            FROM TABLE
+                    (CAST
+                        ((SELECT ms_apps_utilities.parse_string
+                                                              (x_notify_users,
+                                                               ','
+                                                              )
+                            FROM DUAL) AS ms_varchar2_array
+                        )
+                    )
+           WHERE COLUMN_VALUE IS NOT NULL)
+      LOOP
+         INSERT INTO ms_rga_subscrptn_notify_users
+                     (subs_response_id,
+                      notification_id,
+                      user_type,
+                      active,
+                      created_on,
+                      created_by,
+                      modified_on,
+                      modified_by,
+                      user_name
+                     )
+              VALUES (i_create_notify_users_rec.sub_noti_dtls_tbl.subs_response_id,
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.notification_id,
+                      'SYSTEM',
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.active,
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.created_on,
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.created_by,
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.modified_on,
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.modified_by,
+                      ms_apps_utilities.get_user_name(i.user_id)
+                     );
+      END LOOP;
+     x_notify_users := i_create_notify_users_rec.sub_noti_dtls_tbl.user_type;
+     FOR x IN
+         (SELECT COLUMN_VALUE AS user_id
+            FROM TABLE
+                    (CAST
+                        ((SELECT ms_apps_utilities.parse_string
+                                                              (x_notify_users,
+                                                               ','
+                                                              )
+                            FROM DUAL) AS ms_varchar2_array
+                        )
+                    )
+           WHERE COLUMN_VALUE IS NOT NULL)
+      LOOP
+         INSERT INTO ms_rga_subscrptn_notify_users
+                     (subs_response_id,
+                      notification_id,
+                      user_type,
+                      active,
+                      created_on,
+                      created_by,
+                      modified_on,
+                      modified_by,
+                      user_name
+                     )
+              VALUES (i_create_notify_users_rec.sub_noti_dtls_tbl.subs_response_id,
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.notification_id,
+                      'OTHER',
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.active,
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.created_on,
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.created_by,
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.modified_on,
+                      i_create_notify_users_rec.sub_noti_dtls_tbl.modified_by,
+                      --ms_apps_utilities.get_user_name(i.user_id)
+                      x.user_id
+                     );
+      END LOOP;
+   EXCEPTION
+      WHEN DUP_VAL_ON_INDEX
+      THEN
+         o_error_message :='Error in INSERT_SUBS_NOTIFI_USERS at statement number'|| x_stmt_number|| ' Error Msg is '|| SUBSTR (SQLERRM, 1, 250);
+         o_error_code := SQLCODE;   
+       WHEN OTHERS
+      THEN
+         o_error_message := Dbms_Utility.format_error_backtrace;
+         o_error_code := SQLCODE;
+         ms_apps_utilities.insert_log (o_error_message,g_Module,'INSERT_SUBS_NOTIFI_USERS');
+  END;
+
+   PROCEDURE email_notify_users (
+      i_pf_id           IN              NUMBER,
+      i_metric_id       IN              NUMBER,
+      i_feed_data_id    IN              NUMBER,
+      o_error_code      OUT NOCOPY      NUMBER,
+      o_error_message   OUT NOCOPY      VARCHAR2
+   )
+   IS
+      x_recipients            varchar2_array             := varchar2_array
+                                                                          ();
+      x_param_names           varchar2_array             := varchar2_array
+                                                                          ();
+      x_param_values          clob_array                     := clob_array
+                                                                          ();
+      x_notify_system_users   VARCHAR2 (2000);
+      x_notify_other_users    VARCHAR2 (2000);
+      x_max_instance_id       PLS_INTEGER;
+      x_stmt_number           PLS_INTEGER;
+      x_error_code            PLS_INTEGER;
+      --x_metric_name           VARCHAR2 (2000);
+      x_error_message         VARCHAR2 (1000);
+      x_subject               clob;
+      x_subject_body          clob;
+      x_attachment            varchar2(4000);
+      --x_infolet_id            NUMBER;
+      x_email_note            si_messages_t.MESSAGE_TEXT%TYPE;
+      x_boiler_plate          si_messages_t.MESSAGE_TEXT%TYPE;
+      x_copyright             si_messages_t.MESSAGE_TEXT%TYPE;
+      send_email_excp         EXCEPTION;
+      x                       NUMBER                            := 0;
+      x_user_name varchar2(4000);
+   BEGIN
+      x_stmt_number := 5;
+
+      BEGIN
+         SELECT MAX (instance_id)
+           INTO x_max_instance_id
+           FROM ms_rga_notify_users_v
+          WHERE process_instance_id = i_pf_id;
+          
+      EXCEPTION
+         WHEN NO_DATA_FOUND
+         THEN
+            o_error_code := SQLCODE;
+            o_error_message :=
+                  'Error in Procedure email_notify_users and statement number'
+               || x_stmt_number
+               || ' Error Msg is '
+               || x_error_message;
+      END;
+
+      x_stmt_number := 15;
+
+      BEGIN
+         SELECT NOTIFY_SYSTEM_USERS,NOTIFY_OTHER_USERS,ms_apps_utilities.get_user_full_name(dd_event_user_name)
+           INTO x_notify_system_users,x_notify_other_users,x_user_name
+           FROM ms_rga_notify_users_v
+          WHERE process_instance_id = i_pf_id
+            AND instance_id = x_max_instance_id;
+            
+           
+      EXCEPTION
+         WHEN NO_DATA_FOUND
+         THEN
+            o_error_code := SQLCODE;
+            o_error_message :=
+                  'Error in Procedure email_notify_users and statement number'
+               || x_stmt_number
+               || ' Error Msg is '
+               || x_error_message;
+      END;
+
+      x_stmt_number := 20;
+
+       BEGIN
+         SELECT SUBJECT, BODY , ATTACHMENT
+           INTO x_subject, x_subject_body , x_attachment
+           FROM MS_RGA_FEED_AGGREGATOR_V
+           WHERE feed_data_id=i_feed_data_id;
+           
+      EXCEPTION
+         WHEN NO_DATA_FOUND
+         THEN
+            o_error_code := SQLCODE;
+            o_error_message :=
+                  'Error in Procedure email_notify_users and statement number'
+               || x_stmt_number
+               || ' Error Msg is '
+               || x_error_message;
+      END;
+
+      x_stmt_number := 25;
+--end
+     
+
+      x_email_note :=
+         'Note : This message and all attachments should be considered confidential and proprietary to Quality Stream.';
+      x_boiler_plate := 'Alert automatically generated by MetricStream.';
+      x_copyright :=
+                'Copyright @ MetricStream Inc. 1999-2013 All rights reserved.';
+     
+      x_stmt_number := 30;
+
+     /* SELECT ms_apps_utilities.get_infolet_id ('MS RGA NOTIFY USERS')
+        INTO x_infolet_id
+        FROM DUAL;*/
+
+      x_stmt_number := 35;
+      x_param_names.EXTEND (9);
+      /* Set the email subject and set up the parameter names array */
+      x_param_names (1) := 'USER_FULL_NAME';
+      x_param_names (2) := 'EMAIL_NOTE';
+      x_param_names (3) := 'BOILERPLATE_TEXT';
+      x_param_names (4) := 'COPYRIGHT_INFORMATION';
+      x_param_names (5) := 'SUBJECT_HEADER';
+      x_param_names (6) := 'SUBJECT_BODY';
+      x_param_names (7) := 'PROC_INSTANCE_ID';
+      x_param_names (8) := 'PUSH_INFO_ID';
+      x_param_names (9) := 'ATTACHMENT';
+      x_stmt_number := 40;
+
+      x_param_values.EXTEND (9);
+      /*Assign the values into the parameter values array*/
+      x_param_values (1) := x_user_name;
+      x_param_values (2) := x_email_note;
+      x_param_values (3) := x_boiler_plate;
+      x_param_values (4) := x_copyright;
+      x_param_values (5) := x_subject;
+      x_param_values (6) := x_subject_body;
+      x_param_values (7) := TO_CHAR (i_pf_id);
+      x_param_values (8) := TO_CHAR (i_metric_id);--(x_infolet_id);
+      x_param_values (9) := x_attachment;
+
+      x_stmt_number := 45;
+
+      IF x_error_code &lt;&gt; ms_rga_utilities.g_success_code
+      THEN
+         RAISE send_email_excp;
+      END IF;
+
+      o_error_code := ms_rga_utilities.g_success_code;
+      o_error_message := ms_rga_utilities.g_success_mesg;
+
+      FOR i IN
+         (SELECT COLUMN_VALUE AS user_id
+            FROM TABLE
+                    (CAST
+                        ((SELECT ms_apps_utilities.parse_string
+                                                       (x_notify_system_users,
+                                                        ','
+                                                       )
+                            FROM DUAL) AS ms_varchar2_array
+                        )
+                    )
+           WHERE COLUMN_VALUE IS NOT NULL)
+      LOOP
+         x_recipients.EXTEND;
+         x := x + 1;
+         x_recipients (x) := ms_apps_utilities.get_user_name(i.user_id);
+      END LOOP;
+
+      /*Ms_Rga_Utilities.Send_Email(2,
+                                  X_Recipients,
+                                  100000,
+                                  X_Subject,
+                                  'RGA/MS_RGA_NOTIFY_USERS.htm',
+                                  X_Param_Names,
+                                  X_Param_Values,
+                                  X_Error_Code,
+                                  X_Error_Message);*/
+      x_stmt_number := 40;
+
+      FOR i IN
+         (SELECT COLUMN_VALUE AS user_id
+            FROM TABLE
+                    (CAST
+                        ((SELECT ms_apps_utilities.parse_string
+                                                        (x_notify_other_users,
+                                                         ','
+                                                        )
+                            FROM DUAL) AS ms_varchar2_array
+                        )
+                    ))
+      LOOP
+         x_recipients.EXTEND;
+         x := x + 1;
+         x_recipients (x) := i.user_id;--ms_apps_utilities.get_user_name(i.user_id);
+      END LOOP;
+
+      ms_rga_utilities.send_email (2,
+                                   x_recipients,
+                                   100000,
+                                   x_subject,
+                                   ms_rga_utilities.g_email_template,
+                                   --'RGA/MS_RGA_NOTIFY_USERS.htm',
+                                   x_param_names,
+                                   x_param_values,
+                                   x_error_code,
+                                   x_error_message
+                                  );
+   EXCEPTION
+      WHEN send_email_excp
+      THEN
+         o_error_code := SQLCODE;
+         o_error_message :=
+               'Error in Procedure notify_users and statement number'
+            || x_stmt_number
+            || ' Error Msg is '
+            || x_error_message;
+      WHEN OTHERS
+      THEN
+         o_error_code := SQLCODE;
+         o_error_message :=
+               'Error Occurred in notify_users at stmt number'
+            || x_stmt_number
+            || '. Error Message: '
+            || SUBSTR (SQLERRM, 1, 250);
+   END email_notify_users;
+END ms_rga_process_notify_users; </TEXT_BODY>
+</PACKAGE_SPEC>

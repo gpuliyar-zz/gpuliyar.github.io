@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><VIEWS_SPEC xmlns="http://www.metricstream.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metricstream.com ms_application_schema.xsd">
+<!--$Revision: 1.30.2.12.2.2.2.9.2.8 $-->
+<!--$Author: prao $-->
+<PLATFORM_DETAILS>
+<PLATFORM_VERSION>6.0</PLATFORM_VERSION>
+<BUILD_VERSION>4.11.0</BUILD_VERSION>
+</PLATFORM_DETAILS>
+<VIEW_NAME>MS_RGA_USER_ORG_ROLES_V</VIEW_NAME>
+<OBJECT_ID>MS_RGA_USER_ORG_ROLES_V</OBJECT_ID>
+<VIEW_TEXT>(USER_ID,ORG_ENTITY_ID,ROLE_ID) AS SELECT   b.user_id, a.org_entity_id, a.role_id
+       FROM si_org_roles a, si_user_org_roles b
+      WHERE a.org_role_id = b.org_role_id
+   ORDER BY user_id, org_entity_id, role_id </VIEW_TEXT>
+</VIEWS_SPEC>

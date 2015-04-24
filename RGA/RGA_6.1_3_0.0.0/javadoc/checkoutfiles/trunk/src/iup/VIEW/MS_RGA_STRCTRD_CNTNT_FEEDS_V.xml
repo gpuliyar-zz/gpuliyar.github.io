@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><VIEWS_SPEC xmlns="http://www.metricstream.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.metricstream.com ms_application_schema.xsd">
+<!--$Revision: 1.30.2.12.2.2.2.9.2.8 $-->
+<!--$Author: prao $-->
+<PLATFORM_DETAILS>
+<PLATFORM_VERSION>6.1</PLATFORM_VERSION>
+<BUILD_VERSION>4.1.1.0</BUILD_VERSION>
+</PLATFORM_DETAILS>
+<VIEW_NAME>MS_RGA_STRCTRD_CNTNT_FEEDS_V</VIEW_NAME>
+<OBJECT_ID>MS_RGA_STRCTRD_CNTNT_FEEDS_V</OBJECT_ID>
+<VIEW_TEXT>("CHANNEL_ID","CHANNEL_NAME","CHANNEL_TYPE","STRUCTCONTENT_INFOLET","CHANNEL_DESCRIPTION","CHANNEL_ACTIVE","SOURCE_ID","SOURCE_TYPE","SERVER_ADD_URL","SCR_USER_NAME","SCR_PASSWORD","EMAIL_FROM","KEYWORDS","SOURCE_DESCRIPTION","SOURCE_ACTIVE","SERVER_PARAMETERS","CHNL_DTLS_USERNAME","FEED_AGGTR_USERNAME","RESPONSE_DATE","BODY","TITLE_SUBJECT","ATTACHMENTS","CREATED_ON","MODIFIED_ON","PROCESSED_FLAG","FEED_DATA_ID") AS SELECT channel_id,
+    channel_name,
+    channel_type,
+    structcontent_infolet,
+    channel_description,
+    channel_active,
+    source_id,
+    source_type,
+    server_add_url,
+    scr_user_name,
+    scr_password,
+    email_from,
+    keywords,
+    source_description,
+    source_active,
+    server_parameters,
+    chnl_dtls_username,
+    feed_aggtr_username,
+    response_date,
+    body,
+    title_subject,
+    attachments,
+    created_on,
+    modified_on,
+    processed_flag,
+    org_feed_data_id feed_data_id
+  FROM Ms_Rga_Unprocessd_Chnl_Feeds_V
+  WHERE Processed_Flag = 'P' -- Consider all Structured Content entries which have been propagated to Channel Response.
+  AND Channel_Type     = '2' -- Channel Type should be Structured Content.</VIEW_TEXT>
+</VIEWS_SPEC>
