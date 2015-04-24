@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_AUD_MANAGE_AUDIT_DV">MS_AUD_MANAGE_AUDIT_DV</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "AUDDEVSP3"."MS_AUD_MANAGE_AUDIT_DV" ("ANNUAL_PLAN_ID", "APS_CONTROLS", "APS_CONTROLS_HTM", "APS_TESTS", "APS_TESTS_HTM", "ASSIGNEE", "AUDIT_ACTION", "AUDIT_CLASSIFICATION", "AUDIT_CLOSURE_DATE", "AUDIT_COMMENTS", "AUDIT_ID", "AUDIT_INSTANCE_NUM", "AUDIT_MANAGER", "AUDIT_RECURRENCE", "AUDIT_RECURRENCE_NUMBER", "AUDIT_STAGE", "AUDIT_START_DATE", "AUDIT_STATUS", "AUDIT_TITLE", "AUDIT_TYPE", "AU_NOTIFICATION", "CALL_AUDIT_CLOSURE_INFOLET", "CLOSURE_FLAG", "CONDUCTED_BY_ORG", "CONFIG_FLAG", "CONFIG_FLAG_PARAM", "CON_AUDIT_ID", "CORE_OBJECTS", "CO_AUDITEE_CONTACT", "CO_COMMENTS", "CO_CONTACT_ID", "CO_EMAIL", "CO_NAME", "CO_NOTIFICATION_OPTIONS", "CO_PHONE", "CO_TITLE", "CO_USER", "CO_USER_IN_SYSTEM", "CREATED_BY", "CREATION_DATE", "DD_CURRENT_STAGE", "DD_CURRENT_USER_NAME", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_OBJECT_TYPE", "DD_PROCESS_CODE", "DOC_AUDIT_ID", "DO_CATEGORY", "DO_COMMENTS", "DO_DOCUMENT", "DO_ID", "DO_LINK", "DO_NAME", "DO_TYPE", "ELECTRONICALLY_SIGNED", "EMAIL_FLAG", "FINAL_AUDIT_REPORT", "FORM_NAME", "HDN_MNG_SELECT_USER", "INSTANCE_ID", "INSTANCE_REC_NUM", "INTERNAL_STATUS", "KEY_COL_NAME", "KMS_AUDIT_ID", "KM_ACTUAL_DATE", "KM_ATTACHMENTS", "KM_COMMENTS", "KM_EVENT_IN_SYSTEM", "KM_MILESTONES", "KM_PROPOSED_DATE", "LATEST_FLAG", "LEAD_AUDITOR", "LOAD_AUDIT_CLOSURE", "LOCATIONS", "MANAGE_ORGANIZATIONS", "METRIC_COMPLETED_DATE", "METRIC_ID", "METRIC_RUN_DATE", "MULTIROW_GROUP_NAME", "MULTIROW_REGION_ID", "NEXT_AUDIT_DATE", "NEXT_AUDIT_ID", "NEXT_RECURRENCE_AUDIT", "OPENED_FORM", "PLANNED_AUDIT_LENGTH", "PLAN_ID", "PLAN_TITLE", "PREVIOUS_STAGE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "PURPOSE", "PURPOSE_HTM", "RELATED_RISKS", "RESTRICTED_ACCESS_TO", "RESTRICT_ACCESS_TO", "RTF_ATTACH", "SCHEDULE_END_DATE", "SCHEDULE_ID", "SCHEDULE_START_DATE", "SCOPE_BASED_ON", "SETUP_ACTION_PLAN_CAN_CREATED", "SETUP_APPROVALS_REQUIRED", "SETUP_AUDITEE_RESP_REQUIRED", "SETUP_AUDITORS_CREATE_TASKS", "SETUP_AUDITOR_SEND_ISSUES", "SETUP_AUDITOR_TASK_REVIEW", "SETUP_AUDTIORS_ADD_ADDITI_QUES", "SETUP_ENABLE_AUDIT_SCORING", "SETUP_PLANNING_SCOPING", "SETUP_QUALITY_REVIEWER", "SETUP_REPORT_TEMPLATE", "SETUP_SINGLE_AUDITOR_PROCESS", "SETUP_TASK_SPECIFIED_DATES", "STATUS", "TEAM_MEMBER", "TEMP_CONFIG_FLAG", "TMP_CORE_OBJECTS", "TMP_ORGANIZATIONS", "TMP_RELATED_RISKS", "LAST_REOPENED_DATE") AS 
+  SELECT annual_plan_id,
+    aps_controls,
+    aps_controls_htm,
+    aps_tests,
+    aps_tests_htm,
+    assignee,
+    audit_action,
+    audit_classification,
+    audit_closure_date,
+    audit_comments,
+    audit_id,
+    audit_instance_num,
+    NVL(ms_apps_utilities.get_user_full_name(audit_manager),ms_aud_utilities.fn_get_mlov_aud_man_disp(ms_aud_utilities.fn_get_mlov_values(audit_id,'audit_manager_mlov','ms_aud_audit_amm'))) as audit_manager,
+    audit_recurrence,
+    audit_recurrence_number,
+    audit_stage,
+    audit_start_date,
+    audit_status,
+    audit_title,
+    audit_type,
+    au_notification,
+    call_audit_closure_infolet,
+    closure_flag,
+    conducted_by_org,
+    config_flag,
+    config_flag_param,
+    con_audit_id,
+    NVL (ms_aud_utilities.fn_get_core_display_values (core_objects), '   ' ) AS core_objects,
+    co_auditee_contact,
+    co_comments,
+    co_contact_id,
+    co_email,
+    co_name,
+    co_notification_options,
+    co_phone,
+    co_title,
+    co_user,
+    co_user_in_system,
+    created_by,
+    creation_date,
+    dd_current_stage,
+    dd_current_user_name,
+    dd_enterprise_info,
+    dd_event_user_name,
+    dd_object_type,
+    dd_process_code,
+    doc_audit_id,
+    do_category,
+    do_comments,
+    do_document,
+    do_id,
+    do_link,
+    do_name,
+    do_type,
+    electronically_signed,
+    email_flag,
+    final_audit_report,
+    form_name,
+    hdn_mng_select_user,
+    instance_id,
+    instance_rec_num,
+    internal_status,
+    key_col_name,
+    kms_audit_id,
+    km_actual_date,
+    km_attachments,
+    km_comments,
+    km_event_in_system,
+    km_milestones,
+    km_proposed_date,
+    latest_flag,
+    NVL(ms_apps_utilities.get_user_full_name(lead_auditor),ms_aud_utilities.fn_get_mlov_lead_aud_disp(ms_aud_utilities.fn_get_mlov_values(audit_id,'lead_auditor_mlov','ms_aud_audit_alm'))) as lead_auditor,
+    load_audit_closure,
+    locations,
+    NVL (ms_aud_utilities.fn_get_org_display_values (manage_organizations), '      ' ) AS manage_organizations,
+    metric_completed_date,
+    metric_id,
+    metric_run_date,
+    multirow_group_name,
+    multirow_region_id,
+    next_audit_date,
+    next_audit_id,
+    next_recurrence_audit,
+    opened_form,
+    planned_audit_length,
+    plan_id,
+    ms_aud_utilities.fn_get_plan_title (plan_title) AS plan_title,
+    previous_stage,
+    process_flow_status,
+    process_instance_id,
+    purpose,
+    PURPOSE_HTM,
+    NVL (ms_aud_utilities_2.FN_GET_ADHOC_RISK_DISP_VALUES (related_risks,audit_id), '      ' ) AS related_risks,
+    restricted_access_to,
+    restrict_access_to,
+    rtf_attach,
+    schedule_end_date,
+    schedule_id,
+    schedule_start_date,
+    ms_aud_utilities.get_scope_disp_value(process_instance_id,scope_based_on) as scope_based_on,
+    setup_action_plan_can_created,
+    setup_approvals_required,
+    setup_auditee_resp_required,
+    setup_auditors_create_tasks,
+    setup_auditor_send_issues,
+    setup_auditor_task_review,
+    setup_audtiors_add_additi_ques,
+    setup_enable_audit_scoring,
+    setup_planning_scoping,
+    setup_quality_reviewer,
+    setup_report_template,
+    setup_single_auditor_process,
+    setup_task_specified_dates,
+    status,
+    team_member,
+    temp_config_flag,
+    tmp_core_objects,
+    tmp_organizations,
+    tmp_related_risks,
+    last_reopened_date
+  FROM ms_aud_manage_audit_v
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Tables</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+      <script src="../js/jquery-1.11.1.min.js"></script>
+		<script src="../dist/js/searchInfoletJavaScript.js"></script>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_AUD_AUDIT_PUB_V">MS_AUD_AUDIT_PUB_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Description:</th>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <br/>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover dbTable-table-cl">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Column Name</th>
+                                                                <th>Data Type</th>
+                                                                <th>Not Null?</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>UPDATE_FLAG</td>
+                                                                <td>VARCHAR2
+(100
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>APPROVE_FLAG</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>NUM_OF_AUDIT_REOPEN</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>CHK_USER_FOR_APP_REOPEN_ACT</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>CHK_USER_FOR_REOPEN_ACTIVITY</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>LAST_REOPENED_DATE</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>REOPEN_SAVE_STATUS</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>LEGACY_ID</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>UPLOAD_FLAG</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>EDITABLE_FIELDS_JSON</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DATA_CORRECTION_FLAG</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DC_SAVE_STATUS</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>OPEN_ASSGNMT</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>OPEN_FLAG</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>APS_RISKS</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DD_OBJECT_TYPE</td>
+                                                                <td>VARCHAR2
+(100
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                    <p style="text-align:center" class="fa fa-check"/>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DD_PROCESS_INSTANCE_ID</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                    <p style="text-align:center" class="fa fa-check"/>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DD_INSTANCE_ID</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                    <p style="text-align:center" class="fa fa-check"/>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DD_CREATED_ON</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DD_CREATED_BY</td>
+                                                                <td>VARCHAR2
+(100
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DD_MODIFIED_ON</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DD_MODIFIED_BY</td>
+                                                                <td>VARCHAR2
+(100
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DD_PROCESS_CODE</td>
+                                                                <td>VARCHAR2
+(1000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DD_EDIT_FLAG</td>
+                                                                <td>VARCHAR2
+(1
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>CONDUCTED_BY_ORG</td>
+                                                                <td>VARCHAR2
+(100
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>LEAD_AUDITOR</td>
+                                                                <td>VARCHAR2
+(100
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_MANAGER</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_TYPE</td>
+                                                                <td>VARCHAR2
+(10
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_CLASSIFICATION</td>
+                                                                <td>VARCHAR2
+(10
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>PLANNED_AUDIT_LENGTH</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>RESTRICTED_ACCESS_TO</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_REPORT_TEMPLATE</td>
+                                                                <td>VARCHAR2
+(225
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_SINGLE_AUDITOR_PROCESS</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_AUDITEE_RESP_REQUIRED</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_ENABLE_AUDIT_SCORING</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_AUDITORS_CREATE_TASKS</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_AUDITOR_TASK_REVIEW</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_APPROVALS_REQUIRED</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_RECURRENCE_NUMBER</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_ACTION</td>
+                                                                <td>VARCHAR2
+(50
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_COMMENTS</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SCOPE_BASED_ON</td>
+                                                                <td>VARCHAR2
+(10
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>PURPOSE</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ANNUAL_PLAN_ID</td>
+                                                                <td>VARCHAR2
+(100
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>APS_CONTROLS</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>APS_TESTS</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SCHEDULE_ID</td>
+                                                                <td>VARCHAR2
+(201
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_ID</td>
+                                                                <td>VARCHAR2
+(100
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                    <p style="text-align:center" class="fa fa-check"/>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_STAGE</td>
+                                                                <td>VARCHAR2
+(10
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_STATUS</td>
+                                                                <td>VARCHAR2
+(10
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>PLAN_ID</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AU_NOTIFICATION</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_TASK_SPECIFIED_DATES</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_PLANNING_SCOPING</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_QUALITY_REVIEWER</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>STATUS</td>
+                                                                <td>VARCHAR2
+(100
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>RESTRICT_ACCESS_TO</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>INTERNAL_STATUS</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_INSTANCE_NUM</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SCHEDULE_START_DATE</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SCHEDULE_END_DATE</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>NEXT_AUDIT_DATE</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>PLAN_TITLE</td>
+                                                                <td>VARCHAR2
+(60
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_RECURRENCE</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>NEXT_RECURRENCE_AUDIT</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>NEXT_AUDIT_ID</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>RTF_ATTACH</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>EMAIL_FLAG</td>
+                                                                <td>VARCHAR2
+(3
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_AUDITOR_SEND_ISSUES</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>FINAL_AUDIT_REPORT</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_CLOSURE_DATE</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SETUP_AUDTIORS_ADD_ADDITI_QUES</td>
+                                                                <td>VARCHAR2
+(30
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_TITLE</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUDIT_START_DATE</td>
+                                                                <td>DATE
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>DD_STATUS_FLAG</td>
+                                                                <td>VARCHAR2
+(1
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>MILESTONE_TEMPLATE</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>AUD_TRANS_STATUS</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>MILESTONE_TEMP_ID_2</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>INITIATOR</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>APPROVER</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>MILESTONE_JSON_STR</td>
+                                                                <td>CLOB
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>CANDIDATE_ID</td>
+                                                                <td>VARCHAR2
+(254
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>MILESTONE_TEMP_ID_1</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>INTERNAL_PLAN_ID</td>
+                                                                <td>VARCHAR2
+(254
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ACTUAL_EFFORT</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>ADHOC_ACTIVITY</td>
+                                                                <td>NUMBER
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>PERF_CONFIG_FLAG</td>
+                                                                <td>VARCHAR2
+(4000
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>SUBMIT_STATUS</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>REFERENCE_ID</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                            <tr>
+                                                                <td>COPY_AUDIT</td>
+                                                                <td>VARCHAR2
+(255
+Char
+)
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                            </tr>												
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                    </div>
+                                    <!-- tab-content -->
+                                </div>
+                                </div>
+                                <!-- /.panel-default -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.tooltip-db').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                });
+                $('.dbTable-table-cl').DataTable({
+                    destroy: true,
+                    responsive: true,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },     // 1st column width 
+                        { "sWidth": "40%" },     // 2nd column width 
+                        { "sWidth": "20%" }      // 3rd column width 
+                    ]
+                });
+                $('.dbTable-table-clnr').DataTable({
+                    destroy: true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },     // 1st column width 
+                        { "sWidth": "40%" },     // 2nd column width 
+                        { "sWidth": "20%" }      // 3rd column width 
+                    ]
+                });
+                $('.dbTable-table-uc').DataTable({
+                    destroy: true,
+                    responsive: true,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "25%" },     // 1st column width 
+                        { "sWidth": "25%" },     // 2nd column width 
+                        { "sWidth": "50%" }      // 3rd column width 
+                    ]
+                });
+                $('.dbTable-table-ucnr').DataTable({
+                    destroy: true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "25%" },     // 1st column width 
+                        { "sWidth": "25%" },     // 2nd column width 
+                        { "sWidth": "50%" }      // 3rd column width 
+                    ]
+                });
+                $('.dbTable-table-i').DataTable({
+                    destroy: true,
+                    responsive: true,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "25%" },     // 1st column width 
+                        { "sWidth": "75%" }      // 2nd column width 
+                    ]
+                });
+                $('.dbTable-table-inr').DataTable({
+                    destroy: true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "25%" },     // 1st column width 
+                        { "sWidth": "75%" }      // 2nd column width 
+                    ]
+                });
+            });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

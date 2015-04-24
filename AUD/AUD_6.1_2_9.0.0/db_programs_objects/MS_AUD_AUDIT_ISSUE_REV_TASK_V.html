@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_AUD_AUDIT_ISSUE_REV_TASK_V">MS_AUD_AUDIT_ISSUE_REV_TASK_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "AUDDEVSP3"."MS_AUD_AUDIT_ISSUE_REV_TASK_V" ("HEADER_DETAILS_PARAM", "HEADER_DETAILS", "PREV_TYPE", "RTF_ATTACH", "PICK_AUDIT_ID", "AUDIT_CLASSIFICATION", "TMP_PK_ID", "SELECT_ACTION", "ACT_SAVE", "FND_SAVE", "ISSUE_DELEGATEE_FLAG", "FORM_NAME", "KEY_COL_NAME", "PID", "POPULATE_FINDING", "SETUP_ACTION_PLAN_CAN_CREATED", "AUDIT_ID", "SETUP_AUDITEE_RESP_REQUIRED", "TMP_FLAG", "AC_AUDITEE_COMMENTS_DATE", "LEAD_AUDITOR_COMMENTS", "RESTRICT_ACCESS_TO", "REVIEW_SENT_DATE", "TASK_ID", "TASK_OWNER", "TASK_NAME", "TASK_STATUS", "TASK_TYPE", "ASSIGNEE", "CONFIG_FLAG", "PREVIOUS_STAGE", "SCOPE_BASED_ON", "ISSUE_COMMENTS", "DELEGATEE", "MANAGEMENT_RESPONSE_DUE_DATE", "ISSUE_REVIEWER", "REVIEW_TYPE", "LEAD_AUDITOR_ACTION", "ACT_ORDERKEY", "AC_DUE_BY", "AC_CAN_DEL_FLAG", "CHK_ACT_ID_GEN", "ACT_TMP_PK_ID", "ACT_TASK_ID", "ACT_AUDIT_ID", "AC_OWNER_ORGANIZATION", "AC_REF_ID", "TCT_ACT_ID_GEN", "AC_AUDITEE_COMMENTS", "ADDITIONAL_ACTION", "AC_FINDING_ID", "AC_ID", "AC_ADD_ACTION_DUE_DATE", "AC_ADD_PRIORITY", "AC_ADD_ACTION_OWNER", "AC_ADD_OWNER_ORGANIZATION", "AC_ADD_ACTION_DESCRIPTION", "AC_ADD_ACTION_TITLE", "AC_ADD_FINDING_TITLE", "AC_TMP_FINDING_ID", "AC_DUE_DATE", "AC_PRIORITY", "AC_ACTION_OWNER", "AC_ACTION_DESCRIPTION", "AC_ACTION_TITLE", "ACT_DELETE_FLAG", "AC_ISSUE_TITLE", "FND_ORDERKEY", "SEND_TO", "CHK_FND_ID_GEN", "FN_TEST_REFERENCE", "FN_QUESTION_REFERENCE", "FN_CONTROL_REFERENCE", "FN_CLASSIFICATION", "FND_TMP_PK_ID", "FND_TASK_ID", "FND_AUDIT_ID", "FN_CUS_RTF", "FN_CUS_F1", "FN_CUS_F2", "FN_REF_TASK_ID", "FN_AUDITEE_COMMENTS", "FN_AUDITEE_RESPONSE_DATE", "FN_DISPOSITION", "MANAGEMENT_RESPONSE", "FN_AUDITEE_ACTION", "TCT_FND_ID_GEN", "FN_REF_ID", "FN_ID", "FN_CONTRIBUTING_FACTORS", "FN_ROOT_CAUSE", "PRIOR_FINDING", "FN_RECOMMENDATION", "TMP_FND_RELATED_RISKS", "TMP_FND_CORE_OBJECTS", "TMP_FND_ORGANIZATIONS", "FN_ORGANIZATIONS", "FN_RELATED_RISKS", "FN_CORE_OBJECTS", "FN_ISSUE_APPROVER", "FN_APPROVER_ORG", "FN_ISSUE_DUE_DATE", "FN_ISSUE_OWNER", "FN_OWNER_ORGANIZATION", "FN_ISSUE_RESOLUTION", "FN_FINDING_TYPE", "FN_ISSUE_RATING", "FN_FINDING_DETAILS", "FN_FINDING_TITLE", "MANAGEMENT_RESPONSE_DATE", "ISSUE_SENT_BY", "SELECT_ISSUES", "AUDIT_MANAGER_MLOV", "LEAD_AUDITOR_MLOV", "AUDIT_MANAGER", "LEAD_AUDITOR", "CONDUCTED_BY_ORG", "STATUS", "AUDIT_DATE", "AUDIT_TITLE", "DD_PROCESS_CODE", "DD_CURRENT_STAGE", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_CURRENT_USER_NAME", "DD_OBJECT_TYPE", "INSTANCE_REC_NUM", "INSTANCE_ID", "METRIC_ID", "METRIC_RUN_DATE", "METRIC_COMPLETED_DATE", "LATEST_FLAG", "CREATED_BY", "CREATION_DATE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "MULTIROW_GROUP_NAME", "ELECTRONICALLY_SIGNED", "MULTIROW_REGION_ID", "FN_FINDING_DETAILS_HTM", "FN_RECOMMENDATION_HTM", "MANAGEMENT_RESPONSE_HTM", "FN_REVIEWER_COMMENTS_HTM", "FN_CUS_RTF_HTM", "AC_ACTION_DESCRIPTION_HTM", "AC_ADD_ACTION_DESCRIPTION_HTM", "FN_REVIEWER_COMMENTS") AS 
+  select "HEADER_DETAILS_PARAM","HEADER_DETAILS","PREV_TYPE","RTF_ATTACH","PICK_AUDIT_ID","AUDIT_CLASSIFICATION","TMP_PK_ID","SELECT_ACTION","ACT_SAVE","FND_SAVE","ISSUE_DELEGATEE_FLAG","FORM_NAME","KEY_COL_NAME","PID","POPULATE_FINDING","SETUP_ACTION_PLAN_CAN_CREATED","AUDIT_ID","SETUP_AUDITEE_RESP_REQUIRED","TMP_FLAG","AC_AUDITEE_COMMENTS_DATE","LEAD_AUDITOR_COMMENTS","RESTRICT_ACCESS_TO","REVIEW_SENT_DATE","TASK_ID","TASK_OWNER","TASK_NAME","TASK_STATUS","TASK_TYPE","ASSIGNEE","CONFIG_FLAG","PREVIOUS_STAGE","SCOPE_BASED_ON","ISSUE_COMMENTS","DELEGATEE","MANAGEMENT_RESPONSE_DUE_DATE","ISSUE_REVIEWER","REVIEW_TYPE","LEAD_AUDITOR_ACTION","ACT_ORDERKEY","AC_DUE_BY","AC_CAN_DEL_FLAG","CHK_ACT_ID_GEN","ACT_TMP_PK_ID","ACT_TASK_ID","ACT_AUDIT_ID","AC_OWNER_ORGANIZATION","AC_REF_ID","TCT_ACT_ID_GEN","AC_AUDITEE_COMMENTS","ADDITIONAL_ACTION","AC_FINDING_ID","AC_ID","AC_ADD_ACTION_DUE_DATE","AC_ADD_PRIORITY","AC_ADD_ACTION_OWNER","AC_ADD_OWNER_ORGANIZATION","AC_ADD_ACTION_DESCRIPTION","AC_ADD_ACTION_TITLE","AC_ADD_FINDING_TITLE","AC_TMP_FINDING_ID","AC_DUE_DATE","AC_PRIORITY","AC_ACTION_OWNER","AC_ACTION_DESCRIPTION","AC_ACTION_TITLE","ACT_DELETE_FLAG","AC_ISSUE_TITLE","FND_ORDERKEY","SEND_TO","CHK_FND_ID_GEN","FN_TEST_REFERENCE","FN_QUESTION_REFERENCE","FN_CONTROL_REFERENCE","FN_CLASSIFICATION","FND_TMP_PK_ID","FND_TASK_ID","FND_AUDIT_ID","FN_CUS_RTF","FN_CUS_F1","FN_CUS_F2","FN_REF_TASK_ID","FN_AUDITEE_COMMENTS","FN_AUDITEE_RESPONSE_DATE","FN_DISPOSITION","MANAGEMENT_RESPONSE","FN_AUDITEE_ACTION","TCT_FND_ID_GEN","FN_REF_ID","FN_ID","FN_CONTRIBUTING_FACTORS","FN_ROOT_CAUSE","PRIOR_FINDING","FN_RECOMMENDATION","TMP_FND_RELATED_RISKS","TMP_FND_CORE_OBJECTS","TMP_FND_ORGANIZATIONS","FN_ORGANIZATIONS","FN_RELATED_RISKS","FN_CORE_OBJECTS","FN_ISSUE_APPROVER","FN_APPROVER_ORG","FN_ISSUE_DUE_DATE","FN_ISSUE_OWNER","FN_OWNER_ORGANIZATION","FN_ISSUE_RESOLUTION","FN_FINDING_TYPE","FN_ISSUE_RATING","FN_FINDING_DETAILS","FN_FINDING_TITLE","MANAGEMENT_RESPONSE_DATE","ISSUE_SENT_BY","SELECT_ISSUES","AUDIT_MANAGER_MLOV","LEAD_AUDITOR_MLOV","AUDIT_MANAGER","LEAD_AUDITOR","CONDUCTED_BY_ORG","STATUS","AUDIT_DATE","AUDIT_TITLE","DD_PROCESS_CODE","DD_CURRENT_STAGE","DD_ENTERPRISE_INFO","DD_EVENT_USER_NAME","DD_CURRENT_USER_NAME","DD_OBJECT_TYPE","INSTANCE_REC_NUM","INSTANCE_ID","METRIC_ID","METRIC_RUN_DATE","METRIC_COMPLETED_DATE","LATEST_FLAG","CREATED_BY","CREATION_DATE","PROCESS_FLOW_STATUS","PROCESS_INSTANCE_ID","MULTIROW_GROUP_NAME","ELECTRONICALLY_SIGNED","MULTIROW_REGION_ID","FN_FINDING_DETAILS_HTM","FN_RECOMMENDATION_HTM","MANAGEMENT_RESPONSE_HTM","FN_REVIEWER_COMMENTS_HTM","FN_CUS_RTF_HTM","AC_ACTION_DESCRIPTION_HTM","AC_ADD_ACTION_DESCRIPTION_HTM","FN_REVIEWER_COMMENTS" from SI_101993_T 
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
