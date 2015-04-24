@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_RSM_MANAGE_TEAM_RESOURCES_V">MS_RSM_MANAGE_TEAM_RESOURCES_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "RSMDEV"."MS_RSM_MANAGE_TEAM_RESOURCES_V" ("CONFIG_FLAG", "HIDDEN_COMMENTS", "OVERALL_CURRENT_ALLOC", "OVERALL_TOTAL_ALLOC", "OVERALL_CURRENT", "OVERALL_TOTAL", "TEAM_TYPE", "EMAIL_STATUS", "TEAM_INST_ID", "TEAM_PID", "TEAM_METRIC_ID", "FREEBUSY_HIDDEN", "ALLOCATED_HIDDEN", "REQUESTED_HIDDEN", "YEAR_GOTO", "MONTH_GOTO", "RESOURCE_POOLID_HDR", "RPM_COUNT", "RM_COUNT", "RESOURCE_LINE_ID", "FREEBUSY_MONTH3", "FREEBUSY_MONTH2", "ALLOCATED_MONTH3", "ALLOCATED_MONTH2", "REQUESTED_MONTH3", "REQUESTED_MONTH2", "RESOURCE_COMMENTS", "TEAM_ID", "HEADER_YEAR_RANGE_END", "HEADER_YEAR_RANGE_START", "HEADER_MONTH_RANGE_END", "HEADER_MONTH_RANGE_START", "OPEN_RESOURCE_REQUEST", "MANAGER_ACTION", "USER_VIEWING_REPORT", "CURRENT_BOOKING_ALLOCATED", "TOTAL_EFFORT_ALLOCATED", "CURRENT_USER_ROLE", "CUSTOM_FIELD3", "CUSTOM_FIELD2", "CUSTOM_FIELD1", "CERTIFICATIONS", "SKILLS", "SELECT_RESOURCE", "FREEBUSY_MONTH", "ALLOCATED_MONTH", "REQUESTED_MONTH", "CURRENT_BOOKING", "TOTAL_EFFORT", "RESOURCE_NAME", "ROLE", "RESOURCE_POOL", "TEAM_LEVEL2_MANAGER", "TEAM_MANAGER", "END_DATE", "START_DATE", "TEAM_NAME", "CURRENT_DATE", "EVENT_CREATION_DATE", "EVENT_USER_NAME", "CURRENT_USER_NAME", "INSTANCE_REC_NUM", "INSTANCE_ID", "METRIC_ID", "METRIC_RUN_DATE", "METRIC_COMPLETED_DATE", "LATEST_FLAG", "CREATED_BY", "CREATION_DATE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "MULTIROW_GROUP_NAME", "ELECTRONICALLY_SIGNED", "MULTIROW_REGION_ID", "IS_DOUBLE_BOOKING", "CURRENT_USER_FULL_NAME", "PROACTIVE_FLAG") AS 
+  select "CONFIG_FLAG","HIDDEN_COMMENTS","OVERALL_CURRENT_ALLOC","OVERALL_TOTAL_ALLOC","OVERALL_CURRENT","OVERALL_TOTAL","TEAM_TYPE","EMAIL_STATUS","TEAM_INST_ID","TEAM_PID","TEAM_METRIC_ID","FREEBUSY_HIDDEN","ALLOCATED_HIDDEN","REQUESTED_HIDDEN","YEAR_GOTO","MONTH_GOTO","RESOURCE_POOLID_HDR","RPM_COUNT","RM_COUNT","RESOURCE_LINE_ID","FREEBUSY_MONTH3","FREEBUSY_MONTH2","ALLOCATED_MONTH3","ALLOCATED_MONTH2","REQUESTED_MONTH3","REQUESTED_MONTH2","RESOURCE_COMMENTS","TEAM_ID","HEADER_YEAR_RANGE_END","HEADER_YEAR_RANGE_START","HEADER_MONTH_RANGE_END","HEADER_MONTH_RANGE_START","OPEN_RESOURCE_REQUEST","MANAGER_ACTION","USER_VIEWING_REPORT","CURRENT_BOOKING_ALLOCATED","TOTAL_EFFORT_ALLOCATED","CURRENT_USER_ROLE","CUSTOM_FIELD3","CUSTOM_FIELD2","CUSTOM_FIELD1","CERTIFICATIONS","SKILLS","SELECT_RESOURCE","FREEBUSY_MONTH","ALLOCATED_MONTH","REQUESTED_MONTH","CURRENT_BOOKING","TOTAL_EFFORT","RESOURCE_NAME","ROLE","RESOURCE_POOL","TEAM_LEVEL2_MANAGER","TEAM_MANAGER","END_DATE","START_DATE","TEAM_NAME","CURRENT_DATE","EVENT_CREATION_DATE","EVENT_USER_NAME","CURRENT_USER_NAME","INSTANCE_REC_NUM","INSTANCE_ID","METRIC_ID","METRIC_RUN_DATE","METRIC_COMPLETED_DATE","LATEST_FLAG","CREATED_BY","CREATION_DATE","PROCESS_FLOW_STATUS","PROCESS_INSTANCE_ID","MULTIROW_GROUP_NAME","ELECTRONICALLY_SIGNED","MULTIROW_REGION_ID","IS_DOUBLE_BOOKING","CURRENT_USER_FULL_NAME","PROACTIVE_FLAG" from SI_102151_T 
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
