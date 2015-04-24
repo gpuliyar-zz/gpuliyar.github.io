@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_DMS_ALL_INPROGRESS_DOCS_V">MS_DMS_ALL_INPROGRESS_DOCS_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "PDMS61SP2_DEV"."MS_DMS_ALL_INPROGRESS_DOCS_V" ("PURPOSE", "CATEGORY_ID", "USER_NAME", "DOCUMENT_NAME", "DOCUMENT_TYPE", "VERSION_NUMBER", "DOCUMENT_NUMBER", "AUTHOR_NAME", "OWNER_NAME", "LIFE_CYCLE_NAME", "STAGE_NAME", "DUE_DATE", "ATTRIBUTES", "LAST_UPDATED_ON", "CATEGORY", "SUB_CATEGORY1", "SUB_CATEGORY2", "SUB_CATEGORY3", "SUB_CATEGORY4", "DOCUMENT_OBJECT_ID") AS 
+  WITH TEMP_TAB AS
+(SELECT distinct a.lifecycle_id as lifecycle_id,b.user_name as user_name
+FROM ms_dms_lifecycle_all_stage_v a,SI_USERS_T b, 
+SI_DMS_GROUP_DETAILS g,SI_DMS_LIFECYCLE_ROLE_GRPS lg,si_dms_roles rl 
+WHERE g.role_group_id =lg.role_group_id AND lg.lifecycle_id = a.lifecycle_id
+AND lg.stage_id = a.stage_id AND RL.ROLE_ID=LG.ROLE_ID AND G.USER_ID=B.USER_ID )
+SELECT b.purpose as purpose,
+		b.CATEGORY_ID as CATEGORY_ID,
+		c.USER_NAME as USER_NAME,
+--Ms_Dms_Doc_Url_For_nameReport (b.process_instance_id, a.audit_id, 'In Process', b.document_attachment, b.document_name) AS DOCUMENT_NAME, 
+('<a href="'
+      || 'javascript:openDMSDoc('''
+      ||  REPLACE (REPLACE (b.document_attachment, '''', '\'''), '`', '\`')
+      || ''','
+      || b.process_instance_id
+      || ','
+      || a.AUDIT_ID
+      || ','
+      || ''''
+      || (
+       SELECT DECODE(pdf_convert_yn,'Y',UPPER (DOC_STATUS),'E','Not Converted',NULL,'Yet Convert')
+           FROM ms_dms_doc_audit_history
+          WHERE document_name =
+                   DECODE (b.document_name,
+                           'View', document_name,
+                           b.document_name
+                          )
+            AND process_instance_id = b.process_instance_id
+            AND audit_id = a.audit_id
+        ) 
+      || ''''
+      || ','
+      || CHR (39)
+      --||  ms_apps_utilities.get_parameter_value(1,'MS DMS Native Viewer Errors','MS DMS Native Viewer Error Display_YN')
+       || (SELECT pvalue.parameter_value
+           FROM ms_qs_parameter_values pvalue,
+                ms_qs_parameter_types ptype,
+                ms_qs_parameter_names pname
+          WHERE  (ptype.parameter_type) =  ('MS DMS Native Viewer Errors')
+            AND pname.parameter_id = pvalue.parameter_id
+            AND ptype.parameter_type_id = pvalue.parameter_type_id
+            AND ptype.parameter_type_id = pname.parameter_type_id
+            AND  (pname.parameter_name) =  ('MS DMS Native Viewer Error Display_YN')
+           AND pvalue.org_entity_id = 1)
+      || CHR (39)
+      || ','
+      || CHR (39)
+      || (SELECT pvalue.parameter_value
+           FROM ms_qs_parameter_values pvalue,
+                ms_qs_parameter_types ptype,
+                ms_qs_parameter_names pname
+          WHERE  (ptype.parameter_type) =  ('MS_DMS_PDF_CONVERSION_RQD_YN')
+            AND pname.parameter_id = pvalue.parameter_id
+            AND ptype.parameter_type_id = pvalue.parameter_type_id
+            AND ptype.parameter_type_id = pname.parameter_type_id
+            AND  (pname.parameter_name) =  ('MS_DMS_PDF_CONVERSION_RQD_YN')
+           AND pvalue.org_entity_id = 1) ||'^'||(SELECT pvalue.parameter_value
+           FROM ms_qs_parameter_values pvalue,
+                ms_qs_parameter_types ptype,
+                ms_qs_parameter_names pname
+          WHERE  (ptype.parameter_type) =  ('MS DMS Native Viewer Errors')
+            AND pname.parameter_id = pvalue.parameter_id
+            AND ptype.parameter_type_id = pvalue.parameter_type_id
+            AND ptype.parameter_type_id = pname.parameter_type_id
+            AND  (pname.parameter_name) =  ('MS DMS Native Viewer Error Display_YN')
+           AND pvalue.org_entity_id = 1)||'^'
+           || (SELECT DECODE( DECODE(pdf_convert_yn,'Y','IN PROCESS','E','Not Converted',NULL,'Yet Convert'),
+                'Not Converted',
+                (SELECT pvalue.parameter_value
+           FROM ms_qs_parameter_values pvalue,
+                ms_qs_parameter_types ptype,
+                ms_qs_parameter_names pname
+          WHERE  (ptype.parameter_type) =  ('MS DMS Native Viewer Errors')
+            AND pname.parameter_id = pvalue.parameter_id
+            AND ptype.parameter_type_id = pvalue.parameter_type_id
+            AND ptype.parameter_type_id = pname.parameter_type_id
+            AND  (pname.parameter_name) =  ('MS DMS Native Viewer Error Display')
+           AND pvalue.org_entity_id = 1),
+                'Yet Convert',
+                (SELECT pvalue.parameter_value
+           FROM ms_qs_parameter_values pvalue,
+                ms_qs_parameter_types ptype,
+                ms_qs_parameter_names pname
+          WHERE  (ptype.parameter_type) =  ('MS DMS Native Viewer Errors')
+            AND pname.parameter_id = pvalue.parameter_id
+            AND ptype.parameter_type_id = pvalue.parameter_type_id
+            AND ptype.parameter_type_id = pname.parameter_type_id
+            AND  (pname.parameter_name) =  ('MS_DMS_CONV_INPROCESS_MSG')
+           AND pvalue.org_entity_id = 1),
+                'Document generation failed. Please contact administrator.')
+           FROM ms_dms_doc_audit_history
+          WHERE document_name =
+                   DECODE (b.DOCUMENT_NAME,
+                           'View', document_name,
+                           b.DOCUMENT_NAME
+                          )
+            AND process_instance_id = b.process_instance_id
+            AND audit_id = a.AUDIT_ID) 
+      || CHR (39)
+      || ')">'
+      || (  SELECT NVL(displayed_value,'View')
+          FROM MS_DMS_LIST_OF_VALUES_V v,
+                si_enabled_locales l,
+                si_USERS_T t
+          WHERE LOV_NAME='MS_DMS_STATUS_LOV' 
+          and   l.locale_id = v.locale_id
+          and  l.locale_string= t.locale
+          and  t.USER_NAME= c.user_name
+          and  v.stored_value='View')
+      || b.DOCUMENT_NAME||'</a>') as 
+       DOCUMENT_NAME, 
+ MS_APPS_UTILITIES.Get_Display_Value(ms_grc_utilities.active_ent_id, 'MS_DMS_INLINE_DOCUMENT_TYPE', b.doc_type,1,(select locale_id from si_locales aa , si_users_t bb where aa.locale_string=bb.locale and bb.user_name=c.user_name)) as document_type,
+ a.version_number as version_number,
+ b.document_number AS document_number,
+ --MS_APPS_UTILITIES.get_user_full_name(b.AUTHOR_NAME) as Author_Name,
+ (select full_name from MS_DMS_LOCAL_USERS_T where user_name = b.AUTHOR_NAME) as Author_Name,
+ --MS_APPS_UTILITIES.get_user_full_name(b.Owner_NAME) as Owner_NAME,
+ (select full_name from MS_DMS_LOCAL_USERS_T where user_name = b.Owner_NAME) as Owner_NAME,
+decode(b.is_inline,'Y',MS_DMS_RPT_UTILS.get_inline_rpt_approvals
+(b.process_instance_id,MS_DMS_MLS_UTILITIES.MS_DMS_GET_LIFECYCLE_MLSVALUE(b.LIFE_CYCLE_ID,null,null,c.user_name)), MS_DMS_MLS_UTILITIES.MS_DMS_GET_LIFECYCLE_MLSVALUE(b.LIFE_CYCLE_ID,null,null,c.user_name)) AS LIFE_CYCLE_NAME,
+ decode(b.is_inline,'Y',MS_DMS_RPT_UTILS.get_inline_rpt_approvals( b.process_instance_id,a.Stage_name), b.current_stage_name) as Stage_name,
+ ms_dms_document_review_rep_pkg.get_due_date(b.process_instance_id) as due_date,
+ ms_dms_utilities.ms_dms_get_val_for_locale (c.user_name, 'Attributes')
+ as Attributes,
+ b.created_on as last_updated_on,
+ --MS_DMS_MLS_UTILITIES.MS_DMS_GET_CATEGORY_MLSVALUE (:7, b.category_ID) AS category,
+ --MS_DMS_MLS_UTILITIES.MS_DMS_GET_CATEGORY_MLSVALUE (:7, b.sub_category1_ID) AS sub_category1,
+ --MS_DMS_MLS_UTILITIES.MS_DMS_GET_CATEGORY_MLSVALUE (:7, b.sub_category2_ID) AS sub_category2,
+ --MS_DMS_MLS_UTILITIES.MS_DMS_GET_CATEGORY_MLSVALUE (:7, b.sub_category3_ID) AS sub_category3,
+ --MS_DMS_MLS_UTILITIES.MS_DMS_GET_CATEGORY_MLSVALUE (:7, b.sub_category4_ID) AS sub_category4,
+        (select cv.category_name
+    from
+    si_dms_categories_v cv,
+    MS_DMS_LOCAL_USERS_T ut
+    where cv.LOCALE_ID = ut.locale_id
+    and cv.CATEGORY_ID=b.category_id
+    and ut.user_name = c.user_name) as category,
+       (select cv.category_name
+    from
+    si_dms_categories_v cv,
+    MS_DMS_LOCAL_USERS_T ut
+    where cv.LOCALE_ID = ut.locale_id
+    and cv.CATEGORY_ID=b.sub_category1_ID
+    and ut.user_name = c.user_name) as sub_category1,
+       (select cv.category_name
+    from
+    si_dms_categories_v cv,
+    MS_DMS_LOCAL_USERS_T ut
+    where cv.LOCALE_ID = ut.locale_id
+    and cv.CATEGORY_ID=b.sub_category2_ID
+    and ut.user_name = c.user_name) as sub_category2,
+              (select cv.category_name
+    from
+    si_dms_categories_v cv,
+    MS_DMS_LOCAL_USERS_T ut
+    where cv.LOCALE_ID = ut.locale_id
+    and cv.CATEGORY_ID=b.sub_category3_ID
+    and ut.user_name = c.user_name) as sub_category3,
+       (select cv.category_name
+    from
+    si_dms_categories_v cv,
+    MS_DMS_LOCAL_USERS_T ut
+    where cv.LOCALE_ID = ut.locale_id
+    and cv.CATEGORY_ID=b.sub_category4_ID
+    and ut.user_name = c.user_name) as sub_category4,	
+ b.document_object_id as document_object_id 
+FROM MS_DMS_DOC_AUDIT_HISTORY a,MS_DMS_DOCUMENTS_HDR b,TEMP_TAB c
+WHERE A.LIFE_CYCLE_ID = C.LIFECYCLE_ID 
+AND A.LIFE_CYCLE_ID = B.LIFE_CYCLE_ID
+AND b.in_process_flag = 'Y' 
+AND a.process_instance_id = b.process_instance_id
+AND audit_id = (SELECT MAX (audit_id) FROM MS_DMS_DOC_AUDIT_HISTORY where process_instance_id = b.process_instance_id)
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_DMS_PRODUCTION_DOCS_V">MS_DMS_PRODUCTION_DOCS_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "PDMS61SP2_DEV"."MS_DMS_PRODUCTION_DOCS_V" ("RIGHTS", "METRIC_ID", "PROCESS_INSTANCE_ID", "INSTANCE_ID", "ATTACHMENT", "COLSEQ", "USER_NAME", "CREATION_DATE", "ATTCOLNAME", "CREATED_BY", "CREATION_DATE_SQL", "CREATION_DATE_CMP", "DOCUMENT_TYPE", "DOCUMENT_NUMBER", "VERSION_NUMBER", "ACTION", "DOCUMENT_NAME", "CATEGORY", "SUB_CATEGORY1", "SUB_CATEGORY2", "SUB_CATEGORY3", "SUB_CATEGORY4", "CURRENT_LEVEL_NAME", "NEXT_LEVEL_NAME", "DESCRIPTION", "PURPOSE", "REVIEW_SCHEDULE_DAYS", "KEYWORDS", "DOCUMENT_CREATOR", "USER_LIST", "CURRENT_USER", "NEXT_STAGE", "DOCUMENT_STATUS", "LIFECYCLE_NAME", "USER_ID", "DAYS_TO_REVIEW", "NEXT_REVIEW_DATE", "RELATIONSHIP_DETAILS", "EFFECTIVE_DATE") AS 
+  ( 
+SELECT 
+	DECODE(SUM(SUBSTR(g.access_rights,1,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,2,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,3,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,4,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,5,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,6,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,7,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,8,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,9,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,10,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,11,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,12,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,13,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,14,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,15,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,16,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,17,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,18,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,19,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,20,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,21,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,22,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,23,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,24,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,25,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,26,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,27,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,28,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,29,1)),0,0,1)||DECODE(SUM(SUBSTR(g.access_rights,30,1)),0,0,1)|| 
+	DECODE(SUM(SUBSTR(g.access_rights,31,1)),0,0,1) access_rights, 
+	(select metric_id from si_metrics_t where metric_name like 'MS DMS Document Review' and end_Date is null), -- metric_id 
+	a.process_instance_id, 
+	a.instance_id, 
+	a.document_attachment attachment, 
+	10 colseq, 
+	a.last_username, 
+	TO_CHAR(a.TIMESTAMP, 'mm/dd/yyyy HH:MI AM') creation_date, 
+	'Document' attcolname, 
+	a.last_username, 
+	a.TIMESTAMP, 
+	NULL, --creation_date_cmp 
+	NULL, --a.document_type 
+	a.document_number, 
+	a.revision_number, 
+	NULL, --action_type 
+	a.document_name, 
+	a.CATEGORY, 
+	a.sub_category1, 
+	a.sub_category2, 
+	a.sub_category3, 
+	a.sub_category4, 
+	NULL, --t.current_level_name, 
+	NULL, --t.next_level_name, 
+	a.description, 
+	a.purpose, 
+	a.review_schedule_days, 
+	a.key_words, 
+	a.document_owner, 
+	--ms_dms_document_author(a.document_name), 
+	NULL, --t.user_list, 
+	NULL, --t.current_user, 
+	NULL, --t.next_stage, 
+       'Production' document_status, 
+	(SELECT lifecycle_name FROM SI_DMS_LIFECYCLES WHERE lifecycle_id = a.approval_process_id) lifecycle_name, 
+	e.user_id, 
+	TRUNC((NVL(a.last_review_date, a.TIMESTAMP) + a.review_schedule_days)) - TRUNC(SYSDATE), 
+	TO_CHAR((NVL(a.last_review_date, a.TIMESTAMP)+a.review_schedule_days), 'mm/dd/yyyy HH:MI AM'), 
+	Ms_Dms_Get_Assoc_Docs_List(a.document_name) asso_docs, 
+	TO_CHAR(NVL(a.effective_date, a.TIMESTAMP), 'mm/dd/yyyy HH:MI AM') eff_Dat 
+FROM 
+     MS_DMS_DOCUMENTS a, 
+     SI_DMS_ROLES g, 
+     si_users siu, 
+     SI_DMS_ACCESS_GRP_CATS f, 
+	SI_DMS_USER_GROUP_USERS e 
+WHERE 
+f.access_group_id = e.user_group_id AND 
+siu.user_id = e.user_id AND 
+g.enterprise_id = siu.enterprise_id AND 
+g.role_id = f.role_id 
+AND A.CATEGORY = f.CATEGORY 
+AND ((f.subcategory1 IS NULL)OR (A.sub_category1 = f.subcategory1)) 
+AND ((f.subcategory2 IS NULL)OR (A.sub_category2 = f.subcategory2)) 
+AND ((f.subcategory3 IS NULL)OR (A.sub_category3 = f.subcategory3)) 
+AND ((f.subcategory4 IS NULL)OR (A.sub_category4 = f.subcategory4)) 
+AND A.frozen_flag = 'Y' 
+AND ( NVL(A.obsolete_flag,'N') = 'N' OR 
+      (A.obsolete_flag = 'Y' AND a.effective_date > SYSDATE) ) 
+/* Added by Peter Chow */ 
+AND a.process_instance_id = 
+ (SELECT MAX(process_instance_id) FROM MS_DMS_DOCUMENTS mdd 
+   WHERE mdd.document_name = a.document_name 
+   AND   DECODE(TRUNC(SYSDATE),TRUNC(NVL(a.effective_date,SYSDATE)), 'Production', 
+	     DECODE(((TRUNC(SYSDATE)-TRUNC(NVL(a.effective_date,SYSDATE)))+ 
+	  	         TRUNC(SYSDATE)-TRUNC(NVL(a.effective_date,SYSDATE))),0, 
+			  	  'Ready For Production','Production')) = 'Production') 
+GROUP BY 
+a.process_instance_id, a.instance_id,a.document_attachment,a.last_username, a.TIMESTAMP, 
+TO_CHAR(a.TIMESTAMP, 'mm/dd/yyyy HH:MI AM') , 
+a.document_author, 
+a.document_number,a.revision_number,a.document_name, 
+a.CATEGORY, a.sub_category1,a.sub_category2,a.sub_category3,a.sub_category4, 
+a.description,a.purpose,a.review_schedule_days, 
+a.key_words, a.document_owner, 'Production', 
+a.approval_process_id, e.user_id, a.last_review_date, ABS(TRUNC((NVL(a.last_review_date, a.TIMESTAMP) + a.review_schedule_days)) - TRUNC(SYSDATE)), 
+TO_CHAR((NVL(a.last_review_date, a.TIMESTAMP)+a.review_schedule_days), 'mm/dd/yyyy HH:MI AM'), 
+Ms_Dms_Get_Assoc_Docs_List(a.document_name), TO_CHAR(NVL(a.effective_date, a.TIMESTAMP), 'mm/dd/yyyy HH:MI AM') 
+)
+
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

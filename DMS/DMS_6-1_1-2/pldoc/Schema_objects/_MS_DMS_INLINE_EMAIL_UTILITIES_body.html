@@ -1,0 +1,1230 @@
+<HTML xmlns:lxslt="http://xml.apache.org/xslt" xmlns:exslt="http://exslt.org/common">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>DMS - 6-1</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF="../css/customstyle.css" TITLE="Style">
+<script src="../js/jquery-1.11.1.min.js"></script>
+<link href="../css/jquery.mCustomScrollbar.css" rel="stylesheet">
+<!--
+        sameCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesLowerCase=FALSE
+        namesUpperCase=FALSE
+        namesDefaultCase=TRUE
+        defaultNamesCase=UPPER
+        namesFromCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesToCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-->
+<style>
+		html, body{ height: 100%; }
+	</style>
+</HEAD>
+<BODY>
+<div class="loading"></div>
+<div id="outer">
+<div id="menubar"></div>
+<div class="outermenu">
+<div class="menuliclass">
+<a class="menuaclass" HREF="../summary.html">Overview</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../deprecated-list.html">Deprecated</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../index-list.html">Index</a>
+</div>
+</div>
+<b>DMS - 6-1</b>
+<br>
+<div style="margin-top:60px;">
+<table class="summarytable">
+<tr>
+<td>SUMMARY:</td><td><A HREF="#field_summary">FIELD</A> |</td><td><A HREF="#type_summary">TYPE</A> |</td><td><A HREF="#method_summary">METHOD</A></td>
+</tr>
+<tr>
+<td>DETAIL:</td><td><A HREF="#field_detail">FIELD</A> | </td><td><A HREF="#type_detail">TYPE</A> | </td><td><A HREF="#method_detail">METHOD</A></td>
+</tr>
+</table>
+</div>
+<HR>
+<H2>
+<FONT SIZE="-1">Schema_objects</FONT>
+<BR>Package&nbsp;MS_DMS_INLINE_EMAIL_UTILITIES</H2>
+<P></P>
+<DL></DL>
+<HR>
+<P></P>
+<A NAME="field_summary"></A><A NAME="type_summary"></A><A NAME="method_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_ACTION_TYPE"></A><TD><CODE><B><A HREF="#GET_ACTION_TYPE(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">GET_ACTION_TYPE</A></B>(PC_FLOW_CODE IN VARCHAR2, PC_STAGE_CODE IN VARCHAR2, PN_PROCESS_INSTANCE_ID IN NUMBER, PN_INSTANCE_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      FUNCTION  get_form_description(
+ip_flow_code            IN              VARCHAR2,
+ip_stage_code           IN              VARCHAR2,
+ip_pid                  IN              NUMBER,
+ip_id                   IN              NUMBER
+)
+return varchar2 is
+lv_viewname     varchar2(100);
+lv_description  clob;
+lv_sqlstmt      varchar2(4000);
+begin
+lv_viewname := get_flow_view_name (ip_flow_code);
+lv_sqlstmt := 'select description from ' || lv_viewname ||' where process_instance_id = '||ip_pid ||'
+and instance_id = '||ip_id||' and rownum = 1';
+execute immediate lv_sqlstmt into lv_description ;
+return lv_description;
+EXCEPTION
+WHEN NO_DATA_FOUND
+then
+RETURN NULL;
+end get_form_description;
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_APPROVAL_LEVEL"></A><TD><CODE><B><A HREF="#GET_APPROVAL_LEVEL(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">GET_APPROVAL_LEVEL</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->CLOB</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_APPROVAL_LEVEL_SEC_DOC"></A><TD><CODE><B><A HREF="#GET_APPROVAL_LEVEL_SEC_DOC(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">GET_APPROVAL_LEVEL_SEC_DOC</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_FIRST_STAGE_USERS"></A><TD><CODE><B><A HREF="#GET_FIRST_STAGE_USERS(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">GET_FIRST_STAGE_USERS</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      function GET_FLOW_VIEW_NAME (PC_FLOW_CODE varchar2,
+pc_view_type varchar2 default 'V' )
+RETURN VARCHAR2
+IS
+lc_namespace         VARCHAR2 (100) := 'xmlns="http://www.metricstream.com/appstudio/mdf"';
+lv_flow              XMLTYPE;
+lv_view_name         varchar2 (400);
+begin
+dbms_output.put_line('2');
+SELECT XMLTYPE (flow_xml)
+INTO lv_flow
+FROM ms_apps_mdf_flow_xml
+where flow_code = pc_flow_code;
+dbms_output.put_line('1');
+if pc_view_type='V' then
+dbms_output.put_line('Anil-inside if');
+SELECT stages.EXTRACT ('stage/view/text()', lc_namespace).getstringval() view_name
+INTO lv_view_name
+FROM TABLE
+(XMLSEQUENCE
+((SELECT lv_flow.EXTRACT
+('process/stages/stage[enabled="Y"]',
+lc_namespace
+)
+FROM DUAL)
+)
+) stages
+WHERE ROWNUM = 1;
+else
+dbms_output.put_line('Anil-inside else');
+SELECT stages.EXTRACT ('stage/displayview/text()', lc_namespace).getstringval() view_name
+INTO lv_view_name
+FROM TABLE
+(XMLSEQUENCE
+((SELECT lv_flow.EXTRACT
+('process/stages/stage[enabled="Y"]',
+lc_namespace
+)
+FROM DUAL)
+)
+) stages
+WHERE ROWNUM = 1;
+end if;
+dbms_output.put_line('Anil-End  : ' || lv_view_name);
+RETURN lv_view_name;
+EXCEPTION
+WHEN NO_DATA_FOUND
+then
+return null;
+end get_flow_view_name;
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_LIFECYCLE_UPVERSION_FLAG"></A><TD><CODE><B><A HREF="#GET_LIFECYCLE_UPVERSION_FLAG(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">GET_LIFECYCLE_UPVERSION_FLAG</A></B>(PC_FLOW_CODE IN VARCHAR2, PC_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_OBSOLETE_VERSION_NUMBER"></A><TD><CODE><B><A HREF="#GET_OBSOLETE_VERSION_NUMBER(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">GET_OBSOLETE_VERSION_NUMBER</A></B>(PC_FLOW_CODE IN VARCHAR2, PC_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_OWNER_INITIATOR"></A><TD><CODE><B><A HREF="#GET_OWNER_INITIATOR(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">GET_OWNER_INITIATOR</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_STAGE_MOVEMENT"></A><TD><CODE><B><A HREF="#GET_STAGE_MOVEMENT(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">GET_STAGE_MOVEMENT</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_STAGE_NAME"></A><TD><CODE><B><A HREF="#GET_STAGE_NAME(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">GET_STAGE_NAME</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Function to fix Trakr#201538
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_VER"></A><TD><CODE><B><A HREF="#GET_VER(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">GET_VER</A></B>(PC_FLOW_CODE IN VARCHAR2, PC_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_VERSION_NUMBER"></A><TD><CODE><B><A HREF="#GET_VERSION_NUMBER(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">GET_VERSION_NUMBER</A></B>(PC_FLOW_CODE IN VARCHAR2, PC_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="IS_READY_TO_PUBLISH"></A><TD><CODE><B><A HREF="#IS_READY_TO_PUBLISH(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">IS_READY_TO_PUBLISH</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MAIL_BASED_ON_CONFIG_PARAM"></A><TD><CODE><B><A HREF="#MAIL_BASED_ON_CONFIG_PARAM(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">MAIL_BASED_ON_CONFIG_PARAM</A></B>(PC_FLOW_CODE IN VARCHAR2, PC_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_GET_AUTHOR_OWNER_ID"></A><TD><CODE><B><A HREF="#MS_DMS_GET_AUTHOR_OWNER_ID(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">MS_DMS_GET_AUTHOR_OWNER_ID</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=8 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROC_PRODUCTION_EMAIL"></A><TD><CODE><B><A HREF="#PROC_PRODUCTION_EMAIL(VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,NUMBER,NUMBER,VARCHAR2)">PROC_PRODUCTION_EMAIL</A></B>(OBJECT_ID IN VARCHAR2, IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_FLAG IN VARCHAR2, PROCESS_INSTANCE_ID IN NUMBER, INSTANCE_ID IN NUMBER, O_ERROR_CODE OUT NUMBER, O_ERROR_MESSAGE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=5 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PRODUCTION_EMAIL"></A><TD><CODE><B><A HREF="#PRODUCTION_EMAIL(VARCHAR2,NUMBER,NUMBER,NUMBER,VARCHAR2)">PRODUCTION_EMAIL</A></B>(LV_OBJECT_ID IN VARCHAR2, LV_PROCESS_INSTANCE_ID IN NUMBER, LV_INSTANCE_ID IN NUMBER, O_ERROR_CODE OUT NUMBER, O_ERROR_MESSAGE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      FUNCTION author_publish_assign(IP_FLOW_CODE  IN VARCHAR2,
+IP_STAGE_CODE IN VARCHAR2,
+IP_PID        IN NUMBER,
+ip_id         in number)
+RETURN CLOB AS
+L_USERNAME_LIST CLOB;
+X_LENGTH        NUMBER;
+X_ERR           VARCHAR2(4000);
+CURSOR V_USERS IS
+SELECT DISTINCT L1_APPROVER_SEC "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SEC')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+where process_instance_id = ip_pid)
+AND review_response_sec &lt;&gt; 'NRP'
+UNION
+SELECT DISTINCT L1_APPROVER_SUB "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SUB')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+where process_instance_id = ip_pid)
+AND review_response_sec &lt;&gt; 'NRP'
+UNION
+SELECT DISTINCT L2_APPROVER_SEC "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SEC')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE process_instance_id = IP_PID)
+and upper(requires_approval_from_sec) = '2'
+AND review_response_sec &lt;&gt; 'NRP'
+UNION
+SELECT DISTINCT L2_APPROVER_SUB "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SUB')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE process_instance_id = IP_PID)
+and upper(requires_approval_from_sub) = '2'
+AND review_response_sec &lt;&gt; 'NRP'
+UNION
+SELECT DISTINCT L3_APPROVER_SEC "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SEC')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE process_instance_id = IP_PID)
+and upper(requires_approval_from_sec) = '2'
+AND review_response_sec &lt;&gt; 'NRP'
+UNION
+SELECT DISTINCT L2_APPROVER_SUB "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SUB')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE process_instance_id = IP_PID)
+and upper(requires_approval_from_sub) = '2'
+AND review_response_sec &lt;&gt; 'NRP';
+BEGIN
+FOR I IN V_USERS LOOP
+IF I.USERS IS NOT NULL THEN
+L_USERNAME_LIST := L_USERNAME_LIST || ',' || I.USERS;
+END IF;
+END LOOP;
+x_LENGTH        := dbms_lob.getlength(L_USERNAME_LIST);
+L_USERNAME_LIST := DBMS_LOB.SUBSTR(L_USERNAME_LIST, X_LENGTH, 2);
+RETURN L_USERNAME_LIST;
+EXCEPTION
+WHEN OTHERS THEN
+return null;
+END author_publish_assign;
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->CLOB</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PUBLISH_PUBLISH_ASSIGN"></A><TD><CODE><B><A HREF="#PUBLISH_PUBLISH_ASSIGN(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">PUBLISH_PUBLISH_ASSIGN</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      fix for Tracker Trakr#201522 Anil
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="RULE_FOR_NON_OWNER_ANY"></A><TD><CODE><B><A HREF="#RULE_FOR_NON_OWNER_ANY(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">RULE_FOR_NON_OWNER_ANY</A></B>(PC_FLOW_CODE IN VARCHAR2, PC_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="SEND_MAIL_OR_NOT"></A><TD><CODE><B><A HREF="#SEND_MAIL_OR_NOT(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">SEND_MAIL_OR_NOT</A></B>(PC_FLOW_CODE IN VARCHAR2, PC_STAGE_CODE IN VARCHAR2, PN_PROCESS_INSTANCE_ID IN NUMBER, PN_INSTANCE_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPVERSION_EMAIL"></A><TD><CODE><B><A HREF="#UPVERSION_EMAIL(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">UPVERSION_EMAIL</A></B>(PC_FLOW_CODE IN VARCHAR2, PC_STAGE_CODE IN VARCHAR2, PN_PROCESS_INSTANCE_ID IN NUMBER, PN_INSTANCE_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPVERSION_TYPE"></A><TD><CODE><B><A HREF="#UPVERSION_TYPE(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">UPVERSION_TYPE</A></B>(PC_FLOW_CODE IN VARCHAR2, PC_STAGE_CODE IN VARCHAR2, PN_PROCESS_INSTANCE_ID IN NUMBER, PN_INSTANCE_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="URL_FOR_REASSIGN"></A><TD><CODE><B><A HREF="#URL_FOR_REASSIGN(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">URL_FOR_REASSIGN</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="VALIDATE_EMAIL_FLAG"></A><TD><CODE><B><A HREF="#VALIDATE_EMAIL_FLAG(VARCHAR2,VARCHAR2,NUMBER,NUMBER)">VALIDATE_EMAIL_FLAG</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_STAGE_CODE IN VARCHAR2, IP_PID IN NUMBER, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="trigger_summary"></A><A NAME="field_detail"></A><A NAME="type_detail"></A><A NAME="method_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="GET_ACTION_TYPE(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>GET_ACTION_TYPE</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_ACTION_TYPE</B>(PC_FLOW_CODE IN VARCHAR2, <BR>                          PC_STAGE_CODE IN VARCHAR2, <BR>                          PN_PROCESS_INSTANCE_ID IN NUMBER, <BR>                          PN_INSTANCE_ID IN NUMBER)</PRE>
+<DL>
+<DD>FUNCTION  get_form_description(
+ip_flow_code            IN              VARCHAR2,
+ip_stage_code           IN              VARCHAR2,
+ip_pid                  IN              NUMBER,
+ip_id                   IN              NUMBER
+)
+return varchar2 is
+lv_viewname     varchar2(100);
+lv_description  clob;
+lv_sqlstmt      varchar2(4000);
+begin
+lv_viewname := get_flow_view_name (ip_flow_code);
+lv_sqlstmt := 'select description from ' || lv_viewname ||' where process_instance_id = '||ip_pid ||'
+and instance_id = '||ip_id||' and rownum = 1';
+execute immediate lv_sqlstmt into lv_description ;
+return lv_description;
+EXCEPTION
+WHEN NO_DATA_FOUND
+then
+RETURN NULL;
+end get_form_description;
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_APPROVAL_LEVEL(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>GET_APPROVAL_LEVEL</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_APPROVAL_LEVEL</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                             IP_STAGE_CODE IN VARCHAR2, <BR>                             IP_PID IN NUMBER, <BR>                             IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_APPROVAL_LEVEL_SEC_DOC(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>GET_APPROVAL_LEVEL_SEC_DOC</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->CLOB <B>GET_APPROVAL_LEVEL_SEC_DOC</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                                 IP_STAGE_CODE IN VARCHAR2, <BR>                                 IP_PID IN NUMBER, <BR>                                 IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_FIRST_STAGE_USERS(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>GET_FIRST_STAGE_USERS</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_FIRST_STAGE_USERS</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                                IP_STAGE_CODE IN VARCHAR2, <BR>                                IP_PID IN NUMBER, <BR>                                IP_ID IN NUMBER)</PRE>
+<DL>
+<DD>function GET_FLOW_VIEW_NAME (PC_FLOW_CODE varchar2,
+pc_view_type varchar2 default 'V' )
+RETURN VARCHAR2
+IS
+lc_namespace         VARCHAR2 (100) := 'xmlns="http://www.metricstream.com/appstudio/mdf"';
+lv_flow              XMLTYPE;
+lv_view_name         varchar2 (400);
+begin
+dbms_output.put_line('2');
+SELECT XMLTYPE (flow_xml)
+INTO lv_flow
+FROM ms_apps_mdf_flow_xml
+where flow_code = pc_flow_code;
+dbms_output.put_line('1');
+if pc_view_type='V' then
+dbms_output.put_line('Anil-inside if');
+SELECT stages.EXTRACT ('stage/view/text()', lc_namespace).getstringval() view_name
+INTO lv_view_name
+FROM TABLE
+(XMLSEQUENCE
+((SELECT lv_flow.EXTRACT
+('process/stages/stage[enabled="Y"]',
+lc_namespace
+)
+FROM DUAL)
+)
+) stages
+WHERE ROWNUM = 1;
+else
+dbms_output.put_line('Anil-inside else');
+SELECT stages.EXTRACT ('stage/displayview/text()', lc_namespace).getstringval() view_name
+INTO lv_view_name
+FROM TABLE
+(XMLSEQUENCE
+((SELECT lv_flow.EXTRACT
+('process/stages/stage[enabled="Y"]',
+lc_namespace
+)
+FROM DUAL)
+)
+) stages
+WHERE ROWNUM = 1;
+end if;
+dbms_output.put_line('Anil-End  : ' || lv_view_name);
+RETURN lv_view_name;
+EXCEPTION
+WHEN NO_DATA_FOUND
+then
+return null;
+end get_flow_view_name;
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_LIFECYCLE_UPVERSION_FLAG(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>GET_LIFECYCLE_UPVERSION_FLAG</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_LIFECYCLE_UPVERSION_FLAG</B>(PC_FLOW_CODE IN VARCHAR2, <BR>                                       PC_STAGE_CODE IN VARCHAR2, <BR>                                       IP_PID IN NUMBER, <BR>                                       IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_OBSOLETE_VERSION_NUMBER(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>GET_OBSOLETE_VERSION_NUMBER</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_OBSOLETE_VERSION_NUMBER</B>(PC_FLOW_CODE IN VARCHAR2, <BR>                                      PC_STAGE_CODE IN VARCHAR2, <BR>                                      IP_PID IN NUMBER, <BR>                                      IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_OWNER_INITIATOR(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>GET_OWNER_INITIATOR</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_OWNER_INITIATOR</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                              IP_STAGE_CODE IN VARCHAR2, <BR>                              IP_PID IN NUMBER, <BR>                              IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_STAGE_MOVEMENT(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>GET_STAGE_MOVEMENT</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_STAGE_MOVEMENT</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                             IP_STAGE_CODE IN VARCHAR2, <BR>                             IP_PID IN NUMBER, <BR>                             IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_STAGE_NAME(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>GET_STAGE_NAME</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_STAGE_NAME</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                         IP_STAGE_CODE IN VARCHAR2, <BR>                         IP_PID IN NUMBER, <BR>                         IP_ID IN NUMBER)</PRE>
+<DL>
+<DD>Function to fix Trakr#201538
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_VER(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>GET_VER</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_VER</B>(PC_FLOW_CODE IN VARCHAR2, <BR>                  PC_STAGE_CODE IN VARCHAR2, <BR>                  IP_PID IN NUMBER, <BR>                  IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_VERSION_NUMBER(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>GET_VERSION_NUMBER</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_VERSION_NUMBER</B>(PC_FLOW_CODE IN VARCHAR2, <BR>                             PC_STAGE_CODE IN VARCHAR2, <BR>                             IP_PID IN NUMBER, <BR>                             IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="IS_READY_TO_PUBLISH(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>IS_READY_TO_PUBLISH</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>IS_READY_TO_PUBLISH</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                              IP_STAGE_CODE IN VARCHAR2, <BR>                              IP_PID IN NUMBER, <BR>                              IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MAIL_BASED_ON_CONFIG_PARAM(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>MAIL_BASED_ON_CONFIG_PARAM</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>MAIL_BASED_ON_CONFIG_PARAM</B>(PC_FLOW_CODE IN VARCHAR2, <BR>                                     PC_STAGE_CODE IN VARCHAR2, <BR>                                     IP_PID IN NUMBER, <BR>                                     IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_GET_AUTHOR_OWNER_ID(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>MS_DMS_GET_AUTHOR_OWNER_ID</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>MS_DMS_GET_AUTHOR_OWNER_ID</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                                     IP_STAGE_CODE IN VARCHAR2, <BR>                                     IP_PID IN NUMBER, <BR>                                     IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROC_PRODUCTION_EMAIL(VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>PROC_PRODUCTION_EMAIL</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> 
+<B>PROC_PRODUCTION_EMAIL</B>(OBJECT_ID IN VARCHAR2, <BR>                        IP_FLOW_CODE IN VARCHAR2, <BR>                        IP_STAGE_CODE IN VARCHAR2, <BR>                        IP_FLAG IN VARCHAR2, <BR>                        PROCESS_INSTANCE_ID IN NUMBER, <BR>                        INSTANCE_ID IN NUMBER, <BR>                        O_ERROR_CODE OUT NUMBER, <BR>                        O_ERROR_MESSAGE OUT VARCHAR2)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PRODUCTION_EMAIL(VARCHAR2,NUMBER,NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>PRODUCTION_EMAIL</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> 
+<B>PRODUCTION_EMAIL</B>(LV_OBJECT_ID IN VARCHAR2, <BR>                   LV_PROCESS_INSTANCE_ID IN NUMBER, <BR>                   LV_INSTANCE_ID IN NUMBER, <BR>                   O_ERROR_CODE OUT NUMBER, <BR>                   O_ERROR_MESSAGE OUT VARCHAR2)</PRE>
+<DL>
+<DD>FUNCTION author_publish_assign(IP_FLOW_CODE  IN VARCHAR2,
+IP_STAGE_CODE IN VARCHAR2,
+IP_PID        IN NUMBER,
+ip_id         in number)
+RETURN CLOB AS
+L_USERNAME_LIST CLOB;
+X_LENGTH        NUMBER;
+X_ERR           VARCHAR2(4000);
+CURSOR V_USERS IS
+SELECT DISTINCT L1_APPROVER_SEC "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SEC')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+where process_instance_id = ip_pid)
+AND review_response_sec &lt;&gt; 'NRP'
+UNION
+SELECT DISTINCT L1_APPROVER_SUB "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SUB')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+where process_instance_id = ip_pid)
+AND review_response_sec &lt;&gt; 'NRP'
+UNION
+SELECT DISTINCT L2_APPROVER_SEC "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SEC')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE process_instance_id = IP_PID)
+and upper(requires_approval_from_sec) = '2'
+AND review_response_sec &lt;&gt; 'NRP'
+UNION
+SELECT DISTINCT L2_APPROVER_SUB "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SUB')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE process_instance_id = IP_PID)
+and upper(requires_approval_from_sub) = '2'
+AND review_response_sec &lt;&gt; 'NRP'
+UNION
+SELECT DISTINCT L3_APPROVER_SEC "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SEC')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE process_instance_id = IP_PID)
+and upper(requires_approval_from_sec) = '2'
+AND review_response_sec &lt;&gt; 'NRP'
+UNION
+SELECT DISTINCT L2_APPROVER_SUB "USERS"
+FROM MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE PROCESS_INSTANCE_ID = IP_PID
+AND MULTIROW_REGION_ID =
+MS_DMS_FLOW_UTILITIES.GET_MULTIROW_ID('MS_DMS_INLINE_CREATE_DOCMUNENT',
+'SUB')
+AND instance_id =
+(SELECT MAX(instance_id)
+from MS_DMS_INLINE_CREATE_DOCMUN_V
+WHERE process_instance_id = IP_PID)
+and upper(requires_approval_from_sub) = '2'
+AND review_response_sec &lt;&gt; 'NRP';
+BEGIN
+FOR I IN V_USERS LOOP
+IF I.USERS IS NOT NULL THEN
+L_USERNAME_LIST := L_USERNAME_LIST || ',' || I.USERS;
+END IF;
+END LOOP;
+x_LENGTH        := dbms_lob.getlength(L_USERNAME_LIST);
+L_USERNAME_LIST := DBMS_LOB.SUBSTR(L_USERNAME_LIST, X_LENGTH, 2);
+RETURN L_USERNAME_LIST;
+EXCEPTION
+WHEN OTHERS THEN
+return null;
+END author_publish_assign;
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PUBLISH_PUBLISH_ASSIGN(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>PUBLISH_PUBLISH_ASSIGN</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->CLOB <B>PUBLISH_PUBLISH_ASSIGN</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                             IP_STAGE_CODE IN VARCHAR2, <BR>                             IP_PID IN NUMBER, <BR>                             IP_ID IN NUMBER)</PRE>
+<DL>
+<DD>fix for Tracker Trakr#201522 Anil
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="RULE_FOR_NON_OWNER_ANY(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>RULE_FOR_NON_OWNER_ANY</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>RULE_FOR_NON_OWNER_ANY</B>(PC_FLOW_CODE IN VARCHAR2, <BR>                                 PC_STAGE_CODE IN VARCHAR2, <BR>                                 IP_PID IN NUMBER, <BR>                                 IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="SEND_MAIL_OR_NOT(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>SEND_MAIL_OR_NOT</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>SEND_MAIL_OR_NOT</B>(PC_FLOW_CODE IN VARCHAR2, <BR>                           PC_STAGE_CODE IN VARCHAR2, <BR>                           PN_PROCESS_INSTANCE_ID IN NUMBER, <BR>                           PN_INSTANCE_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPVERSION_EMAIL(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>UPVERSION_EMAIL</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>UPVERSION_EMAIL</B>(PC_FLOW_CODE IN VARCHAR2, <BR>                          PC_STAGE_CODE IN VARCHAR2, <BR>                          PN_PROCESS_INSTANCE_ID IN NUMBER, <BR>                          PN_INSTANCE_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPVERSION_TYPE(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>UPVERSION_TYPE</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>UPVERSION_TYPE</B>(PC_FLOW_CODE IN VARCHAR2, <BR>                         PC_STAGE_CODE IN VARCHAR2, <BR>                         PN_PROCESS_INSTANCE_ID IN NUMBER, <BR>                         PN_INSTANCE_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="URL_FOR_REASSIGN(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>URL_FOR_REASSIGN</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>URL_FOR_REASSIGN</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                           IP_STAGE_CODE IN VARCHAR2, <BR>                           IP_PID IN NUMBER, <BR>                           IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="VALIDATE_EMAIL_FLAG(VARCHAR2,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>VALIDATE_EMAIL_FLAG</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>VALIDATE_EMAIL_FLAG</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                              IP_STAGE_CODE IN VARCHAR2, <BR>                              IP_PID IN NUMBER, <BR>                              IP_ID IN NUMBER)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="trigger_detail"></A><script src="../js/jquery.mCustomScrollbar.concat.min.js"></script><script>
+		(function($){
+			$(window).load(function(){
+				$("#outer").addClass('loader');	
+				$(".loading").fadeOut("slow");	
+				$("body").mCustomScrollbar({
+					theme:"rounded-dots-dark",
+					mouseWheel:{ scrollAmount: "300px" }
+				});
+				
+			});
+		})(jQuery);
+	</script>
+</div>
+</BODY>
+</HTML>

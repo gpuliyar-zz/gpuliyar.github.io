@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Infolets</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">                                <h4 class="infolet-tooltip"><span class="fa fa-gears fa-fw"></span>  
+                                <span data-toggle="tooltip" data-placement="top" title="Category: Assets" class="fa fa-cubes fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Output Type: Ordinary Data Report" class="fa fa-sign-out fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Type: SQL Based" class="fa fa-globe fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Keep History" class="fa fa-history fa-fw"></span>
+                                <a style="text-decoration: none; " id="MS_DMS_POLICY_DATA_ALL">MS_DMS_POLICY_DATA_ALL</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>MS_DMS_POLICY_DATA_ALL</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#query-pill" data-toggle="tab">Query</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-c">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Type</th>
+                                                            <th>Result Column Name</th>
+                                                            <th>User Column Name</th>
+                                                            <th>Default Infolet/<br>Input Infolet</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>ACTION_COMMENTS</td>                                                                <td>Varchar2</td>
+                                                                <td>ACTION_COMMENTS</td>
+                                                                <td>ACTION_COMMENTS</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>ACTION_TYPE</td>                                                                <td>Varchar2</td>
+                                                                <td>ACTION_TYPE</td>
+                                                                <td>ACTION_TYPE</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>ADDITIONAL_POLICY_USERS_DISP</td>                                                                <td>Long Varchar</td>
+                                                                <td>ADDITIONAL_POLICY_USERS_DISP</td>
+                                                                <td>ADDITIONAL_POLICY_USERS_DISP</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>AUTHOR_DISP</td>                                                                <td>Varchar2</td>
+                                                                <td>AUTHOR_DISP</td>
+                                                                <td>AUTHOR_DISP</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>AUTHOR_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>AUTHOR_NAME</td>
+                                                                <td>AUTHOR_NAME</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td>CATEGORY_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>CATEGORY_ID</td>
+                                                                <td>CATEGORY_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>CATEGORY_ID_LIST</td>                                                                <td>Varchar2</td>
+                                                                <td>CATEGORY_ID_LIST</td>
+                                                                <td>CATEGORY_ID_LIST</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>DD_CREATED_BY</td>                                                                <td>Varchar2</td>
+                                                                <td>DD_CREATED_BY</td>
+                                                                <td>DD_CREATED_BY</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>DD_CREATED_ON</td>                                                                <td>Date</td>
+                                                                <td>DD_CREATED_ON</td>
+                                                                <td>DD_CREATED_ON</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>13</td>
+                                                                <td>DD_EDIT_FLAG</td>                                                                <td>Varchar2</td>
+                                                                <td>DD_EDIT_FLAG</td>
+                                                                <td>DD_EDIT_FLAG</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>14</td>
+                                                                <td>DD_INSTANCE_ID</td>                                                                <td>Number</td>
+                                                                <td>DD_INSTANCE_ID</td>
+                                                                <td>DD_INSTANCE_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>15</td>
+                                                                <td>DD_MODIFIED_BY</td>                                                                <td>Varchar2</td>
+                                                                <td>DD_MODIFIED_BY</td>
+                                                                <td>DD_MODIFIED_BY</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>16</td>
+                                                                <td>DD_MODIFIED_ON</td>                                                                <td>Date</td>
+                                                                <td>DD_MODIFIED_ON</td>
+                                                                <td>DD_MODIFIED_ON</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>17</td>
+                                                                <td>DD_OBJECT_TYPE</td>                                                                <td>Varchar2</td>
+                                                                <td>DD_OBJECT_TYPE</td>
+                                                                <td>DD_OBJECT_TYPE</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>18</td>
+                                                                <td>DD_PROCESS_CODE</td>                                                                <td>Varchar2</td>
+                                                                <td>DD_PROCESS_CODE</td>
+                                                                <td>DD_PROCESS_CODE</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>19</td>
+                                                                <td>DD_PROCESS_INSTANCE_ID</td>                                                                <td>Number</td>
+                                                                <td>DD_PROCESS_INSTANCE_ID</td>
+                                                                <td>DD_PROCESS_INSTANCE_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>20</td>
+                                                                <td>DD_STATUS_FLAG</td>                                                                <td>Varchar2</td>
+                                                                <td>DD_STATUS_FLAG</td>
+                                                                <td>DD_STATUS_FLAG</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>21</td>
+                                                                <td>DOCUMENT_ATTACHMENT</td>                                                                <td>Varchar2</td>
+                                                                <td>DOCUMENT_ATTACHMENT</td>
+                                                                <td>DOCUMENT_ATTACHMENT</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>22</td>
+                                                                <td>DOCUMENT_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>DOCUMENT_NAME</td>
+                                                                <td>DOCUMENT_NAME</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>23</td>
+                                                                <td>DOCUMENT_NUMBER</td>                                                                <td>Varchar2</td>
+                                                                <td>DOCUMENT_NUMBER</td>
+                                                                <td>DOCUMENT_NUMBER</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>24</td>
+                                                                <td>DOC_AUDITID</td>                                                                <td>Number</td>
+                                                                <td>DOC_AUDITID</td>
+                                                                <td>DOC_AUDITID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>25</td>
+                                                                <td>DOC_INSTID</td>                                                                <td>Number</td>
+                                                                <td>DOC_INSTID</td>
+                                                                <td>DOC_INSTID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>26</td>
+                                                                <td>DOC_OBJECTID</td>                                                                <td>Number</td>
+                                                                <td>DOC_OBJECTID</td>
+                                                                <td>DOC_OBJECTID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>27</td>
+                                                                <td>DOC_PID</td>                                                                <td>Number</td>
+                                                                <td>DOC_PID</td>
+                                                                <td>DOC_PID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>28</td>
+                                                                <td>EFFECTIVE_DATE</td>                                                                <td>Date</td>
+                                                                <td>EFFECTIVE_DATE</td>
+                                                                <td>EFFECTIVE_DATE</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>ADDITIONAL_POLICY_USERS_STOR</td>                                                                <td>Long Varchar</td>
+                                                                <td>ADDITIONAL_POLICY_USERS_STOR</td>
+                                                                <td>ADDITIONAL_POLICY_USERS_STOR</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>APPROVAL_PROCESS_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>APPROVAL_PROCESS_ID</td>
+                                                                <td>APPROVAL_PROCESS_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>ASSIGN_DUE_DATE</td>                                                                <td>Date</td>
+                                                                <td>ASSIGN_DUE_DATE</td>
+                                                                <td>ASSIGN_DUE_DATE</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>29</td>
+                                                                <td>FORM_STATUS_PID</td>                                                                <td>Varchar2</td>
+                                                                <td>FORM_STATUS_PID</td>
+                                                                <td>FORM_STATUS_PID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>30</td>
+                                                                <td>HDN_CHK_ASSIGNMENT</td>                                                                <td>Varchar2</td>
+                                                                <td>HDN_CHK_ASSIGNMENT</td>
+                                                                <td>HDN_CHK_ASSIGNMENT</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>31</td>
+                                                                <td>HDN_FIELD1</td>                                                                <td>Varchar2</td>
+                                                                <td>HDN_FIELD1</td>
+                                                                <td>HDN_FIELD1</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>32</td>
+                                                                <td>HDN_FIELD2</td>                                                                <td>Varchar2</td>
+                                                                <td>HDN_FIELD2</td>
+                                                                <td>HDN_FIELD2</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>33</td>
+                                                                <td>HDN_FIELD3</td>                                                                <td>Varchar2</td>
+                                                                <td>HDN_FIELD3</td>
+                                                                <td>HDN_FIELD3</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>34</td>
+                                                                <td>HDN_FIELD4</td>                                                                <td>Varchar2</td>
+                                                                <td>HDN_FIELD4</td>
+                                                                <td>HDN_FIELD4</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>35</td>
+                                                                <td>HDN_FIELD5</td>                                                                <td>Varchar2</td>
+                                                                <td>HDN_FIELD5</td>
+                                                                <td>HDN_FIELD5</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>36</td>
+                                                                <td>HDN_USER_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>HDN_USER_ID</td>
+                                                                <td>HDN_USER_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>37</td>
+                                                                <td>HDN_VALIDATION_1</td>                                                                <td>Varchar2</td>
+                                                                <td>HDN_VALIDATION_1</td>
+                                                                <td>HDN_VALIDATION_1</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>38</td>
+                                                                <td>HDN_VALIDATION_2</td>                                                                <td>Varchar2</td>
+                                                                <td>HDN_VALIDATION_2</td>
+                                                                <td>HDN_VALIDATION_2</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>39</td>
+                                                                <td>HDN_VALIDATION_3</td>                                                                <td>Varchar2</td>
+                                                                <td>HDN_VALIDATION_3</td>
+                                                                <td>HDN_VALIDATION_3</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>40</td>
+                                                                <td>INITIATOR_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>INITIATOR_NAME</td>
+                                                                <td>INITIATOR_NAME</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>41</td>
+                                                                <td>LOCALE_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>LOCALE_ID</td>
+                                                                <td>LOCALE_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>42</td>
+                                                                <td>NATIVE_VIEWER_ERROR</td>                                                                <td>Varchar2</td>
+                                                                <td>NATIVE_VIEWER_ERROR</td>
+                                                                <td>NATIVE_VIEWER_ERROR</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>43</td>
+                                                                <td>NEXT_REVIEW_DATE</td>                                                                <td>Date</td>
+                                                                <td>NEXT_REVIEW_DATE</td>
+                                                                <td>NEXT_REVIEW_DATE</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>44</td>
+                                                                <td>OBJECT_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>OBJECT_ID</td>
+                                                                <td>OBJECT_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>45</td>
+                                                                <td>OWNER_DISP</td>                                                                <td>Varchar2</td>
+                                                                <td>OWNER_DISP</td>
+                                                                <td>OWNER_DISP</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>46</td>
+                                                                <td>OWNER_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>OWNER_NAME</td>
+                                                                <td>OWNER_NAME</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>47</td>
+                                                                <td>POLICY_AGREEMENT</td>                                                                <td>Long Varchar</td>
+                                                                <td>POLICY_AGREEMENT</td>
+                                                                <td>POLICY_AGREEMENT</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>48</td>
+                                                                <td>POLICY_AGREEMENT_DISP</td>                                                                <td>Long Varchar</td>
+                                                                <td>POLICY_AGREEMENT_DISP</td>
+                                                                <td>POLICY_AGREEMENT_DISP</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>49</td>
+                                                                <td>POLICY_DESCRIPTION</td>                                                                <td>Long Varchar</td>
+                                                                <td>POLICY_DESCRIPTION</td>
+                                                                <td>POLICY_DESCRIPTION</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>50</td>
+                                                                <td>POLICY_DESCRIPTION_DISP</td>                                                                <td>Long Varchar</td>
+                                                                <td>POLICY_DESCRIPTION_DISP</td>
+                                                                <td>POLICY_DESCRIPTION_DISP</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>51</td>
+                                                                <td>POLICY_DOC_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>POLICY_DOC_NAME</td>
+                                                                <td>POLICY_DOC_NAME</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>52</td>
+                                                                <td>POLICY_END_DATE</td>                                                                <td>Date</td>
+                                                                <td>POLICY_END_DATE</td>
+                                                                <td>POLICY_END_DATE</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>53</td>
+                                                                <td>POLICY_PDF_YN</td>                                                                <td>Varchar2</td>
+                                                                <td>POLICY_PDF_YN</td>
+                                                                <td>POLICY_PDF_YN</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>54</td>
+                                                                <td>REPORT_STATUS</td>                                                                <td>Varchar2</td>
+                                                                <td>REPORT_STATUS</td>
+                                                                <td>REPORT_STATUS</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>55</td>
+                                                                <td>REQ_POLICY_ACCPT</td>                                                                <td>Varchar2</td>
+                                                                <td>REQ_POLICY_ACCPT</td>
+                                                                <td>REQ_POLICY_ACCPT</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>57</td>
+                                                                <td>SCHEDULE_PERIOD_TYPE</td>                                                                <td>Varchar2</td>
+                                                                <td>SCHEDULE_PERIOD_TYPE</td>
+                                                                <td>SCHEDULE_PERIOD_TYPE</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>58</td>
+                                                                <td>SCHEDULE_PERIOD_TYPE_VAL</td>                                                                <td>Varchar2</td>
+                                                                <td>SCHEDULE_PERIOD_TYPE_VAL</td>
+                                                                <td>SCHEDULE_PERIOD_TYPE_VAL</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>59</td>
+                                                                <td>SEARCH_DOC_FORM_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>SEARCH_DOC_FORM_ID</td>
+                                                                <td>SEARCH_DOC_FORM_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>60</td>
+                                                                <td>SUB_CATEGORY1_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>SUB_CATEGORY1_ID</td>
+                                                                <td>SUB_CATEGORY1_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>61</td>
+                                                                <td>SUB_CATEGORY2_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>SUB_CATEGORY2_ID</td>
+                                                                <td>SUB_CATEGORY2_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>62</td>
+                                                                <td>SUB_CATEGORY3_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>SUB_CATEGORY3_ID</td>
+                                                                <td>SUB_CATEGORY3_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>63</td>
+                                                                <td>SUB_CATEGORY4_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>SUB_CATEGORY4_ID</td>
+                                                                <td>SUB_CATEGORY4_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>64</td>
+                                                                <td>SUB_CATEGORY5_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>SUB_CATEGORY5_ID</td>
+                                                                <td>SUB_CATEGORY5_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>65</td>
+                                                                <td>UNIQUE_REF_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>UNIQUE_REF_ID</td>
+                                                                <td>UNIQUE_REF_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>66</td>
+                                                                <td>URL_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>URL_ID</td>
+                                                                <td>URL_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>67</td>
+                                                                <td>VERSION_NUMBER</td>                                                                <td>Varchar2</td>
+                                                                <td>VERSION_NUMBER</td>
+                                                                <td>VERSION_NUMBER</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>56</td>
+                                                                <td>REVIEW_SCHEDULE_DAYS</td>                                                                <td>Number</td>
+                                                                <td>REVIEW_SCHEDULE_DAYS</td>
+                                                                <td>REVIEW_SCHEDULE_DAYS</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="query-pill">
+                                            <div class="modal-dialog"">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-sql')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-sql">
+                                                        SELECTACTION_COMMENTS , ACTION_TYPE , ADDITIONAL_POLICY_USERS_DISP , ADDITIONAL_POLICY_USERS_STOR , APPROVAL_PROCESS_ID , ASSIGN_DUE_DATE , AUTHOR_DISP , AUTHOR_NAME , CATEGORY_ID , CATEGORY_ID_LIST , DD_CREATED_BY , DD_CREATED_ON , DD_EDIT_FLAG , DD_INSTANCE_ID , DD_MODIFIED_BY , DD_MODIFIED_ON , DD_OBJECT_TYPE , DD_PROCESS_CODE , DD_PROCESS_INSTANCE_ID , DD_STATUS_FLAG , DOCUMENT_ATTACHMENT , DOCUMENT_NAME , DOCUMENT_NUMBER , DOC_AUDITID , DOC_INSTID , DOC_OBJECTID , DOC_PID , EFFECTIVE_DATE , FORM_STATUS_PID , HDN_CHK_ASSIGNMENT , HDN_FIELD1 , HDN_FIELD2 , HDN_FIELD3 , HDN_FIELD4 , HDN_FIELD5 , HDN_USER_ID , HDN_VALIDATION_1 , HDN_VALIDATION_2 , HDN_VALIDATION_3 , INITIATOR_NAME , LOCALE_ID , NATIVE_VIEWER_ERROR , NEXT_REVIEW_DATE , OBJECT_ID , OWNER_DISP , OWNER_NAME , POLICY_AGREEMENT , POLICY_AGREEMENT_DISP , POLICY_DESCRIPTION , POLICY_DESCRIPTION_DISP , POLICY_DOC_NAME , POLICY_END_DATE , POLICY_PDF_YN , REPORT_STATUS , REQ_POLICY_ACCPT , REVIEW_SCHEDULE_DAYS , SCHEDULE_PERIOD_TYPE , SCHEDULE_PERIOD_TYPE_VAL , SEARCH_DOC_FORM_ID , SUB_CATEGORY1_ID , SUB_CATEGORY2_ID , SUB_CATEGORY3_ID , SUB_CATEGORY4_ID , SUB_CATEGORY5_ID , UNIQUE_REF_ID , URL_ID , VERSION_NUMBER  FROM MS_DMS_POLICY
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                </div>
+                                <!--panel-default -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.infolet-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.infolet-table-c').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-cnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-f').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-fnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-p').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-pnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-r').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-rnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                    ]
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,2528 @@
+<HTML xmlns:lxslt="http://xml.apache.org/xslt" xmlns:exslt="http://exslt.org/common">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>DMS - 6-1</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF="../css/customstyle.css" TITLE="Style">
+<script src="../js/jquery-1.11.1.min.js"></script>
+<link href="../css/jquery.mCustomScrollbar.css" rel="stylesheet">
+<!--
+        sameCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesLowerCase=FALSE
+        namesUpperCase=FALSE
+        namesDefaultCase=TRUE
+        defaultNamesCase=UPPER
+        namesFromCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesToCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-->
+<style>
+		html, body{ height: 100%; }
+	</style>
+</HEAD>
+<BODY>
+<div class="loading"></div>
+<div id="outer">
+<div id="menubar"></div>
+<div class="outermenu">
+<div class="menuliclass">
+<a class="menuaclass" HREF="../summary.html">Overview</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../deprecated-list.html">Deprecated</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../index-list.html">Index</a>
+</div>
+</div>
+<b>DMS - 6-1</b>
+<br>
+<div style="margin-top:60px;">
+<table class="summarytable">
+<tr>
+<td>SUMMARY:</td><td><A HREF="#field_summary">FIELD</A> |</td><td><A HREF="#type_summary">TYPE</A> |</td><td><A HREF="#method_summary">METHOD</A></td>
+</tr>
+<tr>
+<td>DETAIL:</td><td><A HREF="#field_detail">FIELD</A> | </td><td><A HREF="#type_detail">TYPE</A> | </td><td><A HREF="#method_detail">METHOD</A></td>
+</tr>
+</table>
+</div>
+<HR>
+<H2>
+<FONT SIZE="-1">Schema_objects</FONT>
+<BR>Package&nbsp;MS_DMS_UPDATE_DOCUMENT</H2> ======================================================================<br/>
+ Module: MS_DMS_UPDATE_DOCUMENT <br/>
+ Description: Methods in this package are used for insertion of the form data to base tables of the DMS<br/>
+ Method is called for the when document is upversioned or performed change request<br/>
+ Values populated to tables are  MS_DMS_DOC_AUDIT_HISTORY, MS_DMS_DOCUMENTS_HDR, MS_DMS_DOCUMENTS etc.<br/>
+ ======================================================================<br/>
+<P></P>
+<DL></DL>
+<HR>
+<P></P>
+<A NAME="field_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Field Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_ALL_APPROVAL_TYPE">X_ALL_APPROVAL_TYPE</A></B> CONSTANT := 'All'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#X_ALLOW_UPERVSION_DOC_NO">X_ALLOW_UPERVSION_DOC_NO</A></B> CONSTANT := 0</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#X_ALLOW_UPERVSION_DOC_YES">X_ALLOW_UPERVSION_DOC_YES</A></B> CONSTANT := 1</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_ANY_APPROVAL_TYPE">X_ANY_APPROVAL_TYPE</A></B> CONSTANT := 'Any'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#X_AUD_ID_POLICY_REVIEW">X_AUD_ID_POLICY_REVIEW</A></B></CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(500)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(500)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(500)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_AUTHOR_PARAM_NAME">X_AUTHOR_PARAM_NAME</A></B> CONSTANT := 'DMS Last person signed-off as Author becomes Author'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(500)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(500)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(500)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_AUTHOR_PARAM_TYPE">X_AUTHOR_PARAM_TYPE</A></B> CONSTANT := 'MS DMS CONFIGURATION PARAMETERS'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_AUTO_REASSIGN_TEXT">X_AUTO_REASSIGN_TEXT</A></B> CONSTANT := 'Review Assignment'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_CHREQ_DOC_ACTION_NAME">X_CHREQ_DOC_ACTION_NAME</A></B> CONSTANT := 'Change Request'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(1)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(1)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(1)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_CONST_N">X_CONST_N</A></B> CONSTANT := 'N'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(1)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(1)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(1)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_CONST_Y">X_CONST_Y</A></B> CONSTANT := 'Y'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_CONTINUE_WORKING">X_CONTINUE_WORKING</A></B> CONSTANT := 'Continue Working'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_CREATE_DOC_ACTION_NAME">X_CREATE_DOC_ACTION_NAME</A></B> CONSTANT := 'Create Document'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(500)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(500)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(500)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_CREATE_DOC_METRIC_NAME">X_CREATE_DOC_METRIC_NAME</A></B> CONSTANT := 'MS_DMS_UPDATE_DOCUMENT'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Constants are declared below
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_CREATE_REPLACE">X_CREATE_REPLACE</A></B> CONSTANT := 'Create'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_DCOUMENT_NUM_FORMAT">X_DCOUMENT_NUM_FORMAT</A></B> CONSTANT := 'MS_DMS_Document_Numbering'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(500)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(500)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(500)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_DMS_REVIEW_METRIC_NAME">X_DMS_REVIEW_METRIC_NAME</A></B> CONSTANT := 'MS_DMS_UPDATE_DOCUMENT'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(500)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(500)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(500)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_DMS_VIRTUAL_METRIC_NAME">X_DMS_VIRTUAL_METRIC_NAME</A></B> CONSTANT := 'MS DMS Virtual Document'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_DOC_DELIMITER">X_DOC_DELIMITER</A></B> CONSTANT := 'Delimiter'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_DOC_NOT_READY_FOR_PROCESS">X_DOC_NOT_READY_FOR_PROCESS</A></B> CONSTANT := 'Obsoleted'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(4000)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(4000)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(4000)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_DOC_OBJ_TYPE_POLICY_VIRTUAL">X_DOC_OBJ_TYPE_POLICY_VIRTUAL</A></B></CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      this is to get audit_id   for the policy managment
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_DOC_READY_FOR_PROCESS">X_DOC_READY_FOR_PROCESS</A></B> CONSTANT := 'InProcess'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(500)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(500)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(500)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_EN_MOD_USER_LIST_NAME">X_EN_MOD_USER_LIST_NAME</A></B> CONSTANT := 'Enable Stage User List'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_EN_STAGE_USER_LIST_NO">X_EN_STAGE_USER_LIST_NO</A></B> CONSTANT := 'No'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_EN_STAGE_USER_LIST_YES">X_EN_STAGE_USER_LIST_YES</A></B> CONSTANT := 'Yes'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#X_EXCLUSIVE_DOC_NO">X_EXCLUSIVE_DOC_NO</A></B> CONSTANT := 0</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#X_EXCLUSIVE_DOC_YES">X_EXCLUSIVE_DOC_YES</A></B> CONSTANT := 1</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(1)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(1)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(1)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_INDEX_FLAG">X_INDEX_FLAG</A></B> := 'Y'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      this is to get document_object_id for virtual documents  for the policy managment
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(1)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(1)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(1)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_INDEX3_FLAG">X_INDEX3_FLAG</A></B> := 'Y'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_INIT_VIRTUALDOC_VERSION">X_INIT_VIRTUALDOC_VERSION</A></B> CONSTANT := '1.0.0.0'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#X_LOG_LEVEL">X_LOG_LEVEL</A></B> CONSTANT := 0</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_MOVE_NEXT">X_MOVE_NEXT</A></B> CONSTANT := 'Next'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_MOVE_NEXT_LEVEL">X_MOVE_NEXT_LEVEL</A></B> CONSTANT := 'Submit'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_MOVE_PREV">X_MOVE_PREV</A></B> CONSTANT := 'Prev'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_MOVE_PREV_LEVEL">X_MOVE_PREV_LEVEL</A></B> CONSTANT := 'Return to Previous Level'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_NONALL_APPROVAL_TYPE">X_NONALL_APPROVAL_TYPE</A></B> CONSTANT := 'Non Owner - All'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_NONANY_APPROVAL_TYPE">X_NONANY_APPROVAL_TYPE</A></B> CONSTANT := 'Non Owner - Any'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(1)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(1)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(1)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_NORMAL_DOC">X_NORMAL_DOC</A></B> CONSTANT := 'N'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_OBSOL_DOC_ACTION_NAME">X_OBSOL_DOC_ACTION_NAME</A></B> CONSTANT := 'Obsolete Document'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_OWNER_APPROVAL_TYPE">X_OWNER_APPROVAL_TYPE</A></B> CONSTANT := 'Owner'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_PROC_DELETE">X_PROC_DELETE</A></B> CONSTANT := 'DELETE'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_PROC_INSERT">X_PROC_INSERT</A></B> CONSTANT := 'INSERT'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_PROC_UPDATE">X_PROC_UPDATE</A></B> CONSTANT := 'UPDATE'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_REASSIGN_TEXT">X_REASSIGN_TEXT</A></B> CONSTANT := 'Re-Assigned Assignment'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(500)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(500)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(500)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_REASSIGNMENT_NAME">X_REASSIGNMENT_NAME</A></B> CONSTANT := 'MS DMS Reassign Document'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_REVIEW_DOC_ACTION_NAME">X_REVIEW_DOC_ACTION_NAME</A></B> CONSTANT := 'Review Complete, No upversion required'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_SIG_AUTHOR">X_SIG_AUTHOR</A></B> CONSTANT := 'AUTHOR'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_SIG_AUTHORING">X_SIG_AUTHORING</A></B> CONSTANT := 'AUTHORING'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_TERMINATE_LEVEL">X_TERMINATE_LEVEL</A></B> CONSTANT := 'Cancel'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_UPDATE_DOC_ACTION_NAME">X_UPDATE_DOC_ACTION_NAME</A></B> CONSTANT := 'UpVersion Document'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(1)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(1)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(1)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_VIRTUAL_DOC">X_VIRTUAL_DOC</A></B> CONSTANT := 'V'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="type_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Type Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=ms_dms_update_document_v%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=ms_dms_update_document_v%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->ms_dms_update_document_v%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#CREATE_DOC_REC_TYPE">CREATE_DOC_REC_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_AUDIT_DETAILS%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_AUDIT_DETAILS%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_AUDIT_DETAILS%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_AUD_DETAILS_TYPE">DOC_AUD_DETAILS_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_AUD_REC_TYPE">DOC_AUD_REC_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_DTL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_DTL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_DTL%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_DTL_TYPE">DOC_DTL_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_HDR%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_HDR%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_HDR%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_HDR_TYPE">DOC_HDR_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_STAGE_DTL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_STAGE_DTL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_STAGE_DTL%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_STAGE_DTL_TYPE">DOC_STAGE_DTL_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_STG_ROUTING_DTL_TL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_STG_ROUTING_DTL_TL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_STG_ROUTING_DTL_TL%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_STAGE_ROUT_DTL_TL">DOC_STAGE_ROUT_DTL_TL</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_STAGE_ROUTING_DTL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_STAGE_ROUTING_DTL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_STAGE_ROUTING_DTL%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_STAGE_ROUTING_DTL">DOC_STAGE_ROUTING_DTL</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_STAGE_USR_DTL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_STAGE_USR_DTL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_STAGE_USR_DTL%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_STAGE_USR_DTL_TYPE">DOC_STAGE_USR_DTL_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_RELATIONSHIP%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_RELATIONSHIP%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_RELATIONSHIP%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_VIRTUAL_CHILD_TYPE">DOC_VIRTUAL_CHILD_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=si_dms_virtual_document_v%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=si_dms_virtual_document_v%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->si_dms_virtual_document_v%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_VIRTUAL_TYPE">DOC_VIRTUAL_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=SI_DMS_MODIFY_STAGE_USER_V%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=SI_DMS_MODIFY_STAGE_USER_V%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->SI_DMS_MODIFY_STAGE_USER_V%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#ENABLE_USER_LIST_REC_TYPE">ENABLE_USER_LIST_REC_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#MS_DMS_DOCUMENTS_REC_TYPE">MS_DMS_DOCUMENTS_REC_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Types used in the package body are listed below<br/>
+ Rowtypes are related to our base tables
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=SI_DMS_REASSIGN_DOCUMENT_V%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=SI_DMS_REASSIGN_DOCUMENT_V%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->SI_DMS_REASSIGN_DOCUMENT_V%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#REASSIGN_DOC_REC_TYPE">REASSIGN_DOC_REC_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=ms_dms_review_document_v%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=ms_dms_review_document_v%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->ms_dms_review_document_v%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#REVIEW_DOC_REC_TYPE">REVIEW_DOC_REC_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="method_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=7 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="CONVERT_PROCESS_DOC_HDR_TO_DTL"></A><TD><CODE><B><A HREF="#CONVERT_PROCESS_DOC_HDR_TO_DTL(DOC_HDR_TYPE,DOC_STAGE_DTL_TYPE,DOC_STAGE_USR_DTL_TYPE,CREATE_DOC_REC_TYPE,NUMBER,NUMBER,VARCHAR2)">CONVERT_PROCESS_DOC_HDR_TO_DTL</A></B>(X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, X_DOC_STAGE_DTL_TYPE IN OUT DOC_STAGE_DTL_TYPE, X_DOC_STAGE_USR_DTL_TYPE IN OUT DOC_STAGE_USR_DTL_TYPE, X_CREATE_DOC_REC_TYPE IN OUT CREATE_DOC_REC_TYPE, X_PARENT_AUDIT_ID IN NUMBER, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       CONVERT_PROCESS_DOC_HDR_TO_DTL method is called for initlizing the record type variables for ms_dms_documents_hdr, MS_DMS_DOCUMENTS_STAGE_USR_DTL table.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GEN_VERSION_NUMBER_FOR_DOC"></A><TD><CODE><B><A HREF="#GEN_VERSION_NUMBER_FOR_DOC(CREATE_DOC_REC_TYPE,NUMBER,VARCHAR2)">GEN_VERSION_NUMBER_FOR_DOC</A></B>(X_CREATE_DOC_TYPE IN OUT CREATE_DOC_REC_TYPE, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       GEN_VERSION_NUMBER_FOR_DOC method is called for calculating the version number of the document.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_CALC_REVIEW_SCHEDULE"></A><TD><CODE><B><A HREF="#MS_DMS_CALC_REVIEW_SCHEDULE(NUMBER,VARCHAR2)">MS_DMS_CALC_REVIEW_SCHEDULE</A></B>(I_SCHEDULE_VALUE IN NUMBER, I_SCHEDULE_PERIOD IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Returns the number of days for the review of the assignment based on schedule value and schedule date.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_INS_AUD_AUTHOR_SUBMIT"></A><TD><CODE><B><A HREF="#MS_DMS_INS_AUD_AUTHOR_SUBMIT(NUMBER,NUMBER,VARCHAR2)">MS_DMS_INS_AUD_AUTHOR_SUBMIT</A></B>(X_PROCESS_INSTANCE_ID IN NUMBER, X_ERROR_CODE OUT NUMBER, X_ERROR_MESSAGE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       MS_DMS_INS_AUD_AUTHOR_SUBMIT method used to fetch the details in Initiator and Author different flow for upversion and change request.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_CREATE_DOCUMENT"></A><TD><CODE><B><A HREF="#PROCESS_CREATE_DOCUMENT(NUMBER,NUMBER,VARCHAR2)">PROCESS_CREATE_DOCUMENT</A></B>(X_PROCESS_INSTANCE_ID IN NUMBER, X_ERROR_CODE OUT NUMBER, X_ERROR_MESSAGE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       PROCESS_CREATE_DOCUMENT method is called when ms dms update document form is submitted <br/>
+ This stored procedure will be called to populate the record in ms_dms_process_doc_hdr, ms_dms_doc_audit_history.<br/>
+ Send the assignment for  enable stage user list or ms dms review document push form based on the condition.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_DMS_STG_ROUTING_DTL_TL"></A><TD><CODE><B><A HREF="#PROCESS_DMS_STG_ROUTING_DTL_TL(DOC_STAGE_ROUT_DTL_TL,VARCHAR2,NUMBER,VARCHAR2)">PROCESS_DMS_STG_ROUTING_DTL_TL</A></B>(X_DOC_STAGE_ROUTING_DTL_TL IN OUT DOC_STAGE_ROUT_DTL_TL, X_MODE IN VARCHAR2, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       PROCESS_DMS_STG_ROUTING_DTL_TL method used to insert the data into the MS_DMS_DOC_STG_ROUTING_DTL_TL table.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=21 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_DOCUMENT_REVIEW"></A><TD><CODE><B><A HREF="#PROCESS_DOCUMENT_REVIEW(NUMBER,NUMBER,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,NUMBER,NUMBER,NUMBER,NUMBER,VARCHAR2,NUMBER)">PROCESS_DOCUMENT_REVIEW</A></B>(X_PROCESS_INSTANCE_ID IN NUMBER, X_CURRENT_LEVEL_NUMBER IN NUMBER, X_CURRENT_USER IN VARCHAR2, X_MOVE_ACCROSS_LEVELS OUT VARCHAR2, X_EMAIL_FLAG OUT VARCHAR2, X_RETURN_LEVEL_NUMBER OUT NUMBER, X_USER_ACTION_TYPE OUT VARCHAR2, X_FINAL_STAGE OUT VARCHAR2, X_RET_ARGS1 OUT VARCHAR2, X_RET_ARGS2 OUT VARCHAR2, X_RET_ARGS3 OUT VARCHAR2, X_RET_ARGS4 OUT VARCHAR2, X_RET_ARGS5 OUT VARCHAR2, X_RET_ARGS6 OUT VARCHAR2, X_RET_ARGSN7 OUT NUMBER, X_RET_ARGSN8 OUT NUMBER, X_RET_ARGSN9 OUT NUMBER, X_RET_ARGSN10 OUT NUMBER, X_ERROR_CODE OUT NUMBER, X_ERROR_MESSAGE OUT VARCHAR2, X_ASSIGNMENT_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       PROCESS_DOCUMENT_REVIEW method is called for document review flow.<br/>
+ This method will handle the operations from reviewer stage to Production.<br/>
+ This method in turns calls the sub programs for insertion into DMS base tables.</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_LOCALISED_STAGE_DTL"></A><TD><CODE><B><A HREF="#PROCESS_LOCALISED_STAGE_DTL(DOC_STAGE_DTL_TYPE,NUMBER,VARCHAR2)">PROCESS_LOCALISED_STAGE_DTL</A></B>(X_DOC_STAGE_DTL_TYPE IN OUT DOC_STAGE_DTL_TYPE, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       PROCESS_LOCALISED_STAGE_DTL method used to insert the data into the MS_DMS_DOCUMENTS_STAGE_DTL table.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=SPLIT_TBL
+       localTypeName=
+       schema=Schema_objects
+       fieldType=SPLIT_TBL
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->SPLIT_TBL</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="SPLIT"></A><TD><CODE><B><A HREF="#SPLIT(VARCHAR2,VARCHAR2)">SPLIT</A></B>(P_LIST IN VARCHAR2, P_DEL IN VARCHAR2 DEFAULT ',')</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This function is used to split the given string into column values based on the delimiter.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_ATTRIBUTE_FOR_DOCUMENT"></A><TD><CODE><B><A HREF="#UPDATE_ATTRIBUTE_FOR_DOCUMENT(CREATE_DOC_REC_TYPE,NUMBER,VARCHAR2)">UPDATE_ATTRIBUTE_FOR_DOCUMENT</A></B>(X_CREATE_DOC_TYPE IN OUT CREATE_DOC_REC_TYPE, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       UPDATE_ATTRIBUTE_FOR_DOCUMENT method is called for handling the edit attributes.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=6 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UTIL_DMS_DEBUG_LOG"></A><TD><CODE><B><A HREF="#UTIL_DMS_DEBUG_LOG(VARCHAR2,VARCHAR2,NUMBER,NUMBER,NUMBER,VARCHAR2)">UTIL_DMS_DEBUG_LOG</A></B>(X_API_NAME IN VARCHAR2, X_DEBUG_MESSAGE IN VARCHAR2, X_PROCESS_INSTANCE_ID IN NUMBER, X_INSTANCE_ID IN NUMBER, X_ERROR_TYPE IN NUMBER, STATEMENT_ID IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Deprecated.</B>&nbsp;<I>This method is deprecated as we have MS_DMS_ERR_LOGS_PKG package for debug/error logging.<br/></I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=6 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UTIL_DMS_ERROR_LOG"></A><TD><CODE><B><A HREF="#UTIL_DMS_ERROR_LOG(VARCHAR2,VARCHAR2,NUMBER,NUMBER,NUMBER,VARCHAR2)">UTIL_DMS_ERROR_LOG</A></B>(X_API_NAME IN VARCHAR2, X_ERROR_MESSAGE IN VARCHAR2, X_PROCESS_INSTANCE_ID IN NUMBER, X_INSTANCE_ID IN NUMBER, X_ERROR_TYPE IN NUMBER, STATEMENT_ID IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Deprecated.</B>&nbsp;<I>This method is deprecated as we have MS_DMS_ERR_LOGS_PKG package for debug/error logging.<br/></I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=1 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UTIL_GET_LIFE_CYCLE_NAME"></A><TD><CODE><B><A HREF="#UTIL_GET_LIFE_CYCLE_NAME(NUMBER)">UTIL_GET_LIFE_CYCLE_NAME</A></B>(X_LIFE_CYCLE_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Returns the Life cycle name by passing life cycle id.<br/>
+</TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="trigger_summary"></A><A NAME="field_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Field Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="X_ALL_APPROVAL_TYPE"></A>
+<H3>X_ALL_APPROVAL_TYPE</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_ALL_APPROVAL_TYPE</B> CONSTANT := 'All'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_ALLOW_UPERVSION_DOC_NO"></A>
+<H3>X_ALLOW_UPERVSION_DOC_NO</H3>
+<PRE>
+        public NUMBER <B>X_ALLOW_UPERVSION_DOC_NO</B> CONSTANT := 0</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_ALLOW_UPERVSION_DOC_YES"></A>
+<H3>X_ALLOW_UPERVSION_DOC_YES</H3>
+<PRE>
+        public NUMBER <B>X_ALLOW_UPERVSION_DOC_YES</B> CONSTANT := 1</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_ANY_APPROVAL_TYPE"></A>
+<H3>X_ANY_APPROVAL_TYPE</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_ANY_APPROVAL_TYPE</B> CONSTANT := 'Any'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_AUD_ID_POLICY_REVIEW"></A>
+<H3>X_AUD_ID_POLICY_REVIEW</H3>
+<PRE>
+        public NUMBER <B>X_AUD_ID_POLICY_REVIEW</B>
+</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_AUTHOR_PARAM_NAME"></A>
+<H3>X_AUTHOR_PARAM_NAME</H3>
+<PRE>
+        public VARCHAR2(500) <B>X_AUTHOR_PARAM_NAME</B> CONSTANT := 'DMS Last person signed-off as Author becomes Author'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_AUTHOR_PARAM_TYPE"></A>
+<H3>X_AUTHOR_PARAM_TYPE</H3>
+<PRE>
+        public VARCHAR2(500) <B>X_AUTHOR_PARAM_TYPE</B> CONSTANT := 'MS DMS CONFIGURATION PARAMETERS'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_AUTO_REASSIGN_TEXT"></A>
+<H3>X_AUTO_REASSIGN_TEXT</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_AUTO_REASSIGN_TEXT</B> CONSTANT := 'Review Assignment'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_CHREQ_DOC_ACTION_NAME"></A>
+<H3>X_CHREQ_DOC_ACTION_NAME</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_CHREQ_DOC_ACTION_NAME</B> CONSTANT := 'Change Request'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_CONST_N"></A>
+<H3>X_CONST_N</H3>
+<PRE>
+        public VARCHAR2(1) <B>X_CONST_N</B> CONSTANT := 'N'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_CONST_Y"></A>
+<H3>X_CONST_Y</H3>
+<PRE>
+        public VARCHAR2(1) <B>X_CONST_Y</B> CONSTANT := 'Y'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_CONTINUE_WORKING"></A>
+<H3>X_CONTINUE_WORKING</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_CONTINUE_WORKING</B> CONSTANT := 'Continue Working'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_CREATE_DOC_ACTION_NAME"></A>
+<H3>X_CREATE_DOC_ACTION_NAME</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_CREATE_DOC_ACTION_NAME</B> CONSTANT := 'Create Document'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_CREATE_DOC_METRIC_NAME"></A>
+<H3>X_CREATE_DOC_METRIC_NAME</H3>
+<PRE>
+        public VARCHAR2(500) <B>X_CREATE_DOC_METRIC_NAME</B> CONSTANT := 'MS_DMS_UPDATE_DOCUMENT'</PRE>
+<DL>
+<DD>Constants are declared below
+</DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_CREATE_REPLACE"></A>
+<H3>X_CREATE_REPLACE</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_CREATE_REPLACE</B> CONSTANT := 'Create'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_DCOUMENT_NUM_FORMAT"></A>
+<H3>X_DCOUMENT_NUM_FORMAT</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_DCOUMENT_NUM_FORMAT</B> CONSTANT := 'MS_DMS_Document_Numbering'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_DMS_REVIEW_METRIC_NAME"></A>
+<H3>X_DMS_REVIEW_METRIC_NAME</H3>
+<PRE>
+        public VARCHAR2(500) <B>X_DMS_REVIEW_METRIC_NAME</B> CONSTANT := 'MS_DMS_UPDATE_DOCUMENT'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_DMS_VIRTUAL_METRIC_NAME"></A>
+<H3>X_DMS_VIRTUAL_METRIC_NAME</H3>
+<PRE>
+        public VARCHAR2(500) <B>X_DMS_VIRTUAL_METRIC_NAME</B> CONSTANT := 'MS DMS Virtual Document'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_DOC_DELIMITER"></A>
+<H3>X_DOC_DELIMITER</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_DOC_DELIMITER</B> CONSTANT := 'Delimiter'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_DOC_NOT_READY_FOR_PROCESS"></A>
+<H3>X_DOC_NOT_READY_FOR_PROCESS</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_DOC_NOT_READY_FOR_PROCESS</B> CONSTANT := 'Obsoleted'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_DOC_OBJ_TYPE_POLICY_VIRTUAL"></A>
+<H3>X_DOC_OBJ_TYPE_POLICY_VIRTUAL</H3>
+<PRE>
+        public VARCHAR2(4000) <B>X_DOC_OBJ_TYPE_POLICY_VIRTUAL</B>
+</PRE>
+<DL>
+<DD>this is to get audit_id   for the policy managment
+</DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_DOC_READY_FOR_PROCESS"></A>
+<H3>X_DOC_READY_FOR_PROCESS</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_DOC_READY_FOR_PROCESS</B> CONSTANT := 'InProcess'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_EN_MOD_USER_LIST_NAME"></A>
+<H3>X_EN_MOD_USER_LIST_NAME</H3>
+<PRE>
+        public VARCHAR2(500) <B>X_EN_MOD_USER_LIST_NAME</B> CONSTANT := 'Enable Stage User List'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_EN_STAGE_USER_LIST_NO"></A>
+<H3>X_EN_STAGE_USER_LIST_NO</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_EN_STAGE_USER_LIST_NO</B> CONSTANT := 'No'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_EN_STAGE_USER_LIST_YES"></A>
+<H3>X_EN_STAGE_USER_LIST_YES</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_EN_STAGE_USER_LIST_YES</B> CONSTANT := 'Yes'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_EXCLUSIVE_DOC_NO"></A>
+<H3>X_EXCLUSIVE_DOC_NO</H3>
+<PRE>
+        public NUMBER <B>X_EXCLUSIVE_DOC_NO</B> CONSTANT := 0</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_EXCLUSIVE_DOC_YES"></A>
+<H3>X_EXCLUSIVE_DOC_YES</H3>
+<PRE>
+        public NUMBER <B>X_EXCLUSIVE_DOC_YES</B> CONSTANT := 1</PRE>
+<DL>
+<DD>
+</DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_INDEX_FLAG"></A>
+<H3>X_INDEX_FLAG</H3>
+<PRE>
+        public VARCHAR2(1) <B>X_INDEX_FLAG</B> := 'Y'</PRE>
+<DL>
+<DD>this is to get document_object_id for virtual documents  for the policy managment
+</DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_INDEX3_FLAG"></A>
+<H3>X_INDEX3_FLAG</H3>
+<PRE>
+        public VARCHAR2(1) <B>X_INDEX3_FLAG</B> := 'Y'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_INIT_VIRTUALDOC_VERSION"></A>
+<H3>X_INIT_VIRTUALDOC_VERSION</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_INIT_VIRTUALDOC_VERSION</B> CONSTANT := '1.0.0.0'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_LOG_LEVEL"></A>
+<H3>X_LOG_LEVEL</H3>
+<PRE>
+        public NUMBER <B>X_LOG_LEVEL</B> CONSTANT := 0</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_MOVE_NEXT"></A>
+<H3>X_MOVE_NEXT</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_MOVE_NEXT</B> CONSTANT := 'Next'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_MOVE_NEXT_LEVEL"></A>
+<H3>X_MOVE_NEXT_LEVEL</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_MOVE_NEXT_LEVEL</B> CONSTANT := 'Submit'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_MOVE_PREV"></A>
+<H3>X_MOVE_PREV</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_MOVE_PREV</B> CONSTANT := 'Prev'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_MOVE_PREV_LEVEL"></A>
+<H3>X_MOVE_PREV_LEVEL</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_MOVE_PREV_LEVEL</B> CONSTANT := 'Return to Previous Level'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_NONALL_APPROVAL_TYPE"></A>
+<H3>X_NONALL_APPROVAL_TYPE</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_NONALL_APPROVAL_TYPE</B> CONSTANT := 'Non Owner - All'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_NONANY_APPROVAL_TYPE"></A>
+<H3>X_NONANY_APPROVAL_TYPE</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_NONANY_APPROVAL_TYPE</B> CONSTANT := 'Non Owner - Any'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_NORMAL_DOC"></A>
+<H3>X_NORMAL_DOC</H3>
+<PRE>
+        public VARCHAR2(1) <B>X_NORMAL_DOC</B> CONSTANT := 'N'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_OBSOL_DOC_ACTION_NAME"></A>
+<H3>X_OBSOL_DOC_ACTION_NAME</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_OBSOL_DOC_ACTION_NAME</B> CONSTANT := 'Obsolete Document'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_OWNER_APPROVAL_TYPE"></A>
+<H3>X_OWNER_APPROVAL_TYPE</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_OWNER_APPROVAL_TYPE</B> CONSTANT := 'Owner'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_PROC_DELETE"></A>
+<H3>X_PROC_DELETE</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_PROC_DELETE</B> CONSTANT := 'DELETE'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_PROC_INSERT"></A>
+<H3>X_PROC_INSERT</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_PROC_INSERT</B> CONSTANT := 'INSERT'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_PROC_UPDATE"></A>
+<H3>X_PROC_UPDATE</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_PROC_UPDATE</B> CONSTANT := 'UPDATE'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_REASSIGN_TEXT"></A>
+<H3>X_REASSIGN_TEXT</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_REASSIGN_TEXT</B> CONSTANT := 'Re-Assigned Assignment'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_REASSIGNMENT_NAME"></A>
+<H3>X_REASSIGNMENT_NAME</H3>
+<PRE>
+        public VARCHAR2(500) <B>X_REASSIGNMENT_NAME</B> CONSTANT := 'MS DMS Reassign Document'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_REVIEW_DOC_ACTION_NAME"></A>
+<H3>X_REVIEW_DOC_ACTION_NAME</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_REVIEW_DOC_ACTION_NAME</B> CONSTANT := 'Review Complete, No upversion required'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_SIG_AUTHOR"></A>
+<H3>X_SIG_AUTHOR</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_SIG_AUTHOR</B> CONSTANT := 'AUTHOR'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_SIG_AUTHORING"></A>
+<H3>X_SIG_AUTHORING</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_SIG_AUTHORING</B> CONSTANT := 'AUTHORING'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_TERMINATE_LEVEL"></A>
+<H3>X_TERMINATE_LEVEL</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_TERMINATE_LEVEL</B> CONSTANT := 'Cancel'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_UPDATE_DOC_ACTION_NAME"></A>
+<H3>X_UPDATE_DOC_ACTION_NAME</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_UPDATE_DOC_ACTION_NAME</B> CONSTANT := 'UpVersion Document'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_VIRTUAL_DOC"></A>
+<H3>X_VIRTUAL_DOC</H3>
+<PRE>
+        public VARCHAR2(1) <B>X_VIRTUAL_DOC</B> CONSTANT := 'V'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="type_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Type Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="CREATE_DOC_REC_TYPE"></A>
+<H3>CREATE_DOC_REC_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=ms_dms_update_document_v%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=ms_dms_update_document_v%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->ms_dms_update_document_v%ROWTYPE <B>CREATE_DOC_REC_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_AUD_DETAILS_TYPE"></A>
+<H3>DOC_AUD_DETAILS_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_AUDIT_DETAILS%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_AUDIT_DETAILS%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_AUDIT_DETAILS%ROWTYPE <B>DOC_AUD_DETAILS_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_AUD_REC_TYPE"></A>
+<H3>DOC_AUD_REC_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE <B>DOC_AUD_REC_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_DTL_TYPE"></A>
+<H3>DOC_DTL_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_DTL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_DTL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_DTL%ROWTYPE <B>DOC_DTL_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_HDR_TYPE"></A>
+<H3>DOC_HDR_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_HDR%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_HDR%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_HDR%ROWTYPE <B>DOC_HDR_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_STAGE_DTL_TYPE"></A>
+<H3>DOC_STAGE_DTL_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_STAGE_DTL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_STAGE_DTL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_STAGE_DTL%ROWTYPE <B>DOC_STAGE_DTL_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_STAGE_ROUT_DTL_TL"></A>
+<H3>DOC_STAGE_ROUT_DTL_TL</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_STG_ROUTING_DTL_TL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_STG_ROUTING_DTL_TL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_STG_ROUTING_DTL_TL%ROWTYPE <B>DOC_STAGE_ROUT_DTL_TL</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_STAGE_ROUTING_DTL"></A>
+<H3>DOC_STAGE_ROUTING_DTL</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_STAGE_ROUTING_DTL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_STAGE_ROUTING_DTL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_STAGE_ROUTING_DTL%ROWTYPE <B>DOC_STAGE_ROUTING_DTL</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_STAGE_USR_DTL_TYPE"></A>
+<H3>DOC_STAGE_USR_DTL_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_STAGE_USR_DTL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_STAGE_USR_DTL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_STAGE_USR_DTL%ROWTYPE <B>DOC_STAGE_USR_DTL_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_VIRTUAL_CHILD_TYPE"></A>
+<H3>DOC_VIRTUAL_CHILD_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_RELATIONSHIP%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_RELATIONSHIP%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_RELATIONSHIP%ROWTYPE <B>DOC_VIRTUAL_CHILD_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_VIRTUAL_TYPE"></A>
+<H3>DOC_VIRTUAL_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=si_dms_virtual_document_v%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=si_dms_virtual_document_v%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->si_dms_virtual_document_v%ROWTYPE <B>DOC_VIRTUAL_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="ENABLE_USER_LIST_REC_TYPE"></A>
+<H3>ENABLE_USER_LIST_REC_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=SI_DMS_MODIFY_STAGE_USER_V%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=SI_DMS_MODIFY_STAGE_USER_V%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->SI_DMS_MODIFY_STAGE_USER_V%ROWTYPE <B>ENABLE_USER_LIST_REC_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_DOCUMENTS_REC_TYPE"></A>
+<H3>MS_DMS_DOCUMENTS_REC_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS%ROWTYPE <B>MS_DMS_DOCUMENTS_REC_TYPE</B>()</PRE>
+<DL>
+<DD> Types used in the package body are listed below<br/>
+ Rowtypes are related to our base tables
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="REASSIGN_DOC_REC_TYPE"></A>
+<H3>REASSIGN_DOC_REC_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=SI_DMS_REASSIGN_DOCUMENT_V%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=SI_DMS_REASSIGN_DOCUMENT_V%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->SI_DMS_REASSIGN_DOCUMENT_V%ROWTYPE <B>REASSIGN_DOC_REC_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="REVIEW_DOC_REC_TYPE"></A>
+<H3>REVIEW_DOC_REC_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=ms_dms_review_document_v%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=ms_dms_review_document_v%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->ms_dms_review_document_v%ROWTYPE <B>REVIEW_DOC_REC_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="method_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="CONVERT_PROCESS_DOC_HDR_TO_DTL(DOC_HDR_TYPE,DOC_STAGE_DTL_TYPE,DOC_STAGE_USR_DTL_TYPE,CREATE_DOC_REC_TYPE,NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>CONVERT_PROCESS_DOC_HDR_TO_DTL</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>CONVERT_PROCESS_DOC_HDR_TO_DTL</B>(X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, <BR>                                       X_DOC_STAGE_DTL_TYPE IN OUT DOC_STAGE_DTL_TYPE, <BR>                                       X_DOC_STAGE_USR_DTL_TYPE IN OUT DOC_STAGE_USR_DTL_TYPE, <BR>                                       X_CREATE_DOC_REC_TYPE IN OUT CREATE_DOC_REC_TYPE, <BR>                                       X_PARENT_AUDIT_ID IN NUMBER, <BR>                                       X_ERROR_CODE IN OUT NUMBER, <BR>                                       X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> CONVERT_PROCESS_DOC_HDR_TO_DTL method is called for initlizing the record type variables for ms_dms_documents_hdr, MS_DMS_DOCUMENTS_STAGE_USR_DTL table.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_DOC_HDR_TYPE</CODE> -
+              Record type variable for MS_DMS_DOCUMENTS_HDR table.</DD>
+<DD>
+<CODE>X_DOC_STAGE_DTL_TYPE</CODE> -
+              Record type variable for MS_DMS_DOCUMENTS_STAGE_DTL table.</DD>
+<DD>
+<CODE>X_DOC_STAGE_USR_DTL_TYPE</CODE> -
+              Record type variable for MS_DMS_DOCUMENTS_STAGE_USR_DTL table.</DD>
+<DD>
+<CODE>X_CREATE_DOC_REC_TYPE</CODE> -
+              Record type variable for MS_DMS_UPDATE_DOCUMENT_V table.</DD>
+<DD>
+<CODE>X_PARENT_AUDIT_ID</CODE> -
+              Audit id of the document.</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success  non-zero for error.</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GEN_VERSION_NUMBER_FOR_DOC(CREATE_DOC_REC_TYPE,NUMBER,VARCHAR2)"></A>
+<H3>GEN_VERSION_NUMBER_FOR_DOC</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>GEN_VERSION_NUMBER_FOR_DOC</B>(X_CREATE_DOC_TYPE IN OUT CREATE_DOC_REC_TYPE, <BR>                                   X_ERROR_CODE IN OUT NUMBER, <BR>                                   X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> GEN_VERSION_NUMBER_FOR_DOC method is called for calculating the version number of the document.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_CREATE_DOC_TYPE</CODE> -
+              Record type variable for MS_DMS_UPDATE_DOCUMENT_V table.</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success  non-zero for error.</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_CALC_REVIEW_SCHEDULE(NUMBER,VARCHAR2)"></A>
+<H3>MS_DMS_CALC_REVIEW_SCHEDULE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER <B>MS_DMS_CALC_REVIEW_SCHEDULE</B>(I_SCHEDULE_VALUE IN NUMBER, <BR>                                          I_SCHEDULE_PERIOD IN VARCHAR2)</PRE>
+<DL>
+<DD> Returns the number of days for the review of the assignment based on schedule value and schedule date.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>I_SCHEDULE_VALUE</CODE> -
+              Schedule_value will have values like 1,2,3 etc.</DD>
+<DD>
+<CODE>I_SCHEDULE_PERIOD</CODE> -
+              Schedule_period will have values like "Days", "Months", "Years" etc.</DD>
+</DT>
+<DT>Returns:
+          <DD>Days Possible value of the return is the number of days.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+                                If there is any Other Error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_INS_AUD_AUTHOR_SUBMIT(NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>MS_DMS_INS_AUD_AUTHOR_SUBMIT</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>MS_DMS_INS_AUD_AUTHOR_SUBMIT</B>(X_PROCESS_INSTANCE_ID IN NUMBER, <BR>                                     X_ERROR_CODE OUT NUMBER, <BR>                                     X_ERROR_MESSAGE OUT VARCHAR2)</PRE>
+<DL>
+<DD> MS_DMS_INS_AUD_AUTHOR_SUBMIT method used to fetch the details in Initiator and Author different flow for upversion and change request.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_PROCESS_INSTANCE_ID</CODE> -
+              Process Instance Id of the document.</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error.</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_CREATE_DOCUMENT(NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>PROCESS_CREATE_DOCUMENT</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PROCESS_CREATE_DOCUMENT</B>(X_PROCESS_INSTANCE_ID IN NUMBER, <BR>                                X_ERROR_CODE OUT NUMBER, <BR>                                X_ERROR_MESSAGE OUT VARCHAR2)</PRE>
+<DL>
+<DD> PROCESS_CREATE_DOCUMENT method is called when ms dms update document form is submitted <br/>
+ This stored procedure will be called to populate the record in ms_dms_process_doc_hdr, ms_dms_doc_audit_history.<br/>
+ Send the assignment for  enable stage user list or ms dms review document push form based on the condition.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_PROCESS_INSTANCE_ID</CODE> -
+              process_instance_id of the form submitted.</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error.</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_DMS_STG_ROUTING_DTL_TL(DOC_STAGE_ROUT_DTL_TL,VARCHAR2,NUMBER,VARCHAR2)"></A>
+<H3>PROCESS_DMS_STG_ROUTING_DTL_TL</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PROCESS_DMS_STG_ROUTING_DTL_TL</B>(X_DOC_STAGE_ROUTING_DTL_TL IN OUT DOC_STAGE_ROUT_DTL_TL, <BR>                                       X_MODE IN VARCHAR2, <BR>                                       X_ERROR_CODE IN OUT NUMBER, <BR>                                       X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> PROCESS_DMS_STG_ROUTING_DTL_TL method used to insert the data into the MS_DMS_DOC_STG_ROUTING_DTL_TL table.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_DOC_STAGE_ROUTING_DTL_TL</CODE> -
+              Record type variable for the MS_DMS_DOC_STG_ROUTING_DTL_TL table.</DD>
+<DD>
+<CODE>X_MODE</CODE> -
+              Mode determines the operation is Insert or Update.</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error.</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_DOCUMENT_REVIEW(NUMBER,NUMBER,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,NUMBER,NUMBER,NUMBER,NUMBER,VARCHAR2,NUMBER)"></A>
+<H3>PROCESS_DOCUMENT_REVIEW</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PROCESS_DOCUMENT_REVIEW</B>(X_PROCESS_INSTANCE_ID IN NUMBER, <BR>                                X_CURRENT_LEVEL_NUMBER IN NUMBER, <BR>                                X_CURRENT_USER IN VARCHAR2, <BR>                                X_MOVE_ACCROSS_LEVELS OUT VARCHAR2, <BR>                                X_EMAIL_FLAG OUT VARCHAR2, <BR>                                X_RETURN_LEVEL_NUMBER OUT NUMBER, <BR>                                X_USER_ACTION_TYPE OUT VARCHAR2, <BR>                                X_FINAL_STAGE OUT VARCHAR2, <BR>                                X_RET_ARGS1 OUT VARCHAR2, <BR>                                X_RET_ARGS2 OUT VARCHAR2, <BR>                                X_RET_ARGS3 OUT VARCHAR2, <BR>                                X_RET_ARGS4 OUT VARCHAR2, <BR>                                X_RET_ARGS5 OUT VARCHAR2, <BR>                                X_RET_ARGS6 OUT VARCHAR2, <BR>                                X_RET_ARGSN7 OUT NUMBER, <BR>                                X_RET_ARGSN8 OUT NUMBER, <BR>                                X_RET_ARGSN9 OUT NUMBER, <BR>                                X_RET_ARGSN10 OUT NUMBER, <BR>                                X_ERROR_CODE OUT NUMBER, <BR>                                X_ERROR_MESSAGE OUT VARCHAR2, <BR>                                X_ASSIGNMENT_ID IN NUMBER)</PRE>
+<DL>
+<DD> PROCESS_DOCUMENT_REVIEW method is called for document review flow.<br/>
+ This method will handle the operations from reviewer stage to Production.<br/>
+ This method in turns calls the sub programs for insertion into DMS base tables.
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_PROCESS_INSTANCE_ID</CODE> -
+              Process_instance_id of the form submitted.</DD>
+<DD>
+<CODE>X_CURRENT_LEVEL_NUMBER</CODE> -
+              Level number or stage id of the form.</DD>
+<DD>
+<CODE>X_CURRENT_USER</CODE> -
+              Current logged in user name or form submitted user.</DD>
+<DD>
+<CODE>X_MOVE_ACCROSS_LEVELS</CODE> -
+              Next stage Level of the form submitted.</DD>
+<DD>
+<CODE>X_EMAIL_FLAG</CODE> -
+              Flag to determine the email checks.</DD>
+<DD>
+<CODE>X_RETURN_LEVEL_NUMBER</CODE> -
+              Stage sequence numbe of the submitted form.</DD>
+<DD>
+<CODE>X_USER_ACTION_TYPE</CODE> -
+              Action type choosen by the submitted user.</DD>
+<DD>
+<CODE>X_FINAL_STAGE</CODE> -
+              Last stage of the form.</DD>
+<DD>
+<CODE>X_RET_ARGS1</CODE> -
+              Out parameter, Document Action type will be value for this.</DD>
+<DD>
+<CODE>X_RET_ARGS2</CODE> -
+              Out parameter, Level number type will be value for this.</DD>
+<DD>
+<CODE>X_RET_ARGS3</CODE> -
+              Out parameter, ,Mail User List value.</DD>
+<DD>
+<CODE>X_RET_ARGS4</CODE> -
+              Out parameter, approval requrirement value.</DD>
+<DD>
+<CODE>X_RET_ARGS5</CODE> -
+              Out parameter, temporaray value.</DD>
+<DD>
+<CODE>X_RET_ARGS6</CODE> -
+              Out parameter, Version number value.</DD>
+<DD>
+<CODE>X_RET_ARGSN7</CODE> -
+              Out parameter, Current stage sequence.</DD>
+<DD>
+<CODE>X_RET_ARGSN8</CODE> -
+              Out parameter, temporaray value.</DD>
+<DD>
+<CODE>X_RET_ARGSN9</CODE> -
+              Out parameter, temporaray value.</DD>
+<DD>
+<CODE>X_RET_ARGSN10</CODE> -
+              Out parameter, temporaray value.</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error.</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors.</DD>
+<DD>
+<CODE>X_ASSIGNMENT_ID</CODE> -
+              Assignment ID of the form.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_LOCALISED_STAGE_DTL(DOC_STAGE_DTL_TYPE,NUMBER,VARCHAR2)"></A>
+<H3>PROCESS_LOCALISED_STAGE_DTL</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PROCESS_LOCALISED_STAGE_DTL</B>(X_DOC_STAGE_DTL_TYPE IN OUT DOC_STAGE_DTL_TYPE, <BR>                                    X_ERROR_CODE IN OUT NUMBER, <BR>                                    X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> PROCESS_LOCALISED_STAGE_DTL method used to insert the data into the MS_DMS_DOCUMENTS_STAGE_DTL table.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_DOC_STAGE_DTL_TYPE</CODE> -
+              Record type variable for the MS_DMS_DOC_STG_ROUTING_DTL_TL table.</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error.</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="SPLIT(VARCHAR2,VARCHAR2)"></A>
+<H3>SPLIT</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=SPLIT_TBL
+       localTypeName=
+       schema=Schema_objects
+       fieldType=SPLIT_TBL
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->SPLIT_TBL <B>SPLIT</B>(P_LIST IN VARCHAR2, <BR>                       P_DEL IN VARCHAR2 DEFAULT ',')</PRE>
+<DL>
+<DD> This function is used to split the given string into column values based on the delimiter.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>P_LIST</CODE> -
+              String to be split.</DD>
+<DD>
+<CODE>P_DEL</CODE> -
+              Delimiter used to split the string.</DD>
+</DT>
+<DT>Returns:
+          <DD>Split_tbl is the collection of splitted values.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_ATTRIBUTE_FOR_DOCUMENT(CREATE_DOC_REC_TYPE,NUMBER,VARCHAR2)"></A>
+<H3>UPDATE_ATTRIBUTE_FOR_DOCUMENT</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_ATTRIBUTE_FOR_DOCUMENT</B>(X_CREATE_DOC_TYPE IN OUT CREATE_DOC_REC_TYPE, <BR>                                      X_ERROR_CODE IN OUT NUMBER, <BR>                                      X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> UPDATE_ATTRIBUTE_FOR_DOCUMENT method is called for handling the edit attributes.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_CREATE_DOC_TYPE</CODE> -
+              Record type variable of the type MS_DMS_UPDATE_DOCUMENT_V.</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success  non-zero for error.</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UTIL_DMS_DEBUG_LOG(VARCHAR2,VARCHAR2,NUMBER,NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>UTIL_DMS_DEBUG_LOG</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UTIL_DMS_DEBUG_LOG</B>(X_API_NAME IN VARCHAR2, <BR>                           X_DEBUG_MESSAGE IN VARCHAR2, <BR>                           X_PROCESS_INSTANCE_ID IN NUMBER, <BR>                           X_INSTANCE_ID IN NUMBER, <BR>                           X_ERROR_TYPE IN NUMBER, <BR>                           STATEMENT_ID IN VARCHAR2)</PRE>
+<DL>
+<DD> UTIL_DMS_DEBUG_LOG method is called for logging debug messages to MS_DMS_ERROR_LOGS table <br/>
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL>
+<DT>Deprecated:</DT>
+<DD>This method is deprecated as we have MS_DMS_ERR_LOGS_PKG package for debug/error logging.<br/></DD>
+<P></P>
+</DL>
+</DL>
+<HR>
+<A NAME="UTIL_DMS_ERROR_LOG(VARCHAR2,VARCHAR2,NUMBER,NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>UTIL_DMS_ERROR_LOG</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UTIL_DMS_ERROR_LOG</B>(X_API_NAME IN VARCHAR2, <BR>                           X_ERROR_MESSAGE IN VARCHAR2, <BR>                           X_PROCESS_INSTANCE_ID IN NUMBER, <BR>                           X_INSTANCE_ID IN NUMBER, <BR>                           X_ERROR_TYPE IN NUMBER, <BR>                           STATEMENT_ID IN VARCHAR2)</PRE>
+<DL>
+<DD> util_dms_error_log method is called for logging error messages to MS_DMS_ERROR_LOGS table <br/>
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL>
+<DT>Deprecated:</DT>
+<DD>This method is deprecated as we have MS_DMS_ERR_LOGS_PKG package for debug/error logging.<br/></DD>
+<P></P>
+</DL>
+</DL>
+<HR>
+<A NAME="UTIL_GET_LIFE_CYCLE_NAME(NUMBER)"></A>
+<H3>UTIL_GET_LIFE_CYCLE_NAME</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>UTIL_GET_LIFE_CYCLE_NAME</B>(X_LIFE_CYCLE_ID IN NUMBER)</PRE>
+<DL>
+<DD> Returns the Life cycle name by passing life cycle id.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_LIFE_CYCLE_ID</CODE> -
+              Life_cycle_id number parameter.</DD>
+</DT>
+<DT>Returns:
+          <DD>Life_Cycle_Name   Possible value is life cycle name.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+                          If there is any Other Error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="trigger_detail"></A><script src="../js/jquery.mCustomScrollbar.concat.min.js"></script><script>
+		(function($){
+			$(window).load(function(){
+				$("#outer").addClass('loader');	
+				$(".loading").fadeOut("slow");	
+				$("body").mCustomScrollbar({
+					theme:"rounded-dots-dark",
+					mouseWheel:{ scrollAmount: "300px" }
+				});
+				
+			});
+		})(jQuery);
+	</script>
+</div>
+</BODY>
+</HTML>

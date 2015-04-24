@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_DMS_UPDATE_DOCUMENT_V">MS_DMS_UPDATE_DOCUMENT_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "PDMS61SP2_DEV"."MS_DMS_UPDATE_DOCUMENT_V" ("OLD_EFFECTIVE_DATE", "HDN_OBJECT_ID_FOR_REF", "HDN_DOC_NAME_CHANGE_FLAG", "DOCUMENT_ATTACHMENT_DIR", "HDN_SUP_DOC_JSON", "HDN_REF_LINK_JSON", "HDN_FIRST_STAGE", "HDN_PARAM_FOR_ALLOW_OBS_FLAG", "HDN_ALLOW_OBSOLETE_FLAG", "ATTACHED_INLINE", "TEMP_SAVE", "ORB_DOC_DETAILS", "ORB_OBJECT_ID", "DOC_OBJ_ID_VERSION", "DOC_OBJ_ID_STATUS", "CUSTOM_TEXT5", "CUSTOM_TEXT4", "CUSTOM_TEXT3", "CUSTOM_TEXT2", "CUSTOM_TEXT1", "REF_DOC_JSON", "DOC_LOCK_VERSION", "TEMP_EFFECTIVE_DATE", "DOCUMENT_LOCK_DTL", "HDN_LFC_ID_FOR_CAT_ID", "HDN_USER_ACTION_FLAG", "LOCALE_ID", "HDN_OBJ_ID", "HDN_LIFECYCLE_ID_FLAG", "HDN_TRAVERSE_FLAG", "OWNER_LOGIN_UID", "AUTHOR_LOGIN_UID", "AUTHOR_LOGIN_NAME", "PAG_DATA", "SEARCH_DOC_FORM_ID", "HDN_VALIDATION_3", "HDN_VALIDATION_2", "HDN_VALIDATION_1", "REF_DATA", "REF_DOC", "CURRENT_STAGE_NAME", "HDN_AUDIT_ID_STR", "USER_ASSIGNMENT_ID", "HDN_ALL_CAT_GRP_IDS", "HDN_ALL_META_COLUMNS", "RTF_ATTACH", "ASSIGNMENT_USERS", "HDN_DEFAULT_PARAMETER_DETAILS", "ESIGNATURE2", "ESIGNATURE1", "VALIDATE_INFOLET", "OLD_ATTACHMENT_STR_AND_NEW_ID", "OLD_ATTACHMENT_PATH", "CHK_FOR_ESIGNATURE", "CURRENT_PID", "STAGE_MOVEMENT", "COPY_FILE_JAVA_CLASS", "AUDIT_ID_HDN", "AUDIT_ID", "PREV_STG_SEQ", "PREV_STAGE", "NEXT_STAGE", "INITIAL_VERSION_NUMBER", "NO_OF_DAYS_FOR_REVIEW", "DOCUMENT_NUMBER", "CREATE_REVIEW_FLAG", "CURRENT_STG_SEQ", "DOCUMENT_ATTACHMENT_DIR1", "DOCUMENT_SEQ_NUM", "ENABLE_STAGE_USER_FLAG", "HDN_SUB_CATEGORY4", "HDN_SUB_CATEGORY3", "HDN_SUB_CATEGORY2", "HDN_SUB_CATEGORY1", "HDN_CATEGORY", "HDN_KEYWORDS", "HDN_PURPOSE", "HDN_DESCRIPTION", "HDN_SUPPORTING_DOCUMENTS", "HDN_DOCUMENT_ATTACHMENT", "HDN_DEFAULT_POLICY_DETAILS", "HDN_DEFAULT_STAGES_DETAILS", "HDN_DEFAULT_ALL_DOC_DTLS", "HDN_DEFAULT_OWNERSHIP", "HDN_DEFAULT_LC_DETAILS", "HDN_DEFAULT_DOC_HDR_DETAILS", "ACCESS_GROUP", "TEMP_OBJ_ID", "SELECTED_CATEGORY_ID", "INITIATOR", "OWNER_VALIDATION", "LIFECYCLE_NAME", "VERSION_NUMBER", "AUTHOR_NAME_HDN", "DOCUMENT_AUTHOR", "REVIEW_SCHEDULE_DAYS", "CATEGORY_ID_LIST", "CURRENT_STAGE", "DOCUMENT_OBJECT_TYPE", "OBJECT_ID", "DOCUMENT_TYPE", "HDN_DOC_NAME_VALID", "STAGE_ID_LIST", "ACTION_COMMENTS", "OBJECT_ACTION", "HDN_MLOV_DUMMY", "MLOV_DATA_VALUE", "HDN_META_COULMN_NAME_4", "HDN_CASCADE_META_LOV", "META_OLD_DATA_STR", "META_LOV_DISPLAY_NAME", "HDN_LOV_DISP_VAL", "META_OLD_NEW", "META_LOV_NAME", "META_LABEL_NAME", "MET_TEMP_OBJ_ID", "MET_OBJECT_ID", "HDN_META_SEQ", "HDN_LOV_NAME", "META_COLUMN_DATA_TYPE", "META_COLUMN_NAME", "META_COLUMN_VALUE", "DATE_DATA_VALUE", "HDN_META_COULMN_NAME_3", "LOV_DATA_VALUE", "DROPDOWN_DATA_VALUE", "HDN_META_COULMN_NAME_2", "NUMBER_DATA_VALUE", "STRING_DATA_VALUE", "HDN_META_COULMN_NAME_1", "OTHER_POLICY_USERS", "OTHER_POLICY_USERS_STOR", "OTHER_POLICY_USERS_DISP", "POLICY_USERS", "PAG_OBJECT_ID", "POLICY_GROUP_SEQ", "POLICY_USER_GROUP", "ASSIGNMENT_DUE_DATE", "POLICY_END_DATE", "POLICY_AGREEMENT", "REQUIRE_POLICY_ACCEPTANCE", "POLICY_DESCRIPTION", "APPROVAL", "STG_OBJECT_ID", "STAGE_LEVEL_NUMBER", "STAGE_USER_LIST", "STAGE_ID", "STAGE_USERS", "STAGE_NAME", "ATTRIBUTE_COLUMN_H2", "ATTRIBUTE_COLUMN_H3", "ADDITIONAL_COLUMN_H1", "ASSOCIATED_WITH_TYPE", "REL_SOURCE_OBJECT_ID", "REL_SOURCE_ID", "ADDITIONAL_COLUMN5", "ADDITIONAL_COLUMN4", "ADDITIONAL_COLUMN3", "ADDITIONAL_COLUMN2", "ORB_FORM_URL", "ADDITIONAL_DETAILS_WITH_ID", "ADDITIONAL_COLUMN1", "ADDITIONAL_DETAILS", "APPLICABLE_TO", "ORB_REL_SOURCE_ID", "SELF_REL_TYPE", "PARENT_REL_INST_ID", "REL_VALID_UNTIL", "REL_VALID_FROM", "REL_COMMENTS", "TGT_OBJ_ID", "TGT_OBJ_NAME", "TGT_OBJ_TYPE", "ROW_NUM", "REL_CONFIG_ID", "REL_INST_ID", "CONFIGURED_OBJECT_TYPES", "REL_OBJECT_ID", "REL_CUSTOM_FIELD_2", "REL_CUSTOM_FIELD_1", "REL_REF_URL_DETAILS", "REL_CLASSIFICATION", "REL_REF_URL", "REL_REF_URL_NAME", "SUPPORTING_DOCUMENTS", "SUP_OBJECT_ID", "CUSTOM_FIELD3", "CUSTOM_FIELD2", "CUSTOM_FIELD1", "SUP_CLASSIFICATION", "SUP_DOC_ATTACH", "SUP_DOC_NAME", "REF_ID", "REF_NAME_DOC", "REF_DOC_NAME", "REF_STATUS", "REF_OBJECT_ID", "REF_DOC_CURR_STATUS", "CURRENT_DOC_DETAILS", "HDN_DOC_DETAILS", "DOC_REF_SEQ", "MS_DMS_CLASSIFICATION", "REF_DOC_AUTHOR", "REF_DOC_VERSION", "REF_DOC_CURR_LATEST", "REF_DOC_ID", "SUBSECTION_COMMENTS", "SUBSECTION_LEVEL", "SUBSECTION_MARK_DELETED", "SUB_OBJECT_ID", "SUBSECTION_FK", "SUBSECTION_PARENT_TYPE", "SUBSECTION_AUTO_CREATE_REQ", "SUBSECTION_DETAILS", "SUBSECTION_TITLE", "SUBSECTION_NUMBER", "SECTION_MARK_DELETED", "SCD_OBJECT_ID", "SECTION_FK", "SECTION_PARENT_TYPE", "SECTION_AUTO_CREATE_REQ", "SECTION_DETAILS", "SECTION_TITLE", "SECTION_NUMBER", "OWNER_NAME", "AUTHOR_NAME", "INITIATOR_NAME", "NEXT_REVIEW_SCHEDULE", "SCHEDULE_PERIOD_TYPE", "SCHEDULE_PERIOD_VALUE", "MAX_PRINT_COPIES", "EFFECTIVE_FROM_DATE", "CATEGORY_NAME_LIST", "LIFECYCLE_ID", "DOCUMENT_TEMPLATE", "AUTO_CREATE_REQUIREMENT1", "KEYWORDS", "PURPOSE", "DESCRIPTION", "DOCUMENT_ATTACHMENT", "DOC_TYPE", "NEW_DOCUMENT_NAME", "OBJECT_NAME", "ACTION_TYPE", "DD_PROCESS_CODE", "DD_CURRENT_STAGE", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_CURRENT_USER_NAME", "DD_OBJECT_TYPE", "INSTANCE_REC_NUM", "INSTANCE_ID", "METRIC_ID", "METRIC_RUN_DATE", "METRIC_COMPLETED_DATE", "LATEST_FLAG", "CREATED_BY", "CREATION_DATE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "MULTIROW_GROUP_NAME", "ELECTRONICALLY_SIGNED", "MULTIROW_REGION_ID", "DESCRIPTION_HTM", "SECTION_DETAILS_HTM", "SUBSECTION_DETAILS_HTM", "POLICY_AGREEMENT_HTM", "HDN_DESCRIPTION_HTM", "HDN_META_MANDATORY_CHK", "REASSIGN_MAM", "USER_MAM") AS 
+  select "OLD_EFFECTIVE_DATE","HDN_OBJECT_ID_FOR_REF","HDN_DOC_NAME_CHANGE_FLAG","DOCUMENT_ATTACHMENT_DIR","HDN_SUP_DOC_JSON","HDN_REF_LINK_JSON","HDN_FIRST_STAGE","HDN_PARAM_FOR_ALLOW_OBS_FLAG","HDN_ALLOW_OBSOLETE_FLAG","ATTACHED_INLINE","TEMP_SAVE","ORB_DOC_DETAILS","ORB_OBJECT_ID","DOC_OBJ_ID_VERSION","DOC_OBJ_ID_STATUS","CUSTOM_TEXT5","CUSTOM_TEXT4","CUSTOM_TEXT3","CUSTOM_TEXT2","CUSTOM_TEXT1","REF_DOC_JSON","DOC_LOCK_VERSION","TEMP_EFFECTIVE_DATE","DOCUMENT_LOCK_DTL","HDN_LFC_ID_FOR_CAT_ID","HDN_USER_ACTION_FLAG","LOCALE_ID","HDN_OBJ_ID","HDN_LIFECYCLE_ID_FLAG","HDN_TRAVERSE_FLAG","OWNER_LOGIN_UID","AUTHOR_LOGIN_UID","AUTHOR_LOGIN_NAME","PAG_DATA","SEARCH_DOC_FORM_ID","HDN_VALIDATION_3","HDN_VALIDATION_2","HDN_VALIDATION_1","REF_DATA","REF_DOC","CURRENT_STAGE_NAME","HDN_AUDIT_ID_STR","USER_ASSIGNMENT_ID","HDN_ALL_CAT_GRP_IDS","HDN_ALL_META_COLUMNS","RTF_ATTACH","ASSIGNMENT_USERS","HDN_DEFAULT_PARAMETER_DETAILS","ESIGNATURE2","ESIGNATURE1","VALIDATE_INFOLET","OLD_ATTACHMENT_STR_AND_NEW_ID","OLD_ATTACHMENT_PATH","CHK_FOR_ESIGNATURE","CURRENT_PID","STAGE_MOVEMENT","COPY_FILE_JAVA_CLASS","AUDIT_ID_HDN","AUDIT_ID","PREV_STG_SEQ","PREV_STAGE","NEXT_STAGE","INITIAL_VERSION_NUMBER","NO_OF_DAYS_FOR_REVIEW","DOCUMENT_NUMBER","CREATE_REVIEW_FLAG","CURRENT_STG_SEQ","DOCUMENT_ATTACHMENT_DIR1","DOCUMENT_SEQ_NUM","ENABLE_STAGE_USER_FLAG","HDN_SUB_CATEGORY4","HDN_SUB_CATEGORY3","HDN_SUB_CATEGORY2","HDN_SUB_CATEGORY1","HDN_CATEGORY","HDN_KEYWORDS","HDN_PURPOSE","HDN_DESCRIPTION","HDN_SUPPORTING_DOCUMENTS","HDN_DOCUMENT_ATTACHMENT","HDN_DEFAULT_POLICY_DETAILS","HDN_DEFAULT_STAGES_DETAILS","HDN_DEFAULT_ALL_DOC_DTLS","HDN_DEFAULT_OWNERSHIP","HDN_DEFAULT_LC_DETAILS","HDN_DEFAULT_DOC_HDR_DETAILS","ACCESS_GROUP","TEMP_OBJ_ID","SELECTED_CATEGORY_ID","INITIATOR","OWNER_VALIDATION","LIFECYCLE_NAME","VERSION_NUMBER","AUTHOR_NAME_HDN","DOCUMENT_AUTHOR","REVIEW_SCHEDULE_DAYS","CATEGORY_ID_LIST","CURRENT_STAGE","DOCUMENT_OBJECT_TYPE","OBJECT_ID","DOCUMENT_TYPE","HDN_DOC_NAME_VALID","STAGE_ID_LIST","ACTION_COMMENTS","OBJECT_ACTION","HDN_MLOV_DUMMY","MLOV_DATA_VALUE","HDN_META_COULMN_NAME_4","HDN_CASCADE_META_LOV","META_OLD_DATA_STR","META_LOV_DISPLAY_NAME","HDN_LOV_DISP_VAL","META_OLD_NEW","META_LOV_NAME","META_LABEL_NAME","MET_TEMP_OBJ_ID","MET_OBJECT_ID","HDN_META_SEQ","HDN_LOV_NAME","META_COLUMN_DATA_TYPE","META_COLUMN_NAME","META_COLUMN_VALUE","DATE_DATA_VALUE","HDN_META_COULMN_NAME_3","LOV_DATA_VALUE","DROPDOWN_DATA_VALUE","HDN_META_COULMN_NAME_2","NUMBER_DATA_VALUE","STRING_DATA_VALUE","HDN_META_COULMN_NAME_1","OTHER_POLICY_USERS","OTHER_POLICY_USERS_STOR","OTHER_POLICY_USERS_DISP","POLICY_USERS","PAG_OBJECT_ID","POLICY_GROUP_SEQ","POLICY_USER_GROUP","ASSIGNMENT_DUE_DATE","POLICY_END_DATE","POLICY_AGREEMENT","REQUIRE_POLICY_ACCEPTANCE","POLICY_DESCRIPTION","APPROVAL","STG_OBJECT_ID","STAGE_LEVEL_NUMBER","STAGE_USER_LIST","STAGE_ID","STAGE_USERS","STAGE_NAME","ATTRIBUTE_COLUMN_H2","ATTRIBUTE_COLUMN_H3","ADDITIONAL_COLUMN_H1","ASSOCIATED_WITH_TYPE","REL_SOURCE_OBJECT_ID","REL_SOURCE_ID","ADDITIONAL_COLUMN5","ADDITIONAL_COLUMN4","ADDITIONAL_COLUMN3","ADDITIONAL_COLUMN2","ORB_FORM_URL","ADDITIONAL_DETAILS_WITH_ID","ADDITIONAL_COLUMN1","ADDITIONAL_DETAILS","APPLICABLE_TO","ORB_REL_SOURCE_ID","SELF_REL_TYPE","PARENT_REL_INST_ID","REL_VALID_UNTIL","REL_VALID_FROM","REL_COMMENTS","TGT_OBJ_ID","TGT_OBJ_NAME","TGT_OBJ_TYPE","ROW_NUM","REL_CONFIG_ID","REL_INST_ID","CONFIGURED_OBJECT_TYPES","REL_OBJECT_ID","REL_CUSTOM_FIELD_2","REL_CUSTOM_FIELD_1","REL_REF_URL_DETAILS","REL_CLASSIFICATION","REL_REF_URL","REL_REF_URL_NAME","SUPPORTING_DOCUMENTS","SUP_OBJECT_ID","CUSTOM_FIELD3","CUSTOM_FIELD2","CUSTOM_FIELD1","SUP_CLASSIFICATION","SUP_DOC_ATTACH","SUP_DOC_NAME","REF_ID","REF_NAME_DOC","REF_DOC_NAME","REF_STATUS","REF_OBJECT_ID","REF_DOC_CURR_STATUS","CURRENT_DOC_DETAILS","HDN_DOC_DETAILS","DOC_REF_SEQ","MS_DMS_CLASSIFICATION","REF_DOC_AUTHOR","REF_DOC_VERSION","REF_DOC_CURR_LATEST","REF_DOC_ID","SUBSECTION_COMMENTS","SUBSECTION_LEVEL","SUBSECTION_MARK_DELETED","SUB_OBJECT_ID","SUBSECTION_FK","SUBSECTION_PARENT_TYPE","SUBSECTION_AUTO_CREATE_REQ","SUBSECTION_DETAILS","SUBSECTION_TITLE","SUBSECTION_NUMBER","SECTION_MARK_DELETED","SCD_OBJECT_ID","SECTION_FK","SECTION_PARENT_TYPE","SECTION_AUTO_CREATE_REQ","SECTION_DETAILS","SECTION_TITLE","SECTION_NUMBER","OWNER_NAME","AUTHOR_NAME","INITIATOR_NAME","NEXT_REVIEW_SCHEDULE","SCHEDULE_PERIOD_TYPE","SCHEDULE_PERIOD_VALUE","MAX_PRINT_COPIES","EFFECTIVE_FROM_DATE","CATEGORY_NAME_LIST","LIFECYCLE_ID","DOCUMENT_TEMPLATE","AUTO_CREATE_REQUIREMENT1","KEYWORDS","PURPOSE","DESCRIPTION","DOCUMENT_ATTACHMENT","DOC_TYPE","NEW_DOCUMENT_NAME","OBJECT_NAME","ACTION_TYPE","DD_PROCESS_CODE","DD_CURRENT_STAGE","DD_ENTERPRISE_INFO","DD_EVENT_USER_NAME","DD_CURRENT_USER_NAME","DD_OBJECT_TYPE","INSTANCE_REC_NUM","INSTANCE_ID","METRIC_ID","METRIC_RUN_DATE","METRIC_COMPLETED_DATE","LATEST_FLAG","CREATED_BY","CREATION_DATE","PROCESS_FLOW_STATUS","PROCESS_INSTANCE_ID","MULTIROW_GROUP_NAME","ELECTRONICALLY_SIGNED","MULTIROW_REGION_ID","DESCRIPTION_HTM","SECTION_DETAILS_HTM","SUBSECTION_DETAILS_HTM","POLICY_AGREEMENT_HTM","HDN_DESCRIPTION_HTM","HDN_META_MANDATORY_CHK","REASSIGN_MAM","USER_MAM" from SI_101560_T 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,540 @@
+<HTML xmlns:lxslt="http://xml.apache.org/xslt" xmlns:exslt="http://exslt.org/common">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>DMS - 6-1</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF="../css/customstyle.css" TITLE="Style">
+<script src="../js/jquery-1.11.1.min.js"></script>
+<link href="../css/jquery.mCustomScrollbar.css" rel="stylesheet">
+<!--
+        sameCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesLowerCase=FALSE
+        namesUpperCase=FALSE
+        namesDefaultCase=TRUE
+        defaultNamesCase=UPPER
+        namesFromCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesToCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-->
+<style>
+		html, body{ height: 100%; }
+	</style>
+</HEAD>
+<BODY>
+<div class="loading"></div>
+<div id="outer">
+<div id="menubar"></div>
+<div class="outermenu">
+<div class="menuliclass">
+<a class="menuaclass" HREF="../summary.html">Overview</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../deprecated-list.html">Deprecated</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../index-list.html">Index</a>
+</div>
+</div>
+<b>DMS - 6-1</b>
+<br>
+<div style="margin-top:60px;">
+<table class="summarytable">
+<tr>
+<td>SUMMARY:</td><td><A HREF="#field_summary">FIELD</A> |</td><td><A HREF="#type_summary">TYPE</A> |</td><td><A HREF="#method_summary">METHOD</A></td>
+</tr>
+<tr>
+<td>DETAIL:</td><td><A HREF="#field_detail">FIELD</A> | </td><td><A HREF="#type_detail">TYPE</A> | </td><td><A HREF="#method_detail">METHOD</A></td>
+</tr>
+</table>
+</div>
+<HR>
+<H2>
+<FONT SIZE="-1">Schema_objects</FONT>
+<BR>Package&nbsp;MS_DMS_EXTENDED_ATTRIBUTE_PKG</H2> ======================================================================<br/>
+ Module: MS_DMS_EXTENDED_ATTRIBUTE_PKG <br/>
+ Description: This Package Encapsulates all PDMS processes related to extended attribute.<br/>
+ ======================================================================<br/>
+<P></P>
+<DL></DL>
+<HR>
+<P></P>
+<A NAME="field_summary"></A><A NAME="type_summary"></A><A NAME="method_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="CREATE_ATTRIBUTES"></A><TD><CODE><B><A HREF="#CREATE_ATTRIBUTES(NUMBER,NUMBER,VARCHAR2)">CREATE_ATTRIBUTES</A></B>(I_PID IN NUMBER DEFAULT 0, O_ERROR_CODE OUT NUMBER, O_ERROR_MESSAGE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Procedure alters the table MS_DMS_DOC_EXTENDED_ATTRIBS,MS_DMS_CONFIG_DOC_TAB to add columns.<br/>
+ Drops all the domain indexes and recreate it at the end.<br/>
+ Send assignment for stage user list or DMS review document push form based on the condition.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=5 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="CREATE_ATTRIBUTES_LOG"></A><TD><CODE><B><A HREF="#CREATE_ATTRIBUTES_LOG(VARCHAR2,NUMBER,VARCHAR2,NUMBER,VARCHAR2)">CREATE_ATTRIBUTES_LOG</A></B>(I_INTERNAL_NAME IN VARCHAR2, I_ERROR_CODE IN NUMBER, I_ERROR_MESSAGE IN VARCHAR2, O_ERROR_CODE OUT NUMBER, O_ERROR_MESSAGE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Autonomous transaction Procedure to capture the log for creating attribute.</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=7 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="INSERT_EXTENDED_ATRRIB_DATA"></A><TD><CODE><B><A HREF="#INSERT_EXTENDED_ATRRIB_DATA(NUMBER,NUMBER,NUMBER,VARCHAR2,NUMBER,VARCHAR2,NUMBER)">INSERT_EXTENDED_ATRRIB_DATA</A></B>(I_PID IN NUMBER, I_DOC_OBJECT_ID IN NUMBER, I_AUDIT_ID IN NUMBER, I_VIEW_NAME IN VARCHAR2, O_ERROR_CODE OUT NUMBER, O_ERROR_MESSAGE OUT VARCHAR2, I_NEW_PID IN NUMBER DEFAULT 0)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Procedure insert records into table MS_DMS_DOC_EXTENDED_ATTRIBS.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=7 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="INSERT_INLINE_EXTEND_ATRRIB"></A><TD><CODE><B><A HREF="#INSERT_INLINE_EXTEND_ATRRIB(NUMBER,NUMBER,NUMBER,VARCHAR2,NUMBER,VARCHAR2,NUMBER)">INSERT_INLINE_EXTEND_ATRRIB</A></B>(I_PID IN NUMBER, I_DOC_OBJECT_ID IN NUMBER, I_AUDIT_ID IN NUMBER, I_VIEW_NAME IN VARCHAR2, O_ERROR_CODE OUT NUMBER, O_ERROR_MESSAGE OUT VARCHAR2, I_NEW_PID IN NUMBER DEFAULT 0)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Procedure insert records into table MS_DMS_DOC_EXTENDED_ATTRIBS.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_SET_USER_PREVILEGES"></A><TD><CODE><B><A HREF="#MS_DMS_SET_USER_PREVILEGES(VARCHAR2,VARCHAR2)">MS_DMS_SET_USER_PREVILEGES</A></B>(P_USER_NAME IN VARCHAR2, P_PARAMETER IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Procedure update MS_DMS_CONFIG_DOC_TAB.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=METADATA_TABLE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=METADATA_TABLE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->METADATA_TABLE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_GET_METADATA_FOR_MYDOCUMENT"></A><TD><CODE><B><A HREF="#MS_GET_METADATA_FOR_MYDOCUMENT(NUMBER,VARCHAR2,VARCHAR,NUMBER)">MS_GET_METADATA_FOR_MYDOCUMENT</A></B>(I_DOCUMENT_OBJECT_ID IN NUMBER, I_DOC_TYPE IN VARCHAR2, I_USER_ID IN VARCHAR DEFAULT 0, I_AUDIT_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Get the metadata for the report.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=METADATA_TABLE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=METADATA_TABLE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->METADATA_TABLE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_GET_METADATA_FOR_REPORT"></A><TD><CODE><B><A HREF="#MS_GET_METADATA_FOR_REPORT(NUMBER,VARCHAR2,VARCHAR)">MS_GET_METADATA_FOR_REPORT</A></B>(I_DOCUMENT_OBJECT_ID IN NUMBER, I_DOC_TYPE IN VARCHAR2, I_USER_ID IN VARCHAR DEFAULT 0)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Get the metadata for the report.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=METADATA_TABLE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=METADATA_TABLE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->METADATA_TABLE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_GET_METADATA_FOR_VER_REP"></A><TD><CODE><B><A HREF="#MS_GET_METADATA_FOR_VER_REP(NUMBER,VARCHAR2,VARCHAR2,VARCHAR)">MS_GET_METADATA_FOR_VER_REP</A></B>(I_DOCUMENT_OBJECT_ID IN NUMBER, I_VERSION_NUM IN VARCHAR2, I_DOC_TYPE IN VARCHAR2, I_USER_ID IN VARCHAR DEFAULT 0)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Get the metadata for the report based on version.<br/>
+</TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="trigger_summary"></A><A NAME="field_detail"></A><A NAME="type_detail"></A><A NAME="method_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="CREATE_ATTRIBUTES(NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>CREATE_ATTRIBUTES</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>CREATE_ATTRIBUTES</B>(I_PID IN NUMBER DEFAULT 0, <BR>                          O_ERROR_CODE OUT NUMBER, <BR>                          O_ERROR_MESSAGE OUT VARCHAR2)</PRE>
+<DL>
+<DD> Procedure alters the table MS_DMS_DOC_EXTENDED_ATTRIBS,MS_DMS_CONFIG_DOC_TAB to add columns.<br/>
+ Drops all the domain indexes and recreate it at the end.<br/>
+ Send assignment for stage user list or DMS review document push form based on the condition.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>I_PID</CODE> -
+              Process instance identifier.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>E_DUPLICATE_COLUMN</CODE> -
+              	  Column Already Exists. Cannot Create Duplicate Column.</DD>
+<DD>
+<CODE>E_COLUMN_DONOT_EXISTS</CODE> -
+              	Column Does not exists, Cannot drop this column.</DD>
+<DD>
+<CODE>OTHERS</CODE> -
+              	              Populate error details into MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="CREATE_ATTRIBUTES_LOG(VARCHAR2,NUMBER,VARCHAR2,NUMBER,VARCHAR2)"></A>
+<H3>CREATE_ATTRIBUTES_LOG</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>CREATE_ATTRIBUTES_LOG</B>(I_INTERNAL_NAME IN VARCHAR2, <BR>                              I_ERROR_CODE IN NUMBER, <BR>                              I_ERROR_MESSAGE IN VARCHAR2, <BR>                              O_ERROR_CODE OUT NUMBER, <BR>                              O_ERROR_MESSAGE OUT VARCHAR2)</PRE>
+<DL>
+<DD> Autonomous transaction Procedure to capture the log for creating attribute. updates table MS_DMS_EXTENDED_ATTRIB_CONFIG against the internal name.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>I_INTERNAL_NAME</CODE> -
+              Internal name.</DD>
+<DD>
+<CODE>I_ERROR_CODE</CODE> -
+              Custom error code.</DD>
+<DD>
+<CODE>I_ERROR_MESSAGE</CODE> -
+              Custom error message.</DD>
+<DD>
+<CODE>O_ERROR_CODE</CODE> -
+              Captures and share the oracle error code as output.</DD>
+<DD>
+<CODE>O_ERROR_MESSAGE</CODE> -
+              Captures and share the oracle error message  as output.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+              	          Populate error details into MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="INSERT_EXTENDED_ATRRIB_DATA(NUMBER,NUMBER,NUMBER,VARCHAR2,NUMBER,VARCHAR2,NUMBER)"></A>
+<H3>INSERT_EXTENDED_ATRRIB_DATA</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>INSERT_EXTENDED_ATRRIB_DATA</B>(I_PID IN NUMBER, <BR>                                    I_DOC_OBJECT_ID IN NUMBER, <BR>                                    I_AUDIT_ID IN NUMBER, <BR>                                    I_VIEW_NAME IN VARCHAR2, <BR>                                    O_ERROR_CODE OUT NUMBER, <BR>                                    O_ERROR_MESSAGE OUT VARCHAR2, <BR>                                    I_NEW_PID IN NUMBER DEFAULT 0)</PRE>
+<DL>
+<DD> Procedure insert records into table MS_DMS_DOC_EXTENDED_ATTRIBS.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>I_PID</CODE> -
+              Process instance identifier.</DD>
+<DD>
+<CODE>I_DOC_OBJECT_ID</CODE> -
+              Document object identifier.</DD>
+<DD>
+<CODE>I_AUDIT_ID</CODE> -
+              Audit identifier.</DD>
+<DD>
+<CODE>O_ERROR_CODE</CODE> -
+              Captures and share the oracle error code as output.</DD>
+<DD>
+<CODE>O_ERROR_MESSAGE</CODE> -
+              Captures and share the oracle error message  as output.</DD>
+<DD>
+<CODE>I_NEW_PID</CODE> -
+              Process instance identifier.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+              	        Populate error details into MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="INSERT_INLINE_EXTEND_ATRRIB(NUMBER,NUMBER,NUMBER,VARCHAR2,NUMBER,VARCHAR2,NUMBER)"></A>
+<H3>INSERT_INLINE_EXTEND_ATRRIB</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>INSERT_INLINE_EXTEND_ATRRIB</B>(I_PID IN NUMBER, <BR>                                    I_DOC_OBJECT_ID IN NUMBER, <BR>                                    I_AUDIT_ID IN NUMBER, <BR>                                    I_VIEW_NAME IN VARCHAR2, <BR>                                    O_ERROR_CODE OUT NUMBER, <BR>                                    O_ERROR_MESSAGE OUT VARCHAR2, <BR>                                    I_NEW_PID IN NUMBER DEFAULT 0)</PRE>
+<DL>
+<DD> Procedure insert records into table MS_DMS_DOC_EXTENDED_ATTRIBS.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>I_PID</CODE> -
+              Process instance identifier.</DD>
+<DD>
+<CODE>I_DOC_OBJECT_ID</CODE> -
+              Document object identifier.</DD>
+<DD>
+<CODE>I_AUDIT_ID</CODE> -
+              Audit identifier.</DD>
+<DD>
+<CODE>I_VIEW_NAME</CODE> -
+              Name of View.</DD>
+<DD>
+<CODE>O_ERROR_CODE</CODE> -
+              Captures and share the oracle error code as output.</DD>
+<DD>
+<CODE>O_ERROR_MESSAGE</CODE> -
+              Captures and share the oracle error message  as output.</DD>
+<DD>
+<CODE>I_NEW_PID</CODE> -
+              Process instance identifier.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+              	        Populate error details into MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_SET_USER_PREVILEGES(VARCHAR2,VARCHAR2)"></A>
+<H3>MS_DMS_SET_USER_PREVILEGES</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>MS_DMS_SET_USER_PREVILEGES</B>(P_USER_NAME IN VARCHAR2, <BR>                                   P_PARAMETER IN VARCHAR2)</PRE>
+<DL>
+<DD> Procedure update MS_DMS_CONFIG_DOC_TAB.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>P_USER_NAME</CODE> -
+              User name.</DD>
+<DD>
+<CODE>P_PARAMETER</CODE> -
+              Delimiter to split.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_GET_METADATA_FOR_MYDOCUMENT(NUMBER,VARCHAR2,VARCHAR,NUMBER)"></A>
+<H3>MS_GET_METADATA_FOR_MYDOCUMENT</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=METADATA_TABLE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=METADATA_TABLE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->METADATA_TABLE <B>MS_GET_METADATA_FOR_MYDOCUMENT</B>(I_DOCUMENT_OBJECT_ID IN NUMBER, <BR>                                                     I_DOC_TYPE IN VARCHAR2, <BR>                                                     I_USER_ID IN VARCHAR DEFAULT 0, <BR>                                                     I_AUDIT_ID IN NUMBER)</PRE>
+<DL>
+<DD> Get the metadata for the report.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>I_DOCUMENT_OBJECT_ID</CODE> -
+              Document object identifier.</DD>
+<DD>
+<CODE>I_DOC_TYPE</CODE> -
+              Document state.type.</DD>
+<DD>
+<CODE>I_USER_ID</CODE> -
+              User identifier.</DD>
+<DD>
+<CODE>I_AUDIT_ID</CODE> -
+              Audit identifier.</DD>
+</DT>
+<DT>Returns:
+          <DD>Metadata table with meta lable name,meta value, document name, audit identifier and serial number. <br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_GET_METADATA_FOR_REPORT(NUMBER,VARCHAR2,VARCHAR)"></A>
+<H3>MS_GET_METADATA_FOR_REPORT</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=METADATA_TABLE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=METADATA_TABLE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->METADATA_TABLE <B>MS_GET_METADATA_FOR_REPORT</B>(I_DOCUMENT_OBJECT_ID IN NUMBER, <BR>                                                 I_DOC_TYPE IN VARCHAR2, <BR>                                                 I_USER_ID IN VARCHAR DEFAULT 0)</PRE>
+<DL>
+<DD> Get the metadata for the report.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>I_DOCUMENT_OBJECT_ID</CODE> -
+              Document object identifier.</DD>
+<DD>
+<CODE>I_DOC_TYPE</CODE> -
+              Document state type.</DD>
+<DD>
+<CODE>I_USER_ID</CODE> -
+              User identifier.</DD>
+</DT>
+<DT>Returns:
+          <DD>Metadata table with lable name,document name, audit identifier and serial number. <br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_GET_METADATA_FOR_VER_REP(NUMBER,VARCHAR2,VARCHAR2,VARCHAR)"></A>
+<H3>MS_GET_METADATA_FOR_VER_REP</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=METADATA_TABLE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=METADATA_TABLE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->METADATA_TABLE <B>MS_GET_METADATA_FOR_VER_REP</B>(I_DOCUMENT_OBJECT_ID IN NUMBER, <BR>                                                  I_VERSION_NUM IN VARCHAR2, <BR>                                                  I_DOC_TYPE IN VARCHAR2, <BR>                                                  I_USER_ID IN VARCHAR DEFAULT 0)</PRE>
+<DL>
+<DD> Get the metadata for the report based on version.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>I_DOCUMENT_OBJECT_ID</CODE> -
+              Document object identifier.</DD>
+<DD>
+<CODE>I_VERSION_NUM</CODE> -
+              Version number.</DD>
+<DD>
+<CODE>I_DOC_TYPE</CODE> -
+              Document state.type.</DD>
+<DD>
+<CODE>I_USER_ID</CODE> -
+              User identifier.</DD>
+</DT>
+<DT>Returns:
+          <DD>Metadata table with lable name,document name, audit identifier and serial number. <br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="trigger_detail"></A><script src="../js/jquery.mCustomScrollbar.concat.min.js"></script><script>
+		(function($){
+			$(window).load(function(){
+				$("#outer").addClass('loader');	
+				$(".loading").fadeOut("slow");	
+				$("body").mCustomScrollbar({
+					theme:"rounded-dots-dark",
+					mouseWheel:{ scrollAmount: "300px" }
+				});
+				
+			});
+		})(jQuery);
+	</script>
+</div>
+</BODY>
+</HTML>

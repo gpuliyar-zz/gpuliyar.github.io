@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_DMS_POLICY_DOC_REPORT_V">MS_DMS_POLICY_DOC_REPORT_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "PDMS61SP2_DEV"."MS_DMS_POLICY_DOC_REPORT_V" ("DOC_OBJECTID", "DOCUMENT_NAME", "VERSION_NUMBER", "CATEGORY", "CATEGORY1", "CATEGORY2", "CATEGORY3", "CATEGORY4", "CATEGORY_ID", "SUB_CATEGORY1_ID", "SUB_CATEGORY2_ID", "SUB_CATEGORY3_ID", "SUB_CATEGORY4_ID", "DOCUMENT_STATUS", "EFFECTIVE_DATE", "COL1", "COL2", "COL3", "COL4", "CHECKED_OUT_FLAG", "DOCUMENT_OBJECT_ID", "DOC_NAME") AS 
+  SELECT (a.doc_objectid),
+    (SELECT '<a target="_self" href="javascript'
+      || CHR (58)
+      || 'callreportdetails(''Pushinfolet?id='
+      || ms_apps_utilities. get_infolet_id ('MS_DMS_MANAGE_POLICY')
+      || CHR (38)
+      || 'proc='
+      || a.process_instance_id
+      || CHR (38)
+      || 'instid='
+      ||
+      (SELECT MAX (instance_id)
+      FROM ms_dms_manage_policy_v e
+      WHERE e.object_id      = a.object_id
+      AND e.dd_current_stage = 'CREATE'
+      )
+      || CHR (38)
+      || 'flag=1'
+      || CHR (38)
+      || 'emd=4'
+      || CHR (38)
+      || 'edit_flag='
+      || (
+      CASE
+        WHEN (b.checked_out_flag = 'N')
+        THEN 'Y'
+        ELSE 'N'
+      END)
+      || CHR (38)
+      || 'wrapper=no'')">'
+      || a.document_name
+      || '</a>'
+    FROM DUAL
+    ) AS document_name,
+    a.version_number,
+    (SELECT c.category_name
+    FROM si_dms_categories c
+    WHERE c.category_id = a.category_id
+    ) CATEGORY,
+    (SELECT c.category_name
+    FROM si_dms_categories c
+    WHERE c.category_id = a.sub_category1_id
+    ) category1,
+    (SELECT c.category_name
+    FROM si_dms_categories c
+    WHERE c.category_id = a.sub_category2_id
+    ) category2,
+    (SELECT c.category_name
+    FROM si_dms_categories c
+    WHERE c.category_id = a.sub_category3_id
+    ) category3,
+    (SELECT c.category_name
+    FROM si_dms_categories c
+    WHERE c.category_id = a.sub_category4_id
+    ) category4,
+    a.category_id      AS CATEGORY_ID,
+    a.sub_category1_id AS SUB_CATEGORY1_ID,
+    a.sub_category2_id AS SUB_CATEGORY2_ID,
+    a.sub_category3_id AS SUB_CATEGORY3_ID,
+    a.sub_category4_id AS SUB_CATEGORY4_ID,
+    b.document_status,
+    a.effective_date,
+    (
+    CASE
+      WHEN (NVL (a.assign_due_date, SYSDATE + 1) > SYSDATE)
+      THEN
+        (SELECT DECODE (COUNT (c.feedback_pid), COUNT (user_name), 'Completed', 'In Progress')
+        FROM ms_dms_policy_feedback c
+        WHERE c.pol_object_id = TO_CHAR (a.doc_objectid)
+        AND c.user_name      IS NOT NULL
+        )
+      ELSE 'Completed'
+    END) col1,
+    'Attributes' AS col2,
+    (SELECT MAX (c.seq_no)
+    FROM ms_dms_policy_feedback c
+    WHERE c.doc_objectid = a.doc_objectid
+    AND c.user_name     IS NOT NULL
+    )    AS COL3,
+    NULL AS COL4,
+    B.CHECKED_OUT_FLAG,
+    B.DOCUMENT_OBJECT_ID,
+    b.document_name as doc_name
+  FROM ms_dms_manage_policy_v a,
+    ms_dms_documents b
+  WHERE a.doc_objectid      = b.document_object_id
+  AND a.process_instance_id =
+    (SELECT MAX (process_instance_id)
+    FROM ms_dms_manage_policy_v
+    WHERE doc_objectid = a.doc_objectid
+    )
+  AND a.instance_id =
+    (SELECT MAX (INSTANCE_ID)
+    FROM ms_dms_manage_policy_v
+    WHERE process_instance_id = a.process_instance_id
+    )
+  AND A.HDN_FIELD3 = 'DUMMY'
+  AND A.OBJECT_ID IS NOT NULL
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

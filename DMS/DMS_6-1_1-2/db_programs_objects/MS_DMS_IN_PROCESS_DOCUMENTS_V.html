@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_DMS_IN_PROCESS_DOCUMENTS_V">MS_DMS_IN_PROCESS_DOCUMENTS_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "PDMS61SP2_DEV"."MS_DMS_IN_PROCESS_DOCUMENTS_V" ("TRANSACTION_ID", "ENTERPRISE_ID", "PROCESS_INSTANCE_ID", "DOCUMENT_NUMBER", "DOCUMENT_NAME", "VERSION_NUMBER", "ACTION_TYPE", "LIFE_CYCLE_ID", "LIFE_CYCLE_NAME", "CURRENT_STAGE_ID", "CURRENT_STAGE_NAME", "CURRENT_STAGE_SEQ", "OWNER_ID", "OWNER_NAME", "ORIGINATOR_ID", "ORIGINATOR_NAME", "CATEGORY_ID", "SUB_CATEGORY1_ID", "SUB_CATEGORY2_ID", "SUB_CATEGORY3_ID", "SUB_CATEGORY4_ID", "CATEGORY", "SUB_CATEGORY1", "SUB_CATEGORY2", "SUB_CATEGORY3", "SUB_CATEGORY4", "REVIEW_SCHEDULE_DAYS", "DOCUMENT_ATTACHMENT", "EFFECTIVE_FROM", "EN_CHAGE_STAGE_USERS", "IN_PROCESS_FLAG", "KEYWORDS", "DESCRIPTION", "PURPOSE", "CREATE_REVIEW_FLAG", "USER_LIST", "DEFAULT_USER_LIST", "CHANGE_REQUEST_COMMENTS", "COMMENTS_HISTORY", "LOCK_STATUS", "LOCK_USER_ID", "AUTHOR_ID", "AUTHOR_NAME", "STAGE_ID", "STAGE_NAME", "STAGE_SEQ", "CURRENT_STAGE_FLAG", "APPROVAL_REQUIREMENT", "ELECTRONIC_SIGNATURE_REQ", "EMAIL_FLAG", "NEXT_STAGE_SEQ", "PREV_STAGE_SEQ", "USER_ID", "ORGINAL_USER_ID", "ACCESS_RIGHT", "ORGINAL_ACCESS_RIGHT") AS 
+  SELECT 
+   A.TRANSACTION_ID,  A.ENTERPRISE_ID,  A.PROCESS_INSTANCE_ID,  A.DOCUMENT_NUMBER,  A.DOCUMENT_NAME, 
+  A.VERSION_NUMBER,  A.ACTION_TYPE,  A.LIFE_CYCLE_ID,  A.LIFE_CYCLE_NAME,  A.CURRENT_STAGE_ID, 
+  A.CURRENT_STAGE_NAME,  A.CURRENT_STAGE_SEQ,  A.OWNER_ID,  A.OWNER_NAME,  A.ORIGINATOR_ID, 
+  A.ORIGINATOR_NAME,  A.CATEGORY_ID,  A.SUB_CATEGORY1_ID,  A.SUB_CATEGORY2_ID,  A.SUB_CATEGORY3_ID, 
+  A.SUB_CATEGORY4_ID,  A.CATEGORY,  A.SUB_CATEGORY1,  A.SUB_CATEGORY2,  A.SUB_CATEGORY3, 
+  A.SUB_CATEGORY4,  A.REVIEW_SCHEDULE_DAYS,  A.DOCUMENT_ATTACHMENT,  A.EFFECTIVE_FROM,  A.EN_CHAGE_STAGE_USERS, 
+  A.IN_PROCESS_FLAG,  A.KEYWORDS,  A.DESCRIPTION,  A.PURPOSE,  A.CREATE_REVIEW_FLAG, 
+  A.USER_LIST,  A.DEFAULT_USER_LIST,  A.CHANGE_REQUEST_COMMENTS,  A.COMMENTS_HISTORY,  A.LOCK_STATUS, 
+  A.LOCK_USER_ID,  A.AUTHOR_ID,  A.AUTHOR_NAME, 
+   b.STAGE_ID, 
+   b.STAGE_NAME, 
+   b.STAGE_SEQ, 
+   b.CURRENT_STAGE_FLAG, 
+   b.APPROVAL_REQUIREMENT, 
+   b.ELECTRONIC_SIGNATURE_REQ, 
+   b.EMAIL_FLAG, 
+   b.NEXT_STAGE_SEQ, 
+   b.PREV_STAGE_SEQ, 
+  C.USER_ID, 
+  C.orginal_USER_ID, 
+  C.ACCESS_RIGHT, 
+   C.orginal_ACCESS_RIGHT 
+FROM MS_DMS_DOCUMENTS_HDR a, 
+MS_DMS_DOCUMENTS_STAGE_DTL b, 
+MS_DMS_DOCUMENTS_STAGE_USR_DTL c 
+WHERE 
+a.transaction_id=b.transaction_id 
+AND b.transaction_id=c.transaction_id 
+AND b.stage_seq=c.stage_seq
+
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

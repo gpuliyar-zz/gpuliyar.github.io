@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_DMS_DOC_PRODUCTION_V">MS_DMS_DOC_PRODUCTION_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "PDMS61SP2_DEV"."MS_DMS_DOC_PRODUCTION_V" ("CATEGORY", "SUB_CATEGORY1", "SUB_CATEGORY2", "SUB_CATEGORY3", "SUB_CATEGORY4", "CATEGORY_ID", "SUB_CATEGORY1_ID", "SUB_CATEGORY2_ID", "SUB_CATEGORY3_ID", "SUB_CATEGORY4_ID", "DOCUMENT_NAME", "DOCUMENT_NUMBER", "PROCESS_INSTANCE_ID", "DOCUMENT_ATTACHMENT", "REVISION_NUMBER", "LAST_UPDATED_BY", "TIMESTAMP", "DOCUMENT_AUTHOR", "INSTANCE_ID", "DOCUMENT_OBJECT_ID", "DOCUMENT_OBJECT_TYPE", "AUDIT_ID", "KEYWORDS", "LAST_REVIEW_DATE", "PURPOSE", "DESCRIPTION", "EFFECTIVE_DATE", "SUPPORTING_DOCUMENTS", "IS_INLINE", "DOCUMENT_ORIGINATOR", "NEXT_REVIEW_DATE", "DOC_TYPE", "DOCUMENT_OWNER", "ORATXT_IDX") AS 
+  SELECT A.CATEGORY, A.sub_category1, A.sub_category2, A.sub_category3, A.sub_category4, A.CATEGORY_id, A.sub_category1_id, A.sub_category2_id, A.sub_category3_id, A.sub_category4_id, a.document_name, a.document_number, a.process_instance_id, a.document_attachment, a.revision_number, A.LAST_USERNAME, a.TIMESTAMP, a.document_author , a.instance_id, a.document_object_id, a.document_object_type, a.audit_id , a.key_words, a.LAST_REVIEW_DATE, a.purpose, a.description, a.effective_date, a.supporting_documents, a.is_inline, A.DOCUMENT_ORIGINATOR, A.NEXT_REVIEW_DATE,A.DOC_TYPE,A.DOCUMENT_OWNER,A.ORATXT_IDX
+  FROM MS_DMS_DOCUMENTS a
+  WHERE (a.effective_date IS NULL OR TRUNC(A.effective_date) <= TRUNC(SYSDATE)) AND obsolete_flag ='N'
+  UNION ALL
+  SELECT B.CATEGORY, B.sub_category1, B.sub_category2, B.sub_category3, B.sub_category4, B.CATEGORY_id, B.sub_category1_id, B.sub_category2_id, B.sub_category3_id, B.sub_category4_id, a.document_name, a.document_number, a.process_instance_id, a.document_attachment, a.revision_number, B.LAST_USERNAME, a.TIMESTAMP, a.document_author , a.instance_id, a.document_object_id, a.document_object_type, a.audit_id , a.key_words, b.LAST_REVIEW_DATE, a.purpose, a.description, a.effective_date, a.supporting_documents, a.is_inline, B.DOCUMENT_ORIGINATOR,B.NEXT_REVIEW_DATE,B.DOC_TYPE,B.DOCUMENT_OWNER,A.ORATXT_IDX
+  FROM MS_DMS_ALL_PRODUCTION_DOCS a , MS_DMS_DOCUMENTS b
+  WHERE EXISTS
+    (SELECT document_object_id
+    FROM MS_DMS_DOCUMENTS MDD
+    WHERE effective_date      > SYSDATE AND b.document_object_id=mdd.document_object_Id
+    ) AND a.document_object_id=b.document_object_id AND a.audit_id =
+    (SELECT MAX(audit_id)
+    FROM MS_DMS_ALL_PRODUCTION_DOCS
+    WHERE document_object_id=a.document_object_id AND audit_id <>b.audit_id AND effective_date<=sysdate
+    )
+  ORDER BY 13 DESC
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

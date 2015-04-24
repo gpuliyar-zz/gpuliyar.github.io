@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Infolets</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">                                <h4 class="infolet-tooltip"><span class="fa fa-gears fa-fw"></span>  
+                                <span data-toggle="tooltip" data-placement="top" title="Category: SYSTEMI" class="fa fa-cubes fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Output Type: Graph and Report" class="fa fa-sign-out fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Type: SQL Based" class="fa fa-globe fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Keep History" class="fa fa-history fa-fw"></span>
+                                <a style="text-decoration: none; " id="MS_DMS_Get_Last_Lifecycle_Used">MS DMS Get Last Lifecycle Used</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This infolet is not in use</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#query-pill" data-toggle="tab">Query</a></li>
+                                        <li><a href="#xml-pill" data-toggle="tab">XML</a></li>
+                                        <li><a href="#params-pill" data-toggle="tab">Parameters</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-cnr">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Type</th>
+                                                            <th>Result Column Name</th>
+                                                            <th>User Column Name</th>
+                                                            <th>Default Infolet/<br>Input Infolet</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>LIFECYCLE_NAME</td>                                                                <td>Varchar2</td>
+                                                                <td>LIFECYCLE_NAME</td>
+                                                                <td>LIFECYCLE_NAME</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>LIFECYCLE_ID</td>                                                                <td>Varchar2</td>
+                                                                <td>LIFECYCLE_ID</td>
+                                                                <td>LIFECYCLE_ID</td>                                                                <td>--/ --</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="params-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-pnr">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Mandatory</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>document_name</td>
+                                                                <td>N</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>a</td>
+                                                                <td>N</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>b</td>
+                                                                <td>N</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>c</td>
+                                                                <td>N</td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="query-pill">
+                                            <div class="modal-dialog"">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-sql')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-sql">
+                                                        SELECT '  ' AS lifecycle_name, 0 AS lifecycle_id
+FROM DUAL
+ WHERE NOT EXISTS (SELECT 1
+                     FROM ms_dms_documents b
+                    WHERE b.document_name = :1)UNION 
+SELECT DISTINCT lifecycle_name,lifecycle_id FROM (SELECT DISTINCT lfc.lifecycle_name,  lfc.lifecycle_id FROM
+ si_users siu,SI_ENT sie, SI_DMS_GROUP_DETAILS dsgrp,
+ SI_DMS_ROLES dms_roles,  SI_DMS_LIFECYCLE_ROLE_GRPS lc_rl_grp, 
+ SI_DMS_LIFECYCLE_STAGES stages, SI_DMS_LIFECYCLES lfc, MS_DMS_DOCUMENTS  docu
+WHERE SYSDATE BETWEEN lfc.START_DATE AND NVL(lfc.END_DATE,SYSDATE+1)  AND stages.lifecycle_id = lfc.lifecycle_id AND
+ stages.seq = (SELECT MIN(seq) FROM SI_DMS_LIFECYCLE_STAGES WHERE lifecycle_id=lfc.lifecycle_id) AND
+ lc_rl_grp.lifecycle_id = stages.lifecycle_id AND lc_rl_grp.stage_id = stages.stage_id AND
+ dms_roles.role_id =lc_rl_grp.role_id  AND dsgrp.role_group_id =lc_rl_grp.role_group_id AND dsgrp.user_id = siu.user_id     
+    AND siu.user_name = :2 AND siu.enterprise_id = sie.enterprise_id AND                        
+ sie.enterprise_name = :3 AND RTRIM(docu.document_name)=RTRIM(:1)  and    docu.approval_process_id=lfc.lifecycle_id 
+ and SUBSTR(dms_roles.access_rights,4,1)=
+    case when :4 IN ('Create Document','UpVersion Document') then   '1' 
+      when :4  not IN('Obsolete Document' ) then 
+        SUBSTR(dms_roles.access_rights,4,1)   end
+   AND docu.approval_process_id=lfc.lifecycle_id and obsolete_flag='N'
+ UNION
+   SELECT DISTINCT lfc.lifecycle_name,  lfc.lifecycle_id FROM
+ si_users siu,SI_ENT sie,ms_dms_documents_stage_usr_dtl dsc,
+  SI_DMS_LIFECYCLE_STAGES stages, SI_DMS_LIFECYCLES lfc, MS_DMS_DOCUMENTS  docu
+WHERE SYSDATE BETWEEN lfc.START_DATE AND NVL(lfc.END_DATE,SYSDATE+1)  AND stages.lifecycle_id = lfc.lifecycle_id AND
+ stages.seq = (SELECT MIN(seq) FROM SI_DMS_LIFECYCLE_STAGES WHERE lifecycle_id=lfc.lifecycle_id) AND
+  SUBSTR(dsc.access_right,4,1)=
+  case when :4 IN ('Create Document','UpVersion Document') then   '1' 
+      when :4 not IN('Obsolete Document' ) then  SUBSTR(dsc.access_right,4,1)
+       end  AND docu.document_object_id=dsc.document_object_id
+       AND siu.user_name = :2 AND siu.enterprise_id = sie.enterprise_id AND  stages.stage_id=dsc.stage_id 
+       and lfc.lifecycle_id=dsc.life_cycle_id and   docu.approval_process_id=dsc.life_cycle_id   and                 
+        sie.enterprise_name = :3 AND RTRIM(docu.document_name)=RTRIM(:1) AND dsc.stage_seq=1  and
+             docu.approval_process_id=lfc.lifecycle_id and siu.user_id=dsc.user_id and obsolete_flag='N'
+        UNION ALL 
+        select distinct lifecycle_name,  lifecycle_id from si_dms_lifecycles where lifecycle_id =
+   ( select case WHEN EXISTS (
+    SELECT obs_lfc.lifecycle_id  FROM si_dms_lifecycles obs_lfc
+WHERE obs_lfc.lifecycle_id = lfcyc.obsolete_lifecycle_id AND SYSDATE BETWEEN obs_lfc.start_date
+AND NVL (obs_lfc.end_date, SYSDATE + 1))
+THEN (SELECT DISTINCT obs_lfc.lifecycle_id FROM si_dms_lifecycles obs_lfc  WHERE obs_lfc.lifecycle_id =lfcyc.obsolete_lifecycle_id)
+else (SELECT DISTINCT obs_lfc.lifecycle_id FROM si_dms_lifecycles obs_lfc     WHERE obs_lfc.lifecycle_id =lfcyc.lifecycle_id
+AND SYSDATE BETWEEN obs_lfc.start_date AND NVL (obs_lfc.end_date,
+SYSDATE + 1)) END as lfc_id 
+FROM si_dms_lifecycles lfcyc, ms_dms_documents docs WHERE :4 IN ('Obsolete Document') and lfcyc.lifecycle_id=docs.approval_process_id
+          and document_name=:1 and obsolete_flag='N'))
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <div class="tab-pane fade" id="xml-pill">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-xml')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-xml">
+                                                        &lt;?xml version=&quot;1.0&quot;?&gt;&lt;METRIC_DEPLOYMENT&gt;&lt;METRIC       PROCESS=&quot;0&quot;  INSTANCE=&quot;0&quot;  NOTIFY=&quot;YES&quot;   RETURN=&quot;RESULTSET&quot; &gt;&lt;RESULTMAP &gt;&lt;/RESULTMAP&gt;&lt;/METRIC&gt;&lt;/METRIC_DEPLOYMENT&gt;
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                </div>
+                                <!--panel-default -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.infolet-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.infolet-table-c').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-cnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-f').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-fnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-p').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-pnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-r').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-rnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                    ]
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

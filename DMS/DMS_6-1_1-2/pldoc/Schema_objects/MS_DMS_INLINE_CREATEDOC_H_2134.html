@@ -1,0 +1,851 @@
+<HTML xmlns:lxslt="http://xml.apache.org/xslt" xmlns:exslt="http://exslt.org/common">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>DMS - 6-1</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF="../css/customstyle.css" TITLE="Style">
+<script src="../js/jquery-1.11.1.min.js"></script>
+<link href="../css/jquery.mCustomScrollbar.css" rel="stylesheet">
+<!--
+        sameCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesLowerCase=FALSE
+        namesUpperCase=FALSE
+        namesDefaultCase=TRUE
+        defaultNamesCase=UPPER
+        namesFromCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesToCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-->
+<style>
+		html, body{ height: 100%; }
+	</style>
+</HEAD>
+<BODY>
+<div class="loading"></div>
+<div id="outer">
+<div id="menubar"></div>
+<div class="outermenu">
+<div class="menuliclass">
+<a class="menuaclass" HREF="../summary.html">Overview</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../deprecated-list.html">Deprecated</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../index-list.html">Index</a>
+</div>
+</div>
+<b>DMS - 6-1</b>
+<br>
+<div style="margin-top:60px;">
+<table class="summarytable">
+<tr>
+<td>SUMMARY:</td><td><A HREF="#field_summary">FIELD</A> |</td><td><A HREF="#type_summary">TYPE</A> |</td><td><A HREF="#method_summary">METHOD</A></td>
+</tr>
+<tr>
+<td>DETAIL:</td><td><A HREF="#field_detail">FIELD</A> | </td><td><A HREF="#type_detail">TYPE</A> | </td><td><A HREF="#method_detail">METHOD</A></td>
+</tr>
+</table>
+</div>
+<HR>
+<H2>
+<FONT SIZE="-1">Schema_objects</FONT>
+<BR>Package&nbsp;MS_DMS_INLINE_CREATEDOC_H_2134</H2><br/>
+ ======================================================================<br/>
+ Module: MS_DMS_INLINE_CREATEDOC_HELPER <br/>
+ Description: This package is used To serve the business logic for Inline Document flow module.Package gets referred by various transactions in process flow
+ ======================================================================<br/>
+<P></P>
+<DL></DL>
+<HR>
+<P></P>
+<A NAME="field_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Field Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(3)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(3)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(3)</CODE></FONT></TD><TD><CODE><B><A HREF="#G_MODULE_NAME">G_MODULE_NAME</A></B> CONSTANT := 'DMS'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(30)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(30)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(30)</CODE></FONT></TD><TD><CODE><B><A HREF="#G_PACKAGE_NAME">G_PACKAGE_NAME</A></B> CONSTANT := 'MS_DMS_INLINE_CREATEDOC_HELPER'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(100)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(100)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(100)</CODE></FONT></TD><TD><CODE><B><A HREF="#GC_DATA_NAMESPACE">GC_DATA_NAMESPACE</A></B> := 'xmlns="http://www.metricstream.com/appstudio/msa"'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#L_MS_TABLE_COUNT">L_MS_TABLE_COUNT</A></B></CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#LN_VERSION_NUMBER">LN_VERSION_NUMBER</A></B></CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#LNI_PROCESS_INSTANCE_ID">LNI_PROCESS_INSTANCE_ID</A></B> := '0'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(4000)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(4000)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(4000)</CODE></FONT></TD><TD><CODE><B><A HREF="#LV_DD_OBJECT_TYPE">LV_DD_OBJECT_TYPE</A></B></CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="type_summary"></A><A NAME="method_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="CR_UPDATE_OUT_OF_OFFICE_USERS"></A><TD><CODE><B><A HREF="#CR_UPDATE_OUT_OF_OFFICE_USERS(NUMBER,VARCHAR2,NUMBER,NUMBER)">CR_UPDATE_OUT_OF_OFFICE_USERS</A></B>(P_PID IN NUMBER, P_OBJECT_ID IN VARCHAR2, P_STAGE_ID IN NUMBER, P_STG_SEQ IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This Procedure is used to do Insert the out of office users in MS_DMS_OUT_OF_OFFICE_USERS table
+for the Inline Document flow in Create Form.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_NEXT_STAGE"></A><TD><CODE><B><A HREF="#GET_NEXT_STAGE(VARCHAR2,VARCHAR2)">GET_NEXT_STAGE</A></B>(LC_ID IN VARCHAR2, STG_ID IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This Function is used to do get the next stage Id details.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="GET_STG_SEQ"></A><TD><CODE><B><A HREF="#GET_STG_SEQ(VARCHAR2,VARCHAR2)">GET_STG_SEQ</A></B>(LC_ID IN VARCHAR2, STG_ID IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This Function is used to do get the next stage sequence details.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=8 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PR_CREATE_INLINE_DOCUMENT"></A><TD><CODE><B><A HREF="#PR_CREATE_INLINE_DOCUMENT(CLOB,CLOB,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,NUMBER,VARCHAR2)">PR_CREATE_INLINE_DOCUMENT</A></B>(LT_IN_DATA IN OUT CLOB, LT_OUT_DATA IN OUT CLOB, PC_PROCESS_CODE IN VARCHAR2, LC_FROM_STAGE IN VARCHAR2, LC_TO_STAGE IN VARCHAR2, XN_ERROR_HANDLE_ID IN OUT NUMBER, XN_ERROR_SEQ IN OUT NUMBER, XN_ERROR_CODE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This Procedure is used to do the required changes for the Inline Document(Content Structure and Multirow changes) for flow to Execute.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=1 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_ASSIGNMENT_NO"></A><TD><CODE><B><A HREF="#UPDATE_ASSIGNMENT_NO(NUMBER)">UPDATE_ASSIGNMENT_NO</A></B>(PN_PID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This Procedure is used to do update the assignment number in MS_DMS_DOCUMENTS_STAGE_USR_DTL table after the flow is completed.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=8 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_AUDIT_FOR_RCNUR"></A><TD><CODE><B><A HREF="#UPDATE_AUDIT_FOR_RCNUR(VARCHAR2,MS_DMS_INLINE_UPDATE_FORM_V%ROWTYPE,NUMBER,NUMBER,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2)">UPDATE_AUDIT_FOR_RCNUR</A></B>(ACTION_TYPE IN VARCHAR2, L_MULTI IN MS_DMS_INLINE_UPDATE_FORM_V%ROWTYPE, PID IN NUMBER, DOCOBJ_ID IN NUMBER, V_ERRORCODE OUT VARCHAR2, V_ERRMSG OUT VARCHAR2, L_ATTACH_URL IN VARCHAR2 DEFAULT NULL, LDN_DOC IN VARCHAR2 DEFAULT NULL)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This Procedure is used to do Update/Insert values in the required Table for the Inline Document flow When the User Selects
+Review Complete No Upversion Required or Edit Attribute.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=9 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_OUT_DATA"></A><TD><CODE><B><A HREF="#UPDATE_OUT_DATA(CLOB,CLOB,CLOB,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,NUMBER,VARCHAR2)">UPDATE_OUT_DATA</A></B>(LT_IN_DATA_ORIG IN CLOB, LT_IN_DATA IN OUT CLOB, LT_OUT_DATA IN OUT CLOB, PC_PROCESS_CODE IN VARCHAR2, LC_FROM_STAGE IN VARCHAR2, LC_TO_STAGE IN VARCHAR2, XN_ERROR_HANDLE_ID IN OUT NUMBER, XN_ERROR_SEQ IN OUT NUMBER, XN_ERROR_CODE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This Procedure is used to do the required changes for the Inline Document flow to Execute.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=9 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_OUT_DATA_EDIT_RCNUR"></A><TD><CODE><B><A HREF="#UPDATE_OUT_DATA_EDIT_RCNUR(CLOB,CLOB,CLOB,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,NUMBER,VARCHAR2)">UPDATE_OUT_DATA_EDIT_RCNUR</A></B>(LT_IN_DATA_ORIG IN CLOB, LT_IN_DATA IN OUT CLOB, LT_OUT_DATA IN OUT CLOB, PC_PROCESS_CODE IN VARCHAR2, LC_FROM_STAGE IN VARCHAR2, LC_TO_STAGE IN VARCHAR2, XN_ERROR_HANDLE_ID IN OUT NUMBER, XN_ERROR_SEQ IN OUT NUMBER, XN_ERROR_CODE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This Procedure is used to do the required changes for the Inline Document flow to Execute When the User Selects
+Review Complete No Upversion Required or Edit Attribute.<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=5 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_OUT_OF_OFFICE_AUTHOR"></A><TD><CODE><B><A HREF="#UPDATE_OUT_OF_OFFICE_AUTHOR(NUMBER,VARCHAR2,NUMBER,NUMBER,VARCHAR2)">UPDATE_OUT_OF_OFFICE_AUTHOR</A></B>(P_PID IN NUMBER, P_OBJECT_ID IN VARCHAR2, P_STAGE_ID IN NUMBER, P_STG_SEQ IN NUMBER, P_AUTHOR IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This Procedure is used to do Insert the out of office users in MS_DMS_OUT_OF_OFFICE_USERS table
+for the Inline Document flow in create Form(Author Transition).<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_OUT_OF_OFFICE_USERS"></A><TD><CODE><B><A HREF="#UPDATE_OUT_OF_OFFICE_USERS(NUMBER,VARCHAR2,NUMBER,NUMBER)">UPDATE_OUT_OF_OFFICE_USERS</A></B>(P_PID IN NUMBER, P_OBJECT_ID IN VARCHAR2, P_STAGE_ID IN NUMBER, P_STG_SEQ IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This Procedure is used to do Insert the out of office users in MS_DMS_OUT_OF_OFFICE_USERS table
+for the Inline Document flow in create Form.<br/>
+</TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="trigger_summary"></A><A NAME="field_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Field Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="G_MODULE_NAME"></A>
+<H3>G_MODULE_NAME</H3>
+<PRE>
+        public VARCHAR2(3) <B>G_MODULE_NAME</B> CONSTANT := 'DMS'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="G_PACKAGE_NAME"></A>
+<H3>G_PACKAGE_NAME</H3>
+<PRE>
+        public VARCHAR2(30) <B>G_PACKAGE_NAME</B> CONSTANT := 'MS_DMS_INLINE_CREATEDOC_HELPER'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="GC_DATA_NAMESPACE"></A>
+<H3>GC_DATA_NAMESPACE</H3>
+<PRE>
+        public VARCHAR2(100) <B>GC_DATA_NAMESPACE</B> := 'xmlns="http://www.metricstream.com/appstudio/msa"'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="L_MS_TABLE_COUNT"></A>
+<H3>L_MS_TABLE_COUNT</H3>
+<PRE>
+        public NUMBER <B>L_MS_TABLE_COUNT</B>
+</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="LN_VERSION_NUMBER"></A>
+<H3>LN_VERSION_NUMBER</H3>
+<PRE>
+        public NUMBER <B>LN_VERSION_NUMBER</B>
+</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="LNI_PROCESS_INSTANCE_ID"></A>
+<H3>LNI_PROCESS_INSTANCE_ID</H3>
+<PRE>
+        public NUMBER <B>LNI_PROCESS_INSTANCE_ID</B> := '0'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="LV_DD_OBJECT_TYPE"></A>
+<H3>LV_DD_OBJECT_TYPE</H3>
+<PRE>
+        public VARCHAR2(4000) <B>LV_DD_OBJECT_TYPE</B>
+</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="type_detail"></A><A NAME="method_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="CR_UPDATE_OUT_OF_OFFICE_USERS(NUMBER,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>CR_UPDATE_OUT_OF_OFFICE_USERS</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>CR_UPDATE_OUT_OF_OFFICE_USERS</B>(P_PID IN NUMBER, <BR>                                      P_OBJECT_ID IN VARCHAR2, <BR>                                      P_STAGE_ID IN NUMBER, <BR>                                      P_STG_SEQ IN NUMBER)</PRE>
+<DL>
+<DD> This Procedure is used to do Insert the out of office users in MS_DMS_OUT_OF_OFFICE_USERS table
+for the Inline Document flow in Create Form.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>P_PID</CODE> -
+              The Process instance Id for which the Form is submitted.</DD>
+<DD>
+<CODE>P_OBJECT_ID</CODE> -
+              The document object Id for which the Form is submitted.</DD>
+<DD>
+<CODE>P_STAGE_ID</CODE> -
+              The Current stage Id for which the Form is submitted.</DD>
+<DD>
+<CODE>P_STG_SEQ</CODE> -
+              The Current stage sequence for which the Form is submitted.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+                    If there is any error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_NEXT_STAGE(VARCHAR2,VARCHAR2)"></A>
+<H3>GET_NEXT_STAGE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_NEXT_STAGE</B>(LC_ID IN VARCHAR2, <BR>                               STG_ID IN VARCHAR2)</PRE>
+<DL>
+<DD> This Function is used to do get the next stage Id details.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Returns:
+          <DD>next stage id for the given lifecycle id and stage Id.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+               If there is any error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="GET_STG_SEQ(VARCHAR2,VARCHAR2)"></A>
+<H3>GET_STG_SEQ</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>GET_STG_SEQ</B>(LC_ID IN VARCHAR2, <BR>                            STG_ID IN VARCHAR2)</PRE>
+<DL>
+<DD> This Function is used to do get the next stage sequence details.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Returns:
+          <DD>Next stage sequence for the given lifecycle id and stage Id.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+               If there is any error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PR_CREATE_INLINE_DOCUMENT(CLOB,CLOB,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>PR_CREATE_INLINE_DOCUMENT</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PR_CREATE_INLINE_DOCUMENT</B>(LT_IN_DATA IN OUT CLOB, <BR>                                  LT_OUT_DATA IN OUT CLOB, <BR>                                  PC_PROCESS_CODE IN VARCHAR2, <BR>                                  LC_FROM_STAGE IN VARCHAR2, <BR>                                  LC_TO_STAGE IN VARCHAR2, <BR>                                  XN_ERROR_HANDLE_ID IN OUT NUMBER, <BR>                                  XN_ERROR_SEQ IN OUT NUMBER, <BR>                                  XN_ERROR_CODE OUT VARCHAR2)</PRE>
+<DL>
+<DD> This Procedure is used to do the required changes for the Inline Document(Content Structure and Multirow changes) for flow to Execute.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>LT_IN_DATA</CODE> -
+              The In data XML in CLob format</DD>
+<DD>
+<CODE>LT_OUT_DATA</CODE> -
+              The Out data XML in CLob format</DD>
+<DD>
+<CODE>PC_PROCESS_CODE</CODE> -
+              The workflow code name for the flow</DD>
+<DD>
+<CODE>LC_FROM_STAGE</CODE> -
+              The stage name from which the Form Is submitted</DD>
+<DD>
+<CODE>LC_TO_STAGE</CODE> -
+              The stage name to which the Form Is submitted or the rule group is passed</DD>
+<DD>
+<CODE>XN_ERROR_HANDLE_ID</CODE> -
+              The error handle id for which the Form is submitted</DD>
+<DD>
+<CODE>XN_ERROR_SEQ</CODE> -
+              The error sequence for which the Form is submitted</DD>
+<DD>
+<CODE>XN_ERROR_CODE</CODE> -
+              The error code Id for which the Form is submitted</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+               If there is any error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_ASSIGNMENT_NO(NUMBER)"></A>
+<H3>UPDATE_ASSIGNMENT_NO</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_ASSIGNMENT_NO</B>(PN_PID IN NUMBER)</PRE>
+<DL>
+<DD> This Procedure is used to do update the assignment number in MS_DMS_DOCUMENTS_STAGE_USR_DTL table after the flow is completed.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+               If there is any error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_AUDIT_FOR_RCNUR(VARCHAR2,MS_DMS_INLINE_UPDATE_FORM_V%ROWTYPE,NUMBER,NUMBER,VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2)"></A>
+<H3>UPDATE_AUDIT_FOR_RCNUR</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_AUDIT_FOR_RCNUR</B>(ACTION_TYPE IN VARCHAR2, <BR>                               L_MULTI IN MS_DMS_INLINE_UPDATE_FORM_V%ROWTYPE, <BR>                               PID IN NUMBER, <BR>                               DOCOBJ_ID IN NUMBER, <BR>                               V_ERRORCODE OUT VARCHAR2, <BR>                               V_ERRMSG OUT VARCHAR2, <BR>                               L_ATTACH_URL IN VARCHAR2 DEFAULT NULL, <BR>                               LDN_DOC IN VARCHAR2 DEFAULT NULL)</PRE>
+<DL>
+<DD> This Procedure is used to do Update/Insert values in the required Table for the Inline Document flow When the User Selects
+Review Complete No Upversion Required or Edit Attribute.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>ACTION_TYPE</CODE> -
+              This will contain Review Complete No Upversion Required or Edit Attribute based on User Selection.</DD>
+<DD>
+<CODE>L_MULTI</CODE> -
+              The Collection Type record for MS_DMS_INLINE_UPDATE_FORM_V.</DD>
+<DD>
+<CODE>PID</CODE> -
+              The Process instance Id for which the Form is submitted.</DD>
+<DD>
+<CODE>DOCOBJ_ID</CODE> -
+              The document object Id for which the Form is submitted.</DD>
+<DD>
+<CODE>V_ERRORCODE</CODE> -
+              The error code Id for which the Form is submitted.</DD>
+<DD>
+<CODE>V_ERRMSG</CODE> -
+              The error message for which the Form is submitted.</DD>
+<DD>
+<CODE>L_ATTACH_URL</CODE> -
+              Attachment details for Inline Document this will be null.</DD>
+<DD>
+<CODE>LDN_DOC</CODE> -
+              This contains the document number for the Document.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+               If there is any error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_OUT_DATA(CLOB,CLOB,CLOB,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>UPDATE_OUT_DATA</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_OUT_DATA</B>(LT_IN_DATA_ORIG IN CLOB, <BR>                        LT_IN_DATA IN OUT CLOB, <BR>                        LT_OUT_DATA IN OUT CLOB, <BR>                        PC_PROCESS_CODE IN VARCHAR2, <BR>                        LC_FROM_STAGE IN VARCHAR2, <BR>                        LC_TO_STAGE IN VARCHAR2, <BR>                        XN_ERROR_HANDLE_ID IN OUT NUMBER, <BR>                        XN_ERROR_SEQ IN OUT NUMBER, <BR>                        XN_ERROR_CODE OUT VARCHAR2)</PRE>
+<DL>
+<DD> This Procedure is used to do the required changes for the Inline Document flow to Execute.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>LT_IN_DATA_ORIG</CODE> -
+              The data XML in CLob format.</DD>
+<DD>
+<CODE>LT_IN_DATA</CODE> -
+              The In data XML in CLob format.</DD>
+<DD>
+<CODE>LT_OUT_DATA</CODE> -
+              The Out data XML in CLob format.</DD>
+<DD>
+<CODE>PC_PROCESS_CODE</CODE> -
+              The workflow code name for the flow.</DD>
+<DD>
+<CODE>LC_FROM_STAGE</CODE> -
+              The stage name from which the Form Is submitted.</DD>
+<DD>
+<CODE>LC_TO_STAGE</CODE> -
+              The stage name to which the Form Is submitted or the Rulegroup is passed.</DD>
+<DD>
+<CODE>XN_ERROR_HANDLE_ID</CODE> -
+              The error handle id for which the Form is submitted.</DD>
+<DD>
+<CODE>XN_ERROR_SEQ</CODE> -
+              The error sequence for which the Form is submitted.</DD>
+<DD>
+<CODE>XN_ERROR_CODE</CODE> -
+              The error code Id for which the Form is submitted.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+                                    If there is any error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_OUT_DATA_EDIT_RCNUR(CLOB,CLOB,CLOB,VARCHAR2,VARCHAR2,VARCHAR2,NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>UPDATE_OUT_DATA_EDIT_RCNUR</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_OUT_DATA_EDIT_RCNUR</B>(LT_IN_DATA_ORIG IN CLOB, <BR>                                   LT_IN_DATA IN OUT CLOB, <BR>                                   LT_OUT_DATA IN OUT CLOB, <BR>                                   PC_PROCESS_CODE IN VARCHAR2, <BR>                                   LC_FROM_STAGE IN VARCHAR2, <BR>                                   LC_TO_STAGE IN VARCHAR2, <BR>                                   XN_ERROR_HANDLE_ID IN OUT NUMBER, <BR>                                   XN_ERROR_SEQ IN OUT NUMBER, <BR>                                   XN_ERROR_CODE OUT VARCHAR2)</PRE>
+<DL>
+<DD> This Procedure is used to do the required changes for the Inline Document flow to Execute When the User Selects
+Review Complete No Upversion Required or Edit Attribute.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>LT_IN_DATA_ORIG</CODE> -
+              The data XML in CLob format.</DD>
+<DD>
+<CODE>LT_IN_DATA</CODE> -
+              The In data XML in CLob format.</DD>
+<DD>
+<CODE>LT_OUT_DATA</CODE> -
+              The Out data XML in CLob format.</DD>
+<DD>
+<CODE>PC_PROCESS_CODE</CODE> -
+              The workflow code name for the flow.</DD>
+<DD>
+<CODE>LC_FROM_STAGE</CODE> -
+              The stage name from which the Form Is submitted.</DD>
+<DD>
+<CODE>LC_TO_STAGE</CODE> -
+              The stage name to which the Form Is submitted or the rule group is passed.</DD>
+<DD>
+<CODE>XN_ERROR_HANDLE_ID</CODE> -
+              The error handle id for which the Form is submitted.</DD>
+<DD>
+<CODE>XN_ERROR_SEQ</CODE> -
+              The error sequence for which the Form is submitted.</DD>
+<DD>
+<CODE>XN_ERROR_CODE</CODE> -
+              The error code Id for which the Form is submitted.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+               If there is any error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_OUT_OF_OFFICE_AUTHOR(NUMBER,VARCHAR2,NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>UPDATE_OUT_OF_OFFICE_AUTHOR</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_OUT_OF_OFFICE_AUTHOR</B>(P_PID IN NUMBER, <BR>                                    P_OBJECT_ID IN VARCHAR2, <BR>                                    P_STAGE_ID IN NUMBER, <BR>                                    P_STG_SEQ IN NUMBER, <BR>                                    P_AUTHOR IN VARCHAR2)</PRE>
+<DL>
+<DD> This Procedure is used to do Insert the out of office users in MS_DMS_OUT_OF_OFFICE_USERS table
+for the Inline Document flow in create Form(Author Transition).<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>P_PID</CODE> -
+              The Process instance Id for which the Form is submitted.</DD>
+<DD>
+<CODE>P_OBJECT_ID</CODE> -
+              The document object Id for which the Form is submitted.</DD>
+<DD>
+<CODE>P_STAGE_ID</CODE> -
+              The Current stage Id for which the Form is submitted.</DD>
+<DD>
+<CODE>P_STG_SEQ</CODE> -
+              The Current stage sequence for which the Form is submitted.</DD>
+<DD>
+<CODE>P_AUTHOR</CODE> -
+              The error code Id for which the Form is submitted.</DD>
+</DT>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+                   If there is any error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_OUT_OF_OFFICE_USERS(NUMBER,VARCHAR2,NUMBER,NUMBER)"></A>
+<H3>UPDATE_OUT_OF_OFFICE_USERS</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_OUT_OF_OFFICE_USERS</B>(P_PID IN NUMBER, <BR>                                   P_OBJECT_ID IN VARCHAR2, <BR>                                   P_STAGE_ID IN NUMBER, <BR>                                   P_STG_SEQ IN NUMBER)</PRE>
+<DL>
+<DD> This Procedure is used to do Insert the out of office users in MS_DMS_OUT_OF_OFFICE_USERS table
+for the Inline Document flow in create Form.<br/>
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>OTHERS</CODE> -
+               If there is any error then storing the error details in MS_DMS_ERR_LOGS table.<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="trigger_detail"></A><script src="../js/jquery.mCustomScrollbar.concat.min.js"></script><script>
+		(function($){
+			$(window).load(function(){
+				$("#outer").addClass('loader');	
+				$(".loading").fadeOut("slow");	
+				$("body").mCustomScrollbar({
+					theme:"rounded-dots-dark",
+					mouseWheel:{ scrollAmount: "300px" }
+				});
+				
+			});
+		})(jQuery);
+	</script>
+</div>
+</BODY>
+</HTML>

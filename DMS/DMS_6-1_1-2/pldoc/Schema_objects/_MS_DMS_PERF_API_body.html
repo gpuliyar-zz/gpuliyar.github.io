@@ -1,0 +1,472 @@
+<HTML xmlns:lxslt="http://xml.apache.org/xslt" xmlns:exslt="http://exslt.org/common">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>DMS - 6-1</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF="../css/customstyle.css" TITLE="Style">
+<script src="../js/jquery-1.11.1.min.js"></script>
+<link href="../css/jquery.mCustomScrollbar.css" rel="stylesheet">
+<!--
+        sameCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesLowerCase=FALSE
+        namesUpperCase=FALSE
+        namesDefaultCase=TRUE
+        defaultNamesCase=UPPER
+        namesFromCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesToCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-->
+<style>
+		html, body{ height: 100%; }
+	</style>
+</HEAD>
+<BODY>
+<div class="loading"></div>
+<div id="outer">
+<div id="menubar"></div>
+<div class="outermenu">
+<div class="menuliclass">
+<a class="menuaclass" HREF="../summary.html">Overview</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../deprecated-list.html">Deprecated</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../index-list.html">Index</a>
+</div>
+</div>
+<b>DMS - 6-1</b>
+<br>
+<div style="margin-top:60px;">
+<table class="summarytable">
+<tr>
+<td>SUMMARY:</td><td><A HREF="#field_summary">FIELD</A> |</td><td><A HREF="#type_summary">TYPE</A> |</td><td><A HREF="#method_summary">METHOD</A></td>
+</tr>
+<tr>
+<td>DETAIL:</td><td><A HREF="#field_detail">FIELD</A> | </td><td><A HREF="#type_detail">TYPE</A> | </td><td><A HREF="#method_detail">METHOD</A></td>
+</tr>
+</table>
+</div>
+<HR>
+<H2>
+<FONT SIZE="-1">Schema_objects</FONT>
+<BR>Package&nbsp;MS_DMS_PERF_API</H2>
+<P></P>
+<DL></DL>
+<HR>
+<P></P>
+<A NAME="field_summary"></A><A NAME="type_summary"></A><A NAME="method_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#MS_DMS_PARAMETER_LOCIZATION">MS_DMS_PARAMETER_LOCIZATION</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="P_LOCAL_LOV_T"></A><TD><CODE><B><A HREF="#P_LOCAL_LOV_T(NUMBER,VARCHAR2)">P_LOCAL_LOV_T</A></B>(P_ERROR_CODE IN OUT NUMBER, P_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="P_MS_DMS_LOCAL_USERS"></A><TD><CODE><B><A HREF="#P_MS_DMS_LOCAL_USERS(NUMBER,NUMBER,VARCHAR2)">P_MS_DMS_LOCAL_USERS</A></B>(P_USER_ID IN NUMBER DEFAULT NULL, P_ERROR_CODE IN OUT NUMBER, P_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      ------------------------------------------------------------------
+|Package Name :  ms_dms_perf_api
+|Usage		:	to store the Denormalized data in local tables
+to increase the performance
+|Version Information
+|Version           Author         Date            Comments
+|Initial Version   Kalyan         07-Apr-2014     NA
+|2.0.0.0           anup.gupta     08-Apr-2014     Added procedure refresh_user_cat_ar_mapping
+|2.0.0.1           Kalyan         14-Apr-2014     Added New columns to MS_DMS_LOCAL_USERS
+|3.0.0.0           anup.gupta     08-May-2014     Added procedure sync_user_cat_ar_mapping
+|4.0.0.0           Kalyan         29-May-2014     Added Update satement in scheduled infolet for AG changes
+|5.0.0.0           Kalyan         31-May-2014     Added procedure p_local_lov_t
+|5.0.0.1           Kalyan         24-Jun-2014     Added COMMITS in SYNC procedure which is calling from Sch Infolet.</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="P_MS_SYNC_CAT_USER_ACCESS_CAL"></A><TD><CODE><B><A HREF="#P_MS_SYNC_CAT_USER_ACCESS_CAL(NUMBER,VARCHAR2)">P_MS_SYNC_CAT_USER_ACCESS_CAL</A></B>(P_ERROR_CODE IN OUT NUMBER, P_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_MS_DMS_LOCAL_USERS"></A><TD><CODE><B><A HREF="#PROCESS_MS_DMS_LOCAL_USERS(VARCHAR2,NUMBER,VARCHAR2)">PROCESS_MS_DMS_LOCAL_USERS</A></B>(P_USER_NAME_LIST IN VARCHAR2, P_ERROR_CODE IN OUT NUMBER, P_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=1 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="REFRESH_EXTENDED_ATTRIBUTE_IDX"></A><TD><CODE><B><A HREF="#REFRESH_EXTENDED_ATTRIBUTE_IDX(VARCHAR2)">REFRESH_EXTENDED_ATTRIBUTE_IDX</A></B>(P_RUN_STATUS OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This procedure will create the index on MS_DMS_DOC_EXTENDED_ATTRIBS table.</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="REFRESH_USER_CAT_AR_MAPPING"></A><TD><CODE><B><A HREF="#REFRESH_USER_CAT_AR_MAPPING(VARCHAR2,VARCHAR2,NUMBER,VARCHAR2)">REFRESH_USER_CAT_AR_MAPPING</A></B>(P_USER_ID IN VARCHAR2 DEFAULT NULL, P_CATEGORY_ID IN VARCHAR2 DEFAULT NULL, P_ERROR_CODE OUT NUMBER, P_ERROR_MESSAGE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=1 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="REMOVE_EXTENDED_ATTRIBUTE_IDX"></A><TD><CODE><B><A HREF="#REMOVE_EXTENDED_ATTRIBUTE_IDX(VARCHAR2)">REMOVE_EXTENDED_ATTRIBUTE_IDX</A></B>(P_RUN_STATUS OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_VARCHAR2_ARRAY
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_VARCHAR2_ARRAY
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_VARCHAR2_ARRAY</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="SPLIT_CLOB_STRING"></A><TD><CODE><B><A HREF="#SPLIT_CLOB_STRING(CLOB,CHAR)">SPLIT_CLOB_STRING</A></B>(P_STRING IN CLOB, P_DELIMITER IN CHAR)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="SYNC_USER_CAT_AR_MAPPING"></A><TD><CODE><B><A HREF="#SYNC_USER_CAT_AR_MAPPING(CLOB,NUMBER,VARCHAR2)">SYNC_USER_CAT_AR_MAPPING</A></B>(P_USER_NAME_STR IN OUT CLOB, P_ERROR_CODE OUT NUMBER, P_ERROR_MESSAGE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="trigger_summary"></A><A NAME="field_detail"></A><A NAME="type_detail"></A><A NAME="method_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="MS_DMS_PARAMETER_LOCIZATION"></A>
+<H3>MS_DMS_PARAMETER_LOCIZATION</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> 
+<B>MS_DMS_PARAMETER_LOCIZATION</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="P_LOCAL_LOV_T(NUMBER,VARCHAR2)"></A>
+<H3>P_LOCAL_LOV_T</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> 
+<B>P_LOCAL_LOV_T</B>(P_ERROR_CODE IN OUT NUMBER, <BR>                P_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="P_MS_DMS_LOCAL_USERS(NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>P_MS_DMS_LOCAL_USERS</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> 
+<B>P_MS_DMS_LOCAL_USERS</B>(P_USER_ID IN NUMBER DEFAULT NULL, <BR>                       P_ERROR_CODE IN OUT NUMBER, <BR>                       P_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD>------------------------------------------------------------------
+|Package Name :  ms_dms_perf_api
+|Usage		:	to store the Denormalized data in local tables
+to increase the performance
+|Version Information
+|Version           Author         Date            Comments
+|Initial Version   Kalyan         07-Apr-2014     NA
+|2.0.0.0           anup.gupta     08-Apr-2014     Added procedure refresh_user_cat_ar_mapping
+|2.0.0.1           Kalyan         14-Apr-2014     Added New columns to MS_DMS_LOCAL_USERS
+|3.0.0.0           anup.gupta     08-May-2014     Added procedure sync_user_cat_ar_mapping
+|4.0.0.0           Kalyan         29-May-2014     Added Update satement in scheduled infolet for AG changes
+|5.0.0.0           Kalyan         31-May-2014     Added procedure p_local_lov_t
+|5.0.0.1           Kalyan         24-Jun-2014     Added COMMITS in SYNC procedure which is calling from Sch Infolet.
+|6.0.0.1           Girish         09-Jan-2015     Added the logger messages as per new logging system
+|6.0.0.2           Samaresh       04-Mar-2015     Added new LEXER to REFRESH_EXTENDED_ATTRIBUTE_IDX.
+|7.0.0.0           Samaresh       04-Mar-2015     Added REMOVE_EXTENDED_ATTRIBUTE_IDX
+-----------------------------------------------------------------
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="P_MS_SYNC_CAT_USER_ACCESS_CAL(NUMBER,VARCHAR2)"></A>
+<H3>P_MS_SYNC_CAT_USER_ACCESS_CAL</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> 
+<B>P_MS_SYNC_CAT_USER_ACCESS_CAL</B>(P_ERROR_CODE IN OUT NUMBER, <BR>                                P_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_MS_DMS_LOCAL_USERS(VARCHAR2,NUMBER,VARCHAR2)"></A>
+<H3>PROCESS_MS_DMS_LOCAL_USERS</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> 
+<B>PROCESS_MS_DMS_LOCAL_USERS</B>(P_USER_NAME_LIST IN VARCHAR2, <BR>                             P_ERROR_CODE IN OUT NUMBER, <BR>                             P_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="REFRESH_EXTENDED_ATTRIBUTE_IDX(VARCHAR2)"></A>
+<H3>REFRESH_EXTENDED_ATTRIBUTE_IDX</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> 
+<B>REFRESH_EXTENDED_ATTRIBUTE_IDX</B>(P_RUN_STATUS OUT VARCHAR2)</PRE>
+<DL>
+<DD> This procedure will create the index on MS_DMS_DOC_EXTENDED_ATTRIBS table. Which enables the DMS extended attribute search capability 
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="REFRESH_USER_CAT_AR_MAPPING(VARCHAR2,VARCHAR2,NUMBER,VARCHAR2)"></A>
+<H3>REFRESH_USER_CAT_AR_MAPPING</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> 
+<B>REFRESH_USER_CAT_AR_MAPPING</B>(P_USER_ID IN VARCHAR2 DEFAULT NULL, <BR>                              P_CATEGORY_ID IN VARCHAR2 DEFAULT NULL, <BR>                              P_ERROR_CODE OUT NUMBER, <BR>                              P_ERROR_MESSAGE OUT VARCHAR2)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="REMOVE_EXTENDED_ATTRIBUTE_IDX(VARCHAR2)"></A>
+<H3>REMOVE_EXTENDED_ATTRIBUTE_IDX</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> 
+<B>REMOVE_EXTENDED_ATTRIBUTE_IDX</B>(P_RUN_STATUS OUT VARCHAR2)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="SPLIT_CLOB_STRING(CLOB,CHAR)"></A>
+<H3>SPLIT_CLOB_STRING</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=MS_VARCHAR2_ARRAY
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_VARCHAR2_ARRAY
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_VARCHAR2_ARRAY <B>SPLIT_CLOB_STRING</B>(P_STRING IN CLOB, <BR>                                     P_DELIMITER IN CHAR)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="SYNC_USER_CAT_AR_MAPPING(CLOB,NUMBER,VARCHAR2)"></A>
+<H3>SYNC_USER_CAT_AR_MAPPING</H3>
+<PRE> <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> 
+<B>SYNC_USER_CAT_AR_MAPPING</B>(P_USER_NAME_STR IN OUT CLOB, <BR>                           P_ERROR_CODE OUT NUMBER, <BR>                           P_ERROR_MESSAGE OUT VARCHAR2)</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="trigger_detail"></A><script src="../js/jquery.mCustomScrollbar.concat.min.js"></script><script>
+		(function($){
+			$(window).load(function(){
+				$("#outer").addClass('loader');	
+				$(".loading").fadeOut("slow");	
+				$("body").mCustomScrollbar({
+					theme:"rounded-dots-dark",
+					mouseWheel:{ scrollAmount: "300px" }
+				});
+				
+			});
+		})(jQuery);
+	</script>
+</div>
+</BODY>
+</HTML>

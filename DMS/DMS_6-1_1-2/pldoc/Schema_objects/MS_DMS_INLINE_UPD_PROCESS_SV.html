@@ -1,0 +1,1827 @@
+<HTML xmlns:lxslt="http://xml.apache.org/xslt" xmlns:exslt="http://exslt.org/common">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>DMS - 6-1</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF="../css/customstyle.css" TITLE="Style">
+<script src="../js/jquery-1.11.1.min.js"></script>
+<link href="../css/jquery.mCustomScrollbar.css" rel="stylesheet">
+<!--
+        sameCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesLowerCase=FALSE
+        namesUpperCase=FALSE
+        namesDefaultCase=TRUE
+        defaultNamesCase=UPPER
+        namesFromCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesToCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-->
+<style>
+		html, body{ height: 100%; }
+	</style>
+</HEAD>
+<BODY>
+<div class="loading"></div>
+<div id="outer">
+<div id="menubar"></div>
+<div class="outermenu">
+<div class="menuliclass">
+<a class="menuaclass" HREF="../summary.html">Overview</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../deprecated-list.html">Deprecated</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../index-list.html">Index</a>
+</div>
+</div>
+<b>DMS - 6-1</b>
+<br>
+<div style="margin-top:60px;">
+<table class="summarytable">
+<tr>
+<td>SUMMARY:</td><td><A HREF="#field_summary">FIELD</A> |</td><td><A HREF="#type_summary">TYPE</A> |</td><td><A HREF="#method_summary">METHOD</A></td>
+</tr>
+<tr>
+<td>DETAIL:</td><td><A HREF="#field_detail">FIELD</A> | </td><td><A HREF="#type_detail">TYPE</A> | </td><td><A HREF="#method_detail">METHOD</A></td>
+</tr>
+</table>
+</div>
+<HR>
+<H2>
+<FONT SIZE="-1">Schema_objects</FONT>
+<BR>Package&nbsp;MS_DMS_INLINE_UPD_PROCESS_SV</H2><br/>
+ ======================================================================<br/>
+ Module: MS_DMS_INLINE_DOC_PROCESS_SV <br/>
+ Description: Methods in this package are used for insertion of the form data to base tables of the DMS for Inline Upversion section Level<br/>
+ Values populated to tables are  MS_DMS_DOC_AUDIT_HISTORY, MS_DMS_DOCUMENTS_HDR, MS_DMS_DOCUMENTS etc
+ ======================================================================<br/>
+<P></P>
+<DL></DL>
+<HR>
+<P></P>
+<A NAME="field_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Field Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_CHREQ_DOC_ACTION_NAME">X_CHREQ_DOC_ACTION_NAME</A></B> CONSTANT := 'Change Request'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_CREATE_DOC_ACTION_NAME">X_CREATE_DOC_ACTION_NAME</A></B> CONSTANT := 'Create Document'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Constants declaration
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(500)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(500)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(500)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_CREATE_DOC_METRIC_NAME">X_CREATE_DOC_METRIC_NAME</A></B> CONSTANT := 'MS_DMS_INLINE_UPDATE_FORM'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(500)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(500)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(500)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_DMS_REVIEW_METRIC_NAME">X_DMS_REVIEW_METRIC_NAME</A></B> CONSTANT := 'MS_DMS_INLINE_REVIEW_DOCUMENT'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_DOC_NOT_READY_FOR_PROCESS">X_DOC_NOT_READY_FOR_PROCESS</A></B> CONSTANT := 'Obsoleted'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#X_LOG_LEVEL">X_LOG_LEVEL</A></B> CONSTANT := 0</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(1)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(1)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(1)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_NORMAL_DOC">X_NORMAL_DOC</A></B> CONSTANT := 'N'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_OBSOL_DOC_ACTION_NAME">X_OBSOL_DOC_ACTION_NAME</A></B> CONSTANT := 'Obsolete Document'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_PROC_DELETE">X_PROC_DELETE</A></B> CONSTANT := 'DELETE'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_PROC_INSERT">X_PROC_INSERT</A></B> CONSTANT := 'INSERT'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_PROC_UPDATE">X_PROC_UPDATE</A></B> CONSTANT := 'UPDATE'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2(50)
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2(50)
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2(50)</CODE></FONT></TD><TD><CODE><B><A HREF="#X_UPDATE_DOC_ACTION_NAME">X_UPDATE_DOC_ACTION_NAME</A></B> CONSTANT := 'UpVersion Document'</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="type_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Type Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_INLINE_UPDATE_FORM_v%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_INLINE_UPDATE_FORM_v%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_INLINE_UPDATE_FORM_v%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#CREATE_DOC_REC_TYPE">CREATE_DOC_REC_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_AUD_REC_TYPE">DOC_AUD_REC_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_DTL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_DTL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_DTL%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_DTL_TYPE">DOC_DTL_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_HDR%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_HDR%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_HDR%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#DOC_HDR_TYPE">DOC_HDR_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#MS_DMS_DOCUMENTS_REC_TYPE">MS_DMS_DOCUMENTS_REC_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Types used in the package body are listed below<br/>
+ Rowtypes are related to our base tables
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=ms_dms_inline_review_docume_v%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=ms_dms_inline_review_docume_v%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->ms_dms_inline_review_docume_v%ROWTYPE</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=0 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><TD><CODE><B><A HREF="#REVIEW_DOC_REC_TYPE">REVIEW_DOC_REC_TYPE</A></B>()</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="method_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=6 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="CONVERT_PUSH_CR_APP_DATA"></A><TD><CODE><B><A HREF="#CONVERT_PUSH_CR_APP_DATA(CREATE_DOC_REC_TYPE,DOC_HDR_TYPE,DOC_AUD_REC_TYPE,VARCHAR2,NUMBER,VARCHAR2)">CONVERT_PUSH_CR_APP_DATA</A></B>(X_CREATE_DOC_TYPE IN OUT CREATE_DOC_REC_TYPE, X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, X_DOC_AUD_REC_TYPE IN OUT DOC_AUD_REC_TYPE, X_INITIAL_VERSION IN VARCHAR2, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       CONVERT_PUSH_CR_APP_DATA method used to initialize the record type variables of base tables of DMS <br/>
+ Through this procedure HDR, Audit_History, HDR table record type variables are initialized
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_CALC_REVIEW_SCHEDULE"></A><TD><CODE><B><A HREF="#MS_DMS_CALC_REVIEW_SCHEDULE(NUMBER,VARCHAR2)">MS_DMS_CALC_REVIEW_SCHEDULE</A></B>(I_SCHEDULE_VALUE IN NUMBER, I_SCHEDULE_PERIOD IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Returns the number of days for the review of the assignment based on schedule value and schedule date <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_INLINE_OBSOLETE_EMAIL"></A><TD><CODE><B><A HREF="#MS_DMS_INLINE_OBSOLETE_EMAIL(MS_DMS_DOCUMENTS_REC_TYPE,VARCHAR2)">MS_DMS_INLINE_OBSOLETE_EMAIL</A></B>(X_MS_DMS_DOCUMENTS_REC_TYPE IN MS_DMS_DOCUMENTS_REC_TYPE, X_CURENT_USER_DOC IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       MS_DMS_INLINE_OBSOLETE_EMAIL method is called sending emails for the obsolete documents <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_INLINE_REF_DOC_EMAIL"></A><TD><CODE><B><A HREF="#MS_DMS_INLINE_REF_DOC_EMAIL(VARCHAR2,NUMBER,VARCHAR2,VARCHAR2)">MS_DMS_INLINE_REF_DOC_EMAIL</A></B>(X_OBJECT_ID IN VARCHAR2, X_PID IN NUMBER, X_UPDATE_DOC_ACTION IN VARCHAR2, X_CURRENT_USER IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       MS_DMS_INLINE_REF_DOC_EMAIL method is used to trigger emails based on the action types choosen <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=1 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_INLINE_REF_DTL_CR"></A><TD><CODE><B><A HREF="#MS_DMS_INLINE_REF_DTL_CR(NUMBER)">MS_DMS_INLINE_REF_DTL_CR</A></B>(X_PROCESS_INSTANCE_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       MS_DMS_INLINE_REF_DTL_CR method is called for Inserting the records to MS_DMS_DOCUMENT_REF_DTL,MS_DMS_DOCUMENT_REF_LNK_DTL table for supporting documents in create form<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=1 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_INLINE_REF_DTL_RV"></A><TD><CODE><B><A HREF="#MS_DMS_INLINE_REF_DTL_RV(NUMBER)">MS_DMS_INLINE_REF_DTL_RV</A></B>(X_PROCESS_INSTANCE_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       MS_DMS_INLINE_REF_DTL_RV method is called for Inserting the records to MS_DMS_DOCUMENT_REF_DTL,MS_DMS_DOCUMENT_REF_LNK_DTL table for supporting documents in review form<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_INLINE_SUPP_DOCS"></A><TD><CODE><B><A HREF="#MS_DMS_INLINE_SUPP_DOCS(NUMBER,VARCHAR2)">MS_DMS_INLINE_SUPP_DOCS</A></B>(X_PROCESS_INSTANCE_ID IN NUMBER, X_VIEW_NAME IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       MS_DMS_INLINE_SUPP_DOCS method is called for updating the supporting documents into the MS_DMS_DOCUMENTS,MS_DMS_ALL_PRODUCTION_DOCS,MS_DMS_DOC_AUDIT_HISTORY tables<br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=1 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_INLINE_UPVERSION_EMAIL"></A><TD><CODE><B><A HREF="#MS_DMS_INLINE_UPVERSION_EMAIL(NUMBER)">MS_DMS_INLINE_UPVERSION_EMAIL</A></B>(X_PID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       MS_DMS_INLINE_UPVERSION_EMAIL method is called sending emails for the upversion/change request documents <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_DMS_INLINE_VERSION_NUM"></A><TD><CODE><B><A HREF="#MS_DMS_INLINE_VERSION_NUM(VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2)">MS_DMS_INLINE_VERSION_NUM</A></B>(X_CURRENT_VERSION IN VARCHAR2, X_APPROVALS IN VARCHAR2, FROM_STAGE IN VARCHAR2, TO_STAGE IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Returns the new calculated version number of the document <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=MS_VARCHAR2_ARRAY
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_VARCHAR2_ARRAY
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_VARCHAR2_ARRAY</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PARSE_STRING"></A><TD><CODE><B><A HREF="#PARSE_STRING(CLOB,VARCHAR2)">PARSE_STRING</A></B>(I_STRING IN CLOB, I_DELIMITER IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       This function is used to split the given string into column values based on the delimiter
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_CREATE_DOCUMENT"></A><TD><CODE><B><A HREF="#PROCESS_CREATE_DOCUMENT(NUMBER,NUMBER,VARCHAR2,VARCHAR2)">PROCESS_CREATE_DOCUMENT</A></B>(X_PROCESS_INSTANCE_ID IN NUMBER, X_ERROR_CODE OUT NUMBER, X_ERROR_MESSAGE OUT VARCHAR2, FROM_STAGE IN VARCHAR2 DEFAULT NULL)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       PROCESS_CREATE_DOCUMENT method is called when MS_DMS_INLINE_UPDATE form is submitted <br/>
+ this stored procedure will be called to populate the record in ms_dms_process_doc_hdr, ms_dms_doc_audit_history <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_DMS_AUDIT_HISTORY"></A><TD><CODE><B><A HREF="#PROCESS_DMS_AUDIT_HISTORY(DOC_AUD_REC_TYPE,NUMBER,VARCHAR2)">PROCESS_DMS_AUDIT_HISTORY</A></B>(X_DOC_AUD_REC_TYPE IN OUT DOC_AUD_REC_TYPE, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       PROCESS_DMS_AUDIT_HISTORY method is called for insert/update the data into MS_DMS_DOC_AUDIT_HISTORY table <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_DOCUMENT_HDR"></A><TD><CODE><B><A HREF="#PROCESS_DOCUMENT_HDR(VARCHAR2,DOC_HDR_TYPE,NUMBER,VARCHAR2)">PROCESS_DOCUMENT_HDR</A></B>(X_MODE IN VARCHAR2, X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       PROCESS_DOCUMENT_HDR method is called for insert/update the data into MS_DMS_DOCUMENTS_HDR table <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=6 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_DOCUMENT_REVIEW"></A><TD><CODE><B><A HREF="#PROCESS_DOCUMENT_REVIEW(NUMBER,VARCHAR2,NUMBER,VARCHAR2,VARCHAR2,VARCHAR2)">PROCESS_DOCUMENT_REVIEW</A></B>(X_PROCESS_INSTANCE_ID IN NUMBER, X_CURRENT_USER IN VARCHAR2, X_ERROR_CODE OUT NUMBER, X_ERROR_MESSAGE OUT VARCHAR2, FROM_STAGE IN VARCHAR2 DEFAULT NULL, TO_STAGE IN VARCHAR2 DEFAULT NULL)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       PROCESS_DOCUMENT_REVIEW method is called for processing form from review to production <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_META_ALL_DOCUMENT"></A><TD><CODE><B><A HREF="#PROCESS_META_ALL_DOCUMENT(VARCHAR2,MS_DMS_DOCUMENTS_REC_TYPE,NUMBER,VARCHAR2)">PROCESS_META_ALL_DOCUMENT</A></B>(X_MODE IN VARCHAR2, X_MS_DMS_DOCUMENTS_REC_TYPE IN OUT MS_DMS_DOCUMENTS_REC_TYPE, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       process_meta_all_document method is called for Inserting/updating the records to ms_dms_all_production_docs table while document moves to production <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=5 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_META_DOCUMENT"></A><TD><CODE><B><A HREF="#PROCESS_META_DOCUMENT(VARCHAR2,MS_DMS_DOCUMENTS_REC_TYPE,NUMBER,VARCHAR2,VARCHAR2)">PROCESS_META_DOCUMENT</A></B>(X_MODE IN VARCHAR2, X_MS_DMS_DOCUMENTS_REC_TYPE IN OUT MS_DMS_DOCUMENTS_REC_TYPE, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2, X_CURRENT_USER_NAME IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       process_meta_document method is called for Inserting/updating the records to ms_dms_documents table while document moves to production <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="PROCESS_SUPPORTING_DOCUMENT"></A><TD><CODE><B><A HREF="#PROCESS_SUPPORTING_DOCUMENT(NUMBER,VARCHAR2)">PROCESS_SUPPORTING_DOCUMENT</A></B>(X_PROCESS_INSTANCE_ID IN NUMBER, X_VIEW_NAME IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       PROCESS_SUPPORTING_DOCUMENT method is used to insert the records into MS_DMS_DOCUMENT_SUP_DTL table while create, review <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=5 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_AUDIT_HISTORY_DET_CR"></A><TD><CODE><B><A HREF="#UPDATE_AUDIT_HISTORY_DET_CR(CREATE_DOC_REC_TYPE,DOC_HDR_TYPE,VARCHAR2,NUMBER,VARCHAR2)">UPDATE_AUDIT_HISTORY_DET_CR</A></B>(X_REVIEW_DOC_REC_TYPE IN OUT CREATE_DOC_REC_TYPE, X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, X_FINAL_STAGE IN VARCHAR2, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       UPDATE_AUDIT_HISTORY_DET_CR method is called for Inserting/updating the records to MS_DMS_DOC_AUDIT_HISTORY table while single stage document moves to production <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=5 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_AUDIT_HISTORY_DETAILS"></A><TD><CODE><B><A HREF="#UPDATE_AUDIT_HISTORY_DETAILS(REVIEW_DOC_REC_TYPE,DOC_HDR_TYPE,VARCHAR2,NUMBER,VARCHAR2)">UPDATE_AUDIT_HISTORY_DETAILS</A></B>(X_REVIEW_DOC_REC_TYPE IN OUT REVIEW_DOC_REC_TYPE, X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, X_FINAL_STAGE IN VARCHAR2, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       UPDATE_AUDIT_HISTORY_DETAILS method is called for Inserting/updating the records to MS_DMS_DOC_AUDIT_HISTORY table while document has different action types <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=6 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_AUDIT_HISTORY_PROD"></A><TD><CODE><B><A HREF="#UPDATE_AUDIT_HISTORY_PROD(DOC_HDR_TYPE,REVIEW_DOC_REC_TYPE,NUMBER,NUMBER,VARCHAR2,VARCHAR2)">UPDATE_AUDIT_HISTORY_PROD</A></B>(X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, X_REVIEW_DOC_REC_TYPE IN OUT REVIEW_DOC_REC_TYPE, X_AUDIT_ID IN OUT NUMBER, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2, X_ACTION_TYPE IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       UPDATE_AUDIT_HISTORY_PROD method is called for Inserting/updating the records to MS_DMS_DOC_AUDIT_HISTORY table while document moves to production <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=6 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_AUDIT_HISTORY_PROD_CR"></A><TD><CODE><B><A HREF="#UPDATE_AUDIT_HISTORY_PROD_CR(DOC_HDR_TYPE,CREATE_DOC_REC_TYPE,NUMBER,NUMBER,VARCHAR2,VARCHAR2)">UPDATE_AUDIT_HISTORY_PROD_CR</A></B>(X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, X_REVIEW_DOC_REC_TYPE IN OUT CREATE_DOC_REC_TYPE, X_AUDIT_ID IN OUT NUMBER, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2, X_ACTION_TYPE IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       UPDATE_AUDIT_HISTORY_PROD_CR method is called for updating the records to MS_DMS_DOC_AUDIT_HISTORY, MS_DMS_DOCUMENTS table while document moves to production <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=6 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UPDATE_DMS_DOCUMENTS"></A><TD><CODE><B><A HREF="#UPDATE_DMS_DOCUMENTS(DOC_HDR_TYPE,NUMBER,NUMBER,VARCHAR2,VARCHAR2,VARCHAR2)">UPDATE_DMS_DOCUMENTS</A></B>(X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, X_LAST_USER_ID IN NUMBER, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2, X_ACTION_TYPE IN VARCHAR2, X_CURRENT_USER IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       update_dms_documents method is called for updating the records to MS_DMS_DOCUMENTS table and in turn it calls the process_meta_document procedure <br/>
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=6 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="UTIL_DMS_DEBUG_LOG"></A><TD><CODE><B><A HREF="#UTIL_DMS_DEBUG_LOG(VARCHAR2,VARCHAR2,NUMBER,NUMBER,NUMBER,VARCHAR2)">UTIL_DMS_DEBUG_LOG</A></B>(X_API_NAME IN VARCHAR2, X_DEBUG_MESSAGE IN VARCHAR2, X_PROCESS_INSTANCE_ID IN NUMBER, X_INSTANCE_ID IN NUMBER, X_ERROR_TYPE IN NUMBER, STATEMENT_ID IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Deprecated.</B>&nbsp;<I>This method is deprecated as we have MS_DMS_ERR_LOGS_PKG package for debug/error logging</I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="VALIDATE_FOR_CREATE_DOC"></A><TD><CODE><B><A HREF="#VALIDATE_FOR_CREATE_DOC(CREATE_DOC_REC_TYPE,NUMBER,VARCHAR2)">VALIDATE_FOR_CREATE_DOC</A></B>(X_CREATE_DOC_TYPE IN OUT CREATE_DOC_REC_TYPE, X_ERROR_CODE IN OUT NUMBER, X_ERROR_MESSAGE IN OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       VALIDATE_FOR_CREATE_DOC method determines the document is in production or in process <br/>
+</TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="trigger_summary"></A><A NAME="field_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Field Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="X_CHREQ_DOC_ACTION_NAME"></A>
+<H3>X_CHREQ_DOC_ACTION_NAME</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_CHREQ_DOC_ACTION_NAME</B> CONSTANT := 'Change Request'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_CREATE_DOC_ACTION_NAME"></A>
+<H3>X_CREATE_DOC_ACTION_NAME</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_CREATE_DOC_ACTION_NAME</B> CONSTANT := 'Create Document'</PRE>
+<DL>
+<DD>Constants declaration
+</DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_CREATE_DOC_METRIC_NAME"></A>
+<H3>X_CREATE_DOC_METRIC_NAME</H3>
+<PRE>
+        public VARCHAR2(500) <B>X_CREATE_DOC_METRIC_NAME</B> CONSTANT := 'MS_DMS_INLINE_UPDATE_FORM'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_DMS_REVIEW_METRIC_NAME"></A>
+<H3>X_DMS_REVIEW_METRIC_NAME</H3>
+<PRE>
+        public VARCHAR2(500) <B>X_DMS_REVIEW_METRIC_NAME</B> CONSTANT := 'MS_DMS_INLINE_REVIEW_DOCUMENT'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_DOC_NOT_READY_FOR_PROCESS"></A>
+<H3>X_DOC_NOT_READY_FOR_PROCESS</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_DOC_NOT_READY_FOR_PROCESS</B> CONSTANT := 'Obsoleted'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_LOG_LEVEL"></A>
+<H3>X_LOG_LEVEL</H3>
+<PRE>
+        public NUMBER <B>X_LOG_LEVEL</B> CONSTANT := 0</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_NORMAL_DOC"></A>
+<H3>X_NORMAL_DOC</H3>
+<PRE>
+        public VARCHAR2(1) <B>X_NORMAL_DOC</B> CONSTANT := 'N'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_OBSOL_DOC_ACTION_NAME"></A>
+<H3>X_OBSOL_DOC_ACTION_NAME</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_OBSOL_DOC_ACTION_NAME</B> CONSTANT := 'Obsolete Document'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_PROC_DELETE"></A>
+<H3>X_PROC_DELETE</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_PROC_DELETE</B> CONSTANT := 'DELETE'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_PROC_INSERT"></A>
+<H3>X_PROC_INSERT</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_PROC_INSERT</B> CONSTANT := 'INSERT'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_PROC_UPDATE"></A>
+<H3>X_PROC_UPDATE</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_PROC_UPDATE</B> CONSTANT := 'UPDATE'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="X_UPDATE_DOC_ACTION_NAME"></A>
+<H3>X_UPDATE_DOC_ACTION_NAME</H3>
+<PRE>
+        public VARCHAR2(50) <B>X_UPDATE_DOC_ACTION_NAME</B> CONSTANT := 'UpVersion Document'</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="type_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Type Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="CREATE_DOC_REC_TYPE"></A>
+<H3>CREATE_DOC_REC_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_INLINE_UPDATE_FORM_v%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_INLINE_UPDATE_FORM_v%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_INLINE_UPDATE_FORM_v%ROWTYPE <B>CREATE_DOC_REC_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_AUD_REC_TYPE"></A>
+<H3>DOC_AUD_REC_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOC_AUDIT_HISTORY%ROWTYPE <B>DOC_AUD_REC_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_DTL_TYPE"></A>
+<H3>DOC_DTL_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_DTL%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_DTL%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_DTL%ROWTYPE <B>DOC_DTL_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="DOC_HDR_TYPE"></A>
+<H3>DOC_HDR_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS_HDR%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS_HDR%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS_HDR%ROWTYPE <B>DOC_HDR_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_DOCUMENTS_REC_TYPE"></A>
+<H3>MS_DMS_DOCUMENTS_REC_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_DMS_DOCUMENTS%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_DMS_DOCUMENTS%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_DMS_DOCUMENTS%ROWTYPE <B>MS_DMS_DOCUMENTS_REC_TYPE</B>()</PRE>
+<DL>
+<DD> Types used in the package body are listed below<br/>
+ Rowtypes are related to our base tables
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="REVIEW_DOC_REC_TYPE"></A>
+<H3>REVIEW_DOC_REC_TYPE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=ms_dms_inline_review_docume_v%ROWTYPE
+       localTypeName=
+       schema=Schema_objects
+       fieldType=ms_dms_inline_review_docume_v%ROWTYPE
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->ms_dms_inline_review_docume_v%ROWTYPE <B>REVIEW_DOC_REC_TYPE</B>()</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="method_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="CONVERT_PUSH_CR_APP_DATA(CREATE_DOC_REC_TYPE,DOC_HDR_TYPE,DOC_AUD_REC_TYPE,VARCHAR2,NUMBER,VARCHAR2)"></A>
+<H3>CONVERT_PUSH_CR_APP_DATA</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>CONVERT_PUSH_CR_APP_DATA</B>(X_CREATE_DOC_TYPE IN OUT CREATE_DOC_REC_TYPE, <BR>                                 X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, <BR>                                 X_DOC_AUD_REC_TYPE IN OUT DOC_AUD_REC_TYPE, <BR>                                 X_INITIAL_VERSION IN VARCHAR2, <BR>                                 X_ERROR_CODE IN OUT NUMBER, <BR>                                 X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> CONVERT_PUSH_CR_APP_DATA method used to initialize the record type variables of base tables of DMS <br/>
+ Through this procedure HDR, Audit_History, HDR table record type variables are initialized
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_CREATE_DOC_TYPE</CODE> -
+              Record type variable for the MS_DMS_INLINE_CREATE_DOCMUN_V</DD>
+<DD>
+<CODE>X_DOC_HDR_TYPE</CODE> -
+              Record type variable for the ms_dms_documents_hdr</DD>
+<DD>
+<CODE>X_DOC_AUD_REC_TYPE</CODE> -
+              Record type variable for the ms_dms_doc_audit_history</DD>
+<DD>
+<CODE>X_INITIAL_VERSION</CODE> -
+              Version number of the document</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_CALC_REVIEW_SCHEDULE(NUMBER,VARCHAR2)"></A>
+<H3>MS_DMS_CALC_REVIEW_SCHEDULE</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->NUMBER <B>MS_DMS_CALC_REVIEW_SCHEDULE</B>(I_SCHEDULE_VALUE IN NUMBER, <BR>                                          I_SCHEDULE_PERIOD IN VARCHAR2)</PRE>
+<DL>
+<DD> Returns the number of days for the review of the assignment based on schedule value and schedule date <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>I_SCHEDULE_VALUE</CODE> -
+              schedule_value will have values like 1,2,3 etc</DD>
+<DD>
+<CODE>I_SCHEDULE_PERIOD</CODE> -
+              schedule_period will have values like "Days", "Months", "Years" etc</DD>
+</DT>
+<DT>Returns:
+          <DD>Days Possible value of the return is the number of days <br/>
+ ERROR indicating unexpected errors in ms_dms_calc_review_schedule  evaluation<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_INLINE_OBSOLETE_EMAIL(MS_DMS_DOCUMENTS_REC_TYPE,VARCHAR2)"></A>
+<H3>MS_DMS_INLINE_OBSOLETE_EMAIL</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>MS_DMS_INLINE_OBSOLETE_EMAIL</B>(X_MS_DMS_DOCUMENTS_REC_TYPE IN MS_DMS_DOCUMENTS_REC_TYPE, <BR>                                     X_CURENT_USER_DOC IN VARCHAR2)</PRE>
+<DL>
+<DD> MS_DMS_INLINE_OBSOLETE_EMAIL method is called sending emails for the obsolete documents <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_MS_DMS_DOCUMENTS_REC_TYPE</CODE> -
+              Process_Instance_id of the document</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_INLINE_REF_DOC_EMAIL(VARCHAR2,NUMBER,VARCHAR2,VARCHAR2)"></A>
+<H3>MS_DMS_INLINE_REF_DOC_EMAIL</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>MS_DMS_INLINE_REF_DOC_EMAIL</B>(X_OBJECT_ID IN VARCHAR2, <BR>                                    X_PID IN NUMBER, <BR>                                    X_UPDATE_DOC_ACTION IN VARCHAR2, <BR>                                    X_CURRENT_USER IN VARCHAR2)</PRE>
+<DL>
+<DD> MS_DMS_INLINE_REF_DOC_EMAIL method is used to trigger emails based on the action types choosen <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_OBJECT_ID</CODE> -
+              Document Object Id of the document</DD>
+<DD>
+<CODE>X_PID</CODE> -
+              Process_Instance_id of the document</DD>
+<DD>
+<CODE>X_UPDATE_DOC_ACTION</CODE> -
+              Action type selected while submit of the document</DD>
+<DD>
+<CODE>X_CURRENT_USER</CODE> -
+              Submitted User or the current user</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_INLINE_REF_DTL_CR(NUMBER)"></A>
+<H3>MS_DMS_INLINE_REF_DTL_CR</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>MS_DMS_INLINE_REF_DTL_CR</B>(X_PROCESS_INSTANCE_ID IN NUMBER)</PRE>
+<DL>
+<DD> MS_DMS_INLINE_REF_DTL_CR method is called for Inserting the records to MS_DMS_DOCUMENT_REF_DTL,MS_DMS_DOCUMENT_REF_LNK_DTL table for supporting documents in create form<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_PROCESS_INSTANCE_ID</CODE> -
+              Process_Instance_id of the document</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_INLINE_REF_DTL_RV(NUMBER)"></A>
+<H3>MS_DMS_INLINE_REF_DTL_RV</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>MS_DMS_INLINE_REF_DTL_RV</B>(X_PROCESS_INSTANCE_ID IN NUMBER)</PRE>
+<DL>
+<DD> MS_DMS_INLINE_REF_DTL_RV method is called for Inserting the records to MS_DMS_DOCUMENT_REF_DTL,MS_DMS_DOCUMENT_REF_LNK_DTL table for supporting documents in review form<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_PROCESS_INSTANCE_ID</CODE> -
+              Process_Instance_id of the document</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_INLINE_SUPP_DOCS(NUMBER,VARCHAR2)"></A>
+<H3>MS_DMS_INLINE_SUPP_DOCS</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>MS_DMS_INLINE_SUPP_DOCS</B>(X_PROCESS_INSTANCE_ID IN NUMBER, <BR>                                X_VIEW_NAME IN VARCHAR2)</PRE>
+<DL>
+<DD> MS_DMS_INLINE_SUPP_DOCS method is called for updating the supporting documents into the MS_DMS_DOCUMENTS,MS_DMS_ALL_PRODUCTION_DOCS,MS_DMS_DOC_AUDIT_HISTORY tables<br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_PROCESS_INSTANCE_ID</CODE> -
+              Process_Instance_id of the document</DD>
+<DD>
+<CODE>X_VIEW_NAME</CODE> -
+              View name which is passed as input</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_INLINE_UPVERSION_EMAIL(NUMBER)"></A>
+<H3>MS_DMS_INLINE_UPVERSION_EMAIL</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>MS_DMS_INLINE_UPVERSION_EMAIL</B>(X_PID IN NUMBER)</PRE>
+<DL>
+<DD> MS_DMS_INLINE_UPVERSION_EMAIL method is called sending emails for the upversion/change request documents <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_PID</CODE> -
+              Process_Instance_id of the document</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_DMS_INLINE_VERSION_NUM(VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2)"></A>
+<H3>MS_DMS_INLINE_VERSION_NUM</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>MS_DMS_INLINE_VERSION_NUM</B>(X_CURRENT_VERSION IN VARCHAR2, <BR>                                          X_APPROVALS IN VARCHAR2, <BR>                                          FROM_STAGE IN VARCHAR2, <BR>                                          TO_STAGE IN VARCHAR2)</PRE>
+<DL>
+<DD> Returns the new calculated version number of the document <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_CURRENT_VERSION</CODE> -
+              Current version number of the document</DD>
+<DD>
+<CODE>X_APPROVALS</CODE> -
+              Approval type of the document</DD>
+<DD>
+<CODE>FROM_STAGE</CODE> -
+              From Stage of the document</DD>
+<DD>
+<CODE>TO_STAGE</CODE> -
+              To Stage of the document</DD>
+</DT>
+<DT>Returns:
+          <DD>Version_Number  Possible value of the return is the version number <br/>
+ ERROR indicating unexpected errors in MS_DMS_INLINE_VERSION_NUM  evaluation<br/></DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PARSE_STRING(CLOB,VARCHAR2)"></A>
+<H3>PARSE_STRING</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=MS_VARCHAR2_ARRAY
+       localTypeName=
+       schema=Schema_objects
+       fieldType=MS_VARCHAR2_ARRAY
+       synonymsFile=,,--><!--GenerateTypeLink: default reached-->MS_VARCHAR2_ARRAY <B>PARSE_STRING</B>(I_STRING IN CLOB, <BR>                                      I_DELIMITER IN VARCHAR2)</PRE>
+<DL>
+<DD> This function is used to split the given string into column values based on the delimiter
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>I_STRING</CODE> -
+              string to be split</DD>
+<DD>
+<CODE>I_DELIMITER</CODE> -
+              delimiter used to split the string</DD>
+</DT>
+<DT>Returns:
+          <DD>split_tbl is the collection of splitted values</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_CREATE_DOCUMENT(NUMBER,NUMBER,VARCHAR2,VARCHAR2)"></A>
+<H3>PROCESS_CREATE_DOCUMENT</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PROCESS_CREATE_DOCUMENT</B>(X_PROCESS_INSTANCE_ID IN NUMBER, <BR>                                X_ERROR_CODE OUT NUMBER, <BR>                                X_ERROR_MESSAGE OUT VARCHAR2, <BR>                                FROM_STAGE IN VARCHAR2 DEFAULT NULL)</PRE>
+<DL>
+<DD> PROCESS_CREATE_DOCUMENT method is called when MS_DMS_INLINE_UPDATE form is submitted <br/>
+ this stored procedure will be called to populate the record in ms_dms_process_doc_hdr, ms_dms_doc_audit_history <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_PROCESS_INSTANCE_ID</CODE> -
+              process_instance_id of the form submitted</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+<DD>
+<CODE>FROM_STAGE</CODE> -
+              Determines the from stage of the assignment</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_DMS_AUDIT_HISTORY(DOC_AUD_REC_TYPE,NUMBER,VARCHAR2)"></A>
+<H3>PROCESS_DMS_AUDIT_HISTORY</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PROCESS_DMS_AUDIT_HISTORY</B>(X_DOC_AUD_REC_TYPE IN OUT DOC_AUD_REC_TYPE, <BR>                                  X_ERROR_CODE IN OUT NUMBER, <BR>                                  X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> PROCESS_DMS_AUDIT_HISTORY method is called for insert/update the data into MS_DMS_DOC_AUDIT_HISTORY table <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_DOC_AUD_REC_TYPE</CODE> -
+              Record type of audit history table in and out parameter</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_DOCUMENT_HDR(VARCHAR2,DOC_HDR_TYPE,NUMBER,VARCHAR2)"></A>
+<H3>PROCESS_DOCUMENT_HDR</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PROCESS_DOCUMENT_HDR</B>(X_MODE IN VARCHAR2, <BR>                             X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, <BR>                             X_ERROR_CODE IN OUT NUMBER, <BR>                             X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> PROCESS_DOCUMENT_HDR method is called for insert/update the data into MS_DMS_DOCUMENTS_HDR table <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_MODE</CODE> -
+              Determines the operation Insert or Update</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_DOCUMENT_REVIEW(NUMBER,VARCHAR2,NUMBER,VARCHAR2,VARCHAR2,VARCHAR2)"></A>
+<H3>PROCESS_DOCUMENT_REVIEW</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PROCESS_DOCUMENT_REVIEW</B>(X_PROCESS_INSTANCE_ID IN NUMBER, <BR>                                X_CURRENT_USER IN VARCHAR2, <BR>                                X_ERROR_CODE OUT NUMBER, <BR>                                X_ERROR_MESSAGE OUT VARCHAR2, <BR>                                FROM_STAGE IN VARCHAR2 DEFAULT NULL, <BR>                                TO_STAGE IN VARCHAR2 DEFAULT NULL)</PRE>
+<DL>
+<DD> PROCESS_DOCUMENT_REVIEW method is called for processing form from review to production <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_PROCESS_INSTANCE_ID</CODE> -
+              Process Instance Id of the document</DD>
+<DD>
+<CODE>X_CURRENT_USER</CODE> -
+              Submitted user or the logged in user of the assignment</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+<DD>
+<CODE>FROM_STAGE</CODE> -
+              Determines the from stage of the assignment</DD>
+<DD>
+<CODE>TO_STAGE</CODE> -
+              Determines the to stage of the assignment</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_META_ALL_DOCUMENT(VARCHAR2,MS_DMS_DOCUMENTS_REC_TYPE,NUMBER,VARCHAR2)"></A>
+<H3>PROCESS_META_ALL_DOCUMENT</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PROCESS_META_ALL_DOCUMENT</B>(X_MODE IN VARCHAR2, <BR>                                  X_MS_DMS_DOCUMENTS_REC_TYPE IN OUT MS_DMS_DOCUMENTS_REC_TYPE, <BR>                                  X_ERROR_CODE IN OUT NUMBER, <BR>                                  X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> process_meta_all_document method is called for Inserting/updating the records to ms_dms_all_production_docs table while document moves to production <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_MODE</CODE> -
+              Determines the operation Insert or Update</DD>
+<DD>
+<CODE>X_MS_DMS_DOCUMENTS_REC_TYPE</CODE> -
+              Record type of MS_DMS_DOCUMENTS table in and out parameter</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_META_DOCUMENT(VARCHAR2,MS_DMS_DOCUMENTS_REC_TYPE,NUMBER,VARCHAR2,VARCHAR2)"></A>
+<H3>PROCESS_META_DOCUMENT</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PROCESS_META_DOCUMENT</B>(X_MODE IN VARCHAR2, <BR>                              X_MS_DMS_DOCUMENTS_REC_TYPE IN OUT MS_DMS_DOCUMENTS_REC_TYPE, <BR>                              X_ERROR_CODE IN OUT NUMBER, <BR>                              X_ERROR_MESSAGE IN OUT VARCHAR2, <BR>                              X_CURRENT_USER_NAME IN VARCHAR2)</PRE>
+<DL>
+<DD> process_meta_document method is called for Inserting/updating the records to ms_dms_documents table while document moves to production <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_MODE</CODE> -
+              Determines the operation Insert or Update</DD>
+<DD>
+<CODE>X_MS_DMS_DOCUMENTS_REC_TYPE</CODE> -
+              Record type of MS_DMS_DOCUMENTS table in and out parameter</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+<DD>
+<CODE>X_CURRENT_USER_NAME</CODE> -
+              Current user name or the submitted user name</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="PROCESS_SUPPORTING_DOCUMENT(NUMBER,VARCHAR2)"></A>
+<H3>PROCESS_SUPPORTING_DOCUMENT</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>PROCESS_SUPPORTING_DOCUMENT</B>(X_PROCESS_INSTANCE_ID IN NUMBER, <BR>                                    X_VIEW_NAME IN VARCHAR2)</PRE>
+<DL>
+<DD> PROCESS_SUPPORTING_DOCUMENT method is used to insert the records into MS_DMS_DOCUMENT_SUP_DTL table while create, review <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_PROCESS_INSTANCE_ID</CODE> -
+              Process_Instance_id of the document</DD>
+<DD>
+<CODE>X_VIEW_NAME</CODE> -
+              View name Might be create, review, update view</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_AUDIT_HISTORY_DET_CR(CREATE_DOC_REC_TYPE,DOC_HDR_TYPE,VARCHAR2,NUMBER,VARCHAR2)"></A>
+<H3>UPDATE_AUDIT_HISTORY_DET_CR</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_AUDIT_HISTORY_DET_CR</B>(X_REVIEW_DOC_REC_TYPE IN OUT CREATE_DOC_REC_TYPE, <BR>                                    X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, <BR>                                    X_FINAL_STAGE IN VARCHAR2, <BR>                                    X_ERROR_CODE IN OUT NUMBER, <BR>                                    X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> UPDATE_AUDIT_HISTORY_DET_CR method is called for Inserting/updating the records to MS_DMS_DOC_AUDIT_HISTORY table while single stage document moves to production <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_REVIEW_DOC_REC_TYPE</CODE> -
+              MS_DMS_INLINE_REVIEW_DOCUME_V view row type declaration</DD>
+<DD>
+<CODE>X_DOC_HDR_TYPE</CODE> -
+              MS_DMS_DOCUMENTS_HDR row type declaration</DD>
+<DD>
+<CODE>X_FINAL_STAGE</CODE> -
+              Flag to determine the document final stage</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_AUDIT_HISTORY_DETAILS(REVIEW_DOC_REC_TYPE,DOC_HDR_TYPE,VARCHAR2,NUMBER,VARCHAR2)"></A>
+<H3>UPDATE_AUDIT_HISTORY_DETAILS</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_AUDIT_HISTORY_DETAILS</B>(X_REVIEW_DOC_REC_TYPE IN OUT REVIEW_DOC_REC_TYPE, <BR>                                     X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, <BR>                                     X_FINAL_STAGE IN VARCHAR2, <BR>                                     X_ERROR_CODE IN OUT NUMBER, <BR>                                     X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> UPDATE_AUDIT_HISTORY_DETAILS method is called for Inserting/updating the records to MS_DMS_DOC_AUDIT_HISTORY table while document has different action types <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_REVIEW_DOC_REC_TYPE</CODE> -
+              MS_DMS_INLINE_REVIEW_DOCUME_V view row type declaration</DD>
+<DD>
+<CODE>X_DOC_HDR_TYPE</CODE> -
+              MS_DMS_DOCUMENTS_HDR row type declaration</DD>
+<DD>
+<CODE>X_FINAL_STAGE</CODE> -
+              Flag to determine the document final stage</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_AUDIT_HISTORY_PROD(DOC_HDR_TYPE,REVIEW_DOC_REC_TYPE,NUMBER,NUMBER,VARCHAR2,VARCHAR2)"></A>
+<H3>UPDATE_AUDIT_HISTORY_PROD</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_AUDIT_HISTORY_PROD</B>(X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, <BR>                                  X_REVIEW_DOC_REC_TYPE IN OUT REVIEW_DOC_REC_TYPE, <BR>                                  X_AUDIT_ID IN OUT NUMBER, <BR>                                  X_ERROR_CODE IN OUT NUMBER, <BR>                                  X_ERROR_MESSAGE IN OUT VARCHAR2, <BR>                                  X_ACTION_TYPE IN VARCHAR2)</PRE>
+<DL>
+<DD> UPDATE_AUDIT_HISTORY_PROD method is called for Inserting/updating the records to MS_DMS_DOC_AUDIT_HISTORY table while document moves to production <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_DOC_HDR_TYPE</CODE> -
+              MS_DMS_DOCUMENTS_HDR row type declaration</DD>
+<DD>
+<CODE>X_REVIEW_DOC_REC_TYPE</CODE> -
+              MS_DMS_INLINE_REVIEW_DOCUME_V view row type declaration</DD>
+<DD>
+<CODE>X_AUDIT_ID</CODE> -
+              Audit ID of the document</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+<DD>
+<CODE>X_ACTION_TYPE</CODE> -
+              Action type selected while form submission</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_AUDIT_HISTORY_PROD_CR(DOC_HDR_TYPE,CREATE_DOC_REC_TYPE,NUMBER,NUMBER,VARCHAR2,VARCHAR2)"></A>
+<H3>UPDATE_AUDIT_HISTORY_PROD_CR</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_AUDIT_HISTORY_PROD_CR</B>(X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, <BR>                                     X_REVIEW_DOC_REC_TYPE IN OUT CREATE_DOC_REC_TYPE, <BR>                                     X_AUDIT_ID IN OUT NUMBER, <BR>                                     X_ERROR_CODE IN OUT NUMBER, <BR>                                     X_ERROR_MESSAGE IN OUT VARCHAR2, <BR>                                     X_ACTION_TYPE IN VARCHAR2)</PRE>
+<DL>
+<DD> UPDATE_AUDIT_HISTORY_PROD_CR method is called for updating the records to MS_DMS_DOC_AUDIT_HISTORY, MS_DMS_DOCUMENTS table while document moves to production <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_DOC_HDR_TYPE</CODE> -
+              MS_DMS_DOCUMENTS_HDR row type declaration</DD>
+<DD>
+<CODE>X_REVIEW_DOC_REC_TYPE</CODE> -
+              MS_DMS_INLINE_REVIEW_DOCUME_V view row type declaration</DD>
+<DD>
+<CODE>X_AUDIT_ID</CODE> -
+              Audit ID of the document</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+<DD>
+<CODE>X_ACTION_TYPE</CODE> -
+              Action type selected while form submission</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UPDATE_DMS_DOCUMENTS(DOC_HDR_TYPE,NUMBER,NUMBER,VARCHAR2,VARCHAR2,VARCHAR2)"></A>
+<H3>UPDATE_DMS_DOCUMENTS</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UPDATE_DMS_DOCUMENTS</B>(X_DOC_HDR_TYPE IN OUT DOC_HDR_TYPE, <BR>                             X_LAST_USER_ID IN NUMBER, <BR>                             X_ERROR_CODE IN OUT NUMBER, <BR>                             X_ERROR_MESSAGE IN OUT VARCHAR2, <BR>                             X_ACTION_TYPE IN VARCHAR2, <BR>                             X_CURRENT_USER IN VARCHAR2)</PRE>
+<DL>
+<DD> update_dms_documents method is called for updating the records to MS_DMS_DOCUMENTS table and in turn it calls the process_meta_document procedure <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_DOC_HDR_TYPE</CODE> -
+              MS_DMS_DOCUMENTS_HDR row type</DD>
+<DD>
+<CODE>X_LAST_USER_ID</CODE> -
+              last Submitted user of user of the assignment</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+<DD>
+<CODE>X_ACTION_TYPE</CODE> -
+              action type choosen for the document</DD>
+<DD>
+<CODE>X_CURRENT_USER</CODE> -
+              Current user name</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="UTIL_DMS_DEBUG_LOG(VARCHAR2,VARCHAR2,NUMBER,NUMBER,NUMBER,VARCHAR2)"></A>
+<H3>UTIL_DMS_DEBUG_LOG</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>UTIL_DMS_DEBUG_LOG</B>(X_API_NAME IN VARCHAR2, <BR>                           X_DEBUG_MESSAGE IN VARCHAR2, <BR>                           X_PROCESS_INSTANCE_ID IN NUMBER, <BR>                           X_INSTANCE_ID IN NUMBER, <BR>                           X_ERROR_TYPE IN NUMBER, <BR>                           STATEMENT_ID IN VARCHAR2)</PRE>
+<DL>
+<DD> UTIL_DMS_DEBUG_LOG method is called for logging debug messages to MS_DMS_ERROR_LOGS table <br/>
+</DD>
+<DD>
+<DL></DL>
+</DD>
+<P></P>
+<DL>
+<DT>Deprecated:</DT>
+<DD>This method is deprecated as we have MS_DMS_ERR_LOGS_PKG package for debug/error logging</DD>
+<P></P>
+</DL>
+</DL>
+<HR>
+<A NAME="VALIDATE_FOR_CREATE_DOC(CREATE_DOC_REC_TYPE,NUMBER,VARCHAR2)"></A>
+<H3>VALIDATE_FOR_CREATE_DOC</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,,--><!--GenerateTypeLink: default reached--> <B>VALIDATE_FOR_CREATE_DOC</B>(X_CREATE_DOC_TYPE IN OUT CREATE_DOC_REC_TYPE, <BR>                                X_ERROR_CODE IN OUT NUMBER, <BR>                                X_ERROR_MESSAGE IN OUT VARCHAR2)</PRE>
+<DL>
+<DD> VALIDATE_FOR_CREATE_DOC method determines the document is in production or in process <br/>
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>X_CREATE_DOC_TYPE</CODE> -
+              Record type for the MS_DMS_INLINE_CREATE_DOCMUN_V view</DD>
+<DD>
+<CODE>X_ERROR_CODE</CODE> -
+              0 for success non-zero for error</DD>
+<DD>
+<CODE>X_ERROR_MESSAGE</CODE> -
+              Error message parameter , in case of exceptions and errors</DD>
+</DT>
+</DL>
+</DD>
+<P></P>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="trigger_detail"></A><script src="../js/jquery.mCustomScrollbar.concat.min.js"></script><script>
+		(function($){
+			$(window).load(function(){
+				$("#outer").addClass('loader');	
+				$(".loading").fadeOut("slow");	
+				$("body").mCustomScrollbar({
+					theme:"rounded-dots-dark",
+					mouseWheel:{ scrollAmount: "300px" }
+				});
+				
+			});
+		})(jQuery);
+	</script>
+</div>
+</BODY>
+</HTML>
