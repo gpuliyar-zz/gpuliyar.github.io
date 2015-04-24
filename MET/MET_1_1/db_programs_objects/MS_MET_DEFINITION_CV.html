@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_MET_DEFINITION_CV">MS_MET_DEFINITION_CV</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "METRICS_DEV"."MS_MET_DEFINITION_CV" ("ORB_REL_SOURCE_ID", "STAKE_HOLDERS", "ATI_OBJECT_ID", "TYPE_OF_OWNER", "PTOA_INPUT", "ATO_ORB_TEMP", "ORB_KEY_RISK", "NATURE_OF_RELATIONSHIP", "NATURE_OF_REL_PTOA", "CAUSE_CONSEQUENCE", "TEMP_FIELD_OBJ_ID", "ORB_RPT_NAME", "ATI_ASSESSED_ORG_TEMP", "ATI_ASSEMENT_FOR", "ATI_ASSESSED_ORGS", "OBJECT_ID", "ADDITIONAL_COLUMN5", "ADDITIONAL_COLUMN4", "ORB_FORM_URL", "ADDITIONAL_DETAILS_WITH_ID", "ATTRIBUTE_COLUMN_H2", "ATTRIBUTE_COLUMN_H3", "ADDITIONAL_COLUMN_H1", "OBJ_STATUS", "ADDITIONAL_COLUMN3", "ADDITIONAL_COLUMN2", "ADDITIONAL_COLUMN1", "ADDITIONAL_DETAILS", "APPLICABLE_TO", "ROW_NUM", "TGT_OBJ_TYPE", "SELF_REL_TYPE", "PARENT_REL_INST_ID", "REL_COMMENTS", "REL_VALID_UNTIL", "REL_VALID_FROM", "TGT_OBJ_ID", "TGT_OBJ_NAME", "REL_CONFIG_ID", "REL_INST_ID", "ASSOCIATED_WITH_TYPE", "CONFIGURED_OBJECT_TYPES", "REL_SOURCE_OBJECT_ID", "REL_SOURCE_ID", "FREQUENCY", "CHECK_USER_AVAIL", "OBJ_CURRENCY", "ATI_MOVING_THRESHOLD", "RTO_COMMENTS", "RELATED_CONTROLS_COMMENTS", "RELATED_OBJECTS_COMMENTS", "RELATED_RISK_COMMENTS", "RELATED_ORGANIZATIONS", "RISK_CATEGORY", "OBJECT_NAME", "OWNER_ORGANIZATIONS", "RELATED_RISKS", "RELATED_CONTROLS", "RELATED_CORE_OBJECTS", "OBJ_MOVING_THRESHOLD", "MANUAL_ENTRY_AUTOMATED", "OWN_APP_CONFIG_TEMP", "OWN_APP_CONFIG", "OBJ_MODIFIED_ON", "OBJ_MODIFIED_BY", "OBJ_CREATED_ON", "OBJ_STATUS_TEMP", "OBJ_CREATED_BY", "OWNERS", "ATI_OBJECT_ID_PK", "ATI_MANUAL_ENTRY_AUTOMATED", "ATI_OBJ_ID", "CRITICAL_DROPPING_ORGS", "NON_CRITICAL_DROPING_ORGS", "ATI_EXPECTED_VALUE", "NON_CRITICAL_RISING_ORGS", "CRITICAL_RISING_ORGS", "ATI_APPROVER", "ATI_ORGANIZATION_NAME", "ATI_OWNER", "ATI_NAME", "RTF_ATTACH", "NEXT_SCHEDULED_DATE", "RESTRICT_ACCESS_TO", "RISING_DROPPING_INDICATOR", "VALID_FROM", "VALID_UNTIL", "LEADING_TRAILING_INDICATOR", "LEVEL_1_APPROVER", "LEVEL_2_APPROVER", "NON_CRITICAL_DROPPING", "NON_CRITICAL_RISING", "OBJECT_ACTION", "CRITICAL_DROPPING", "CRITICAL_RISING", "DESCRIPTION", "DUE_BY", "EXPECTED_VALUE", "INDICATOR_MEASUREMENT", "KPI_KRI_FLAG", "ACTION_COMMENTS", "APPROVE_ALL_MANUAL_KPI_KRI", "ASSEMENT_FOR", "ATTACH_FILES", "DD_PROCESS_CODE", "DD_CURRENT_STAGE", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_CURRENT_USER_NAME", "DD_OBJECT_TYPE", "INSTANCE_REC_NUM", "INSTANCE_ID", "METRIC_ID", "METRIC_RUN_DATE", "METRIC_COMPLETED_DATE", "LATEST_FLAG", "CREATED_BY", "CREATION_DATE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "MULTIROW_GROUP_NAME", "ELECTRONICALLY_SIGNED", "MULTIROW_REGION_ID", "DESCRIPTION_HTM", "CREATED_BY_HIDDEN", "MODIF_REQ_BY_HIDDEN", "LOCALE_ID", "LOCALE_STRING") AS 
+  SELECT "ORB_REL_SOURCE_ID",
+    ms_met_utilities.fn_get_users_by_id(STAKE_HOLDERS) "STAKE_HOLDERS",
+    "ATI_OBJECT_ID",
+    "TYPE_OF_OWNER",
+    "PTOA_INPUT",
+    "ATO_ORB_TEMP",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET Yes No', ORB_KEY_RISK, 1, locale_id) "ORB_KEY_RISK",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS_MET_Nature_of_Relationship', NATURE_OF_RELATIONSHIP, 1, locale_id) "NATURE_OF_RELATIONSHIP",
+    "NATURE_OF_REL_PTOA",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS_MET_Nature_of_Relationship', CAUSE_CONSEQUENCE, 1, locale_id) "CAUSE_CONSEQUENCE",
+    "TEMP_FIELD_OBJ_ID",
+    "ORB_RPT_NAME",
+    "ATI_ASSESSED_ORG_TEMP",
+    "ATI_ASSEMENT_FOR",
+    ms_apps_utilities.get_display_values ( ms_met_utilities.active_ent_id, 'ORGENTITY', ATI_ASSESSED_ORGS, ',' ) ATI_ASSESSED_ORGS,
+    "OBJECT_ID",
+    "ADDITIONAL_COLUMN5",
+    "ADDITIONAL_COLUMN4",
+    "ORB_FORM_URL",
+    "ADDITIONAL_DETAILS_WITH_ID",
+    "ATTRIBUTE_COLUMN_H2",
+    "ATTRIBUTE_COLUMN_H3",
+    "ADDITIONAL_COLUMN_H1",
+    ms_met_utilities.get_status_name (dd_current_user_name, obj_status) "OBJ_STATUS",
+    "ADDITIONAL_COLUMN3",
+    "ADDITIONAL_COLUMN2",
+    "ADDITIONAL_COLUMN1",
+    "ADDITIONAL_DETAILS",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS_MET_Core_Object_ATO_Applies_To', APPLICABLE_TO, 1, locale_id) "APPLICABLE_TO",
+    "ROW_NUM",
+    "TGT_OBJ_TYPE",
+    "SELF_REL_TYPE",
+    "PARENT_REL_INST_ID",
+    "REL_COMMENTS",
+    "REL_VALID_UNTIL",
+    "REL_VALID_FROM",
+    "TGT_OBJ_ID",
+    "TGT_OBJ_NAME",
+    "REL_CONFIG_ID",
+    "REL_INST_ID",
+    "ASSOCIATED_WITH_TYPE",
+    "CONFIGURED_OBJECT_TYPES",
+    "REL_SOURCE_OBJECT_ID",
+    "REL_SOURCE_ID",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET KI Frequency', frequency ) "FREQUENCY",
+    "CHECK_USER_AVAIL",
+    "OBJ_CURRENCY",
+    "ATI_MOVING_THRESHOLD",
+    "RTO_COMMENTS",
+    "RELATED_CONTROLS_COMMENTS",
+    "RELATED_OBJECTS_COMMENTS",
+    "RELATED_RISK_COMMENTS",
+    "RELATED_ORGANIZATIONS",
+    "RISK_CATEGORY",
+    "OBJECT_NAME",
+    ms_apps_utilities.get_display_values ( ms_met_utilities.active_ent_id, 'ORGENTITY', owner_organizations, ',' ) owner_organizations,
+    ms_met_utilities.get_grc_object_names (related_risks, 'MS_GRC_RISK') "RELATED_RISKS",
+    ms_met_utilities.get_grc_object_names (related_controls, 'MS_GRC_COMPLIANCE_OBJE') "RELATED_CONTROLS",
+    ms_met_utilities.get_grc_object_names (related_core_objects, 'MS_GRC_CORE_OBJECT') "RELATED_CORE_OBJECTS",
+    "OBJ_MOVING_THRESHOLD",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET KI Manual Automated', manual_entry_automated ) "MANUAL_ENTRY_AUTOMATED",
+    "OWN_APP_CONFIG_TEMP",
+    "OWN_APP_CONFIG",
+    "OBJ_MODIFIED_ON",
+    "OBJ_MODIFIED_BY",
+    "OBJ_CREATED_ON",
+    "OBJ_STATUS_TEMP",
+    "OBJ_CREATED_BY",
+    "OWNERS",
+    "ATI_OBJECT_ID_PK",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET KI ATI Manual Automated', manual_entry_automated ) "ATI_MANUAL_ENTRY_AUTOMATED",
+    "ATI_OBJ_ID",
+    "CRITICAL_DROPPING_ORGS",
+    "NON_CRITICAL_DROPING_ORGS",
+    "ATI_EXPECTED_VALUE",
+    "NON_CRITICAL_RISING_ORGS",
+    "CRITICAL_RISING_ORGS",
+    "ATI_APPROVER",
+    ms_met_object_utilities.get_metrics_ati_name (assement_for, ati_obj_id) "ATI_ORGANIZATION_NAME",
+    "ATI_OWNER",
+    ms_met_object_utilities.get_metrics_ati_name (assement_for, ati_object_id) "ATI_NAME",
+    "RTF_ATTACH",
+    "NEXT_SCHEDULED_DATE",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET Restrict Access To', restrict_access_to ) "RESTRICT_ACCESS_TO",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET KI Rise Drop Indicator', rising_dropping_indicator ) "RISING_DROPPING_INDICATOR",
+    "VALID_FROM",
+    "VALID_UNTIL",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET KI Lead Trail Indicator', leading_trailing_indicator ) "LEADING_TRAILING_INDICATOR",
+    ms_apps_utilities.get_user_full_name (level_1_approver) level_1_approver,
+    ms_apps_utilities.get_user_full_name (level_2_approver) level_2_approver,
+    "NON_CRITICAL_DROPPING",
+    "NON_CRITICAL_RISING",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET Action', object_action ) "OBJECT_ACTION",
+    "CRITICAL_DROPPING",
+    "CRITICAL_RISING",
+    "DESCRIPTION_HTM" AS DESCRIPTION,
+    "DUE_BY",
+    "EXPECTED_VALUE",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET KI Indicator Measurement', indicator_measurement ) "INDICATOR_MEASUREMENT",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET KI Type', kpi_kri_flag ) "KPI_KRI_FLAG",
+    "ACTION_COMMENTS",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET KI Approve all Data Entries', approve_all_manual_kpi_kri ) "APPROVE_ALL_MANUAL_KPI_KRI",
+    ms_apps_utilities.get_display_value ( ms_met_utilities.active_ent_id, 'MS MET KI Applies To Items', assement_for ) "ASSEMENT_FOR",
+    "ATTACH_FILES",
+    "DD_PROCESS_CODE",
+    ms_met_utilities.get_wf_stage_desc(loc.locale_id, DD_CURRENT_STAGE) "DD_CURRENT_STAGE",
+    "DD_ENTERPRISE_INFO",
+    ms_apps_utilities.get_user_full_name ( ms_apps_utilities.get_user_id (dd_event_user_name) ) "DD_EVENT_USER_NAME",
+    ms_apps_utilities.get_user_full_name ( ms_apps_utilities.get_user_id (dd_current_user_name) ) "DD_CURRENT_USER_NAME",
+    "DD_OBJECT_TYPE",
+    "INSTANCE_REC_NUM",
+    "INSTANCE_ID",
+    "METRIC_ID",
+    "METRIC_RUN_DATE",
+    "METRIC_COMPLETED_DATE",
+    "LATEST_FLAG",
+    "CREATED_BY",
+    "CREATION_DATE",
+    "PROCESS_FLOW_STATUS",
+    "PROCESS_INSTANCE_ID",
+    "MULTIROW_GROUP_NAME",
+    "ELECTRONICALLY_SIGNED",
+    "MULTIROW_REGION_ID",
+    "DESCRIPTION_HTM",
+    CREATED_BY_HIDDEN,
+    MODIF_REQ_BY_HIDDEN,
+    loc.LOCALE_ID,
+    loc.LOCALE_STRING
+  FROM MS_MET_DEFINITION_v vwOut,
+    (SELECT LOCALE_ID, LOCALE_STRING FROM si_locales WHERE enabled_flag = 'Y'
+    ) loc
+  WHERE (vwOut.object_id, vwOut.process_instance_id, vwOut.dd_current_stage, vwOut.CREATION_DATE, vwOut.instance_id) IN
+    (SELECT vwInn.object_id,
+      vwInn.process_instance_id,
+      vwInn.dd_current_stage,
+      vwInn.CREATION_DATE,
+      MAX(vwInn.instance_id) AS instance_id
+    FROM MS_MET_DEFINITION_v vwInn
+    WHERE vwInn.object_id                                      = vwOut.object_id
+    AND vwInn.process_instance_id                              = vwOut.process_instance_id
+    AND vwInn.dd_current_stage                                 = vwOut.dd_current_stage
+    AND TO_CHAR(vwInn.CREATION_DATE, 'DD-MON-YYYY HH24:MI:SS') = TO_CHAR(vwOut.CREATION_DATE, 'DD-MON-YYYY HH24:MI:SS')
+    GROUP BY vwInn.object_id,
+      vwInn.process_instance_id,
+      vwInn.dd_current_stage,
+      vwInn.CREATION_DATE
+    )
+  AND dd_current_stage != 'NONE'
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../dist/css/style.css" rel="stylesheet">
+        <script src="../../js/jquery-1.11.1.min.js"></script>
+        <script src="../../dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw"></span>  <a style="text-decoration: none; " id="MS_MET_PENDING_TASK_V">MS_MET_PENDING_TASK_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "METRICS_DEV"."MS_MET_PENDING_TASK_V" ("OBJECT_ID", "OBJECT_NAME_URL", "OBJECT_NAME", "EVENT_ID", "DD_OBJECT_TYPE", "STATUS", "STATUS_STORED", "DUE_BY", "PAST_DUE_DATE", "PREVIOUS_VALUE", "CURRENT_VALUE", "INDI_MEASURE_DIS_VAL", "INDI_MEASURE_STORED", "FREQUENCY", "VALIDITY", "VALID_FROM", "STORED_RISK_CATEGORY", "RISK_CATEGORY", "ASSESSMENT_TYPE", "ASSESSMENT_TYPE_STORED", "ASSESSMENT_FOR", "ASSESSMENT_FOR_STORED", "METRIC_TYPE", "METRIC_TYPE_STORED", "DATA_COLL_TYPE", "CRITICAL_RISING_THRESH", "CRITICAL_DROPPING_THRESH", "NON_CRITICAL_RISING_THRESH", "NON_CRITICAL_DROPPING_THRESH", "EXPECTED_VALUE", "OWN_ORGNIZATIONS", "OWNERS", "PROCESS_INSTANCE_ID", "INSTANCE_ID", "CURRENT_ASSIGNEE_STORED", "CURRENT_ASSIGNEE", "PREV_CLR", "CUR_CLR") AS 
+  SELECT b.object_id,
+    NULL AS object_name_url,
+    a.object_name,
+    a.event_id,
+    --(SELECT MS_MET_UTILITIES.Get_Edit_Url(a.DD_OBJECT_TYPE, a.PROCESS_INSTANCE_ID, a.iNSTANCE_ID,' ',a.event_id)
+    --FROM dual  )
+    A.dd_object_type,
+    DECODE( A.OBJ_STATUS,'M_REASSIGN','Data Entry - Pending','M_CLR_PEND','Data Entry - Pending', MS_APPS_UTILITIES.GET_DISPLAY_VALUE (MS_MET_UTILITIES.ACTIVE_ENT_ID ,'MS_MET_Metrics_Status_Custom', A.OBJ_STATUS)) AS STATUS,
+    DECODE(a.OBJ_STATUS,'M_CLR_PEND','MET_PEND','M_REASSIGN','MET_PEND',a.OBJ_STATUS)                                                                                                                                 AS status_stored,
+    (SELECT TRUNC(a.NEXT_SCHEDULED_DATE)FROM dual
+    ) AS DUE_BY,
+    (SELECT TRUNC(SYSDATE - a.NEXT_SCHEDULED_DATE)FROM dual
+    ) AS past_due_date,
+    a.previous_value,
+    a.current_value,
+    ms_APPS_utilities.get_DISPLAY_VALUE(MS_MET_UTILITIES.ACTive_ENT_ID ,'MS MET KI Indicator Measurement',A.INDICATOR_MEASUREMENT) AS indi_measure_dis_val,
+    A.INDICATOR_MEASUREMENT                                                                                                        AS indi_measure_stored,
+    MS_APPS_UTILITIES.GET_DISPLAY_VALUE (MS_MET_UTILITIES.ACTIVE_ENT_ID , 'MS MET KI Frequency', A.FREQUENCY )                     AS FREQUENCY,
+    B.VALID_UNTIL                                                                                                                  AS VALIDITY,
+    b.valid_from                                                                                                                   AS valid_from,
+    a.Risk_category                                                                                                                AS stored_risk_category,
+    (SELECT MS_MET_UTILITIES.get_risk_category_comma_sep(a.Risk_category)
+    FROM dual
+    )                                                                                                              AS Risk_Category,
+    MS_APPS_UTILITIES.GET_DISPLAY_VALUE(MS_MET_UTILITIES.ACTIVE_ENT_ID,'MS MET KI Applies To Items',A.APPLIES_TO ) AS ASSESSMENT_TYPE,
+    a.applies_to                                                                                                   as assessment_type_stored,
+    (SELECT ms_met_object_utilities.get_metrics_ati_name (A.applies_to,A.ati_object_id )
+    FROM DUAL
+    )               AS ASSESSMENT_FOR,
+    a.ati_object_id AS assessment_for_stored,
+    (SELECT ms_apps_utilities.get_display_value(MS_MET_UTILITIES.ACTive_ENT_ID,'MS MET KI Type',b.kpi_kri_flag)
+    FROM dual
+    )                                                                                                                                           AS metric_type,
+    b.kpi_kri_flag                                                                                                                              AS metric_type_stored,
+    NVL(ms_apps_utilities.get_display_value (MS_MET_UTILITIES.ACTive_ENT_ID,'MS MET KI ATI Manual Automated',b.MANUAL_ENTRY_AUTOMATED ),'Both') AS data_coll_type,
+    a.CRITICAL_RISING_THRESH,
+    a.CRITICAL_DROPPING_THRESH,
+    a.NON_CRITICAL_RISING_THRESH,
+    a.NON_CRITICAL_DROPPING_THRESH,
+    a.EXPECTED_VALUE,
+    (SELECT (RTRIM(XMLAGG(XMLELEMENT(e,
+      (SELECT org_entity_name
+      FROM SI_ORG_ENTITIES_T
+      WHERE org_entity_id = g.owner_organizations
+      )
+      || ',' )).extract ('//text()'),','))
+    FROM ms_met_definition_ogn g
+    WHERE G.OBJECT_ID = A.OBJECT_ID
+    ) AS OWN_ORGNIZATIONS,
+    (SELECT (RTRIM(XMLAGG(XMLELEMENT(E,
+      (SELECT FIRST_NAME||' '||LAST_NAME FROM SI_USERS_T WHERE user_name=g.owners
+      )
+      || ',' )).extract ('//text()'),',' ))
+    FROM ms_met_definition_own g
+    WHERE g.object_id = a.object_id
+    ) AS owners,
+    a.process_instance_id,
+    a.instance_id,
+    (SELECT (RTRIM(XMLAGG(XMLELEMENT(e,
+      (SELECT user_name FROM si_users_t WHERE user_id=c.user_id
+      )
+      || ',' )).EXTRACT ('//text()'),',' ))
+    FROM si_event_assignments c
+    WHERE c.process_instance_id = a.process_instance_id
+    ) AS current_assignee_stored,
+    (SELECT (RTRIM(XMLAGG(XMLELEMENT(e,
+      (SELECT first_name||' '||last_name FROM si_users_t WHERE user_id=c.user_id
+      )
+      || ',' )).EXTRACT ('//text()'),',' ))
+    FROM si_event_assignments c
+    WHERE c.process_instance_id = A.process_instance_id
+    ) AS current_assignee,
+    (SELECT MS_MET_UTILITIES.FN_KPI_KRI_PREVAL_COLOR_CODE(B.OBJECT_ID, A.EVENT_ID)
+    FROM DUAL
+    ) AS PREV_CLR,
+    (SELECT MS_MET_UTILITIES.Fn_Kpi_Kri_Curval_Color_Code(b.object_id, a.event_id)
+    FROM Dual
+    ) AS cur_clr
+  FROM ms_met_data_entry_v a,
+    ms_met_definition b
+  WHERE a.process_instance_id IN
+    (SELECT process_instance_id
+    FROM si_event_assignments
+      --WHERE user_id   = ms_apps_utilities.get_user_id(:LOGIN_ID)
+    WHERE infolet_id IN
+      (SELECT metric_id FROM si_metrics_t WHERE metric_name = 'MS_MET_DATA_ENTRY'
+      )
+    AND a.instance_id =
+      (SELECT MAX (instance_id)
+      FROM ms_met_data_entry_v
+      WHERE process_instance_id = a.process_instance_id
+      )
+    )
+  AND A.OBJECT_ID=B.OBJECT_ID
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <link rel="stylesheet" href="../../dist/highlight/styles/sunburst.css"/>
+        <script src="../../dist/highlight/highlight.pack.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					var urlSet=document.URL.split("pages/");
+					localStorage.setItem("UrlStorage", urlSet[1]);
+					var scrollAmt=localStorage.getItem("scrollAmount");
+              if(localStorage.getItem("EscrollOff")=="true"){
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: scrollAmt }
+                });
+                scrollBody();  
+			  }
+            });
+             if(localStorage.getItem("EscrollOff")=="true"){
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 }
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
