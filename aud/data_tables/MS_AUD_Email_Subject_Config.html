@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Data Tables</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw" style="margin-right:10px"></span> <a class="headerAlign" id="MS_AUD_Email_Subject_Config" href="../db_tables/MS_AUD_Email_Subject_Config.html">MS_AUD_Email_Subject_Config</a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This data table stores the subject of Audit emails so that it can be configured based on users locale.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    <br/>
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#data-pill" data-toggle="tab">Data</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover dataTable-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Title<br>Name</th>
+                                                                <th>Type</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
+                                                                Subject_ID<br>SUBJECT_ID
+                                                                 </td>
+                                                                <td>Varchar2(100 char)</td>
+                                                                <td>SUBJECT_ID</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>
+                                                                Subject<br>SUBJECT
+                                                                 </td>
+                                                                <td>Varchar2(4000 char)</td>
+                                                                <td>SUBJECT</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>
+                                                                Locale_ID<br>LOCALE_ID
+                                                                 </td>
+                                                                <td>Number(10)</td>
+                                                                <td>LOCALE_ID</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="data-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <div class="modal-body" style="overflow:auto;">
+                                                        <table class="table table-hover data-table-d">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>SUBJECT_ID</th>
+                                                                    <th>SUBJECT</th>
+                                                                    <th>LOCALE_ID</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>AUD_CANCEL</td>
+                                                                    <td>[Audit Cancelled]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_UPCOMING</td>
+                                                                    <td>[Upcoming Audit]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_AUDIT_TASK</td>
+                                                                    <td>[Complete Audit Task]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_REVIEW_EMAIL</td>
+                                                                    <td>[Review Issues]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_REVIEW_COMPL</td>
+                                                                    <td>[Review Complete]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_REVIEW_RESPONSE</td>
+                                                                    <td>[Review Auditee Response]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_DELEGATE_REVIEW</td>
+                                                                    <td>[Review Issues]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_DELEGATE_REMOVED</td>
+                                                                    <td>[Delegation Removed] Review Issues-</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_FINAL_REPORT</td>
+                                                                    <td>[Audit Report Published]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_MGT_CLARIFY</td>
+                                                                    <td>[Clarify Final Audit Report]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_PLAN_SCOPE</td>
+                                                                    <td>[Audit Plan/Scope</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_CLOSE_EMAIL</td>
+                                                                    <td>[Audit Closed]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_REAUDIT_EMAIL</td>
+                                                                    <td>[Re-Audit]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_SUB1</td>
+                                                                    <td>Sent back for Clarification</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_SUB2</td>
+                                                                    <td>Approved</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_CHECKLIST_TASK</td>
+                                                                    <td>[Complete Checklist Task]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_CONTROL_TASK</td>
+                                                                    <td>[Test Controls]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_AUDIT_TASK_REOPEN</td>
+                                                                    <td>[Complete Re-opened Audit Task]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_CHECKLIST_TASK_REOPEN</td>
+                                                                    <td>[Complete Re-opened Checklist Task]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_CONTROL_TASK_REOPEN</td>
+                                                                    <td>[Test Controls for the Re-opened Control Test Task]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_AUDIT_TASK_REASSIGN</td>
+                                                                    <td>[Complete Re-assigned Audit Task]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_CHECKLIST_TASK_REASSIGN</td>
+                                                                    <td>[Complete Re-assigned Checklist Task]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>AUD_CONTROL_TASK_REASSIGN</td>
+                                                                    <td>[Test Controls for the Re-assigned Control Test Task]</td>
+                                                                    <td>1009</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- tab-content -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.data-table-d').DataTable({
+                    destroy:true,
+                    "responsive": true
+                });
+                $('.data-table-dnr').DataTable({
+                    destroy:true,
+                    "responsive": false
+                });
+                $('.tooltip-dt').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.dataTable-table').DataTable({
+                    responsive: true,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "15%" },     // 3rd column width 
+                        { "sWidth": "45%" }      // 4th column width 
+                    ]
+                });
+                $('.dataTable-table-nr').DataTable({
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "15%" },     // 3rd column width 
+                        { "sWidth": "45%" }      // 4th column width 
+                    ]
+                });
+            });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();  
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

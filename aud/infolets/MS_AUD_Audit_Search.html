@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Infolets</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">                                <h4 class="infolet-tooltip"><span class="fa fa-info fa-fw" style="margin-right:10px"></span>  
+                                <span data-toggle="tooltip" data-placement="top" title="Category: Assets" class="fa fa-cubes fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Output Type: Ordinary Graph" class="fa fa-sign-out fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Type: SQL Based" class="fa fa-globe fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Keep History" class="fa fa-history fa-fw"></span>
+                                <a class="headerAlign" id="MS_AUD_Audit_Search">MS_AUD_Audit_Search</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This Infolet has been Deprecated</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#query-pill" data-toggle="tab">Query</a></li>
+                                        <li><a href="#xml-pill" data-toggle="tab">XML</a></li>
+                                        <li><a href="#params-pill" data-toggle="tab">Parameters</a></li>
+                                        <li><a href="#filters-pill" data-toggle="tab">Filetrs</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-c">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Type</th>
+                                                            <th>Result Column Name</th>
+                                                            <th>User Column Name</th>
+                                                            <th>Default Infolet/<br>Input Infolet</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>AA.AUDIT_TITLE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_TITLE_MAIN</td>
+                                                                <td>Audit_Title_Main</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td> CASE WHEN ((LOWER (AA.LEAD_AUDITOR) LIKE '%' || LOWER (E1.USER_NAME) || '%' OR LOWER (AA.AUDIT_MANAGER) LIKE '%' || LOWER (E1.USER_NAME) || '%' OR E1.ACTIVITY_NAME='AUD - MODIFY SCHEDULED AUDIT') AND AA.AUDIT_START_DATE &gt; SYSDATE)  THEN '&lt;A TARGET=&quot;_SELF&quot; HREF=&quot;JAVASCRIPT'||CHR(58)||'CALLREPORTDETAILS(''PUSHINFOLET?ID='||MS_APPS_UTILITIES.GET_INFOLET_ID ('MS_AUD_MANAGE_AUDIT')  ||CHR(38</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_TITLE</td>
+                                                                <td>Audit_Title</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>NEXR_START_DATE</td>
+                                                                <td>Date</td>
+                                                                <td>NEXT_START_DATE</td>
+                                                                <td>Next_Start_Date</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>AUDIT_INTERVAL</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_INTERVAL</td>
+                                                                <td>Audit_Interval</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>AUDIT_CLASSIFICATION</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_CLASSIFICATION</td>
+                                                                <td>Audit_Classification</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>AUDIT_TYPE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_TYPE</td>
+                                                                <td>Audit_Type</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>Audit Manager</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_MANAGER</td>
+                                                                <td>Audit Manager</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>Lead Auditor</td>
+                                                                <td>Varchar2</td>
+                                                                <td>LEAD_AUDITOR</td>
+                                                                <td>Lead Auditor</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>E1.USER_NAME</td>
+                                                                <td>Varchar2</td>
+                                                                <td>USER_NAME</td>
+                                                                <td>User_Name</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td> AA.PLAN_TITLE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>PLAN_TITLE</td>
+                                                                <td>Plan_Title</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>CREATED_BY</td>
+                                                                <td>Varchar2</td>
+                                                                <td>CREATEDBY</td>
+                                                                <td>CreatedBy</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>LAST_MODIFIED_BY</td>
+                                                                <td>Varchar2</td>
+                                                                <td>LAST_MODIFIED_BY</td>
+                                                                <td>Last_Modified_By</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="filters-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-fnr">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Expression</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Current_User</td>
+                                                                <td>(trim(User_Name) = ('@LOGIN_ID@'))</td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="params-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-p">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Mandatory</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Audit_Title</td>
+                                                                <td>N</td>
+                                                                <td>Audit_Title</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Organization</td>
+                                                                <td>N</td>
+                                                                <td>Organization</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Lead_Auditor</td>
+                                                                <td>N</td>
+                                                                <td>Lead_Auditor</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Auditor_Manager</td>
+                                                                <td>N</td>
+                                                                <td>Auditor_Manager</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Audit_Classification</td>
+                                                                <td>N</td>
+                                                                <td>Audit_Classification</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Audit_Type</td>
+                                                                <td>N</td>
+                                                                <td>Audit_Type</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Created_By</td>
+                                                                <td>N</td>
+                                                                <td>Created_By</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Last_Modified</td>
+                                                                <td>N</td>
+                                                                <td>Last_Modified</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Starting_After</td>
+                                                                <td>N</td>
+                                                                <td>Start_Date_After</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Starting_Before</td>
+                                                                <td>N</td>
+                                                                <td>Start_Date_Before</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Plan_Title</td>
+                                                                <td>N</td>
+                                                                <td>Plan_Title</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="query-pill">
+                                            <div class="modal-dialog"">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-sql')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-sql">
+                                                        SELECT CASE WHEN ((LOWER (aa.lead_auditor) LIKE '%' || LOWER (e1.user_name) || '%' OR LOWER (aa.audit_manager) LIKE '%' || LOWER (e1.user_name) || '%' OR e1.activity_name='AUD - Modify Scheduled Audit') AND aa.audit_start_date &gt; SYSDATE)
+THEN '&lt;a target=&quot;_self&quot; href=&quot;javascript'||CHR(58)||'callreportdetails(''Pushinfolet?id='||ms_apps_utilities.get_infolet_id ('MS_AUD_MANAGE_AUDIT')
+||CHR(38)||'proc='||aa.dd_process_instance_id||CHR(38)||'flag=1'||CHR(38)||'emd=1'||CHR(38)||'x_edit_mode=Yes'|| CHR(38)||'Audit_id='
+||aa.audit_id||CHR(38)||'wrapper=no'')&quot;&gt;'||aa.audit_title||'&lt;/a&gt;'ELSE'&lt;a target=&quot;_self&quot; href=&quot;javascript'||CHR(58)
+||'callreportdetails(''Pushinfolet?id='||ms_apps_utilities.get_infolet_id ('MS_AUD_MANAGE_AUDIT')||CHR(38)||'proc='
+||aa.dd_process_instance_id||CHR(38)||'flag=1'||CHR(38)||'emd=2'||CHR(38)||'x_edit_mode=No'||CHR(38)||'Audit_id='||aa.audit_id
+||CHR (38)||'wrapper=no'')&quot;&gt;'||aa.audit_title||'&lt;/a&gt;'END AS &quot;Audit_Title&quot;,TO_DATE (aa.next_audit_date) AS nexr_start_date,
+(SELECT aa.audit_recurrence_number|| ' '|| ms_apps_utilities.get_display_value(100000,'MS AUD Audit Recurrence',aa.audit_recurrence) FROM DUAL) AS audit_interval,
+ms_aud_utilities.fn_get_audit_type(aa.audit_classification,'MS AUD Classification') AS audit_classification,ms_aud_utilities.fn_get_audit_type (aa.audit_type,'MS AUD Audit Type') AS audit_type,
+ms_apps_utilities.get_user_full_name(aa.audit_manager) AS audit_manager,ms_apps_utilities.get_user_full_name (aa.lead_auditor) AS lead_auditor,e1.user_name, aa.PLAN_TITLE,ms_apps_utilities.get_user_full_name(aa.dd_created_by) as Created_By,ms_apps_utilities.get_user_full_name(aa.dd_modified_by) as Last_Modified_By,aa.audit_title FROM ms_aud_audit aa,(SELECT DISTINCT user_name, activity_name FROM ms_qms_flow_down_org_v where activity_name like 'AUD - Modify Scheduled Audit' union (SELECT distinct user_name, null as activity_name FROM ms_qms_flow_down_org_v minus SELECT distinct user_name, null as activity_name FROM ms_qms_flow_down_org_v where activity_name like 'AUD - Modify Scheduled Audit')) e1  
+WHERE (:1 IS NULL OR (:1 IS NOT NULL AND (lower(aa.audit_title) LIKE '%' || lower(:1) || '%')))
+AND aa.conducted_by_org IN NVL (:2, aa.conducted_by_org)
+AND (:3 IS NULL OR (:3 IS NOT NULL AND (aa.lead_auditor = :3))) 
+AND (:4 IS NULL OR (:4 IS NOT NULL AND (aa.audit_manager = :4)))
+AND (:6 IS NULL OR (:6 IS NOT NULL AND (aa.audit_type = :6)))
+AND (:5 IS NULL OR (:5 IS NOT NULL AND (aa.audit_classification = :5)))
+AND aa.dd_created_by IN NVL (:7, dd_created_by) AND (:8 IS NULL OR (:8 IS NOT NULL AND (aa.dd_modified_by = :8)))
+AND (:9 IS NULL OR (:9 IS NOT NULL AND trunc(aa.schedule_start_date) &gt;= :9))
+AND (:10 IS NULL OR (:10 IS NOT NULL AND trunc(aa.schedule_start_date) &lt;= :10))
+AND (:11 IS NULL OR (:11 IS NOT NULL AND (aa.plan_id =(SELECT sub.plan_id FROM ms_aud_audit_plan sub WHERE plan_type=3 and sub.plan_id=:11)))) and trunc(aa.audit_start_date)&gt;trunc(sysdate)
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <div class="tab-pane fade" id="xml-pill">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-xml')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-xml">
+                                                        &lt;?xml version=&quot;1.0&quot;?&gt;&lt;METRIC_DEPLOYMENT&gt;&lt;METRIC       PROCESS=&quot;0&quot;  INSTANCE=&quot;0&quot;  NOTIFY=&quot;YES&quot;   RETURN=&quot;RESULTSET&quot; &gt;&lt;RESULTMAP &gt;&lt;/RESULTMAP&gt;&lt;/METRIC&gt;&lt;/METRIC_DEPLOYMENT&gt;
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                </div>
+                                <!--panel-default -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+      
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.infolet-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.infolet-table-c').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-cnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-f').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-fnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-p').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-pnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-r').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-rnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();  
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

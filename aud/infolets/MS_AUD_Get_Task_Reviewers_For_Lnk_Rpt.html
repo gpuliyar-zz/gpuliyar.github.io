@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Infolets</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">                                <h4 class="infolet-tooltip"><span class="fa fa-info fa-fw" style="margin-right:10px"></span>  
+                                <span data-toggle="tooltip" data-placement="top" title="Category: Assets" class="fa fa-cubes fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Output Type: Report" class="fa fa-sign-out fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Type: SQL Based" class="fa fa-globe fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Keep History" class="fa fa-history fa-fw"></span>
+                                <a class="headerAlign" id="MS_AUD_Get_Task_Reviewers_For_Lnk_Rpt">MS_AUD_Get_Task_Reviewers_For_Lnk_Rpt</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This infolet is attached to Reviewer field in the following form:
+Checklist task,control test task,audit task.This infolet pulls all list of values based on restriction and who have Review Task Activity.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#query-pill" data-toggle="tab">Query</a></li>
+                                        <li><a href="#xml-pill" data-toggle="tab">XML</a></li>
+                                        <li><a href="#params-pill" data-toggle="tab">Parameters</a></li>
+                                        <li><a href="#usedin-pill" data-toggle="tab">Used In</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-cnr">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Type</th>
+                                                            <th>Result Column Name</th>
+                                                            <th>User Column Name</th>
+                                                            <th>Default Infolet/<br>Input Infolet</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>&quot;CHECKBOX&quot;</td>
+                                                                <td>Varchar2</td>
+                                                                <td>CHECK_BOX</td>
+                                                                <td>CHECK BOX</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>&quot;USERFULLNAME&quot;</td>
+                                                                <td>Varchar2</td>
+                                                                <td>USER_FULL_NAME</td>
+                                                                <td>USER FULL NAME</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>&quot;USERNAME&quot;FROM(SELECTUSER_NAME,USER_FULL_NAME,ACTIVITY_NAMEFROM(--OWNERORGANIZATIONSELECTUSER_NAMEASUSER_NAME,MS_APPS_UTILITIES.GET_USER_FULL_NAME(USER_NAME)ASUSER_FULL_NAME,ACTIVITY_NAMEASACTIVITY_NAMEFROMMS_AUD_FLOW_DOWN_ORG_VWHERE:X_RES</td>
+                                                                <td>Varchar2</td>
+                                                                <td>USER_NAME</td>
+                                                                <td>USER NAME</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="params-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-pnr">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Mandatory</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>x_restric_accecss_to</td>
+                                                                <td>N</td>
+                                                                <td>x_restric_accecss_to</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>x_audit_id</td>
+                                                                <td>N</td>
+                                                                <td>x_audit_id</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>x_org_id</td>
+                                                                <td>N</td>
+                                                                <td>x_org_id</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>i_search</td>
+                                                                <td>N</td>
+                                                                <td>i_search</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="usedin-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-rnr">
+                                                        <thead>
+                                                            <th>Used In</th>
+                                                            <th>Usage Type</th>
+                                                            <th>User</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>MS_AUD_Get_Reviewers_Rpt</td>
+                                                                <td>Report Parameter Input</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_AUD_Get_Reviewers_Rpt</td>
+                                                                <td>Report</td>
+                                                                <td>pfadmin</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="query-pill">
+                                            <div class="modal-dialog"">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-sql')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-sql">
+                                                        select  ms_aud_utilities.get_select_url(user_full_name,user_name,'RADIO') as &quot;Check Box&quot;, 
+          user_full_name as &quot;User Full Name&quot;, 
+          user_name as &quot;User Name&quot;
+from (SELECT  USER_NAME, USER_FULL_NAME, ACTIVITY_NAME
+  FROM (       -- Owner Organization
+        SELECT  user_name AS USER_NAME,
+                ms_apps_utilities.get_user_full_name (user_name)
+                   AS USER_FULL_NAME,
+                activity_name AS ACTIVITY_NAME
+           FROM MS_AUD_FLOW_DOWN_ORG_V
+          WHERE  :1  = 'O' AND org_entity_id = :3 
+        UNION
+       -- No restriction
+        SELECT user_name AS user_name,
+               ms_apps_utilities.get_user_full_name (user_name)
+                  AS USER_FULL_NAME,
+               activity_name AS activity_name
+          FROM MS_AUD_FLOW_DOWN_ORG_V
+         WHERE  :1  = 'N'
+        UNION
+        -- Team Mambers
+        SELECT user_name AS user_name,
+               ms_apps_utilities.get_user_full_name (user_name)
+                  AS USER_FULL_NAME,
+               activity_name AS activity_name
+          FROM MS_AUD_FLOW_DOWN_ORG_V
+         WHERE  :1  = 'R'
+               AND user_name IN
+                      (SELECT team_member from ms_aud_audit_tmm
+                                  WHERE audit_id = :2
+                       UNION
+                       SELECT rsm_team_member as team_member 
+                         FROM ms_aud_audit_tem 
+                        WHERE audit_id = :2))
+        WHERE trim(ACTIVITY_NAME) = 'AUD - Review Tasks'          
+        UNION
+        --Lead Auditor and Auditor Manager
+        SELECT user_name AS user_name,
+               ms_apps_utilities.get_user_full_name (user_name)
+                  AS USER_FULL_NAME,
+               activity_name AS activity_name
+          FROM MS_AUD_FLOW_DOWN_ORG_V
+         WHERE  :1  = 'R'
+               AND (user_name IN (SELECT COLUMN_VALUE
+                                   FROM TABLE (SELECT ms_apps_utilities.
+                                                      parse_string (
+                                                         (SELECT LEAD_AUDITOR
+                                                                 || ','
+                                                                 || AUDIT_MANAGER
+                                                                    AS USER_NAME
+                                                            FROM ms_aud_audit
+                                                           WHERE audit_id =
+                                                                    :2),
+                                                         ',')
+                                                 FROM DUAL))
+                   OR user_name IN (SELECT audit_manager_mlov AS team_member
+                                     FROM ms_aud_audit_amm
+                                    WHERE audit_id = :2
+                                   UNION
+                                   SELECT lead_auditor_mlov AS team_member
+                                     FROM ms_aud_audit_alm
+                                    WHERE audit_id = :2))
+        AND trim(ACTIVITY_NAME) = 'AUD - Review Tasks')
+where (upper(user_full_name) like nvl(upper('%'||:4||'%'),upper(user_full_name)) 
+      or upper(user_name) like nvl(upper('%'||:4||'%'),upper(user_name))
+      )
+order by user_full_name
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <div class="tab-pane fade" id="xml-pill">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-xml')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-xml">
+                                                        &lt;?xml version=&quot;1.0&quot;?&gt;&lt;METRIC_DEPLOYMENT&gt;&lt;METRIC       PROCESS=&quot;0&quot;  INSTANCE=&quot;0&quot;  NOTIFY=&quot;YES&quot;   RETURN=&quot;RESULTSET&quot; &gt;&lt;RESULTMAP &gt;&lt;/RESULTMAP&gt;&lt;/METRIC&gt;&lt;/METRIC_DEPLOYMENT&gt;
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                </div>
+                                <!--panel-default -->
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
+                                    </thead>
+                                        <tr>
+                                            <td><a href="../reports/100266.html">Reviewer</a></td>
+                                            <td></td>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-info -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+      
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.infolet-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.infolet-table-c').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-cnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-f').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-fnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-p').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-pnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-r').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-rnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();  
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

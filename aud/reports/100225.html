@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Reports</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4 class="report-tooltip"><span class="fa fa-reports fa-fw" style="margin-right:10px"></span>
+                                    <span  data-toggle="tooltip" data-placement="top" title="Tabular Report" class="fa fa-th-list fa-fw"></span> 
+                                     <a class="headerAlign" id="100225">Detailed Task List Report</a>
+                                 </h4>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Name</th>
+                                                <td>MS_AUD_Rpt_View_Detailed_Task_List_Report</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Default Title</th>
+                                                <td>Detailed Task List Report</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Template Name</th>
+                                                <td>MS_AUD_GridPlain_Scrollable.xhtmp</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Infolet</th>
+                                                <td><a href = "../infolets/MS_AUD_View_Task_Details.html">MS_AUD_View_Task_Details</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Comments</th>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This is a jumbo infolet report which lists all the tasks and its details available in the system.This is available under Reports section of Audit Projects infocenter .</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <ul class="nav nav-pills">
+                                            <li class="active"><a href="#columns-pills" data-toggle="tab">Columns</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade in active" id="columns-pills">
+                                                <div class="panel-body">
+                                                    <table class="table table-hover report-table-c">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Label</th>
+                                                                <th>Comments</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Audit Title</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>Task Name</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Status</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>Auditor</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>Approver</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>Final Approver</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td>Type</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>Details</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>Open Coaching Notes</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>Reassign Owner</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>13</td>
+                                                                <td>Reassign Approver</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>14</td>
+                                                                <td>Task Start Date</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>15</td>
+                                                                <td>Task Completion Date</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>16</td>
+                                                                <td>Planned Fieldwork Start Date</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>17</td>
+                                                                <td>Planned Fieldwork Completion date</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>18</td>
+                                                                <td>Budgeted Days</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>19</td>
+                                                                <td>Instructions</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>20</td>
+                                                                <td>Time Spent (in Days)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>21</td>
+                                                                <td>Task Execution Result</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>22</td>
+                                                                <td>Work Done</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>23</td>
+                                                                <td>Results</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>24</td>
+                                                                <td>Attachments</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>25</td>
+                                                                <td>Checklist Name</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>26</td>
+                                                                <td>Checklist Version</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>27</td>
+                                                                <td>Checklist Score</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>28</td>
+                                                                <td>Issues</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>29</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>30</td>
+                                                                <td></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.tab-content -->
+                                    </div>
+                                </div>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Infocenters</th>
+                                    </thead>
+                                        <tr>
+                                            <td><a href="../infocenters/Audits_Application_Admin.html">Audit Application Admin</a></td>
+                                            <td></td>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.report-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+               $('.report-table-c').DataTable({
+                    responsive: true,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "40%" },     // 2nd column width 
+                        { "sWidth": "55%" }      // 3rdcolumn width 
+                    ]
+                });
+                $('.report-table-cnr').DataTable({
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "40%" },     // 2nd column width 
+                        { "sWidth": "55%" }      // 3rdcolumn width  
+                    ]
+                });
+                $('.report-table-f').DataTable({
+                    responsive: true,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },     // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "25%" },     // 3rd column width 
+                        { "sWidth": "20%" }      // 4th column width 
+                    ]
+                });
+                $('.report-table-fnr').DataTable({
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },     // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "25%" },     // 3rd column width 
+                        { "sWidth": "20%" }      // 4th column width 
+                    ]
+                });
+            });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();  
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

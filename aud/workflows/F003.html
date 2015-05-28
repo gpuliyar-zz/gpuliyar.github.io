@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Work Flows</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-workflow fa-fw" style="margin-right:10px"></span>  <a style="text-decoration: none; " id="F003_info">AUD Manage Audit</a></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%">Code</th>
+                                                <td>F003</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%">Name</th>
+                                                <td>AUD Manage Audit</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Type</th>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Enabled</th>
+                                                <td>Y</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Ready Flag</th>
+                                                <td>Y</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This flow is used to trigger Audits</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-wrapper -->
+                                <div class="panel panel-warning" id="Create_Audit_stg">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Stage" class="fa fa-delicious"></span> Create Audit</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>Create_Audit</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Name</th>
+                                                        <td>Create Audit</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Description</th>
+                                                        <td>At this stage Audits will be created</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Type</th>
+                                                        <td>Form</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Approval Type</th>
+                                                        <td>Normal</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">UsedY2S</th>
+                                                        <td>6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Object</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">View</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_V</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Display View</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_DV</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Participant</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-success">
+                                            <div class="panel-body">
+                                                <ul class="nav nav-pills">
+                                                    <li class="active"><a href="#params-pill1" data-toggle="tab">Parameters</a></li>
+                                                    <li ><a href="#rules-pill1" data-toggle="tab">Rules</a></li>
+                                                    <li ><a href="#assgns-pill1" data-toggle="tab">Assignees</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="params-pill1">
+                                                        <div class="panel-body">
+                                                            <div class="dataTable_wrapper">
+                                                                <table class="table table-hover table-resp">
+                                                                    <thead>
+                                                                        <th>Code</th>
+                                                                        <th>Source Type</th>
+                                                                        <th>Source</th>
+                                                                        <th>Description</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Schedule_Id</td>
+                                                                            <td>Form Field (Stored)</td>
+                                                                            <td>SCHEDULE_ID</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>AUDIT_START_DATE</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>AUDIT_START_DATE</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>RISKS</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>RELATED_RISKS</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>PLAN_TITLE</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>PLAN_TITLE</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>AUDIT_TITLE</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>AUDIT_TITLE</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>LEAD_AUDITOR</td>
+                                                                            <td>Custom Function</td>
+                                                                            <td>ms_aud_notification_utilities.fn_get_aud_lead_display</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>AUDIT_MANAGER</td>
+                                                                            <td>Custom Function</td>
+                                                                            <td>ms_aud_notification_utilities.fn_get_aud_manager_display</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>ORGANIZATIONS</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>MANAGE_ORGANIZATIONS</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>TMP_AUDITABLE_ENTITIES</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>TMP_CORE_OBJECTS</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>TMP_RISKS</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>TMP_RELATED_RISKS</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>TMP_ORGANIZATIONS</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>TMP_ORGANIZATIONS</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>PURPOSE_RATIONALE</td>
+                                                                            <td>Custom Function</td>
+                                                                            <td>ms_aud_notification_utilities.get_purpose_rationale</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>AUDITABLE_ENTITY</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>CORE_OBJECTS</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Reopened_Date</td>
+                                                                            <td>Custom Function</td>
+                                                                            <td>ms_aud_utilities.fn_get_last_reopened_date</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Scope</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>SCOPE_BASED_ON</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="rules-pill1">
+                                                        <div class="panel-body">
+                                                            <div class="dataTable_wrapper">
+                                                                <table class="table table-hover table-resp">
+                                                                    <thead>
+                                                                        <th>Code</th>
+                                                                        <th>Type</th>
+                                                                        <th>Operand1</th>
+                                                                        <th>Operator</th>
+                                                                        <th>Operand2</th>
+                                                                        <th>Description</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Update_Audit</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_ACTION</td>
+                                                                            <td>1</td>
+                                                                            <td>8</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Cancel_Audit</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_ACTION</td>
+                                                                            <td>1</td>
+                                                                            <td>9</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Send_For_Approval</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_ACTION</td>
+                                                                            <td>1</td>
+                                                                            <td>2</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Close_Audit</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_ACTION</td>
+                                                                            <td>1</td>
+                                                                            <td>28</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Reopen_Audit</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_ACTION</td>
+                                                                            <td>1</td>
+                                                                            <td>36</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Has_Reopen_Activity</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>CHK_USER_FOR_REOPEN_ACTIVITY</td>
+                                                                            <td>1</td>
+                                                                            <td>1</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Doesnot_Have_Reopen_Activity</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>CHK_USER_FOR_REOPEN_ACTIVITY</td>
+                                                                            <td>1</td>
+                                                                            <td>0</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Data_Correction_Flag_Yes</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>DATA_CORRECTION_FLAG</td>
+                                                                            <td>1</td>
+                                                                            <td>1</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Data_Correction_Flag_No</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>DATA_CORRECTION_FLAG</td>
+                                                                            <td>1</td>
+                                                                            <td>0</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Send_Reopen_Audit_For_Approval</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_ACTION</td>
+                                                                            <td>1</td>
+                                                                            <td>37</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Has_Approve_Reopen_Activity</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>CHK_USER_FOR_APP_REOPEN_ACT</td>
+                                                                            <td>1</td>
+                                                                            <td>1</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Doesnot_Have_Approve_Reopen_Activity</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>CHK_USER_FOR_APP_REOPEN_ACT</td>
+                                                                            <td>1</td>
+                                                                            <td>0</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="assgns-pill1">
+                                                        <div class="panel-body">
+                                                            <div class="dataTable_wrapper">
+                                                                <table class="table table-hover table-resp">
+                                                                    <thead>
+                                                                        <th>Code</th>
+                                                                        <th>Source Type</th>
+                                                                        <th>Source</th>
+                                                                        <th>Description</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>AUD_Manager</td>
+                                                                            <td>Custom Function</td>
+                                                                            <td>ms_aud_notification_utilities.fn_get_aud_manager</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>AUD_LEAD</td>
+                                                                            <td>Custom Function</td>
+                                                                            <td>ms_aud_notification_utilities.fn_get_aud_lead</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Aud_Initiator</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>INITIATOR</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-warning" id="Manage_Audit_End_stg">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Stage" class="fa fa-delicious"></span> Manage Audit End</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>Manage_Audit_End</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Name</th>
+                                                        <td>Manage Audit End</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Description</th>
+                                                        <td>At this stage Manage Audit flow ends</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Type</th>
+                                                        <td>3</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Approval Type</th>
+                                                        <td>Normal</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">UsedY2S</th>
+                                                        <td>6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Object</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">View</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_V</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Display View</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_DV</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Participant</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-success">
+                                            <div class="panel-body">
+                                                <ul class="nav nav-pills">
+                                                    <li class="active"><a href="#rules-pill2" data-toggle="tab">Rules</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="rules-pill2">
+                                                        <div class="panel-body">
+                                                            <div class="dataTable_wrapper">
+                                                                <table class="table table-hover table-resp">
+                                                                    <thead>
+                                                                        <th>Code</th>
+                                                                        <th>Type</th>
+                                                                        <th>Operand1</th>
+                                                                        <th>Operator</th>
+                                                                        <th>Operand2</th>
+                                                                        <th>Description</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Reopen_Audit</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_ACTION</td>
+                                                                            <td>1</td>
+                                                                            <td>36</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Has_Reopen_Activity</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>CHK_USER_FOR_REOPEN_ACTIVITY</td>
+                                                                            <td>1</td>
+                                                                            <td>1</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Doesnot_Have_Reopen_Activity</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>CHK_USER_FOR_REOPEN_ACTIVITY</td>
+                                                                            <td>1</td>
+                                                                            <td>0</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Data_Correction_Flag_Yes</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>DATA_CORRECTION_FLAG</td>
+                                                                            <td>1</td>
+                                                                            <td>1</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Send_Reopen_Audit_For_Approval</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_ACTION</td>
+                                                                            <td>1</td>
+                                                                            <td>37</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Has_Approve_Reopen_Activity</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>CHK_USER_FOR_APP_REOPEN_ACT</td>
+                                                                            <td>1</td>
+                                                                            <td>1</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Doesnot_Have_Approve_Reopen_Activity</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>CHK_USER_FOR_APP_REOPEN_ACT</td>
+                                                                            <td>1</td>
+                                                                            <td>0</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-warning" id="Approve_Audit_stg">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Stage" class="fa fa-delicious"></span> Approve_Audit</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>Approve_Audit</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Name</th>
+                                                        <td>Approve_Audit</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Description</th>
+                                                        <td><P>At this stage Audit will be approved.</P></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Type</th>
+                                                        <td>1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Approval Type</th>
+                                                        <td>Normal</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">UsedY2S</th>
+                                                        <td>6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Object</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">View</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_V</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Display View</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_DV</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Participant</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-success">
+                                            <div class="panel-body">
+                                                <ul class="nav nav-pills">
+                                                    <li class="active"><a href="#params-pill3" data-toggle="tab">Parameters</a></li>
+                                                    <li ><a href="#rules-pill3" data-toggle="tab">Rules</a></li>
+                                                    <li ><a href="#assgns-pill3" data-toggle="tab">Assignees</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="params-pill3">
+                                                        <div class="panel-body">
+                                                            <div class="dataTable_wrapper">
+                                                                <table class="table table-hover table-resp">
+                                                                    <thead>
+                                                                        <th>Code</th>
+                                                                        <th>Source Type</th>
+                                                                        <th>Source</th>
+                                                                        <th>Description</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>AUDIT_TITLE</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>AUDIT_TITLE</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>AUDIT_START_DATE</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>AUDIT_START_DATE</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>AUDITABLE_ENTITY</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>CORE_OBJECTS</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>RISKS</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>RELATED_RISKS</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>ORGANIZATIONS</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>MANAGE_ORGANIZATIONS</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>PURPOSE_RATIONALE</td>
+                                                                            <td>Custom Function</td>
+                                                                            <td>ms_aud_notification_utilities.get_purpose_rationale</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>PLAN_TITLE</td>
+                                                                            <td>Form Field (Displayed)</td>
+                                                                            <td>PLAN_TITLE</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="rules-pill3">
+                                                        <div class="panel-body">
+                                                            <div class="dataTable_wrapper">
+                                                                <table class="table table-hover table-resp">
+                                                                    <thead>
+                                                                        <th>Code</th>
+                                                                        <th>Type</th>
+                                                                        <th>Operand1</th>
+                                                                        <th>Operator</th>
+                                                                        <th>Operand2</th>
+                                                                        <th>Description</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Audit_Approved</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_ACTION</td>
+                                                                            <td>1</td>
+                                                                            <td>3</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Audit_Rework</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_ACTION</td>
+                                                                            <td>1</td>
+                                                                            <td>4</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Cancel_Audit</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_ACTION</td>
+                                                                            <td>1</td>
+                                                                            <td>9</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Approve_Reopen_Audit</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>AUDIT_STATUS</td>
+                                                                            <td>1</td>
+                                                                            <td>57</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Pending_Reopen_Audit_Status</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>STATUS</td>
+                                                                            <td>1</td>
+                                                                            <td>51</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Not_In_Approve_Reopen_Stage</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>STATUS</td>
+                                                                            <td>2</td>
+                                                                            <td>51</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="assgns-pill3">
+                                                        <div class="panel-body">
+                                                            <div class="dataTable_wrapper">
+                                                                <table class="table table-hover table-resp">
+                                                                    <thead>
+                                                                        <th>Code</th>
+                                                                        <th>Source Type</th>
+                                                                        <th>Source</th>
+                                                                        <th>Description</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Aud_Approver</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>APPROVER</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>AUD_Manager</td>
+                                                                            <td>Custom Function</td>
+                                                                            <td>ms_aud_notification_utilities.fn_get_aud_manager</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>AUD_LEAD</td>
+                                                                            <td>Custom Function</td>
+                                                                            <td>ms_aud_notification_utilities.fn_get_aud_lead</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>AUD_Reopen_Approver</td>
+                                                                            <td>Form Field</td>
+                                                                            <td>ASSIGNEE</td>
+                                                                            <td></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-warning" id="AUD_S020_S020_A008_tr">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Transition" class="fa fa-openid"></span>  AUD_S020_S020_A008</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S020_S020_A008</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Etl</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_P.CALL_ETL</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Xsl Mapping</th>
+                                                        <td>F003_AUD_S020_S020_A008_Mapping</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S020_S020_A008hooks">
+                                    <div class="panel-heading">
+                                        <h4>Hooks</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table table-hover table-resp">
+                                                <thead>
+                                                    <th>Type</th>
+                                                    <th>Name</th>
+                                                    <th>Enabled</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>Hook</td><td>ms_aud_f003_helper.AUD_S020_S020_A008</td><td>Y</td></tr>
+                                                    <tr><td>Post Hook</td><td>ms_aud_f003_helper.post_hook_pid_update</td><td>Y</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="Aud_Manager_E1eml">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Email" class="fa fa-envelope"></span>  Aud_Manager_E1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <td>Aud_Manager_E1</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>To</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Subject</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Body</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Enabled</th>
+                                                    <td></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="Aud_Lead_E1eml">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Email" class="fa fa-envelope"></span>  Aud_Lead_E1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <td>Aud_Lead_E1</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>To</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Subject</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Body</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Enabled</th>
+                                                    <td></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S020_S020_A008_RG_1rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S020_S020_A008_RG_1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S020_S020_A008_RG_1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Update_Audit</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Data_Correction_Flag_No</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S020_S020_A036_RG_2rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S020_S020_A036_RG_2</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S020_S020_A036_RG_2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Reopen_Audit</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S020_S020_DC_RG_3rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S020_S020_DC_RG_3</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S020_S020_DC_RG_3</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Update_Audit</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Data_Correction_Flag_Yes</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-warning" id="AUD_S020_S021_A009_tr">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Transition" class="fa fa-openid"></span>  AUD_S020_S021_A009</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S020_S021_A009</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Etl</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_P.CALL_ETL</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Xsl Mapping</th>
+                                                        <td>F003_AUD_S020_S021_A009_Mapping</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S020_S021_A009hooks">
+                                    <div class="panel-heading">
+                                        <h4>Hooks</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table table-hover table-resp">
+                                                <thead>
+                                                    <th>Type</th>
+                                                    <th>Name</th>
+                                                    <th>Enabled</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>Hook</td><td>ms_aud_f003_helper.AUD_S020_S021_A009</td><td>Y</td></tr>
+                                                    <tr><td>Post Hook</td><td>ms_aud_f003_helper.post_hook_pid_update</td><td>Y</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S020_S021_A009_RG_1rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S020_S021_A009_RG_1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S020_S021_A009_RG_1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Cancel_Audit</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S020_S021_A009_RG_2rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S020_S021_A009_RG_2</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S020_S021_A009_RG_2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Close_Audit</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-warning" id="AUD_S020_S022_A002_tr">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Transition" class="fa fa-openid"></span>  AUD_S020_S022_A002</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S020_S022_A002</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Etl</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_P.CALL_ETL</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Xsl Mapping</th>
+                                                        <td>F003_AUD_S020_S022_A002_Mapping</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S020_S022_A002hooks">
+                                    <div class="panel-heading">
+                                        <h4>Hooks</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table table-hover table-resp">
+                                                <thead>
+                                                    <th>Type</th>
+                                                    <th>Name</th>
+                                                    <th>Enabled</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>Hook</td><td>ms_aud_f003_helper.AUD_S020_S022_A002</td><td>Y</td></tr>
+                                                    <tr><td>Post Hook</td><td>ms_aud_f003_helper.post_hook_pid_update</td><td>Y</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="Aud_Approver_A1_asnmt">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Assignment" class="fa fa-pencil"></span>  Aud_Approver_A1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <td>Aud_Approver_A1</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>To</th>
+                                                    <td>Aud_Approver</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Text</th>
+                                                    <td>Approve Unplanned Audit - :AUDIT_TITLE</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Enabled</th>
+                                                    <td>Y</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_Reopen_Approver_A2_asnmt">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Assignment" class="fa fa-pencil"></span>  AUD_Reopen_Approver_A2</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <td>AUD_Reopen_Approver_A2</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>To</th>
+                                                    <td>AUD_Reopen_Approver</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Text</th>
+                                                    <td>Approve Re-open Audit - :AUDIT_TITLE</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Enabled</th>
+                                                    <td>Y</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S020_S022_A002_RG_1rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S020_S022_A002_RG_1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S020_S022_A002_RG_1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Send_For_Approval</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S020_S022_A037_RG_2rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S020_S022_A037_RG_2</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S020_S022_A037_RG_2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Send_Reopen_Audit_For_Approval</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-warning" id="AUD_S022_S020_A004_tr">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Transition" class="fa fa-openid"></span>  AUD_S022_S020_A004</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S022_S020_A004</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Etl</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_P.CALL_ETL</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Xsl Mapping</th>
+                                                        <td>F003_AUD_S022_S020_A004_Mapping</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S022_S020_A004hooks">
+                                    <div class="panel-heading">
+                                        <h4>Hooks</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table table-hover table-resp">
+                                                <thead>
+                                                    <th>Type</th>
+                                                    <th>Name</th>
+                                                    <th>Enabled</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>Hook</td><td>ms_aud_f003_helper.AUD_S022_S020_A004</td><td>Y</td></tr>
+                                                    <tr><td>Post Hook</td><td>ms_aud_f003_helper.post_hook_pid_update</td><td>Y</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="Aud_Initiator_A1_asnmt">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Assignment" class="fa fa-pencil"></span>  Aud_Initiator_A1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <td>Aud_Initiator_A1</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>To</th>
+                                                    <td>Aud_Initiator</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Text</th>
+                                                    <td>Clarify Unplanned Audit - :AUDIT_TITLE</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Enabled</th>
+                                                    <td>Y</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="Aud_Manager_E1eml">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Email" class="fa fa-envelope"></span>  Aud_Manager_E1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <td>Aud_Manager_E1</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>To</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Subject</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Body</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Enabled</th>
+                                                    <td></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="Aud_Lead_E1eml">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Email" class="fa fa-envelope"></span>  Aud_Lead_E1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <td>Aud_Lead_E1</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>To</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Subject</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Body</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Enabled</th>
+                                                    <td></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S022_S020_A004_RG_1rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S022_S020_A004_RG_1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S022_S020_A004_RG_1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Audit_Rework</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S022_S020_A003_RG_1rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S022_S020_A003_RG_1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S022_S020_A003_RG_1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Audit_Approved</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S022_S020_A003_AS57_RG_1rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S022_S020_A003_AS57_RG_1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S022_S020_A003_AS57_RG_1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Audit_Approved</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Approve_Reopen_Audit</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-warning" id="AUD_S022_S021_A009_tr">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Transition" class="fa fa-openid"></span>  AUD_S022_S021_A009</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S022_S021_A009</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Etl</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_P.CALL_ETL</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Xsl Mapping</th>
+                                                        <td>F003_AUD_S022_S021_A009_Mapping</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S022_S021_A009hooks">
+                                    <div class="panel-heading">
+                                        <h4>Hooks</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table table-hover table-resp">
+                                                <thead>
+                                                    <th>Type</th>
+                                                    <th>Name</th>
+                                                    <th>Enabled</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>Hook</td><td>ms_aud_f003_helper.AUD_S022_S021_A009</td><td>Y</td></tr>
+                                                    <tr><td>Post Hook</td><td>ms_aud_f003_helper.post_hook_pid_update</td><td>Y</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S022_S021_A009_RG_1rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S022_S021_A009_RG_1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S022_S021_A009_RG_1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Cancel_Audit</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Not_In_Approve_Reopen_Stage</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S022_S021_A009_AS51_RG_2rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S022_S021_A009_AS51_RG_2</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S022_S021_A009_AS51_RG_2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Cancel_Audit</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Pending_Reopen_Audit_Status</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-warning" id="AUD_S021_S020_A036_tr">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Transition" class="fa fa-openid"></span>  AUD_S021_S020_A036</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S021_S020_A036</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Etl</th>
+                                                        <td>MS_AUD_MANAGE_AUDIT_P.CALL_ETL</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Xsl Mapping</th>
+                                                        <td>F003_AUD_S021_S020_A036_Mapping</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S021_S020_A036hooks">
+                                    <div class="panel-heading">
+                                        <h4>Hooks</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table table-hover table-resp">
+                                                <thead>
+                                                    <th>Type</th>
+                                                    <th>Name</th>
+                                                    <th>Enabled</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>Hook</td><td>ms_aud_f003_helper.aud_s021_s020_a036</td><td>Y</td></tr>
+                                                    <tr><td>Post Hook</td><td>ms_aud_f003_helper.post_hook_pid_update</td><td>Y</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="Aud_Manager_E1eml">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Email" class="fa fa-envelope"></span>  Aud_Manager_E1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <td>Aud_Manager_E1</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>To</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Subject</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Body</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Enabled</th>
+                                                    <td></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="Aud_Lead_E1eml">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Email" class="fa fa-envelope"></span>  Aud_Lead_E1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <td>Aud_Lead_E1</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>To</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Subject</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Body</th>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Enabled</th>
+                                                    <td></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S021_S020_A036_RG_1rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S021_S020_A036_RG_1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S021_S020_A036_RG_1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Reopen_Audit</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S021_S020_DC_RG_2rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S021_S020_DC_RG_2</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S021_S020_DC_RG_2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Data_Correction_Flag_Yes</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-warning" id="AUD_S021_S022_A037_tr">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Transition" class="fa fa-openid"></span>  AUD_S021_S022_A037</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S021_S022_A037</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Etl</th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Xsl Mapping</th>
+                                                        <td>F003_AUD_S021_S022_A037_Mapping</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S021_S022_A037hooks">
+                                    <div class="panel-heading">
+                                        <h4>Hooks</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table table-hover table-resp">
+                                                <thead>
+                                                    <th>Type</th>
+                                                    <th>Name</th>
+                                                    <th>Enabled</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>Hook</td><td>ms_aud_f003_helper.aud_s021_s020_a036</td><td>Y</td></tr>
+                                                    <tr><td>Post Hook</td><td></td><td></td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_Reopen_Approver_A1_asnmt">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Assignment" class="fa fa-pencil"></span>  AUD_Reopen_Approver_A1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <td>AUD_Reopen_Approver_A1</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>To</th>
+                                                    <td>AUD_Reopen_Approver</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Text</th>
+                                                    <td>Approve Re-open Audit - :AUDIT_TITLE</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Enabled</th>
+                                                    <td>Y</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-success" id="AUD_S021_S022_A037_RG_1rlgrp">
+                                    <div class="panel-heading">
+                                        <h4 class="tooltip-loc"><span data-toggle="tooltip" data-placement="top" title="Rule Group" class="fa fa-book1"></span>  AUD_S021_S022_A037_RG_1</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="dataTable_wrapper">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="width:15%">Code</th>
+                                                        <td>AUD_S021_S022_A037_RG_1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="width:15%;">Enabled</th>
+                                                        <td>Y</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4>Rules</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover table-resp">
+                                                        <thead>
+                                                            <th>Code</th>
+                                                            <th>Enabled</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Send_Reopen_Audit_For_Approval</td>
+                                                                <td>Y</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        </div>
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <!-- index of the data tables -->
+        <script>
+            $(document).ready(function() {
+                $('.tooltip-loc').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                });
+                $('.table-resp').DataTable({
+                    responsive: true
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();  
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+</html>

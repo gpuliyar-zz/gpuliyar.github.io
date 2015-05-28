@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/themes/default/style.css" />
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <style>
+            html, body{ height: 100%; background-color:white;}
+			.form-control{
+  padding-left: 5px;
+  width: 300px !important;
+  height: 25px;
+  color: black;
+  border: 1px solid rgba(5, 5, 5, 0.26);
+  margin-bottom: 10px !important;
+  margin-left: 10px;
+  background-color: rgba(255, 255, 255, 0.72);
+  margin-top:20px;
+				}
+        </style>
+    </head>
+    <body style="background-color: rgb(216, 229, 237);">
+	<div style="background-color: rgba(255, 255, 255, 0.54);">
+	<img src="../../template_files/dist/icons/flowchart.png" style="float:left;margin-left:10px"/>
+	<h3 style="font-family: sans-serif;color: #337ab7;line-height: 1.1; margin-left:30px;">WorkFlow</h3>
+	</div>
+	    <div id="jstree-container" class="content" style="padding-left:20px">	
+            <div id="jstree" class="jstree" style="width:1000px;">
+                <ul>
+                    <li>
+                        <a href="F013.html#F013_info" TARGET="workflowContent">Details</a>
+                    </li>
+                    <li>
+                        <a href="#" TARGET="workflowContent">Stages </a>
+                        <ul>
+                        <li><a href="F013.html#S120_stg" TARGET="workflowContent">Initiate Audit-Closure</a></li>
+                        <li><a href="F013.html#S121_stg" TARGET="workflowContent">Approve Audit-Closure</a></li>
+                        <li><a href="F013.html#S122_stg" TARGET="workflowContent">Follow-up Audit</a></li>
+                        <li><a href="F013.html#S123_stg" TARGET="workflowContent">Close Audit</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" TARGET="workflowContent">Transitions </a>
+                        <ul>
+                        <li>
+                            <a href="F013.html#AC_S120_S121_A028_tr" TARGET="workflowContent">AC_S120_S121_A028</a>
+                            <ul>
+                            <li>
+                                <a href="F013.html#AC_S120_S121_A028hooks" TARGET="workflowContent">Hooks</a>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Assignments</a>
+                                <ul>
+                                    <li><a href="F013.html#AUDIT_CLOSURE_APPROVER_A1_asnmt" TARGET="workflowContent">AUDIT_CLOSURE_APPROVER_A1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Emails</a>
+                                <ul>
+                                <li><a href="F013.html#AUDIT_CLOSURE_APPROVER_E1eml" TARGET="workflowContent">AUDIT_CLOSURE_APPROVER_E1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Rule Groups</a>
+                                <ul>
+                                <li><a href="F013.html#AC_S120_S121_A028_RG_1rlgrp" TARGET="workflowContent">AC_S120_S121_A028_RG_1</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="F013.html#AC_S120_S122_A029_tr" TARGET="workflowContent">AC_S120_S122_A029</a>
+                            <ul>
+                            <li>
+                                <a href="F013.html#AC_S120_S122_A029hooks" TARGET="workflowContent">Hooks</a>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Assignments</a>
+                                <ul>
+                                    <li><a href="F013.html#FOLLOW_UP_AUDITOR_A1_asnmt" TARGET="workflowContent">FOLLOW_UP_AUDITOR_A1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Emails</a>
+                                <ul>
+                                <li><a href="F013.html#FOLLOW_UP_AUDITOR_E1eml" TARGET="workflowContent">FOLLOW_UP_AUDITOR_E1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Rule Groups</a>
+                                <ul>
+                                <li><a href="F013.html#AC_S120_S122_A029_RG_1rlgrp" TARGET="workflowContent">AC_S120_S122_A029_RG_1</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="F013.html#AC_S120_S123_A030_tr" TARGET="workflowContent">AC_S120_S123_A030</a>
+                            <ul>
+                            <li>
+                                <a href="F013.html#AC_S120_S123_A030hooks" TARGET="workflowContent">Hooks</a>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Rule Groups</a>
+                                <ul>
+                                <li><a href="F013.html#AC_S120_S123_A030_RG_1rlgrp" TARGET="workflowContent">AC_S120_S123_A030_RG_1</a></li>
+                                <li><a href="F013.html#AC_S120_S123_A030_RG_2rlgrp" TARGET="workflowContent">AC_S120_S123_A030_RG_2</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="F013.html#AC_S121_S123_A003_tr" TARGET="workflowContent">AC_S121_S123_A003</a>
+                            <ul>
+                            <li>
+                                <a href="F013.html#AC_S121_S123_A003hooks" TARGET="workflowContent">Hooks</a>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Rule Groups</a>
+                                <ul>
+                                <li><a href="F013.html#AC_S121_S123_A003_RG_1rlgrp" TARGET="workflowContent">AC_S121_S123_A003_RG_1</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="F013.html#AC_S122_S123_A028_tr" TARGET="workflowContent">AC_S122_S123_A028</a>
+                            <ul>
+                            <li>
+                                <a href="F013.html#AC_S122_S123_A028hooks" TARGET="workflowContent">Hooks</a>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Rule Groups</a>
+                                <ul>
+                                <li><a href="F013.html#AC_S122_S123_A028_RG_1rlgrp" TARGET="workflowContent">AC_S122_S123_A028_RG_1</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="F013.html#AC_S122_S120_A031_tr" TARGET="workflowContent">AC_S122_S120_A031</a>
+                            <ul>
+                            <li>
+                                <a href="F013.html#AC_S122_S120_A031hooks" TARGET="workflowContent">Hooks</a>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Assignments</a>
+                                <ul>
+                                    <li><a href="F013.html#INITIATOR_A1_asnmt" TARGET="workflowContent">INITIATOR_A1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Emails</a>
+                                <ul>
+                                <li><a href="F013.html#INITIATOR_E1eml" TARGET="workflowContent">INITIATOR_E1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Rule Groups</a>
+                                <ul>
+                                <li><a href="F013.html#AC_S122_S120_A031_RG_1rlgrp" TARGET="workflowContent">AC_S122_S120_A031_RG_1</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="F013.html#AC_S120_S120_A001_tr" TARGET="workflowContent">AC_S120_S120_A001</a>
+                            <ul>
+                            <li>
+                                <a href="F013.html#AC_S120_S120_A001hooks" TARGET="workflowContent">Hooks</a>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Rule Groups</a>
+                                <ul>
+                                <li><a href="F013.html#AC_S120_S120_A001_RG_1rlgrp" TARGET="workflowContent">AC_S120_S120_A001_RG_1</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="F013.html#AC_S121_S120_A004_tr" TARGET="workflowContent">AC_S121_S120_A004</a>
+                            <ul>
+                            <li>
+                                <a href="F013.html#AC_S121_S120_A004hooks" TARGET="workflowContent">Hooks</a>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Assignments</a>
+                                <ul>
+                                    <li><a href="F013.html#INITIATOR_A1_asnmt" TARGET="workflowContent">INITIATOR_A1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Emails</a>
+                                <ul>
+                                <li><a href="F013.html#INITIATOR_E1eml" TARGET="workflowContent">INITIATOR_E1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Rule Groups</a>
+                                <ul>
+                                <li><a href="F013.html#AC_S121_S120_A004_RG_1rlgrp" TARGET="workflowContent">AC_S121_S120_A004_RG_1</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="F013.html#AC_S123_S123_A030_tr" TARGET="workflowContent">AC_S123_S123_A030</a>
+                            <ul>
+                            <li>
+                                <a href="F013.html#AC_S123_S123_A030hooks" TARGET="workflowContent">Hooks</a>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Rule Groups</a>
+                                <ul>
+                                <li><a href="F013.html#AC_S123_S123_A030_RG_1rlgrp" TARGET="workflowContent">AC_S123_S123_A030_RG_1</a></li>
+                                <li><a href="F013.html#AC_S123_S123_A030_RG_2rlgrp" TARGET="workflowContent">AC_S123_S123_A030_RG_2</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="F013.html#AC_S123_S121_A028_tr" TARGET="workflowContent">AC_S123_S121_A028</a>
+                            <ul>
+                            <li>
+                                <a href="F013.html#AC_S123_S121_A028hooks" TARGET="workflowContent">Hooks</a>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Assignments</a>
+                                <ul>
+                                    <li><a href="F013.html#AUDIT_CLOSURE_APPROVER_A1_asnmt" TARGET="workflowContent">AUDIT_CLOSURE_APPROVER_A1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Emails</a>
+                                <ul>
+                                <li><a href="F013.html#AUDIT_CLOSURE_APPROVER_E1eml" TARGET="workflowContent">AUDIT_CLOSURE_APPROVER_E1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Rule Groups</a>
+                                <ul>
+                                <li><a href="F013.html#AC_S123_S121_A028_RG_1rlgrp" TARGET="workflowContent">AC_S123_S121_A028_RG_1</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="F013.html#AC_S123_S122_A029_tr" TARGET="workflowContent">AC_S123_S122_A029</a>
+                            <ul>
+                            <li>
+                                <a href="F013.html#AC_S123_S122_A029hooks" TARGET="workflowContent">Hooks</a>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Assignments</a>
+                                <ul>
+                                    <li><a href="F013.html#FOLLOW_UP_AUDITOR_A1_asnmt" TARGET="workflowContent">FOLLOW_UP_AUDITOR_A1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Emails</a>
+                                <ul>
+                                <li><a href="F013.html#FOLLOW_UP_AUDITOR_E1eml" TARGET="workflowContent">FOLLOW_UP_AUDITOR_E1</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"  TARGET="workflowContent">Rule Groups</a>
+                                <ul>
+                                <li><a href="F013.html#AC_S123_S122_A029_RG_1rlgrp" TARGET="workflowContent">AC_S123_S122_A029_RG_1</a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- 5 include the minified jstree source -->
+        <script src="../../template_files/js/jstree.min.js"></script>
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>        
+        <script>
+  		   $(function () {
+                $("#jstree").jstree({
+                    "plugins" : [ "search" ]
+                });
+                var to = false;
+                $('#plugins4_q').keyup(function () {
+                    if(to) { clearTimeout(to); }
+                    to = setTimeout(function () {
+                        var v = $('#plugins4_q').val();
+                        $('#jstree').jstree(true).search(v);
+                    }, 250);
+                });
+			});
+            (function($){
+                $(window).load(function(){
+                        $('#jstree').jstree();
+                  });       
+                $('#jstree').on("changed.jstree", function (e, data) {
+                    str=data.node.a_attr.href;
+                    var n = str.search("pldoc");
+                    var m = str.search("javadoc");
+                    if(n==0){
+                        window.open(data.node.a_attr.href,"pldoc");
+                    }else if(m==0){
+                        window.open(data.node.a_attr.href,"javadoc");
+                    }else if(data.node.a_attr.href!="#"){
+                        parent.workflowContent.location.href = data.node.a_attr.href;
+                    }
+                });
+                })(jQuery);
+      
+            (function($){
+            $(window).load(function(){
+               $("#jstree-container").mCustomScrollbar({
+                    axis:"yx",
+                    theme:"dark-thin",
+                    mouseWheel:{ scrollAmount: "250px" }
+                });
+            });
+            })(jQuery);
+        </script>
+    </body>
+</html>

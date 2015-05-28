@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Data Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-database fa-fw" style="margin-right:10px"></span> <a class="headerAlign" id="MS_AUD_AUDIT_PLAN">AUDIT PLAN</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Internal Name</th>
+                                                <td>AUDIT PLAN</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Table Name</th>
+                                                <td>MS_AUD_AUDIT_PLAN</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-pills">
+                                            <li class="active"><a href="#header181-pills" data-toggle="tab">Header</a></li>
+                                            <li><a href="#ACD181-pills" data-toggle="tab">ACD</a></li>
+                                            <li><a href="#ALM181-pills" data-toggle="tab">ALM</a></li>
+                                            <li><a href="#AMM181-pills" data-toggle="tab">AMM</a></li>
+                                            <li><a href="#AUE181-pills" data-toggle="tab">AUE</a></li>
+                                            <li><a href="#CRO181-pills" data-toggle="tab">CRO</a></li>
+                                            <li><a href="#LOC181-pills" data-toggle="tab">LOC</a></li>
+                                            <li><a href="#OOR181-pills" data-toggle="tab">OOR</a></li>
+                                            <li><a href="#ORG181-pills" data-toggle="tab">ORG</a></li>
+                                            <li><a href="#PNY181-pills" data-toggle="tab">PNY</a></li>
+                                            <li><a href="#RPL181-pills" data-toggle="tab">RPL</a></li>
+                                            <li><a href="#RSK181-pills" data-toggle="tab">RSK</a></li>
+                                            <li><a href="#TOR181-pills" data-toggle="tab">TOR</a></li>
+                                            <li><a href="#TRS181-pills" data-toggle="tab">TRS</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade in active" id="header181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN.html">MS_AUD_AUDIT_PLAN</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Plan Id</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">PLAN_ID</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>The multi-audit plan id is system generated on submission of the Create/Modify Multi-Audit Plan Form 
+the first time by setting the action to Save and Continue,Send To Review or Send To Approver. 
+The system-generated plan ID is configurable.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <font style="color:red;">Plan Title</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">PLAN_TITLE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field is used to capture the title of the plan. 
+The Title should auto-populate and will be displayed after the org level. </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <font style="color:red;">Type</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">PLAN_TYPE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_MSNPI_Get_LOV_Details.html">MS_AUD_MSNPI_Get_LOV_Details</a>
+                                                                    <br/>
+                                                                    (Plan Type)
+                                                                </td>
+                                                                <td>This field describes the type or purpose of this multi-year plan. This is an important 
+field that determines whether this is a plan for planning upcoming audit projects or 
+whether this is a container for a program containing multiple audit projects.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Rich Text" class="fa fa-file-word-o fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Accomplishments
+                                                                        <br/>
+                                                                        <font style="color:green;">ACCOMPLISHMENTS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field post-facto to document the final accomplishments of this plan before it is closed out</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Rich Text" class="fa fa-file-word-o fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        ADD_SCOPE
+                                                                        <br/>
+                                                                        <font style="color:green;">ADD_SCOPE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field to optionally describe the scope of this plan</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number ID" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        ADVISOR_JSONDATA
+                                                                        <br/>
+                                                                        <font style="color:green;">ADVISOR_JSONDATA</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the JSON information of  Auditable Entity or Process to be shown in Audit Advisor.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        ADVISOR_RUN_FLAG
+                                                                        <br/>
+                                                                        <font style="color:green;">ADVISOR_RUN_FLAG</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field is one of the parameter for JSON fields which captures the JSON information. Based on this field value we are invoking the infolet attached to the JSON fields.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Rich Text" class="fa fa-file-word-o fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Approach
+                                                                        <br/>
+                                                                        <font style="color:green;">APPROACH</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field to capture an overview of the business conditions and their relevance to the plan</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Approved By
+                                                                        <br/>
+                                                                        <font style="color:green;">APPROVED BY</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the user who approves the plan.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Date" class="fa fa-calendar fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Approved On
+                                                                        <br/>
+                                                                        <font style="color:green;">APPROVED ON</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the date on which the plan is approved</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Attachments
+                                                                        <br/>
+                                                                        <font style="color:green;">ATTACHMENTS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field to capture all documents related to this plan.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Budgeted Cost
+                                                                        <br/>
+                                                                        <font style="color:green;">BUDGETED_COST</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field to capture the budgeted person hours for this plan. This value cannot be less than 0</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Budgeted Effort (from Audit Candidates)
+                                                                        <br/>
+                                                                        <font style="color:green;">BUDGETED_EFFORT_FROM_AC</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field will display the sum of the effort for all the Auditable candidates defined in the Audit candidate tab</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Rich Text" class="fa fa-file-word-o fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Business Overview
+                                                                        <br/>
+                                                                        <font style="color:green;">BUSINESS_OVERVIEW</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field to capture an overview of the business conditions and their relevance to the plan</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Budgeted_Effort_Field1
+                                                                        <br/>
+                                                                        <font style="color:green;">Budgeted_Effort_Field1</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field will display the sum of the effort for the current year across all the audit candidates</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Budgeted_Effort_Field2
+                                                                        <br/>
+                                                                        <font style="color:green;">Budgeted_Effort_Field2</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field will display the sum of the effort for the current year + 1 across all the audit candidates</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Budgeted_Effort_Field3
+                                                                        <br/>
+                                                                        <font style="color:green;">Budgeted_Effort_Field3</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field will display the sum of the effort for the current year + 2 across all the audit candidates</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Budgeted_Effort_Field4
+                                                                        <br/>
+                                                                        <font style="color:green;">Budgeted_Effort_Field4</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field will display the sum of the effort for the current year + 3 across all the audit candidates</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Budgeted_Effort1
+                                                                        <br/>
+                                                                        <font style="color:green;">Budgeted_Effort_Label1</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field will display the label for the Budgeted Effort of current year across all the audit candidates</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Budgeted_Effort2
+                                                                        <br/>
+                                                                        <font style="color:green;">Budgeted_Effort_Label2</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field will display the label for the Budgeted Effort for the current year + 1 across all the audit candidates</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Budgeted_Effort3
+                                                                        <br/>
+                                                                        <font style="color:green;">Budgeted_Effort_Label3</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field will display the label for the Budgeted Effort for the current year + 2.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Budgeted_Effort4
+                                                                        <br/>
+                                                                        <font style="color:green;">Budgeted_Effort_Label4</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field will display the label for the Budgeted Effort for the current year + 3.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        CANDIDATE_STATUS
+                                                                        <br/>
+                                                                        <font style="color:green;">CANDIDATE_STATUS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Status of Audit Candidates</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        CAN_ID
+                                                                        <br/>
+                                                                        <font style="color:green;">CAN_ID</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Candidate ID of Audit Candidates</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Date" class="fa fa-calendar fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        End Date
+                                                                        <br/>
+                                                                        <font style="color:green;">END_DATE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field describes the end date till when this plan is effective. 
+It should be equal to or greater than the system date and needs to be greater than the start date.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Enterprise ID
+                                                                        <br/>
+                                                                        <font style="color:green;">ENTERPRISE ID</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the  Enterprise ID.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        HDR_ORGANIZATION
+                                                                        <br/>
+                                                                        <font style="color:green;">HDR_ORGANIZATION</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_Org_Flow_MSNPI.html">MS_AUD_Org_Flow_MSNPI</a>
+                                                                </td>
+                                                                <td>This field should display all the organization entities that are available in the system</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        INTERNAL_PLAN_ID
+                                                                        <br/>
+                                                                        <font style="color:green;">INTERNAL_PLAN_ID</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the plan_id for the plan . This ID remains the same even when we create multiple versions of the same plan</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Initiator
+                                                                        <br/>
+                                                                        <font style="color:green;">Initiator</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Initiator of the Plan</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Oraganization Level
+                                                                        <br/>
+                                                                        <font style="color:green;">ORGANIZATION LEVEL</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Organization level of the Organization selected in Conducted by Organization field.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number ID" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        ORG_JSONDATA
+                                                                        <br/>
+                                                                        <font style="color:green;">ORG_JSONDATA</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the JSON information of  Organizations  to be shown in  Organization Advisor.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Rich Text" class="fa fa-file-word-o fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Overview
+                                                                        <br/>
+                                                                        <font style="color:green;">OVERVIEW</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field to capture an overview of this plan</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        PERF_CONFIG_FLAG
+                                                                        <br/>
+                                                                        <font style="color:green;">PERF_CONFIG_FLAG</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the information of System level parameters and its values.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Action on Form Submission
+                                                                        <br/>
+                                                                        <font style="color:green;">PLAN_ACTION</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_Flow_Actions.html">MS_AUD_Flow_Actions</a>
+                                                                </td>
+                                                                <td>Use this field to capture the action to be taken by the user which includes Save and Continue, Send for Approval, Approve, Request Clarification, Cancel, Send for Review</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Plan Comments
+                                                                        <br/>
+                                                                        <font style="color:green;">PLAN_COMMENTS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field to capture user comments on plan submission.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Plan Stage
+                                                                        <br/>
+                                                                        <font style="color:green;">PLAN_STAGE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Stage of the Plan</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Rich Text" class="fa fa-file-word-o fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Process Overview
+                                                                        <br/>
+                                                                        <font style="color:green;">PROCESS_OVERVIEW</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field to capture an overview of the process for executing on the plan.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Restrict Access To
+                                                                        <br/>
+                                                                        <font style="color:green;">RESTRICT_ACCESS_TO</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_MSNPI_Get_LOV_Details.html">MS_AUD_MSNPI_Get_LOV_Details</a>
+                                                                    <br/>
+                                                                    (Restrict Access To)
+                                                                </td>
+                                                                <td>This field is deprecated.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Reviewer
+                                                                        <br/>
+                                                                        <font style="color:green;">REVIEWER</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_Org_Users.html">MS_AUD_Org_Users</a>
+                                                                    <br/>
+                                                                    (Plan Reviewer)
+                                                                </td>
+                                                                <td>This field captures the Reviewer of the Plan.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number ID" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        RISK_JSONDATA
+                                                                        <br/>
+                                                                        <font style="color:green;">RISK_JSONDATA</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the JSON information of  Risks  to be shown in Risk Advisor.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number ID" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        RSKORG_JSONDATA
+                                                                        <br/>
+                                                                        <font style="color:green;">RSKORG_JSONDATA</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the JSON information of  Organizations and Risks  to be shown in  Organization Advisor.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        RTF_ATTACH
+                                                                        <br/>
+                                                                        <font style="color:green;">RTF_ATTACH</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the attachments attached in RTF fields in Plan Form.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Reviewer Flag
+                                                                        <br/>
+                                                                        <font style="color:green;">Reviewer Flag</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Based on this field value Send for Review Option is enabled in Action drop down of Plan form</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Rich Text" class="fa fa-file-word-o fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Significant Challenges
+                                                                        <br/>
+                                                                        <font style="color:green;">SIGNIFICANT_CHALLENGES</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field to optionally describe the significant challenges to successful completion of this plan</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Date" class="fa fa-calendar fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Start Date
+                                                                        <br/>
+                                                                        <font style="color:green;">START_DATE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field describes the start date from when this plan is effective.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Status
+                                                                        <br/>
+                                                                        <font style="color:green;">STATUS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_STATUS.html">MS_AUD_STATUS</a>
+                                                                </td>
+                                                                <td>This field captures the current status of this plan.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        TMP_PLAN_ID
+                                                                        <br/>
+                                                                        <font style="color:green;">TMP_PLAN_ID</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Plan ID of a Plan.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Total Budget Effort (in Days)
+                                                                        <br/>
+                                                                        <font style="color:green;">TOTAL_BUDGETED_EFFORT</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field to capture the budgeted person hours for this plan. This value cannot be less than 0.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Use Assessment From
+                                                                        <br/>
+                                                                        <font style="color:green;">USE_ASSESSMENT_FORM</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field displays a list of scoring scenarios that are relevant for the selected organization as well as the Default score.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Version
+                                                                        <br/>
+                                                                        <font style="color:green;">VERSION_NO</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field will display the version number and  is system generated on submission of the Annual/Multi-Year Plan form the first time.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="ACD181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_ACD.html">MS_AUD_AUDIT_PLAN_ACD</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Audit Candidate Id</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_CANDIDATE_ID</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the candidate ID of an audit candidate.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        ACD_ORDERKEY
+                                                                        <br/>
+                                                                        <font style="color:green;">ACD_ORDERKEY</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the order in which the audit candidates are added for a plan</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Audit Classification
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_AUDIT_CLASSIFICATION</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_Audit_Dependent_Lov.html">MS_AUD_Audit_Dependent_Lov</a>
+                                                                    <br/>
+                                                                    (Audit Classifications)
+                                                                </td>
+                                                                <td>This field captures the audit classification for an audit candidate.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Audit Manager
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_AUDIT_MANAGER</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_Org_Flow_Up.html">MS_AUD_Org_Flow_Up</a>
+                                                                </td>
+                                                                <td>This field captures Audit Manager of an audit candidate. He should be with activity AUD -Manages the Audit and in the current organization for which this plan is being created or flow-up</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Audit Title
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_AUDIT_TITLE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the title of the audit candidate.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Audit Type
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_AUDIT_TYPE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_AUDIT_Dependent_List_details.html">MS_AUD_AUDIT_Dependent_List_details</a>
+                                                                </td>
+                                                                <td>This field captures the audit type for an audit candidate.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        ResourcePool/Effort
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_EFFORT</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field is deprecated.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Lead Auditor
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_LEAD_AUDITOR</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures Lead Auditor of an audit candidate. He should be with activity AUD -Leads the Audit and in the current organization for which this plan is being created.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Rich Text" class="fa fa-file-word-o fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Purpose/ Rationale
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_PURPOSE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Purpose of the audit.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Restrict Access To
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_RESTRICT_ACCESS TO</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_MSNPI_Get_LOV_Details.html">MS_AUD_MSNPI_Get_LOV_Details</a>
+                                                                    <br/>
+                                                                    (Restrict Access To)
+                                                                </td>
+                                                                <td>This filed captures the restrict acccess to information which has Restrict Access To, Owner Organization and Team members based on which audits will be accessible for the Users.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Date" class="fa fa-calendar fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Schedule (Time Window/Quarter/Month/Date)
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_SCHEDULE_DATE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Schedule Date of an audit Candidate.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Schedule Years
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_SCHEDULE_YEARS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_MSNPI_Get_LOV_Details.html">MS_AUD_MSNPI_Get_LOV_Details</a>
+                                                                    <br/>
+                                                                    (Audit Schedule Types)
+                                                                </td>
+                                                                <td>This field captures Schedule Years for and Audit Candidate.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Scope Based On
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_SCOPE_BASED_ON</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_MSNPI_Get_LOV_Details.html">MS_AUD_MSNPI_Get_LOV_Details</a>
+                                                                    <br/>
+                                                                    (Audit Based On)
+                                                                </td>
+                                                                <td>This field captures the scope of the audit candidate. It can be Process/AE -Risk, Organization -AE -Risk, Organization-Risk, Organization Non-risk related and Process or AE.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Status
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_STATUS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Status of Audit Candidates</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Schedule (Time Window/Quarter/Month/Date)
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_TIME_WINDOW</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_Schedule_Window.html">MS_AUD_Schedule_Window</a>
+                                                                </td>
+                                                                <td>time window selected is captured in this field</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Audit Based On
+                                                                        <br/>
+                                                                        <font style="color:green;">AUDIT BASED ON</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field is deprecated.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Deletion Comments
+                                                                        <br/>
+                                                                        <font style="color:green;">DELETION_COMMENTS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the comments given for marking the scheduled audit candidates for deletion.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Mark For Deletion
+                                                                        <br/>
+                                                                        <font style="color:green;">MARK_FOR_DELETION</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the data to mark the scheduled audits for deletion after reopening the plan.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Process/AE
+                                                                        <br/>
+                                                                        <font style="color:green;">PROCESS_AE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Process/AE added for audit candidates.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Resource Pools/Effort
+                                                                        <br/>
+                                                                        <font style="color:green;">RESOURCE POOL</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the resource pool effort and will be editable based on System level parameter.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="ALM181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_ALM.html">MS_AUD_AUDIT_PLAN_ALM</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Lead Auditor</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_LEAD_AUDITOR_MLOV</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Lead Auditors selected for a cross - functional audit.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="AMM181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_AMM.html">MS_AUD_AUDIT_PLAN_AMM</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Audit Manager</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_AUDIT_MANAGER_MLOV</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Audit Managers selected for a cross - functional audit.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="AUE181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_AUE.html">MS_AUD_AUDIT_PLAN_AUE</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Core Objects(Processes etc)</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_CORE_OBJECT</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Auditable Entites/ Processes selected for an audit candidate based on Scope.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="CRO181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_CRO.html">MS_AUD_AUDIT_PLAN_CRO</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Core Objects (Processes etc)</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">TMP_CORE_OBJECTS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Auditable Entites/ Processes selected for an audit candidate based on Scope.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="LOC181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_LOC.html">MS_AUD_AUDIT_PLAN_LOC</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Locations</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_LOCATIONS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_Get_Locations_MSNPI.html">MS_AUD_Get_Locations_MSNPI</a>
+                                                                </td>
+                                                                <td>This field captures the Locations selected for an audit candidate.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="OOR181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_OOR.html">MS_AUD_AUDIT_PLAN_OOR</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Owner Organizations</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">OWNER_ORGANIZATIONS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_Org_Flow_Down_MSNPI.html">MS_AUD_Org_Flow_Down_MSNPI</a>
+                                                                </td>
+                                                                <td>This field is deprecated.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="ORG181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_ORG.html">MS_AUD_AUDIT_PLAN_ORG</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">AC_ORGANIZATIONS</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_ORGANIZATIONS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Organizations selected for an audit candidate based on Scope.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="PNY181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_PNY.html">MS_AUD_AUDIT_PLAN_PNY</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Plan Years</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_PLAN_YEARS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_Plan_Year.html">MS_AUD_Plan_Year</a>
+                                                                </td>
+                                                                <td>This field captures the plan Years selected for an audit candidate.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="RPL181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_RPL.html">MS_AUD_AUDIT_PLAN_RPL</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Rpl Id</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">RP_ID</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the resource pool ID of the resource pools added for the audit candidates.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        PLAN_RESOURCE_POOL_GEN
+                                                                        <br/>
+                                                                        <font style="color:green;">PLAN_RESOURCE_POOL_GEN</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field is used to check whether resource pool ID is already generated for resource pools added for audit candidates in a Plan.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        RPL_ORDERKEY
+                                                                        <br/>
+                                                                        <font style="color:green;">RPL_ORDERKEY</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the order in which the resource pools are added for audit canidadates.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        RPL_SAVE
+                                                                        <br/>
+                                                                        <font style="color:green;">RPL_SAVE</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field is deprecated.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Candidate Id
+                                                                        <br/>
+                                                                        <font style="color:green;">RP_CANDIDATE_ID</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Candidate ID of Audit Candidates added for a plan</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Number" class="fa fa-sort-numeric-asc fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Estimated Effort (Man days)
+                                                                        <br/>
+                                                                        <font style="color:green;">RP_ESTIMATED_EFFORT</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field is used to define the person days of effort required from the selected team during the audit</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Justification
+                                                                        <br/>
+                                                                        <font style="color:green;">RP_JUSTIFICATION</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>Use this field to capture user justification for the estimated effort.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        Team
+                                                                        <br/>
+                                                                        <font style="color:green;">RP_TEAM</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/MS_AUD_Rpl_Team.html">MS_AUD_Rpl_Team</a>
+                                                                </td>
+                                                                <td>This field describes the team that is required to perform the audit. By default this lists all organizations in the system</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="RSK181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_RSK.html">MS_AUD_AUDIT_PLAN_RSK</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Related Risks</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">AC_RELATED_RISKS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Related Risks selected for an audit candidate based on Scope.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="TOR181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_TOR.html">MS_AUD_AUDIT_PLAN_TOR</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Organizations</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">TMP_ORGANIZATIONS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Organizations selected for an audit candidate based on Scope.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                            <div class="tab-pane fade" id="TRS181-pills">
+                                                </br>
+                                                <p>DB Table:  <a href="../db_tables/MS_AUD_AUDIT_PLAN_TRS.html">MS_AUD_AUDIT_PLAN_TRS</a></p>
+                                                <div class="panel-body">
+                                                    <table class="table table-hover dataobject-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Label<br><font style="color:green;">Field</font></th>
+                                                                <th>Infolet (Filter)</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="attrType-tooltip">
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Normal Text" class="fa fa-font fa-fw iconS"></span>
+                                                                </td>
+                                                                <td class="attrType-tooltip">
+                                                                    <p>
+                                                                        <span data-toggle="tooltip" data-placement="top" title="Primary Key" class="fa fa-key fa-fw iconS"></span>
+                                                                        <font style="color:red;">Related Risks</font>
+                                                                        <br/>
+                                                                        <font style="color:green;">TMP_RELATED_RISKS</font>
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="../infolets/.html"></a>
+                                                                </td>
+                                                                <td>This field captures the Related Risks selected for an audit candidate.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- tab-pane fade -->
+                                        </div>
+                                        <!-- /.tab-content -->
+                                    </div>
+                                </div>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">DataForms</th>
+                                    </thead>
+                                        <tr>
+                                            <td><a href="../data_forms/MS_AUD_PLAN_AUDIT.html">Annual Plan</a></td>
+                                            <td></td>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                 $('.attrType-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.dataobject-table').DataTable({
+                    "responsive": true,
+                    "aaSorting": [],
+                    "bAutoWidth": false, 		// Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "3%" },     // 1st column width 
+                        { "sWidth": "25%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                        { "sWidth": "47%" }     // 4th column width 
+                    ]
+                });
+
+                $('.dataobject-table-nr').DataTable({
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false, 	    // Disable the auto width calculation 
+                    "aaSorting": [],
+                    "aoColumns": [
+                        { "sWidth": "3%" },     // 1st column width 
+                        { "sWidth": "25%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                        { "sWidth": "47%" }     // 4th column width 
+                    ]
+                });
+            });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+               (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();  
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+</html>

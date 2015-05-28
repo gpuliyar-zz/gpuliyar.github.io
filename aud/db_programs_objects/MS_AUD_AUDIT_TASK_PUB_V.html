@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>DB Programs and Objects</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-table fa-fw" style="margin-right:10px"></span>  <a class="headerAlign" id="MS_AUD_AUDIT_TASK_PUB_V">MS_AUD_AUDIT_TASK_PUB_V</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+                                                
+  CREATE OR REPLACE FORCE VIEW "AUDDEVSP3"."MS_AUD_AUDIT_TASK_PUB_V" ("SETUP_AUDITEE_RESP_REQUIRED", "SETUP_AUDITORS_CREATE_TASKS", "SETUP_AUDITOR_TASK_REVIEW", "SETUP_ENABLE_AUDIT_SCORING", "SETUP_PLANNING_SCOPING", "DD_OBJECT_TYPE", "DD_PROCESS_INSTANCE_ID", "DD_INSTANCE_ID", "DD_CREATED_ON", "DD_CREATED_BY", "DD_MODIFIED_ON", "DD_MODIFIED_BY", "DD_PROCESS_CODE", "DD_EDIT_FLAG", "DD_STATUS_FLAG", "SETUP_QUALITY_REVIEWER", "SETUP_REPORT_TEMPLATE", "SETUP_SINGLE_AUDITOR_PROCESS", "SETUP_TASK_SPECIFIED_DATES", "RTF_ATTACH", "TASK_COMMENTS", "TASK_ACTION", "ACTION_COMMENTS", "AUDIT_ID", "TASK_TYPE", "TASK_CATEGORY", "TASK_NAME", "AUDITOR", "APPROVER", "PLANNED_START_DATE", "PLANNED_COMPLETION_DATE", "BUDGETED_HOURS", "TASK_EXECUTION_RESULT", "TIME_SPENT", "PURPOSE", "RESULTS", "WORK_DONE", "STATUS", "RESTRICT_ACCESS_TO", "FINAL_APPROVER", "SETUP_ACTION_PLAN_CAN_CREATED", "SETUP_APPROVALS_REQUIRED", "TASK_ID", "TASK_START_DATE", "TASK_COMPLETION_DATE", "TASK_INITIATED_BY", "INSTRUCTIONS", "TASK_STATUS", "TASK_OWNER", "TASK_REVIEWER", "CONDUCTED_BY", "LEAD_AUDITOR", "AUDIT_MANAGER", "AUDIT_TITLE", "AUDIT_CLASSIFICATION", "TASK_ACTION_REASSIGN", "REFERENCE_TYPE", "CORE_OBJECTS_HIDDEN_JSON", "RELATED_RISKS_HIDDEN_JSON", "ORG_HIDDEN_JSON", "HIDDEN_USER_NAME", "RP_TASK_OWNER", "RP_TASK_APPROVER", "STATUS_FLAG", "IS_COACHING_NOTES_ADDED", "RP_FINAL_APPROVER", "RP_COUNT", "RP_USER", "DRAFT_STATUS_FLAG", "IS_WORKFLOW_SUBMITTED", "TOTAL_OPEN_COMMENTS", "AUTHOR_NAME", "COA_EMAIL_FLAG", "HEADER_DETAILS", "HIDDEN_FLD", "DATA_CORRECTION_FLAG_AT", "EDITABLE_FIELDS_JSON_AT", "DC_SAVE_STATUS_AT") AS 
+  SELECT "SETUP_AUDITEE_RESP_REQUIRED","SETUP_AUDITORS_CREATE_TASKS","SETUP_AUDITOR_TASK_REVIEW","SETUP_ENABLE_AUDIT_SCORING","SETUP_PLANNING_SCOPING","DD_OBJECT_TYPE","DD_PROCESS_INSTANCE_ID","DD_INSTANCE_ID","DD_CREATED_ON","DD_CREATED_BY","DD_MODIFIED_ON","DD_MODIFIED_BY","DD_PROCESS_CODE","DD_EDIT_FLAG","DD_STATUS_FLAG","SETUP_QUALITY_REVIEWER","SETUP_REPORT_TEMPLATE","SETUP_SINGLE_AUDITOR_PROCESS","SETUP_TASK_SPECIFIED_DATES","RTF_ATTACH","TASK_COMMENTS","TASK_ACTION","ACTION_COMMENTS","AUDIT_ID","TASK_TYPE","TASK_CATEGORY","TASK_NAME","AUDITOR","APPROVER","PLANNED_START_DATE","PLANNED_COMPLETION_DATE","BUDGETED_HOURS","TASK_EXECUTION_RESULT","TIME_SPENT","PURPOSE","RESULTS","WORK_DONE","STATUS","RESTRICT_ACCESS_TO","FINAL_APPROVER","SETUP_ACTION_PLAN_CAN_CREATED","SETUP_APPROVALS_REQUIRED","TASK_ID","TASK_START_DATE","TASK_COMPLETION_DATE","TASK_INITIATED_BY","INSTRUCTIONS","TASK_STATUS","TASK_OWNER","TASK_REVIEWER","CONDUCTED_BY","LEAD_AUDITOR","AUDIT_MANAGER","AUDIT_TITLE","AUDIT_CLASSIFICATION","TASK_ACTION_REASSIGN","REFERENCE_TYPE","CORE_OBJECTS_HIDDEN_JSON","RELATED_RISKS_HIDDEN_JSON","ORG_HIDDEN_JSON","HIDDEN_USER_NAME","RP_TASK_OWNER","RP_TASK_APPROVER","STATUS_FLAG","IS_COACHING_NOTES_ADDED","RP_FINAL_APPROVER","RP_COUNT","RP_USER","DRAFT_STATUS_FLAG","IS_WORKFLOW_SUBMITTED","TOTAL_OPEN_COMMENTS","AUTHOR_NAME","COA_EMAIL_FLAG","HEADER_DETAILS","HIDDEN_FLD","DATA_CORRECTION_FLAG_AT","EDITABLE_FIELDS_JSON_AT","DC_SAVE_STATUS_AT" FROM ms_aud_audit_task
+
+ 
+                                                </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();  
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

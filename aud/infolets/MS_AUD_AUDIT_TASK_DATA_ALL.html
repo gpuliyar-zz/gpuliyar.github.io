@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Infolets</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">                                <h4 class="infolet-tooltip"><span class="fa fa-info fa-fw" style="margin-right:10px"></span>  
+                                <span data-toggle="tooltip" data-placement="top" title="Category: Assets" class="fa fa-cubes fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Output Type: Ordinary Data Report" class="fa fa-sign-out fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Type: SQL Based" class="fa fa-globe fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Keep History" class="fa fa-history fa-fw"></span>
+                                <a class="headerAlign" id="MS_AUD_AUDIT_TASK_DATA_ALL">MS_AUD_AUDIT_TASK_DATA_ALL</a> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>MS_AUD_AUDIT_TASK_DATA_ALL</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#query-pill" data-toggle="tab">Query</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-c">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Type</th>
+                                                            <th>Result Column Name</th>
+                                                            <th>User Column Name</th>
+                                                            <th>Default Infolet/<br>Input Infolet</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>ACTION_COMMENTS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ACTION_COMMENTS</td>
+                                                                <td>ACTION_COMMENTS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>ACTION_FIN_APPROVER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ACTION_FIN_APPROVER</td>
+                                                                <td>ACTION_FIN_APPROVER</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>APPROVER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>APPROVER</td>
+                                                                <td>APPROVER</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>AUDITOR</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDITOR</td>
+                                                                <td>AUDITOR</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>AUDIT_CLASSIFICATION</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_CLASSIFICATION</td>
+                                                                <td>AUDIT_CLASSIFICATION</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>AUDIT_ID</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_ID</td>
+                                                                <td>AUDIT_ID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>AUDIT_MANAGER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_MANAGER</td>
+                                                                <td>AUDIT_MANAGER</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>AUDIT_TITLE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_TITLE</td>
+                                                                <td>AUDIT_TITLE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td>AUTHOR_NAME</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUTHOR_NAME</td>
+                                                                <td>AUTHOR_NAME</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>BUDGETED_HOURS</td>
+                                                                <td>Number</td>
+                                                                <td>BUDGETED_HOURS</td>
+                                                                <td>BUDGETED_HOURS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>COA_EMAIL_FLAG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>COA_EMAIL_FLAG</td>
+                                                                <td>COA_EMAIL_FLAG</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>CONDUCTED_BY</td>
+                                                                <td>Varchar2</td>
+                                                                <td>CONDUCTED_BY</td>
+                                                                <td>CONDUCTED_BY</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>13</td>
+                                                                <td>CORE_OBJECTS_HIDDEN_JSON</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>CORE_OBJECTS_HIDDEN_JSON</td>
+                                                                <td>CORE_OBJECTS_HIDDEN_JSON</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>14</td>
+                                                                <td>DATA_CORRECTION_FLAG_AT</td>
+                                                                <td>Varchar2</td>
+                                                                <td>DATA_CORRECTION_FLAG_AT</td>
+                                                                <td>DATA_CORRECTION_FLAG_AT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>15</td>
+                                                                <td>DC_SAVE_STATUS_AT</td>
+                                                                <td>Number</td>
+                                                                <td>DC_SAVE_STATUS_AT</td>
+                                                                <td>DC_SAVE_STATUS_AT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>16</td>
+                                                                <td>DD_CREATED_BY</td>
+                                                                <td>Varchar2</td>
+                                                                <td>DD_CREATED_BY</td>
+                                                                <td>DD_CREATED_BY</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>17</td>
+                                                                <td>DD_CREATED_ON</td>
+                                                                <td>Date</td>
+                                                                <td>DD_CREATED_ON</td>
+                                                                <td>DD_CREATED_ON</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>18</td>
+                                                                <td>DD_EDIT_FLAG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>DD_EDIT_FLAG</td>
+                                                                <td>DD_EDIT_FLAG</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>19</td>
+                                                                <td>DD_INSTANCE_ID</td>
+                                                                <td>Number</td>
+                                                                <td>DD_INSTANCE_ID</td>
+                                                                <td>DD_INSTANCE_ID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>20</td>
+                                                                <td>DD_MODIFIED_BY</td>
+                                                                <td>Varchar2</td>
+                                                                <td>DD_MODIFIED_BY</td>
+                                                                <td>DD_MODIFIED_BY</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>21</td>
+                                                                <td>DD_MODIFIED_ON</td>
+                                                                <td>Date</td>
+                                                                <td>DD_MODIFIED_ON</td>
+                                                                <td>DD_MODIFIED_ON</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>22</td>
+                                                                <td>DD_OBJECT_TYPE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>DD_OBJECT_TYPE</td>
+                                                                <td>DD_OBJECT_TYPE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>23</td>
+                                                                <td>DD_PROCESS_CODE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>DD_PROCESS_CODE</td>
+                                                                <td>DD_PROCESS_CODE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>24</td>
+                                                                <td>DD_PROCESS_INSTANCE_ID</td>
+                                                                <td>Number</td>
+                                                                <td>DD_PROCESS_INSTANCE_ID</td>
+                                                                <td>DD_PROCESS_INSTANCE_ID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>25</td>
+                                                                <td>DD_STATUS_FLAG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>DD_STATUS_FLAG</td>
+                                                                <td>DD_STATUS_FLAG</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>26</td>
+                                                                <td>DRAFT_STATUS_FLAG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>DRAFT_STATUS_FLAG</td>
+                                                                <td>DRAFT_STATUS_FLAG</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>27</td>
+                                                                <td>EDITABLE_FIELDS_JSON_AT</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>EDITABLE_FIELDS_JSON_AT</td>
+                                                                <td>EDITABLE_FIELDS_JSON_AT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>28</td>
+                                                                <td>FINAL_APPROVER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>FINAL_APPROVER</td>
+                                                                <td>FINAL_APPROVER</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>29</td>
+                                                                <td>HEADER_DETAILS</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>HEADER_DETAILS</td>
+                                                                <td>HEADER_DETAILS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>30</td>
+                                                                <td>HIDDEN_FLD</td>
+                                                                <td>Varchar2</td>
+                                                                <td>HIDDEN_FLD</td>
+                                                                <td>HIDDEN_FLD</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>31</td>
+                                                                <td>HIDDEN_USER_NAME</td>
+                                                                <td>Varchar2</td>
+                                                                <td>HIDDEN_USER_NAME</td>
+                                                                <td>HIDDEN_USER_NAME</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>32</td>
+                                                                <td>INSTRUCTIONS</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>INSTRUCTIONS</td>
+                                                                <td>INSTRUCTIONS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>33</td>
+                                                                <td>IS_COACHING_NOTES_ADDED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>IS_COACHING_NOTES_ADDED</td>
+                                                                <td>IS_COACHING_NOTES_ADDED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>34</td>
+                                                                <td>IS_WORKFLOW_SUBMITTED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>IS_WORKFLOW_SUBMITTED</td>
+                                                                <td>IS_WORKFLOW_SUBMITTED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>35</td>
+                                                                <td>LEAD_AUDITOR</td>
+                                                                <td>Varchar2</td>
+                                                                <td>LEAD_AUDITOR</td>
+                                                                <td>LEAD_AUDITOR</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>36</td>
+                                                                <td>ORG_HIDDEN_JSON</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>ORG_HIDDEN_JSON</td>
+                                                                <td>ORG_HIDDEN_JSON</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>37</td>
+                                                                <td>PLANNED_COMPLETION_DATE</td>
+                                                                <td>Date</td>
+                                                                <td>PLANNED_COMPLETION_DATE</td>
+                                                                <td>PLANNED_COMPLETION_DATE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>38</td>
+                                                                <td>PLANNED_START_DATE</td>
+                                                                <td>Date</td>
+                                                                <td>PLANNED_START_DATE</td>
+                                                                <td>PLANNED_START_DATE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>39</td>
+                                                                <td>PURPOSE</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>PURPOSE</td>
+                                                                <td>PURPOSE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>40</td>
+                                                                <td>REFERENCE_TYPE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>REFERENCE_TYPE</td>
+                                                                <td>REFERENCE_TYPE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>41</td>
+                                                                <td>RELATED_RISKS_HIDDEN_JSON</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>RELATED_RISKS_HIDDEN_JSON</td>
+                                                                <td>RELATED_RISKS_HIDDEN_JSON</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>42</td>
+                                                                <td>RESTRICT_ACCESS_TO</td>
+                                                                <td>Varchar2</td>
+                                                                <td>RESTRICT_ACCESS_TO</td>
+                                                                <td>RESTRICT_ACCESS_TO</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>43</td>
+                                                                <td>RESULTS</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>RESULTS</td>
+                                                                <td>RESULTS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>44</td>
+                                                                <td>RP_COUNT</td>
+                                                                <td>Varchar2</td>
+                                                                <td>RP_COUNT</td>
+                                                                <td>RP_COUNT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>45</td>
+                                                                <td>RP_FINAL_APPROVER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>RP_FINAL_APPROVER</td>
+                                                                <td>RP_FINAL_APPROVER</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>46</td>
+                                                                <td>RP_TASK_APPROVER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>RP_TASK_APPROVER</td>
+                                                                <td>RP_TASK_APPROVER</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>47</td>
+                                                                <td>RP_TASK_OWNER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>RP_TASK_OWNER</td>
+                                                                <td>RP_TASK_OWNER</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>48</td>
+                                                                <td>RP_USER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>RP_USER</td>
+                                                                <td>RP_USER</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>49</td>
+                                                                <td>RTF_ATTACH</td>
+                                                                <td>Varchar2</td>
+                                                                <td>RTF_ATTACH</td>
+                                                                <td>RTF_ATTACH</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>50</td>
+                                                                <td>SETUP_ACTION_PLAN_CAN_CREATED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SETUP_ACTION_PLAN_CAN_CREATED</td>
+                                                                <td>SETUP_ACTION_PLAN_CAN_CREATED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>51</td>
+                                                                <td>SETUP_APPROVALS_REQUIRED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SETUP_APPROVALS_REQUIRED</td>
+                                                                <td>SETUP_APPROVALS_REQUIRED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>52</td>
+                                                                <td>SETUP_AUDITEE_RESP_REQUIRED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SETUP_AUDITEE_RESP_REQUIRED</td>
+                                                                <td>SETUP_AUDITEE_RESP_REQUIRED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>53</td>
+                                                                <td>SETUP_AUDITORS_CREATE_TASKS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SETUP_AUDITORS_CREATE_TASKS</td>
+                                                                <td>SETUP_AUDITORS_CREATE_TASKS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>54</td>
+                                                                <td>SETUP_AUDITOR_TASK_REVIEW</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SETUP_AUDITOR_TASK_REVIEW</td>
+                                                                <td>SETUP_AUDITOR_TASK_REVIEW</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>56</td>
+                                                                <td>SETUP_PLANNING_SCOPING</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SETUP_PLANNING_SCOPING</td>
+                                                                <td>SETUP_PLANNING_SCOPING</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>57</td>
+                                                                <td>SETUP_QUALITY_REVIEWER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SETUP_QUALITY_REVIEWER</td>
+                                                                <td>SETUP_QUALITY_REVIEWER</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>58</td>
+                                                                <td>SETUP_REPORT_TEMPLATE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SETUP_REPORT_TEMPLATE</td>
+                                                                <td>SETUP_REPORT_TEMPLATE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>59</td>
+                                                                <td>SETUP_SINGLE_AUDITOR_PROCESS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SETUP_SINGLE_AUDITOR_PROCESS</td>
+                                                                <td>SETUP_SINGLE_AUDITOR_PROCESS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>60</td>
+                                                                <td>SETUP_TASK_SPECIFIED_DATES</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SETUP_TASK_SPECIFIED_DATES</td>
+                                                                <td>SETUP_TASK_SPECIFIED_DATES</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>61</td>
+                                                                <td>STATUS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>STATUS</td>
+                                                                <td>STATUS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>62</td>
+                                                                <td>STATUS_FLAG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>STATUS_FLAG</td>
+                                                                <td>STATUS_FLAG</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>63</td>
+                                                                <td>TASK_ACTION</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_ACTION</td>
+                                                                <td>TASK_ACTION</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>64</td>
+                                                                <td>TASK_ACTION_REASSIGN</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_ACTION_REASSIGN</td>
+                                                                <td>TASK_ACTION_REASSIGN</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>65</td>
+                                                                <td>TASK_ATTACHMENTS_AT</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_ATTACHMENTS_AT</td>
+                                                                <td>TASK_ATTACHMENTS_AT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>66</td>
+                                                                <td>TASK_CATEGORY</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_CATEGORY</td>
+                                                                <td>TASK_CATEGORY</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>67</td>
+                                                                <td>TASK_COMMENTS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_COMMENTS</td>
+                                                                <td>TASK_COMMENTS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>68</td>
+                                                                <td>TASK_COMPLETION_DATE</td>
+                                                                <td>Date</td>
+                                                                <td>TASK_COMPLETION_DATE</td>
+                                                                <td>TASK_COMPLETION_DATE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>69</td>
+                                                                <td>TASK_EXECUTION_RESULT</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_EXECUTION_RESULT</td>
+                                                                <td>TASK_EXECUTION_RESULT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>70</td>
+                                                                <td>TASK_ID</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_ID</td>
+                                                                <td>TASK_ID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>71</td>
+                                                                <td>TASK_INITIATED_BY</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_INITIATED_BY</td>
+                                                                <td>TASK_INITIATED_BY</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>72</td>
+                                                                <td>TASK_NAME</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_NAME</td>
+                                                                <td>TASK_NAME</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>73</td>
+                                                                <td>TASK_OWNER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_OWNER</td>
+                                                                <td>TASK_OWNER</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>74</td>
+                                                                <td>TASK_REVIEWER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_REVIEWER</td>
+                                                                <td>TASK_REVIEWER</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>75</td>
+                                                                <td>TASK_START_DATE</td>
+                                                                <td>Date</td>
+                                                                <td>TASK_START_DATE</td>
+                                                                <td>TASK_START_DATE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>76</td>
+                                                                <td>TASK_STATUS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_STATUS</td>
+                                                                <td>TASK_STATUS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>55</td>
+                                                                <td>SETUP_ENABLE_AUDIT_SCORING</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SETUP_ENABLE_AUDIT_SCORING</td>
+                                                                <td>SETUP_ENABLE_AUDIT_SCORING</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>77</td>
+                                                                <td>TASK_TYPE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TASK_TYPE</td>
+                                                                <td>TASK_TYPE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>78</td>
+                                                                <td>TIME_SPENT</td>
+                                                                <td>Number</td>
+                                                                <td>TIME_SPENT</td>
+                                                                <td>TIME_SPENT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>79</td>
+                                                                <td>TOTAL_OPEN_COMMENTS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>TOTAL_OPEN_COMMENTS</td>
+                                                                <td>TOTAL_OPEN_COMMENTS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>80</td>
+                                                                <td>WORK_DONE</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>WORK_DONE</td>
+                                                                <td>WORK_DONE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="query-pill">
+                                            <div class="modal-dialog"">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-sql')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-sql">
+                                                        SELECTACTION_COMMENTS , ACTION_FIN_APPROVER , APPROVER , AUDITOR , AUDIT_CLASSIFICATION , AUDIT_ID , AUDIT_MANAGER , AUDIT_TITLE , AUTHOR_NAME , BUDGETED_HOURS , COA_EMAIL_FLAG , CONDUCTED_BY , CORE_OBJECTS_HIDDEN_JSON , DATA_CORRECTION_FLAG_AT , DC_SAVE_STATUS_AT , DD_CREATED_BY , DD_CREATED_ON , DD_EDIT_FLAG , DD_INSTANCE_ID , DD_MODIFIED_BY , DD_MODIFIED_ON , DD_OBJECT_TYPE , DD_PROCESS_CODE , DD_PROCESS_INSTANCE_ID , DD_STATUS_FLAG , DRAFT_STATUS_FLAG , EDITABLE_FIELDS_JSON_AT , FINAL_APPROVER , HEADER_DETAILS , HIDDEN_FLD , HIDDEN_USER_NAME , INSTRUCTIONS , IS_COACHING_NOTES_ADDED , IS_WORKFLOW_SUBMITTED , LEAD_AUDITOR , ORG_HIDDEN_JSON , PLANNED_COMPLETION_DATE , PLANNED_START_DATE , PURPOSE , REFERENCE_TYPE , RELATED_RISKS_HIDDEN_JSON , RESTRICT_ACCESS_TO , RESULTS , RP_COUNT , RP_FINAL_APPROVER , RP_TASK_APPROVER , RP_TASK_OWNER , RP_USER , RTF_ATTACH , SETUP_ACTION_PLAN_CAN_CREATED , SETUP_APPROVALS_REQUIRED , SETUP_AUDITEE_RESP_REQUIRED , SETUP_AUDITORS_CREATE_TASKS , SETUP_AUDITOR_TASK_REVIEW , SETUP_ENABLE_AUDIT_SCORING , SETUP_PLANNING_SCOPING , SETUP_QUALITY_REVIEWER , SETUP_REPORT_TEMPLATE , SETUP_SINGLE_AUDITOR_PROCESS , SETUP_TASK_SPECIFIED_DATES , STATUS , STATUS_FLAG , TASK_ACTION , TASK_ACTION_REASSIGN , TASK_ATTACHMENTS_AT , TASK_CATEGORY , TASK_COMMENTS , TASK_COMPLETION_DATE , TASK_EXECUTION_RESULT , TASK_ID , TASK_INITIATED_BY , TASK_NAME , TASK_OWNER , TASK_REVIEWER , TASK_START_DATE , TASK_STATUS , TASK_TYPE , TIME_SPENT , TOTAL_OPEN_COMMENTS , WORK_DONE  FROM MS_AUD_AUDIT_TASK
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                </div>
+                                <!--panel-default -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+      
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.infolet-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.infolet-table-c').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-cnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-f').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-fnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-p').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-pnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "40%" },    // 1st column width 
+                        { "sWidth": "20%" },    // 2nd column width 
+                        { "sWidth": "40%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-r').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-rnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();  
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
