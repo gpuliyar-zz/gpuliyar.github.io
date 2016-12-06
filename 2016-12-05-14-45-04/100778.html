@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS_GRC_KPI_KRI_Breached_Thresholds_Infolet (100778)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code>select col,count(col) as count ,:1 from (select current_value,applies_to,
+     case
+when current_value >= critical_rising_thresh then 'Critical Rising' 
+when (current_value < critical_rising_thresh AND current_value >= non_critical_rising_thresh) then 'Non-Critical Rising'
+when (current_value > critical_dropping_thresh AND current_value <= non_critical_dropping_thresh) then 'Non-Critical Dropping'
+when (current_value <= critical_dropping_thresh) then 'Critical Dropping'
+end col  
+from ms_grc_kpi_kri_data_en a, ms_grc_kpi_kri_Defn b where applies_to=:1
+and a.object_id=b.object_id and provided_on in (select max(provided_on) from ms_grc_kpi_kri_data_en a,ms_grc_kpi_kri_defn b where a.object_id=b.object_id group by a.ati_object_id,a.object_id)
+and ms_apps_security_pkg.check_object_access(b.dd_object_type, b.restrict_access_to, (SELECT MS_CONCAT(owner_organizations) FROM MS_gRC_KPI_KRI_DEFN_OGN C WHERE C.OBJECt_ID=B.OBJECT_ID), :2, 'VIEW') = 'ACCESS' )
+group by col</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td> Overall_Breached_Thresholds </td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Plan hash value: 4121264198</h2></header>
+										<pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------
+| Id  | Operation                       | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                |                            |     1 |   547 |     7  (43)| 00:00:01 |
+|   1 |  SORT GROUP BY                  |                            |     1 |   547 |     7  (43)| 00:00:01 |
+|*  2 |   FILTER                        |                            |       |       |            |          |
+|*  3 |    HASH JOIN SEMI               |                            |     1 |   547 |     6  (34)| 00:00:01 |
+|   4 |     NESTED LOOPS                |                            |       |       |            |          |
+|   5 |      NESTED LOOPS               |                            |     1 |   538 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  6 |       TABLE ACCESS FULL         | MS_GRC_KPI_KRI_DATA_EN     |     1 |   126 |     2   (0)| 00:00:01 |</font>
+|*  7 |       INDEX UNIQUE SCAN         | MS_GRC_KPI_KRI_DEFN_PK     |     1 |       |     0   (0)| 00:00:01 |
+|   8 |      TABLE ACCESS BY INDEX ROWID| MS_GRC_KPI_KRI_DEFN        |     1 |   412 |     0   (0)| 00:00:01 |
+|   9 |     VIEW                        | VW_NSO_1                   |     1 |     9 |     3  (34)| 00:00:01 |
+|  10 |      SORT GROUP BY              |                            |     1 |   295 |     3  (34)| 00:00:01 |
+|  11 |       NESTED LOOPS              |                            |     1 |   295 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  12 |        TABLE ACCESS FULL        | MS_GRC_KPI_KRI_DATA_EN     |     1 |    93 |     2   (0)| 00:00:01 |</font>
+|* 13 |        INDEX UNIQUE SCAN        | MS_GRC_KPI_KRI_DEFN_PK     |     1 |   202 |     0   (0)| 00:00:01 |
+|  14 |    SORT AGGREGATE               |                            |     1 |   404 |            |          |
+|* 15 |     INDEX RANGE SCAN            | MS_GRC_KPI_KRI_DEFN_OGN_UK |     1 |   404 |     0   (0)| 00:00:01 |
+--------------------------------------------------------------------------------------------------------------
+ 
+										</code></pre>
+ 										<header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header>
+										<pre><code>
+-------------------------------------------------------------
+ 
+   1 - SEL$1F949E82
+   6 - SEL$1F949E82 / A@SEL$2
+   7 - SEL$1F949E82 / B@SEL$2
+   8 - SEL$1F949E82 / B@SEL$2
+   9 - SEL$291F8F59 / VW_NSO_1@SEL$1F949E82
+  10 - SEL$291F8F59
+  12 - SEL$291F8F59 / A@SEL$3
+  13 - SEL$291F8F59 / B@SEL$3
+  14 - SEL$4       
+  15 - SEL$4        / C@SEL$4
+ 
+										</code></pre>
+ 										<header class="major"><h2>Predicate Information (identified by operation id):</h2></header>
+										<pre><code>
+---------------------------------------------------
+ 
+   2 - filter("MS_APPS_SECURITY_PKG"."CHECK_OBJECT_ACCESS"("B"."DD_OBJECT_TYPE","B"."RESTRICT_ACCESS_T
+              O", (SELECT "MS_CONCAT"("OWNER_ORGANIZATIONS") FROM "MS_GRC_KPI_KRI_DEFN_OGN" "C" WHERE 
+              "C"."OBJECT_ID"=:B1),:2,'VIEW')='ACCESS')
+   3 - access("PROVIDED_ON"="MAX(PROVIDED_ON)")
+   6 - filter("APPLIES_TO"=:1)
+   7 - access("A"."OBJECT_ID"="B"."OBJECT_ID")
+  13 - access("A"."OBJECT_ID"="B"."OBJECT_ID")
+  15 - access("C"."OBJECT_ID"=:B1)
+ 
+										</code></pre>
+ 										<header class="major"><h2>Column Projection Information (identified by operation id):</h2></header>
+										<pre><code>
+-----------------------------------------------------------
+ 
+   1 - (#keys=1) CASE  WHEN "CURRENT_VALUE">="CRITICAL_RISING_THRESH" THEN 'Critical Rising' WHEN 
+       ("CURRENT_VALUE"<"CRITICAL_RISING_THRESH" AND "CURRENT_VALUE">="NON_CRITICAL_RISING_THRESH") THEN 
+       'Non-Critical Rising' WHEN ("CURRENT_VALUE">"CRITICAL_DROPPING_THRESH" AND 
+       "CURRENT_VALUE"<="NON_CRITICAL_DROPPING_THRESH") THEN 'Non-Critical Dropping' WHEN 
+       "CURRENT_VALUE"<="CRITICAL_DROPPING_THRESH" THEN 'Critical Dropping' END [21], COUNT(CASE  WHEN 
+       "CURRENT_VALUE">="CRITICAL_RISING_THRESH" THEN 'Critical Rising' WHEN 
+       ("CURRENT_VALUE"<"CRITICAL_RISING_THRESH" AND "CURRENT_VALUE">="NON_CRITICAL_RISING_THRESH") THEN 
+       'Non-Critical Rising' WHEN ("CURRENT_VALUE">"CRITICAL_DROPPING_THRESH" AND 
+       "CURRENT_VALUE"<="NON_CRITICAL_DROPPING_THRESH") THEN 'Non-Critical Dropping' WHEN 
+       "CURRENT_VALUE"<="CRITICAL_DROPPING_THRESH" THEN 'Critical Dropping' END )[22]
+   2 - "CRITICAL_DROPPING_THRESH"[NUMBER,22], "CRITICAL_RISING_THRESH"[NUMBER,22], 
+       "NON_CRITICAL_DROPPING_THRESH"[NUMBER,22], "NON_CRITICAL_RISING_THRESH"[NUMBER,22], 
+       "CURRENT_VALUE"[NUMBER,22]
+   3 - (#keys=1) "CRITICAL_DROPPING_THRESH"[NUMBER,22], "CRITICAL_RISING_THRESH"[NUMBER,22], 
+       "NON_CRITICAL_DROPPING_THRESH"[NUMBER,22], "NON_CRITICAL_RISING_THRESH"[NUMBER,22], 
+       "CURRENT_VALUE"[NUMBER,22], "B"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "B"."RESTRICT_ACCESS_TO"[VARCHAR2,12], "B"."OBJECT_ID"[VARCHAR2,400]
+   4 - (#keys=0) "CRITICAL_DROPPING_THRESH"[NUMBER,22], "CRITICAL_RISING_THRESH"[NUMBER,22], 
+       "NON_CRITICAL_DROPPING_THRESH"[NUMBER,22], "NON_CRITICAL_RISING_THRESH"[NUMBER,22], 
+       "CURRENT_VALUE"[NUMBER,22], "PROVIDED_ON"[DATE,7], "B"."RESTRICT_ACCESS_TO"[VARCHAR2,12], 
+       "B"."OBJECT_ID"[VARCHAR2,400], "B"."DD_OBJECT_TYPE"[VARCHAR2,400]
+   5 - (#keys=0) "CRITICAL_DROPPING_THRESH"[NUMBER,22], "CRITICAL_RISING_THRESH"[NUMBER,22], 
+       "NON_CRITICAL_DROPPING_THRESH"[NUMBER,22], "NON_CRITICAL_RISING_THRESH"[NUMBER,22], 
+       "CURRENT_VALUE"[NUMBER,22], "PROVIDED_ON"[DATE,7], "B".ROWID[ROWID,10], "B"."OBJECT_ID"[VARCHAR2,400]
+   6 - "CRITICAL_DROPPING_THRESH"[NUMBER,22], "CRITICAL_RISING_THRESH"[NUMBER,22], 
+       "NON_CRITICAL_DROPPING_THRESH"[NUMBER,22], "NON_CRITICAL_RISING_THRESH"[NUMBER,22], 
+       "CURRENT_VALUE"[NUMBER,22], "A"."OBJECT_ID"[VARCHAR2,80], "PROVIDED_ON"[DATE,7]
+   7 - "B".ROWID[ROWID,10], "B"."OBJECT_ID"[VARCHAR2,400]
+   8 - "B"."RESTRICT_ACCESS_TO"[VARCHAR2,12], "B"."DD_OBJECT_TYPE"[VARCHAR2,400]
+   9 - "MAX(PROVIDED_ON)"[DATE,7]
+  10 - (#keys=2) "A"."ATI_OBJECT_ID"[VARCHAR2,80], "A"."OBJECT_ID"[VARCHAR2,80], MAX("PROVIDED_ON")[7]
+  11 - (#keys=0) "A"."ATI_OBJECT_ID"[VARCHAR2,80], "A"."OBJECT_ID"[VARCHAR2,80], "PROVIDED_ON"[DATE,7]
+  12 - "A"."ATI_OBJECT_ID"[VARCHAR2,80], "A"."OBJECT_ID"[VARCHAR2,80], "PROVIDED_ON"[DATE,7]
+  14 - (#keys=0) "MS_CONCAT"("OWNER_ORGANIZATIONS")[4000]
+  15 - "OWNER_ORGANIZATIONS"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>

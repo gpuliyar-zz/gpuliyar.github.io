@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS_GRC_GET_PROD_PARENT (100758)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code>select distinct names.object_id,
+       names.object_name
+  from ms_grc_product prnt,
+       ms_grc_product names
+ where prnt.object_parent = names.object_id</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td> MS_GRC_GET_PROD_PARENT </td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Plan hash value: 446583264</h2></header>
+										<pre><code>
+ 
+---------------------------------------------------------------------------------------------------
+| Id  | Operation                     | Name              | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT              |                   |     1 |  2716 |     3  (34)| 00:00:01 |
+|   1 |  SORT UNIQUE                  |                   |     1 |  2716 |     3  (34)| 00:00:01 |
+|   2 |   NESTED LOOPS                |                   |       |       |            |          |
+|   3 |    NESTED LOOPS               |                   |     1 |  2716 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   4 |     TABLE ACCESS FULL         | MS_GRC_PRODUCT    |     1 |   512 |     2   (0)| 00:00:01 |</font>
+|*  5 |     INDEX UNIQUE SCAN         | MS_GRC_PRODUCT_PK |     1 |       |     0   (0)| 00:00:01 |
+|   6 |    TABLE ACCESS BY INDEX ROWID| MS_GRC_PRODUCT    |     1 |  2204 |     0   (0)| 00:00:01 |
+---------------------------------------------------------------------------------------------------
+ 
+										</code></pre>
+ 										<header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header>
+										<pre><code>
+-------------------------------------------------------------
+ 
+   1 - SEL$1
+   4 - SEL$1 / PRNT@SEL$1
+   5 - SEL$1 / NAMES@SEL$1
+   6 - SEL$1 / NAMES@SEL$1
+ 
+										</code></pre>
+ 										<header class="major"><h2>Predicate Information (identified by operation id):</h2></header>
+										<pre><code>
+---------------------------------------------------
+ 
+   5 - access("PRNT"."OBJECT_PARENT"="NAMES"."OBJECT_ID")
+ 
+										</code></pre>
+ 										<header class="major"><h2>Column Projection Information (identified by operation id):</h2></header>
+										<pre><code>
+-----------------------------------------------------------
+ 
+   1 - (#keys=2) "NAMES"."OBJECT_ID"[VARCHAR2,400], "NAMES"."OBJECT_NAME"[VARCHAR2,4000]
+   2 - (#keys=0) "NAMES"."OBJECT_ID"[VARCHAR2,400], "NAMES"."OBJECT_NAME"[VARCHAR2,4000]
+   3 - (#keys=0) "NAMES".ROWID[ROWID,10], "NAMES"."OBJECT_ID"[VARCHAR2,400]
+   4 - "PRNT"."OBJECT_PARENT"[VARCHAR2,1020]
+   5 - "NAMES".ROWID[ROWID,10], "NAMES"."OBJECT_ID"[VARCHAR2,400]
+   6 - "NAMES"."OBJECT_NAME"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS_GRC_SHOW_PARENT_OBJECTS (100984)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code>SELECT distinct object_name AS obj_name,
+  'Level '
+  ||object_level AS obj_level,
+  DD_OBJECT_TYPE AS OBJ_TYPE,
+  a.OBJECT_ID    AS OBJ_ID
+FROM MS_GRC_CORE_OBJECT a,
+  MS_GRC_CORE_OBJECT_OGN B
+where a.OBJECT_ID          =B.OBJECT_ID
+AND A.DD_OBJECT_TYPE = 'MS_GRC_PROCESS'
+AND dd_PROCESS_INSTANCE_ID =
+  (SELECT MAX(dd_PROCESS_INSTANCE_ID)
+  FROM MS_GRC_CORE_OBJECT B
+  WHERE B.dd_PROCESS_INSTANCE_ID =a.dd_PROCESS_INSTANCE_ID
+  AND DD_OBJECT_TYPE             =a.DD_OBJECT_TYPE
+  )
+AND OBJECT_LEVEL    = (:1 -1)
+AND TRUNC(sysdate) >= TRUNC(NVL(VALID_FROM,sysdate))
+and TRUNC(sysdate) <= TRUNC(NVL(VALID_UNTIL,sysdate))
+and 
+  MS_APPS_SECURITY_PKG.CHECK_OBJECT_ACCESS(a.DD_OBJECT_TYPE, a.RESTRICT_ACCESS_TO,
+  (select OWNER_ORG_IDS from MS_GRC_PROCESS_RV where OBJECT_ID=a.OBJECT_ID
+  ),:2, 'VIEW') = 'ACCESS'</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Plan hash value: 2860307396</h2></header>
+										<pre><code>
+ 
+-------------------------------------------------------------------------------------------------------------
+| Id  | Operation                       | Name                      | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                |                           |     1 |    96 |    11  (28)| 00:00:01 |
+|   1 |  SORT UNIQUE                    |                           |     1 |    96 |    11  (28)| 00:00:01 |
+|*  2 |   FILTER                        |                           |       |       |            |          |
+|*  3 |    HASH JOIN                    |                           |     1 |    96 |     8  (25)| 00:00:01 |
+|   4 |     NESTED LOOPS                |                           |       |       |            |          |
+|   5 |      NESTED LOOPS               |                           |     1 |    63 |     3   (0)| 00:00:01 |
+|   6 |       INDEX FULL SCAN           | MS_GRC_CORE_OBJECT_OGN_UK |     2 |    28 |     1   (0)| 00:00:01 |
+|*  7 |       INDEX UNIQUE SCAN         | MS_GRC_CORE_OBJECT_PK     |     1 |       |     0   (0)| 00:00:01 |
+|*  8 |      TABLE ACCESS BY INDEX ROWID| MS_GRC_CORE_OBJECT        |     1 |    49 |     1   (0)| 00:00:01 |
+|   9 |     VIEW                        | VW_SQ_2                   |     2 |    66 |     4  (25)| 00:00:01 |
+|  10 |      SORT GROUP BY              |                           |     2 |    40 |     4  (25)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 11 |       TABLE ACCESS FULL         | MS_GRC_CORE_OBJECT        |     2 |    40 |     3   (0)| 00:00:01 |</font>
+|  12 |    NESTED LOOPS                 |                           |     1 |    58 |     2   (0)| 00:00:01 |
+|* 13 |     TABLE ACCESS BY INDEX ROWID | MS_GRC_PROCESS            |     1 |    29 |     1   (0)| 00:00:01 |
+|* 14 |      INDEX UNIQUE SCAN          | MS_GRC_PROCESS_PK         |     1 |       |     0   (0)| 00:00:01 |
+|* 15 |     INDEX UNIQUE SCAN           | MS_GRC_CORE_OBJECT_PK     |     1 |       |     0   (0)| 00:00:01 |
+|  16 |    SORT AGGREGATE               |                           |     1 |    21 |            |          |
+|* 17 |     INDEX RANGE SCAN            | MS_GRC_CORE_OBJECT_OGN_UK |     1 |    21 |     1   (0)| 00:00:01 |
+-------------------------------------------------------------------------------------------------------------
+ 
+										</code></pre>
+ 										<header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header>
+										<pre><code>
+-------------------------------------------------------------
+ 
+   1 - SEL$C772B8D1
+   6 - SEL$C772B8D1 / B@SEL$1
+   7 - SEL$C772B8D1 / A@SEL$1
+   8 - SEL$C772B8D1 / A@SEL$1
+   9 - SEL$683B0107 / VW_SQ_2@SEL$7511BFD2
+  10 - SEL$683B0107
+  11 - SEL$683B0107 / B@SEL$2
+  12 - SEL$07BDC5B4
+  13 - SEL$07BDC5B4 / B@SEL$4
+  14 - SEL$07BDC5B4 / B@SEL$4
+  15 - SEL$07BDC5B4 / A@SEL$4
+  16 - SEL$6       
+  17 - SEL$6        / E@SEL$6
+ 
+										</code></pre>
+ 										<header class="major"><h2>Predicate Information (identified by operation id):</h2></header>
+										<pre><code>
+---------------------------------------------------
+ 
+   2 - filter("MS_APPS_SECURITY_PKG"."CHECK_OBJECT_ACCESS"("A"."DD_OBJECT_TYPE","A"."RESTRICT_ACCESS_
+              TO", (SELECT  (SELECT "MS_CONCAT"("OWNER_ORGANIZATIONS") FROM MAZARS_DEV."MS_GRC_CORE_OBJECT_OGN" 
+              "E" WHERE "E"."OBJECT_ID"=:B1) FROM MAZARS_DEV."MS_GRC_PROCESS" "B",MAZARS_DEV."MS_GRC_CORE_OBJECT" 
+              "A" WHERE "A"."OBJECT_ID"=:B2 AND "B"."OBJECT_ID"=:B3 AND 
+              "B"."DD_OBJECT_TYPE"='MS_GRC_PROCESS'),:2,'VIEW')='ACCESS')
+   3 - access("DD_PROCESS_INSTANCE_ID"="MAX(DD_PROCESS_INSTANCE_ID)" AND 
+              "ITEM_1"="A"."DD_PROCESS_INSTANCE_ID" AND "ITEM_2"="A"."DD_OBJECT_TYPE")
+   7 - access("A"."OBJECT_ID"="B"."OBJECT_ID")
+   8 - filter(TRUNC(NVL("VALID_FROM",SYSDATE@!))<=TRUNC(SYSDATE@!) AND 
+              TRUNC(NVL("VALID_UNTIL",SYSDATE@!))>=TRUNC(SYSDATE@!) AND "A"."DD_OBJECT_TYPE"='MS_GRC_PROCESS' AND 
+              TO_NUMBER("OBJECT_LEVEL")=TO_NUMBER(:1)-1)
+  11 - filter("DD_OBJECT_TYPE"='MS_GRC_PROCESS')
+  13 - filter("B"."DD_OBJECT_TYPE"='MS_GRC_PROCESS')
+  14 - access("B"."OBJECT_ID"=:B1)
+  15 - access("A"."OBJECT_ID"=:B1)
+  17 - access("E"."OBJECT_ID"=:B1)
+ 
+										</code></pre>
+ 										<header class="major"><h2>Column Projection Information (identified by operation id):</h2></header>
+										<pre><code>
+-----------------------------------------------------------
+ 
+   1 - (#keys=4) "OBJECT_NAME"[VARCHAR2,4000], 'Level '||"OBJECT_LEVEL"[406], 
+       "DD_OBJECT_TYPE"[VARCHAR2,400], "A"."OBJECT_ID"[VARCHAR2,400]
+   2 - "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], 
+       "OBJECT_LEVEL"[VARCHAR2,400], "A"."OBJECT_ID"[VARCHAR2,400]
+   3 - (#keys=3) "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], 
+       "OBJECT_LEVEL"[VARCHAR2,400], "A"."RESTRICT_ACCESS_TO"[VARCHAR2,40], "A"."OBJECT_ID"[VARCHAR2,400]
+   4 - (#keys=0) "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "A"."RESTRICT_ACCESS_TO"[VARCHAR2,40], "A"."OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], 
+       "OBJECT_LEVEL"[VARCHAR2,400]
+   5 - (#keys=0) "A".ROWID[ROWID,10], "A"."OBJECT_ID"[VARCHAR2,400]
+   6 - "B"."OBJECT_ID"[VARCHAR2,400]
+   7 - "A".ROWID[ROWID,10], "A"."OBJECT_ID"[VARCHAR2,400]
+   8 - "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "A"."RESTRICT_ACCESS_TO"[VARCHAR2,40], "OBJECT_NAME"[VARCHAR2,4000], "OBJECT_LEVEL"[VARCHAR2,400]
+   9 - "MAX(DD_PROCESS_INSTANCE_ID)"[NUMBER,22], "ITEM_1"[NUMBER,22], "ITEM_2"[VARCHAR2,400]
+  10 - (#keys=2) "B"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "DD_OBJECT_TYPE"[VARCHAR2,400], 
+       MAX("DD_PROCESS_INSTANCE_ID")[22]
+  11 - "DD_OBJECT_TYPE"[VARCHAR2,400], "DD_PROCESS_INSTANCE_ID"[NUMBER,22]
+  12 - (#keys=0) "A"."OBJECT_ID"[VARCHAR2,400]
+  14 - "B".ROWID[ROWID,10]
+  15 - "A".ROWID[ROWID,10], "A"."OBJECT_ID"[VARCHAR2,400]
+  16 - (#keys=0) "MS_CONCAT"("OWNER_ORGANIZATIONS")[4000]
+  17 - "OWNER_ORGANIZATIONS"[VARCHAR2,2000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>

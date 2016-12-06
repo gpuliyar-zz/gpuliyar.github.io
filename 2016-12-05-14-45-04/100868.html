@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS_GRC_ORG_BROWSER_DRILLDOWN (100868)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code> SELECT substr(org_entity_name,1,30)        DISPLAY_NAME
+,      To_Char(org_entity_id) OBJECT_ID
+,      'MS_GRC_ORGANIZATION'   OBJECT_TYPE
+,      to_char(b.org_level)     ORG_LEVEL 
+,'Y' AS OVER_RIDE_ACTION,
+'' as EDIT_ACTION_PARAMETERS 
+FROM si_org_entities_t a,
+si_org_hierarchy_levels b
+WHERE  parent_org_entity_id = :1
+and a.org_hierarchy_id = b.org_hierarchy_id
+AND    SYSDATE BETWEEN a.start_date AND Nvl(a.end_date, SYSDATE)
+UNION ALL
+SELECT substr(a.object_name,1,30)
+,      b.object_id
+,      a.dd_object_type
+,      a.object_level object_level
+,'Y' AS OVER_RIDE_ACTION
+, 'proc='|| TO_CHAR(dd_process_instance_id)||'|instid='||TO_CHAR(dd_instance_id)||'|edit_flag='||NVL(dd_edit_flag,'Y') AS EDIT_ACTION_PARAMETERS
+from ms_grc_core_object a, ms_grc_core_object_org b
+where 
+a.object_id = b.object_id
+AND   b.ato_organization = :1
+AND SYSDATE between NVL(a.valid_from,SYSDATE) and NVL(a.valid_until,SYSDATE)
+UNION ALL
+SELECT substr(a.object_name,1,30)
+,      b.object_id
+,      a.dd_object_type
+,      a.object_level object_level
+,'Y' AS OVER_RIDE_ACTION
+, 'proc='|| TO_CHAR(dd_process_instance_id)||'|instid='||TO_CHAR(dd_instance_id)||'|edit_flag='||NVL(dd_edit_flag,'Y') AS EDIT_ACTION_PARAMETERS
+from ms_grc_risk a, ms_grc_risk_org b
+where 
+a.object_id = b.object_id
+AND   b.ato_organization = :1
+AND SYSDATE between NVL(a.valid_from,SYSDATE) and NVL(a.valid_until,SYSDATE)
+UNION ALL
+SELECT substr(a.object_name,1,30)
+,      b.object_id
+,      a.dd_object_type
+,      '' as object_level
+,'Y' AS OVER_RIDE_ACTION
+, 'proc='|| TO_CHAR(dd_process_instance_id)||'|instid='||TO_CHAR(dd_instance_id)||'|edit_flag='||NVL(dd_edit_flag,'Y') AS EDIT_ACTION_PARAMETERS from ms_grc_compliance_obje a, ms_grc_compliance_obje_org b
+where 
+a.object_id = b.object_id
+AND   b.ato_organization = :1
+AND SYSDATE between NVL(a.valid_from,SYSDATE) and NVL(a.valid_until,SYSDATE)</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td> Drilldown for Org </td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Plan hash value: 1171030522</h2></header>
+										<pre><code>
+ 
+------------------------------------------------------------------------------------------------------------
+| Id  | Operation                     | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT              |                            |     6 |  7502 |    14  (50)| 00:00:01 |
+|   1 |  UNION-ALL                    |                            |       |       |            |          |
+|*  2 |   HASH JOIN                   |                            |     3 |   132 |     8  (13)| 00:00:01 |
+|*  3 |    TABLE ACCESS BY INDEX ROWID| SI_ORG_ENTITIES_T          |     3 |   108 |     3   (0)| 00:00:01 |
+|*  4 |     INDEX RANGE SCAN          | SI_ORG_ENTITIES_N3         |     3 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   5 |    TABLE ACCESS FULL          | SI_ORG_HIERARCHY_LEVELS_T  |     7 |    56 |     4   (0)| 00:00:01 |</font>
+|   6 |   NESTED LOOPS                |                            |       |       |            |          |
+|   7 |    NESTED LOOPS               |                            |     1 |  2260 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  8 |     TABLE ACCESS FULL         | MS_GRC_CORE_OBJECT_ORG     |     1 |  2204 |     2   (0)| 00:00:01 |</font>
+|*  9 |     INDEX UNIQUE SCAN         | MS_GRC_CORE_OBJECT_PK      |     1 |       |     0   (0)| 00:00:01 |
+|* 10 |    TABLE ACCESS BY INDEX ROWID| MS_GRC_CORE_OBJECT         |     1 |    56 |     0   (0)| 00:00:01 |
+|  11 |   NESTED LOOPS                |                            |       |       |            |          |
+|  12 |    NESTED LOOPS               |                            |     1 |  2257 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 13 |     TABLE ACCESS FULL         | MS_GRC_RISK_ORG            |     1 |  2204 |     2   (0)| 00:00:01 |</font>
+|* 14 |     INDEX UNIQUE SCAN         | MS_GRC_RISK_PK             |     1 |       |     0   (0)| 00:00:01 |
+|* 15 |    TABLE ACCESS BY INDEX ROWID| MS_GRC_RISK                |     1 |    53 |     0   (0)| 00:00:01 |
+|  16 |   NESTED LOOPS                |                            |       |       |            |          |
+|  17 |    NESTED LOOPS               |                            |     1 |  2853 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 18 |     TABLE ACCESS FULL         | MS_GRC_COMPLIANCE_OBJE_ORG |     1 |  2804 |     2   (0)| 00:00:01 |</font>
+|* 19 |     INDEX UNIQUE SCAN         | MS_GRC_COMPLIANCE_OBJE_PK  |     1 |       |     0   (0)| 00:00:01 |
+|* 20 |    TABLE ACCESS BY INDEX ROWID| MS_GRC_COMPLIANCE_OBJE     |     1 |    49 |     0   (0)| 00:00:01 |
+------------------------------------------------------------------------------------------------------------
+ 
+										</code></pre>
+ 										<header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header>
+										<pre><code>
+-------------------------------------------------------------
+ 
+   1 - SET$1       
+   2 - SEL$F5BB74E1
+   3 - SEL$F5BB74E1 / A@SEL$1
+   4 - SEL$F5BB74E1 / A@SEL$1
+   5 - SEL$F5BB74E1 / SI_ORG_HIERARCHY_LEVELS_T@SEL$2
+   6 - SEL$3       
+   8 - SEL$3        / B@SEL$3
+   9 - SEL$3        / A@SEL$3
+  10 - SEL$3        / A@SEL$3
+  11 - SEL$4       
+  13 - SEL$4        / B@SEL$4
+  14 - SEL$4        / A@SEL$4
+  15 - SEL$4        / A@SEL$4
+  16 - SEL$5       
+  18 - SEL$5        / B@SEL$5
+  19 - SEL$5        / A@SEL$5
+  20 - SEL$5        / A@SEL$5
+ 
+										</code></pre>
+ 										<header class="major"><h2>Predicate Information (identified by operation id):</h2></header>
+										<pre><code>
+---------------------------------------------------
+ 
+   2 - access("A"."ORG_HIERARCHY_ID"="ORG_HIERARCHY_ID")
+   3 - filter("A"."START_DATE"<=SYSDATE@! AND NVL("A"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+   4 - access("PARENT_ORG_ENTITY_ID"=TO_NUMBER(:1))
+   8 - filter("B"."ATO_ORGANIZATION"=:1)
+   9 - access("A"."OBJECT_ID"="B"."OBJECT_ID")
+  10 - filter(NVL("A"."VALID_FROM",SYSDATE@!)<=SYSDATE@! AND 
+              NVL("A"."VALID_UNTIL",SYSDATE@!)>=SYSDATE@!)
+  13 - filter("B"."ATO_ORGANIZATION"=:1)
+  14 - access("A"."OBJECT_ID"="B"."OBJECT_ID")
+  15 - filter(NVL("A"."VALID_FROM",SYSDATE@!)<=SYSDATE@! AND 
+              NVL("A"."VALID_UNTIL",SYSDATE@!)>=SYSDATE@!)
+  18 - filter("B"."ATO_ORGANIZATION"=:1)
+  19 - access("A"."OBJECT_ID"="B"."OBJECT_ID")
+  20 - filter(NVL("A"."VALID_FROM",SYSDATE@!)<=SYSDATE@! AND 
+              NVL("A"."VALID_UNTIL",SYSDATE@!)>=SYSDATE@!)
+ 
+										</code></pre>
+ 										<header class="major"><h2>Column Projection Information (identified by operation id):</h2></header>
+										<pre><code>
+-----------------------------------------------------------
+ 
+   1 - STRDEF[120], STRDEF[1600], STRDEF[400], STRDEF[400], STRDEF[1], STRDEF[108]
+   2 - (#keys=1) "ORG_ENTITY_ID"[NUMBER,22], "ORG_ENTITY_NAME"[VARCHAR2,100], "ORG_LEVEL"[NUMBER,22]
+   3 - "ORG_ENTITY_ID"[NUMBER,22], "ORG_ENTITY_NAME"[VARCHAR2,100], 
+       "A"."ORG_HIERARCHY_ID"[NUMBER,22]
+   4 - "A".ROWID[ROWID,10]
+   5 - "ORG_HIERARCHY_ID"[NUMBER,22], "ORG_LEVEL"[NUMBER,22]
+   6 - (#keys=0) "B"."OBJECT_ID"[VARCHAR2,400], "A"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "DD_PROCESS_INSTANCE_ID"[NUMBER,22], "DD_INSTANCE_ID"[NUMBER,22], "DD_EDIT_FLAG"[VARCHAR2,4], 
+       "A"."OBJECT_NAME"[VARCHAR2,4000], "A"."OBJECT_LEVEL"[VARCHAR2,400]
+   7 - (#keys=0) "B"."OBJECT_ID"[VARCHAR2,400], "A".ROWID[ROWID,10]
+   8 - "B"."OBJECT_ID"[VARCHAR2,400]
+   9 - "A".ROWID[ROWID,10]
+  10 - "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "DD_INSTANCE_ID"[NUMBER,22], "DD_EDIT_FLAG"[VARCHAR2,4], "A"."OBJECT_NAME"[VARCHAR2,4000], 
+       "A"."OBJECT_LEVEL"[VARCHAR2,400]
+  11 - (#keys=0) "B"."OBJECT_ID"[VARCHAR2,400], "A"."OBJECT_NAME"[VARCHAR2,4000], 
+       "A"."OBJECT_LEVEL"[VARCHAR2,400], "A"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "DD_PROCESS_INSTANCE_ID"[NUMBER,22], "DD_INSTANCE_ID"[NUMBER,22], "DD_EDIT_FLAG"[VARCHAR2,4]
+  12 - (#keys=0) "B"."OBJECT_ID"[VARCHAR2,400], "A".ROWID[ROWID,10]
+  13 - "B"."OBJECT_ID"[VARCHAR2,400]
+  14 - "A".ROWID[ROWID,10]
+  15 - "A"."OBJECT_NAME"[VARCHAR2,4000], "A"."OBJECT_LEVEL"[VARCHAR2,400], 
+       "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "DD_INSTANCE_ID"[NUMBER,22], "DD_EDIT_FLAG"[VARCHAR2,4]
+  16 - (#keys=0) "B"."OBJECT_ID"[VARCHAR2,1600], "DD_INSTANCE_ID"[NUMBER,22], 
+       "DD_EDIT_FLAG"[VARCHAR2,4], "A"."OBJECT_NAME"[VARCHAR2,4000], "A"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "DD_PROCESS_INSTANCE_ID"[NUMBER,22]
+  17 - (#keys=0) "B"."OBJECT_ID"[VARCHAR2,1600], "A".ROWID[ROWID,10]
+  18 - "B"."OBJECT_ID"[VARCHAR2,1600]
+  19 - "A".ROWID[ROWID,10]
+  20 - "DD_INSTANCE_ID"[NUMBER,22], "DD_EDIT_FLAG"[VARCHAR2,4], "A"."OBJECT_NAME"[VARCHAR2,4000], 
+       "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "DD_PROCESS_INSTANCE_ID"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>

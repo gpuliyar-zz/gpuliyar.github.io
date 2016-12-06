@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS_GRC_61_SP2_MOD_REF_TYPE_dbf (102638)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code>Select c.Stored_Value,
+       c.Displayed_Value,
+       c.Lov_Name From   MS_GRC_LOV_ORG_VALUES_V c,
+si_locales a,si_users_t b 
+where 
+c.locale_id= a.locale_id
+and a.locale_string = b.locale and b.user_name = :1  and  (trim(Lov_Name)='MS GRC Model Reference Type')
+order by displayed_value asc</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td> MS_GRC_61_SP2_MOD_REF_TYPE_dbf </td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Plan hash value: 2654979943</h2></header>
+										<pre><code>
+ 
+------------------------------------------------------------------------------------------------------------
+| Id  | Operation                        | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                 |                         |     1 |  1154 |    50   (6)| 00:00:01 |
+|   1 |  SORT ORDER BY                   |                         |     1 |  1154 |    50   (6)| 00:00:01 |
+|*  2 |   HASH JOIN OUTER                |                         |     1 |  1154 |    49   (5)| 00:00:01 |
+|*  3 |    HASH JOIN                     |                         |     1 |  1128 |    42   (3)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   4 |     MERGE JOIN CARTESIAN         |                         |     3 |   180 |    12   (9)| 00:00:01 |</font>
+|*  5 |      HASH JOIN                   |                         |     1 |    31 |     6  (17)| 00:00:01 |
+|   6 |       TABLE ACCESS BY INDEX ROWID| SI_USERS_T              |     1 |    20 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  7 |        INDEX SKIP SCAN           | SI_USERS_T_N2           |     1 |       |     1   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|   8 |       TABLE ACCESS FULL          | SI_LOCALES              |    35 |   385 |     3   (0)| 00:00:01 |</font>
+|   9 |      BUFFER SORT                 |                         |     3 |    87 |     9  (12)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 10 |       TABLE ACCESS FULL          | MS_QS_LOV_NAMES         |     3 |    87 |     6   (0)| 00:00:01 |</font>
+|  11 |     VIEW                         |                         |  4883 |  5092K|    30   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  12 |      MERGE JOIN CARTESIAN        |                         |  4883 |   162K|    30   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 13 |       TABLE ACCESS FULL          | SI_LOCALES              |     4 |    24 |     3   (0)| 00:00:01 |</font>
+|  14 |       BUFFER SORT                |                         |  1395 | 39060 |    27   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  15 |        TABLE ACCESS FULL         | MS_QS_LIST_OF_VALUES_T  |  1395 | 39060 |     7   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  16 |    TABLE ACCESS FULL             | MS_QS_LIST_OF_VALUES_TL |  1160 | 30160 |     6   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------------
+ 
+										</code></pre>
+ 										<header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header>
+										<pre><code>
+-------------------------------------------------------------
+ 
+   1 - SEL$FACC8911
+   6 - SEL$FACC8911 / B@SEL$1
+   7 - SEL$FACC8911 / B@SEL$1
+   8 - SEL$FACC8911 / A@SEL$1
+  10 - SEL$FACC8911 / MS_QS_LOV_NAMES@SEL$6
+  11 - SEL$7286615E / X@SEL$3
+  12 - SEL$7286615E
+  13 - SEL$7286615E / SI_LOCALES@SEL$5
+  15 - SEL$7286615E / T@SEL$4
+  16 - SEL$FACC8911 / TL@SEL$3
+ 
+										</code></pre>
+ 										<header class="major"><h2>Predicate Information (identified by operation id):</h2></header>
+										<pre><code>
+---------------------------------------------------
+ 
+   2 - access("X"."LOV_VALUE_ID"="TL"."LOV_VALUE_ID"(+) AND "X"."LOCALE_ID"="TL"."LOCALE_ID"(+))
+   3 - access("X"."LOCALE_ID"="A"."LOCALE_ID" AND "X"."LOV_ID"="LOV_ID")
+   5 - access("A"."LOCALE_STRING"="B"."LOCALE")
+   7 - access("B"."USER_NAME"=:1)
+       filter("B"."USER_NAME"=:1)
+  10 - filter(TRIM("LOV_NAME")='MS GRC Model Reference Type')
+  13 - filter("ENABLED_FLAG"='Y')
+ 
+										</code></pre>
+ 										<header class="major"><h2>Column Projection Information (identified by operation id):</h2></header>
+										<pre><code>
+-----------------------------------------------------------
+ 
+   1 - (#keys=1) NVL("TL"."DISPLAYED_VALUE","X"."DISPLAYED_VALUE")[2000], 
+       "X"."STORED_VALUE"[VARCHAR2,100], "LOV_NAME"[VARCHAR2,100]
+   2 - (#keys=2) "X"."DISPLAYED_VALUE"[VARCHAR2,2000], "LOV_NAME"[VARCHAR2,100], 
+       "X"."STORED_VALUE"[VARCHAR2,100], "TL"."DISPLAYED_VALUE"[VARCHAR2,2000]
+   3 - (#keys=2) "X"."LOCALE_ID"[NUMBER,22], "LOV_NAME"[VARCHAR2,100], 
+       "X"."LOV_VALUE_ID"[NUMBER,22], "X"."DISPLAYED_VALUE"[VARCHAR2,2000], 
+       "X"."STORED_VALUE"[VARCHAR2,100]
+   4 - (#keys=0) "A"."LOCALE_ID"[NUMBER,22], "LOV_NAME"[VARCHAR2,100], "LOV_ID"[NUMBER,22]
+   5 - (#keys=1) "A"."LOCALE_ID"[NUMBER,22]
+   6 - "B"."LOCALE"[VARCHAR2,400]
+   7 - "B".ROWID[ROWID,10]
+   8 - "A"."LOCALE_ID"[NUMBER,22], "A"."LOCALE_STRING"[VARCHAR2,100]
+   9 - (#keys=0) "LOV_NAME"[VARCHAR2,100], "LOV_ID"[NUMBER,22]
+  10 - "LOV_NAME"[VARCHAR2,100], "LOV_ID"[NUMBER,22]
+  11 - "X"."LOV_VALUE_ID"[NUMBER,22], "X"."LOV_ID"[NUMBER,22], "X"."STORED_VALUE"[VARCHAR2,100], 
+       "X"."DISPLAYED_VALUE"[VARCHAR2,2000], "X"."LOCALE_ID"[NUMBER,22]
+  12 - (#keys=0) "LOCALE_ID"[NUMBER,22], "T"."LOV_VALUE_ID"[NUMBER,22], "T"."LOV_ID"[NUMBER,22], 
+       "T"."STORED_VALUE"[VARCHAR2,100], "T"."DISPLAYED_VALUE"[VARCHAR2,2000]
+  13 - "LOCALE_ID"[NUMBER,22]
+  14 - (#keys=0) "T"."LOV_VALUE_ID"[NUMBER,22], "T"."LOV_ID"[NUMBER,22], 
+       "T"."STORED_VALUE"[VARCHAR2,100], "T"."DISPLAYED_VALUE"[VARCHAR2,2000]
+  15 - "T"."LOV_VALUE_ID"[NUMBER,22], "T"."LOV_ID"[NUMBER,22], "T"."STORED_VALUE"[VARCHAR2,100], 
+       "T"."DISPLAYED_VALUE"[VARCHAR2,2000]
+  16 - "TL"."LOV_VALUE_ID"[NUMBER,22], "TL"."DISPLAYED_VALUE"[VARCHAR2,2000], 
+       "TL"."LOCALE_ID"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS GRC Metrics Data Entry Link Report Infolet (100530)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code>select METRIC_DEFN_NAME    ,
+METRIC_DEFINITION_ID    ,
+ms_apps_utilities.get_display_value (MS_GRC_UTILITIES.active_ent_id, 'MS GRC KI Applies To Items', ASSESSMENT_TYPE ) AS assessment_type ,
+TO_CHAR (trunc (NEXT_SCHEDULED_DATE),'mm/dd/yyyy')    ,
+ms_apps_utilities.get_display_value (MS_GRC_UTILITIES.active_ent_id, 'MS GRC KI Indicator Measurement', INDICATOR_MEASUREMENT ) as INDICATOR_MEASUREMENT  ,
+ms_apps_utilities.get_user_full_name(DATA_ENTRY_OWNER) AS DATA_ENTRY_OWNER    ,
+CURRENT_VALUE    ,
+NON_CRITICAL_RISING_THRESH    ,
+CRITICAL_RISING_THRESH    ,
+NON_CRITICAL_DROPPING_THRESH    ,
+CRITICAL_DROPPING_THRESH ,
+ATI_OBJECT_ID,
+to_char(Trunc(CURRENT_DATE_VALUE),'mm/dd/yyyy') as CURRENT_DATE_VALUE,
+ATI_COMMENTS,EXPECTED_VALUE, ms_apps_utilities.get_display_value (MS_GRC_UTILITIES.active_ent_id, 'MS GRC KI Frequency', frequency ) as frequency,
+NULL AS ATI_OBJ_NAME,
+Case When Risk_Categories Is Not Null Then ms_grc_reportbrowser_filters.Get_Risk_Category(:4,Risk_Categories) Else Null End As Risk_Categories,
+to_char(ms_grc_utilities.GET_VALUE_IN_DATE_FORMAT(CURRENT_DATE_VALUE,FREQUENCY)) as CURRENT_DATE_VALUE_FORMAT
+from ms_Grc_kpi_kri_Data_Entry_rv 
+where metric_definition_id = :1
+and ati_object_id=:2
+and to_char(Trunc(CURRENT_DATE_VALUE),'DD-MON-YY')=:3 and metric_event_id=(select max(metric_event_id) from ms_Grc_kpi_kri_Data_Entry_rv where metric_definition_id = :1
+and ati_object_id=:2
+and to_char(Trunc(CURRENT_DATE_VALUE),'DD-MON-YY')=:3)</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Error</h2></header>
+										<pre><code>
+ORA-04063: view "MAZARS_DEV.MS_GRC_KPI_KRI_DATA_ENTRY_RV" has errors
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>

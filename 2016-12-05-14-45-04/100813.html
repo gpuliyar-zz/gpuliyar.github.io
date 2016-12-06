@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS_GRC_KPI_KRI_get_defn (100813)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code>SELECT   DISPLAY_NAME,
+         OBJECT_ID,
+         OWNERS,
+         --OWNER_ORGS as ORGANIZATION,
+ (Select Ms_Concat(Org_Entity_Name)
+        From   Si_Org_Entities_t Sorg,
+           Si_Ent            Bb
+        Where  Org_Entity_Id In
+           (Select Regexp_Substr(Owner_Org_Ids,
+                       '[^,]+',
+                       1,
+                       Level)
+            From   Dual
+            Connect By Regexp_Substr(Owner_Org_Ids,
+                         '[^,]+',
+                         1,
+											   Level) Is Not Null)
+			  And    Sorg.Enterprise_Id = Bb.Enterprise_Id) As ORGANIZATION,
+        ASSEMENT_FOR,
+       valid_until,      
+ valid_from,    
+         ms_Grc_utilities.INCLUDE_eXPIRED (VALID_FROM, VALID_UNTIL)
+            AS EXPIRED_FLAG,dd_process_instance_id,
+                                                     dd_instance_id,
+object_name
+  FROM   MS_GRC_KPI_KRI_DEFN_RV
+  where 
+ms_apps_security_pkg.check_object_access(dd_object_type, restrict_access_to, Owner_Org_Ids, :1, 'VIEW') = 'ACCESS'
+ORDER BY display_name</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Plan hash value: 1857114155</h2></header>
+										<pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                                | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                         |                            |     1 |  7036 |     3  (34)| 00:00:01 |
+|   1 |  SORT AGGREGATE                          |                            |     1 |   442 |            |          |
+|   2 |   NESTED LOOPS                           |                            |       |       |            |          |
+|   3 |    NESTED LOOPS                          |                            |     1 |   442 |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   4 |     MERGE JOIN CARTESIAN                 |                            |     1 |   407 |     1   (0)| 00:00:01 |</font>
+|*  5 |      INDEX RANGE SCAN                    | MS_GRC_KPI_KRI_DEFN_OWN_UK |     1 |   404 |     0   (0)| 00:00:01 |
+|   6 |      BUFFER SORT                         |                            |     1 |     3 |     1   (0)| 00:00:01 |
+|   7 |       INDEX FULL SCAN                    | SI_ENT_N1                  |     1 |     3 |     1   (0)| 00:00:01 |
+|*  8 |     INDEX RANGE SCAN                     | SI_USERS_T_N2              |     1 |       |     0   (0)| 00:00:01 |
+|   9 |    TABLE ACCESS BY INDEX ROWID           | SI_USERS_T                 |     1 |    35 |     0   (0)| 00:00:01 |
+|  10 |  SORT AGGREGATE                          |                            |     1 |    23 |            |          |
+|* 11 |   FILTER                                 |                            |       |       |            |          |
+|  12 |    NESTED LOOPS                          |                            |    10 |   230 |     3  (34)| 00:00:01 |
+|  13 |     VIEW                                 | index$_join$_001           |    10 |   200 |     3  (34)| 00:00:01 |
+|* 14 |      HASH JOIN                           |                            |       |       |            |          |
+|  15 |       INDEX FAST FULL SCAN               | SI_ORG_ENTITIES_N1         |    10 |   200 |     1   (0)| 00:00:01 |
+|  16 |       INDEX FAST FULL SCAN               | SI_ORG_ENTITIES_N2         |    10 |   200 |     1   (0)| 00:00:01 |
+|* 17 |     INDEX RANGE SCAN                     | SI_ENT_N1                  |     1 |     3 |     0   (0)| 00:00:01 |
+|* 18 |    FILTER                                |                            |       |       |            |          |
+|* 19 |     CONNECT BY WITHOUT FILTERING (UNIQUE)|                            |       |       |            |          |
+|  20 |      FAST DUAL                           |                            |     1 |       |     2   (0)| 00:00:01 |
+|  21 |  SORT AGGREGATE                          |                            |     1 |   714 |            |          |
+|  22 |   TABLE ACCESS BY INDEX ROWID            | MS_GRC_KPI_KRI_DEFN_ATI    |     1 |   714 |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 23 |    INDEX SKIP SCAN                       | MS_GRC_KPI_KRI_DEFN_ATI_UK |     1 |       |     1   (0)| 00:00:01 |</font>
+|  24 |  SORT ORDER BY                           |                            |     1 |  7036 |     3  (34)| 00:00:01 |
+|  25 |   SORT AGGREGATE                         |                            |     1 |   404 |            |          |
+|* 26 |    INDEX RANGE SCAN                      | MS_GRC_KPI_KRI_DEFN_OGN_UK |     1 |   404 |     0   (0)| 00:00:01 |
+|* 27 |   VIEW                                   | MS_GRC_KPI_KRI_DEFN_RV     |     1 |  7036 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  28 |    TABLE ACCESS FULL                     | MS_GRC_KPI_KRI_DEFN        |     1 |   976 |     2   (0)| 00:00:01 |</font>
+-----------------------------------------------------------------------------------------------------------------------
+ 
+										</code></pre>
+ 										<header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header>
+										<pre><code>
+-------------------------------------------------------------
+ 
+   1 - SEL$5       
+   5 - SEL$5        / D@SEL$5
+   7 - SEL$5        / E@SEL$5
+   8 - SEL$5        / USR@SEL$5
+   9 - SEL$5        / USR@SEL$5
+  10 - SEL$2       
+  13 - SEL$F5F5CAC6 / SORG@SEL$2
+  14 - SEL$F5F5CAC6
+  15 - SEL$F5F5CAC6 / indexjoin$_alias$_001@SEL$F5F5CAC6
+  16 - SEL$F5F5CAC6 / indexjoin$_alias$_002@SEL$F5F5CAC6
+  17 - SEL$2        / BB@SEL$2
+  18 - SEL$0EEC8FC1
+  20 - SEL$0EEC8FC1 / DUAL@SEL$3
+  21 - SEL$7       
+  22 - SEL$7        / K@SEL$7
+  23 - SEL$7        / K@SEL$7
+  24 - SEL$1       
+  25 - SEL$6       
+  26 - SEL$6        / D@SEL$6
+  27 - SEL$4        / MS_GRC_KPI_KRI_DEFN_RV@SEL$1
+  28 - SEL$4        / A@SEL$4
+ 
+										</code></pre>
+ 										<header class="major"><h2>Predicate Information (identified by operation id):</h2></header>
+										<pre><code>
+---------------------------------------------------
+ 
+   5 - access("D"."OBJECT_ID"=:B1)
+   8 - access("USR"."ENTERPRISE_ID"="E"."ENTERPRISE_ID" AND "USR"."USER_NAME"="D"."OWNERS")
+  11 - filter( EXISTS (SELECT 0 FROM "SYS"."DUAL" "DUAL" WHERE TO_NUMBER( REGEXP_SUBSTR 
+              (:B1,'[^,]+',1,LEVEL))=:B2 CONNECT BY  REGEXP_SUBSTR (:B3,'[^,]+',1,LEVEL) IS NOT NULL))
+  14 - access(ROWID=ROWID)
+  17 - access("SORG"."ENTERPRISE_ID"="BB"."ENTERPRISE_ID")
+  18 - filter(TO_NUMBER( REGEXP_SUBSTR (:B1,'[^,]+',1,LEVEL))=:B2)
+  19 - filter( REGEXP_SUBSTR (:B1,'[^,]+',1,LEVEL) IS NOT NULL)
+  23 - access("K"."OBJECT_ID"=:B1)
+       filter("K"."OBJECT_ID"=:B1)
+  26 - access("D"."OBJECT_ID"=:B1)
+  27 - filter("MS_APPS_SECURITY_PKG"."CHECK_OBJECT_ACCESS"("DD_OBJECT_TYPE","RESTRICT_ACCESS_TO","OWNER_ORG_IDS
+              ",:1,'VIEW')='ACCESS')
+ 
+										</code></pre>
+ 										<header class="major"><h2>Column Projection Information (identified by operation id):</h2></header>
+										<pre><code>
+-----------------------------------------------------------
+ 
+   1 - (#keys=0) "MS_CONCAT"("USR"."FIRST_NAME"||' '||"USR"."LAST_NAME")[4000]
+   2 - (#keys=0) "USR"."LAST_NAME"[VARCHAR2,400], "USR"."FIRST_NAME"[VARCHAR2,400]
+   3 - (#keys=0) "USR".ROWID[ROWID,10]
+   4 - (#keys=0) "D"."OWNERS"[VARCHAR2,400], "E"."ENTERPRISE_ID"[NUMBER,22]
+   5 - "D"."OWNERS"[VARCHAR2,400]
+   6 - (#keys=0) "E"."ENTERPRISE_ID"[NUMBER,22]
+   7 - "E"."ENTERPRISE_ID"[NUMBER,22]
+   8 - "USR".ROWID[ROWID,10]
+   9 - "USR"."LAST_NAME"[VARCHAR2,400], "USR"."FIRST_NAME"[VARCHAR2,400]
+  10 - (#keys=0) "MS_CONCAT"("ORG_ENTITY_NAME")[4000]
+  11 - "ORG_ENTITY_NAME"[VARCHAR2,100]
+  12 - (#keys=0) "ORG_ENTITY_NAME"[VARCHAR2,100], "ORG_ENTITY_ID"[NUMBER,22]
+  13 - "ORG_ENTITY_NAME"[VARCHAR2,100], "SORG"."ENTERPRISE_ID"[NUMBER,22], "ORG_ENTITY_ID"[NUMBER,22]
+  14 - (#keys=1) "ORG_ENTITY_ID"[NUMBER,22], "SORG"."ENTERPRISE_ID"[NUMBER,22], "ORG_ENTITY_NAME"[VARCHAR2,100]
+  15 - ROWID[ROWID,10], "SORG"."ENTERPRISE_ID"[NUMBER,22], "ORG_ENTITY_ID"[NUMBER,22]
+  16 - ROWID[ROWID,10], "ORG_ENTITY_NAME"[VARCHAR2,100]
+  18 - LEVEL[4]
+  19 - LEVEL[4]
+  21 - (#keys=0) "MS_CONCAT"("MS_GRC_KPI_KRI_UTILITIES"."GET_KPI_KRI_ATI_NAME"(:B1,"K"."ATI_OBJ_ID"))[4000]
+  22 - "K"."ATI_OBJ_ID"[VARCHAR2,1020]
+  23 - "K".ROWID[ROWID,10]
+  24 - (#keys=1) "DISPLAY_NAME"[VARCHAR2,120], "OBJECT_NAME"[VARCHAR2,1020], "OBJECT_ID"[VARCHAR2,400], 
+       "OWNERS"[VARCHAR2,4000],  (SELECT "MS_CONCAT"("ORG_ENTITY_NAME") FROM "SI_ENT" "BB", (SELECT "ORG_ENTITY_NAME" 
+       "ORG_ENTITY_NAME","SORG"."ENTERPRISE_ID" "ENTERPRISE_ID","ORG_ENTITY_ID" "ORG_ENTITY_ID",ROWID "ROWID" FROM 
+       "SI_ORG_ENTITIES_T" "indexjoin$_alias$_002","SI_ORG_ENTITIES_T" "indexjoin$_alias$_001" WHERE ROWID=ROWID) 
+       "SORG" WHERE  EXISTS (SELECT 0 FROM "SYS"."DUAL" "DUAL" WHERE TO_NUMBER( REGEXP_SUBSTR 
+       (:B1,'[^,]+',1,LEVEL))=:B2 CONNECT BY  REGEXP_SUBSTR (:B3,'[^,]+',1,LEVEL) IS NOT NULL) AND 
+       "SORG"."ENTERPRISE_ID"="BB"."ENTERPRISE_ID")[4000], "ASSEMENT_FOR"[VARCHAR2,4000], "VALID_UNTIL"[DATE,7], 
+       "VALID_FROM"[DATE,7], "MS_GRC_UTILITIES"."INCLUDE_EXPIRED"("VALID_FROM","VALID_UNTIL")[22], 
+       "DD_PROCESS_INSTANCE_ID"[NUMBER,22], "DD_INSTANCE_ID"[NUMBER,22]
+  25 - (#keys=0) "MS_CONCAT"("OWNER_ORGANIZATIONS")[4000]
+  26 - "OWNER_ORGANIZATIONS"[VARCHAR2,400]
+  27 - "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,1020], "OWNERS"[VARCHAR2,4000], 
+       "OWNER_ORG_IDS"[VARCHAR2,4000], "VALID_UNTIL"[DATE,7], "VALID_FROM"[DATE,7], "DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "DISPLAY_NAME"[VARCHAR2,120], "DD_PROCESS_INSTANCE_ID"[NUMBER,22], "DD_INSTANCE_ID"[NUMBER,22], 
+       "RESTRICT_ACCESS_TO"[VARCHAR2,12], "ASSEMENT_FOR"[VARCHAR2,4000]
+  28 - "RESTRICT_ACCESS_TO"[VARCHAR2,12], "VALID_FROM"[DATE,7], "VALID_UNTIL"[DATE,7], 
+       "A"."ASSEMENT_FOR"[VARCHAR2,12], "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,1020], 
+       "DD_OBJECT_TYPE"[VARCHAR2,400], "DD_PROCESS_INSTANCE_ID"[NUMBER,22], "DD_INSTANCE_ID"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>

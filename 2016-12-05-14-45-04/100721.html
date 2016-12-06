@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS_GRC_GET_ACTIONS (100721)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code>SELECT distinct w.action_code as action_code,
+  w.action_name as action_name,
+  v.status_code as status_code
+FROM ms_grc_status v,
+  ms_grc_actions w,
+  ms_grc_status_action_mapping x,
+  si_users_t y,
+  si_locales z
+where y.user_name = :1
+and w.locale_id   =
+  (SELECT locale_id FROM si_locales WHERE locale_string=y.locale
+  )
+and w.action_code =x.actions
+and V.STATUS_CODE =X.STATUS
+and V.STATUS_CODE =:2
+and nvl(current_Stage,:3) = :3</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Plan hash value: 2271444809</h2></header>
+										<pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------------
+| Id  | Operation                        | Name                         | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                 |                              |    10 |   860 |    28   (8)| 00:00:01 |
+|   1 |  SORT UNIQUE                     |                              |    10 |   860 |    28   (8)| 00:00:01 |
+|*  2 |   FILTER                         |                              |       |       |            |          |
+<font style="background-color: lightblue; color: red">|   3 |    MERGE JOIN CARTESIAN          |                              |    41 |  3526 |    15   (7)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|   4 |     MERGE JOIN CARTESIAN         |                              |     1 |    86 |    12   (9)| 00:00:01 |</font>
+|*  5 |      HASH JOIN                   |                              |     1 |    66 |    10  (10)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   6 |       MERGE JOIN CARTESIAN       |                              |    11 |   396 |     6   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|*  7 |        TABLE ACCESS FULL         | MS_GRC_STATUS                |     1 |     6 |     3   (0)| 00:00:01 |</font>
+|   8 |        BUFFER SORT               |                              |    11 |   330 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   9 |         TABLE ACCESS FULL        | MS_GRC_ACTIONS               |    11 |   330 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 10 |       TABLE ACCESS FULL          | MS_GRC_STATUS_ACTION_MAPPING |     1 |    30 |     3   (0)| 00:00:01 |</font>
+|  11 |      BUFFER SORT                 |                              |     1 |    20 |     9  (12)| 00:00:01 |
+|  12 |       TABLE ACCESS BY INDEX ROWID| SI_USERS_T                   |     1 |    20 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 13 |        INDEX SKIP SCAN           | SI_USERS_T_N2                |     1 |       |     1   (0)| 00:00:01 |</font>
+|  14 |     BUFFER SORT                  |                              |    35 |       |    13   (8)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  15 |      TABLE ACCESS FULL           | SI_LOCALES                   |    35 |       |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 16 |    TABLE ACCESS FULL             | SI_LOCALES                   |     1 |    11 |     3   (0)| 00:00:01 |</font>
+-----------------------------------------------------------------------------------------------------------------
+ 
+										</code></pre>
+ 										<header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header>
+										<pre><code>
+-------------------------------------------------------------
+ 
+   1 - SEL$1
+   7 - SEL$1 / V@SEL$1
+   9 - SEL$1 / W@SEL$1
+  10 - SEL$1 / X@SEL$1
+  12 - SEL$1 / Y@SEL$1
+  13 - SEL$1 / Y@SEL$1
+  15 - SEL$1 / Z@SEL$1
+  16 - SEL$2 / SI_LOCALES@SEL$2
+ 
+										</code></pre>
+ 										<header class="major"><h2>Predicate Information (identified by operation id):</h2></header>
+										<pre><code>
+---------------------------------------------------
+ 
+   2 - filter("W"."LOCALE_ID"= (SELECT "LOCALE_ID" FROM "SI_LOCALES" "SI_LOCALES" WHERE 
+              "LOCALE_STRING"=:B1))
+   5 - access("W"."ACTION_CODE"="X"."ACTIONS" AND "V"."STATUS_CODE"="X"."STATUS")
+   7 - filter("V"."STATUS_CODE"=:2)
+  10 - filter("X"."STATUS"=:2 AND NVL("CURRENT_STAGE",:3)=:3)
+  13 - access("Y"."USER_NAME"=:1)
+       filter("Y"."USER_NAME"=:1)
+  16 - filter("LOCALE_STRING"=:B1)
+ 
+										</code></pre>
+ 										<header class="major"><h2>Column Projection Information (identified by operation id):</h2></header>
+										<pre><code>
+-----------------------------------------------------------
+ 
+   1 - (#keys=3) "W"."ACTION_CODE"[VARCHAR2,160], "W"."ACTION_NAME"[VARCHAR2,1600], 
+       "V"."STATUS_CODE"[VARCHAR2,160]
+   2 - "W"."ACTION_CODE"[VARCHAR2,160], "V"."STATUS_CODE"[VARCHAR2,160], "W"."ACTION_NAME"[VARCHAR2,1600]
+   3 - (#keys=0) "W"."ACTION_CODE"[VARCHAR2,160], "V"."STATUS_CODE"[VARCHAR2,160], 
+       "W"."ACTION_NAME"[VARCHAR2,1600], "W"."LOCALE_ID"[NUMBER,22], "Y"."LOCALE"[VARCHAR2,400]
+   4 - (#keys=0) "W"."ACTION_CODE"[VARCHAR2,160], "V"."STATUS_CODE"[VARCHAR2,160], 
+       "W"."ACTION_NAME"[VARCHAR2,1600], "W"."LOCALE_ID"[NUMBER,22], "Y"."LOCALE"[VARCHAR2,400]
+   5 - (#keys=2) "W"."ACTION_CODE"[VARCHAR2,160], "V"."STATUS_CODE"[VARCHAR2,160], 
+       "W"."ACTION_NAME"[VARCHAR2,1600], "W"."LOCALE_ID"[NUMBER,22]
+   6 - (#keys=0) "V"."STATUS_CODE"[VARCHAR2,160], "W"."ACTION_CODE"[VARCHAR2,160], 
+       "W"."ACTION_NAME"[VARCHAR2,1600], "W"."LOCALE_ID"[NUMBER,22]
+   7 - "V"."STATUS_CODE"[VARCHAR2,160]
+   8 - (#keys=0) "W"."ACTION_CODE"[VARCHAR2,160], "W"."ACTION_NAME"[VARCHAR2,1600], 
+       "W"."LOCALE_ID"[NUMBER,22]
+   9 - "W"."ACTION_CODE"[VARCHAR2,160], "W"."ACTION_NAME"[VARCHAR2,1600], "W"."LOCALE_ID"[NUMBER,22]
+  10 - "X"."STATUS"[VARCHAR2,1600], "X"."ACTIONS"[VARCHAR2,1600]
+  11 - (#keys=0) "Y"."LOCALE"[VARCHAR2,400]
+  12 - "Y"."LOCALE"[VARCHAR2,400]
+  13 - "Y".ROWID[ROWID,10]
+  14 - (#keys=0) 
+  16 - "LOCALE_ID"[NUMBER,22], "LOCALE_STRING"[VARCHAR2,100]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>

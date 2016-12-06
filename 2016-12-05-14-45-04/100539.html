@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS GRC ORB Add Objectives (100539)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code>SELECT '<input type=checkbox id="'
+     || replace(r.Object_Id,' ','$^$')
+      || '" value="'
+      || htf.ESCAPE_SC(substr(r.Object_Name,1,3600))
+      ||'^*^'
+      ||r.OBJECTIVE_TYPE
+      ||'$#$'
+      ||ms_grc_utilities.get_form_url(r.dd_object_type,r.object_id)
+      || '"onClick=checkboxChange("'
+      || replace(r.Object_Id,' ','$^$')
+      || '")></input>'  AS Checkbox,
+	  r.Object_Id,
+      r.Object_Name,
+ r.PARENT As PARENT_NAME,
+ r.OBJECTIVE_TYPE as OBJECTIVE_TYPE_VALUE,
+ r.COSO_TYPE as COSO_TYPE
+    FROM MS_GRC_OBJECTIVE_DENORM_OV r
+	where 
+EXISTS
+(SELECT COLUMN_VALUE
+FROM TABLE(cast(MS_GRC_REPORT_FILTERS.Get_Filters_Objectives(:1,:2,:3,:4,:5,:6) AS ms_varchar2_array))
+WHERE COLUMN_VALUE = R.OBJECT_ID
+)
+AND r.locale =
+  (SELECT LOCALE FROM si_users_t WHERE USER_NAME = :1
+  )
+order by r.upper_object_name</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Plan hash value: 1453715578</h2></header>
+										<pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                           | Name                         | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                    |                              |     1 | 10920 |    33   (7)| 00:00:01 |
+|   1 |  SORT ORDER BY                      |                              |     1 | 10920 |    33   (7)| 00:00:01 |
+|*  2 |   HASH JOIN SEMI                    |                              |     1 | 10920 |    30   (4)| 00:00:01 |
+|   3 |    NESTED LOOPS                     |                              |     1 | 10918 |     0   (0)| 00:00:01 |
+|   4 |     INDEX FULL SCAN                 | MS_GRC_OBJ_PK                |     1 |  5910 |     0   (0)| 00:00:01 |
+|*  5 |     TABLE ACCESS BY INDEX ROWID     | MS_GRC_OBJECTIVE_MLS_SUMMARY |     1 |  5008 |     0   (0)| 00:00:01 |
+|*  6 |      INDEX RANGE SCAN               | MS_GRC_OBJC_MLS_SUMM_IDX2    |     1 |       |     0   (0)| 00:00:01 |
+|   7 |      TABLE ACCESS BY INDEX ROWID    | SI_USERS_T                   |     1 |    20 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  8 |       INDEX SKIP SCAN               | SI_USERS_T_N2                |     1 |       |     1   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|   9 |    COLLECTION ITERATOR PICKLER FETCH| GET_FILTERS_OBJECTIVES       |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+--------------------------------------------------------------------------------------------------------------------
+ 
+										</code></pre>
+ 										<header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header>
+										<pre><code>
+-------------------------------------------------------------
+ 
+   1 - SEL$B7274CD5
+   4 - SEL$B7274CD5 / OBJSUMM@SEL$2
+   5 - SEL$B7274CD5 / MLSSUMM@SEL$2
+   6 - SEL$B7274CD5 / MLSSUMM@SEL$2
+   7 - SEL$5        / SI_USERS_T@SEL$5
+   8 - SEL$5        / SI_USERS_T@SEL$5
+   9 - SEL$B7274CD5 / KOKBF$0@SEL$4
+ 
+										</code></pre>
+ 										<header class="major"><h2>Predicate Information (identified by operation id):</h2></header>
+										<pre><code>
+---------------------------------------------------
+ 
+   2 - access("OBJSUMM"."OBJECT_ID"=VALUE(KOKBF$))
+   5 - filter("MLSSUMM"."LOCALE"= (SELECT "LOCALE" FROM "SI_USERS_T" "SI_USERS_T" WHERE "USER_NAME"=:1))
+   6 - access("OBJSUMM"."OBJECT_ID"="MLSSUMM"."OBJECT_ID")
+   8 - access("USER_NAME"=:1)
+       filter("USER_NAME"=:1)
+ 
+										</code></pre>
+ 										<header class="major"><h2>Column Projection Information (identified by operation id):</h2></header>
+										<pre><code>
+-----------------------------------------------------------
+ 
+   1 - (#keys=1) "OBJSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], '<input type=checkbox 
+       id="'||REPLACE("OBJSUMM"."OBJECT_ID",' ','$^$')||'" value="'||"HTF"."ESCAPE_SC"(SUBSTR("OBJSUMM"."OBJECT_NAM
+       E",1,3600))||'^*^'||"MLSSUMM"."OBJECTIVE_TYPE"||'$#$'||"MS_GRC_UTILITIES"."GET_FORM_URL"("DD_OBJECT_TYPE","O
+       BJSUMM"."OBJECT_ID")||'"onClick=checkboxChange("'||REPLACE("OBJSUMM"."OBJECT_ID",' 
+       ','$^$')||'")></input>'[4000], "OBJSUMM"."OBJECT_ID"[VARCHAR2,1600], 
+       "OBJSUMM"."OBJECT_NAME"[VARCHAR2,4000], "OBJSUMM"."PARENT"[VARCHAR2,1600], 
+       "MLSSUMM"."OBJECTIVE_TYPE"[4000], "MLSSUMM"."COSO_TYPE"[4000]
+   2 - (#keys=1) "OBJSUMM"."OBJECT_ID"[VARCHAR2,1600], "OBJSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "MLSSUMM"."COSO_TYPE"[LOB,4000], "OBJSUMM"."OBJECT_NAME"[VARCHAR2,4000], "OBJSUMM"."PARENT"[VARCHAR2,1600], 
+       "DD_OBJECT_TYPE"[VARCHAR2,1600], "MLSSUMM"."OBJECTIVE_TYPE"[LOB,4000]
+   3 - (#keys=0) "OBJSUMM".ROWID[ROWID,3034], "OBJSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "OBJ_SUMM_WID"[NUMBER,22], "OBJSUMM"."OBJECT_ID"[VARCHAR2,1600], "OBJSUMM"."OBJECT_NAME"[VARCHAR2,4000], 
+       "OBJSUMM"."PARENT"[VARCHAR2,1600], "DD_OBJECT_TYPE"[VARCHAR2,1600], "MLSSUMM".ROWID[ROWID,10], 
+       "MLSSUMM"."OBJECT_ID"[VARCHAR2,1600], "MLSSUMM"."LOCALE"[VARCHAR2,400], 
+       "MLSSUMM"."OBJECTIVE_TYPE"[LOB,4000], "MLSSUMM"."COSO_TYPE"[LOB,4000]
+   4 - "OBJSUMM".ROWID[ROWID,3034], "OBJSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "OBJ_SUMM_WID"[NUMBER,22], "OBJSUMM"."OBJECT_ID"[VARCHAR2,1600], "OBJSUMM"."OBJECT_NAME"[VARCHAR2,4000], 
+       "OBJSUMM"."PARENT"[VARCHAR2,1600], "DD_OBJECT_TYPE"[VARCHAR2,1600]
+   5 - "MLSSUMM".ROWID[ROWID,10], "MLSSUMM"."OBJECT_ID"[VARCHAR2,1600], "MLSSUMM"."LOCALE"[VARCHAR2,400], 
+       "MLSSUMM"."OBJECTIVE_TYPE"[LOB,4000], "MLSSUMM"."COSO_TYPE"[LOB,4000]
+   6 - "MLSSUMM".ROWID[ROWID,10], "MLSSUMM"."OBJECT_ID"[VARCHAR2,1600]
+   7 - "SI_USERS_T".ROWID[ROWID,10], "USER_NAME"[VARCHAR2,320], "LOCALE"[VARCHAR2,400]
+   8 - "SI_USERS_T".ROWID[ROWID,10], "USER_NAME"[VARCHAR2,320]
+   9 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>

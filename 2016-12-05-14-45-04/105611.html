@@ -1,0 +1,261 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS_GRC_REF_Drilldown_Rpt_Inf (105611)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code>SELECT ctrl.object_id                                                        AS object_id ,
+  ctrl.object_name_url                                                           AS object_name ,
+  ctrl.object_status                                                       AS object_status ,
+  inn.rel_dir_type                                                           AS relationship_type
+FROM
+  (SELECT DISTINCT tgt_obj_id,
+    Src_Obj_Id ,
+    rel_dir_type
+  FROM ms_grc_orb_relations_pub_v vw
+  WHERE vw.tgt_obj_type ='MS_GRC_REFERENCE'
+  AND vw.src_obj_type   = :1
+  ) inn,
+  MS_GRC_REFERENCE_DENORM_RV ctrl
+WHERE inn.Src_Obj_Id = :2
+AND inn.tgt_obj_id   = ctrl.object_id
+and 
+ctrl.LOCALE = (SELECT LOCALE FROM si_users_t where USER_NAME = :3)
+order by ctrl.upper_object_name</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td> This infolet fetched related references </td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Plan hash value: 1441948608</h2></header>
+										<pre><code>
+ 
+------------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                             | Name                           | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                      |                                |     1 |  6485 |     7  (29)| 00:00:01 |
+|   1 |  SORT ORDER BY                        |                                |     1 |  6485 |     7  (29)| 00:00:01 |
+|   2 |   NESTED LOOPS                        |                                |     1 |  6485 |     4  (25)| 00:00:01 |
+|   3 |    NESTED LOOPS                       |                                |     1 |  4268 |     4  (25)| 00:00:01 |
+|   4 |     VIEW                              |                                |     2 |  1098 |     4  (25)| 00:00:01 |
+|   5 |      SORT UNIQUE                      |                                |     2 |  1120 |     4  (25)| 00:00:01 |
+|   6 |       VIEW                            | MS_GRC_ORB_RELATIONS_PUB_V     |     2 |  1120 |     3   (0)| 00:00:01 |
+|   7 |        UNION-ALL                      |                                |       |       |            |          |
+|   8 |         NESTED LOOPS                  |                                |       |       |            |          |
+|   9 |          NESTED LOOPS                 |                                |     1 |  1607 |     2   (0)| 00:00:01 |
+|  10 |           NESTED LOOPS                |                                |     1 |  1581 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  11 |            TABLE ACCESS FULL          | MS_GRC_ORB_RELATIONS_ORB       |     1 |  1536 |     2   (0)| 00:00:01 |</font>
+|* 12 |            TABLE ACCESS BY INDEX ROWID| MS_GRC_REL_DEFN                |     1 |    45 |     0   (0)| 00:00:01 |
+|* 13 |             INDEX UNIQUE SCAN         | MS_GRC_REL_DEFN_PK             |     1 |       |     0   (0)| 00:00:01 |
+|* 14 |           INDEX UNIQUE SCAN           | MS_GRC_ORB_RELATIONS_PK        |     1 |       |     0   (0)| 00:00:01 |
+|* 15 |          TABLE ACCESS BY INDEX ROWID  | MS_GRC_ORB_RELATIONS           |     1 |    26 |     0   (0)| 00:00:01 |
+|  16 |         NESTED LOOPS                  |                                |       |       |            |          |
+|  17 |          NESTED LOOPS                 |                                |     1 |  1607 |     1   (0)| 00:00:01 |
+|  18 |           NESTED LOOPS                |                                |     1 |  1581 |     1   (0)| 00:00:01 |
+|  19 |            TABLE ACCESS BY INDEX ROWID| MS_GRC_ORB_RELATIONS_ORB       |     1 |  1536 |     1   (0)| 00:00:01 |
+|* 20 |             INDEX RANGE SCAN          | MS_GRC_ORB_RELATIONS_ORB_IDX1  |     1 |       |     1   (0)| 00:00:01 |
+|* 21 |            TABLE ACCESS BY INDEX ROWID| MS_GRC_REL_DEFN                |     1 |    45 |     0   (0)| 00:00:01 |
+|* 22 |             INDEX UNIQUE SCAN         | MS_GRC_REL_DEFN_PK             |     1 |       |     0   (0)| 00:00:01 |
+|* 23 |           INDEX UNIQUE SCAN           | MS_GRC_ORB_RELATIONS_PK        |     1 |       |     0   (0)| 00:00:01 |
+|  24 |          TABLE ACCESS BY INDEX ROWID  | MS_GRC_ORB_RELATIONS           |     1 |    26 |     0   (0)| 00:00:01 |
+|* 25 |     INDEX UNIQUE SCAN                 | MS_GRC_REF_SUMMARY_PK          |     1 |  3719 |     0   (0)| 00:00:01 |
+|* 26 |      INDEX RANGE SCAN                 | MS_GRC_REFERENCE_SUMM_IDX1     |     1 |       |     0   (0)| 00:00:01 |
+|* 27 |    TABLE ACCESS BY INDEX ROWID        | MS_GRC_REFERENCE_MLS_SUMMARY   |     1 |  2217 |     0   (0)| 00:00:01 |
+|* 28 |     INDEX RANGE SCAN                  | MS_GRC_REFERENCE_MLS_SUMM_IDX1 |     1 |       |     0   (0)| 00:00:01 |
+|  29 |     TABLE ACCESS BY INDEX ROWID       | SI_USERS_T                     |     1 |    20 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 30 |      INDEX SKIP SCAN                  | SI_USERS_T_N2                  |     1 |       |     1   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------------------------
+ 
+										</code></pre>
+ 										<header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header>
+										<pre><code>
+-------------------------------------------------------------
+ 
+   1 - SEL$66276EDA
+   4 - SEL$2        / INN@SEL$1
+   5 - SEL$2       
+   6 - SET$1        / VW@SEL$2
+   7 - SET$1       
+   8 - SEL$3       
+  11 - SEL$3        / REL_ORB@SEL$3
+  12 - SEL$3        / DEFN@SEL$3
+  13 - SEL$3        / DEFN@SEL$3
+  14 - SEL$3        / REL@SEL$3
+  15 - SEL$3        / REL@SEL$3
+  16 - SEL$4       
+  19 - SEL$4        / REL_ORB@SEL$4
+  20 - SEL$4        / REL_ORB@SEL$4
+  21 - SEL$4        / DEFN@SEL$4
+  22 - SEL$4        / DEFN@SEL$4
+  23 - SEL$4        / REL@SEL$4
+  24 - SEL$4        / REL@SEL$4
+  25 - SEL$66276EDA / REFSUMM@SEL$5
+  26 - SEL$66276EDA / REFSUMM@SEL$5
+  27 - SEL$66276EDA / REFMLSSUMM@SEL$5
+  28 - SEL$66276EDA / REFMLSSUMM@SEL$5
+  29 - SEL$10       / SI_USERS_T@SEL$10
+  30 - SEL$10       / SI_USERS_T@SEL$10
+ 
+										</code></pre>
+ 										<header class="major"><h2>Predicate Information (identified by operation id):</h2></header>
+										<pre><code>
+---------------------------------------------------
+ 
+  12 - filter("DEFN"."SRC_OBJ_TYPE"=:1 AND "DEFN"."DEST_OBJ_TYPE"='MS_GRC_REFERENCE')
+  13 - access("DEFN"."REL_ID"="REL_ORB"."REL_CONFIG_ID")
+  14 - access("REL"."REL_SOURCE_ID"="REL_ORB"."REL_SOURCE_ID")
+  15 - filter("REL"."REL_SOURCE_OBJECT_ID"=:2)
+  20 - access("REL_ORB"."TGT_OBJ_ID"=:2)
+  21 - filter("DEFN"."SRC_OBJ_TYPE"='MS_GRC_REFERENCE' AND "DEFN"."DEST_OBJ_TYPE"=:1)
+  22 - access("DEFN"."REL_ID"="REL_ORB"."REL_CONFIG_ID")
+  23 - access("REL"."REL_SOURCE_ID"="REL_ORB"."REL_SOURCE_ID")
+  25 - access("INN"."TGT_OBJ_ID"="REFSUMM"."OBJECT_ID")
+  26 - access("INN"."TGT_OBJ_ID"="REFSUMM"."OBJECT_ID")
+  27 - filter("REFMLSSUMM"."LOCALE"= (SELECT "LOCALE" FROM "SI_USERS_T" "SI_USERS_T" WHERE "USER_NAME"=:3))
+  28 - access("REFSUMM"."OBJ_REF_SUMM_WID"="REFMLSSUMM"."OBJ_REF_SUMM_WID")
+  30 - access("USER_NAME"=:3)
+       filter("USER_NAME"=:3)
+ 
+										</code></pre>
+ 										<header class="major"><h2>Column Projection Information (identified by operation id):</h2></header>
+										<pre><code>
+-----------------------------------------------------------
+ 
+   1 - (#keys=1) "REFSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], "REFSUMM"."OBJECT_ID"[VARCHAR2,400], 
+       "REFSUMM"."OBJECT_NAME_URL"[VARCHAR2,4000], "REFMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], 
+       "INN"."REL_DIR_TYPE"[CHARACTER,28]
+   2 - (#keys=0) "INN"."REL_DIR_TYPE"[CHARACTER,28], "REFSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "REFSUMM"."OBJECT_ID"[VARCHAR2,400], "REFSUMM"."OBJECT_NAME_URL"[VARCHAR2,4000], 
+       "REFMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000]
+   3 - (#keys=0) "INN"."REL_DIR_TYPE"[CHARACTER,28], "REFSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "REFSUMM"."OBJ_REF_SUMM_WID"[NUMBER,22], "REFSUMM"."OBJECT_ID"[VARCHAR2,400], 
+       "REFSUMM"."OBJECT_NAME_URL"[VARCHAR2,4000]
+   4 - "INN"."TGT_OBJ_ID"[VARCHAR2,1020], "INN"."REL_DIR_TYPE"[CHARACTER,28]
+   5 - (#keys=3) "TGT_OBJ_ID"[VARCHAR2,1020], "SRC_OBJ_ID"[VARCHAR2,1020], "REL_DIR_TYPE"[CHARACTER,28]
+   6 - "SRC_OBJ_ID"[VARCHAR2,1020], "TGT_OBJ_ID"[VARCHAR2,1020], "REL_DIR_TYPE"[CHARACTER,28]
+   7 - STRDEF[512], STRDEF[1020], STRDEF[512], STRDEF[1020], STRDEF[7]
+   8 - (#keys=0) "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,1020], "DEFN"."SRC_OBJ_TYPE"[VARCHAR2,512], 
+       "DEFN"."DEST_OBJ_TYPE"[VARCHAR2,512], "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016]
+   9 - (#keys=0) "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,1020], "DEFN"."SRC_OBJ_TYPE"[VARCHAR2,512], 
+       "DEFN"."DEST_OBJ_TYPE"[VARCHAR2,512], "REL".ROWID[ROWID,10]
+  10 - (#keys=0) "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,1020], "REL_ORB"."REL_SOURCE_ID"[VARCHAR2,1020], 
+       "DEFN"."SRC_OBJ_TYPE"[VARCHAR2,512], "DEFN"."DEST_OBJ_TYPE"[VARCHAR2,512]
+  11 - "REL_ORB"."REL_CONFIG_ID"[VARCHAR2,1020], "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,1020], 
+       "REL_ORB"."REL_SOURCE_ID"[VARCHAR2,1020]
+  12 - "DEFN"."SRC_OBJ_TYPE"[VARCHAR2,512], "DEFN"."DEST_OBJ_TYPE"[VARCHAR2,512]
+  13 - "DEFN".ROWID[ROWID,10]
+  14 - "REL".ROWID[ROWID,10]
+  15 - "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016]
+  16 - (#keys=0) "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,1020], "DEFN"."SRC_OBJ_TYPE"[VARCHAR2,512], 
+       "DEFN"."DEST_OBJ_TYPE"[VARCHAR2,512], "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016]
+  17 - (#keys=0) "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,1020], "DEFN"."SRC_OBJ_TYPE"[VARCHAR2,512], 
+       "DEFN"."DEST_OBJ_TYPE"[VARCHAR2,512], "REL".ROWID[ROWID,10]
+  18 - (#keys=0) "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,1020], "REL_ORB"."REL_SOURCE_ID"[VARCHAR2,1020], 
+       "DEFN"."SRC_OBJ_TYPE"[VARCHAR2,512], "DEFN"."DEST_OBJ_TYPE"[VARCHAR2,512]
+  19 - "REL_ORB"."REL_CONFIG_ID"[VARCHAR2,1020], "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,1020], 
+       "REL_ORB"."REL_SOURCE_ID"[VARCHAR2,1020]
+  20 - "REL_ORB".ROWID[ROWID,10], "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,1020]
+  21 - "DEFN"."SRC_OBJ_TYPE"[VARCHAR2,512], "DEFN"."DEST_OBJ_TYPE"[VARCHAR2,512]
+  22 - "DEFN".ROWID[ROWID,10]
+  23 - "REL".ROWID[ROWID,10]
+  24 - "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016]
+  25 - "REFSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], "REFSUMM"."OBJ_REF_SUMM_WID"[NUMBER,22], 
+       "REFSUMM"."OBJECT_ID"[VARCHAR2,400], "REFSUMM"."OBJECT_NAME_URL"[VARCHAR2,4000]
+  26 - "REFSUMM".ROWID[ROWID,3034], "REFSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "REFSUMM"."OBJ_REF_SUMM_WID"[NUMBER,22], "REFSUMM"."OBJECT_ID"[VARCHAR2,400], 
+       "REFSUMM"."OBJECT_NAME_URL"[VARCHAR2,4000], "REFSUMM".ROWID[ROWID,3034]
+  27 - "REFMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000]
+  28 - "REFMLSSUMM".ROWID[ROWID,10]
+  29 - "SI_USERS_T".ROWID[ROWID,10], "LOCALE"[VARCHAR2,400]
+  30 - "SI_USERS_T".ROWID[ROWID,10]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>

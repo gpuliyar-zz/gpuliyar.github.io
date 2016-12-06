@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS_GRC_AOC_BROWSER_DRILLDOWN (100583)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code>SELECT SUBSTR (a.object_name, 1, 30) display_name, a.object_id object_id,
+       a.dd_object_type object_type, NULL object_level,
+       'Y' AS over_ride_action,
+          'proc='
+       || TO_CHAR (a.dd_process_instance_id)
+       || '|instid='
+       || TO_CHAR (a.dd_instance_id)
+       || '|edit_flag='
+       || NVL (a.dd_edit_flag, 'Y') AS edit_action_parameters
+  FROM ms_grc_requirement a
+ WHERE area_of_compliance = :1
+union all
+select substr(a.object_name,1,30) display_name
+,a.object_id object_id
+,a.dd_object_type object_type
+,a.object_level object_level
+,'Y' AS OVER_RIDE_ACTION
+, 'proc='|| TO_CHAR(dd_process_instance_id)||'|instid='||TO_CHAR(dd_instance_id)||'|edit_flag='||NVL(dd_edit_flag,'Y') AS EDIT_ACTION_PARAMETERS
+from
+MS_GRC_CORE_OBJECT a 
+where  A.OBJECT_ID IN (select OBJECT_ID
+           from ms_grc_core_object_aoc 
+           WHERE MS_GRC_UTILITIES.compare_comma_separated_string(area_of_compliance,:1) = 1) and
+sysdate between NVL(Valid_from, sysdate) and nvl(valid_until, sysdate)
+union all
+SELECT substr(a.object_name,1,30) display_name, a.object_id object_id,
+a.dd_object_type object_type, NULL object_level,
+'Y' AS over_ride_action,
+'proc='
+|| TO_CHAR (a.dd_process_instance_id)
+|| '|instid='
+|| TO_CHAR (a.dd_instance_id)
+|| '|edit_flag='
+|| NVL (a.dd_edit_flag, 'Y') AS edit_action_parameters
+FROM ms_grc_regulatory_body a, ms_grc_area_of_complia b
+WHERE b.object_id = :1
+AND a.object_id in  b.regulatory_body
+AND SYSDATE BETWEEN NVL (a.valid_from, SYSDATE) AND NVL (a.valid_until,
+SYSDATE)
+union all
+select substr(a.object_name,1,30) display_name
+,a.object_id object_id
+,a.dd_object_type object_type
+,null object_level
+,'Y' AS OVER_RIDE_ACTION
+, 'proc='|| TO_CHAR(dd_process_instance_id)||'|instid='||TO_CHAR(dd_instance_id)||'|edit_flag='||NVL(dd_edit_flag,'Y') AS EDIT_ACTION_PARAMETERS
+from
+ms_grc_compliance_obje a 
+where  A.OBJECT_ID IN (select OBJECT_ID
+           from ms_grc_compliance_obje_aoc 
+           WHERE MS_GRC_UTILITIES.compare_comma_separated_string(area_of_compliance,:1) = 1) and
+sysdate between NVL(Valid_from, sysdate) and nvl(valid_until, sysdate)
+union all
+select substr(a.object_name,1,30) display_name
+,a.object_id object_id
+,a.dd_object_type object_type
+,null object_level
+,'Y' AS OVER_RIDE_ACTION
+, 'proc='|| TO_CHAR(dd_process_instance_id)||'|instid='||TO_CHAR(dd_instance_id)||'|edit_flag='||NVL(dd_edit_flag,'Y') AS EDIT_ACTION_PARAMETERS
+from
+ms_grc_risk a 
+where  A.OBJECT_ID IN (select OBJECT_ID
+           from ms_grc_risk_aoc 
+           WHERE MS_GRC_UTILITIES.compare_comma_separated_string(area_of_compliance,:1) = 1) and
+sysdate between NVL(Valid_from, sysdate) and nvl(valid_until, sysdate)
+union all
+   select substr(a.object_name,1,30) display_name
+,a.object_id object_id
+,a.dd_object_type object_type
+,NULL object_level
+,'Y' AS OVER_RIDE_ACTION
+, 'proc='|| TO_CHAR(A.dd_process_instance_id)||'|instid='||TO_CHAR(A.dd_instance_id)||'|edit_flag='||NVL(A.dd_edit_flag,'Y') AS EDIT_ACTION_PARAMETERS
+ from ms_grc_area_of_complia_mre B,
+ms_grc_model_Reference A
+where B.object_id=:1
+AND A.object_id=B.model_name
+and sysdate between NVL(A.Valid_from, sysdate) and nvl(A.valid_until, sysdate) union all
+SELECT SUBSTR (org_entity_name, 1, 30) display_name,
+ TO_CHAR (org_entity_id) object_id, 'MS_GRC_ORGANIZATION' object_type,
+ NULL object_level, 'Y' AS over_ride_action,
+ '' AS edit_action_parameters
+FROM si_org_entities_t a
+ WHERE EXISTS (
+WITH org_list AS
+ (SELECT TRIM (SUBSTR (txt,
+ INSTR (txt, ',', 1, LEVEL) + 1,
+ INSTR (txt, ',', 1, LEVEL + 1)
+ - INSTR (txt, ',', 1, LEVEL)
+ - 1
+)
+) AS org_id
+FROM (SELECT ',' || organization_name || ',' AS txt
+FROM ms_grc_area_of_complia_ato
+ WHERE object_id = :1)
+CONNECT BY LEVEL <=
+LENGTH (txt) - LENGTH (REPLACE (txt, ',', ''))
+- 1)
+SELECT DISTINCT org_id
+ FROM org_list
+WHERE org_id = a.org_entity_id)</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td> Regulation Policy / Area of Compliance drill down browser </td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Error</h2></header>
+										<pre><code>
+ORA-00904: "AREA_OF_COMPLIANCE": invalid identifier
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>

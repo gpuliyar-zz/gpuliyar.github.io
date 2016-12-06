@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td>Name</td>
+														<td>MS_GRC_ORG_PROFILE_LEVEL (102752)</td>
+													</tr>
+													<tr>
+														<td>SQL</td>
+														<td><pre><code>SELECT org.org_entity_id   AS org_entity_id
+, org.parent_org_entity_id    AS parent_org_entity_id
+, org.org_entity_name          AS org_entity_name
+, porg.org_entity_name       AS parent_org_entity_name
+, org.description                   AS org_description
+, loc.location_name            AS org_location
+, ohl.org_level                       AS org_level
+, ohl.org_hierarchy_name          AS org_hierarchy_name
+FROM si_org_entities org
+, si_org_locations loc
+, si_org_hierarchy_levels ohl
+, si_org_entities porg
+where org.location_id = loc.location_id (+)
+and org.org_entity_id=:1
+AND SYSDATE BETWEEN org.start_date AND Nvl(org.end_date, SYSDATE)
+AND org.org_hierarchy_id = ohl.org_hierarchy_id
+AND org.parent_org_entity_id = porg.org_entity_id (+)
+and ORG.ORG_ENTITY_id <> 1
+Order By org.org_entity_name</code></pre></td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td> NPI Infolet to list all the organizations along with their locations, hierarchies, org levels and parent org name </td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+ 										<header class="major"><h2>Plan hash value: 2779225706</h2></header>
+										<pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------
+| Id  | Operation                        | Name                      | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                 |                           |     1 |    89 |    11  (19)| 00:00:01 |
+|   1 |  SORT ORDER BY                   |                           |     1 |    89 |    11  (19)| 00:00:01 |
+|*  2 |   FILTER                         |                           |       |       |            |          |
+|   3 |    NESTED LOOPS OUTER            |                           |     1 |    89 |    10  (10)| 00:00:01 |
+|*  4 |     HASH JOIN                    |                           |     1 |    72 |     8  (13)| 00:00:01 |
+|   5 |      NESTED LOOPS OUTER          |                           |     1 |    55 |     3   (0)| 00:00:01 |
+|*  6 |       TABLE ACCESS BY INDEX ROWID| SI_ORG_ENTITIES_T         |     1 |    45 |     2   (0)| 00:00:01 |
+|*  7 |        INDEX RANGE SCAN          | SI_ORG_ENTITIES_N5        |     1 |       |     1   (0)| 00:00:01 |
+|   8 |       TABLE ACCESS BY INDEX ROWID| SI_ORG_LOCATIONS_T        |     1 |    10 |     1   (0)| 00:00:01 |
+|*  9 |        INDEX RANGE SCAN          | SI_ORG_LOCATIONS_N1       |     1 |       |     0   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  10 |      TABLE ACCESS FULL           | SI_ORG_HIERARCHY_LEVELS_T |     7 |   119 |     4   (0)| 00:00:01 |</font>
+|  11 |     TABLE ACCESS BY INDEX ROWID  | SI_ORG_ENTITIES_T         |     1 |    17 |     2   (0)| 00:00:01 |
+|* 12 |      INDEX RANGE SCAN            | SI_ORG_ENTITIES_N5        |     1 |       |     1   (0)| 00:00:01 |
+--------------------------------------------------------------------------------------------------------------
+ 
+										</code></pre>
+ 										<header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header>
+										<pre><code>
+-------------------------------------------------------------
+ 
+   1 - SEL$1D9EFBE1
+   6 - SEL$1D9EFBE1 / SI_ORG_ENTITIES_T@SEL$2
+   7 - SEL$1D9EFBE1 / SI_ORG_ENTITIES_T@SEL$2
+   8 - SEL$1D9EFBE1 / SI_ORG_LOCATIONS_T@SEL$3
+   9 - SEL$1D9EFBE1 / SI_ORG_LOCATIONS_T@SEL$3
+  10 - SEL$1D9EFBE1 / SI_ORG_HIERARCHY_LEVELS_T@SEL$4
+  11 - SEL$1D9EFBE1 / SI_ORG_ENTITIES_T@SEL$5
+  12 - SEL$1D9EFBE1 / SI_ORG_ENTITIES_T@SEL$5
+ 
+										</code></pre>
+ 										<header class="major"><h2>Predicate Information (identified by operation id):</h2></header>
+										<pre><code>
+---------------------------------------------------
+ 
+   2 - filter(TO_NUMBER(:1)<>1)
+   4 - access("ORG_HIERARCHY_ID"="ORG_HIERARCHY_ID")
+   6 - filter("START_DATE"<=SYSDATE@! AND NVL("END_DATE",SYSDATE@!)>=SYSDATE@!)
+   7 - access("ORG_ENTITY_ID"=TO_NUMBER(:1))
+       filter("ORG_ENTITY_ID"<>1)
+   9 - access("LOCATION_ID"="LOCATION_ID"(+))
+  12 - access("PARENT_ORG_ENTITY_ID"="ORG_ENTITY_ID"(+))
+ 
+										</code></pre>
+ 										<header class="major"><h2>Column Projection Information (identified by operation id):</h2></header>
+										<pre><code>
+-----------------------------------------------------------
+ 
+   1 - (#keys=1) "ORG_ENTITY_NAME"[VARCHAR2,100], "ORG_ENTITY_ID"[NUMBER,22], 
+       "PARENT_ORG_ENTITY_ID"[NUMBER,22], "ORG_HIERARCHY_NAME"[VARCHAR2,100], 
+       "ORG_ENTITY_NAME"[VARCHAR2,100], "DESCRIPTION"[VARCHAR2,500], "LOCATION_NAME"[VARCHAR2,100], 
+       "ORG_LEVEL"[NUMBER,22]
+   2 - "ORG_ENTITY_ID"[NUMBER,22], "ORG_ENTITY_NAME"[VARCHAR2,100], "DESCRIPTION"[VARCHAR2,500], 
+       "LOCATION_NAME"[VARCHAR2,100], "PARENT_ORG_ENTITY_ID"[NUMBER,22], "ORG_LEVEL"[NUMBER,22], 
+       "ORG_HIERARCHY_NAME"[VARCHAR2,100], "ORG_ENTITY_NAME"[VARCHAR2,100]
+   3 - (#keys=0) "ORG_ENTITY_ID"[NUMBER,22], "ORG_ENTITY_NAME"[VARCHAR2,100], 
+       "DESCRIPTION"[VARCHAR2,500], "LOCATION_NAME"[VARCHAR2,100], "PARENT_ORG_ENTITY_ID"[NUMBER,22], 
+       "ORG_LEVEL"[NUMBER,22], "ORG_HIERARCHY_NAME"[VARCHAR2,100], "ORG_ENTITY_NAME"[VARCHAR2,100]
+   4 - (#keys=1) "ORG_ENTITY_ID"[NUMBER,22], "ORG_ENTITY_NAME"[VARCHAR2,100], 
+       "DESCRIPTION"[VARCHAR2,500], "LOCATION_NAME"[VARCHAR2,100], "PARENT_ORG_ENTITY_ID"[NUMBER,22], 
+       "ORG_LEVEL"[NUMBER,22], "ORG_HIERARCHY_NAME"[VARCHAR2,100]
+   5 - (#keys=0) "ORG_ENTITY_ID"[NUMBER,22], "ORG_ENTITY_NAME"[VARCHAR2,100], 
+       "DESCRIPTION"[VARCHAR2,500], "ORG_HIERARCHY_ID"[NUMBER,22], "PARENT_ORG_ENTITY_ID"[NUMBER,22], 
+       "LOCATION_NAME"[VARCHAR2,100]
+   6 - "ORG_ENTITY_ID"[NUMBER,22], "ORG_ENTITY_NAME"[VARCHAR2,100], "DESCRIPTION"[VARCHAR2,500], 
+       "ORG_HIERARCHY_ID"[NUMBER,22], "PARENT_ORG_ENTITY_ID"[NUMBER,22], "LOCATION_ID"[NUMBER,22]
+   7 - "SI_ORG_ENTITIES_T".ROWID[ROWID,10], "ORG_ENTITY_ID"[NUMBER,22], 
+       "PARENT_ORG_ENTITY_ID"[NUMBER,22]
+   8 - "LOCATION_NAME"[VARCHAR2,100]
+   9 - "SI_ORG_LOCATIONS_T".ROWID[ROWID,10]
+  10 - "ORG_HIERARCHY_ID"[NUMBER,22], "ORG_HIERARCHY_NAME"[VARCHAR2,100], "ORG_LEVEL"[NUMBER,22]
+  11 - "ORG_ENTITY_NAME"[VARCHAR2,100]
+  12 - "SI_ORG_ENTITIES_T".ROWID[ROWID,10]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">SQL Analysis</span>
+									<ul>
+										<li><a href="union.html">Union &amp; Union All</a></li>
+										<li><a href="poor-sql.html">Poor Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full Report</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../lib/assets/js/jquery.min.js"></script>
+			<script src="../lib/assets/js/skel.min.js"></script>
+			<script src="../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../lib/assets/js/main.js"></script>
+	</body>
+</html>
