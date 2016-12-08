@@ -25,66 +25,40 @@
 							<!-- Content -->
 								<section>
 									<!-- Content -->
-										<header class="major"><h2>Infolet Details</h2></header>
+										<header class="major"><h2>Infolet - Invalid DB Objects</h2></header>
 										<div class="table-wrapper">
 											<table>
-												<tbody>
+												<thead>
 													<tr>
 														<td>Name</td>
-														<td>MS_GRC_Reference_Browser_Infolet (100973)</td>
+														<td>Type</td>
+														<td>Status</td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>MS_GRC_METRICS_REPORTS</td>
+														<td>PACKAGE</td>
+														<td>INVALID</td>
 													</tr>
 													<tr>
-														<td>SQL</td>
-														<td><pre><code>SELECT dd_process_instance_id,
-  dd_instance_id,
-  display_name,
-  dd_object_type as Object_Type,
-  OVER_RIDE_ACTION,
-  EDIT_ACTION_PARAMETERS,  dd_object_type||'^'||object_id
- as object_id
- FROM TABLE(MS_GRC_REPORTBROWSER_FILTERS.GET_Filters_reference
-  (:1,:2,:3, :4,null,:5,:6,:7,:8,:9,:10,:11,'DATABROWSER'))</code></pre></td>
+														<td>MS_GRC_KPI_KRI_DATA_ENTRY_RV</td>
+														<td>VIEW</td>
+														<td>INVALID</td>
 													</tr>
 													<tr>
-														<td>Description</td>
-														<td> MS_GRC_Reference_Browser_Infolet </td>
+														<td>MS_GRC_METRIC_PENDING_TASK_V</td>
+														<td>VIEW</td>
+														<td>INVALID</td>
+													</tr>
+													<tr>
+														<td>MS_GRC_METRICS_REPORTS</td>
+														<td>PACKAGE BODY</td>
+														<td>INVALID</td>
 													</tr>
 												</tbody>
 											</table>
 										</div>
-
-										<h2 align="center" id="content">Analysis Report</h2>
-										<hr>
- 										<header class="major"><h2>Plan hash value: 1357892321</h2></header>
-										<pre><code>
- 
------------------------------------------------------------------------------------------------------------
-| Id  | Operation                         | Name                  | Rows  | Bytes | Cost (%CPU)| Time     |
------------------------------------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT                  |                       |  8168 | 16336 |    29   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|   1 |  COLLECTION ITERATOR PICKLER FETCH| GET_FILTERS_REFERENCE |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
------------------------------------------------------------------------------------------------------------
- 
-										</code></pre>
- 										<header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header>
-										<pre><code>
--------------------------------------------------------------
- 
-   1 - SEL$F5BB74E1 / KOKBF$0@SEL$2
- 
-										</code></pre>
- 										<header class="major"><h2>Column Projection Information (identified by operation id):</h2></header>
-										<pre><code>
------------------------------------------------------------
- 
-   1 - VALUE(A0)[21], VALUE(A0)[21], VALUE(A0)[400], VALUE(A0)[40], VALUE(A0)[32767], 
-       VALUE(A0)[32767], VALUE(A0)[32767], VALUE(A0)[32767], VALUE(A0)[32767], VALUE(A0)[32767], 
-       VALUE(A0)[1020], VALUE(A0)[400], VALUE(A0)[400], VALUE(A0)[16000], VALUE(A0)[400], 
-       VALUE(A0)[16000], VALUE(A0)[16000], VALUE(A0)[4], VALUE(A0)[16000], VALUE(A0)[400], 
-       VALUE(A0)[16000], VALUE(A0)[22], VALUE(A0)[420], VALUE(A0)[16000], VALUE(A0)[16000], 
-       VALUE(A0)[948], VALUE(A0)[16000], VALUE(A0)[32767], VALUE(A0)[22], VALUE(A0)[400], VALUE(A0)[22], 
-       VALUE(A0)[4], VALUE(A0)[16000]
-										</code></pre>
 								</section>
 						</div>
 					</div>
