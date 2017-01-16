@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>ISM INITIATE ACTION FLOWISM INITIATE ACTION FLOW</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_ISM_INTG_ISSUE_PUB_V">MS_ISM_INTG_ISSUE_PUB_V</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "METRICSTREAM"."MS_ISM_INTG_ISSUE_PUB_V" ("ISSUE_ID", "ISSUE_TITLE", "ISSUE_DETAILS", "ISSUE_STATUS", "ISSUE_STATUS_STORED", "ISSUE_DUE_DATE", "ORIG_ISSUE_DUE_DT", "ISSUE_IDENTIFIED_ON", "PROGRESS_STATUS", "PROGRESS_STATUS_STORED", "ISSUE_SOURCE_TYPE", "ISSUE_SRC_TYPE_STORED", "ISSUE_SOURCE_TYPE_ADT", "ISSUE_SOURCE", "ISSUE_SOURCE_STORED", "ISSUE_SOURCE_REF", "CREATED_BY", "CREATED_BY_FULL_NAME", "CREATED_ON", "LAST_MODIFIED_BY", "MODIFIED_BY_FULL_NAME", "LAST_MODIFIED_ON", "ISSUE_CLOSED_ON", "OBJECT_TYPE", "ISSUE_OWNER", "ISSUE_OWNER_FULL_NAME", "ISSUE_OWNERORG", "ISSUE_OWNERORG_STORED", "ISSUE_DELEGATEE", "ISSUE_DLGT_FULL_NAME", "INITIAL_APPROVER", "INITIAL_APPR_FULL_NAME", "INITIAL_APPROVER_ORG", "INITIAL_APPR_ORG_STORED", "ACTION_PLAN_APPROVER", "ACT_PLAN_APPR_FULL_NAME", "ACT_PLAN_APPROVER_ORG", "ACT_PLAN_APPR_ORG_STORED", "FINAL_APPROVER", "FINAL_APPR_FULL_NAME", "FINAL_APPROVER_ORG", "FINAL_APPR_ORG_STORED", "NO_OF_REOPEN", "ISSUE_RATING", "ISSUE_RATING_STORED", "PRIORITY", "PRIORITY_STORED", "NO_OF_ACTIONS_TRIGGERED", "ACTION_APPROVAL_STORED", "IMPACT", "IMPACT_STORED", "LIKELIHOOD", "LIKELIHOOD_STORED", "LOSS_GAIN", "LOSS_GAIN_STORED", "LOSS_GAIN_AMOUNT", "EXCEPTION_TYPE", "EXCEPTION_TYPE_STORED", "REACHED_TO_MANAGE", "REPEAT_ISSUE", "REPEAT_ISSUE_STORED", "ISSUE_TYPE", "ISSUE_TYPE_STORED", "RELATED_ISSUES", "RELATED_RISKS", "RELATED_AREA_OF_COMP", "RELATED_CONTROLS", "RELATED_CORE_PROCESSES", "RELATED_ORGS", "RELATED_STANDARD", "RELATED_ASSET", "RELATED_ASSET_CLASS", "RELATED_FINANCIAL_ACOUNT", "RELATED_FUNCTION", "RELATED_FRAMEWORK_REF", "RELATED_OBJECTIVE", "RELATED_PROCESS", "RELATED_REFERENCE", "RELATED_REGULATORY_BODY", "RELATED_REQUIREMENT", "RELATED_QUESTION_PROCEDURE", "RELATED_SUPPLIER", "RELATED_AUDITABLE_ENTITY", "RELATED_PRODUCT", "RELATED_RISKS_CLOB", "RELATED_AREA_OF_COMP_CLOB", "RELATED_CONTROLS_CLOB", "RELATED_CORE_PROCESSES_CLOB", "RELATED_ORGS_CLOB", "RELATED_STANDARD_CLOB", "RELATED_ASSET_CLOB", "RELATED_ASSET_CLASS_CLOB", "RELATED_FINANCIAL_ACOUNT_CLOB", "RELATED_FUNCTION_CLOB", "RELATED_FRAMEWORK_REF_CLOB", "RELATED_OBJECTIVE_CLOB", "RELATED_PROCESS_CLOB", "RELATED_REFERENCE_CLOB", "RELATED_REGULATORY_BODY_CLOB", "RELATED_REQUIREMENT_CLOB", "RELATED_QUESTION_PROC_CLOB", "RELATED_SUPPLIER_CLOB", "RELATED_AUDITABLE_ENTITY_CLOB", "RELATED_PRODUCT_CLOB", "DD_PROCESS_INSTANCE_ID", "DD_INSTANCE_ID", "DD_METRIC_ID", "ISSUE_LINK", "ISSUE_POPUP_LINK", "EDIT_FORM_LINK") AS 
+  SELECT /*@deprecated*/ a.issue_id                                                                                                               AS issue_id,
+    A.Issue_Title                                                                                                                 AS Issue_Title,
+    REGEXP_REPLACE (a.issue_details, '<[^>]+>', NULL)                                                                             AS issue_details,
+    Ms_Ism_Helper.Get_Status_Display_Name(A.Issue_Status)                                                                         AS Issue_Status,
+    a.issue_status                                                                                                                AS issue_status_stored,
+    A.Issue_Due_Date                                                                                                              AS Issue_Due_Date,
+    A.Orig_Issue_Due_Dt                                                                                                              AS Orig_Issue_Due_Dt,
+    A.Issue_identified_on                                                                                                         AS Issue_Identified_On,
+    Ms_Apps_Utilities.Get_Display_Value (100000, 'MS ISM Update Status', A.Progress_Status, 1, NULL, NULL)                        AS Progress_Status,
+    A.progress_status                                                                                                             AS Progress_Status_stored,
+    Ms_Apps_Utilities.Get_Display_Value (100000, 'MS ISM Source Type', A.Issue_Source_Type, 1, NULL, NULL)                        AS Issue_Source_Type,
+    A.Issue_Source_Type                                                                                                           AS Issue_Src_Type_Stored,
+    A.Issue_Source_Type_adt                                                                                                       AS Issue_Source_Type_adt,
+    DECODE (A.Issue_Source_Type, '0', A.Adhoc_Source, Ms_Ism_Helper.Get_Issue_Source_Title (a.Issue_Source_Type, A.Issue_Source_Type_adt,A.Issue_Source)) AS Issue_Source,
+    a.issue_source                                                                                                                AS ISSUE_SOURCE_STORED,
+    A.Issue_Source_Ref                                                                                                            AS Issue_Source_Ref,
+    A.Dd_Created_By                                                                                                               AS Created_By,
+    ms_ism_utilities.get_user_full_name(A.Dd_Created_By)                                                                          AS Created_By_Full_Name,
+    A.Dd_Created_On                                                                                                               AS Created_On,
+    A.Dd_Modified_By                                                                                                              AS Last_Modified_By,
+    ms_ism_utilities.get_user_full_name(A.Dd_Modified_By)                                                                         AS Modified_By_Full_name,
+    A.Dd_Modified_On                                                                                                              AS Last_Modified_On,
+    A.Issue_Closed_On                                                                                                             AS Issue_Closed_On,
+    A.Dd_Object_Type                                                                                                              AS Object_Type,
+    A.Issue_Owner                                                                                                                 AS Issue_Owner,
+    Ms_ism_Utilities.Get_User_Full_Name(A.Issue_Owner)                                                                            AS Issue_Owner_Full_Name,
+    Ms_Ism_Helper.Get_Org_Name(A.Issue_OwnerOrg)                                                                                  AS Issue_Owner_Org,
+    A.Issue_OwnerOrg                                                                                                              AS Issue_Owner_Org_stored,
+    A.Issue_Delegatee                                                                                                             AS Issue_Delegatee,
+    Ms_Ism_Utilities.Get_User_Full_Name(A.Issue_Delegatee)                                                                        AS Issue_Dlgt_Full_Name,
+    A.Issue_Approver                                                                                                              AS Initial_Approver,
+    Ms_Ism_Utilities.Get_User_Full_Name(A.Issue_Approver)                                                                         AS Initial_Appr_Full_Name,
+    Ms_Ism_Helper.Get_Org_Name(A.Issue_Approverorg)                                                                               AS Initial_Approver_Org,
+    A.Issue_Approverorg                                                                                                           AS Initial_Appr_Org_Stored,
+    A.Action_Plan_Approver                                                                                                        AS Action_Plan_Approver,
+    Ms_Ism_Utilities.Get_User_Full_Name(A.Action_Plan_Approver)                                                                   AS Act_Plan_Appr_Full_Name,
+    Ms_Ism_Helper.Get_Org_Name(A.Act_Plan_Approverorg)                                                                            AS Action_Plan_Approver_Org,
+    A.Act_Plan_Approverorg                                                                                                        AS Act_Plan_Appr_Org_Stored,
+    A.Final_Iss_Approver                                                                                                          AS Final_Approver,
+    Ms_Ism_Utilities.Get_User_Full_Name(A.Final_Iss_Approver)                                                                     AS Final_Appr_Full_Name,
+    Ms_Ism_Helper.Get_Org_Name(A.Final_Iss_Approverorg)                                                                           AS Final_Approver_Org,
+    A.Final_Iss_Approverorg                                                                                                       AS Final_Appr_Org_Stored,
+    A.Reopen_Issue                                                                                                                AS Reopen_Count,
+    Ms_Apps_Utilities.Get_Display_Value (100000, 'MS ISM Risk Rating', A.Issue_Risk_Rating, 1, NULL, NULL)                        AS Issue_Rating,
+    a.issue_risk_rating                                                                                                           AS issue_rating_stored,
+    Ms_Apps_Utilities.Get_Display_Value (100000, 'MS ISM Priority', A.Issue_Risk_Priority, 1, NULL, NULL)                         AS Priority,
+    A.Issue_Risk_Priority                                                                                                         AS Priority_Stored,
+    no_of_action                                                                                                                  AS No_Of_Actions_Added,
+    a.final_action_approval                                                                                                       AS final_action_approval,
+    Ms_Apps_Utilities.Get_Display_Value (100000, 'MS ISM Impact', A.Issue_Risk_Impact, 1, NULL, NULL)                             AS Issue_Risk_Impact,
+    A.Issue_Risk_Impact                                                                                                           AS Issue_Risk_Impact_stored,
+    Ms_Apps_Utilities.Get_Display_Value (100000, 'MS ISM Likelihood', A.Issue_Risk_Liklihood, 1, NULL, NULL)                      AS Issue_Risk_Liklihood,
+    A.Issue_Risk_Liklihood                                                                                                        AS Issue_Risk_Likhood_stored,
+    Ms_Apps_Utilities.Get_Display_Value (100000, 'MS ISM Loss Gain', A.Issue_Risk_Loss_Gain, 1, NULL, NULL)                       AS Issue_Risk_Loss_Gain,
+    A.Issue_Risk_Loss_Gain                                                                                                        AS Issue_Loss_Gain_stored,
+    a.issue_risk_loss_gain_amt                                                                                                    AS loss_gain_amount,
+    Ms_Apps_Utilities.Get_Display_Value (100000, 'MS ISM Classification Type', A.Type_Of_Execution, 1, NULL, NULL)                AS Exception_Type,
+    A.Type_Of_Execution                                                                                                           AS Exception_Type_Stored,
+    A.Reached_Manage                                                                                                              AS Reached_To_Manage_Stage,
+    Ms_Apps_Utilities.Get_Display_Value (100000, 'MS_ISM_YES_NO', A.Repeat_Issue, 1, NULL, NULL)                                  AS Repeat_Issue,
+    A.Repeat_Issue                                                                                                                AS Repeat_Issue_stored,
+    Ms_Ism_Helper.Get_Comma_Sep_Value_For_Mlov ('ISSUE_TYPE','MS_ISM_ISSUE_IST',A.Issue_Id,'MS ISM Issue Type')                   AS Issue_Type,
+    Ms_Ism_Helper.Get_Comma_Sep_Iss_type_sto_val(A.Issue_Id)                                                                      AS Issue_Type_stored,
+    Ms_Ism_Helper.Get_Comma_Sep_Related_Issues(A.Issue_Id)                                                                        AS Related_Issues,
+    ms_ism_helper.get_coma_seprtd_orb_list('MS_GRC_RISK',a.issue_id)                                                                   AS Related_Risks,
+    ms_ism_helper.get_coma_seprtd_orb_list('MS_GRC_AREA_OF_COMPLIA',a.issue_id)                                                     AS Related_Area_Of_Comp,
+    ms_ism_helper.get_coma_seprtd_orb_list('MS_GRC_CONTROL',a.issue_id)                                                                AS Related_Controls,
+    Ms_Ism_Helper.get_coma_seprtd_orb_list('MS_GRC_CORE_OBJECT',A.Issue_Id)                                                            AS Related_Core_Processes,
+    Ms_Ism_Helper.get_coma_seprtd_orb_list('SI_ORG_ENTITIES_T',A.Issue_Id)                                                           AS Related_Orgs,
+    Ms_Ism_Helper.get_coma_seprtd_orb_list ('MS_GRC_STANDARD',A.Issue_Id)                                                              AS Standard,
+    ms_ism_helper.get_coma_seprtd_orb_list ('MS_GRC_ASSET',a.issue_id)                                                                 AS Asset,
+    ms_ism_helper.get_coma_seprtd_orb_list ('MS_GRC_ASSET_CLASS',a.issue_id)                                                          AS Asset_Class,
+    ms_ism_helper.get_coma_seprtd_orb_list ('MS_GRC_FINANCIAL_ACCOU',a.issue_id)                                                     AS Financial_Account,
+    ms_ism_helper.get_coma_seprtd_orb_list ('MS_GRC_FUNCTION',a.issue_id)                                                              AS FunctionObj,
+    ms_ism_helper.get_coma_seprtd_orb_list ('MS_GRC_MODEL_REFERENCE',a.issue_id)                                                   AS Framework_Reference,
+    Ms_Ism_Helper.get_coma_seprtd_orb_list ('MS_GRC_OBJECTIVES',A.Issue_Id)                                                             AS Objective,
+    ms_ism_helper.get_coma_seprtd_orb_list ('MS_GRC_PROCESS',a.issue_id)                                                              AS Process,
+    Ms_Ism_Helper.get_coma_seprtd_orb_list ('MS_GRC_REFERENCE',A.Issue_Id)                                                             AS REFERENCE,
+    ms_ism_helper.get_coma_seprtd_orb_list ('MS_GRC_REGULATORY_BODY',a.issue_id)                                                      AS Regulatory_Bod,
+    Ms_Ism_Helper.get_coma_seprtd_orb_list ('MS_GRC_REQUIREMENT',A.Issue_Id)                                                           AS Requirement,
+    ms_ism_helper.get_coma_seprtd_orb_list ('MS_GRC_QUESTION_PROC',a.issue_id)                                                  AS Question_Procedure,
+    Ms_Ism_Helper.get_coma_seprtd_orb_list ('Supplier(s)',A.Issue_Id)                                                            AS Supplier,
+    Ms_Ism_Helper.get_coma_seprtd_orb_list ('Auditable Entity(s)',A.Issue_Id)                                                    AS Auditable_Entity,
+    Ms_Ism_Helper.get_coma_seprtd_orb_list ('MS_GRC_PRODUCT',A.Issue_Id)                                                               AS Product,  
+	ms_ism_helper.get_coma_seprtd_orb_value('MS_GRC_RISK',a.issue_id)                                                                   AS Related_Risks_clob,
+    ms_ism_helper.get_coma_seprtd_orb_value('MS_GRC_AREA_OF_COMPLIA',a.issue_id)                                                     AS Related_AOC_clob,
+    ms_ism_helper.get_coma_seprtd_orb_value('MS_GRC_CONTROL',a.issue_id)                                                                AS Related_Controls_clob,
+    Ms_Ism_Helper.Get_Coma_Seprtd_Orb_Value('MS_GRC_CORE_OBJECT',A.Issue_Id)                                                            AS Related_Core_Processes_clob,
+    Ms_Ism_Helper.Get_Coma_Seprtd_Orb_Value('SI_ORG_ENTITIES_T',A.Issue_Id)                                                           AS Related_Orgs_clob,
+    Ms_Ism_Helper.Get_Coma_Seprtd_Orb_Value ('MS_GRC_STANDARD',A.Issue_Id)                                                              AS Standard_clob,
+    ms_ism_helper.get_coma_seprtd_orb_value ('MS_GRC_ASSET',a.issue_id)                                                                 AS Asset_clob,
+    ms_ism_helper.get_coma_seprtd_orb_value ('MS_GRC_ASSET',a.issue_id)                                                          AS Asset_Class_clob,
+    ms_ism_helper.get_coma_seprtd_orb_value ('MS_GRC_FINANCIAL_ACCOU',a.issue_id)                                                     AS Financial_Account_clob,
+    ms_ism_helper.get_coma_seprtd_orb_value ('MS_GRC_FUNCTION',a.issue_id)                                                              AS FunctionObj_clob,
+    ms_ism_helper.get_coma_seprtd_orb_value ('MS_GRC_MODEL_REFERENCE',a.issue_id)                                                   AS Framework_Reference_clob,
+    Ms_Ism_Helper.Get_Coma_Seprtd_Orb_Value ('MS_GRC_OBJECTIVES',A.Issue_Id)                                                             AS Objective_clob,
+    ms_ism_helper.get_coma_seprtd_orb_value ('MS_GRC_PROCESS',a.issue_id)                                                              AS Process_clob,
+    Ms_Ism_Helper.Get_Coma_Seprtd_Orb_Value ('MS_GRC_REFERENCE',A.Issue_Id)                                                             AS REFERENCE_clob,
+    ms_ism_helper.get_coma_seprtd_orb_value ('MS_GRC_REGULATORY_BODY',a.issue_id)                                                      AS Regulatory_Bod_clob,
+    Ms_Ism_Helper.Get_Coma_Seprtd_Orb_Value ('MS_GRC_REQUIREMENT',A.Issue_Id)                                                           AS Requirement_clob,
+    ms_ism_helper.get_coma_seprtd_orb_value ('MS_GRC_QUESTION_PROC',a.issue_id)                                                  AS Question_Procedure_clob,
+    Ms_Ism_Helper.Get_Coma_Seprtd_Orb_Value ('Supplier(s)',A.Issue_Id)                                                            AS Supplier_clob,
+    Ms_Ism_Helper.Get_Coma_Seprtd_Orb_Value ('Auditable Entity(s)',A.Issue_Id)                                                    AS Auditable_Entity_clob,
+    Ms_Ism_Helper.Get_Coma_Seprtd_Orb_Value ('MS_GRC_PRODUCT',A.Issue_Id)                                                               AS Product_clob,
+	Dd_Process_Instance_Id                                                                                                        AS Dd_Process_Instance_Id,
+    Dd_Instance_Id                                                                                                                AS Dd_Instance_Id,
+    ms_ism_utilities.get_ism_infolet_id ('ISSUE')      AS DD_Metric_ID,
+    (	MS_ISM_RPT_UTILS.fn_get_report_json
+                               ((select metric_id from si_metrics_t where metric_name='MS_ISM_ISSUE'),
+                                 a.dd_process_instance_id,
+                                 null,
+                                '''flag=1'
+                                ||CHR(38)
+                                ||'emd=1'
+                                ||CHR(38)
+                                ||'x_edit_mode=No'
+                                || CHR (38)  
+                                || 'wrapper= No''') ) AS ISSUE_LINK,
+(MS_ISM_RPT_UTILS.fn_get_report_json
+                               ((select metric_id from si_metrics_t where metric_name='MS_ISM_ISSUE'),
+                                 a.dd_process_instance_id,
+                                 null,
+                                '''flag=1'
+                                ||CHR(38)
+                                ||'emd=1'
+                                ||CHR(38)
+                                ||'x_edit_mode=No'
+                                || CHR (38)  
+                                || 'wrapper= No'
+                                || CHR (38)  
+                                || 'mode=view''') ) As Issue_Popup_Link,
+(MS_ISM_RPT_UTILS.fn_get_report_json
+                               ((select metric_id from si_metrics_t where metric_name='MS_ISM_ISSUE'),
+                                 a.dd_process_instance_id,
+                                 null,
+                                '''flag=1'
+                                ||CHR(38)
+                                ||'emd=2'
+                                ||CHR(38)
+                                ||'x_edit_mode=No'
+                                || CHR (38)  
+                                || 'wrapper= No'
+                                || CHR (38)  
+                                || 'issue_status='
+								|| a.issue_status
+                ||'') ) AS EDIT_FORM_LINK
+  FROM Ms_Ism_Issue A 
+  WHERE NVL (Issue_Source_Type, '0') <> '0'</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

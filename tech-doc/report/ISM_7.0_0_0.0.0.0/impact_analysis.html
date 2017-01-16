@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie6" lang="en" class="doctool-7"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en" class="doctool-7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en" class="doctool-7"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9" lang="en" class="doctool-7"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="" lang="en" class="doctool-7"> <!--<![endif]-->
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Impact Analysis</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../template_files/dist/css/style.css" rel="stylesheet">
+		<link href="../template_files/dist/css/impact.css" rel="stylesheet">
+ 
+		<script>
+
+
+		</script>
+		<!--IE9 compatibility mode & IE8:-->
+  <!--[if IE 8]>
+  <style>
+    .modal-dialog{
+	left:20%;
+	}
+	</style>
+  <![endif]-->
+
+<!--IE8 compatibility mode & IE7:-->
+  <!--[if IE 7]>
+    
+  <![endif]-->
+		<style>
+.fixedSearch{
+position: fixed;
+  width: 250px;
+  right: 3%;
+  top: 0%;
+}
+		</style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="page-wrapper">
+			 <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="fa fa-themeisle fa-fw" style="margin-right:10px"></span> <span class="headerAlign" id="menu_icons">Impact Analysis</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+								<div class="input-group custom-search-form" id="searchBox">
+                                <input type="text" class="form-control" id="inputId" placeholder="Search.." onfocus="this.value = this.value;" >
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                       <img src="../template_files/dist/icons/trash.png" onclick="clearValue()"/>
+                                    </button>
+                                </span>
+                            </div>
+							<ul id="l1">
+               
+            </ul>
+			
+   
+
+
+<br/>
+<br/>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" style="width:90%;left:10px">
+								
+                                    <div class="modal-content" id="modalIN">
+								
+
+                                       
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+     
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+            <!-- /page wrapper -->
+        </div>
+	</div>
+        <!-- /.wrapper-->
+        
+                <!-- jQuery -->
+        <script src="../template_files/js/jquery-1.11.1.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		  <link rel="stylesheet" href="../template_files/dist/themes/default/style.css" />
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+  
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <!-- index of the data tables --> 
+        <script type="text/javascript" src="impact_index/impact_report.json"></script>
+		 <script src="../template_files/js/jstree.min.js"></script>
+		 <script src="../template_files/dist/js/impactanalysisjavascript.js"></script>
+        <script type="text/javascript" src="impact_index/object_title.json"></script>
+		<script type="text/javascript" src="impact_index/object_link.json"></script>
+        <script type="text/javascript" src="impact_index/display_parents.json"></script>
+        <script type="text/javascript" src="impact_index/package_methods.json"></script>
+        <script>
+
+		$('#myModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#myModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+		    $('.tooltip-demo').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    });
+
+
+
+
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					if (/msie\s8\.0/gi.test(navigator.appVersion)||/msie\s5\.0/gi.test(navigator.appVersion)||/msie\s6\.0/gi.test(navigator.appVersion)||/msie\s7\.0/gi.test(navigator.appVersion)) {
+    $('body').addClass('CHM_Report');
+}
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" },
+					callbacks:{
+      whileScrolling: function(){
+	  $("#searchBox").addClass('fixedSearch');
+	  },
+	   onTotalScrollBack: function(){
+	  $("#searchBox").removeClass('fixedSearch');
+	  }
+}
+                });
+                scrollBody();  
+			  
+            });            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+            })(jQuery);
+					   $(function () {
+							$("#jstree").jstree({
+								"plugins" : [ "search" ]
+							});
+							var to = false;
+							$('#plugins4_q').keyup(function () {
+								if(to) { clearTimeout(to); }
+								to = setTimeout(function () {
+									var v = $('#plugins4_q').val();
+									$('#jstree').jstree(true).search(v);
+								}, 250);
+							});
+			});
+     
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><schemadiagramrequest xmlns="http://www.metricstream.com/xsd"><module>ISM</module><display_number_of_columns></display_number_of_columns><schemadiagram><name>ISM</name><tables><table><name>MS_ISM_ACTION</name><pkcolumn><column>ACTION_ID</column></pkcolumn></table>
+<table><name>MS_ISM_ACTION_DOC</name><pkcolumn><column>DOC_ID</column></pkcolumn><fkcolumn><column>ACTION_ID</column></fkcolumn></table>
+<table><name>MS_ISM_ACTION_IOR</name><pkcolumn><column>OTHER_IMPACT</column></pkcolumn><fkcolumn><column>ACTION_ID</column></fkcolumn></table>
+<table><name>MS_ISM_ISSUE</name><pkcolumn><column>ISSUE_ID</column></pkcolumn></table>
+<table><name>MS_ISM_ISSUE_IAP</name><pkcolumn><column>ISSUE_ACTION_ID</column><column>ISSUE_ID</column></pkcolumn><fkcolumn><column>ISSUE_ID</column></fkcolumn></table>
+<table><name>MS_ISM_ISSUE_IOR</name><pkcolumn><column>OTHER_IMPACT</column></pkcolumn><fkcolumn><column>ISSUE_ACTION_ID</column><column>ISSUE_ID</column></fkcolumn></table>
+<table><name>MS_ISM_ISSUE_IST</name><pkcolumn><column>ISSUE_TYPE</column></pkcolumn><fkcolumn><column>ISSUE_ID</column></fkcolumn></table>
+<table><name>MS_ISM_ISSUE_RIS</name><pkcolumn><column>ISSUE_RELATED_ISSUES</column></pkcolumn><fkcolumn><column>ISSUE_ID</column></fkcolumn></table>
+<table><name>MS_ISM_ORB_RELATION</name><pkcolumn><column>REL_SOURCE_ID</column></pkcolumn></table>
+<table><name>MS_ISM_ORB_RELATION_ORB</name><pkcolumn><column>REL_INST_ID</column></pkcolumn><fkcolumn><column>REL_SOURCE_ID</column></fkcolumn></table>
+</tables><relationships><relationship name="" logical="1-*">
+<from><table>MS_ISM_ACTION</table>
+</from><to><table>MS_ISM_ACTION_DOC</table><table>MS_ISM_ACTION_IOR</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_ISM_ISSUE</table>
+</from><to><table>MS_ISM_ISSUE_IAP</table><table>MS_ISM_ISSUE_RIS</table><table>MS_ISM_ISSUE_IST</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_ISM_ISSUE_IAP</table>
+</from><to><table>MS_ISM_ISSUE_IOR</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_ISM_ORB_RELATION</table>
+</from><to><table>MS_ISM_ORB_RELATION_ORB</table></to></relationship>
+</relationships></schemadiagram></schemadiagramrequest>

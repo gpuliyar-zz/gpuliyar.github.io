@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Infolets</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">                                <h4 class="infolet-tooltip"><span class="icn icn-infolet" style="margin-right:10px"></span>  
+                                <span data-toggle="tooltip" data-placement="top" title="Category: Assets" class="fa fa-cubes fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Output Type: Ordinary Data Report" class="fa fa-sign-out fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Type: SQL Based" class="fa fa-globe fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Non Persistent" class="fa fa fa-thumbs-down fa-fw"></span>
+                                                                                                <span class="headerAlign" id="MS_ISM_AGEING_ISSUELISTRPT_DRILL">MS ISM AGEING ISSUELISTRPT DRILL</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Name</th>
+                                                <td>MS_ISM_AGEING_ISSUELISTRPT_DRILL</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This is Issue List Report used as a drill down report for Issue Ageing Report.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#query-pill" data-toggle="tab">Query</a></li>
+                                        <li><a href="#xml-pill" data-toggle="tab">XML</a></li>
+                                        <li><a href="#params-pill" data-toggle="tab">Parameters</a></li>
+                                        <li><a href="#filters-pill" data-toggle="tab">Filters</a></li>
+                                        <li><a href="#usedin-pill" data-toggle="tab">Used In</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-c">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Type</th>
+                                                            <th>Result Column Name</th>
+                                                            <th>User Column Name</th>
+                                                            <th>Default Infolet/<br>Input Infolet</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>ISSUE_TITLE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_TITLE</td>
+                                                                <td>Issue Title</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>ISSUE_STATUS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_STATUS</td>
+                                                                <td>Issue Status</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>ISSUE_OWNER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_OWNER</td>
+                                                                <td>Issue Owner</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>ISSUE_RATING</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_RATING</td>
+                                                                <td>Issue Rating</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>PRIORITY</td>
+                                                                <td>Varchar2</td>
+                                                                <td>PRIORITY</td>
+                                                                <td>Priority</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>ISSUE_SOURCE_TYPE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SOURCE_TYPE</td>
+                                                                <td>Source Type</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>ISSUE_DUE_DATE</td>
+                                                                <td>Date</td>
+                                                                <td>ISSUE_DUE_DATE</td>
+                                                                <td>Issue Due Date</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>ISSUE_INITIATOR</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_INITIATOR</td>
+                                                                <td>Issue Initiator</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td>ISSUE_IDENTIFIED_ON</td>
+                                                                <td>Date</td>
+                                                                <td>FIRST_IDENTIFIED_ON</td>
+                                                                <td>First Identified On</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>NO_OF_ACTIONS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>NO_OF_ACTIONS</td>
+                                                                <td>No of Actions</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>ISSUE_ID</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_ID</td>
+                                                                <td>Issue ID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>ISSUE_OWNERORG_DISP</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_OWNERORG_DISP</td>
+                                                                <td>Issue OwnerOrg Disp</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>13</td>
+                                                                <td>ISSUE_APPROVERORG_DISP</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_APPROVERORG_DISP</td>
+                                                                <td>Issue ApproverOrg Disp</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>14</td>
+                                                                <td>ISSUE_OWNERORG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_OWNERORG</td>
+                                                                <td>Issue OwnerOrg</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>15</td>
+                                                                <td>ISSUE_APPROVERORG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_APPROVERORG</td>
+                                                                <td>Issue ApproverOrg</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>16</td>
+                                                                <td>PROGRESS_STATUS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>PROGRESS_STATUS</td>
+                                                                <td>Progress Status</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>17</td>
+                                                                <td>ORGANIZATIONS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ORGANIZATIONS</td>
+                                                                <td>Organizations</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>18</td>
+                                                                <td>AREAS_OF_COMPLIANCE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AREAS_OF_COMPLIANCE</td>
+                                                                <td>Areas of Compliance</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>19</td>
+                                                                <td>CONTROLS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>CONTROLS</td>
+                                                                <td>Controls</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>20</td>
+                                                                <td>RISKS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>RISKS</td>
+                                                                <td>Risks</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>21</td>
+                                                                <td>CORE_OBJECTS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>CORE_OBJECTS</td>
+                                                                <td>Core Objects</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>22</td>
+                                                                <td>OVERDUE_THIS_MONTH_FLAG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>OVERDUE_THIS_MONTH_FLAG</td>
+                                                                <td>OverDue This Month Flag</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>23</td>
+                                                                <td>OVERDUE_BEYOND_3_MONTHS_FLAG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>OVERDUE_BEYOND_3_MONTH_FLAG</td>
+                                                                <td>OverDue Beyond 3 Month Flag</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>24</td>
+                                                                <td>OVERDUE_PAST_3_MONTHS_FLAG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>OVERDUE_PAST_3_MONTH_FLAG</td>
+                                                                <td>OverDue Past 3 Month Flag</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>25</td>
+                                                                <td>DUE_THIS_MONTH_FLAG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>DUE_THIS_MONTH_FLAG</td>
+                                                                <td>Due This Month Flag</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>26</td>
+                                                                <td>DUE_IN_NEXT_X_MONTHS_FLAG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>DUE_IN_NEXT_X_MONTH_FLAG</td>
+                                                                <td>Due In Next X Month Flag</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>27</td>
+                                                                <td>DUE_BEYOND_X_MONTHS_FLAG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>DUE_BEYOND_X_MONTH_FLAG</td>
+                                                                <td>Due Beyond X Month Flag</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="filters-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-fnr">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Expression</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>OverDue This Month</td>
+                                                                <td>(trim(OverDue_This_Month_Flag) = 'Y')</td>
+                                                                <td>This filter to be used for drill of current month overdue issues</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>OverDue Past 3 Months</td>
+                                                                <td>(trim(OverDue_Past_3_Month_Flag) = 'Y')</td>
+                                                                <td>This filter to be used for drill down of issues which are overdue in last 3 months</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>OverDue Past Beyond 3 Months</td>
+                                                                <td>(trim(OverDue_Beyond_3_Month_Flag) = 'Y')</td>
+                                                                <td>This filter to be used for drill down of issues which are overdue for more than 3 months</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Due This Month</td>
+                                                                <td>(trim(Due_This_Month_Flag) = 'Y')</td>
+                                                                <td>This filter to be used for drill down of issues which will be due in current months</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Due In Next X Months</td>
+                                                                <td>(trim(Due_In_Next_X_Month_Flag) = 'Y')</td>
+                                                                <td>This filter to be used for drill down of issues which will be due in next x months</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Due Beyond X Months</td>
+                                                                <td>(trim(Due_Beyond_X_Month_Flag) = 'Y')</td>
+                                                                <td>This filter to be used for drill down of issues which will be due after x months</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="params-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-pnr">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Source Infolet</th>
+                                                            <th>Mandatory</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>LOGIN_ID</td>
+                                                                <td></td>
+                                                                <td>N</td>
+                                                                <td>Logged in User</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Source</td>
+                                                                <td></td>
+                                                                <td>N</td>
+                                                                <td>Issue Source Type</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Organization</td>
+                                                                <td></td>
+                                                                <td>N</td>
+                                                                <td>Organization</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="usedin-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-r">
+                                                        <thead>
+                                                            <th>Used In</th>
+                                                            <th>Usage Type</th>
+                                                            <th>User</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Issue List Due Beyond X Months Drill RPT</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Issue List Due This Month DrillDown</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Issue List Due in X Months Drill RPT</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Issue List OverDue Beyond 3 Month Drill RPT</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Issue List OverDue Past 3 Month Drill RPT</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Issue List OverDue This Month Drill RPT</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_ISM_Issue_List_Due_Beyond_X_Months _Drill_RPT</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_ISM_Issue_List_Due_This_Month_DrillDown</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_ISM_Issue_List_Due_in_X_Months_Drill_RPT</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_ISM_Issue_List_OverDue_Beyond_3_Month_Drill_RPT</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_ISM_Issue_List_OverDue_Past 3_Month_Drill_RPT</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_ISM_Issue_List_OverDue_This_Month_Drill_RPT</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="query-pill">
+                                            <div class="modal-dialog"">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-sql')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-sql">Select issue_title as issue_title,
+       Issue_Status As Issue_Status,
+       Issue_Owner As Issue_Owner,
+       Issue_Rating As Issue_Rating,
+       priority as priority,
+       Source_Type As Issue_Source_Type,
+       Issue_Due_Date As Issue_Due_Date,
+       Issue_Initiator As Issue_Initiator,
+       First_Identified_On As Issue_Identified_On,
+       No_Of_Actions As No_Of_Actions,
+       issue_id as issue_id,
+       issue_owner_org As issue_ownerorg_disp,
+       issue_approverorg As issue_approverorg_disp,
+       OWNERORG As issue_ownerorg,
+       Approverorg As Issue_Approverorg,
+       Progress_Status As Progress_Status,
+       Org As Organizations,
+       area_of_compliance as areas_of_compliance,
+       Controls As Controls,
+       Risks As Risks,
+       Core_Objects as core_objects,
+       Od_This_Month_Flag As Overdue_This_Month_Flag,
+       Od_Beyond_3_Month_Flag As Overdue_Beyond_3_Months_Flag,
+       Od_Past_3_Month_Flag As Overdue_Past_3_Months_Flag,
+       Due_This_Month_Flag As Due_This_Month_Flag,
+       Due_Within_X_Month_Flag As Due_In_Next_X_Months_Flag,
+       Due_Beyond_X_Month_Flag As Due_Beyond_X_Months_Flag  
+  from table(<a class="codeLink" href="../pldoc/index.html#MS_ISM_UTILITIES" target="tab">ms_ism_utilities</a>.Fn_Get_Iss_List_Ageing_Drldwn(:1,:2,:3))</pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <div class="tab-pane fade" id="xml-pill">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-xml')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-xml">&lt;?xml version=&quot;1.0&quot;?&gt;&lt;METRIC_DEPLOYMENT&gt;&lt;METRIC       PROCESS=&quot;0&quot;  INSTANCE=&quot;0&quot;  NOTIFY=&quot;YES&quot;   RETURN=&quot;RESULTSET&quot; &gt;&lt;RESULTMAP &gt;&lt;/RESULTMAP&gt;&lt;/METRIC&gt;&lt;/METRIC_DEPLOYMENT&gt;</pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                </div>
+                                <!--panel-default -->
+                                <div class="no-panel no-panel-success">
+                                    <div class="panel-heading">
+                                        <h4>References</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="../reports/100268.html">Issues</a></td>
+                                                    <td></td>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- panel-body -->
+                                </div>
+                                <!-- panel-success -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+
+      
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.infolet-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.infolet-table-c').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-cnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-f').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-fnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-p').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "22%" },    // 1st column width 
+                        { "sWidth": "30%" },    // 2nd column width
+                        { "sWidth": "13%" },    // 3rd column width 
+                        { "sWidth": "35%" }     // 4th column width 
+                    ]
+                });
+                $('.infolet-table-pnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "22%" },    // 1st column width 
+                        { "sWidth": "30%" },    // 2nd column width
+                        { "sWidth": "13%" },    // 3rd column width 
+                        { "sWidth": "35%" }     // 4th column width 
+                    ]
+                });
+                $('.infolet-table-r').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-rnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Infolets</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">                                <h4 class="infolet-tooltip"><span class="icn icn-infolet" style="margin-right:10px"></span>  
+                                <span data-toggle="tooltip" data-placement="top" title="Category: Human Resource" class="fa fa-cubes fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Output Type: Ordinary Graph" class="fa fa-sign-out fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Type: SQL Based" class="fa fa-globe fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Non Persistent" class="fa fa fa-thumbs-down fa-fw"></span>
+                                                                                                <span class="headerAlign" id="MS_ISM_Action_List_Report_DrillDown">MS ISM Action List Report DrillDown</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Name</th>
+                                                <td>MS_ISM_Action_List_Report_DrillDown</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This infolet used to fetch display value of Action Status.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#query-pill" data-toggle="tab">Query</a></li>
+                                        <li><a href="#xml-pill" data-toggle="tab">XML</a></li>
+                                        <li><a href="#params-pill" data-toggle="tab">Parameters</a></li>
+                                        <li><a href="#usedin-pill" data-toggle="tab">Used In</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-c">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Type</th>
+                                                            <th>Result Column Name</th>
+                                                            <th>User Column Name</th>
+                                                            <th>Default Infolet/<br>Input Infolet</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>19</td>
+                                                                <td>OTHER_IMPACT</td>
+                                                                <td>Varchar2</td>
+                                                                <td>OTHER_IMPACT</td>
+                                                                <td>OTHER_IMPACT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>ACTION_TITLE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ACTION_TITLE</td>
+                                                                <td>Action Title</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>ACTION_STATUS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ACTION_STATUS</td>
+                                                                <td>Action Status</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>ACTION_OWNER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ACTION_OWNER</td>
+                                                                <td>Action Owner</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>PRIORITY</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ACTION_PRIORITY</td>
+                                                                <td>Action Priority</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>ACTION_DUE_DATE</td>
+                                                                <td>Date</td>
+                                                                <td>ACTION_DUE_DATE</td>
+                                                                <td>Action Due Date</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>ACTION_COMPLETED_ON</td>
+                                                                <td>Date</td>
+                                                                <td>ACTION_COMPLETED_ON</td>
+                                                                <td>Action Completed On</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>ISSUE_TITLE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_TITLE</td>
+                                                                <td>Issue Title</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>ISSUE_OWNER</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_OWNER</td>
+                                                                <td>Issue Owner</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td>PERCENTAGE_COMPLETED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>PERCENTAGE_COMPLETED</td>
+                                                                <td>Percentage Completed</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>PID</td>
+                                                                <td>Number</td>
+                                                                <td>PID</td>
+                                                                <td>PID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>INSTANCEID</td>
+                                                                <td>Number</td>
+                                                                <td>INSTANCEID</td>
+                                                                <td>INSTANCEID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>(MS_ISM_RPT_UTILS.FN_GET_REPORT_JSON((SELECTMETRIC_IDFROMSI_METRICS_TWHEREMETRIC_NAME='MS_ISM_ACTION'),PID,INSTANCEID,'''FLAG=1'||CHR(38)||'EMD=1'||CHR(3</td>
+                                                                <td>Varchar2</td>
+                                                                <td>REPORT_JSON</td>
+                                                                <td>REPORT_JSON</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>13</td>
+                                                                <td>ACTION_TITLE_ADT</td>
+                                                                <td>Static Data Object</td>
+                                                                <td>ACTION_TITLE_ADT</td>
+                                                                <td>ACTION_TITLE_ADT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>14</td>
+                                                                <td>ACTION_ID</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ACTION_ID</td>
+                                                                <td>ACTION_ID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>15</td>
+                                                                <td>ACTION_OWNER_ADT</td>
+                                                                <td>User</td>
+                                                                <td>ACTION_OWNER_ADT</td>
+                                                                <td>ACTION_OWNER_ADT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>16</td>
+                                                                <td>ACTION_OWNER_STORED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ACTION_OWNER_STORED</td>
+                                                                <td>ACTION_OWNER_STORED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>17</td>
+                                                                <td>ISSUE_OWNER_ADT</td>
+                                                                <td>User</td>
+                                                                <td>ISSUE_OWNER_ADT</td>
+                                                                <td>ISSUE_OWNER_ADT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>18</td>
+                                                                <td>ISSUE_OWNER_STORED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_OWNER_STORED</td>
+                                                                <td>ISSUE_OWNER_STORED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="params-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-pnr">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Source Infolet</th>
+                                                            <th>Mandatory</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>x_issue_id</td>
+                                                                <td><a href="MS_ISM_Get_All_Issue_IDs.html">MS ISM Get All Issue IDs</a></td>
+                                                                <td>N</td>
+                                                                <td>Issue ID</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>LOGIN_ID</td>
+                                                                <td></td>
+                                                                <td>N</td>
+                                                                <td>LOGIN_ID</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="usedin-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-rnr">
+                                                        <thead>
+                                                            <th>Used In</th>
+                                                            <th>Usage Type</th>
+                                                            <th>User</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>MS_ISM_Action_List_DrillDown_Report</td>
+                                                                <td>Report</td>
+                                                                <td>SYSTEMI</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="query-pill">
+                                            <div class="modal-dialog"">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-sql')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-sql">SELECT action_title as Action_Title
+       ,action_status as Action_Status
+       ,action_owner as Action_Owner
+       ,priority as Priority 
+       ,action_due_date as Action_Due_Date
+       ,action_completed_on as Action_Completed_On
+       ,issue_title as Issue_Title
+       ,issue_owner as Issue_Owner
+       ,PERCENTAGE_COMPLETED as PERCENTAGE_COMPLETED
+       ,pid as pid
+       ,INSTANCEID as instanceid
+       ,(<a class="codeLink" href="../pldoc/index.html#MS_ISM_RPT_UTILS" target="tab">MS_ISM_RPT_UTILS</a>.fn_get_report_json
+                               ((select metric_id from si_metrics_t where metric_name=&#39;MS_ISM_ACTION&#39;),
+                                 pid,
+                                 INSTANCEID,
+                                &#39;&#39;&#39;flag=1&#39;
+                                ||CHR(38)
+                                ||&#39;emd=1&#39;
+                                ||CHR(38)
+                                ||&#39;x_edit_mode=Yes&#39;
+                                || CHR (38)  
+                                || &#39;wrapper= No&#39;
+	           || CHR (38)  
+                                || &#39;mode=view&#39;&#39;&#39;) )As report_json,
+          action_title as action_title_ADT,
+          action_id,
+          action_owner as action_owner_ADT,
+          action_owner_stored,
+          issue_owner as issue_owner_ADT,
+          issue_owner_stored,
+other_impact
+  FROM table(<a class="codeLink" href="../pldoc/index.html#MS_ISM_HELPER" target="tab">ms_ism_helper</a>.Fn_Get_Act_List_drilldown_Rept(:2, :1))</pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <div class="tab-pane fade" id="xml-pill">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-xml')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-xml">&lt;?xml version=&quot;1.0&quot;?&gt;&lt;METRIC_DEPLOYMENT&gt;&lt;METRIC   MODE=&quot;CLASS&quot;     PROCESS=&quot;0&quot;  INSTANCE=&quot;0&quot;  NOTIFY=&quot;YES&quot;   RETURN=&quot;RESULTSET&quot; &gt;&lt;RESULTMAP &gt;&lt;/RESULTMAP&gt;&lt;/METRIC&gt;&lt;/METRIC_DEPLOYMENT&gt;</pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                </div>
+                                <!--panel-default -->
+                                <div class="no-panel no-panel-success">
+                                    <div class="panel-heading">
+                                        <h4>References</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="../reports/100279.html">Actions</a></td>
+                                                    <td></td>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- panel-body -->
+                                </div>
+                                <!-- panel-success -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+
+      
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.infolet-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.infolet-table-c').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-cnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-f').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-fnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-p').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "22%" },    // 1st column width 
+                        { "sWidth": "30%" },    // 2nd column width
+                        { "sWidth": "13%" },    // 3rd column width 
+                        { "sWidth": "35%" }     // 4th column width 
+                    ]
+                });
+                $('.infolet-table-pnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "22%" },    // 1st column width 
+                        { "sWidth": "30%" },    // 2nd column width
+                        { "sWidth": "13%" },    // 3rd column width 
+                        { "sWidth": "35%" }     // 4th column width 
+                    ]
+                });
+                $('.infolet-table-r').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-rnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
