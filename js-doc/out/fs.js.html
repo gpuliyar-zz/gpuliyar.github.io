@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: fs.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: fs.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Extended version of the standard `fs` module.
+ * @module jsdoc/fs
+ */
+'use strict';
+
+var fs = require('fs');
+var path = require('path');
+var stream = require('stream');
+var mkdirp = require('mkdirp');
+
+var ls = exports.ls = function(dir, recurse, _allFiles, _path) {
+    var file;
+    var files;
+    var isFile;
+
+    // first pass
+    if (_path === undefined) {
+        _allFiles = [];
+        _path = [dir];
+    }
+
+    if (!_path.length) {
+        return _allFiles;
+    }
+
+    if (recurse === undefined) {
+        recurse = 1;
+    }
+
+    try {
+        isFile = fs.statSync(dir).isFile();
+    }
+    catch (e) {
+        isFile = false;
+    }
+    if (isFile) {
+        files = [dir];
+    }
+    else {
+        files = fs.readdirSync(dir);
+    }
+
+    for (var i = 0, l = files.length; i &lt; l; i++) {
+        file = String(files[i]);
+
+        // skip dot files
+        if (file.match(/^\.[^\.\/\\]/)) {
+            continue;
+        }
+
+        if ( fs.statSync(path.join(_path.join('/'), file)).isDirectory() ) {
+            // it's a directory
+            _path.push(file);
+
+            if (_path.length - 1 &lt; recurse) {
+                ls(_path.join('/'), recurse, _allFiles, _path);
+            }
+            _path.pop();
+        }
+        else {
+            // it's a file
+            _allFiles.push( path.normalize(path.join(_path.join('/'), file)) );
+        }
+    }
+
+    return _allFiles;
+};
+
+var toDir = exports.toDir = function(_path) {
+    var isDirectory;
+
+    _path = path.normalize(_path);
+
+    try {
+        isDirectory = fs.statSync(_path).isDirectory();
+    }
+    catch (e) {
+        isDirectory = false;
+    }
+
+    if (isDirectory) {
+       return _path;
+    } else {
+        return path.dirname(_path);
+    }
+};
+
+exports.mkPath = function(_path) {
+    if ( Array.isArray(_path) ) {
+        _path = _path.join('');
+    }
+
+    mkdirp.sync(_path);
+};
+
+// adapted from http://procbits.com/2011/11/15/synchronous-file-copy-in-node-js
+exports.copyFileSync = function(inFile, outDir, fileName) {
+    var BUF_LENGTH = 64 * 1024;
+
+    var read;
+    var write;
+
+    var buffer = new Buffer(BUF_LENGTH);
+    var bytesRead = 1;
+    var outFile = path.join( outDir, fileName || path.basename(inFile) );
+    var pos = 0;
+
+    mkdirp.sync(outDir);
+    read = fs.openSync(inFile, 'r');
+    write = fs.openSync(outFile, 'w');
+
+    while (bytesRead > 0) {
+        bytesRead = fs.readSync(read, buffer, 0, BUF_LENGTH, pos);
+        fs.writeSync(write, buffer, 0, bytesRead);
+        pos += bytesRead;
+    }
+
+    fs.closeSync(read);
+    return fs.closeSync(write);
+};
+
+Object.keys(fs).forEach(function(member) {
+    exports[member] = fs[member];
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-jsdoc_app.html">jsdoc/app</a></li><li><a href="module-jsdoc_augment.html">jsdoc/augment</a></li><li><a href="module-jsdoc_borrow.html">jsdoc/borrow</a></li><li><a href="module-jsdoc_config.html">jsdoc/config</a></li><li><a href="module-jsdoc_doclet.html">jsdoc/doclet</a></li><li><a href="module-jsdoc_env.html">jsdoc/env</a></li><li><a href="module-jsdoc_fs.html">jsdoc/fs</a></li><li><a href="module-jsdoc_name.html">jsdoc/name</a></li><li><a href="module-jsdoc_package.html">jsdoc/package</a></li><li><a href="module-jsdoc_path.html">jsdoc/path</a></li><li><a href="module-jsdoc_plugins.html">jsdoc/plugins</a></li><li><a href="module-jsdoc_readme.html">jsdoc/readme</a></li><li><a href="module-jsdoc_tag.html">jsdoc/tag</a></li><li><a href="module-jsdoc_template.html">jsdoc/template</a></li><li><a href="module-jsdoc_tutorial.html">jsdoc/tutorial</a></li></ul><h3>Classes</h3><ul><li><a href="module-jsdoc_config-Config.html">Config</a></li><li><a href="module-jsdoc_doclet.Doclet.html">Doclet</a></li><li><a href="module-jsdoc_package.Package.html">Package</a></li><li><a href="module-jsdoc_readme-ReadMe.html">ReadMe</a></li><li><a href="module-jsdoc_tag-Tag.html">Tag</a></li><li><a href="module-jsdoc_template.Template.html">Template</a></li><li><a href="module-jsdoc_tutorial.RootTutorial.html">RootTutorial</a></li><li><a href="module-jsdoc_tutorial.Tutorial.html">Tutorial</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-jsdoc_app.jsdoc.html">jsdoc</a></li><li><a href="module-jsdoc_doclet.Doclet_setMeta_meta.html">meta</a></li><li><a href="module-jsdoc_doclet.Doclet_setMeta_meta.code.html">code</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Feb 17 2017 11:51:35 GMT+0000 (GMT Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
