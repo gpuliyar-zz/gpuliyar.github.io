@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS_ITS_RPT_UTILS</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_ISM_001_ISSUE_LIST_REPORT_V">MS_ISM_001_ISSUE_LIST_REPORT_V</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "METRICSTREAM"."MS_ISM_001_ISSUE_LIST_REPORT_V" ("ISSUE_TITLE", "ISSUE_STATUS", "ISSUE_OWNER", "ISSUE_RATING", "PRIORITY", "SOURCE_TYPE", "ISSUE_DUE_DATE", "ISSUE_INITIATOR", "FIRST_IDENTIFIED_ON", "ISSUE_ID", "ISSUE_DETAILS", "NO_OF_ACTIONS", "ISSUE_OWNER_ORG", "ISSUE_APPROVERORG", "OWNERORG", "APPROVERORG", "PROGRESS_STATUS", "PID", "INSTANCEID", "ORG", "AREA_OF_COMPLIANCE", "CONTROLS", "RISKS", "CORE_OBJECTS", "EXCEPTION_TYPE") AS 
+  SELECT /*@public*/ 
+    (SELECT '<a target="_self" href="javascript'
+      || CHR (58)
+      || 'callreportdetails(''Pushinfolet?id='
+      --|| ms_apps_utilities.get_infolet_id ('MS_ISM_ISSUE')
+      || ms_ism_utilities.get_ism_infolet_id ('ISSUE')
+      || CHR (38)
+      || 'proc='
+      || a.dd_process_instance_id
+      || CHR (38)
+      || 'flag=1'
+      || CHR (38)
+      || 'emd=1'
+      || CHR (38)
+      || 'x_edit_mode=Yes'
+      || CHR (38)
+      || 'wrapper=no'')">'
+      || a.issue_title
+      || '</a>'
+    FROM DUAL
+    )                                                                                                      AS issue_title,
+    a.issue_status                                                                                         AS issue_status,
+    ms_ism_utilities.get_user_full_name (a.issue_owner)                                                   AS issue_owner,
+    ms_apps_utilities.get_display_value (100000, 'MS ISM Risk Rating', a.issue_risk_rating, 1, NULL, NULL) AS issue_rating,
+    ms_apps_utilities.get_display_value (100000, 'MS ISM Priority', a.issue_risk_priority, 1, NULL, NULL)  AS priority,
+    ms_apps_utilities.get_display_value (100000, 'MS ISM Source Type', a.issue_source_type, 1, NULL, NULL) AS source_type,
+    a.issue_due_date                                                                                       AS issue_due_date,
+    ms_ism_utilities.get_user_full_name (a.dd_created_by)                                                 AS issue_initiator,
+    a.issue_identified_on                                                                                  AS first_identified_on,
+    a.issue_id                                                                                             AS issue_id,
+    REGEXP_REPLACE (a.issue_details, '<[^>]+>', NULL)                                                      AS issue_details,
+    (SELECT COUNT (1) FROM ms_ism_action WHERE issue_id = a.issue_id
+    ) AS no_of_actions,
+    (SELECT org_entity_name
+    FROM si_org_entities_t
+    WHERE org_entity_id = a.issue_ownerorg
+    ) AS issue_owner_org,
+    (SELECT org_entity_name
+    FROM si_org_entities_t
+    WHERE org_entity_id = a.issue_approverorg
+    ) AS issue_approverorg,
+    a.issue_ownerorg,
+    a.issue_approverorg,
+    ms_apps_utilities.get_display_value (100000, 'MS ISM Update Status', a.progress_status, 1, NULL, NULL) AS progress_status,
+    a.dd_process_instance_id                                                                               AS pid,
+    a.dd_instance_id                                                                                       AS instanceid,
+    /*ms_ism_helper.get_comma_seprated_value ('IAO_TITLE', 'MS_ISM_ISSUE_IAO', a.issue_id, 'IAO')            AS org,
+    ms_ism_helper.get_comma_seprated_value ('ATC_TITLE', 'MS_ISM_ISSUE_ATC', a.issue_id, 'ATC')            AS area_of_compliance,
+    ms_ism_helper.get_comma_seprated_value ('IAC_TITLE', 'MS_ISM_ISSUE_IAC', a.issue_id, 'IAC')            AS controls,
+    ms_ism_helper.get_comma_seprated_value ('IAR_TITLE', 'MS_ISM_ISSUE_IAR', a.issue_id, 'IAR')            AS risks,
+    ms_ism_helper.get_comma_seprated_value ('ICO_TITLE', 'MS_ISM_ISSUE_ICO', a.issue_id, 'ICO')            AS core_objects*/
+    ms_ism_helper.get_coma_seprtd_orb_value ('Organization(s)',a.issue_id)  AS org,
+    ms_ism_helper.get_coma_seprtd_orb_value ('Area(s) of Compliance', a.issue_id) AS area_of_compliance,
+    ms_ism_helper.get_coma_seprtd_orb_value ('Control(s)', a.issue_id) AS controls,
+    ms_ism_helper.get_coma_seprtd_orb_value ('Risk(s)', a.issue_id) AS risks,
+    ms_ism_helper.get_coma_seprtd_orb_value ('Core Object(s)', a.issue_id) AS core_objects,
+    ms_apps_utilities.get_display_value (100000, 'MS ISM Classification Type', a.TYPE_OF_EXECUTION, 1, NULL, NULL) AS EXCEPTION_TYPE
+  FROM ms_ism_issue a
+    --     , ms_ism_issue_v c
+    --    WHERE     a.issue_id = c.issue_id
+    --          AND c.instance_id = (SELECT MAX (instance_id)
+    --                                 FROM ms_ism_issue_v
+    --                                WHERE issue_id = a.issue_id)
+    --          AND c.instance_rec_num = 1
+    --          AND
+  WHERE a.issue_status NOT IN ('New', 'Issue Reviewed', 'Pending Review', 'Pending Approval') -- start of fixing of bug - 40918
+    --          AND EXISTS
+    --                 (SELECT previous_stage
+    --                    FROM ms_ism_issue_v
+    --                   WHERE issue_id = a.issue_id AND dd_current_stage = 4)
+  AND a.reached_manage = 'Y'</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Data Tables</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span> <span class="headerAlign" id="MS_ISM_STATUS" href="../db_tables/MS_ISM_STATUS.html">MS ISM STATUS</span></h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Table Name</th>
+                                                <td>MS_ISM_STATUS</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This Data Table Will store ISM Status details.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    <br/>
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#data-pill" data-toggle="tab">Data</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover dataTable-table-nr">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Title<br>Name</th>
+                                                                <th>Type</th>
+                                                                <th>Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>
+                                                                Locale ID<br>LOCALE_ID
+                                                                 </td>
+                                                                <td>Number(10)</td>
+                                                                <td>Will store Locale details.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td class="col-tooltip"><span  data-toggle="tooltip" data-placement="top" title="Unique" class="fa fa-key fa-fw"></span> 
+                                                                Status ID<br>STATUS_ID
+                                                                 </td>
+                                                                <td>Number(3)</td>
+                                                                <td>Capture the Status ID here.</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>
+                                                                Active<br>ACTIVE
+                                                                 </td>
+                                                                <td>Varchar2(1 char)</td>
+                                                                <td>Y / N</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>
+                                                                Status Type<br>STATUS_TYPE
+                                                                 </td>
+                                                                <td>Number(3)</td>
+                                                                <td>Mention the status type here. 1 for Issue and 2 for Action</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>
+                                                                Status Name<br>STATUS_NAME
+                                                                 </td>
+                                                                <td>Varchar2(40 char)</td>
+                                                                <td>Capture the Status Name / Description here.</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="data-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <div class="modal-body" style="overflow:auto;">
+                                                        <table class="table table-hover data-table-d">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>ACTIVE</th>
+                                                                    <th>LOCALE_ID</th>
+                                                                    <th>STATUS_ID</th>
+                                                                    <th>STATUS_NAME</th>
+                                                                    <th>STATUS_TYPE</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>21</td>
+                                                                    <td>Reopened</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>1</td>
+                                                                    <td>New</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>2</td>
+                                                                    <td>Open</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>5</td>
+                                                                    <td>Pending Review</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>6</td>
+                                                                    <td>Pending Approval</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>7</td>
+                                                                    <td>Cancelled</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>10</td>
+                                                                    <td>Closed</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>11</td>
+                                                                    <td>Action Plan Developed</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>14</td>
+                                                                    <td>Action Plan Implementation</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>15</td>
+                                                                    <td>Remediated</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>16</td>
+                                                                    <td>Pending Closure</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>17</td>
+                                                                    <td>Pending Final Approval</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>22</td>
+                                                                    <td>Closed From Manage</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Y</td>
+                                                                    <td>1009</td>
+                                                                    <td>23</td>
+                                                                    <td>Closed From Monitor</td>
+                                                                    <td>1</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- tab-content -->
+                                </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+        <script>
+            $(document).ready(function() {
+                $('.data-table-d').DataTable({
+                    destroy:true,
+                    "responsive": true
+                });
+                $('.data-table-dnr').DataTable({
+                    destroy:true,
+                    "responsive": false
+                });
+                $('.col-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.dataTable-table').DataTable({
+                    responsive: true,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "15%" },     // 3rd column width 
+                        { "sWidth": "45%" }      // 4th column width 
+                    ]
+                });
+                $('.dataTable-table-nr').DataTable({
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false, 		 // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },      // 1st column width 
+                        { "sWidth": "35%" },     // 2nd column width 
+                        { "sWidth": "15%" },     // 3rd column width 
+                        { "sWidth": "45%" }      // 4th column width 
+                    ]
+                });
+            });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
