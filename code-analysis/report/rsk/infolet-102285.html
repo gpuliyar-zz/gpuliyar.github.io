@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_HM_GET_STD_FACTORS (102285)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>select profile_config,sf_x_axis,sf_y_axis,default_profile,(select object_name
+from ms_rsk_qnt_asmt_fctr
+where object_id=sf_x_axis and rownum=1) as sf_x_axis_name,(select object_name
+from ms_rsk_qnt_asmt_fctr
+where object_id=sf_y_axis and rownum=1) as sf_y_axis_name from ms_rsk_sf_config_cfg where perspective=:1 
+and profile_config=:2
+and sf_id=(SELECT MAX(SF_ID) FROM ms_rsk_sf_config_cfg)
+</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>null</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 701173690</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------------------------
+| Id  | Operation                    | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT             |                         |     1 |    51 |     2   (0)| 00:00:01 |
+|*  1 |  COUNT STOPKEY               |                         |       |       |            |          |
+|   2 |   TABLE ACCESS BY INDEX ROWID| MS_RSK_QNT_ASMT_FCTR    |     1 |    30 |     1   (0)| 00:00:01 |
+|*  3 |    INDEX UNIQUE SCAN         | MS_RSK_QNT_ASMT_FCTR_PK |     1 |       |     1   (0)| 00:00:01 |
+|*  4 |  COUNT STOPKEY               |                         |       |       |            |          |
+|   5 |   TABLE ACCESS BY INDEX ROWID| MS_RSK_QNT_ASMT_FCTR    |     1 |    30 |     1   (0)| 00:00:01 |
+|*  6 |    INDEX UNIQUE SCAN         | MS_RSK_QNT_ASMT_FCTR_PK |     1 |       |     1   (0)| 00:00:01 |
+|   7 |  TABLE ACCESS BY INDEX ROWID | MS_RSK_SF_CONFIG_CFG    |     1 |    51 |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  8 |   INDEX SKIP SCAN            | MS_RSK_SF_CONFIG_CFG_UK |     1 |       |     1   (0)| 00:00:01 |</font>
+|   9 |    SORT AGGREGATE            |                         |     1 |     6 |            |          |
+|  10 |     INDEX FULL SCAN          | MS_RSK_SF_CONFIG_CFG_UK |     2 |    12 |     1   (0)| 00:00:01 |
+--------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2
+   2 - SEL$2 / MS_RSK_QNT_ASMT_FCTR@SEL$2
+   3 - SEL$2 / MS_RSK_QNT_ASMT_FCTR@SEL$2
+   4 - SEL$3
+   5 - SEL$3 / MS_RSK_QNT_ASMT_FCTR@SEL$3
+   6 - SEL$3 / MS_RSK_QNT_ASMT_FCTR@SEL$3
+   7 - SEL$1 / MS_RSK_SF_CONFIG_CFG@SEL$1
+   8 - SEL$1 / MS_RSK_SF_CONFIG_CFG@SEL$1
+   9 - SEL$4
+  10 - SEL$4 / MS_RSK_SF_CONFIG_CFG@SEL$4
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - filter(ROWNUM=1)
+   3 - access("OBJECT_ID"=:B1)
+   4 - filter(ROWNUM=1)
+   6 - access("OBJECT_ID"=:B1)
+   8 - access("SF_ID"= (SELECT MAX("SF_ID") FROM "MS_RSK_SF_CONFIG_CFG" "MS_RSK_SF_CONFIG_CFG") 
+              AND "PROFILE_CONFIG"=:2 AND "PERSPECTIVE"=:1)
+       filter("PERSPECTIVE"=:1 AND "PROFILE_CONFIG"=:2 AND "SF_ID"= (SELECT MAX("SF_ID") FROM 
+              "MS_RSK_SF_CONFIG_CFG" "MS_RSK_SF_CONFIG_CFG"))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "OBJECT_NAME"[VARCHAR2,4000], ROWNUM[4]
+   2 - "OBJECT_NAME"[VARCHAR2,4000]
+   3 - "MS_RSK_QNT_ASMT_FCTR".ROWID[ROWID,10]
+   4 - "OBJECT_NAME"[VARCHAR2,4000], ROWNUM[4]
+   5 - "OBJECT_NAME"[VARCHAR2,4000]
+   6 - "MS_RSK_QNT_ASMT_FCTR".ROWID[ROWID,10]
+   7 - "PROFILE_CONFIG"[VARCHAR2,240], "SF_X_AXIS"[VARCHAR2,240], "SF_Y_AXIS"[VARCHAR2,240], 
+       "DEFAULT_PROFILE"[VARCHAR2,20]
+   8 - "MS_RSK_SF_CONFIG_CFG".ROWID[ROWID,10], "PROFILE_CONFIG"[VARCHAR2,240]
+   9 - (#keys=0) MAX("SF_ID")[400]
+  10 - "SF_ID"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

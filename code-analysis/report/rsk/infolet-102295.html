@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_HM_PROC_REC (102295)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT DISTINCT B.OBJECT_ID,
+  OBJECT_NAME,
+  'Level '||object_level,
+  object_parent,
+  (SELECT c.object_name
+  FROM ms_grc_core_object_pub_v c
+  WHERE c.OBJECt_ID=b.object_parent
+  ) AS core_obj_parent
+FROM MS_GRC_CORE_OBJECT B,
+  MS_GRC_CORE_OBJECT_OGN C
+WHERE 
+B.OBJECT_ID  =C.OBJECT_ID
+AND B.OBJECT_ID IN
+  (SELECT distinct core_object_id
+  FROM MS_RSK_CORE_OBJECT_ROLLUP
+  WHERE SCENARIO_ID IN
+    (SELECT TRIM(COLUMN_VALUE)
+    FROM TABLE(CAST(
+      (SELECT MS_APPS_UTILITIES.SPLIT(:1 ) FROM DUAL
+      ) AS ms_varchar2_array))
+    WHERE column_value IS NOT NULL
+    )
+  )
+AND MS_APPS_SECURITY_PKG.CHECK_OBJECT_ACCESS(DD_OBJECT_TYPE, 'O', C.OWNER_ORGANIZATIONS, :3, 'VIEW') = 'ACCESS'
+AND B.OBJECT_LEVEL IN (SELECT trim(column_value)
+  FROM TABLE(CAST(
+    (SELECT MS_APPS_UTILITIES.SPLIT(:2) FROM dual
+    ) as MS_VARCHAR2_ARRAY))
+  WHERE column_value IS NOT NULL)</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>MS_RSK_HM_PROC_REC</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Error</h2></header><pre><code>
+ORA-22814: attribute or element value is larger than specified in type
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

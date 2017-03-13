@@ -1,0 +1,238 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_ISM_LOV_Upload_Infolet (101327)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT stored_value
+      ,displayed_value
+      ,lov_name
+      ,locale_id
+      ,locale_string
+      ,enterprise_id
+      ,lov_id
+      ,lov_value_id
+      ,org_entity_id
+      ,org_entity_name
+      ,start_date
+      ,end_date
+  FROM ms_qs_ism_lov_org_values_v
+WHERE ((trim(START_DATE) <= trunc(sysdate))AND(nvl(end_date,sysdate)>=trunc(sysdate)))
+  order by display_order</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>LOV Infolet used in Upload</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2077406095</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------
+| Id  | Operation                  | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT           |                         |   116 |   515K|    34   (3)| 00:00:01 |
+|   1 |  SORT ORDER BY             |                         |   116 |   515K|    34   (3)| 00:00:01 |
+|*  2 |   HASH JOIN                |                         |   116 |   515K|    33   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   3 |    TABLE ACCESS FULL       | MS_QS_LOV_NAMES         |   463 | 13890 |     5   (0)| 00:00:01 |</font>
+|*  4 |    HASH JOIN RIGHT OUTER   |                         |   116 |   512K|    28   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  5 |     TABLE ACCESS FULL      | SI_ORG_ENTITIES_TL      |     2 |    14 |     3   (0)| 00:00:01 |</font>
+|*  6 |     HASH JOIN RIGHT OUTER  |                         |   116 |   511K|    25   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   7 |      TABLE ACCESS FULL     | MS_QS_LIST_OF_VALUES_TL |     1 |  2028 |     2   (0)| 00:00:01 |</font>
+|*  8 |      HASH JOIN             |                         |   116 |   281K|    23   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   9 |       TABLE ACCESS FULL    | SI_ORG_ENTITIES_T       |    74 |  2072 |     3   (0)| 00:00:01 |</font>
+|  10 |       VIEW                 |                         |   116 |   278K|    20   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  11 |        MERGE JOIN CARTESIAN|                         |   116 |  6380 |    20   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 12 |         TABLE ACCESS FULL  | SI_LOCALES              |     1 |    13 |     3   (0)| 00:00:01 |</font>
+|  13 |         BUFFER SORT        |                         |   116 |  4872 |    17   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 14 |          TABLE ACCESS FULL | MS_QS_LIST_OF_VALUES_T  |   116 |  4872 |    17   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$ED731CA1
+   3 - SEL$ED731CA1 / N@SEL$2
+   5 - SEL$ED731CA1 / TL@SEL$5
+   7 - SEL$ED731CA1 / TL@SEL$2
+   9 - SEL$ED731CA1 / T@SEL$5
+  10 - SEL$07BDC5B4 / X@SEL$2
+  11 - SEL$07BDC5B4
+  12 - SEL$07BDC5B4 / SI_LOCALES@SEL$4
+  14 - SEL$07BDC5B4 / T@SEL$3
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("X"."LOV_ID"="N"."LOV_ID")
+   4 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+))
+   5 - filter("TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+   6 - access("X"."LOCALE_ID"="TL"."LOCALE_ID"(+) AND 
+              "X"."LOV_VALUE_ID"="TL"."LOV_VALUE_ID"(+))
+   8 - access("T"."ORG_ENTITY_ID"="X"."ORG_ENTITY_ID" AND 
+              "T"."ENTERPRISE_ID"="X"."ENTERPRISE_ID")
+  12 - filter("ENABLED_FLAG"='Y')
+  14 - filter(TRIM(INTERNAL_FUNCTION("T"."START_DATE"))<=TRUNC(SYSDATE@!) AND 
+              NVL("T"."END_DATE",SYSDATE@!)>=TRUNC(SYSDATE@!))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "X"."DISPLAY_ORDER"[NUMBER,22], "X"."STORED_VALUE"[VARCHAR2,400], 
+       NVL("TL"."DISPLAYED_VALUE","X"."DISPLAYED_VALUE")[4000], "N"."LOV_NAME"[VARCHAR2,400], 
+       "X"."LOCALE_ID"[NUMBER,22], "X"."LOCALE_STRING"[VARCHAR2,400], 
+       "X"."ENTERPRISE_ID"[NUMBER,22], "X"."LOV_ID"[NUMBER,22], "X"."LOV_VALUE_ID"[NUMBER,22], 
+       "X"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "X"."START_DATE"[DATE,7], "X"."END_DATE"[DATE,7]
+   2 - (#keys=1) "X"."LOV_ID"[NUMBER,22], "N"."LOV_NAME"[VARCHAR2,400], 
+       "X"."LOCALE_ID"[NUMBER,22], "X"."LOV_VALUE_ID"[NUMBER,22], 
+       "TL"."DISPLAYED_VALUE"[VARCHAR2,4000], "X"."START_DATE"[DATE,7], 
+       "X"."ORG_ENTITY_ID"[NUMBER,22], "X"."ENTERPRISE_ID"[NUMBER,22], 
+       "T"."ORG_ENTITY_NAME"[VARCHAR2,400], "X"."DISPLAY_ORDER"[NUMBER,22], 
+       "X"."DISPLAYED_VALUE"[VARCHAR2,4000], "X"."END_DATE"[DATE,7], 
+       "X"."LOCALE_STRING"[VARCHAR2,400], "X"."STORED_VALUE"[VARCHAR2,400]
+   3 - "N"."LOV_NAME"[VARCHAR2,400], "N"."LOV_ID"[NUMBER,22]
+   4 - (#keys=1) "X"."LOCALE_ID"[NUMBER,22], "X"."LOV_VALUE_ID"[NUMBER,22], 
+       "TL"."DISPLAYED_VALUE"[VARCHAR2,4000], "X"."START_DATE"[DATE,7], 
+       "X"."ORG_ENTITY_ID"[NUMBER,22], "X"."ENTERPRISE_ID"[NUMBER,22], 
+       "T"."ORG_ENTITY_NAME"[VARCHAR2,400], "X"."DISPLAY_ORDER"[NUMBER,22], "X"."LOV_ID"[NUMBER,22], 
+       "X"."END_DATE"[DATE,7], "X"."LOCALE_STRING"[VARCHAR2,400], "X"."STORED_VALUE"[VARCHAR2,400], 
+       "X"."DISPLAYED_VALUE"[VARCHAR2,4000]
+   5 - "TL"."ORG_ENTITY_ID"[NUMBER,22]
+   6 - (#keys=2) "X"."LOCALE_ID"[NUMBER,22], "X"."LOV_VALUE_ID"[NUMBER,22], 
+       "TL"."DISPLAYED_VALUE"[VARCHAR2,4000], "T"."ORG_ENTITY_ID"[NUMBER,22], 
+       "X"."ORG_ENTITY_ID"[NUMBER,22], "X"."ENTERPRISE_ID"[NUMBER,22], 
+       "T"."ORG_ENTITY_NAME"[VARCHAR2,400], "X"."DISPLAY_ORDER"[NUMBER,22], "X"."LOV_ID"[NUMBER,22], 
+       "X"."END_DATE"[DATE,7], "X"."LOCALE_STRING"[VARCHAR2,400], "X"."STORED_VALUE"[VARCHAR2,400], 
+       "X"."DISPLAYED_VALUE"[VARCHAR2,4000], "X"."START_DATE"[DATE,7]
+   7 - "TL"."LOV_VALUE_ID"[NUMBER,22], "TL"."DISPLAYED_VALUE"[VARCHAR2,4000], 
+       "TL"."LOCALE_ID"[NUMBER,22]
+   8 - (#keys=2) "T"."ORG_ENTITY_ID"[NUMBER,22], "X"."ORG_ENTITY_ID"[NUMBER,22], 
+       "X"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "X"."LOCALE_ID"[NUMBER,22], "X"."LOV_ID"[NUMBER,22], "X"."LOV_VALUE_ID"[NUMBER,22], 
+       "X"."LOCALE_STRING"[VARCHAR2,400], "X"."STORED_VALUE"[VARCHAR2,400], 
+       "X"."DISPLAYED_VALUE"[VARCHAR2,4000], "X"."START_DATE"[DATE,7], "X"."END_DATE"[DATE,7], 
+       "X"."DISPLAY_ORDER"[NUMBER,22]
+   9 - "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22], 
+       "T"."ORG_ENTITY_NAME"[VARCHAR2,400]
+  10 - "X"."ENTERPRISE_ID"[NUMBER,22], "X"."LOV_ID"[NUMBER,22], 
+       "X"."LOV_VALUE_ID"[NUMBER,22], "X"."ORG_ENTITY_ID"[NUMBER,22], 
+       "X"."STORED_VALUE"[VARCHAR2,400], "X"."DISPLAYED_VALUE"[VARCHAR2,4000], 
+       "X"."START_DATE"[DATE,7], "X"."END_DATE"[DATE,7], "X"."DISPLAY_ORDER"[NUMBER,22], 
+       "X"."LOCALE_ID"[NUMBER,22], "X"."LOCALE_STRING"[VARCHAR2,400]
+  11 - (#keys=0) "LOCALE_ID"[NUMBER,22], "LOCALE_STRING"[VARCHAR2,400], 
+       "T"."LOV_VALUE_ID"[NUMBER,22], "T"."LOV_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22], 
+       "T"."STORED_VALUE"[VARCHAR2,400], "T"."DISPLAYED_VALUE"[VARCHAR2,4000], 
+       "T"."START_DATE"[DATE,7], "T"."END_DATE"[DATE,7], "T"."ENTERPRISE_ID"[NUMBER,22], 
+       "T"."DISPLAY_ORDER"[NUMBER,22]
+  12 - "LOCALE_ID"[NUMBER,22], "LOCALE_STRING"[VARCHAR2,400]
+  13 - (#keys=0) "T"."LOV_VALUE_ID"[NUMBER,22], "T"."LOV_ID"[NUMBER,22], 
+       "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."STORED_VALUE"[VARCHAR2,400], 
+       "T"."DISPLAYED_VALUE"[VARCHAR2,4000], "T"."START_DATE"[DATE,7], "T"."END_DATE"[DATE,7], 
+       "T"."ENTERPRISE_ID"[NUMBER,22], "T"."DISPLAY_ORDER"[NUMBER,22]
+  14 - "T"."LOV_VALUE_ID"[NUMBER,22], "T"."LOV_ID"[NUMBER,22], 
+       "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."STORED_VALUE"[VARCHAR2,400], 
+       "T"."DISPLAYED_VALUE"[VARCHAR2,4000], "T"."START_DATE"[DATE,7], "T"."END_DATE"[DATE,7], 
+       "T"."ENTERPRISE_ID"[NUMBER,22], "T"."DISPLAY_ORDER"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

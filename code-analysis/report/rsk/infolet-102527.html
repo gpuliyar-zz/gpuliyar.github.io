@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_RISK_RAT_RPT_COROBJ_L2_INFOL (102527)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>select  a.Core_Object_name,a.Core_Object_id,a.scenario_id,a.scenario_Name,a.assessment_type,
+a.inherent_rollup_rating,a.residual_rollup_rating,a.Object_level_num,a.parent_Core_Object_id,
+b.ASSMNT_ID,b.PLAN_NAME,b.ASSMNT_ASSESSOR,b.ASSMNT_APPROVER,b.ASSMNT_ASSIGNED_ON,
+b.ASSMNT_APPROVED_ON,b.ASSMNT_DUE_DATE,b.ASSMNT_STATUS,b.ASSMNT_TRIGD_FROM
+from  Ms_Rsk_Risk_Rating_Prc_Vw  a Left outer Join Ms_Rsk_Assmnt_Rpt_prc_Dtl_Vw b
+ on (a.Core_object_id=b.process_id
+ and   a.scenario_id = b.SCENERIO)
+Where a.scenario_id = :1
+and   a.assessment_type = :2
+and   a.parent_Core_Object_id = :3</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>null</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2170142035</h2></header><pre><code>
+ 
+-------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                         | Name                          | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                  |                               |     1 |  6999 |    11  (10)| 00:00:01 |
+|   1 |  NESTED LOOPS OUTER               |                               |     1 |  6999 |    11  (10)| 00:00:01 |
+|   2 |   VIEW                            | MS_RSK_RISK_RATING_PRC_VW     |     1 |  6851 |    10  (10)| 00:00:01 |
+|   3 |    NESTED LOOPS                   |                               |     1 |   778 |    10  (10)| 00:00:01 |
+|   4 |     NESTED LOOPS                  |                               |     1 |   761 |     9  (12)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   5 |      MERGE JOIN CARTESIAN         |                               |     1 |   707 |     8  (13)| 00:00:01 |</font>
+|*  6 |       HASH JOIN                   |                               |     1 |   659 |     7  (15)| 00:00:01 |
+|   7 |        VIEW                       | VW_SQ_1                       |     2 |  1238 |     4  (25)| 00:00:01 |
+|   8 |         SORT GROUP BY             |                               |     2 |    62 |     4  (25)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  9 |          TABLE ACCESS FULL        | MS_RSK_CORE_OBJECT_ROLLUP     |     3 |    93 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 10 |        TABLE ACCESS FULL          | MS_RSK_CORE_OBJECT_ROLLUP     |     3 |   120 |     3   (0)| 00:00:01 |</font>
+|  11 |       BUFFER SORT                 |                               |     1 |    48 |     5  (20)| 00:00:01 |
+|  12 |        TABLE ACCESS BY INDEX ROWID| MS_RSK_SCENARIOS_SCN          |     1 |    48 |     1   (0)| 00:00:01 |
+|* 13 |         INDEX RANGE SCAN          | MS_RSK_SCENARIOS_SCN_UK       |     1 |       |     1   (0)| 00:00:01 |
+|* 14 |      TABLE ACCESS BY INDEX ROWID  | MS_GRC_CORE_OBJECT            |     1 |    54 |     1   (0)| 00:00:01 |
+|* 15 |       INDEX UNIQUE SCAN           | MS_GRC_CORE_OBJECT_PK         |     1 |       |     1   (0)| 00:00:01 |
+|  16 |     TABLE ACCESS BY INDEX ROWID   | MS_RSK_CORE_OBJECT_LEVELS     |     1 |    17 |     1   (0)| 00:00:01 |
+|* 17 |      INDEX RANGE SCAN             | MS_RSK_CORE_OBJECT_LEVELS_OBJ |     1 |       |     1   (0)| 00:00:01 |
+|* 18 |   VIEW PUSHED PREDICATE           | MS_RSK_ASSMNT_RPT_PRC_DTL_VW  |     1 |   148 |     1   (0)| 00:00:01 |
+|* 19 |    HASH JOIN                      |                               |     2 |   296 |     6   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 20 |     TABLE ACCESS FULL             | MS_RSK_RISK_ASSESSMENT_PRC    |     2 |    58 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 21 |     TABLE ACCESS FULL             | MS_RSK_ASSMNT_RPT_DTLS        |     6 |   714 |     3   (0)| 00:00:01 |</font>
+-------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$E0E308B4
+   2 - SEL$583B776D / A@SEL$3
+   3 - SEL$583B776D
+   7 - SEL$F495C89B / VW_SQ_1@SEL$E5511D0C
+   8 - SEL$F495C89B
+   9 - SEL$F495C89B / E@SEL$5
+  10 - SEL$583B776D / A@SEL$4
+  12 - SEL$583B776D / F@SEL$4
+  13 - SEL$583B776D / F@SEL$4
+  14 - SEL$583B776D / D@SEL$4
+  15 - SEL$583B776D / D@SEL$4
+  16 - SEL$583B776D / G@SEL$4
+  17 - SEL$583B776D / G@SEL$4
+  18 - SEL$661FCD0D / B@SEL$1
+  19 - SEL$661FCD0D
+  20 - SEL$661FCD0D / A@SEL$2
+  21 - SEL$661FCD0D / B@SEL$2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   6 - access("A"."VERSION_NO"="MAX(VERSION_NO)" AND "A"."ASSESSMENT_TYPE"="ITEM_0" AND 
+              "A"."SCENARIO_ID"="ITEM_1" AND "A"."CORE_OBJECT_ID"="ITEM_2")
+   9 - filter("E"."SCENARIO_ID"=:1 AND "E"."ASSESSMENT_TYPE"=:2)
+  10 - filter("A"."SCENARIO_ID"=:1 AND "A"."ASSESSMENT_TYPE"=:2)
+  13 - access("F"."SCENARIO_ID"=:1)
+  14 - filter("D"."OBJECT_PARENT"=:3)
+  15 - access("D"."OBJECT_ID"="A"."CORE_OBJECT_ID")
+  17 - access("G"."CORE_OBJECT_ID"="A"."CORE_OBJECT_ID")
+  18 - filter("A"."SCENARIO_ID"="B"."SCENERIO"(+))
+  19 - access("A"."OBJECT_ID"="B"."ASSMNT_ID")
+  20 - filter("A"."PROCESS_ID"="A"."CORE_OBJECT_ID")
+  21 - filter("B"."ASSMNT_TYPE"='1')
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=0) "A"."CORE_OBJECT_NAME"[VARCHAR2,4000], "A"."CORE_OBJECT_ID"[VARCHAR2,400], 
+       "A"."SCENARIO_ID"[VARCHAR2,400], "A"."SCENARIO_NAME"[VARCHAR2,800], "A"."ASSESSMENT_TYPE"[VARCHAR2,400], 
+       "A"."INHERENT_ROLLUP_RATING"[VARCHAR2,4000], "A"."RESIDUAL_ROLLUP_RATING"[VARCHAR2,4000], 
+       "A"."OBJECT_LEVEL_NUM"[NUMBER,22], "A"."PARENT_CORE_OBJECT_ID"[VARCHAR2,400], 
+       "B"."ASSMNT_ID"[VARCHAR2,400], "B"."PLAN_NAME"[VARCHAR2,4000], "B"."ASSMNT_ASSESSOR"[VARCHAR2,4000], 
+       "B"."ASSMNT_APPROVER"[VARCHAR2,4000], "B"."ASSMNT_ASSIGNED_ON"[DATE,7], "B"."ASSMNT_APPROVED_ON"[DATE,7], 
+       "B"."ASSMNT_DUE_DATE"[DATE,7], "B"."ASSMNT_STATUS"[VARCHAR2,400], "B"."ASSMNT_TRIGD_FROM"[VARCHAR2,400]
+   2 - "A"."CORE_OBJECT_NAME"[VARCHAR2,4000], "A"."CORE_OBJECT_ID"[VARCHAR2,400], 
+       "A"."SCENARIO_ID"[VARCHAR2,400], "A"."SCENARIO_NAME"[VARCHAR2,800], "A"."ASSESSMENT_TYPE"[VARCHAR2,400], 
+       "A"."INHERENT_ROLLUP_RATING"[VARCHAR2,4000], "A"."RESIDUAL_ROLLUP_RATING"[VARCHAR2,4000], 
+       "A"."OBJECT_LEVEL_NUM"[NUMBER,22], "A"."PARENT_CORE_OBJECT_ID"[VARCHAR2,400]
+   3 - (#keys=0) "A"."ASSESSMENT_TYPE"[VARCHAR2,400], "A"."SCENARIO_ID"[VARCHAR2,400], 
+       "A"."CORE_OBJECT_ID"[VARCHAR2,400], "A"."INHERENT_ROLLUP_RATING"[VARCHAR2,400], 
+       "A"."RESIDUAL_ROLLUP_RATING"[VARCHAR2,400], "F"."OBJECT_NAME"[VARCHAR2,800], 
+       "D"."OBJECT_PARENT"[VARCHAR2,400], "D"."OBJECT_NAME"[VARCHAR2,4000], "G"."LEVEL_NUM"[NUMBER,22]
+   4 - (#keys=0) "A"."ASSESSMENT_TYPE"[VARCHAR2,400], "A"."SCENARIO_ID"[VARCHAR2,400], 
+       "A"."CORE_OBJECT_ID"[VARCHAR2,400], "A"."INHERENT_ROLLUP_RATING"[VARCHAR2,400], 
+       "A"."RESIDUAL_ROLLUP_RATING"[VARCHAR2,400], "F"."OBJECT_NAME"[VARCHAR2,800], 
+       "D"."OBJECT_PARENT"[VARCHAR2,400], "D"."OBJECT_NAME"[VARCHAR2,4000]
+   5 - (#keys=0) "A"."ASSESSMENT_TYPE"[VARCHAR2,400], "A"."SCENARIO_ID"[VARCHAR2,400], 
+       "A"."CORE_OBJECT_ID"[VARCHAR2,400], "A"."INHERENT_ROLLUP_RATING"[VARCHAR2,400], 
+       "A"."RESIDUAL_ROLLUP_RATING"[VARCHAR2,400], "F"."OBJECT_NAME"[VARCHAR2,800]
+   6 - (#keys=4) "A"."ASSESSMENT_TYPE"[VARCHAR2,400], "A"."SCENARIO_ID"[VARCHAR2,400], 
+       "A"."CORE_OBJECT_ID"[VARCHAR2,400], "A"."INHERENT_ROLLUP_RATING"[VARCHAR2,400], 
+       "A"."RESIDUAL_ROLLUP_RATING"[VARCHAR2,400]
+   7 - "MAX(VERSION_NO)"[NUMBER,22], "ITEM_0"[VARCHAR2,400], "ITEM_1"[VARCHAR2,400], "ITEM_2"[VARCHAR2,400]
+   8 - (#keys=3) "E"."ASSESSMENT_TYPE"[VARCHAR2,400], "E"."SCENARIO_ID"[VARCHAR2,400], 
+       "E"."CORE_OBJECT_ID"[VARCHAR2,400], MAX("VERSION_NO")[22]
+   9 - "E"."SCENARIO_ID"[VARCHAR2,400], "E"."CORE_OBJECT_ID"[VARCHAR2,400], 
+       "E"."ASSESSMENT_TYPE"[VARCHAR2,400], "VERSION_NO"[NUMBER,22]
+  10 - "A"."SCENARIO_ID"[VARCHAR2,400], "A"."CORE_OBJECT_ID"[VARCHAR2,400], 
+       "A"."ASSESSMENT_TYPE"[VARCHAR2,400], "A"."INHERENT_ROLLUP_RATING"[VARCHAR2,400], 
+       "A"."RESIDUAL_ROLLUP_RATING"[VARCHAR2,400], "A"."VERSION_NO"[NUMBER,22]
+  11 - (#keys=0) "F"."OBJECT_NAME"[VARCHAR2,800]
+  12 - "F"."OBJECT_NAME"[VARCHAR2,800]
+  13 - "F".ROWID[ROWID,10]
+  14 - "D"."OBJECT_PARENT"[VARCHAR2,400], "D"."OBJECT_NAME"[VARCHAR2,4000]
+  15 - "D".ROWID[ROWID,10]
+  16 - "G"."LEVEL_NUM"[NUMBER,22]
+  17 - "G".ROWID[ROWID,10]
+  18 - "B"."ASSMNT_ID"[VARCHAR2,400], "B"."PLAN_NAME"[VARCHAR2,4000], 
+       "B"."ASSMNT_ASSESSOR"[VARCHAR2,4000], "B"."ASSMNT_APPROVER"[VARCHAR2,4000], 
+       "B"."ASSMNT_ASSIGNED_ON"[DATE,7], "B"."ASSMNT_APPROVED_ON"[DATE,7], "B"."ASSMNT_DUE_DATE"[DATE,7], 
+       "B"."ASSMNT_STATUS"[VARCHAR2,400], "B"."ASSMNT_TRIGD_FROM"[VARCHAR2,400], "B"."SCENERIO"[VARCHAR2,400]
+  19 - (#keys=1) "B"."ASSMNT_ID"[VARCHAR2,400], "B"."SCENERIO"[VARCHAR2,400], 
+       "B"."PLAN_NAME"[VARCHAR2,4000], "B"."ASSMNT_ASSESSOR"[VARCHAR2,4000], 
+       "B"."ASSMNT_APPROVER"[VARCHAR2,4000], "B"."ASSMNT_ASSIGNED_ON"[DATE,7], "B"."ASSMNT_APPROVED_ON"[DATE,7], 
+       "B"."ASSMNT_DUE_DATE"[DATE,7], "B"."ASSMNT_STATUS"[VARCHAR2,400], "B"."ASSMNT_TRIGD_FROM"[VARCHAR2,400]
+  20 - "A"."OBJECT_ID"[VARCHAR2,400]
+  21 - "B"."ASSMNT_ID"[VARCHAR2,400], "B"."PLAN_NAME"[VARCHAR2,4000], 
+       "B"."ASSMNT_ASSESSOR"[VARCHAR2,4000], "B"."ASSMNT_APPROVER"[VARCHAR2,4000], 
+       "B"."ASSMNT_ASSIGNED_ON"[DATE,7], "B"."ASSMNT_APPROVED_ON"[DATE,7], "B"."ASSMNT_DUE_DATE"[DATE,7], 
+       "B"."ASSMNT_STATUS"[VARCHAR2,400], "B"."ASSMNT_TRIGD_FROM"[VARCHAR2,400], "B"."SCENERIO"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

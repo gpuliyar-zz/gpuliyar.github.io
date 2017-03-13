@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_GRC_CURRENCY_TEMPLATE (100810)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT  SUCCESS_TEMPLATE
+,ERROR_TEMPLATE
+FROM (
+SELECT  SUCCESS_TEMPLATE, ERROR_TEMPLATE,UPLOAD_PROCESS_INSTANCE_ID, max(UPLOAD_PROCESS_INSTANCE_ID) over(PARTITION BY FORM_NAME) AS max_id
+  FROM MS_APPS_DU_UPLOAD_STATUS_LOG
+ WHERE FORM_NAME = 'MS_GRC_CURRENCY_UPLOAD'
+   AND SUCCESS_TEMPLATE IS NOT NULL
+   AND ERROR_TEMPLATE IS NOT NULL
+   )
+   WHERE UPLOAD_PROCESS_INSTANCE_ID = max_id
+AND ROWNUM = 1</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>null</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 23162346</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------
+| Id  | Operation            | Name                         | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT     |                              |     1 |  4030 |     2   (0)| 00:00:01 |
+|*  1 |  COUNT STOPKEY       |                              |       |       |            |          |
+|*  2 |   VIEW               |                              |     1 |  4030 |     2   (0)| 00:00:01 |
+|   3 |    WINDOW BUFFER     |                              |     1 |    60 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  4 |     TABLE ACCESS FULL| MS_APPS_DU_UPLOAD_STATUS_LOG |     1 |    60 |     2   (0)| 00:00:01 |</font>
+-----------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$1
+   2 - SEL$2 / from$_subquery$_001@SEL$1
+   3 - SEL$2
+   4 - SEL$2 / MS_APPS_DU_UPLOAD_STATUS_LOG@SEL$2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - filter(ROWNUM=1)
+   2 - filter("UPLOAD_PROCESS_INSTANCE_ID"="MAX_ID")
+   4 - filter("SUCCESS_TEMPLATE" IS NOT NULL AND "ERROR_TEMPLATE" IS NOT NULL AND 
+              "FORM_NAME"='MS_GRC_CURRENCY_UPLOAD')
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "SUCCESS_TEMPLATE"[VARCHAR2,4000], "ERROR_TEMPLATE"[VARCHAR2,4000]
+   2 - "SUCCESS_TEMPLATE"[VARCHAR2,4000], "ERROR_TEMPLATE"[VARCHAR2,4000], 
+       "UPLOAD_PROCESS_INSTANCE_ID"[NUMBER,22], "MAX_ID"[NUMBER,22]
+   3 - (#keys=1) "FORM_NAME"[VARCHAR2,4000], "ERROR_TEMPLATE"[VARCHAR2,4000], 
+       "UPLOAD_PROCESS_INSTANCE_ID"[NUMBER,22], "SUCCESS_TEMPLATE"[VARCHAR2,4000], 
+       MAX("UPLOAD_PROCESS_INSTANCE_ID") OVER ( PARTITION BY "FORM_NAME")[22]
+   4 - "FORM_NAME"[VARCHAR2,4000], "UPLOAD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "SUCCESS_TEMPLATE"[VARCHAR2,4000], "ERROR_TEMPLATE"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

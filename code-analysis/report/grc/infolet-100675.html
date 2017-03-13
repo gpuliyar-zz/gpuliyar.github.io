@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS GRC Risk Infolet (100675)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT rsk_summ.Object_Id  AS Risk_id,
+rsk_summ.Object_Name     AS risk_name,
+rsk_summ.OBJECT_NAME AS Edit,
+mls_Summ.Obj_Status      AS Obj_Status,
+mls_Summ.Object_Level,
+rsk_summ.OBJECT_PARENT,
+INITCAP(mls_Summ.key_risk) as key_risk,
+mls_Summ.CAT_NAME_AGG AS RISK_CATEGORIES,
+rsk_summ.CREATED_DATE,
+MS_GRC_UTILITIES.FN_user_name(rsk_summ.Created_By) AS Created_by,
+rsk_summ.UPDATED_DATE,
+MS_GRC_UTILITIES.FN_user_name(rsk_summ.UPDATED_BY) AS UPDATED_BY,
+rsk_summ.valid_from as valid_from,
+rsk_summ.valid_until as valid_until,
+rsk_summ.description as description,
+rsk_summ.OWNER_ORG_NAMES AS Owner_Organization,
+rsk_summ.OWNER_NAME as Owner_names,
+rsk_summ.level_1_approver as level_1_approver,
+rsk_summ.level_2_approver as level_2_approver,
+rsk_summ.Rel_Organization_names as Applies_To_Organizations,
+rsk_summ.Rel_Aoc_Obj_Name_Agg as Related_Areas_Of_Compliance,
+rsk_summ.Rel_Asset_Obj_Name_Agg as Related_Assets,
+rsk_summ.Rel_Ctrl_Obj_Name_Agg as Related_Control,
+rsk_summ.Rel_Function_Obj_Name_Agg  as Related_Function,
+Rel_Objective_Obj_Name_Agg as Related_Objectives,
+rsk_summ.Rel_Process_Obj_Name_Agg as Related_Process,
+Rel_Product_name_Agg as Related_Products,
+rsk_summ.Rel_Reg_Body_Obj_Name_Agg as Related_Regulatory_Body,
+rsk_summ.Rel_Requirement_Obj_Name_Agg as Related_Requirement,
+rsk_summ.Rel_Risk_Obj_Name_Agg  as Related_risks,
+Rel_Standard_Obj_Name_Agg as Related_Standards
+,(MS_GRC_UTILITIES.FN_GET_REPORT_JSON((SELECT METRIC_ID FROM SI_METRICS_T WHERE METRIC_NAME='MS_GRC_RISK'),rsk_summ.DD_PROCESS_INSTANCE_ID,(SELECT DD_INSTANCE_ID FROM MS_GRC_RISK WHERE OBJECT_ID=rsk_summ.OBJECT_ID),
+'''flag=1'||CHR(38)||'emd=1'||CHR(38)||'x_edit_mode=Yes'||CHR (38)|| 'wrapper= No'|| CHR (38)|| 'mode=view''')) AS REPORT_JSON
+,OBJ_PARENT_ID,
+(SELECT usr.user_name
+FROM si_users_t usr
+WHERE rsk_summ.LEVEL_1_APPROVER = nvl2(usr.last_name,usr.first_name || ' ' || usr.last_name,usr.first_name)
+) AS LEVEL_1_APPR,
+(SELECT usr.user_name
+FROM si_users_t usr
+where RSK_SUMM.LEVEL_2_APPROVER = NVL2(USR.LAST_NAME,USR.FIRST_NAME || ' ' || USR.LAST_NAME,USR.FIRST_NAME)
+) AS LEVEL_2_APPR,
+rsk_summ.UPPER_OBJECT_NAME as UPPER_OBJECT_NAME
+FROM MS_GRC_RISK_OBJ_SUMMARY rsk_summ,
+MS_GRC_RISK_OBJ_MLS_SUMMARY mls_Summ, (SELECT COLUMN_VALUE
+from table(cast(MS_GRC_REP_BROWSER_FIL_DENORM.FN_RISK_RPT_FILTER(MS_GRC_ARRAY_TYPE(:1,:2,:3,:5,:7,:6,:8,:9,to_char(:10,'YYYY-MM-DD'),to_char(:11,'YYYY-MM-DD'),:12,:13,to_char(:14,'YYYY-MM-DD'),to_char(:15,'YYYY-MM-DD'),to_char(:16,'YYYY-MM-DD'),to_char(:17,'YYYY-MM-DD'),:18,:19,:20,:21,:22,:23,:24,null,null,:25,null,null,:26,null,:27,null,:28,:29,:30,:31,null,:32,:33,'MS_GRC_RISK',:34))as MS_VARCHAR2_ARRAY))
+) colval, (select LOCALE_ID from SI_USERS_T T1 ,SI_LOCALES T2 where USER_NAME = :34  and T1.LOCALE = T2.LOCALE_STRING) LOC
+WHERE COLVAL.column_value = mls_Summ.OBJECT_ID
+and COLVAL.column_value = rsk_summ.OBJECT_ID 
+and loc.locale_id = mls_Summ.LOCALE_ID
+and NVL(IS_ORPHAN, 1)=NVL(:4,NVL(IS_ORPHAN,1))</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>MS GRC Risk Report Infolet</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1400552273</h2></header><pre><code>
+ 
+---------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                             | Name                        | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                      |                             |  2042 |  3762K|    73   (0)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID          | SI_METRICS_T                |     1 |    34 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX RANGE SCAN                    | SI_METRICS_T_N7             |     1 |       |     1   (0)| 00:00:01 |
+|   3 |   TABLE ACCESS BY INDEX ROWID         | MS_GRC_RISK                 |     1 |    20 |     1   (0)| 00:00:01 |
+|*  4 |    INDEX UNIQUE SCAN                  | MS_GRC_RISK_PK              |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  5 |  TABLE ACCESS FULL                    | SI_USERS_T                  |     1 |    28 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|*  6 |  TABLE ACCESS FULL                    | SI_USERS_T                  |     1 |    28 |     3   (0)| 00:00:01 |</font>
+|*  7 |  HASH JOIN                            |                             |  2042 |  3762K|    73   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   8 |   TABLE ACCESS FULL                   | MS_GRC_RISK_OBJ_MLS_SUMMARY |   230 | 41170 |     3   (0)| 00:00:01 |</font>
+|*  9 |   HASH JOIN                           |                             |  4084 |  6811K|    70   (0)| 00:00:01 |
+|* 10 |    INDEX FAST FULL SCAN               | MS_GRC_RISK_SUMMARY_PK      |   115 |   188K|    37   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  11 |    MERGE JOIN CARTESIAN               |                             |  8168 |   255K|    33   (0)| 00:00:01 |</font>
+|  12 |     NESTED LOOPS                      |                             |     1 |    30 |     4   (0)| 00:00:01 |
+|  13 |      TABLE ACCESS BY INDEX ROWID      | SI_USERS_T                  |     1 |    19 |     1   (0)| 00:00:01 |
+|* 14 |       INDEX RANGE SCAN                | SI_USERS_T_N3               |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 15 |      TABLE ACCESS FULL                | SI_LOCALES                  |     1 |    11 |     3   (0)| 00:00:01 |</font>
+|  16 |     BUFFER SORT                       |                             |  8168 | 16336 |    30   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  17 |      COLLECTION ITERATOR PICKLER FETCH| FN_RISK_RPT_FILTER          |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+---------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2        / SI_METRICS_T@SEL$2
+   2 - SEL$2        / SI_METRICS_T@SEL$2
+   3 - SEL$3        / MS_GRC_RISK@SEL$3
+   4 - SEL$3        / MS_GRC_RISK@SEL$3
+   5 - SEL$4        / USR@SEL$4
+   6 - SEL$5        / USR@SEL$5
+   7 - SEL$1224B4CD
+   8 - SEL$1224B4CD / MLS_SUMM@SEL$1
+  10 - SEL$1224B4CD / RSK_SUMM@SEL$1
+  13 - SEL$1224B4CD / T1@SEL$8
+  14 - SEL$1224B4CD / T1@SEL$8
+  15 - SEL$1224B4CD / T2@SEL$8
+  17 - SEL$1224B4CD / KOKBF$0@SEL$7
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("METRIC_NAME"='MS_GRC_RISK')
+   4 - access("OBJECT_ID"=:B1)
+   5 - filter(NVL2("USR"."LAST_NAME","USR"."FIRST_NAME"||' '||"USR"."LAST_NAME","USR"."FIRST_NAME")=:B1)
+   6 - filter(NVL2("USR"."LAST_NAME","USR"."FIRST_NAME"||' '||"USR"."LAST_NAME","USR"."FIRST_NAME")=:B1)
+   7 - access("MLS_SUMM"."OBJECT_ID"=VALUE(KOKBF$) AND "LOCALE_ID"=TO_NUMBER("MLS_SUMM"."LOCALE_ID"))
+   9 - access("RSK_SUMM"."OBJECT_ID"=VALUE(KOKBF$))
+  10 - filter(NVL("IS_ORPHAN",1)=NVL(:4,NVL("IS_ORPHAN",1)))
+  14 - access("USER_NAME"=:34)
+  15 - filter("T1"."LOCALE"="T2"."LOCALE_STRING")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22]
+   2 - "SI_METRICS_T".ROWID[ROWID,10]
+   3 - "MS_GRC_RISK".ROWID[ROWID,10], "DD_INSTANCE_ID"[NUMBER,22]
+   4 - "MS_GRC_RISK".ROWID[ROWID,10]
+   5 - "USR"."LAST_NAME"[VARCHAR2,100], "USR"."FIRST_NAME"[VARCHAR2,100], "USR"."USER_NAME"[VARCHAR2,80]
+   6 - "USR"."LAST_NAME"[VARCHAR2,100], "USR"."FIRST_NAME"[VARCHAR2,100], "USR"."USER_NAME"[VARCHAR2,80]
+   7 - (#keys=2) "MLS_SUMM"."KEY_RISK"[VARCHAR2,1020], "MLS_SUMM"."CAT_NAME_AGG"[LOB,4000], 
+       "MLS_SUMM"."OBJECT_LEVEL"[VARCHAR2,4000], "MLS_SUMM"."OBJ_STATUS"[VARCHAR2,4000], 
+       "RSK_SUMM"."OBJECT_ID"[VARCHAR2,1600], "RSK_SUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "RSK_SUMM"."REL_ORGANIZATION_NAMES"[LOB,4000], "RSK_SUMM"."OBJECT_NAME"[VARCHAR2,4000], 
+       "RSK_SUMM"."OBJECT_PARENT"[VARCHAR2,4000], "OBJ_PARENT_ID"[LOB,4000], 
+       "RSK_SUMM"."LEVEL_1_APPROVER"[VARCHAR2,400], "RSK_SUMM"."LEVEL_2_APPROVER"[VARCHAR2,400], 
+       "RSK_SUMM"."VALID_UNTIL"[DATE,7], "RSK_SUMM"."VALID_FROM"[DATE,7], "RSK_SUMM"."DESCRIPTION"[LOB,4000], 
+       "RSK_SUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "RSK_SUMM"."OWNER_NAME"[LOB,4000], 
+       "RSK_SUMM"."OWNER_ORG_NAMES"[LOB,4000], "RSK_SUMM"."CREATED_DATE"[DATE,7], 
+       "RSK_SUMM"."CREATED_BY"[VARCHAR2,400], "RSK_SUMM"."UPDATED_DATE"[DATE,7], 
+       "RSK_SUMM"."UPDATED_BY"[VARCHAR2,400], "RSK_SUMM"."REL_RISK_OBJ_NAME_AGG"[LOB,4000], 
+       "RSK_SUMM"."REL_CTRL_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_ASSET_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_AOC_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_STANDARD_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_FUNCTION_OBJ_NAME_AGG"[LOB,4000], 
+       "RSK_SUMM"."REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_REG_BODY_OBJ_NAME_AGG"[LOB,4000], 
+       "RSK_SUMM"."REL_PROCESS_OBJ_NAME_AGG"[LOB,4000], "REL_PRODUCT_NAME_AGG"[LOB,4000]
+   8 - "MLS_SUMM"."OBJECT_ID"[VARCHAR2,1600], "MLS_SUMM"."LOCALE_ID"[VARCHAR2,400], 
+       "MLS_SUMM"."CAT_NAME_AGG"[LOB,4000], "MLS_SUMM"."OBJECT_LEVEL"[VARCHAR2,4000], 
+       "MLS_SUMM"."OBJ_STATUS"[VARCHAR2,4000], "MLS_SUMM"."KEY_RISK"[VARCHAR2,1020]
+   9 - (#keys=1) "RSK_SUMM"."OBJECT_ID"[VARCHAR2,1600], "RSK_SUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "RSK_SUMM"."REL_ORGANIZATION_NAMES"[LOB,4000], "RSK_SUMM"."OBJECT_NAME"[VARCHAR2,4000], 
+       "RSK_SUMM"."OBJECT_PARENT"[VARCHAR2,4000], "OBJ_PARENT_ID"[LOB,4000], 
+       "RSK_SUMM"."LEVEL_1_APPROVER"[VARCHAR2,400], "RSK_SUMM"."LEVEL_2_APPROVER"[VARCHAR2,400], 
+       "RSK_SUMM"."VALID_UNTIL"[DATE,7], "RSK_SUMM"."VALID_FROM"[DATE,7], "RSK_SUMM"."DESCRIPTION"[LOB,4000], 
+       "RSK_SUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "RSK_SUMM"."OWNER_NAME"[LOB,4000], 
+       "RSK_SUMM"."OWNER_ORG_NAMES"[LOB,4000], "RSK_SUMM"."CREATED_DATE"[DATE,7], 
+       "RSK_SUMM"."CREATED_BY"[VARCHAR2,400], "RSK_SUMM"."UPDATED_DATE"[DATE,7], 
+       "RSK_SUMM"."UPDATED_BY"[VARCHAR2,400], "RSK_SUMM"."REL_RISK_OBJ_NAME_AGG"[LOB,4000], 
+       "RSK_SUMM"."REL_CTRL_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_ASSET_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_AOC_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_STANDARD_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_FUNCTION_OBJ_NAME_AGG"[LOB,4000], 
+       "RSK_SUMM"."REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_REG_BODY_OBJ_NAME_AGG"[LOB,4000], 
+       "RSK_SUMM"."REL_PROCESS_OBJ_NAME_AGG"[LOB,4000], "REL_PRODUCT_NAME_AGG"[LOB,4000], "LOCALE_ID"[NUMBER,22], 
+       VALUE(A0)[8000]
+  10 - "RSK_SUMM".ROWID[ROWID,3034], "RSK_SUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "OBJ_SUMM_WID"[NUMBER,22], "RSK_SUMM"."OBJECT_ID"[VARCHAR2,1600], "RSK_SUMM"."OBJECT_NAME"[VARCHAR2,4000], 
+       "RSK_SUMM"."OBJECT_PARENT"[VARCHAR2,4000], "OBJ_PARENT_ID"[LOB,4000], 
+       "RSK_SUMM"."LEVEL_1_APPROVER"[VARCHAR2,400], "RSK_SUMM"."LEVEL_2_APPROVER"[VARCHAR2,400], 
+       "RSK_SUMM"."VALID_UNTIL"[DATE,7], "RSK_SUMM"."VALID_FROM"[DATE,7], "RSK_SUMM"."DESCRIPTION"[LOB,4000], 
+       "IS_ORPHAN"[NUMBER,22], "RSK_SUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "RSK_SUMM"."OWNER_NAME"[LOB,4000], 
+       "RSK_SUMM"."OWNER_ORG_NAMES"[LOB,4000], "RSK_SUMM"."CREATED_DATE"[DATE,7], 
+       "RSK_SUMM"."CREATED_BY"[VARCHAR2,400], "RSK_SUMM"."UPDATED_DATE"[DATE,7], 
+       "RSK_SUMM"."UPDATED_BY"[VARCHAR2,400], "RSK_SUMM"."REL_RISK_OBJ_NAME_AGG"[LOB,4000], 
+       "RSK_SUMM"."REL_CTRL_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_ASSET_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_AOC_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_STANDARD_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_FUNCTION_OBJ_NAME_AGG"[LOB,4000], 
+       "RSK_SUMM"."REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], "RSK_SUMM"."REL_REG_BODY_OBJ_NAME_AGG"[LOB,4000], 
+       "RSK_SUMM"."REL_PROCESS_OBJ_NAME_AGG"[LOB,4000], "REL_PRODUCT_NAME_AGG"[LOB,4000], 
+       "RSK_SUMM"."REL_ORGANIZATION_NAMES"[LOB,4000]
+  11 - (#keys=0) "LOCALE_ID"[NUMBER,22], VALUE(A0)[8000]
+  12 - (#keys=0) "LOCALE_ID"[NUMBER,22]
+  13 - "T1"."LOCALE"[VARCHAR2,100]
+  14 - "T1".ROWID[ROWID,10]
+  15 - "LOCALE_ID"[NUMBER,22]
+  16 - (#keys=0) VALUE(A0)[8000]
+  17 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

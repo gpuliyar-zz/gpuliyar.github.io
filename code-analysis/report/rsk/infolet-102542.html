@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_RRB_REPORT (102542)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>Select object_id,object_name, inh_exp, inh_exp_id,ctrl_exp, ctrl_exp_id,res_exp, res_exp_id, factor_object_id, dd_created_on,dd_created_by, DD_MODIFIED_ON,DD_MODIFIED_BY,Rule_Name,Dummy1,pre_resi_exp,object_name_json from (  SELECT object_id, object_name, concat(REPLACE(inh_exp, '`',' '), REPLACE(INH_EXP_2, '`',' ')) AS inh_exp, inh_exp_id, concat(REPLACE(ctrl_exp, '`',' '), REPLACE(CTRL_EXP_2, '`',' ')) AS ctrl_exp, ctrl_exp_id, concat(REPLACE(res_exp, '`',' '), REPLACE(RES_EXP_2, '`',' ')) AS res_exp, res_exp_id, factor_object_id, dd_created_on, ms_apps_utilities.get_user_full_name(dd_created_by) as dd_created_by, DD_MODIFIED_ON, ms_apps_utilities.get_user_full_name(DD_MODIFIED_BY) as DD_MODIFIED_BY,object_name as Rule_Name,null as Dummy1, REPLACE(PRE_RESIDUAL_EXP, '`',' ') AS pre_resi_exp,
+ MS_RSK_RPT_UTILS.FN_GET_REPORT_JSON
+(
+(SELECT METRIC_ID FROM SI_METRICS_T WHERE METRIC_NAME='MS_RSK_RISK_RULE_BUILDER'),
+dd_process_instance_id,dd_instance_id,
+'''flag=1'||CHR(38)||'emd=1'||CHR(38)||'x_edit_mode=Yes'||CHR (38)|| 'wrapper= No'|| CHR (38)|| 'mode=view''') 
+AS object_name_json 
+FROM ms_rsk_risk_rule_build order by rule_name)</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>Risk Builder List  Report</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 3996125671</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------
+| Id  | Operation                   | Name                   | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT            |                        |     7 |  6608 |     4  (25)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID| SI_METRICS_T           |     1 |    34 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX RANGE SCAN          | SI_METRICS_T_N7        |     1 |       |     1   (0)| 00:00:01 |
+|   3 |  SORT ORDER BY              |                        |     7 |  6608 |     4  (25)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   4 |   TABLE ACCESS FULL         | MS_RSK_RISK_RULE_BUILD |     7 |  6608 |     3   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$3        / SI_METRICS_T@SEL$3
+   2 - SEL$3        / SI_METRICS_T@SEL$3
+   3 - SEL$F5BB74E1
+   4 - SEL$F5BB74E1 / MS_RSK_RISK_RULE_BUILD@SEL$2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("METRIC_NAME"='MS_RSK_RISK_RULE_BUILDER')
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22]
+   2 - "SI_METRICS_T".ROWID[ROWID,10]
+   3 - (#keys=1) "OBJECT_NAME"[VARCHAR2,400], "OBJECT_ID"[VARCHAR2,400], 
+       "MS_RSK_RPT_UTILS"."FN_GET_REPORT_JSON"( (SELECT "METRIC_ID" FROM "SI_METRICS_T" 
+       "SI_METRICS_T" WHERE "METRIC_NAME"='MS_RSK_RISK_RULE_BUILDER'),"DD_PROCESS_INSTANCE_ID","DD_IN
+       STANCE_ID",'''flag=1&emd=1&x_edit_mode=Yes&wrapper= No&mode=view''')[4000], 
+       REPLACE("INH_EXP",'`',' ')||REPLACE("INH_EXP_2",'`',' ')[4000], "INH_EXP_ID"[VARCHAR2,4000], 
+       REPLACE("CTRL_EXP",'`',' ')||REPLACE("CTRL_EXP_2",'`',' ')[4000], 
+       "CTRL_EXP_ID"[VARCHAR2,4000], REPLACE("RES_EXP",'`',' ')||REPLACE("RES_EXP_2",'`',' ')[4000], 
+       "RES_EXP_ID"[VARCHAR2,4000], "FACTOR_OBJECT_ID"[VARCHAR2,4000], "DD_CREATED_ON"[DATE,7], 
+       "MS_APPS_UTILITIES"."GET_USER_FULL_NAME"("DD_CREATED_BY")[4000], "DD_MODIFIED_ON"[DATE,7], 
+       "MS_APPS_UTILITIES"."GET_USER_FULL_NAME"("DD_MODIFIED_BY")[4000], 
+       "OBJECT_NAME"[VARCHAR2,400], NULL[0], REPLACE("PRE_RESIDUAL_EXP",'`',' ')[4000]
+   4 - "INH_EXP"[VARCHAR2,4000], "INH_EXP_2"[VARCHAR2,4000], 
+       "FACTOR_OBJECT_ID"[VARCHAR2,4000], "CTRL_EXP"[VARCHAR2,4000], "RES_EXP"[VARCHAR2,4000], 
+       "INH_EXP_ID"[VARCHAR2,4000], "CTRL_EXP_2"[VARCHAR2,4000], "CTRL_EXP_ID"[VARCHAR2,4000], 
+       "PRE_RESIDUAL_EXP"[VARCHAR2,4000], "RES_EXP_2"[VARCHAR2,4000], "OBJECT_NAME"[VARCHAR2,400], 
+       "OBJECT_ID"[VARCHAR2,400], "DD_PROCESS_INSTANCE_ID"[NUMBER,22], "DD_INSTANCE_ID"[NUMBER,22], 
+       "DD_CREATED_ON"[DATE,7], "DD_CREATED_BY"[VARCHAR2,400], "DD_MODIFIED_ON"[DATE,7], 
+       "DD_MODIFIED_BY"[VARCHAR2,400], "RES_EXP_ID"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_ISM_CHANGE_HISTORY_DETAIL (101231)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>select MTL.METRIC_COLUMN_NAME as FIELD_NAME,
+tl.form_name as CHANGED_FORM,
+concat(before_value,'$==$'||after_value) As before_after_value,
+BEFORE_VALUE,
+AFTER_VALUE,
+ms_apps_utilities.get_user_full_name(modified_by) As Modified_BY,
+CAST (modified_on as timestamp) As Modified_on ,
+COMMENTS,
+change_history_id,
+a.issue_id,
+ms_ism_helper.FNGETCHANGEHISREPORTLINK(:1) As ChangeHisRptLink,
+b.issue_title As Issue_Title,
+(select c.action_title from ms_ism_action c where action_id=a.action_id) as action_title,
+modified_by as modified_by_stored
+from ms_ism_change_history a,
+ms_ism_issue b,
+MS_ISM_METRIC_TL_v tl,
+ms_ism_metric_columns_tl_v mtl
+where 
+a.issue_id=b.issue_id
+and tl.metric_id=a.changed_form
+and mtl.METRIC_RESULT_COLUMN_NAME=a.field_name
+AND TL.METRIC_ID=MTL.METRIC_ID
+and tl.locale_string=(select locale from si_users_t where user_name=:1)
+AND mtl.locale_string=tl.locale_string
+AND ((1 = ms_ism_security_pkg.fn_ism_view_issue(:1) 
+           AND 1 = ms_ism_security_pkg.fn_ism_view_issue_org(:1,issue_ownerorg,issue_approverorg,act_plan_approverorg, final_iss_approverorg)) 
+           OR 1 = ms_ism_security_pkg.fn_ism_view_issue_all(:1)
+           OR 1 = decode((SELECT MS_JOIN(tgt_obj_id) as tgt_obj_id
+                                       FROM ms_ism_orb_relation_orb
+                                      WHERE rel_source_id = a.issue_id
+                                        AND additional_column4 = 'SI_ORG_ENTITIES_T'
+                                       GROUP BY rel_source_id),NULL,-1,ms_ism_security_pkg.fn_ism_view_issue_orb(:1,(SELECT MS_JOIN(tgt_obj_id) as tgt_obj_id
+                                       FROM ms_ism_orb_relation_orb
+                                      WHERE rel_source_id = a.issue_id
+                                        AND additional_column4 = 'SI_ORG_ENTITIES_T'
+                                       GROUP BY rel_source_id))))</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet used in Detailed Change History Report</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2278053917</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------------
+| Id  | Operation                             | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                      |                         |     1 | 10319 |   360   (1)| 00:00:05 |
+|   1 |  TABLE ACCESS BY INDEX ROWID          | MS_ISM_ACTION           |     1 |   407 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX UNIQUE SCAN                   | MS_ISM_ACTION_PK        |     1 |       |     1   (0)| 00:00:01 |
+|*  3 |  FILTER                               |                         |       |       |            |          |
+|   4 |   NESTED LOOPS SEMI                   |                         |     1 | 10319 |   360   (1)| 00:00:05 |
+|*  5 |    FILTER                             |                         |       |       |            |          |
+|   6 |     NESTED LOOPS OUTER                |                         |     1 | 10285 |   359   (1)| 00:00:05 |
+|*  7 |      HASH JOIN                        |                         |     1 | 10245 |   358   (1)| 00:00:05 |
+|   8 |       VIEW                            | VW_SQ_1                 |     1 |    52 |     1   (0)| 00:00:01 |
+|   9 |        TABLE ACCESS BY INDEX ROWID    | SI_USERS_T              |     1 |    19 |     1   (0)| 00:00:01 |
+|* 10 |         INDEX RANGE SCAN              | SI_USERS_T_N3           |     1 |       |     1   (0)| 00:00:01 |
+|* 11 |       HASH JOIN                       |                         |     1 | 10193 |   357   (1)| 00:00:05 |
+|* 12 |        FILTER                         |                         |       |       |            |          |
+|  13 |         NESTED LOOPS OUTER            |                         |     1 |  9575 |   217   (1)| 00:00:03 |
+<font style="background-color: lightblue; color: red">|  14 |          MERGE JOIN CARTESIAN         |                         |     1 |  9532 |   216   (1)| 00:00:03 |</font>
+|  15 |           NESTED LOOPS                |                         |     1 |  8699 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  16 |            TABLE ACCESS FULL          | MS_ISM_CHANGE_HISTORY   |     1 |  8588 |     2   (0)| 00:00:01 |</font>
+|  17 |            TABLE ACCESS BY INDEX ROWID| MS_ISM_ISSUE            |     1 |   111 |     1   (0)| 00:00:01 |
+|* 18 |             INDEX UNIQUE SCAN         | MS_ISM_ISSUE_PK         |     1 |       |     1   (0)| 00:00:01 |
+|  19 |           BUFFER SORT                 |                         | 30760 |    24M|   215   (1)| 00:00:03 |
+|  20 |            VIEW                       |                         | 30760 |    24M|   213   (1)| 00:00:03 |
+<font style="background-color: lightblue; color: red">|  21 |             MERGE JOIN CARTESIAN      |                         | 30760 |  1622K|   213   (1)| 00:00:03 |</font>
+<font style="background-color: lightblue; color: red">|* 22 |              TABLE ACCESS FULL        | SI_LOCALES              |     1 |    13 |     3   (0)| 00:00:01 |</font>
+|  23 |              BUFFER SORT              |                         | 30760 |  1231K|   210   (1)| 00:00:03 |
+<font style="background-color: lightblue; color: red">|* 24 |               TABLE ACCESS FULL       | SI_METRIC_COLUMNS_T     | 30760 |  1231K|   210   (1)| 00:00:03 |</font>
+|  25 |          TABLE ACCESS BY INDEX ROWID  | SI_LABELS_TL            |     1 |    43 |     1   (0)| 00:00:01 |
+|* 26 |           INDEX RANGE SCAN            | SI_LABELS_TL_N1         |     1 |       |     1   (0)| 00:00:01 |
+|  27 |        VIEW                           |                         |   128 | 79104 |   139   (0)| 00:00:02 |
+<font style="background-color: lightblue; color: red">|  28 |         MERGE JOIN CARTESIAN          |                         |   128 |  2560 |   139   (0)| 00:00:02 |</font>
+<font style="background-color: lightblue; color: red">|* 29 |          TABLE ACCESS FULL            | SI_LOCALES              |     1 |    13 |     3   (0)| 00:00:01 |</font>
+|  30 |          BUFFER SORT                  |                         |   128 |   896 |   136   (0)| 00:00:02 |
+<font style="background-color: lightblue; color: red">|* 31 |           TABLE ACCESS FULL           | SI_METRICS_T            |   128 |   896 |   136   (0)| 00:00:02 |</font>
+|  32 |      TABLE ACCESS BY INDEX ROWID      | SI_METRICS_TL           |     1 |    40 |     1   (0)| 00:00:01 |
+|* 33 |       INDEX RANGE SCAN                | SI_METRICS_TL_N1        |     1 |       |     1   (0)| 00:00:01 |
+|* 34 |    TABLE ACCESS BY INDEX ROWID        | SI_METRICS_T            |     1 |    34 |     1   (0)| 00:00:01 |
+|* 35 |     INDEX RANGE SCAN                  | SI_METRICS_T_N1         |     1 |       |     1   (0)| 00:00:01 |
+|  36 |   SORT GROUP BY                       |                         |     1 |    45 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 37 |    TABLE ACCESS FULL                  | MS_ISM_ORB_RELATION_ORB |     1 |    45 |     3   (0)| 00:00:01 |</font>
+|  38 |   SORT GROUP BY                       |                         |     1 |    45 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 39 |    TABLE ACCESS FULL                  | MS_ISM_ORB_RELATION_ORB |     1 |    45 |     3   (0)| 00:00:01 |</font>
+-----------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2        / C@SEL$2
+   2 - SEL$2        / C@SEL$2
+   3 - SEL$E0E99321
+   8 - SEL$27FA72D5 / VW_SQ_1@SEL$4A53BC8E
+   9 - SEL$27FA72D5 / SI_USERS_T@SEL$11
+  10 - SEL$27FA72D5 / SI_USERS_T@SEL$11
+  16 - SEL$E0E99321 / A@SEL$1
+  17 - SEL$E0E99321 / B@SEL$1
+  18 - SEL$E0E99321 / B@SEL$1
+  20 - SEL$0328ED5D / T@SEL$6
+  21 - SEL$0328ED5D
+  22 - SEL$0328ED5D / SI_LOCALES@SEL$9
+  24 - SEL$0328ED5D / SI_METRIC_COLUMNS_T@SEL$8
+  25 - SEL$E0E99321 / TL@SEL$6
+  26 - SEL$E0E99321 / TL@SEL$6
+  27 - SEL$7286615E / T@SEL$3
+  28 - SEL$7286615E
+  29 - SEL$7286615E / SI_LOCALES@SEL$5
+  31 - SEL$7286615E / A@SEL$4
+  32 - SEL$E0E99321 / TL@SEL$3
+  33 - SEL$E0E99321 / TL@SEL$3
+  34 - SEL$E0E99321 / SI_METRICS_T@SEL$10
+  35 - SEL$E0E99321 / SI_METRICS_T@SEL$10
+  36 - SEL$12      
+  37 - SEL$12       / MS_ISM_ORB_RELATION_ORB@SEL$12
+  38 - SEL$13      
+  39 - SEL$13       / MS_ISM_ORB_RELATION_ORB@SEL$13
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("ACTION_ID"=:B1)
+   3 - filter("MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE"(:1)=1 AND 
+              "MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE_ORG"(:1,"ISSUE_OWNERORG","ISSUE_APPROVERORG","ACT_PLAN_APPROVERO
+              RG","FINAL_ISS_APPROVERORG")=1 OR "MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE_ALL"(:1)=1 OR DECODE( (SELECT 
+              "MS_JOIN"("TGT_OBJ_ID") FROM "MS_ISM_ORB_RELATION_ORB" "MS_ISM_ORB_RELATION_ORB" WHERE 
+              "REL_SOURCE_ID"=:B1 AND "ADDITIONAL_COLUMN4"='SI_ORG_ENTITIES_T' GROUP BY 
+              "REL_SOURCE_ID"),NULL,(-1),"MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE_ORB"(:1, (SELECT 
+              "MS_JOIN"("TGT_OBJ_ID") FROM "MS_ISM_ORB_RELATION_ORB" "MS_ISM_ORB_RELATION_ORB" WHERE 
+              "REL_SOURCE_ID"=:B2 AND "ADDITIONAL_COLUMN4"='SI_ORG_ENTITIES_T' GROUP BY "REL_SOURCE_ID")))=1)
+   5 - filter(NVL("TL"."METRIC_ID","T"."METRIC_ID")=TO_NUMBER("A"."CHANGED_FORM") AND 
+              NVL("TL"."METRIC_ID","T"."METRIC_ID")="T"."METRIC_ID")
+   7 - access("T"."LOCALE_STRING"="LOCALE")
+  10 - access("USER_NAME"=:1)
+  11 - access("T"."LOCALE_STRING"="T"."LOCALE_STRING")
+  12 - filter("A"."FIELD_NAME"=NVL("TL"."KEY","T"."RESULT_COLUMN_NAME"))
+  18 - access("A"."ISSUE_ID"="B"."ISSUE_ID")
+  22 - filter("ENABLED_FLAG"='Y')
+  24 - filter("ACTION" IS NULL OR "ACTION"='A' OR "ACTION"='M' OR "ACTION"='S')
+  26 - access("T"."METRIC_ID"="TL"."PAGE_ID"(+) AND "T"."RESULT_COLUMN_NAME"="TL"."KEY"(+) AND 
+              "T"."LOCALE_ID"="TL"."LOCALE_ID"(+))
+       filter("T"."RESULT_COLUMN_NAME"="TL"."KEY"(+) AND "T"."LOCALE_ID"="TL"."LOCALE_ID"(+))
+  29 - filter("ENABLED_FLAG"='Y')
+  31 - filter("A"."FORM_NAME" IS NOT NULL)
+  33 - access("T"."METRIC_ID"="TL"."METRIC_ID"(+) AND "T"."LOCALE_ID"="TL"."LOCALE_ID"(+))
+  34 - filter("METRIC_NAME"='MS_ISM_ACTION' OR "METRIC_NAME"='MS_ISM_ISSUE')
+  35 - access("T"."METRIC_ID"="METRIC_ID")
+  37 - filter("REL_SOURCE_ID"=:B1 AND "ADDITIONAL_COLUMN4"='SI_ORG_ENTITIES_T')
+  39 - filter("REL_SOURCE_ID"=:B1 AND "ADDITIONAL_COLUMN4"='SI_ORG_ENTITIES_T')
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "C".ROWID[ROWID,10], "C"."ACTION_TITLE"[VARCHAR2,4000]
+   2 - "C".ROWID[ROWID,10]
+   3 - "CHANGE_HISTORY_ID"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ACTION_ID"[VARCHAR2,1020], 
+       "BEFORE_VALUE"[LOB,4000], "AFTER_VALUE"[LOB,4000], "MODIFIED_ON"[DATE,7], "MODIFIED_BY"[VARCHAR2,1020], 
+       "COMMENTS"[VARCHAR2,4000], "B"."ISSUE_TITLE"[VARCHAR2,4000], "T"."COLUMN_NAME"[VARCHAR2,1600], 
+       "TL"."VALUE"[VARCHAR2,4000], "T"."FORM_NAME"[VARCHAR2,1200], "TL"."FORM_NAME"[VARCHAR2,400]
+   4 - (#keys=0) "CHANGE_HISTORY_ID"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], 
+       "A"."ACTION_ID"[VARCHAR2,1020], "BEFORE_VALUE"[LOB,4000], "AFTER_VALUE"[LOB,4000], 
+       "MODIFIED_ON"[DATE,7], "MODIFIED_BY"[VARCHAR2,1020], "COMMENTS"[VARCHAR2,4000], 
+       "FINAL_ISS_APPROVERORG"[VARCHAR2,4000], "B"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "ACT_PLAN_APPROVERORG"[VARCHAR2,4000], "ISSUE_APPROVERORG"[VARCHAR2,4000], 
+       "ISSUE_OWNERORG"[VARCHAR2,4000], "T"."COLUMN_NAME"[VARCHAR2,1600], "TL"."VALUE"[VARCHAR2,4000], 
+       "T"."FORM_NAME"[VARCHAR2,1200], "TL"."FORM_NAME"[VARCHAR2,400]
+   5 - "CHANGE_HISTORY_ID"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ACTION_ID"[VARCHAR2,1020], 
+       "BEFORE_VALUE"[LOB,4000], "AFTER_VALUE"[LOB,4000], "MODIFIED_ON"[DATE,7], "MODIFIED_BY"[VARCHAR2,1020], 
+       "COMMENTS"[VARCHAR2,4000], "FINAL_ISS_APPROVERORG"[VARCHAR2,4000], "B"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "ACT_PLAN_APPROVERORG"[VARCHAR2,4000], "ISSUE_APPROVERORG"[VARCHAR2,4000], 
+       "ISSUE_OWNERORG"[VARCHAR2,4000], "T"."COLUMN_NAME"[VARCHAR2,1600], "T"."METRIC_ID"[NUMBER,22], 
+       "TL"."VALUE"[VARCHAR2,4000], "T"."FORM_NAME"[VARCHAR2,1200], "TL"."FORM_NAME"[VARCHAR2,400]
+   6 - (#keys=0) "CHANGE_HISTORY_ID"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], 
+       "A"."ACTION_ID"[VARCHAR2,1020], "BEFORE_VALUE"[LOB,4000], "AFTER_VALUE"[LOB,4000], 
+       "A"."CHANGED_FORM"[VARCHAR2,1020], "MODIFIED_ON"[DATE,7], "MODIFIED_BY"[VARCHAR2,1020], 
+       "COMMENTS"[VARCHAR2,4000], "FINAL_ISS_APPROVERORG"[VARCHAR2,4000], "B"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "ACT_PLAN_APPROVERORG"[VARCHAR2,4000], "ISSUE_APPROVERORG"[VARCHAR2,4000], 
+       "ISSUE_OWNERORG"[VARCHAR2,4000], "T"."COLUMN_NAME"[VARCHAR2,1600], "T"."METRIC_ID"[NUMBER,22], 
+       "TL"."VALUE"[VARCHAR2,4000], "T"."FORM_NAME"[VARCHAR2,1200], "T"."METRIC_ID"[NUMBER,22], 
+       "TL"."METRIC_ID"[NUMBER,22], "TL"."FORM_NAME"[VARCHAR2,400]
+   7 - (#keys=1) "T"."LOCALE_ID"[NUMBER,22], "CHANGE_HISTORY_ID"[NUMBER,22], 
+       "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ACTION_ID"[VARCHAR2,1020], "BEFORE_VALUE"[LOB,4000], 
+       "AFTER_VALUE"[LOB,4000], "A"."CHANGED_FORM"[VARCHAR2,1020], "MODIFIED_ON"[DATE,7], 
+       "MODIFIED_BY"[VARCHAR2,1020], "COMMENTS"[VARCHAR2,4000], "FINAL_ISS_APPROVERORG"[VARCHAR2,4000], 
+       "B"."ISSUE_TITLE"[VARCHAR2,4000], "ACT_PLAN_APPROVERORG"[VARCHAR2,4000], 
+       "ISSUE_APPROVERORG"[VARCHAR2,4000], "ISSUE_OWNERORG"[VARCHAR2,4000], "T"."COLUMN_NAME"[VARCHAR2,1600], 
+       "T"."METRIC_ID"[NUMBER,22], "TL"."VALUE"[VARCHAR2,4000], "T"."FORM_NAME"[VARCHAR2,1200], 
+       "T"."METRIC_ID"[NUMBER,22]
+   8 - "LOCALE"[VARCHAR2,100]
+   9 - "LOCALE"[VARCHAR2,100]
+  10 - "SI_USERS_T".ROWID[ROWID,10]
+  11 - (#keys=1) "T"."LOCALE_STRING"[VARCHAR2,400], "CHANGE_HISTORY_ID"[NUMBER,22], 
+       "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ACTION_ID"[VARCHAR2,1020], "BEFORE_VALUE"[LOB,4000], 
+       "AFTER_VALUE"[LOB,4000], "A"."CHANGED_FORM"[VARCHAR2,1020], "MODIFIED_ON"[DATE,7], 
+       "MODIFIED_BY"[VARCHAR2,1020], "COMMENTS"[VARCHAR2,4000], "FINAL_ISS_APPROVERORG"[VARCHAR2,4000], 
+       "B"."ISSUE_TITLE"[VARCHAR2,4000], "ACT_PLAN_APPROVERORG"[VARCHAR2,4000], 
+       "ISSUE_APPROVERORG"[VARCHAR2,4000], "ISSUE_OWNERORG"[VARCHAR2,4000], "T"."COLUMN_NAME"[VARCHAR2,1600], 
+       "T"."METRIC_ID"[NUMBER,22], "TL"."VALUE"[VARCHAR2,4000], "T"."FORM_NAME"[VARCHAR2,1200], 
+       "T"."METRIC_ID"[NUMBER,22], "T"."LOCALE_ID"[NUMBER,22]
+  12 - "CHANGE_HISTORY_ID"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ACTION_ID"[VARCHAR2,1020], 
+       "A"."FIELD_NAME"[VARCHAR2,1020], "BEFORE_VALUE"[LOB,4000], "AFTER_VALUE"[LOB,4000], 
+       "A"."CHANGED_FORM"[VARCHAR2,1020], "MODIFIED_ON"[DATE,7], "MODIFIED_BY"[VARCHAR2,1020], 
+       "COMMENTS"[VARCHAR2,4000], "B".ROWID[ROWID,10], "FINAL_ISS_APPROVERORG"[VARCHAR2,4000], 
+       "B"."ISSUE_TITLE"[VARCHAR2,4000], "ACT_PLAN_APPROVERORG"[VARCHAR2,4000], 
+       "ISSUE_APPROVERORG"[VARCHAR2,4000], "ISSUE_OWNERORG"[VARCHAR2,4000], "B"."ISSUE_ID"[VARCHAR2,1020], 
+       "T"."COLUMN_NAME"[VARCHAR2,1600], "T"."METRIC_ID"[NUMBER,22], "T"."RESULT_COLUMN_NAME"[VARCHAR2,320], 
+       "T"."LOCALE_ID"[NUMBER,22], "T"."LOCALE_STRING"[VARCHAR2,400], "TL".ROWID[ROWID,10], 
+       "TL"."PAGE_ID"[NUMBER,22], "TL"."KEY"[VARCHAR2,1000], "TL"."VALUE"[VARCHAR2,4000], 
+       "TL"."LOCALE_ID"[NUMBER,22]
+  13 - (#keys=0) "CHANGE_HISTORY_ID"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], 
+       "A"."ACTION_ID"[VARCHAR2,1020], "A"."FIELD_NAME"[VARCHAR2,1020], "BEFORE_VALUE"[LOB,4000], 
+       "AFTER_VALUE"[LOB,4000], "A"."CHANGED_FORM"[VARCHAR2,1020], "MODIFIED_ON"[DATE,7], 
+       "MODIFIED_BY"[VARCHAR2,1020], "COMMENTS"[VARCHAR2,4000], "B".ROWID[ROWID,10], 
+       "FINAL_ISS_APPROVERORG"[VARCHAR2,4000], "B"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "ACT_PLAN_APPROVERORG"[VARCHAR2,4000], "ISSUE_APPROVERORG"[VARCHAR2,4000], 
+       "ISSUE_OWNERORG"[VARCHAR2,4000], "B"."ISSUE_ID"[VARCHAR2,1020], "T"."COLUMN_NAME"[VARCHAR2,1600], 
+       "T"."METRIC_ID"[NUMBER,22], "T"."RESULT_COLUMN_NAME"[VARCHAR2,320], "T"."LOCALE_ID"[NUMBER,22], 
+       "T"."LOCALE_STRING"[VARCHAR2,400], "TL".ROWID[ROWID,10], "TL"."PAGE_ID"[NUMBER,22], 
+       "TL"."KEY"[VARCHAR2,1000], "TL"."VALUE"[VARCHAR2,4000], "TL"."LOCALE_ID"[NUMBER,22]
+  14 - (#keys=0) "CHANGE_HISTORY_ID"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], 
+       "A"."ACTION_ID"[VARCHAR2,1020], "A"."FIELD_NAME"[VARCHAR2,1020], "BEFORE_VALUE"[LOB,4000], 
+       "AFTER_VALUE"[LOB,4000], "A"."CHANGED_FORM"[VARCHAR2,1020], "MODIFIED_ON"[DATE,7], 
+       "MODIFIED_BY"[VARCHAR2,1020], "COMMENTS"[VARCHAR2,4000], "B".ROWID[ROWID,10], 
+       "FINAL_ISS_APPROVERORG"[VARCHAR2,4000], "B"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "ACT_PLAN_APPROVERORG"[VARCHAR2,4000], "ISSUE_APPROVERORG"[VARCHAR2,4000], 
+       "ISSUE_OWNERORG"[VARCHAR2,4000], "B"."ISSUE_ID"[VARCHAR2,1020], "T"."COLUMN_NAME"[VARCHAR2,1600], 
+       "T"."METRIC_ID"[NUMBER,22], "T"."RESULT_COLUMN_NAME"[VARCHAR2,320], "T"."LOCALE_ID"[NUMBER,22], 
+       "T"."LOCALE_STRING"[VARCHAR2,400]
+  15 - (#keys=0) "CHANGE_HISTORY_ID"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], 
+       "A"."ACTION_ID"[VARCHAR2,1020], "A"."FIELD_NAME"[VARCHAR2,1020], "BEFORE_VALUE"[LOB,4000], 
+       "AFTER_VALUE"[LOB,4000], "A"."CHANGED_FORM"[VARCHAR2,1020], "MODIFIED_ON"[DATE,7], 
+       "MODIFIED_BY"[VARCHAR2,1020], "COMMENTS"[VARCHAR2,4000], "B".ROWID[ROWID,10], 
+       "FINAL_ISS_APPROVERORG"[VARCHAR2,4000], "B"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "ACT_PLAN_APPROVERORG"[VARCHAR2,4000], "ISSUE_APPROVERORG"[VARCHAR2,4000], 
+       "ISSUE_OWNERORG"[VARCHAR2,4000], "B"."ISSUE_ID"[VARCHAR2,1020]
+  16 - "CHANGE_HISTORY_ID"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ACTION_ID"[VARCHAR2,1020], 
+       "A"."FIELD_NAME"[VARCHAR2,1020], "BEFORE_VALUE"[LOB,4000], "AFTER_VALUE"[LOB,4000], 
+       "A"."CHANGED_FORM"[VARCHAR2,1020], "MODIFIED_ON"[DATE,7], "MODIFIED_BY"[VARCHAR2,1020], 
+       "COMMENTS"[VARCHAR2,4000]
+  17 - "B".ROWID[ROWID,10], "FINAL_ISS_APPROVERORG"[VARCHAR2,4000], "B"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "ACT_PLAN_APPROVERORG"[VARCHAR2,4000], "ISSUE_APPROVERORG"[VARCHAR2,4000], 
+       "ISSUE_OWNERORG"[VARCHAR2,4000], "B"."ISSUE_ID"[VARCHAR2,1020]
+  18 - "B".ROWID[ROWID,10], "B"."ISSUE_ID"[VARCHAR2,1020]
+  19 - (#keys=0) "T"."COLUMN_NAME"[VARCHAR2,1600], "T"."METRIC_ID"[NUMBER,22], 
+       "T"."RESULT_COLUMN_NAME"[VARCHAR2,320], "T"."LOCALE_ID"[NUMBER,22], "T"."LOCALE_STRING"[VARCHAR2,400]
+  20 - "T"."COLUMN_NAME"[VARCHAR2,1600], "T"."METRIC_ID"[NUMBER,22], 
+       "T"."RESULT_COLUMN_NAME"[VARCHAR2,320], "T"."LOCALE_ID"[NUMBER,22], "T"."LOCALE_STRING"[VARCHAR2,400]
+  21 - (#keys=0) "LOCALE_ID"[NUMBER,22], "LOCALE_STRING"[VARCHAR2,400], "ENABLED_FLAG"[VARCHAR2,4], 
+       "METRIC_ID"[NUMBER,22], "COLUMN_NAME"[VARCHAR2,1600], "RESULT_COLUMN_NAME"[VARCHAR2,320], 
+       "ACTION"[VARCHAR2,4]
+  22 - "LOCALE_ID"[NUMBER,22], "LOCALE_STRING"[VARCHAR2,400], "ENABLED_FLAG"[VARCHAR2,4]
+  23 - (#keys=0) "METRIC_ID"[NUMBER,22], "COLUMN_NAME"[VARCHAR2,1600], 
+       "RESULT_COLUMN_NAME"[VARCHAR2,320], "ACTION"[VARCHAR2,4]
+  24 - "METRIC_ID"[NUMBER,22], "COLUMN_NAME"[VARCHAR2,1600], "RESULT_COLUMN_NAME"[VARCHAR2,320], 
+       "ACTION"[VARCHAR2,4]
+  25 - "TL".ROWID[ROWID,10], "TL"."PAGE_ID"[NUMBER,22], "TL"."KEY"[VARCHAR2,1000], 
+       "TL"."VALUE"[VARCHAR2,4000], "TL"."LOCALE_ID"[NUMBER,22]
+  26 - "TL".ROWID[ROWID,10], "TL"."PAGE_ID"[NUMBER,22], "TL"."KEY"[VARCHAR2,1000], 
+       "TL"."LOCALE_ID"[NUMBER,22]
+  27 - "T"."FORM_NAME"[VARCHAR2,1200], "T"."METRIC_ID"[NUMBER,22], "T"."LOCALE_ID"[NUMBER,22], 
+       "T"."LOCALE_STRING"[VARCHAR2,400]
+  28 - (#keys=0) "LOCALE_ID"[NUMBER,22], "LOCALE_STRING"[VARCHAR2,400], "A"."METRIC_ID"[NUMBER,22], 
+       "A"."FORM_NAME"[VARCHAR2,1200]
+  29 - "LOCALE_ID"[NUMBER,22], "LOCALE_STRING"[VARCHAR2,400]
+  30 - (#keys=0) "A"."METRIC_ID"[NUMBER,22], "A"."FORM_NAME"[VARCHAR2,1200]
+  31 - "A"."METRIC_ID"[NUMBER,22], "A"."FORM_NAME"[VARCHAR2,1200]
+  32 - "TL"."METRIC_ID"[NUMBER,22], "TL"."FORM_NAME"[VARCHAR2,400]
+  33 - "TL".ROWID[ROWID,10], "TL"."METRIC_ID"[NUMBER,22]
+  35 - "SI_METRICS_T".ROWID[ROWID,10]
+  36 - (#keys=1) "REL_SOURCE_ID"[VARCHAR2,1020], "MS_JOIN"("TGT_OBJ_ID")[4000]
+  37 - "TGT_OBJ_ID"[VARCHAR2,4000], "REL_SOURCE_ID"[VARCHAR2,1020]
+  38 - (#keys=1) "REL_SOURCE_ID"[VARCHAR2,1020], "MS_JOIN"("TGT_OBJ_ID")[4000]
+  39 - "TGT_OBJ_ID"[VARCHAR2,4000], "REL_SOURCE_ID"[VARCHAR2,1020]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

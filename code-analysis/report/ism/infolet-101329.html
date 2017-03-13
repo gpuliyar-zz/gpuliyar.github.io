@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_ISM_MY_ISSUES_RPT (101329)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT  a.ISSUE_TITLE,
+         ms_ism_rpt_utils.fn_get_local_status(a.ISSUE_STATUS,:1) AS ISSUE_STATUS,
+         a.NO_OF_EXTENSIONS As NO_OF_EXTENSIONS,
+         a.ISSUE_ID As ISSUE_ID,
+         MS_ISM_UTILITIES.GET_USER_FULL_NAME (a.ISSUE_OWNER, a.ISSUE_OWNERORG) AS Issue_Owner_full_name,
+         nvl(a.no_of_action,0)
+            AS Actions,
+         a.ISSUE_DUE_DATE AS ISSUE_DUE_DATE,
+         greatest(Trunc(Sysdate) - Trunc(Issue_Due_Date),0)  As Days_Past_Due,
+         ms_ism_rpt_utils.fn_get_lov_dis_val('MS ISM Source Type',ISSUE_SOURCE_TYPE,:1) as ISSUE_SOURCE_TYPE,
+         Decode (a.upstream_source_type, '0', a.Adhoc_Source,Ms_Ism_Helper.Get_Issue_Source_Title (a.Issue_Source_Type,a.ISSUE_SOURCE_TYPE_ADT,a.Issue_Source)) As Issue_Source,
+         ms_ism_rpt_utils.fn_get_lov_dis_val('MS ISM Risk Rating',
+                                        a.ISSUE_RISK_RATING,:1) AS ISSUE_RISK_RATING,
+(MS_ISM_RPT_UTILS.fn_get_report_json
+                               ((select metric_id from si_metrics_t where metric_name='MS_ISM_ISSUE'),
+                                 dd_process_instance_id,
+                                 dd_instance_id,
+                                '''flag=1'
+                                ||CHR(38)
+                                ||'emd=2'
+                                ||CHR(38)
+                                ||'x_edit_mode=Yes'
+                                || CHR (38)  
+                                || 'wrapper= No''') )As report_json,
+    a.ISSUE_TITLE as ISSUE_TITLE_ADT,
+   MS_ISM_UTILITIES.GET_USER_FULL_NAME (a.ISSUE_OWNER, a.ISSUE_OWNERORG) AS ISSUE_OWNE_ADT,
+        a.ISSUE_OWNER AS ISSUE_OWNER_STORED,
+    a.issue_delegatee as issue_delegatee_stored,
+    MS_ISM_UTILITIES.GET_USER_FULL_NAME (a.issue_delegatee,'') AS issue_delegatee_adt,
+    a.Issue_Source as issue_source_stored,
+    a.Issue_Source_Type as Issue_Source_Type_stored,
+    ISSUE_SOURCE_TYPE_ADT
+    FROM MS_ISM_ISSUE a
+   WHERE (a.issue_owner=:1 or a.issue_delegatee=:1)
+AND a.ISSUE_STATUS NOT IN ('7','10')
+ORDER BY a.DD_CREATED_ON DESC</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet will retrieve all the issues raised in the system.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 3984226487</h2></header><pre><code>
+ 
+-------------------------------------------------------------------------------------------------------
+| Id  | Operation                     | Name                  | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT              |                       |     5 | 10665 |     4  (25)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID  | SI_METRICS_T          |     1 |    34 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX RANGE SCAN            | SI_METRICS_T_N7       |     1 |       |     1   (0)| 00:00:01 |
+|   3 |  SORT ORDER BY                |                       |     5 | 10665 |     4  (25)| 00:00:01 |
+|   4 |   CONCATENATION               |                       |       |       |            |          |
+|   5 |    TABLE ACCESS BY INDEX ROWID| MS_ISM_ISSUE          |     1 |  2133 |     1   (0)| 00:00:01 |
+|*  6 |     INDEX RANGE SCAN          | IDX_ISS_DELEGT_STATUS |     1 |       |     1   (0)| 00:00:01 |
+|*  7 |    TABLE ACCESS BY INDEX ROWID| MS_ISM_ISSUE          |     4 |  8532 |     2   (0)| 00:00:01 |
+|*  8 |     INDEX RANGE SCAN          | IDX_ISS_OWNER_STATUS  |     4 |       |     1   (0)| 00:00:01 |
+-------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2   / SI_METRICS_T@SEL$2
+   2 - SEL$2   / SI_METRICS_T@SEL$2
+   3 - SEL$1  
+   5 - SEL$1_1 / A@SEL$1
+   6 - SEL$1_1 / A@SEL$1
+   7 - SEL$1_2 / A@SEL$1_2
+   8 - SEL$1_2 / A@SEL$1_2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("METRIC_NAME"='MS_ISM_ISSUE')
+   6 - access("A"."ISSUE_DELEGATEE"=:1)
+       filter("A"."ISSUE_STATUS"<>'7' AND "A"."ISSUE_STATUS"<>'10')
+   7 - filter(LNNVL("A"."ISSUE_DELEGATEE"=:1))
+   8 - access("A"."ISSUE_OWNER"=:1)
+       filter("A"."ISSUE_STATUS"<>'7' AND "A"."ISSUE_STATUS"<>'10')
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22]
+   2 - "SI_METRICS_T".ROWID[ROWID,10]
+   3 - (#keys=1) INTERNAL_FUNCTION("A"."DD_CREATED_ON")[7], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "MS_ISM_RPT_UTILS"."FN_GET_LOCAL_STATUS"("A"."ISSUE_STATUS",:1)[4000], 
+       "A"."NO_OF_EXTENSIONS"[VARCHAR2,4000], "A"."ISSUE_ID"[VARCHAR2,1020], 
+       "MS_ISM_UTILITIES"."GET_USER_FULL_NAME"("A"."ISSUE_OWNER","A"."ISSUE_OWNERORG")[4000], 
+       NVL("A"."NO_OF_ACTION",0)[22], "A"."ISSUE_DUE_DATE"[DATE,7], 
+       GREATEST(TRUNC(SYSDATE@!)-TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE")),0)[22], 
+       "MS_ISM_RPT_UTILS"."FN_GET_LOV_DIS_VAL"('MS ISM Source Type',"ISSUE_SOURCE_TYPE",:1)[4000], 
+       DECODE("A"."UPSTREAM_SOURCE_TYPE",'0',"A"."ADHOC_SOURCE","MS_ISM_HELPER"."GET_ISSUE_SOURCE_TITL
+       E"("A"."ISSUE_SOURCE_TYPE","A"."ISSUE_SOURCE_TYPE_ADT","A"."ISSUE_SOURCE"))[4000], 
+       "MS_ISM_RPT_UTILS"."FN_GET_LOV_DIS_VAL"('MS ISM Risk 
+       Rating',"A"."ISSUE_RISK_RATING",:1)[4000], "MS_ISM_RPT_UTILS"."FN_GET_REPORT_JSON"( (SELECT 
+       "METRIC_ID" FROM "SI_METRICS_T" "SI_METRICS_T" WHERE 
+       "METRIC_NAME"='MS_ISM_ISSUE'),"DD_PROCESS_INSTANCE_ID","DD_INSTANCE_ID",'''flag=1&emd=2&x_edit_
+       mode=Yes&wrapper= No''')[4000], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "MS_ISM_UTILITIES"."GET_USER_FULL_NAME"("A"."ISSUE_OWNER","A"."ISSUE_OWNERORG")[4000], 
+       "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], 
+       "MS_ISM_UTILITIES"."GET_USER_FULL_NAME"("A"."ISSUE_DELEGATEE",'')[4000], 
+       "A"."ISSUE_SOURCE"[VARCHAR2,4000], "A"."ISSUE_SOURCE_TYPE"[VARCHAR2,1020], 
+       "ISSUE_SOURCE_TYPE_ADT"[VARCHAR2,4000]
+   4 - "A".ROWID[ROWID,10], "A"."ISSUE_SOURCE_TYPE"[VARCHAR2,1020], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "ISSUE_DUE_DATE"[DATE,7], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."NO_OF_EXTENSIONS"[VARCHAR2,4000], 
+       "A"."ADHOC_SOURCE"[VARCHAR2,1020], "ISSUE_SOURCE_TYPE_ADT"[VARCHAR2,4000], 
+       "A"."ISSUE_TITLE"[VARCHAR2,4000], "A"."ISSUE_SOURCE"[VARCHAR2,4000], 
+       "A"."ISSUE_OWNERORG"[VARCHAR2,4000], "A"."ISSUE_RISK_RATING"[VARCHAR2,4000], 
+       "A"."NO_OF_ACTION"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], 
+       "A"."UPSTREAM_SOURCE_TYPE"[VARCHAR2,1020], "A"."ISSUE_OWNER"[VARCHAR2,4000], 
+       "DD_PROCESS_INSTANCE_ID"[NUMBER,22], "DD_INSTANCE_ID"[NUMBER,22], "A"."DD_CREATED_ON"[DATE,7]
+   5 - "A".ROWID[ROWID,10], "A"."ISSUE_SOURCE_TYPE"[VARCHAR2,1020], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "ISSUE_DUE_DATE"[DATE,7], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."NO_OF_EXTENSIONS"[VARCHAR2,4000], 
+       "A"."ADHOC_SOURCE"[VARCHAR2,1020], "ISSUE_SOURCE_TYPE_ADT"[VARCHAR2,4000], 
+       "A"."ISSUE_TITLE"[VARCHAR2,4000], "A"."ISSUE_SOURCE"[VARCHAR2,4000], 
+       "A"."ISSUE_OWNERORG"[VARCHAR2,4000], "A"."ISSUE_RISK_RATING"[VARCHAR2,4000], 
+       "A"."NO_OF_ACTION"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], 
+       "A"."UPSTREAM_SOURCE_TYPE"[VARCHAR2,1020], "A"."ISSUE_OWNER"[VARCHAR2,4000], 
+       "DD_PROCESS_INSTANCE_ID"[NUMBER,22], "DD_INSTANCE_ID"[NUMBER,22], "A"."DD_CREATED_ON"[DATE,7]
+   6 - "A".ROWID[ROWID,10], "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020]
+   7 - "A".ROWID[ROWID,10], "A"."ISSUE_SOURCE_TYPE"[VARCHAR2,1020], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "ISSUE_DUE_DATE"[DATE,7], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."NO_OF_EXTENSIONS"[VARCHAR2,4000], 
+       "A"."ADHOC_SOURCE"[VARCHAR2,1020], "ISSUE_SOURCE_TYPE_ADT"[VARCHAR2,4000], 
+       "A"."ISSUE_TITLE"[VARCHAR2,4000], "A"."ISSUE_SOURCE"[VARCHAR2,4000], 
+       "A"."ISSUE_OWNERORG"[VARCHAR2,4000], "A"."ISSUE_RISK_RATING"[VARCHAR2,4000], 
+       "A"."NO_OF_ACTION"[NUMBER,22], "A"."ISSUE_ID"[VARCHAR2,1020], 
+       "A"."UPSTREAM_SOURCE_TYPE"[VARCHAR2,1020], "A"."ISSUE_OWNER"[VARCHAR2,4000], 
+       "DD_PROCESS_INSTANCE_ID"[NUMBER,22], "DD_INSTANCE_ID"[NUMBER,22], "A"."DD_CREATED_ON"[DATE,7]
+   8 - "A".ROWID[ROWID,10], "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."ISSUE_STATUS"[VARCHAR2,1020]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

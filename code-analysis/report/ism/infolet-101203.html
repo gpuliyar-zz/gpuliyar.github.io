@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_ISM_ACTION_METRIC_CARD (101203)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>select action_title as action_title,action_status_stored as action_status_stored, 
+action_status as action_status,action_owner as action_owner,priority as priority,action_due_date as action_due_date,
+action_completed_on as action_completed_on,issue_title as issue_title,issue_owner as issue_owner,
+Percentage_Completed As Percentage_Completed,Pid,
+Instanceid,Owner_Organization as Owner_Organization,
+(MS_ISM_RPT_UTILS.fn_get_report_json
+                               ((select metric_id from si_metrics_t where metric_name='MS_ISM_ACTION'),
+                                 Pid,
+                                 Instanceid,
+                                '''flag=1'
+                                ||CHR(38)
+                                ||'emd=1'
+                                ||CHR(38)
+                                ||'x_edit_mode=Yes'
+                                || CHR (38)  
+                                || 'wrapper= No''') )As report_json,
+                                action_id,
+                                action_title as action_title_adt,
+                                action_owner as action_owner_adt,
+                                action_owner_stored,
+                                issue_owner as issue_owner_adt,
+                                issue_owner_stored,
+                               other_impact
+From Table(Ms_Ism_Helper.Fn_Get_Action_List_Rep_Detl(:1))
+where action_status_stored <> '10'
+ORDER BY org_action_title</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet is created to pull open actions in system</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1161569736</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                          | Name                        | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                   |                             |   408 |   816 |    30   (4)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID       | SI_METRICS_T                |     1 |    34 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX RANGE SCAN                 | SI_METRICS_T_N7             |     1 |       |     1   (0)| 00:00:01 |
+|   3 |  SORT ORDER BY                     |                             |   408 |   816 |    30   (4)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  4 |   COLLECTION ITERATOR PICKLER FETCH| FN_GET_ACTION_LIST_REP_DETL |   408 |   816 |    29   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2        / SI_METRICS_T@SEL$2
+   2 - SEL$2        / SI_METRICS_T@SEL$2
+   3 - SEL$8976F1A6
+   4 - SEL$8976F1A6 / KOKBF$0@SEL$3
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("METRIC_NAME"='MS_ISM_ACTION')
+   4 - filter(VALUE(KOKBF$)<>'10')
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22], "METRIC_NAME"[VARCHAR2,400]
+   2 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_NAME"[VARCHAR2,400]
+   3 - (#keys=1) VALUE(KOKBF$)[16000], VALUE(KOKBF$)[16000], VALUE(KOKBF$)[1020], VALUE(KOKBF$)[16000], 
+       VALUE(KOKBF$)[16000], VALUE(KOKBF$)[16000], VALUE(KOKBF$)[21], VALUE(KOKBF$)[21], VALUE(KOKBF$)[4000], 
+       VALUE(KOKBF$)[16000], VALUE(KOKBF$)[1020], VALUE(KOKBF$)[22], VALUE(KOKBF$)[22], VALUE(KOKBF$)[400], 
+       "MS_ISM_RPT_UTILS"."FN_GET_REPORT_JSON"( (SELECT "METRIC_ID" FROM "SI_METRICS_T" "SI_METRICS_T" WHERE 
+       "METRIC_NAME"='MS_ISM_ACTION'),VALUE(KOKBF$),VALUE(KOKBF$),'''flag=1&emd=1&x_edit_mode=Yes&wrapper= 
+       No''')[4000], VALUE(KOKBF$)[16000], VALUE(KOKBF$)[16000], VALUE(KOKBF$)[16000], VALUE(KOKBF$)[16000], 
+       VALUE(KOKBF$)[16000], VALUE(KOKBF$)[16000], VALUE(KOKBF$)[16000]
+   4 - VALUE(A0)[16000], VALUE(A0)[16000], VALUE(A0)[16000], VALUE(A0)[1020], VALUE(A0)[16000], 
+       VALUE(A0)[16000], VALUE(A0)[21], VALUE(A0)[21], VALUE(A0)[4000], VALUE(A0)[16000], VALUE(A0)[1020], 
+       VALUE(A0)[22], VALUE(A0)[22], VALUE(A0)[400], VALUE(A0)[16000], VALUE(A0)[16000], VALUE(A0)[16000], 
+       VALUE(A0)[16000], VALUE(A0)[16000], VALUE(A0)[16000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

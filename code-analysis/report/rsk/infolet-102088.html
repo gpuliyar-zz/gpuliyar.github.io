@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS RSK RISKS INFO (102088)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT 
+  a.proces_id,
+b.object_id,
+  a.object_name as "Risk Name",
+  'Level-'||b.object_level as "Hierarchy",
+case when b.object_level > = 2
+ then ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent(a.risk_id))
+ else null end Level1,
+   case when b.object_level > = 3
+ then ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent(Ms_rsk_utils.get_risk_parent(a.risk_id)))
+ else null end Level2,
+ case when b.object_level=4
+ then ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent(a.risk_id))
+ else null end Level3
+FROM TABLE (Ms_rsk_utils.fn_fetch_risk(:1,:2,:3) ) a,
+ms_grc_risk b
+where a.risk_id = b.object_id
+and b.object_level=2
+union
+SELECT 
+  a.proces_id,
+b.object_id,
+  a.object_name as "Risk Name",
+   'Level-'||b.object_level as "Hierarchy",
+ decode(object_level,3,ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent((Ms_rsk_utils.get_risk_parent(a.risk_id)))),null) as Level1,
+ ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent(a.risk_id)) as Level2,
+ decode(object_level,4,ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent(a.risk_id)),null) as Level3
+FROM TABLE (Ms_rsk_utils.fn_fetch_risk(:1,:2,:3) ) a,
+ms_grc_risk b
+where a.risk_id = b.object_id
+and b.object_level=3
+union
+SELECT 
+  a.proces_id,
+b.object_id,
+   a.object_name as "Risk Name",
+   'Level-'||b.object_level as "Hierarchy",
+  ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent(Ms_rsk_utils.get_risk_parent((Ms_rsk_utils.get_risk_parent(a.risk_id))))) as Level1,
+  ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent(Ms_rsk_utils.get_risk_parent(a.risk_id))) as Level2,
+ decode(object_level,4,ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent(a.risk_id)),null) as Level3
+FROM TABLE (Ms_rsk_utils.fn_fetch_risk(:1,:2,:3) ) a,
+ms_grc_risk b
+where a.risk_id = b.object_id
+and b.object_level=4
+UNION
+SELECT 
+  a.proces_id,
+b.object_id,
+  a.object_name as "Risk Name",
+  'Level-'|| b.object_level as "Hierarchy",
+  decode(object_level,3,ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent((Ms_rsk_utils.get_risk_parent(a.risk_id)))),null) as Level1,
+ ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent(a.risk_id)) as Level2,
+ decode(object_level,4,ms_rsk_utils.
+Fn_Get_multiple_risk_name(Ms_rsk_utils.get_risk_parent(a.risk_id)),null) as Level3
+FROM TABLE (Ms_rsk_utils.fn_fetch_risk(:1,:2,:3) ) a,
+ms_grc_risk b
+where a.risk_id = b.object_id
+and b.object_level=1</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet is used to fetch multiple parent risk based on Organization,Process and Perspective selection</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1974253524</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------
+| Id  | Operation                            | Name          | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                     |               |  8150 |   151K|   141   (4)| 00:00:02 |
+|   1 |  SORT UNIQUE                         |               |  8150 |   151K|   141   (4)| 00:00:02 |
+|   2 |   UNION-ALL                          |               |       |       |            |          |
+|*  3 |    HASH JOIN                         |               |  4404 | 83676 |    34   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  4 |     TABLE ACCESS FULL                | MS_GRC_RISK   |   124 |  2108 |     5   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|   5 |     COLLECTION ITERATOR PICKLER FETCH| FN_FETCH_RISK |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|*  6 |    HASH JOIN                         |               |  2557 | 48583 |    34   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  7 |     TABLE ACCESS FULL                | MS_GRC_RISK   |    72 |  1224 |     5   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|   8 |     COLLECTION ITERATOR PICKLER FETCH| FN_FETCH_RISK |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|*  9 |    HASH JOIN                         |               |    53 |  1007 |    34   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 10 |     TABLE ACCESS FULL                | MS_GRC_RISK   |     2 |    34 |     5   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  11 |     COLLECTION ITERATOR PICKLER FETCH| FN_FETCH_RISK |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|* 12 |    HASH JOIN                         |               |  1136 | 21584 |    34   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 13 |     TABLE ACCESS FULL                | MS_GRC_RISK   |    32 |   544 |     5   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  14 |     COLLECTION ITERATOR PICKLER FETCH| FN_FETCH_RISK |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SET$1       
+   3 - SEL$F5BB74E1
+   4 - SEL$F5BB74E1 / B@SEL$1
+   5 - SEL$F5BB74E1 / KOKBF$0@SEL$2
+   6 - SEL$07BDC5B4
+   7 - SEL$07BDC5B4 / B@SEL$3
+   8 - SEL$07BDC5B4 / KOKBF$1@SEL$4
+   9 - SEL$ABDE6DFF
+  10 - SEL$ABDE6DFF / B@SEL$5
+  11 - SEL$ABDE6DFF / KOKBF$2@SEL$6
+  12 - SEL$8A3193DA
+  13 - SEL$8A3193DA / B@SEL$7
+  14 - SEL$8A3193DA / KOKBF$3@SEL$8
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   3 - access("B"."OBJECT_ID"=VALUE(KOKBF$))
+   4 - filter(TO_NUMBER("B"."OBJECT_LEVEL")=2)
+   6 - access("B"."OBJECT_ID"=VALUE(KOKBF$))
+   7 - filter(TO_NUMBER("B"."OBJECT_LEVEL")=3)
+   9 - access("B"."OBJECT_ID"=VALUE(KOKBF$))
+  10 - filter(TO_NUMBER("B"."OBJECT_LEVEL")=4)
+  12 - access("B"."OBJECT_ID"=VALUE(KOKBF$))
+  13 - filter(TO_NUMBER("B"."OBJECT_LEVEL")=1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=7) STRDEF[4000], STRDEF[400], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[4000]
+   2 - STRDEF[4000], STRDEF[400], STRDEF[4000], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000]
+   3 - (#keys=1) "B"."OBJECT_ID"[VARCHAR2,400], "B"."OBJECT_LEVEL"[VARCHAR2,4000], 
+       VALUE(A0)[4000], VALUE(A0)[4000], VALUE(A0)[8000]
+   4 - "B"."OBJECT_LEVEL"[VARCHAR2,4000], "B"."OBJECT_ID"[VARCHAR2,400]
+   5 - VALUE(A0)[4000], VALUE(A0)[4000], VALUE(A0)[8000]
+   6 - (#keys=1) "B"."OBJECT_ID"[VARCHAR2,400], "B"."OBJECT_LEVEL"[VARCHAR2,4000], 
+       VALUE(A0)[4000], VALUE(A0)[4000], VALUE(A0)[8000]
+   7 - "B"."OBJECT_LEVEL"[VARCHAR2,4000], "B"."OBJECT_ID"[VARCHAR2,400]
+   8 - VALUE(A0)[4000], VALUE(A0)[4000], VALUE(A0)[8000]
+   9 - (#keys=1) "B"."OBJECT_ID"[VARCHAR2,400], "B"."OBJECT_LEVEL"[VARCHAR2,4000], 
+       VALUE(A0)[4000], VALUE(A0)[4000], VALUE(A0)[8000]
+  10 - "B"."OBJECT_LEVEL"[VARCHAR2,4000], "B"."OBJECT_ID"[VARCHAR2,400]
+  11 - VALUE(A0)[4000], VALUE(A0)[4000], VALUE(A0)[8000]
+  12 - (#keys=1) "B"."OBJECT_ID"[VARCHAR2,400], "B"."OBJECT_LEVEL"[VARCHAR2,4000], 
+       VALUE(A0)[4000], VALUE(A0)[4000], VALUE(A0)[8000]
+  13 - "B"."OBJECT_LEVEL"[VARCHAR2,4000], "B"."OBJECT_ID"[VARCHAR2,400]
+  14 - VALUE(A0)[4000], VALUE(A0)[4000], VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

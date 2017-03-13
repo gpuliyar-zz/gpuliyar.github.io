@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_ISM_Issue_By_Risk (101313)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT b.Issue_Source    AS Issue_Source,
+   b.Total_Count         AS Total_Count,
+   b.Dummy1              AS Dummy1,
+   b.Issue_Source_Stored AS Issue_Source_Stored,
+   b.Source_Type         AS Source_Type
+FROM
+   (SELECT MS_ISM_HELPER.get_Issue_Source_Title (a.issue_source_type, a.issue_source_type_adt,a.issue_source)       AS Issue_Source,
+      COUNT(1)                                                                              AS Total_Count ,
+      NULL                                                                                  AS Dummy1,
+      a.issue_source                                                                        AS Issue_Source_Stored,
+      ms_ism_rpt_utils.fn_get_lov_dis_val('MS ISM Source Type',a.issue_source_type,:1) AS Source_Type,
+      dense_rank() over(order by COUNT(1) DESC) rn
+   FROM ms_ism_issue a
+   WHERE a.issue_source_type_adt='MS_RSK_RISK_ASSESSMENT'
+   AND Issue_Source        IS NOT NULL
+   AND a.ISSUE_STATUS NOT  IN('1','5','6','7','10','None')
+   AND reached_manage       = 'Y'
+   AND ((1 = ms_ism_security_pkg.fn_ism_view_issue(:1) 
+           AND 1 = ms_ism_security_pkg.fn_ism_view_issue_org(:1,a.issue_ownerorg,a.issue_approverorg,a.act_plan_approverorg, a.final_iss_approverorg)) 
+           OR 1 = ms_ism_security_pkg.fn_ism_view_issue_all(:1)
+           OR 1 = decode((SELECT MS_JOIN(tgt_obj_id) as tgt_obj_id
+                                       FROM ms_ism_orb_relation_orb
+                                      WHERE rel_source_id = a.issue_id
+                                        AND additional_column4 = 'SI_ORG_ENTITIES_T'
+                                       GROUP BY rel_source_id),NULL,-1,ms_ism_security_pkg.fn_ism_view_issue_orb(:1,(SELECT MS_JOIN(tgt_obj_id) as tgt_obj_id
+                                       FROM ms_ism_orb_relation_orb
+                                      WHERE rel_source_id = a.issue_id
+                                        AND additional_column4 = 'SI_ORG_ENTITIES_T'
+                                       GROUP BY rel_source_id))))
+   GROUP BY a.issue_source_type,
+   a.issue_source_type_adt,
+        a.issue_source
+   ) b
+WHERE b.rn <=10</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This Infolet will be used for TOP TEN RISKS BY OPEN ISSUES chart</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 391965102</h2></header><pre><code>
+ 
+----------------------------------------------------------------------------------------------------
+| Id  | Operation                | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+----------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT         |                         |     1 |  6034 |     7  (29)| 00:00:01 |
+|*  1 |  VIEW                    |                         |     1 |  6034 |     7  (29)| 00:00:01 |
+|*  2 |   WINDOW SORT PUSHED RANK|                         |     1 |    75 |     7  (29)| 00:00:01 |
+|   3 |    SORT GROUP BY         |                         |     1 |    75 |     7  (29)| 00:00:01 |
+|*  4 |     FILTER               |                         |       |       |            |          |
+<font style="background-color: lightblue; color: red">|*  5 |      TABLE ACCESS FULL   | MS_ISM_ISSUE            |     3 |   225 |     5   (0)| 00:00:01 |</font>
+|   6 |      SORT GROUP BY       |                         |     1 |    45 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  7 |       TABLE ACCESS FULL  | MS_ISM_ORB_RELATION_ORB |     1 |    45 |     3   (0)| 00:00:01 |</font>
+|   8 |      SORT GROUP BY       |                         |     1 |    45 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  9 |       TABLE ACCESS FULL  | MS_ISM_ORB_RELATION_ORB |     1 |    45 |     3   (0)| 00:00:01 |</font>
+----------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2 / B@SEL$1
+   2 - SEL$2
+   5 - SEL$2 / A@SEL$2
+   6 - SEL$3
+   7 - SEL$3 / MS_ISM_ORB_RELATION_ORB@SEL$3
+   8 - SEL$4
+   9 - SEL$4 / MS_ISM_ORB_RELATION_ORB@SEL$4
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - filter("B"."RN"<=10)
+   2 - filter(DENSE_RANK() OVER ( ORDER BY COUNT(*) DESC )<=10)
+   4 - filter("MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE_ALL"(:1)=1 OR 
+              "MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE"(:1)=1 AND 
+              "MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE_ORG"(:1,"A"."ISSUE_OWNERORG","A"."ISSUE_APPROVERORG
+              ","A"."ACT_PLAN_APPROVERORG","A"."FINAL_ISS_APPROVERORG")=1 OR DECODE( (SELECT 
+              "MS_JOIN"("TGT_OBJ_ID") FROM "MS_ISM_ORB_RELATION_ORB" "MS_ISM_ORB_RELATION_ORB" WHERE 
+              "REL_SOURCE_ID"=:B1 AND "ADDITIONAL_COLUMN4"='SI_ORG_ENTITIES_T' GROUP BY 
+              "REL_SOURCE_ID"),NULL,(-1),"MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE_ORB"(:1, (SELECT 
+              "MS_JOIN"("TGT_OBJ_ID") FROM "MS_ISM_ORB_RELATION_ORB" "MS_ISM_ORB_RELATION_ORB" WHERE 
+              "REL_SOURCE_ID"=:B2 AND "ADDITIONAL_COLUMN4"='SI_ORG_ENTITIES_T' GROUP BY 
+              "REL_SOURCE_ID")))=1)
+   5 - filter("ISSUE_SOURCE" IS NOT NULL AND "A"."ISSUE_SOURCE_TYPE_ADT"='MS_RSK_RISK_ASSESS
+              MENT' AND "A"."ISSUE_STATUS"<>'1' AND "A"."ISSUE_STATUS"<>'5' AND "A"."ISSUE_STATUS"<>'6' 
+              AND "A"."ISSUE_STATUS"<>'7' AND "A"."ISSUE_STATUS"<>'10' AND "A"."ISSUE_STATUS"<>'None' AND 
+              "REACHED_MANAGE"='Y')
+   7 - filter("REL_SOURCE_ID"=:B1 AND "ADDITIONAL_COLUMN4"='SI_ORG_ENTITIES_T')
+   9 - filter("REL_SOURCE_ID"=:B1 AND "ADDITIONAL_COLUMN4"='SI_ORG_ENTITIES_T')
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "B"."ISSUE_SOURCE"[VARCHAR2,4000], "B"."TOTAL_COUNT"[NUMBER,22], 
+       "B"."DUMMY1"[VARCHAR2,0], "B"."ISSUE_SOURCE_STORED"[VARCHAR2,4000], 
+       "B"."SOURCE_TYPE"[VARCHAR2,4000], "B"."RN"[NUMBER,22]
+   2 - (#keys=1) COUNT(*)[22], "A"."ISSUE_SOURCE_TYPE"[VARCHAR2,1020], 
+       "A"."ISSUE_SOURCE_TYPE_ADT"[VARCHAR2,4000], "A"."ISSUE_SOURCE"[VARCHAR2,4000], DENSE_RANK() 
+       OVER ( ORDER BY COUNT(*) DESC )[22]
+   3 - (#keys=3) "A"."ISSUE_SOURCE_TYPE"[VARCHAR2,1020], 
+       "A"."ISSUE_SOURCE_TYPE_ADT"[VARCHAR2,4000], "A"."ISSUE_SOURCE"[VARCHAR2,4000], COUNT(*)[22]
+   4 - "A"."ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."ISSUE_SOURCE_TYPE_ADT"[VARCHAR2,4000], 
+       "A"."ISSUE_SOURCE"[VARCHAR2,4000]
+   5 - "A"."ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."FINAL_ISS_APPROVERORG"[VARCHAR2,4000], 
+       "A"."ISSUE_SOURCE_TYPE_ADT"[VARCHAR2,4000], "A"."ISSUE_SOURCE"[VARCHAR2,4000], 
+       "A"."ACT_PLAN_APPROVERORG"[VARCHAR2,4000], "A"."ISSUE_APPROVERORG"[VARCHAR2,4000], 
+       "A"."ISSUE_OWNERORG"[VARCHAR2,4000], "A"."ISSUE_ID"[VARCHAR2,1020]
+   6 - (#keys=1) "REL_SOURCE_ID"[VARCHAR2,1020], "MS_JOIN"("TGT_OBJ_ID")[4000]
+   7 - "TGT_OBJ_ID"[VARCHAR2,4000], "REL_SOURCE_ID"[VARCHAR2,1020]
+   8 - (#keys=1) "REL_SOURCE_ID"[VARCHAR2,1020], "MS_JOIN"("TGT_OBJ_ID")[4000]
+   9 - "TGT_OBJ_ID"[VARCHAR2,4000], "REL_SOURCE_ID"[VARCHAR2,1020]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

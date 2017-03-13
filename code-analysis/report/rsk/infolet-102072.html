@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS RSK Org Users Approver (102072)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT DISTINCT fdo.user_id
+, fdo.user_name
+, ms_apps_utilities.get_user_full_name(fdo.user_id) USER_FULL_NAME
+, NULL "fdo.role_id"
+, NULL "fdo.role_name"
+, NULL "fdo.activity_id"
+, NULL "fdo.activity_short_name"
+, fdo.activity_name
+FROM ms_rsk_org_flow_qm_v fdo
+WHERE (trim(Activity_Name) = 'RSK - Approve Scheduled Risk Assessment')
+AND MS_RSK_CheckInList(fdo.org_entity_id,:1) = 1</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>MS RSK Org Users Approver :-
+A: Assessor
+O: Owner</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2208737337</h2></header><pre><code>
+ 
+----------------------------------------------------------------------------------------------------------
+| Id  | Operation                        | Name                  | Rows  | Bytes | Cost (%CPU)| Time     |
+----------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                 |                       |     1 |    91 |     7  (15)| 00:00:01 |
+|   1 |  SORT UNIQUE                     |                       |     1 |    91 |     7  (15)| 00:00:01 |
+|   2 |   NESTED LOOPS                   |                       |     1 |    91 |     6   (0)| 00:00:01 |
+|   3 |    NESTED LOOPS                  |                       |     1 |    91 |     6   (0)| 00:00:01 |
+|   4 |     NESTED LOOPS                 |                       |     1 |    59 |     5   (0)| 00:00:01 |
+|   5 |      NESTED LOOPS                |                       |     1 |    49 |     4   (0)| 00:00:01 |
+|   6 |       NESTED LOOPS               |                       |     1 |    30 |     3   (0)| 00:00:01 |
+|   7 |        NESTED LOOPS              |                       |     1 |    20 |     2   (0)| 00:00:01 |
+|*  8 |         INDEX FULL SCAN          | SI_ORG_ROLES_N3       |     1 |    15 |     1   (0)| 00:00:01 |
+|*  9 |         INDEX RANGE SCAN         | SI_ORG_ENTITIES_N5    |     1 |     5 |     1   (0)| 00:00:01 |
+|* 10 |        INDEX RANGE SCAN          | SI_USER_ORG_ROLES_N2  |     2 |    20 |     1   (0)| 00:00:01 |
+|* 11 |       TABLE ACCESS BY INDEX ROWID| SI_USERS_T            |     1 |    19 |     1   (0)| 00:00:01 |
+|* 12 |        INDEX UNIQUE SCAN         | SI_USERS_T_N1         |     1 |       |     1   (0)| 00:00:01 |
+|* 13 |      INDEX RANGE SCAN            | SI_ROLE_ACTIVITIES_N2 |    12 |   120 |     1   (0)| 00:00:01 |
+|* 14 |     INDEX RANGE SCAN             | SI_ACTIVITIES_N1      |     1 |       |     1   (0)| 00:00:01 |
+|* 15 |    TABLE ACCESS BY INDEX ROWID   | SI_ACTIVITIES_T       |     1 |    32 |     1   (0)| 00:00:01 |
+----------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$F5BB74E1
+   8 - SEL$F5BB74E1 / C@SEL$2
+   9 - SEL$F5BB74E1 / D@SEL$2
+  10 - SEL$F5BB74E1 / E@SEL$2
+  11 - SEL$F5BB74E1 / F@SEL$2
+  12 - SEL$F5BB74E1 / F@SEL$2
+  13 - SEL$F5BB74E1 / B@SEL$2
+  14 - SEL$F5BB74E1 / A@SEL$2
+  15 - SEL$F5BB74E1 / A@SEL$2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   8 - filter("MS_RSK_CHECKINLIST"(TO_CHAR("C"."ORG_ENTITY_ID"),:1)=1)
+   9 - access("C"."ORG_ENTITY_ID"="D"."ORG_ENTITY_ID")
+  10 - access("C"."ORG_ROLE_ID"="E"."ORG_ROLE_ID")
+  11 - filter(NVL("F"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  12 - access("E"."USER_ID"="F"."USER_ID")
+  13 - access("B"."ROLE_ID"="C"."ROLE_ID")
+  14 - access("A"."ACTIVITY_ID"="B"."ACTIVITY_ID")
+  15 - filter(TRIM("A"."ACTIVITY_NAME")='RSK - Approve Scheduled Risk Assessment')
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=8) "E"."USER_ID"[NUMBER,22], "F"."USER_NAME"[VARCHAR2,80], 
+       "MS_APPS_UTILITIES"."GET_USER_FULL_NAME"("E"."USER_ID")[4000], NULL[0], NULL[0], NULL[0], 
+       NULL[0], "A"."ACTIVITY_NAME"[VARCHAR2,400]
+   2 - (#keys=0) "E"."USER_ID"[NUMBER,22], "F"."USER_NAME"[VARCHAR2,80], 
+       "A"."ACTIVITY_NAME"[VARCHAR2,400]
+   3 - (#keys=0) "E"."USER_ID"[NUMBER,22], "F"."USER_NAME"[VARCHAR2,80], "A".ROWID[ROWID,10]
+   4 - (#keys=0) "E"."USER_ID"[NUMBER,22], "F"."USER_NAME"[VARCHAR2,80], 
+       "B"."ACTIVITY_ID"[NUMBER,22]
+   5 - (#keys=0) "C"."ROLE_ID"[NUMBER,22], "E"."USER_ID"[NUMBER,22], "F"."USER_NAME"[VARCHAR2,80]
+   6 - (#keys=0) "C"."ROLE_ID"[NUMBER,22], "E"."USER_ID"[NUMBER,22]
+   7 - (#keys=0) "C"."ORG_ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22]
+   8 - "C"."ORG_ROLE_ID"[NUMBER,22], "C"."ORG_ENTITY_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22]
+  10 - "E"."USER_ID"[NUMBER,22]
+  11 - "F"."USER_NAME"[VARCHAR2,80]
+  12 - "F".ROWID[ROWID,10]
+  13 - "B"."ACTIVITY_ID"[NUMBER,22]
+  14 - "A".ROWID[ROWID,10]
+  15 - "A"."ACTIVITY_NAME"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

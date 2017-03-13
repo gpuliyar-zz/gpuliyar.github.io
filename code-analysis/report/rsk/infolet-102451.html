@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_RAM_GET_INOCENTER_FORM_TABLE_DATA (102451)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT MS_JOIN_FOR_DISPLAY(ob_id) AS ob_id ,
+  MS_JOIN_FOR_DISPLAY(ob_name)    AS ob_name
+FROM
+  (SELECT table_id AS ob_id,
+    table_name     AS ob_name
+  FROM si_data_tables
+  WHERE table_name='MS_RSK_HEATMAP_RANGE'
+  UNION
+  SELECT metric_id AS ob_id,
+    metric_name    AS ob_name
+  FROM si_metrics_t
+  WHERE metric_name='MS_RSK_SF_CONFIGURATION'
+  AND metric_type  =10
+  UNION
+  SELECT infocenter_id AS ob_id,
+    infocenter_name    AS ob_name
+  FROM si_user_infocenter_t
+  WHERE infocenter_name ='Risk Management Setup'
+  AND user_id           =
+    (SELECT user_id FROM si_users_t WHERE user_name=:1
+    )
+  )</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>get ids of infocenter, table and form</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2156811131</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------
+| Id  | Operation                          | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                   |                         |     1 |   215 |     9  (34)| 00:00:01 |
+|   1 |  SORT AGGREGATE                    |                         |     1 |   215 |            |          |
+|   2 |   VIEW                             |                         |     3 |   645 |     9  (34)| 00:00:01 |
+|   3 |    SORT UNIQUE                     |                         |     3 |   105 |     9  (34)| 00:00:01 |
+|   4 |     UNION-ALL                      |                         |       |       |            |          |
+<font style="background-color: lightblue; color: red">|*  5 |      TABLE ACCESS FULL             | SI_DATA_TABLES          |     1 |    29 |     3   (0)| 00:00:01 |</font>
+|*  6 |      TABLE ACCESS BY INDEX ROWID   | SI_METRICS_T            |     1 |    37 |     1   (0)| 00:00:01 |
+|*  7 |       INDEX RANGE SCAN             | SI_METRICS_T_N7         |     1 |       |     1   (0)| 00:00:01 |
+|   8 |      NESTED LOOPS                  |                         |     1 |    39 |     2   (0)| 00:00:01 |
+|   9 |       NESTED LOOPS                 |                         |    24 |    39 |     2   (0)| 00:00:01 |
+|  10 |        VIEW                        | VW_SQ_1                 |     1 |    13 |     1   (0)| 00:00:01 |
+|  11 |         TABLE ACCESS BY INDEX ROWID| SI_USERS_T              |     1 |    18 |     1   (0)| 00:00:01 |
+|* 12 |          INDEX RANGE SCAN          | SI_USERS_T_N3           |     1 |       |     1   (0)| 00:00:01 |
+|* 13 |        INDEX RANGE SCAN            | SI_USER_INFOCENTER_T_N1 |    24 |       |     1   (0)| 00:00:01 |
+|* 14 |       TABLE ACCESS BY INDEX ROWID  | SI_USER_INFOCENTER_T    |     1 |    26 |     1   (0)| 00:00:01 |
+--------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$1       
+   2 - SET$1        / from$_subquery$_001@SEL$1
+   3 - SET$1       
+   5 - SEL$2        / SI_DATA_TABLES@SEL$2
+   6 - SEL$3        / SI_METRICS_T@SEL$3
+   7 - SEL$3        / SI_METRICS_T@SEL$3
+   8 - SEL$583B776D
+  10 - SEL$F495C89B / VW_SQ_1@SEL$E5511D0C
+  11 - SEL$F495C89B / SI_USERS_T@SEL$5
+  12 - SEL$F495C89B / SI_USERS_T@SEL$5
+  13 - SEL$583B776D / SI_USER_INFOCENTER_T@SEL$4
+  14 - SEL$583B776D / SI_USER_INFOCENTER_T@SEL$4
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   5 - filter("TABLE_NAME"='MS_RSK_HEATMAP_RANGE')
+   6 - filter("METRIC_TYPE"=10)
+   7 - access("METRIC_NAME"='MS_RSK_SF_CONFIGURATION')
+  12 - access("USER_NAME"=:1)
+  13 - access("USER_ID"="USER_ID")
+  14 - filter("INFOCENTER_NAME"='Risk Management Setup')
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=0) "MS_JOIN_FOR_DISPLAY"(TO_CHAR("OB_ID"))[4000], "MS_JOIN_FOR_DISPLAY"("OB_NAME")[4000]
+   2 - "OB_ID"[NUMBER,22], "OB_NAME"[VARCHAR2,400]
+   3 - (#keys=2) STRDEF[22], STRDEF[400]
+   4 - STRDEF[22], STRDEF[400]
+   5 - "TABLE_ID"[NUMBER,22], "TABLE_NAME"[VARCHAR2,120]
+   6 - "METRIC_ID"[NUMBER,22], "METRIC_NAME"[VARCHAR2,400]
+   7 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_NAME"[VARCHAR2,400]
+   8 - (#keys=0) "INFOCENTER_ID"[NUMBER,22], "INFOCENTER_NAME"[VARCHAR2,400]
+   9 - (#keys=0) "SI_USER_INFOCENTER_T".ROWID[ROWID,10]
+  10 - "USER_ID"[NUMBER,22]
+  11 - "USER_ID"[NUMBER,22]
+  12 - "SI_USERS_T".ROWID[ROWID,10]
+  13 - "SI_USER_INFOCENTER_T".ROWID[ROWID,10]
+  14 - "INFOCENTER_ID"[NUMBER,22], "INFOCENTER_NAME"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

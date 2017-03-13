@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_GRC_61_SP2_REG_LIST_INF (100739)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>select REGSUMM.OBJECT_ID,
+REGSUMM.OBJECT_NAME,
+REGMLSSUMM.OBJECT_STATUS,
+regSumm.CREATED_ON,
+ms_grc_utilities.fn_user_name(regSumm.created_by) as created_by,
+regsumm.updated_on,
+ms_grc_utilities.fn_user_name(regSumm.Updated_By) as Updated_By,
+REGSUMM.VALID_FROM,
+REGSUMM.VALID_UNTIL,
+REGSUMM.DESCRIPTION,
+REGSUMM.OWNER_ORG_NAMES,
+REGSUMM.OWNER_NAME,
+ms_grc_utilities.fn_user_name(regsumm.level_1_approver) as level_1_approver,
+ms_grc_utilities.fn_user_name(regsumm.LEVEL_2_APPROVER) as LEVEL_2_APPROVER,
+REL_ORGANIZATION_NAMES,
+REL_AOC_OBJ_NAME_AGG,
+REL_CTRL_OBJ_NAME_AGG,
+REL_PROCESS_OBJ_NAME_AGG,
+REL_REQUIREMENT_OBJ_NAME_AGG,
+REL_RISK_OBJ_NAME_AGG,
+REL_STANDARD_OBJ_NAME_AGG ,
+(MS_GRC_UTILITIES.FN_GET_REPORT_JSON((SELECT METRIC_ID FROM SI_METRICS_T WHERE METRIC_NAME='MS_GRC_REGULATORY_BODY'),regSumm.DD_PROCESS_INSTANCE_ID,(SELECT DD_INSTANCE_ID FROM MS_GRC_REGULATORY_BODY WHERE OBJECT_ID=regSumm.OBJECT_ID),
+'''flag=1'||CHR(44)||'emd=1'||CHR(44)||'x_edit_mode=Yes'||CHR (44)|| 'wrapper= No'|| CHR (44)|| 'mode=view''')) AS REPORT_JSON
+,REGSUMM.LEVEL_1_APPROVER as LEVEL_1_APPR,
+REGSUMM.LEVEL_2_APPROVER as LEVEL_2_APPR
+,REGSUMM.UPPER_OBJECT_NAME AS UPPER_OBJECT_NAME
+FROM MS_GRC_REG_SUMMARY regSumm,
+MS_GRC_REG_MLS_SUMMARY regMlsSumm,  
+(select column_value
+from table(cast(ms_grc_rep_browser_fil_denorm.fn_reg_report_filter(ms_grc_array_type(:1,:2,:3,:5,TO_CHAR(:6,'YYYY-MM-DD'),TO_CHAR(:7,'YYYY-MM-DD'),:8,:9,TO_CHAR(:10,'YYYY-MM-DD'),TO_CHAR(:11,'YYYY-MM-DD'),TO_CHAR(:12,'YYYY-MM-DD'),TO_CHAR(:13,'YYYY-MM-DD'),:14,:15,:16,:17,:18,:19,null,null,null,:20,null,
+NULL,NULL,NULL,NULL,NULL,:21,NULL,NULL,:22,NULL,:23,:24,'MS_GRC_REGULATORY_BODY',:25)) as ms_varchar2_array))
+) COLVAL, (select LOCALE_ID from SI_USERS_T T1 ,SI_LOCALES T2 where USER_NAME = :25 and T1.LOCALE = T2.LOCALE_STRING) LOC
+where COLVAL.column_value = regMlsSumm.OBJECT_ID
+and COLVAL.column_value = regSumm.OBJECT_ID
+and loc.locale_id = regmlssumm.locale_id
+AND NVL(is_orphan, 1)=NVL(:4,NVL(is_orphan,1))</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>null</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 3637061552</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------------
+| Id  | Operation                           | Name                      | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                    |                           |  2042 |  1884K|    36   (0)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID        | SI_METRICS_T              |     1 |    34 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX RANGE SCAN                  | SI_METRICS_T_N7           |     1 |       |     1   (0)| 00:00:01 |
+|   3 |   TABLE ACCESS BY INDEX ROWID       | MS_GRC_REGULATORY_BODY    |     1 |    18 |     1   (0)| 00:00:01 |
+|*  4 |    INDEX UNIQUE SCAN                | MS_GRC_REGULATORY_BODY_PK |     1 |       |     1   (0)| 00:00:01 |
+|*  5 |  HASH JOIN                          |                           |  2042 |  1884K|    36   (0)| 00:00:01 |
+|*  6 |   INDEX FULL SCAN                   | MS_GRC_REG_SUMMARY_PK     |     2 |  1774 |     1   (0)| 00:00:01 |
+|*  7 |   HASH JOIN                         |                           |  4084 |   231K|    35   (0)| 00:00:01 |
+|   8 |    NESTED LOOPS                     |                           |     2 |   112 |     6   (0)| 00:00:01 |
+|   9 |     NESTED LOOPS                    |                           |     4 |   112 |     6   (0)| 00:00:01 |
+|  10 |      NESTED LOOPS                   |                           |     4 |   180 |     4   (0)| 00:00:01 |
+|  11 |       TABLE ACCESS BY INDEX ROWID   | SI_USERS_T                |     1 |    19 |     1   (0)| 00:00:01 |
+|* 12 |        INDEX RANGE SCAN             | SI_USERS_T_N3             |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  13 |       TABLE ACCESS FULL             | MS_GRC_REG_MLS_SUMMARY    |     4 |   104 |     3   (0)| 00:00:01 |</font>
+|* 14 |      INDEX UNIQUE SCAN              | SI_LOCALES_U1             |     1 |       |     1   (0)| 00:00:01 |
+|* 15 |     TABLE ACCESS BY INDEX ROWID     | SI_LOCALES                |     1 |    11 |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  16 |    COLLECTION ITERATOR PICKLER FETCH| FN_REG_REPORT_FILTER      |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+-----------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2        / SI_METRICS_T@SEL$2
+   2 - SEL$2        / SI_METRICS_T@SEL$2
+   3 - SEL$3        / MS_GRC_REGULATORY_BODY@SEL$3
+   4 - SEL$3        / MS_GRC_REGULATORY_BODY@SEL$3
+   5 - SEL$2416F508
+   6 - SEL$2416F508 / REGSUMM@SEL$1
+  11 - SEL$2416F508 / T1@SEL$6
+  12 - SEL$2416F508 / T1@SEL$6
+  13 - SEL$2416F508 / REGMLSSUMM@SEL$1
+  14 - SEL$2416F508 / T2@SEL$6
+  15 - SEL$2416F508 / T2@SEL$6
+  16 - SEL$2416F508 / KOKBF$0@SEL$5
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("METRIC_NAME"='MS_GRC_REGULATORY_BODY')
+   4 - access("OBJECT_ID"=:B1)
+   5 - access("REGSUMM"."OBJECT_ID"=VALUE(KOKBF$))
+   6 - filter(NVL("IS_ORPHAN",1)=NVL(:4,NVL("IS_ORPHAN",1)))
+   7 - access("REGMLSSUMM"."OBJECT_ID"=VALUE(KOKBF$))
+  12 - access("USER_NAME"=:25)
+  14 - access("LOCALE_ID"=TO_NUMBER("REGMLSSUMM"."LOCALE_ID"))
+  15 - filter("T1"."LOCALE"="T2"."LOCALE_STRING")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22]
+   2 - "SI_METRICS_T".ROWID[ROWID,10]
+   3 - "MS_GRC_REGULATORY_BODY".ROWID[ROWID,10], "DD_INSTANCE_ID"[NUMBER,22]
+   4 - "MS_GRC_REGULATORY_BODY".ROWID[ROWID,10]
+   5 - (#keys=1) "REGSUMM"."OBJECT_ID"[VARCHAR2,400], "REGSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "REGSUMM"."OBJECT_NAME"[VARCHAR2,4000], "REGSUMM"."DESCRIPTION"[LOB,4000], 
+       "REGSUMM"."VALID_UNTIL"[DATE,7], "REGSUMM"."VALID_FROM"[DATE,7], 
+       "REGSUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "REGSUMM"."OWNER_NAME"[LOB,4000], 
+       "REGSUMM"."OWNER_ORG_NAMES"[LOB,4000], "REGSUMM"."LEVEL_1_APPROVER"[VARCHAR2,250], 
+       "REGSUMM"."LEVEL_2_APPROVER"[VARCHAR2,250], "REGSUMM"."UPDATED_BY"[VARCHAR2,201], 
+       "REGSUMM"."UPDATED_ON"[DATE,7], "REGSUMM"."CREATED_BY"[VARCHAR2,201], "REGSUMM"."CREATED_ON"[DATE,7], 
+       "REL_AOC_OBJ_NAME_AGG"[LOB,4000], "REL_CTRL_OBJ_NAME_AGG"[LOB,4000], "REL_ORGANIZATION_NAMES"[LOB,4000], 
+       "REL_PROCESS_OBJ_NAME_AGG"[LOB,4000], "REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_RISK_OBJ_NAME_AGG"[LOB,4000], "REL_STANDARD_OBJ_NAME_AGG"[LOB,4000], 
+       "REGMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000]
+   6 - "REGSUMM".ROWID[ROWID,3034], "REGSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "OBJ_REG_SUMM_WID"[NUMBER,22], "REGSUMM"."OBJECT_ID"[VARCHAR2,400], 
+       "REGSUMM"."OBJECT_NAME"[VARCHAR2,4000], "REGSUMM"."DESCRIPTION"[LOB,4000], 
+       "REGSUMM"."VALID_UNTIL"[DATE,7], "REGSUMM"."VALID_FROM"[DATE,7], 
+       "REGSUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "REGSUMM"."OWNER_NAME"[LOB,4000], 
+       "REGSUMM"."OWNER_ORG_NAMES"[LOB,4000], "REGSUMM"."LEVEL_1_APPROVER"[VARCHAR2,250], 
+       "REGSUMM"."LEVEL_2_APPROVER"[VARCHAR2,250], "REGSUMM"."UPDATED_BY"[VARCHAR2,201], 
+       "REGSUMM"."UPDATED_ON"[DATE,7], "REGSUMM"."CREATED_BY"[VARCHAR2,201], "REGSUMM"."CREATED_ON"[DATE,7], 
+       "REL_AOC_OBJ_NAME_AGG"[LOB,4000], "REL_CTRL_OBJ_NAME_AGG"[LOB,4000], "REL_ORGANIZATION_NAMES"[LOB,4000], 
+       "REL_PROCESS_OBJ_NAME_AGG"[LOB,4000], "REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_RISK_OBJ_NAME_AGG"[LOB,4000], "REL_STANDARD_OBJ_NAME_AGG"[LOB,4000], "IS_ORPHAN"[NUMBER,22]
+   7 - (#keys=1) "REGMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], VALUE(A0)[8000]
+   8 - (#keys=0) "REGMLSSUMM"."OBJECT_ID"[VARCHAR2,400], "REGMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000]
+   9 - (#keys=0) "T1"."LOCALE"[VARCHAR2,100], "REGMLSSUMM"."OBJECT_ID"[VARCHAR2,400], 
+       "REGMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], "T2".ROWID[ROWID,10]
+  10 - (#keys=0) "T1"."LOCALE"[VARCHAR2,100], "REGMLSSUMM"."OBJECT_ID"[VARCHAR2,400], 
+       "REGMLSSUMM"."LOCALE_ID"[VARCHAR2,400], "REGMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000]
+  11 - "T1"."LOCALE"[VARCHAR2,100]
+  12 - "T1".ROWID[ROWID,10]
+  13 - "REGMLSSUMM"."OBJECT_ID"[VARCHAR2,400], "REGMLSSUMM"."LOCALE_ID"[VARCHAR2,400], 
+       "REGMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000]
+  14 - "T2".ROWID[ROWID,10]
+  16 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

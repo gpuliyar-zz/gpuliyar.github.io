@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_GRC_GET_LIBRARY_TYPE (100895)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT REPLACE(REPLACE(FORM_TITLE,'(',''),')',''),
+  object_type
+FROM MS_GRC_ORB_CONFIG_FORM_TITLE
+WHERE object_type IN
+  (SELECT DEST_OBJ_TYPE
+  FROM ms_grc_rel_defn
+  WHERE src_obj_type=ms_apps_utilities.get_parameter_value ( 1, 'MS GRC Mapping Report Parameter', 'Library Object' )
+  AND ENABLED       = 'Y'
+  )
+AND LOCALE =
+  ( SELECT LOCALE FROM SI_USERS_T WHERE USER_NAME=:1
+  )
+union all
+select
+ms_apps_utilities.get_display_value (
+               ms_grc_utilities.active_ent_id,
+               'MS_GRC_ALL',
+               'All',
+               1,
+               (select LOCALE_ID from SI_LOCALES where LOCALE_STRING = (
+            select LOCALE from SI_USERS_T where USER_NAME=:1 ))
+               ) AS FORM_TITLE,'All' as object_type  FROM DUAL</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>null</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1124552406</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------------
+| Id  | Operation                        | Name                         | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                 |                              |    11 |  2358 |     7   (0)| 00:00:01 |
+|   1 |  UNION-ALL                       |                              |       |       |            |          |
+|*  2 |   HASH JOIN                      |                              |    10 |  1310 |     5   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   3 |    MERGE JOIN CARTESIAN          |                              |     9 |   810 |     2   (0)| 00:00:01 |</font>
+|   4 |     VIEW                         | VW_SQ_1                      |     1 |    52 |     1   (0)| 00:00:01 |
+|   5 |      TABLE ACCESS BY INDEX ROWID | SI_USERS_T                   |     1 |    19 |     1   (0)| 00:00:01 |
+|*  6 |       INDEX RANGE SCAN           | SI_USERS_T_N3                |     1 |       |     1   (0)| 00:00:01 |
+|   7 |     BUFFER SORT                  |                              |     9 |   342 |     2   (0)| 00:00:01 |
+|   8 |      SORT UNIQUE                 |                              |     9 |   342 |     1   (0)| 00:00:01 |
+|*  9 |       TABLE ACCESS BY INDEX ROWID| MS_GRC_REL_DEFN              |     9 |   342 |     1   (0)| 00:00:01 |
+|* 10 |        INDEX RANGE SCAN          | MS_GRC_REL_DEFN_IDX1         |     9 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  11 |    TABLE ACCESS FULL             | MS_GRC_ORB_CONFIG_FORM_TITLE |    21 |   861 |     3   (0)| 00:00:01 |</font>
+|* 12 |   HASH JOIN                      |                              |     1 |    63 |     4   (0)| 00:00:01 |
+|  13 |    VIEW                          | VW_SQ_2                      |     1 |    52 |     1   (0)| 00:00:01 |
+|  14 |     TABLE ACCESS BY INDEX ROWID  | SI_USERS_T                   |     1 |    19 |     1   (0)| 00:00:01 |
+|* 15 |      INDEX RANGE SCAN            | SI_USERS_T_N3                |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  16 |    TABLE ACCESS FULL             | SI_LOCALES                   |    35 |   385 |     3   (0)| 00:00:01 |</font>
+|  17 |   FAST DUAL                      |                              |     1 |       |     2   (0)| 00:00:01 |
+-----------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SET$1       
+   2 - SEL$DBA06A95
+   4 - SEL$291F8F59 / VW_SQ_1@SEL$BD9E0841
+   5 - SEL$291F8F59 / SI_USERS_T@SEL$3
+   6 - SEL$291F8F59 / SI_USERS_T@SEL$3
+   9 - SEL$DBA06A95 / MS_GRC_REL_DEFN@SEL$2
+  10 - SEL$DBA06A95 / MS_GRC_REL_DEFN@SEL$2
+  11 - SEL$DBA06A95 / MS_GRC_ORB_CONFIG_FORM_TITLE@SEL$1
+  12 - SEL$BC53533F
+  13 - SEL$CE1D94FA / VW_SQ_2@SEL$0A1A5A0C
+  14 - SEL$CE1D94FA / SI_USERS_T@SEL$6
+  15 - SEL$CE1D94FA / SI_USERS_T@SEL$6
+  16 - SEL$BC53533F / SI_LOCALES@SEL$5
+  17 - SEL$4        / DUAL@SEL$4
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("LOCALE"="LOCALE" AND "OBJECT_TYPE"="DEST_OBJ_TYPE")
+   6 - access("USER_NAME"=:1)
+   9 - filter("ENABLED"='Y')
+  10 - access("SRC_OBJ_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  12 - access("LOCALE_STRING"="LOCALE")
+  15 - access("USER_NAME"=:1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - STRDEF[4000], STRDEF[1600]
+   2 - (#keys=2) "OBJECT_TYPE"[VARCHAR2,1600], "FORM_TITLE"[VARCHAR2,4000]
+   3 - (#keys=0) "LOCALE"[VARCHAR2,100], "DEST_OBJ_TYPE"[VARCHAR2,512]
+   4 - "LOCALE"[VARCHAR2,100]
+   5 - "LOCALE"[VARCHAR2,100]
+   6 - "SI_USERS_T".ROWID[ROWID,10]
+   7 - (#keys=0) "DEST_OBJ_TYPE"[VARCHAR2,512]
+   8 - (#keys=1) "DEST_OBJ_TYPE"[VARCHAR2,512]
+   9 - "DEST_OBJ_TYPE"[VARCHAR2,512]
+  10 - "MS_GRC_REL_DEFN".ROWID[ROWID,10], "DEST_OBJ_TYPE"[VARCHAR2,512]
+  11 - "OBJECT_TYPE"[VARCHAR2,1600], "FORM_TITLE"[VARCHAR2,4000], "LOCALE"[VARCHAR2,40]
+  12 - (#keys=1) "LOCALE"[VARCHAR2,100], "LOCALE_STRING"[VARCHAR2,400], "LOCALE_ID"[NUMBER,22]
+  13 - "LOCALE"[VARCHAR2,100]
+  14 - "LOCALE"[VARCHAR2,100]
+  15 - "SI_USERS_T".ROWID[ROWID,10]
+  16 - "LOCALE_ID"[NUMBER,22], "LOCALE_STRING"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_GRC_61_SP2_FIN_ACC_LIST_INF (100705)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT finSumm.object_id   AS Financial_Account_ID,
+finSumm.object_name  AS Financial_Account_Name,
+finMlsSumm.FIN_TYPE         AS Financial_Account_Type,
+finMlsSumm.FIN_CATEGORY     AS Financial_Account_Category,
+finMlsSumm.object_status    AS Status,
+finSumm.created_on       AS created_on,
+MS_GRC_UTILITIES.FN_user_name(finSumm.CREATED_BY) AS CREATED_BY,
+finSumm.updated_on       AS modified_on,
+MS_GRC_UTILITIES.FN_user_name(finSumm.Updated_By) AS modification_requested_by,
+finSumm.valid_from       AS valid_from,
+finSumm.valid_until      AS valid_until ,
+finSumm.description      AS description,
+finSumm.owner_org_names  AS Owner_Organizations,
+finSumm.owner_name       AS owners,
+MS_GRC_UTILITIES.FN_user_name(finSumm.LEVEL_1_APPROVER) AS LEVEL_1_APPROVER,
+MS_GRC_UTILITIES.FN_user_name(finSumm.LEVEL_2_APPROVER) AS LEVEL_2_APPROVER,
+finMlsSumm.Assertions,
+REL_OBJECTIVE_OBJ_NAME_AGG AS Objectives,
+rel_refrences_obj_name_agg AS REFERENCES,
+ATTACHMENTS                as ATTACHED_FILES
+,(MS_GRC_UTILITIES.FN_GET_REPORT_JSON((SELECT METRIC_ID FROM SI_METRICS_T WHERE METRIC_NAME='MS_GRC_FINANCIAL_ACCOUNTS'),finSumm.DD_PROCESS_INSTANCE_ID,(SELECT DD_INSTANCE_ID FROM MS_GRC_FINANCIAL_ACCOU WHERE OBJECT_ID=finSumm.OBJECT_ID),
+'''flag=1'||CHR(38)||'emd=1'||CHR(38)||'x_edit_mode=Yes'||CHR (38)|| 'wrapper= No'|| CHR (38)|| 'mode=view''')) AS REPORT_JSON
+,FINSUMM.LEVEL_1_APPROVER as LEVEL_1_APPR,
+FINSUMM.LEVEL_2_APPROVER as LEVEL_2_APPR,
+finSumm.UPPER_OBJECT_NAME as UPPER_OBJECT_NAME
+FROM MS_GRC_FIN_ACC_SUMMARY finSumm,
+MS_GRC_FIN_ACC_MLS_SUMMARY finMlsSumm,
+(select column_value
+FROM TABLE( CAST(MS_GRC_REP_BROWSER_FIL_DENORM.FN_FIN_ACC_REPORT_FILTERS(ms_grc_array_type(:1,:2,:3,:4,:6,:7, to_char(:8,'YYYY-MM-DD'),TO_CHAR(:9,'YYYY-MM-DD'),:10,:11,TO_CHAR(:12,'YYYY-MM-DD'),TO_CHAR(:13,'YYYY-MM-DD'),TO_CHAR(:14,'YYYY-MM-DD'),TO_CHAR(:15,'YYYY-MM-DD'), :16,:17,:18,:19,null,null,null,null,:20,null,null, null,null,null,:21,null,null,null,null,null,:22, null,null,'MS_GRC_FINANCIAL_ACCOUNTS',:23))
+AS ms_varchar2_array))) colval, (select LOCALE_ID from SI_USERS_T T1 ,SI_LOCALES T2 where USER_NAME = :23 and T1.LOCALE = T2.LOCALE_STRING) LOC
+WHERE COLVAL.column_value = finMlsSumm.OBJECT_ID
+and COLVAL.column_value = finSumm.OBJECT_ID
+and loc.locale_id = finmlssumm.locale_id
+AND NVL(is_orphan, 1)=NVL(:5,NVL(is_orphan,1))</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet is used for fetching the Library data for Financial Account list report. It consists of the parameters specific to Financial Account object and also the related library object parmaters. It does not contain any mandatory parameter.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 3228949832</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                             | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                      |                            |  4084 |  4869K|    38   (0)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID          | SI_METRICS_T               |     1 |    34 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX RANGE SCAN                    | SI_METRICS_T_N7            |     1 |       |     1   (0)| 00:00:01 |
+|   3 |   TABLE ACCESS BY INDEX ROWID         | MS_GRC_FINANCIAL_ACCOU     |     1 |    18 |     1   (0)| 00:00:01 |
+|*  4 |    INDEX UNIQUE SCAN                  | MS_GRC_FINANCIAL_ACCOU_PK  |     1 |       |     1   (0)| 00:00:01 |
+|*  5 |  HASH JOIN                            |                            |  4084 |  4869K|    38   (0)| 00:00:01 |
+|*  6 |   INDEX FULL SCAN                     | MS_GRC_FIN_ACC_SUMMARY_PK  |    23 | 20654 |     2   (0)| 00:00:01 |
+|*  7 |   HASH JOIN                           |                            |  4084 |  1288K|    36   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   8 |    TABLE ACCESS FULL                  | MS_GRC_FIN_ACC_MLS_SUMMARY |    23 |  6693 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|   9 |    MERGE JOIN CARTESIAN               |                            |  8168 |   255K|    33   (0)| 00:00:01 |</font>
+|  10 |     NESTED LOOPS                      |                            |     1 |    30 |     4   (0)| 00:00:01 |
+|  11 |      TABLE ACCESS BY INDEX ROWID      | SI_USERS_T                 |     1 |    19 |     1   (0)| 00:00:01 |
+|* 12 |       INDEX RANGE SCAN                | SI_USERS_T_N3              |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 13 |      TABLE ACCESS FULL                | SI_LOCALES                 |     1 |    11 |     3   (0)| 00:00:01 |</font>
+|  14 |     BUFFER SORT                       |                            |  8168 | 16336 |    30   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  15 |      COLLECTION ITERATOR PICKLER FETCH| FN_FIN_ACC_REPORT_FILTERS  |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+--------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2        / SI_METRICS_T@SEL$2
+   2 - SEL$2        / SI_METRICS_T@SEL$2
+   3 - SEL$3        / MS_GRC_FINANCIAL_ACCOU@SEL$3
+   4 - SEL$3        / MS_GRC_FINANCIAL_ACCOU@SEL$3
+   5 - SEL$2416F508
+   6 - SEL$2416F508 / FINSUMM@SEL$1
+   8 - SEL$2416F508 / FINMLSSUMM@SEL$1
+  11 - SEL$2416F508 / T1@SEL$6
+  12 - SEL$2416F508 / T1@SEL$6
+  13 - SEL$2416F508 / T2@SEL$6
+  15 - SEL$2416F508 / KOKBF$0@SEL$5
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("METRIC_NAME"='MS_GRC_FINANCIAL_ACCOUNTS')
+   4 - access("OBJECT_ID"=:B1)
+   5 - access("FINSUMM"."OBJECT_ID"=VALUE(KOKBF$))
+   6 - filter(NVL("IS_ORPHAN",1)=NVL(:5,NVL("IS_ORPHAN",1)))
+   7 - access("FINMLSSUMM"."OBJECT_ID"=VALUE(KOKBF$) AND "LOCALE_ID"=TO_NUMBER("FINMLSSUMM"."LOCALE_ID"))
+  12 - access("USER_NAME"=:23)
+  13 - filter("T1"."LOCALE"="T2"."LOCALE_STRING")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22]
+   2 - "SI_METRICS_T".ROWID[ROWID,10]
+   3 - "MS_GRC_FINANCIAL_ACCOU".ROWID[ROWID,10], "DD_INSTANCE_ID"[NUMBER,22]
+   4 - "MS_GRC_FINANCIAL_ACCOU".ROWID[ROWID,10]
+   5 - (#keys=1) "FINSUMM"."OBJECT_ID"[VARCHAR2,400], "FINSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "FINSUMM"."OBJECT_NAME"[VARCHAR2,4000], "FINSUMM"."DESCRIPTION"[LOB,4000], "FINSUMM"."VALID_UNTIL"[DATE,7], 
+       "FINSUMM"."VALID_FROM"[DATE,7], "FINSUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "FINSUMM"."OWNER_NAME"[LOB,4000], "FINSUMM"."OWNER_ORG_NAMES"[LOB,4000], 
+       "FINSUMM"."LEVEL_1_APPROVER"[VARCHAR2,1000], "FINSUMM"."LEVEL_2_APPROVER"[VARCHAR2,1000], 
+       "ATTACHMENTS"[LOB,4000], "FINSUMM"."UPDATED_BY"[VARCHAR2,804], "FINSUMM"."UPDATED_ON"[DATE,7], 
+       "FINSUMM"."CREATED_BY"[VARCHAR2,804], "FINSUMM"."CREATED_ON"[DATE,7], 
+       "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], "REL_REFRENCES_OBJ_NAME_AGG"[LOB,4000], 
+       "FINMLSSUMM"."ASSERTIONS"[LOB,4000], "FINMLSSUMM"."FIN_TYPE"[LOB,4000], 
+       "FINMLSSUMM"."FIN_CATEGORY"[LOB,4000], "FINMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000]
+   6 - "FINSUMM".ROWID[ROWID,3034], "FINSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "OBJ_FIN_SUMM_WID"[NUMBER,22], "FINSUMM"."OBJECT_ID"[VARCHAR2,400], "FINSUMM"."OBJECT_NAME"[VARCHAR2,4000], 
+       "FINSUMM"."DESCRIPTION"[LOB,4000], "FINSUMM"."VALID_UNTIL"[DATE,7], "FINSUMM"."VALID_FROM"[DATE,7], 
+       "FINSUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "FINSUMM"."OWNER_NAME"[LOB,4000], 
+       "FINSUMM"."OWNER_ORG_NAMES"[LOB,4000], "FINSUMM"."LEVEL_1_APPROVER"[VARCHAR2,1000], 
+       "FINSUMM"."LEVEL_2_APPROVER"[VARCHAR2,1000], "ATTACHMENTS"[LOB,4000], "FINSUMM"."UPDATED_BY"[VARCHAR2,804], 
+       "FINSUMM"."UPDATED_ON"[DATE,7], "FINSUMM"."CREATED_BY"[VARCHAR2,804], "FINSUMM"."CREATED_ON"[DATE,7], 
+       "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], "REL_REFRENCES_OBJ_NAME_AGG"[LOB,4000], "IS_ORPHAN"[NUMBER,22]
+   7 - (#keys=2) "FINMLSSUMM"."ASSERTIONS"[LOB,4000], "FINMLSSUMM"."FIN_TYPE"[LOB,4000], 
+       "FINMLSSUMM"."FIN_CATEGORY"[LOB,4000], "FINMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], VALUE(A0)[8000]
+   8 - "FINMLSSUMM"."OBJECT_ID"[VARCHAR2,400], "FINMLSSUMM"."LOCALE_ID"[VARCHAR2,400], 
+       "FINMLSSUMM"."FIN_TYPE"[LOB,4000], "FINMLSSUMM"."FIN_CATEGORY"[LOB,4000], 
+       "FINMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], "FINMLSSUMM"."ASSERTIONS"[LOB,4000]
+   9 - (#keys=0) "LOCALE_ID"[NUMBER,22], VALUE(A0)[8000]
+  10 - (#keys=0) "LOCALE_ID"[NUMBER,22]
+  11 - "T1"."LOCALE"[VARCHAR2,100]
+  12 - "T1".ROWID[ROWID,10]
+  13 - "LOCALE_ID"[NUMBER,22]
+  14 - (#keys=0) VALUE(A0)[8000]
+  15 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

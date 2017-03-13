@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_AD_HOC_CONTROL_REPORT_INFOL (102107)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>select b.ASSESSMENT_ID,
+       Decode(b.ASSESSMENT_TYPE,'1','CoreObject-Risk','2','Org-CoreObject-Risk','3','Org-Risk') ASSESSMENT_TYPE,
+       b.CONTROL_ID,
+       (Select d.org_entity_name from si_org_entities d where d.org_entity_id =  b.ORGANIZATION_ID) ORGANIZATION_NAME,
+       (Select c.object_name  from Ms_Rsk_All_Assmnt_type c where c.object_id = b.CORE_OBJECT_ID) CORE_OBJECT_NAME,
+       (Select e.object_name from ms_grc_risk e where e.object_id = b.RISK_ID) RISK_NAME,
+       b.CONTROL_NAME,
+       ms_apps_utilities.get_display_value((Select enterprise_id from si_ent),
+                                           'MS_GRC_COMPLIANCE_CATEGORY',
+                                           b.CONTROL_CATEGORY
+                                          ) CONTROL_CATEGORY,
+       ms_apps_utilities.get_display_value((Select enterprise_id from si_ent),
+                                           'MS GRC Yes No',
+                                           b.KEY_CONTROL
+                                          ) KEY_CONTROL,
+           
+       ms_apps_utilities.get_display_value((Select enterprise_id from si_ent),
+                                           'MS_GRC_COMPLIANCE_TYPE',
+                                           b.CONTROL_TYPE
+                                          ) CONTROL_TYPE,
+       (Select a.object_name from ms_rsk_scenarios_scn a where a.scenario_id = b.SCENARIO_ID) scenario_name,
+       trim(b.ASSESSMENT_DATE)ASSESSMENT_DATE,
+        b.CTRL_WTED_SCORE 
+from MS_RSK_ADHOC_CTRL b
+</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet is used to fetch data for 'MS_RSK_AD_HOC_CONTROL_REPORT'.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2137306083</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------
+| Id  | Operation                    | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT             |                            |     3 |   276 |     3   (0)| 00:00:01 |
+|   1 |  NESTED LOOPS OUTER          |                            |     1 |    32 |     4   (0)| 00:00:01 |
+|   2 |   TABLE ACCESS BY INDEX ROWID| SI_ORG_ENTITIES_T          |     1 |    25 |     1   (0)| 00:00:01 |
+|*  3 |    INDEX RANGE SCAN          | SI_ORG_ENTITIES_N5         |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  4 |   TABLE ACCESS FULL          | SI_ORG_ENTITIES_TL         |     1 |     7 |     3   (0)| 00:00:01 |</font>
+|   5 |  TABLE ACCESS BY INDEX ROWID | MS_RSK_ALL_ASSMNT_TYPE     |     1 |    54 |     1   (0)| 00:00:01 |
+|*  6 |   INDEX RANGE SCAN           | IDX_MS_RSK_ALL_ASSMNT_TYPE |     1 |       |     1   (0)| 00:00:01 |
+|   7 |  TABLE ACCESS BY INDEX ROWID | MS_GRC_RISK                |     1 |    52 |     1   (0)| 00:00:01 |
+|*  8 |   INDEX UNIQUE SCAN          | MS_GRC_RISK_PK             |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   9 |  TABLE ACCESS FULL           | SI_ENT                     |     1 |     3 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  10 |  TABLE ACCESS FULL           | SI_ENT                     |     1 |     3 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  11 |  TABLE ACCESS FULL           | SI_ENT                     |     1 |     3 |     3   (0)| 00:00:01 |</font>
+|  12 |  TABLE ACCESS BY INDEX ROWID | MS_RSK_SCENARIOS_SCN       |     1 |    48 |     1   (0)| 00:00:01 |
+|* 13 |   INDEX RANGE SCAN           | MS_RSK_SCENARIOS_SCN_UK    |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  14 |  TABLE ACCESS FULL           | MS_RSK_ADHOC_CTRL          |     3 |   276 |     3   (0)| 00:00:01 |</font>
+-----------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$335DD26A
+   2 - SEL$335DD26A / T@SEL$3
+   3 - SEL$335DD26A / T@SEL$3
+   4 - SEL$335DD26A / TL@SEL$3
+   5 - SEL$4        / C@SEL$4
+   6 - SEL$4        / C@SEL$4
+   7 - SEL$5        / E@SEL$5
+   8 - SEL$5        / E@SEL$5
+   9 - SEL$6        / SI_ENT@SEL$6
+  10 - SEL$7        / SI_ENT@SEL$7
+  11 - SEL$8        / SI_ENT@SEL$8
+  12 - SEL$9        / A@SEL$9
+  13 - SEL$9        / A@SEL$9
+  14 - SEL$1        / B@SEL$1
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   3 - access("T"."ORG_ENTITY_ID"=TO_NUMBER(:B1))
+   4 - filter("TL"."ORG_ENTITY_ID"(+)=TO_NUMBER(:B1) AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()) AND 
+              "T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+))
+   6 - access("C"."OBJECT_ID"=:B1)
+   8 - access("E"."OBJECT_ID"=:B1)
+  13 - access("A"."SCENARIO_ID"=:B1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=0) "T"."ORG_ENTITY_NAME"[VARCHAR2,400]
+   2 - "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400]
+   3 - "T".ROWID[ROWID,10], "T"."ORG_ENTITY_ID"[NUMBER,22]
+   5 - "C".ROWID[ROWID,10], "C"."OBJECT_NAME"[VARCHAR2,4000]
+   6 - "C".ROWID[ROWID,10]
+   7 - "E".ROWID[ROWID,10], "E"."OBJECT_NAME"[VARCHAR2,4000]
+   8 - "E".ROWID[ROWID,10]
+   9 - "ENTERPRISE_ID"[NUMBER,22]
+  10 - "ENTERPRISE_ID"[NUMBER,22]
+  11 - "ENTERPRISE_ID"[NUMBER,22]
+  12 - "A".ROWID[ROWID,10], "A"."OBJECT_NAME"[VARCHAR2,800]
+  13 - "A".ROWID[ROWID,10]
+  14 - "B"."ASSESSMENT_ID"[VARCHAR2,400], "B"."ASSESSMENT_TYPE"[VARCHAR2,400], 
+       "B"."CONTROL_ID"[VARCHAR2,400], "B"."ORGANIZATION_ID"[VARCHAR2,400], 
+       "B"."CORE_OBJECT_ID"[VARCHAR2,400], "B"."RISK_ID"[VARCHAR2,400], 
+       "B"."CONTROL_NAME"[VARCHAR2,4000], "B"."CONTROL_CATEGORY"[VARCHAR2,400], 
+       "B"."KEY_CONTROL"[VARCHAR2,400], "B"."CONTROL_TYPE"[VARCHAR2,400], 
+       "B"."SCENARIO_ID"[VARCHAR2,400], "B"."ASSESSMENT_DATE"[DATE,7], "B"."CTRL_WTED_SCORE"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

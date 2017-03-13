@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_ISM_DISPLAY_USER (101246)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>Select   User_Name,User_Full_Name
+  FROM MS_ISM_USER_DETLS_V
+  Where user_name in (:1)</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This is a display infolet used for users field in ISM forms</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 266382529</h2></header><pre><code>
+ 
+---------------------------------------------------------------------------------------------------------
+| Id  | Operation                      | Name                   | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT               |                        |     1 |   110 |    12   (0)| 00:00:01 |
+|*  1 |  HASH JOIN                     |                        |     1 |   110 |    12   (0)| 00:00:01 |
+|*  2 |   HASH JOIN                    |                        |     1 |    93 |     9   (0)| 00:00:01 |
+|   3 |    NESTED LOOPS                |                        |     1 |    60 |     4   (0)| 00:00:01 |
+|   4 |     TABLE ACCESS BY INDEX ROWID| SI_USERS_T             |     1 |    28 |     1   (0)| 00:00:01 |
+|*  5 |      INDEX RANGE SCAN          | SI_USERS_T_N3          |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  6 |     TABLE ACCESS FULL          | MS_QS_PARAMETER_TYPES  |     1 |    32 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|*  7 |    TABLE ACCESS FULL           | MS_QS_PARAMETER_NAMES  |     3 |    99 |     5   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|*  8 |   TABLE ACCESS FULL            | MS_QS_PARAMETER_VALUES |   257 |  4369 |     3   (0)| 00:00:01 |</font>
+---------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$5C160134
+   4 - SEL$5C160134 / A@SEL$2
+   5 - SEL$5C160134 / A@SEL$2
+   6 - SEL$5C160134 / PTYPE@SEL$3
+   7 - SEL$5C160134 / PNAME@SEL$3
+   8 - SEL$5C160134 / PVALUE@SEL$3
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - access("PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND 
+              "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID")
+   2 - access("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID")
+   5 - access("A"."USER_NAME"=:1)
+   6 - filter(UPPER("PTYPE"."PARAMETER_TYPE")='MS APPS USER NAME DISPLAY FORMAT')
+   7 - filter(UPPER("PNAME"."PARAMETER_NAME")='DISPLAY_FORMAT')
+   8 - filter("PVALUE"."ORG_ENTITY_ID"=1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=2) "A"."LAST_NAME"[VARCHAR2,100], "A"."FIRST_NAME"[VARCHAR2,100], 
+       "A"."USER_NAME"[VARCHAR2,80], "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+   2 - (#keys=1) "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], "A"."LAST_NAME"[VARCHAR2,100], 
+       "A"."FIRST_NAME"[VARCHAR2,100], "A"."USER_NAME"[VARCHAR2,80], "PNAME"."PARAMETER_ID"[NUMBER,22]
+   3 - (#keys=0) "A"."LAST_NAME"[VARCHAR2,100], "A"."FIRST_NAME"[VARCHAR2,100], 
+       "A"."USER_NAME"[VARCHAR2,80], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+   4 - "A"."LAST_NAME"[VARCHAR2,100], "A"."FIRST_NAME"[VARCHAR2,100], 
+       "A"."USER_NAME"[VARCHAR2,80]
+   5 - "A".ROWID[ROWID,10], "A"."USER_NAME"[VARCHAR2,80]
+   6 - "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+   7 - "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22]
+   8 - "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

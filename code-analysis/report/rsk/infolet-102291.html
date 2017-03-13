@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_HM_ORG_REC (102291)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT org.org_entity_id   AS org_entity_id ,
+  org.parent_org_entity_id AS parent_org_entity_id ,
+  org.org_entity_name      AS org_entity_name ,
+  porg.org_entity_name     AS parent_org_entity_name ,
+  org.description          AS org_description ,
+  LOC.LOCATION_NAME        as ORG_LOCATION ,
+  'Level '|| ohl.org_level            AS org_level ,
+  ohl.org_hierarchy_name   AS org_hierarchy_name
+FROM si_org_entities org ,
+  si_org_locations loc ,
+  si_org_hierarchy_levels ohl ,
+  si_org_entities porg
+WHERE org.location_id = loc.location_id (+)
+AND SYSDATE BETWEEN org.start_date AND NVL(org.end_date, SYSDATE)
+AND org.org_hierarchy_id     = ohl.org_hierarchy_id
+AND ORG.PARENT_ORG_ENTITY_ID = PORG.ORG_ENTITY_ID (+)
+AND ohl.org_level           IN
+  (SELECT trim(column_value)
+  FROM TABLE(CAST(
+    (SELECT MS_APPS_UTILITIES.SPLIT(:2 ) FROM dual
+    ) AS ms_varchar2_array))
+  WHERE column_value IS NOT NULL
+  )
+AND ORG.ORG_ENTITY_ID IN
+  (SELECT distinct ORG_ENTITY_ID
+  FROM SI_ORG_ROLES
+  WHERE ORG_ROLE_ID IN
+    (SELECT ORG_ROLE_ID
+    FROM SI_USER_ORG_ROLES
+    WHERE USER_ID=
+      (SELECT USER_ID FROM SI_USERS_T WHERE USER_NAME =:3
+      )
+    )
+  )
+AND org.org_entity_id IN
+  (SELECT distinct owner_organization
+  FROM ms_rsk_scenarios_orn
+  WHERE scenario_id IN
+    (SELECT trim(column_value)
+    FROM TABLE(CAST(
+      (SELECT MS_APPS_UTILITIES.SPLIT(:1 ) FROM dual
+      ) AS ms_varchar2_array))
+    WHERE column_value IS NOT NULL
+    )
+  )
+AND org.ORG_ENTITY_ID IN
+  (SELECT distinct ORGANIZATION_id
+  FROM ms_rsk_organization_rollup
+  WHERE SCENARIO_ID IN
+    (SELECT TRIM(COLUMN_VALUE)
+    FROM TABLE(CAST(
+      (SELECT MS_APPS_UTILITIES.SPLIT(:1 ) FROM DUAL
+      ) AS ms_varchar2_array))
+    WHERE column_value IS NOT NULL
+    )
+  )
+ORDER BY org.org_entity_name</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>null</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Error</h2></header><pre><code>
+ORA-22814: attribute or element value is larger than specified in type
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

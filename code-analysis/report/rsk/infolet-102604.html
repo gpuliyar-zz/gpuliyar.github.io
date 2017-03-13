@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_VIEW_ASSESSMENTS_INFOLET1 (102604)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT PLAN_NAME,
+ASSMNT_ID,
+ASSMNT_STATUS,
+ASSMNT_ASSESSOR,
+ASSMNT_APPROVER,
+ASSMNT_ASSIGNED_ON,
+ASSMNT_ASSESSED_ON,
+ASSMNT_APPROVED_ON,
+ASSMNT_DUE_DATE,
+ASSMNT_PUBLISHED_ON,
+NO_OF_ISSUES,
+NO_OF_OPEN_ISSUES,
+NO_OF_OVERDUE_ISSUES,
+NO_OF_CLOSED_ISSUES,
+SCENERIO as Scenario_Id,
+ASSMNT_TYPE as Assessment_Type,
+case when organizations is not null then organizations else core_objects end as  object_name,
+DUMMY1,
+DUMMY2,
+DUMMY3,
+DUMMY4,
+DUMMY5,
+DUMMY6,
+DUMMY7,
+DUMMY8,
+DUMMY9,
+DUMMY10,
+DUMMY11,
+DUMMY12,
+DUMMY13,
+DUMMY14,
+DUMMY15,
+DUMMY16,
+DUMMY17,
+DUMMY18,
+plan_json,
+ASSESS_JSON
+from MS_RSK_VIEW_ASSMNT_DTLS_RPT_V  where(  Ms_rsk_Rpt_Utils.diff_mlov_filt_comma_str(organizations,VARCHAR2_ARRAY (:1)) = 1
+or Ms_rsk_Rpt_Utils.diff_mlov_filt_comma_str(core_objects,VARCHAR2_ARRAY (:4)) = 1)
+and scenerio = :3
+AND ASSMNT_TYPE =:2</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>Infolet is used for the 'View Assessments' report. Displays the Assessment Details for passed Organization ID/Assessable Entity ID</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1971703633</h2></header><pre><code>
+ 
+----------------------------------------------------------------------------------------------------------
+| Id  | Operation                   | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+----------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT            |                            |     1 |  3062 |    15   (7)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID| SI_METRICS_T               |     1 |    34 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX RANGE SCAN          | SI_METRICS_T_N7            |     1 |       |     1   (0)| 00:00:01 |
+|   3 |  TABLE ACCESS BY INDEX ROWID| SI_METRICS_T               |     1 |    34 |     1   (0)| 00:00:01 |
+|*  4 |   INDEX RANGE SCAN          | SI_METRICS_T_N7            |     1 |       |     1   (0)| 00:00:01 |
+|*  5 |  HASH JOIN                  |                            |     1 |  3062 |    15   (7)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  6 |   TABLE ACCESS FULL         | MS_RSK_ASSMNT_RPT_DTLS     |     1 |   244 |     3   (0)| 00:00:01 |</font>
+|   7 |   VIEW                      |                            |     1 |  2818 |    12   (9)| 00:00:01 |
+|   8 |    SORT GROUP BY            |                            |     1 |    96 |    12   (9)| 00:00:01 |
+|*  9 |     HASH JOIN               |                            |     1 |    96 |    11   (0)| 00:00:01 |
+|* 10 |      HASH JOIN              |                            |     3 |   201 |     6   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 11 |       TABLE ACCESS FULL     | MS_RSK_RISK_ASSESSMENT     |     2 |    50 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 12 |       TABLE ACCESS FULL     | MS_RSK_ASSMNT_RPT_DTLS     |     2 |    84 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  13 |      TABLE ACCESS FULL      | MS_RSK_RISK_ASSESSMENT_RSK |    46 |  1334 |     5   (0)| 00:00:01 |</font>
+----------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$3        / SI_METRICS_T@SEL$3
+   2 - SEL$3        / SI_METRICS_T@SEL$3
+   3 - SEL$4        / SI_METRICS_T@SEL$4
+   4 - SEL$4        / SI_METRICS_T@SEL$4
+   5 - SEL$F5BB74E1
+   6 - SEL$F5BB74E1 / A@SEL$2
+   7 - SEL$5        / B@SEL$2
+   8 - SEL$5       
+  11 - SEL$5        / P@SEL$5
+  12 - SEL$5        / D@SEL$5
+  13 - SEL$5        / C@SEL$5
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("METRIC_NAME"='MS_RSK_SCHEDULE_RISK_ASSMN')
+   4 - access("METRIC_NAME"='MS_RSK_RISK_ASSESSMENT')
+   5 - access("A"."SCENERIO"="B"."SCENARIO_NAME" AND "A"."ASSMNT_ID"="B"."OBJECT_ID")
+   6 - filter("A"."SCENERIO"=:3 AND "A"."ASSMNT_TYPE"=:2 AND 
+              ("MS_RSK_RPT_UTILS"."DIFF_MLOV_FILT_COMMA_STR"("A"."ORGANIZATIONS","VARCHAR2_ARRAY"(:1))=1 OR 
+              "MS_RSK_RPT_UTILS"."DIFF_MLOV_FILT_COMMA_STR"("A"."CORE_OBJECTS","VARCHAR2_ARRAY"(:4))=1) AND 
+              ("A"."ASSMNT_STATUS"='Assess Assessment' OR "A"."ASSMNT_STATUS"='Completed' OR 
+              "A"."ASSMNT_STATUS"='Ongoing Assessment' OR "A"."ASSMNT_STATUS"='Sent For Assessment'))
+   9 - access("C"."OBJECT_ID"="P"."OBJECT_ID" AND "C"."OBJECT_ID"="D"."ASSMNT_ID")
+  10 - access("P"."SCENARIO_NAME"="D"."SCENERIO")
+  11 - filter("P"."SCENARIO_NAME"=:3)
+  12 - filter("D"."SCENERIO"=:3 AND ("D"."ASSMNT_STATUS"='Assess Assessment' OR 
+              "D"."ASSMNT_STATUS"='Completed' OR "D"."ASSMNT_STATUS"='Ongoing Assessment' OR 
+              "D"."ASSMNT_STATUS"='Sent For Assessment'))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22]
+   2 - "SI_METRICS_T".ROWID[ROWID,10]
+   3 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22]
+   4 - "SI_METRICS_T".ROWID[ROWID,10]
+   5 - (#keys=2) "A"."SCENERIO"[VARCHAR2,400], "A"."ASSMNT_ID"[VARCHAR2,400], 
+       "PLAN_ID"[VARCHAR2,400], "PLAN_INSTANCE_ID"[NUMBER,22], "PLAN_NAME"[VARCHAR2,4000], 
+       "A"."ASSMNT_ASSESSOR"[VARCHAR2,4000], "A"."ASSMNT_APPROVER"[VARCHAR2,4000], 
+       "ASSMNT_PID"[NUMBER,22], "A"."ASSMNT_ASSIGNED_ON"[DATE,7], "A"."ASSMNT_ASSESSED_ON"[DATE,7], 
+       "A"."ASSMNT_APPROVED_ON"[DATE,7], "A"."ASSMNT_DUE_DATE"[DATE,7], 
+       "A"."ASSMNT_STATUS"[VARCHAR2,400], "A"."ASSMNT_TYPE"[VARCHAR2,400], "PLAN_PID"[NUMBER,22], 
+       "A"."ASSMNT_PUBLISHED_ON"[DATE,7], "A"."ORGANIZATIONS"[VARCHAR2,4000], 
+       "A"."CORE_OBJECTS"[VARCHAR2,4000], "A"."RISKS"[VARCHAR2,4000], "B"."LIB_RISK_ID"[VARCHAR2,4000]
+   6 - "PLAN_ID"[VARCHAR2,400], "A"."ASSMNT_ID"[VARCHAR2,400], "PLAN_NAME"[VARCHAR2,4000], 
+       "A"."ASSMNT_ASSESSOR"[VARCHAR2,4000], "A"."ASSMNT_APPROVER"[VARCHAR2,4000], 
+       "ASSMNT_PID"[NUMBER,22], "A"."ASSMNT_ASSIGNED_ON"[DATE,7], "A"."ASSMNT_ASSESSED_ON"[DATE,7], 
+       "A"."ASSMNT_APPROVED_ON"[DATE,7], "A"."ASSMNT_DUE_DATE"[DATE,7], 
+       "A"."ASSMNT_STATUS"[VARCHAR2,400], "A"."ASSMNT_TYPE"[VARCHAR2,400], "A"."SCENERIO"[VARCHAR2,400], 
+       "A"."ASSMNT_PUBLISHED_ON"[DATE,7], "A"."ORGANIZATIONS"[VARCHAR2,4000], 
+       "A"."CORE_OBJECTS"[VARCHAR2,4000], "A"."RISKS"[VARCHAR2,4000], "PLAN_INSTANCE_ID"[NUMBER,22], 
+       "PLAN_PID"[NUMBER,22]
+   7 - "B"."OBJECT_ID"[VARCHAR2,400], "B"."SCENARIO_NAME"[VARCHAR2,1600], 
+       "B"."LIB_RISK_ID"[VARCHAR2,4000]
+   8 - (#keys=2) "C"."OBJECT_ID"[VARCHAR2,400], "P"."SCENARIO_NAME"[VARCHAR2,1600], 
+       "MS_JOIN"(DISTINCT "C"."RISK_ID")[4000]
+   9 - (#keys=2) "C"."OBJECT_ID"[VARCHAR2,400], "C"."OBJECT_ID"[VARCHAR2,400], 
+       "P"."SCENARIO_NAME"[VARCHAR2,1600], "C"."RISK_ID"[VARCHAR2,4000]
+  10 - (#keys=1) "P"."SCENARIO_NAME"[VARCHAR2,1600], "P"."OBJECT_ID"[VARCHAR2,400], 
+       "D"."ASSMNT_ID"[VARCHAR2,400]
+  11 - "P"."OBJECT_ID"[VARCHAR2,400], "P"."SCENARIO_NAME"[VARCHAR2,1600]
+  12 - "D"."ASSMNT_ID"[VARCHAR2,400], "D"."SCENERIO"[VARCHAR2,400]
+  13 - "C"."OBJECT_ID"[VARCHAR2,400], "C"."RISK_ID"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

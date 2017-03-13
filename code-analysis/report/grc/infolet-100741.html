@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_GRC_61_SP2_REQ_BROWSER_INF (100741)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT
+OBJECT_NAME as DISPLAY_NAME,
+DD_OBJECT_TYPE as OBJECT_TYPE,
+OVER_RIDE_ACTION,
+EDIT_ACTION_PARAMETERS as VIEW_ACTION_PARAMETERS
+,
+OBJECT_ID as OBJECT_ID
+FROM MS_GRC_REQUIREMENT_DENORM_DRV
+WHERE  EXISTS
+(SELECT column_value
+FROM TABLE(CAST(MS_GRC_REP_BROWSER_FIL_DENORM.FN_REQ_RPT_FILTER(ms_grc_array_type(:1,:2,:3,:4,:5,:6,:7,:8,:9,:10,:11,:12,TO_CHAR(:13,'YYYY-MM-DD'),TO_CHAR(:14,'YYYY-MM-DD'),:15,:16,TO_CHAR(:17,'YYYY-MM-DD'),TO_CHAR(:18,'YYYY-MM-DD'),TO_CHAR(:19,'YYYY-MM-DD'),TO_CHAR(:20,'YYYY-MM-DD'),:21,:22,:23,:24,:25,:26,:27,NULL,NULL,:28,:29,:31,:30,NULL,:32,NULL,:33,:34,NULL,NULL,:35,:36,:37,'MS_GRC_REQUIREMENT',:38))AS MS_VARCHAR2_ARRAY))
+WHERE column_value = OBJECT_ID
+) ORDER BY UPPER_OBJECT_NAME</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet is used to Fetch the Published Requirement Object records to display in the Databrowser</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2949066544</h2></header><pre><code>
+ 
+-------------------------------------------------------------------------------------------------------------
+| Id  | Operation                           | Name                  | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                    |                       |     1 |   132 |    61   (2)| 00:00:01 |
+|   1 |  SORT ORDER BY                      |                       |     1 |   132 |    61   (2)| 00:00:01 |
+|*  2 |   HASH JOIN SEMI                    |                       |     1 |   132 |    60   (0)| 00:00:01 |
+|   3 |    INDEX FAST FULL SCAN             | MS_GRC_REQ_SUMMARY_PK |   289 | 37570 |    31   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   4 |    COLLECTION ITERATOR PICKLER FETCH| FN_REQ_RPT_FILTER     |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+-------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$B7274CD5
+   3 - SEL$B7274CD5 / REQSUMM@SEL$2
+   4 - SEL$B7274CD5 / KOKBF$0@SEL$4
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("REQSUMM"."OBJECT_ID"=VALUE(KOKBF$))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "REQSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "REQSUMM"."OBJECT_NAME"[VARCHAR2,4000], "REQSUMM"."DD_OBJECT_TYPE"[VARCHAR2,1600], 
+       "REQSUMM"."OVER_RIDE_ACTION"[VARCHAR2,16], "REQSUMM"."EDIT_ACTION_PARAMETERS"[VARCHAR2,4000], 
+       "REQSUMM"."OBJECT_ID"[VARCHAR2,1600]
+   2 - (#keys=1) "REQSUMM"."OBJECT_ID"[VARCHAR2,1600], "REQSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "REQSUMM"."DD_OBJECT_TYPE"[VARCHAR2,1600], "REQSUMM"."OBJECT_NAME"[VARCHAR2,4000], 
+       "REQSUMM"."EDIT_ACTION_PARAMETERS"[VARCHAR2,4000], "REQSUMM"."OVER_RIDE_ACTION"[VARCHAR2,16]
+   3 - "REQSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], "REQSUMM"."OBJECT_ID"[VARCHAR2,1600], 
+       "REQSUMM"."OBJECT_NAME"[VARCHAR2,4000], "REQSUMM"."EDIT_ACTION_PARAMETERS"[VARCHAR2,4000], 
+       "REQSUMM"."OVER_RIDE_ACTION"[VARCHAR2,16], "REQSUMM"."DD_OBJECT_TYPE"[VARCHAR2,1600]
+   4 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

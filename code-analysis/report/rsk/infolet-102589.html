@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_Scenario_Get_Default_Values (102589)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT assessed_by, object_name, assessment_type, default_scenario,
+       calculate_residual_scores, continuous_assessment,manual_refresh,
+       (SELECT MS_JOIN
+                  (risk_categories
+                  )
+          FROM ms_rsk_scenarios_rsc ff
+         WHERE a.object_id = ff.object_id and a.SCENARIO_ID=ff.SCENARIO_ID) AS risk_categories,
+       (SELECT MS_JOIN
+                  (owner_organization
+                  )
+          FROM ms_rsk_scenarios_orn dd
+         WHERE a.object_id = dd.object_id and a.SCENARIO_ID=dd.SCENARIO_ID) AS owner_organization,
+          (SELECT MS_GRC_JOIN_STR_DISPLAY
+                  (assessable_element
+                  )
+          FROM ms_rsk_scenarios_aet b 
+         WHERE a.object_id = b.object_id and a.SCENARIO_ID=b.SCENARIO_ID) AS assessable_element,
+       additional_information, valid_until, scenario_algorithm, valid_from,
+       scenario_id, object_id, NULL  AS custom_col1, OPERAND_FOR_STAN_SCORIN_SCENAR AS custom_col2,
+       NULL AS custom_col3, NULL AS custom_col4
+,RISK_ASSESSMENT_METHODOLOGY,RAM_PROFILE,default_scenario_chk
+  FROM ms_rsk_scenarios_scn a
+  order by SCENARIO_ID</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>null</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2848184660</h2></header><pre><code>
+ 
+----------------------------------------------------------------------------------------------
+| Id  | Operation          | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+----------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT   |                         |    13 |  1885 |     4  (25)| 00:00:01 |
+|   1 |  SORT AGGREGATE    |                         |     1 |    25 |            |          |
+<font style="background-color: lightblue; color: red">|*  2 |   INDEX SKIP SCAN  | MS_RSK_SCENARIOS_RSC_UK |     2 |    50 |     1   (0)| 00:00:01 |</font>
+|   3 |  SORT AGGREGATE    |                         |     1 |  2406 |            |          |
+<font style="background-color: lightblue; color: red">|*  4 |   INDEX SKIP SCAN  | MS_RSK_SCENARIOS_ORN_UK |     1 |  2406 |     1   (0)| 00:00:01 |</font>
+|   5 |  SORT AGGREGATE    |                         |     1 |  2406 |            |          |
+<font style="background-color: lightblue; color: red">|*  6 |   INDEX SKIP SCAN  | MS_RSK_SCENARIOS_AET_UK |     1 |  2406 |     1   (0)| 00:00:01 |</font>
+|   7 |  SORT ORDER BY     |                         |    13 |  1885 |     4  (25)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   8 |   TABLE ACCESS FULL| MS_RSK_SCENARIOS_SCN    |    13 |  1885 |     3   (0)| 00:00:01 |</font>
+----------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2
+   2 - SEL$2 / FF@SEL$2
+   3 - SEL$3
+   4 - SEL$3 / DD@SEL$3
+   5 - SEL$4
+   6 - SEL$4 / B@SEL$4
+   7 - SEL$1
+   8 - SEL$1 / A@SEL$1
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("FF"."OBJECT_ID"=:B1 AND "FF"."SCENARIO_ID"=:B2)
+       filter("FF"."SCENARIO_ID"=:B1 AND "FF"."OBJECT_ID"=:B2)
+   4 - access("DD"."OBJECT_ID"=:B1 AND "DD"."SCENARIO_ID"=:B2)
+       filter("DD"."OBJECT_ID"=:B1 AND "DD"."SCENARIO_ID"=:B2)
+   6 - access("B"."OBJECT_ID"=:B1 AND "B"."SCENARIO_ID"=:B2)
+       filter("B"."OBJECT_ID"=:B1 AND "B"."SCENARIO_ID"=:B2)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=0) "MS_JOIN"("RISK_CATEGORIES")[4000]
+   2 - "RISK_CATEGORIES"[VARCHAR2,4000]
+   3 - (#keys=0) "MS_JOIN"("OWNER_ORGANIZATION")[4000]
+   4 - "OWNER_ORGANIZATION"[VARCHAR2,4000]
+   5 - (#keys=0) "MS_GRC_JOIN_STR_DISPLAY"("ASSESSABLE_ELEMENT")[4000]
+   6 - "ASSESSABLE_ELEMENT"[VARCHAR2,4000]
+   7 - (#keys=1) "SCENARIO_ID"[VARCHAR2,400], "ASSESSED_BY"[VARCHAR2,400], 
+       "OBJECT_NAME"[VARCHAR2,800], "ASSESSMENT_TYPE"[VARCHAR2,40], 
+       "DEFAULT_SCENARIO"[VARCHAR2,40], "CALCULATE_RESIDUAL_SCORES"[VARCHAR2,40], 
+       "CONTINUOUS_ASSESSMENT"[VARCHAR2,40], "MANUAL_REFRESH"[VARCHAR2,88],  (SELECT 
+       "MS_JOIN"("RISK_CATEGORIES") FROM "MS_RSK_SCENARIOS_RSC" "FF" WHERE 
+       "FF"."SCENARIO_ID"=:B1 AND "FF"."OBJECT_ID"=:B2)[4000],  (SELECT 
+       "MS_JOIN"("OWNER_ORGANIZATION") FROM "MS_RSK_SCENARIOS_ORN" "DD" WHERE 
+       "DD"."OBJECT_ID"=:B3 AND "DD"."SCENARIO_ID"=:B4)[4000],  (SELECT 
+       "MS_GRC_JOIN_STR_DISPLAY"("ASSESSABLE_ELEMENT") FROM "MS_RSK_SCENARIOS_AET" "B" WHERE 
+       "B"."OBJECT_ID"=:B5 AND "B"."SCENARIO_ID"=:B6)[4000], 
+       "ADDITIONAL_INFORMATION"[LOB,4000], "VALID_UNTIL"[DATE,7], 
+       "SCENARIO_ALGORITHM"[VARCHAR2,40], "VALID_FROM"[DATE,7], 
+       "DEFAULT_SCENARIO_CHK"[VARCHAR2,1020], "OBJECT_ID"[VARCHAR2,400], NULL[0], 
+       "OPERAND_FOR_STAN_SCORIN_SCENAR"[VARCHAR2,400], NULL[0], NULL[0], 
+       "RISK_ASSESSMENT_METHODOLOGY"[VARCHAR2,200], "RAM_PROFILE"[VARCHAR2,240]
+   8 - "OBJECT_NAME"[VARCHAR2,800], "DEFAULT_SCENARIO_CHK"[VARCHAR2,1020], 
+       "SCENARIO_ID"[VARCHAR2,400], "VALID_FROM"[DATE,7], "SCENARIO_ALGORITHM"[VARCHAR2,40], 
+       "VALID_UNTIL"[DATE,7], "ADDITIONAL_INFORMATION"[LOB,4000], 
+       "ASSESSED_BY"[VARCHAR2,400], "CONTINUOUS_ASSESSMENT"[VARCHAR2,40], 
+       "CALCULATE_RESIDUAL_SCORES"[VARCHAR2,40], "DEFAULT_SCENARIO"[VARCHAR2,40], 
+       "ASSESSMENT_TYPE"[VARCHAR2,40], "OPERAND_FOR_STAN_SCORIN_SCENAR"[VARCHAR2,400], 
+       "RISK_ASSESSMENT_METHODOLOGY"[VARCHAR2,200], "RAM_PROFILE"[VARCHAR2,240], 
+       "MANUAL_REFRESH"[VARCHAR2,88], "OBJECT_ID"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

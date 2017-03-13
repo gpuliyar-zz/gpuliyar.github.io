@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_ISM_Issue_Comments_History (101319)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>select ISSUE_ID,ACTION_ID,USER_NAME,USER_FULL_NAME ,
+COMMENTS as COMMENTS,
+ENTERED_DATE,COMMENTS_COLUMN_NAME ,PROCESS_INSTANCE_ID,
+INSTANCE_ID,INFOLET_ID, decode(ISSUE_STAGE,'1','Initiate Issue','2','Review Issue','3','Approve Issue','4','Manage Issue','5','Approve Action Plan','7','Monitor Issue',
+'8','Final Closure','14','Cancel Issue with Approval','No Stage Detected')  as COMMENT_STAGE
+FROM MS_ISM_COMMENTS_LOG     
+WHERE ISSUE_ID = :1
+and action_id is null
+and (user_actions is null or user_actions= '2')
+Union
+select ISSUE_ID,ACTION_ID,USER_NAME,USER_FULL_NAME ,
+COMMENTS||'*' as COMMENTS,ENTERED_DATE, COMMENTS_COLUMN_NAME ,PROCESS_INSTANCE_ID,
+INSTANCE_ID,INFOLET_ID, decode(ISSUE_STAGE,'1','Initiate Issue','2','Review Issue','3','Approve Issue','4','Manage Issue','5','Approve Action Plan','7','Monitor Issue',
+'8','Final Closure','14','Cancel Issue with Approval','No Stage Detected')  as COMMENT_STAGE
+FROM MS_ISM_COMMENTS_LOG     
+WHERE ISSUE_ID = :1
+and user_actions= '1' and (user_name=:2 
+or (select issue_owner from ms_ism_issue where issue_id=:1)=:2)
+order by entered_date desc</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet used as report paramter input in Issue comment history report</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 4185464622</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------
+| Id  | Operation                      | Name                | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT               |                     |     2 | 17728 |     7  (43)| 00:00:01 |
+|   1 |  SORT UNIQUE                   |                     |     2 | 17728 |     6  (34)| 00:00:01 |
+|   2 |   UNION-ALL                    |                     |       |       |            |          |
+<font style="background-color: lightblue; color: red">|*  3 |    TABLE ACCESS FULL           | MS_ISM_COMMENTS_LOG |     1 |  8864 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|*  4 |    TABLE ACCESS FULL           | MS_ISM_COMMENTS_LOG |     1 |  8864 |     2   (0)| 00:00:01 |</font>
+|   5 |     TABLE ACCESS BY INDEX ROWID| MS_ISM_ISSUE        |     1 |    28 |     1   (0)| 00:00:01 |
+|*  6 |      INDEX UNIQUE SCAN         | MS_ISM_ISSUE_PK     |     1 |       |     1   (0)| 00:00:01 |
+------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SET$1
+   3 - SEL$1 / MS_ISM_COMMENTS_LOG@SEL$1
+   4 - SEL$2 / MS_ISM_COMMENTS_LOG@SEL$2
+   5 - SEL$3 / MS_ISM_ISSUE@SEL$3
+   6 - SEL$3 / MS_ISM_ISSUE@SEL$3
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   3 - filter("ACTION_ID" IS NULL AND "ISSUE_ID"=:1 AND ("USER_ACTIONS" IS NULL OR 
+              "USER_ACTIONS"='2'))
+   4 - filter("ISSUE_ID"=:1 AND "USER_ACTIONS"='1' AND ("USER_NAME"=:2 OR  (SELECT 
+              "ISSUE_OWNER" FROM "MS_ISM_ISSUE" "MS_ISM_ISSUE" WHERE "ISSUE_ID"=:1)=:2))
+   6 - access("ISSUE_ID"=:1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=11) STRDEF[7], STRDEF[400], STRDEF[400], STRDEF[400], STRDEF[400], 
+       STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[22], STRDEF[22], STRDEF[26]
+   2 - STRDEF[400], STRDEF[400], STRDEF[400], STRDEF[400], STRDEF[4000], STRDEF[7], 
+       STRDEF[4000], STRDEF[22], STRDEF[22], STRDEF[22], STRDEF[26]
+   3 - "COMMENTS_COLUMN_NAME"[VARCHAR2,4000], "PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "INSTANCE_ID"[NUMBER,22], "INFOLET_ID"[NUMBER,22], "COMMENTS"[VARCHAR2,4000], 
+       "USER_NAME"[VARCHAR2,400], "USER_FULL_NAME"[VARCHAR2,400], "ENTERED_DATE"[DATE,7], 
+       "ISSUE_ID"[VARCHAR2,400], "ACTION_ID"[VARCHAR2,400], "ISSUE_STAGE"[VARCHAR2,4000]
+   4 - "COMMENTS_COLUMN_NAME"[VARCHAR2,4000], "PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "INSTANCE_ID"[NUMBER,22], "INFOLET_ID"[NUMBER,22], "COMMENTS"[VARCHAR2,4000], 
+       "USER_NAME"[VARCHAR2,400], "USER_FULL_NAME"[VARCHAR2,400], "ENTERED_DATE"[DATE,7], 
+       "ISSUE_ID"[VARCHAR2,400], "ACTION_ID"[VARCHAR2,400], "ISSUE_STAGE"[VARCHAR2,4000]
+   5 - "MS_ISM_ISSUE".ROWID[ROWID,10], "ISSUE_OWNER"[VARCHAR2,4000]
+   6 - "MS_ISM_ISSUE".ROWID[ROWID,10]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

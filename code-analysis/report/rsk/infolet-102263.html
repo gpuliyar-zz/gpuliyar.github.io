@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_Get_Task_Plan_Name (102263)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT object_name as schedule_name, a.object_id as schedule_id, /*(SELECT ms_join
+                     (ms_apps_utilities.get_display_value
+                                          ((SELECT enterprise_id
+                      FROM si_ent_active_v),
+                                           'ORGENTITY',
+                                           OWNER_ORGANIZATIONS
+                                          )
+                     )
+             FROM MS_RSK_SCHEDULE_RISK_A_OWO dd
+            WHERE a.object_id = dd.object_id)*/ NULL AS owner_organizations,a.scn_res_cal as Plan_Type
+  FROM ms_rsk_schedule_risk_a a
+ WHERE
+ TO_DATE (SYSDATE) BETWEEN NVL (TO_DATE (valid_from), TO_DATE (SYSDATE))
+                             and nvl (to_date (valid_until),
+                                      TO_DATE (SYSDATE)) and a.scn_res_cal <>'O'
+                                     /*235390*/
+                                      and
+                                      ms_apps_security_pkg.check_object_access (dd_object_type,
+                                                   restrict_access_to,
+                                                   (SELECT ms_join (owner_organizations)
+             FROM MS_RSK_SCHEDULE_RISK_A_OWO z
+            WHERE z.object_id = a.object_id),
+                                                   :1,
+                                                   'VIEW'
+                                                  ) = 'ACCESS' 
+                                                  /*235390*/
+ORDER BY upper(OBJECT_NAME)</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet is used in Risk Assessment Plan field for Risk Assessment Task Form to get the plan name for the scheduled object id.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1258281640</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------
+| Id  | Operation           | Name                          | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT    |                               |     1 |    81 |     5  (20)| 00:00:01 |
+|   1 |  SORT ORDER BY      |                               |     1 |    81 |     5  (20)| 00:00:01 |
+|*  2 |   FILTER            |                               |       |       |            |          |
+<font style="background-color: lightblue; color: red">|*  3 |    TABLE ACCESS FULL| MS_RSK_SCHEDULE_RISK_A        |     1 |    81 |     3   (0)| 00:00:01 |</font>
+|   4 |    SORT AGGREGATE   |                               |     1 |    21 |            |          |
+<font style="background-color: lightblue; color: red">|*  5 |     INDEX SKIP SCAN | MS_RSK_SCHEDULE_RISK_A_OWO_UK |     1 |    21 |     1   (0)| 00:00:01 |</font>
+-----------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$1
+   3 - SEL$1 / A@SEL$1
+   4 - SEL$2
+   5 - SEL$2 / Z@SEL$2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - filter("MS_APPS_SECURITY_PKG"."CHECK_OBJECT_ACCESS"("DD_OBJECT_TYPE","RESTRICT_ACCESS_
+              TO", (SELECT "MS_JOIN"("OWNER_ORGANIZATIONS") FROM "MS_RSK_SCHEDULE_RISK_A_OWO" "Z" WHERE 
+              "Z"."OBJECT_ID"=:B1),:1,'VIEW')='ACCESS')
+   3 - filter("A"."SCN_RES_CAL"<>'O' AND NVL(TO_DATE(INTERNAL_FUNCTION("VALID_FROM")),TO_DATE
+              (TO_CHAR(SYSDATE@!)))<=TO_DATE(TO_CHAR(SYSDATE@!)) AND 
+              NVL(TO_DATE(INTERNAL_FUNCTION("VALID_UNTIL")),TO_DATE(TO_CHAR(SYSDATE@!)))>=TO_DATE(TO_CHAR(S
+              YSDATE@!)))
+   5 - access("Z"."OBJECT_ID"=:B1)
+       filter("Z"."OBJECT_ID"=:B1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) UPPER("OBJECT_NAME")[4000], "OBJECT_NAME"[VARCHAR2,4000], 
+       "A"."OBJECT_ID"[VARCHAR2,400], NULL[0], "A"."SCN_RES_CAL"[VARCHAR2,400]
+   2 - "A"."OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], 
+       "A"."SCN_RES_CAL"[VARCHAR2,400]
+   3 - "DD_OBJECT_TYPE"[VARCHAR2,400], "A"."OBJECT_ID"[VARCHAR2,400], 
+       "RESTRICT_ACCESS_TO"[VARCHAR2,40], "OBJECT_NAME"[VARCHAR2,4000], 
+       "A"."SCN_RES_CAL"[VARCHAR2,400]
+   4 - (#keys=0) "MS_JOIN"("OWNER_ORGANIZATIONS")[4000]
+   5 - "OWNER_ORGANIZATIONS"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

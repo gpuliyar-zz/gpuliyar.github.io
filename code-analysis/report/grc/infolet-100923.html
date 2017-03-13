@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_GRC_Get_OBJC_Flt_Inf (100923)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT object_id AS Objective_ID,
+  object_name    AS Objective_Name
+FROM
+  (SELECT OBJECT_ID,
+    OBJECT_NAME,
+    dd_object_type,
+    (SELECT ms_concat (d.OWNER_ORGANIZATIONS)
+    FROM ms_grc_objectives_ORG d
+    WHERE a.object_id = d.object_id
+    ) AS OWNER_ORGANIZATIONS,
+    restrict_access_to,
+    valid_from,
+    valid_until
+  FROM ms_grc_objectives a
+  ) t1
+WHERE DD_OBJECT_TYPE                                                                                                      ='MS_GRC_OBJECTIVES'
+AND ms_grc_utilities.ms_grc_SECURITY(t1.dd_object_type, t1.restrict_access_to, t1.OWNER_ORGANIZATIONS, :1, 'VIEW') = 'ACCESS'
+AND TRUNC(sysdate) BETWEEN NVL(TRUNC(t1.valid_from),TRUNC(sysdate)) AND NVL(TRUNC(t1.valid_until),TRUNC(sysdate))
+ORDER BY OBJECT_NAME ASC </code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet extracts data from ms_grc_objectives_ORG and ms_grc_objectives_ORG tables and is thereby used in MS_GRC_61_SP2_ASSET_LIST_INF, MS_GRC_61_SP2_FUNCTION_LIST_INF, MS GRC Control Infolet, MS GRC Risk Infolet, MS_GRC_61_SP2_FIN_ACC_LIST_INF, MS_GRC_Product_Rpt_Infolet, MS GRC Process Rep Infolet, MS GRC Requirement Infolet, MS_GRC_61_SP2_ORG_LIST_INF, MS_GRC_61_SP2_STANDARD_LIST_INF and MS_GRC_61_SP2_OBJ_REP_INF infolets</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2707690215</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------------
+| Id  | Operation                     | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT              |                            |     1 |   103 |     4  (25)| 00:00:01 |
+|   1 |  SORT ORDER BY                |                            |     1 |   103 |     4  (25)| 00:00:01 |
+|*  2 |   FILTER                      |                            |       |       |            |          |
+|*  3 |    TABLE ACCESS BY INDEX ROWID| MS_GRC_OBJECTIVES          |     1 |   103 |     2   (0)| 00:00:01 |
+|*  4 |     INDEX RANGE SCAN          | MS_GRC_IDX_DD_OBJ_TYP_OBJC |    35 |       |     1   (0)| 00:00:01 |
+|   5 |    SORT AGGREGATE             |                            |     1 |    22 |            |          |
+<font style="background-color: lightblue; color: red">|*  6 |     INDEX SKIP SCAN           | MS_GRC_OBJECTIVES_ORG_UK   |     1 |    22 |     1   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$F5BB74E1
+   3 - SEL$F5BB74E1 / A@SEL$2
+   4 - SEL$F5BB74E1 / A@SEL$2
+   5 - SEL$3       
+   6 - SEL$3        / D@SEL$3
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - filter("MS_GRC_UTILITIES"."MS_GRC_SECURITY"("DD_OBJECT_TYPE","RESTRICT_ACCESS_TO", (SELECT 
+              "MS_CONCAT"("D"."OWNER_ORGANIZATIONS") FROM "MS_GRC_OBJECTIVES_ORG" "D" WHERE 
+              "D"."OBJECT_ID"=:B1),:1,'VIEW')='ACCESS')
+   3 - filter(NVL(TRUNC(INTERNAL_FUNCTION("VALID_FROM")),TRUNC(SYSDATE@!))<=TRUNC(SYSDATE@!) AND 
+              NVL(TRUNC(INTERNAL_FUNCTION("VALID_UNTIL")),TRUNC(SYSDATE@!))>=TRUNC(SYSDATE@!))
+   4 - access("DD_OBJECT_TYPE"='MS_GRC_OBJECTIVES')
+   6 - access("D"."OBJECT_ID"=:B1)
+       filter("D"."OBJECT_ID"=:B1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "OBJECT_NAME"[VARCHAR2,4000], "OBJECT_ID"[VARCHAR2,400]
+   2 - "A"."OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000]
+   3 - "A"."OBJECT_ID"[VARCHAR2,400], "RESTRICT_ACCESS_TO"[VARCHAR2,4000], 
+       "OBJECT_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,400]
+   4 - "A".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+   5 - (#keys=0) "MS_CONCAT"("D"."OWNER_ORGANIZATIONS")[4000]
+   6 - "D"."OWNER_ORGANIZATIONS"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

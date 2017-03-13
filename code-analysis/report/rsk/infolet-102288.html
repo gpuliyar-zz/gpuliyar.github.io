@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_HM_INH_COUNT_DRILLDOWN_INF (102288)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT ASSESSMENT_TYPE,SCENARIO_NAME,ORG_ID,ORG_NAME,CORE_OBJECT_ID,CORE_OBJECT_NAME,RISK_ID,RISK_NAME,PREV_INHERENT_SCORE,CURR_INHERENT_SCORE,SHORT_NAME,TREND_VALUE_INHERENT,CREATED_BY,CREATION_DATE,LAST_UPDATED_BY,LAST_UPDATE_DATE,X_AXIS_INHERENT,Y_AXIS_INHERENT,BUBBLE_SIZE_INHERENT,BUBBLE_SHAPE_INHERENT,       BUBBLE_COLOR_INHERENT,TREND_INHERENT,(SELECT MS_APPS_UTILITIES.GET_DISPLAY_VALUE(MS_GRC_UTILITIES.ACTIVE_ENT_ID,'MS_GRC_LEVEL',LEVEL_NUM) FROM DUAL) AS LEVEL_NUM,INHERENT_RATING,SCENARIO_ID,PREV_INHERENT_RATING,(SELECT DECODE(TREND_SIGN_INHERENT,1,'<img border="0" src="/images/icons/Upward.png">',-1,'<img border="0" src="/images/icons/Downward.png">',0,'<img border="0" src="/images/icons/No_Change.png">',2,NULL,TREND_SIGN_INHERENT)FROM DUAL) AS TREND_SIGN,FLAG,(SELECT MS_APPS_UTILITIES. GET_DISPLAY_VALUE(MS_GRC_UTILITIES.ACTIVE_ENT_ID, 'MS RSK List of Assessment Types', ASSESSMENT_TYPE) FROM DUAL) AS ASSESSMENT_TYPE_VALUE,'View' as VIEW_ASSESSMENT,(SELECT MS_RSK_RPT_UTILS.FN_GET_FORM_URL_JSON('MS_GRC_PROCESS',NULL,CORE_OBJECT_ID,'PRC',CORE_OBJECT_NAME) FROM DUAL) AS CORE_OBJECT_URL,(SELECT MS_RSK_RPT_UTILS.FN_GET_FORM_URL_JSON('MS_GRC_RISK',NULL,RISK_ID,'RSK',RISK_NAME) FROM DUAL) AS RISK_NAME_URL,RISK_CATEGORIES,OBJECT_OWNERS FROM MS_RSK_HM_MASTER WHERE X_AXIS_INHERENT = :1 AND Y_AXIS_INHERENT = :2</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>MS_RSK_HM_INH_COUNT_DRILLDOWN_INF</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 3583190698</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------
+| Id  | Operation         | Name             | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT  |                  |     2 |   466 |     3   (0)| 00:00:01 |
+|   1 |  FAST DUAL        |                  |     1 |       |     2   (0)| 00:00:01 |
+|   2 |  FAST DUAL        |                  |     1 |       |     2   (0)| 00:00:01 |
+|   3 |  FAST DUAL        |                  |     1 |       |     2   (0)| 00:00:01 |
+|   4 |  FAST DUAL        |                  |     1 |       |     2   (0)| 00:00:01 |
+|   5 |  FAST DUAL        |                  |     1 |       |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  6 |  TABLE ACCESS FULL| MS_RSK_HM_MASTER |     2 |   466 |     3   (0)| 00:00:01 |</font>
+--------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2 / DUAL@SEL$2
+   2 - SEL$3 / DUAL@SEL$3
+   3 - SEL$4 / DUAL@SEL$4
+   4 - SEL$5 / DUAL@SEL$5
+   5 - SEL$6 / DUAL@SEL$6
+   6 - SEL$1 / MS_RSK_HM_MASTER@SEL$1
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   6 - filter("Y_AXIS_INHERENT"=TO_NUMBER(:2) AND 
+              "X_AXIS_INHERENT"=TO_NUMBER(:1))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   6 - "FLAG"[VARCHAR2,400], "RISK_CATEGORIES"[VARCHAR2,4000], 
+       "OBJECT_OWNERS"[VARCHAR2,4000], "ASSESSMENT_TYPE"[VARCHAR2,400], 
+       "SCENARIO_NAME"[VARCHAR2,4000], "ORG_ID"[VARCHAR2,400], 
+       "ORG_NAME"[VARCHAR2,4000], "CORE_OBJECT_ID"[VARCHAR2,400], 
+       "CORE_OBJECT_NAME"[VARCHAR2,4000], "RISK_ID"[VARCHAR2,400], 
+       "RISK_NAME"[VARCHAR2,4000], "PREV_INHERENT_SCORE"[NUMBER,22], 
+       "CURR_INHERENT_SCORE"[NUMBER,22], "SHORT_NAME"[VARCHAR2,400], 
+       "TREND_VALUE_INHERENT"[VARCHAR2,4000], "CREATED_BY"[NUMBER,22], 
+       "CREATION_DATE"[DATE,7], "LAST_UPDATED_BY"[NUMBER,22], 
+       "LAST_UPDATE_DATE"[DATE,7], "X_AXIS_INHERENT"[NUMBER,22], 
+       "Y_AXIS_INHERENT"[NUMBER,22], "BUBBLE_SIZE_INHERENT"[NUMBER,22], 
+       "BUBBLE_SHAPE_INHERENT"[NUMBER,22], "BUBBLE_COLOR_INHERENT"[VARCHAR2,400], 
+       "TREND_INHERENT"[VARCHAR2,4000], "LEVEL_NUM"[NUMBER,22], 
+       "INHERENT_RATING"[VARCHAR2,4000], "SCENARIO_ID"[VARCHAR2,400], 
+       "PREV_INHERENT_RATING"[VARCHAR2,4000], "TREND_SIGN_INHERENT"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_ISM_ACTIONS_LIST (101194)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT action_id, action_name, locale_id, role_activity, previous_stage,
+       current_stage
+  FROM (SELECT a.action_id, b.action_name, b.locale_id, a.role_activity,
+               a.current_stage, a.previous_stage, a.active, a.created_by,
+               a.creation_date, a.last_update_date, a.last_updated_by,
+               a.stage_type, a.status
+          FROM ms_ism_stage_action_mapping a, ms_ism_actions_tl_v b
+         WHERE a.action_id = b.action_id
+          and Previous_Stage = :2
+          and Current_Stage = :3
+         and exists (Select 1 From SI_USER_FLOW_UP_ORG_ACT_VIEW
+                            Where User_Name = :4 And Activity_Name = a.Role_Activity)
+         and a.active = 'Y'
+          and (ms_ism_helper.fn_get_action_list(a.action_id,nvl(:1,''),nvl(:5,''),:2,:3,:4,:6,:7)=1))</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet will fetch list of actions based on stages.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1789006178</h2></header><pre><code>
+ 
+---------------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                                   | Name                        | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                            |                             |     1 |  2138 |    33   (0)| 00:00:01 |
+|*  1 |  FILTER                                     |                             |       |       |            |          |
+|   2 |   NESTED LOOPS OUTER                        |                             |     1 |  2138 |     9   (0)| 00:00:01 |
+|*  3 |    HASH JOIN                                |                             |     1 |   110 |     8   (0)| 00:00:01 |
+|*  4 |     TABLE ACCESS BY INDEX ROWID             | MS_ISM_STAGE_ACTION_MAPPING |     1 |    31 |     2   (0)| 00:00:01 |
+|*  5 |      INDEX RANGE SCAN                       | IDX_STAGE_ACT_MAP2          |    16 |       |     1   (0)| 00:00:01 |
+|   6 |     VIEW                                    |                             |    44 |  3476 |     6   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   7 |      MERGE JOIN CARTESIAN                   |                             |    44 |  1232 |     6   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|*  8 |       TABLE ACCESS FULL                     | SI_LOCALES                  |     1 |     6 |     3   (0)| 00:00:01 |</font>
+|   9 |       BUFFER SORT                           |                             |    44 |   968 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  10 |        TABLE ACCESS FULL                    | MS_ISM_ACTIONS              |    44 |   968 |     3   (0)| 00:00:01 |</font>
+|* 11 |    TABLE ACCESS BY INDEX ROWID              | MS_ISM_ACTIONS_TL           |     1 |  2028 |     1   (0)| 00:00:01 |
+|* 12 |     INDEX RANGE SCAN                        | IDX_ISM_ACTIONS_TL1         |     1 |       |     1   (0)| 00:00:01 |
+|* 13 |   HASH JOIN                                 |                             |     1 |   180 |    24   (0)| 00:00:01 |
+|  14 |    NESTED LOOPS                             |                             |     1 |   175 |    18   (0)| 00:00:01 |
+|  15 |     NESTED LOOPS                            |                             |     1 |   170 |    17   (0)| 00:00:01 |
+|  16 |      NESTED LOOPS                           |                             |     1 |   164 |    16   (0)| 00:00:01 |
+|  17 |       NESTED LOOPS                          |                             |     1 |   154 |    15   (0)| 00:00:01 |
+|  18 |        NESTED LOOPS                         |                             |     1 |   139 |    14   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  19 |         MERGE JOIN CARTESIAN                |                             |     1 |   129 |    13   (0)| 00:00:01 |</font>
+|* 20 |          HASH JOIN                          |                             |     1 |    97 |    12   (0)| 00:00:01 |
+|* 21 |           HASH JOIN                         |                             |     1 |    84 |     9   (0)| 00:00:01 |
+|  22 |            NESTED LOOPS                     |                             |     1 |    51 |     4   (0)| 00:00:01 |
+|* 23 |             TABLE ACCESS BY INDEX ROWID     | SI_USERS_T                  |     1 |    19 |     1   (0)| 00:00:01 |
+|* 24 |              INDEX RANGE SCAN               | SI_USERS_T_N3               |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 25 |             TABLE ACCESS FULL               | MS_QS_PARAMETER_TYPES       |     1 |    32 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 26 |            TABLE ACCESS FULL                | MS_QS_PARAMETER_NAMES       |     3 |    99 |     5   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 27 |           TABLE ACCESS FULL                 | MS_QS_PARAMETER_VALUES      |   257 |  3341 |     3   (0)| 00:00:01 |</font>
+|  28 |          BUFFER SORT                        |                             |     1 |    32 |    10   (0)| 00:00:01 |
+|  29 |           TABLE ACCESS BY INDEX ROWID       | SI_ACTIVITIES_T             |     1 |    32 |     1   (0)| 00:00:01 |
+|* 30 |            INDEX RANGE SCAN                 | SI_ACTIVITIES_N2            |     1 |       |     1   (0)| 00:00:01 |
+|  31 |         TABLE ACCESS BY INDEX ROWID         | SI_USER_ORG_ROLES           |     3 |    30 |     1   (0)| 00:00:01 |
+|* 32 |          INDEX RANGE SCAN                   | SI_USER_ORG_ROLES_N1        |     3 |       |     1   (0)| 00:00:01 |
+|* 33 |        INDEX RANGE SCAN                     | SI_ORG_ROLES_N3             |     1 |    15 |     1   (0)| 00:00:01 |
+|* 34 |       INDEX RANGE SCAN                      | SI_ROLE_ACTIVITIES_N2       |     1 |    10 |     1   (0)| 00:00:01 |
+|* 35 |      TABLE ACCESS BY INDEX ROWID            | SI_ORG_ENTITIES_T           |     1 |     6 |     1   (0)| 00:00:01 |
+|* 36 |       INDEX RANGE SCAN                      | SI_ORG_ENTITIES_N5          |     1 |       |     1   (0)| 00:00:01 |
+|* 37 |     INDEX RANGE SCAN                        | SI_ROLES_N2                 |     1 |     5 |     1   (0)| 00:00:01 |
+|  38 |    VIEW                                     | SI_FLOW_UP_ORGS_VIEW        |   148 |   740 |     7  (15)| 00:00:01 |
+|* 39 |     FILTER                                  |                             |       |       |            |          |
+|* 40 |      CONNECT BY NO FILTERING WITH START-WITH|                             |       |       |            |          |
+|* 41 |       HASH JOIN OUTER                       |                             |    74 |  1332 |     6   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  42 |        TABLE ACCESS FULL                    | SI_ORG_ENTITIES_T           |    74 |   814 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 43 |        TABLE ACCESS FULL                    | SI_ORG_ENTITIES_TL          |     2 |    14 |     3   (0)| 00:00:01 |</font>
+---------------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$5C160134
+   4 - SEL$5C160134 / A@SEL$2
+   5 - SEL$5C160134 / A@SEL$2
+   6 - SEL$7286615E / T@SEL$3
+   7 - SEL$7286615E
+   8 - SEL$7286615E / SI_LOCALES@SEL$5
+  10 - SEL$7286615E / A@SEL$4
+  11 - SEL$5C160134 / TL@SEL$3
+  12 - SEL$5C160134 / TL@SEL$3
+  13 - SEL$5684E3A7
+  23 - SEL$5684E3A7 / USERS@SEL$15
+  24 - SEL$5684E3A7 / USERS@SEL$15
+  25 - SEL$5684E3A7 / PTYPE@SEL$15
+  26 - SEL$5684E3A7 / PNAME@SEL$15
+  27 - SEL$5684E3A7 / PVALUE@SEL$15
+  29 - SEL$5684E3A7 / ACT@SEL$15
+  30 - SEL$5684E3A7 / ACT@SEL$15
+  31 - SEL$5684E3A7 / USR_ORG_ROLES@SEL$15
+  32 - SEL$5684E3A7 / USR_ORG_ROLES@SEL$15
+  33 - SEL$5684E3A7 / ORG_ROLES@SEL$15
+  34 - SEL$5684E3A7 / ROLE_ACT@SEL$15
+  35 - SEL$5684E3A7 / ORGS@SEL$15
+  36 - SEL$5684E3A7 / ORGS@SEL$15
+  37 - SEL$5684E3A7 / ROLES@SEL$15
+  38 - SEL$8        / FLOW_UP_ORGS@SEL$7
+  39 - SEL$8       
+  41 - SEL$C05AD324
+  42 - SEL$C05AD324 / T@SEL$12
+  43 - SEL$C05AD324 / TL@SEL$12
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - filter( EXISTS (SELECT 0 FROM METRICSTREAM."MS_QS_PARAMETER_NAMES" 
+              "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" 
+              "PVALUE",METRICSTREAM."SI_ROLES_T" "ROLES",METRICSTREAM."SI_ORG_ENTITIES_T" "ORGS",METRICSTREAM."SI_ACTIVITIES_T" 
+              "ACT",METRICSTREAM."SI_ROLE_ACTIVITIES" "ROLE_ACT",METRICSTREAM."SI_ORG_ROLES" 
+              "ORG_ROLES",METRICSTREAM."SI_USER_ORG_ROLES" "USR_ORG_ROLES",METRICSTREAM."SI_USERS_T" "USERS", (SELECT 
+              "T"."ORG_ENTITY_ID" "ORG_ENTITY_ID" FROM METRICSTREAM."SI_ORG_ENTITIES_TL" "TL",METRICSTREAM."SI_ORG_ENTITIES_T" 
+              "T" WHERE NVL("END_DATE",SYSDATE@!)>=SYSDATE@! START WITH "T"."ORG_ENTITY_ID"="T"."ORG_ENTITY_ID" AND 
+              "T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+) AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()) 
+              CONNECT BY "T"."ORG_ENTITY_ID"=PRIOR "PARENT_ORG_ENTITY_ID" AND "T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+) AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"())) "FLOW_UP_ORGS" WHERE 
+              "ORGS"."ORG_ENTITY_ID"="FLOW_UP_ORGS"."ORG_ENTITY_ID" AND "USERS"."USER_NAME"=:4 AND 
+              NVL("USERS"."END_DATE",SYSDATE@!)>=SYSDATE@! AND "USERS"."USER_ID"="USR_ORG_ROLES"."USER_ID" AND 
+              "USR_ORG_ROLES"."ORG_ROLE_ID"="ORG_ROLES"."ORG_ROLE_ID" AND "ROLE_ACT"."ACTIVITY_ID"="ACT"."ACTIVITY_ID" AND 
+              "ROLE_ACT"."ROLE_ID"="ORG_ROLES"."ROLE_ID" AND "ACT"."ACTIVITY_NAME"=:B1 AND 
+              "ORGS"."ORG_ENTITY_ID"="ORG_ROLES"."ORG_ENTITY_ID" AND NVL("ORGS"."END_DATE",SYSDATE@!)>=SYSDATE@! AND 
+              "ROLES"."ROLE_ID"="ORG_ROLES"."ROLE_ID" AND "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND 
+              "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PVALUE"."ORG_ENTITY_ID"=1 AND 
+              UPPER("PTYPE"."PARAMETER_TYPE")='MS APPS USER NAME DISPLAY FORMAT' AND 
+              "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND UPPER("PNAME"."PARAMETER_NAME")='DISPLAY_FORMAT'))
+   3 - access("A"."ACTION_ID"="T"."ACTION_ID")
+   4 - filter("A"."ACTIVE"='Y' AND "CURRENT_STAGE"=TO_NUMBER(:3) AND 
+              "MS_ISM_HELPER"."FN_GET_ACTION_LIST"(TO_CHAR("A"."ACTION_ID"),NVL(:1,''),NVL(:5,''),:2,:3,:4,:6,:7)=1)
+   5 - access("PREVIOUS_STAGE"=TO_NUMBER(:2))
+   8 - filter("ENABLED_FLAG"='Y')
+  11 - filter("T"."LOCALE_ID"="TL"."LOCALE_ID"(+))
+  12 - access("T"."ACTION_ID"="TL"."ACTION_ID"(+))
+  13 - access("ORGS"."ORG_ENTITY_ID"="FLOW_UP_ORGS"."ORG_ENTITY_ID")
+  20 - access("PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND 
+              "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID")
+  21 - access("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID")
+  23 - filter(NVL("USERS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  24 - access("USERS"."USER_NAME"=:4)
+  25 - filter(UPPER("PTYPE"."PARAMETER_TYPE")='MS APPS USER NAME DISPLAY FORMAT')
+  26 - filter(UPPER("PNAME"."PARAMETER_NAME")='DISPLAY_FORMAT')
+  27 - filter("PVALUE"."ORG_ENTITY_ID"=1)
+  30 - access("ACT"."ACTIVITY_NAME"=:B1)
+  32 - access("USERS"."USER_ID"="USR_ORG_ROLES"."USER_ID")
+  33 - access("USR_ORG_ROLES"."ORG_ROLE_ID"="ORG_ROLES"."ORG_ROLE_ID")
+  34 - access("ROLE_ACT"."ROLE_ID"="ORG_ROLES"."ROLE_ID" AND "ROLE_ACT"."ACTIVITY_ID"="ACT"."ACTIVITY_ID")
+  35 - filter(NVL("ORGS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  36 - access("ORGS"."ORG_ENTITY_ID"="ORG_ROLES"."ORG_ENTITY_ID")
+  37 - access("ROLES"."ROLE_ID"="ORG_ROLES"."ROLE_ID")
+  39 - filter(NVL("END_DATE",SYSDATE@!)>=SYSDATE@!)
+  40 - access("T"."ORG_ENTITY_ID"=PRIOR "PARENT_ORG_ENTITY_ID")
+       filter("T"."ORG_ENTITY_ID"="T"."ORG_ENTITY_ID")
+  41 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+))
+  43 - filter("TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "A"."ACTION_ID"[NUMBER,22], "PREVIOUS_STAGE"[NUMBER,22], "CURRENT_STAGE"[NUMBER,22], 
+       "A"."ROLE_ACTIVITY"[VARCHAR2,140], "T"."LOCALE_ID"[NUMBER,22], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "TL"."ACTION_NAME"[VARCHAR2,4000]
+   2 - (#keys=0) "A"."ACTION_ID"[NUMBER,22], "PREVIOUS_STAGE"[NUMBER,22], "CURRENT_STAGE"[NUMBER,22], 
+       "A"."ROLE_ACTIVITY"[VARCHAR2,140], "T"."LOCALE_ID"[NUMBER,22], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "TL"."ACTION_NAME"[VARCHAR2,4000]
+   3 - (#keys=1) "A"."ACTION_ID"[NUMBER,22], "T"."ACTION_ID"[NUMBER,22], "PREVIOUS_STAGE"[NUMBER,22], 
+       "CURRENT_STAGE"[NUMBER,22], "A"."ROLE_ACTIVITY"[VARCHAR2,140], "T"."LOCALE_ID"[NUMBER,22], 
+       "T"."ACTION_NAME"[VARCHAR2,140]
+   4 - "PREVIOUS_STAGE"[NUMBER,22], "CURRENT_STAGE"[NUMBER,22], "A"."ROLE_ACTIVITY"[VARCHAR2,140], 
+       "A"."ACTION_ID"[NUMBER,22]
+   5 - "A".ROWID[ROWID,10], "PREVIOUS_STAGE"[NUMBER,22]
+   6 - "T"."ACTION_ID"[NUMBER,22], "T"."ACTION_NAME"[VARCHAR2,140], "T"."LOCALE_ID"[NUMBER,22]
+   7 - (#keys=0) "LOCALE_ID"[NUMBER,22], "A"."ACTION_ID"[NUMBER,22], "A"."ACTION_NAME"[VARCHAR2,140]
+   8 - "LOCALE_ID"[NUMBER,22]
+   9 - (#keys=0) "A"."ACTION_ID"[NUMBER,22], "A"."ACTION_NAME"[VARCHAR2,140]
+  10 - "A"."ACTION_ID"[NUMBER,22], "A"."ACTION_NAME"[VARCHAR2,140]
+  11 - "TL"."ACTION_NAME"[VARCHAR2,4000]
+  12 - "TL".ROWID[ROWID,10]
+  13 - (#keys=1) "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "FLOW_UP_ORGS"."ORG_ENTITY_ID"[NUMBER,22]
+  14 - (#keys=0) "ORGS"."ORG_ENTITY_ID"[NUMBER,22]
+  15 - (#keys=0) "ORG_ROLES"."ROLE_ID"[NUMBER,22], "ORGS"."ORG_ENTITY_ID"[NUMBER,22]
+  16 - (#keys=0) "ORG_ROLES"."ORG_ENTITY_ID"[NUMBER,22], "ORG_ROLES"."ROLE_ID"[NUMBER,22]
+  17 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "ORG_ROLES"."ORG_ENTITY_ID"[NUMBER,22], 
+       "ORG_ROLES"."ROLE_ID"[NUMBER,22]
+  18 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "USR_ORG_ROLES"."ORG_ROLE_ID"[NUMBER,22]
+  19 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "ACT"."ACTIVITY_ID"[NUMBER,22]
+  20 - (#keys=2) "USERS"."USER_ID"[NUMBER,22]
+  21 - (#keys=1) "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], "USERS"."USER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22]
+  22 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  23 - "USERS"."USER_ID"[NUMBER,22]
+  24 - "USERS".ROWID[ROWID,10]
+  25 - "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  26 - "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22]
+  27 - "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22]
+  28 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22]
+  29 - "ACT"."ACTIVITY_ID"[NUMBER,22]
+  30 - "ACT".ROWID[ROWID,10]
+  31 - "USR_ORG_ROLES"."ORG_ROLE_ID"[NUMBER,22]
+  32 - "USR_ORG_ROLES".ROWID[ROWID,10]
+  33 - "ORG_ROLES"."ORG_ENTITY_ID"[NUMBER,22], "ORG_ROLES"."ROLE_ID"[NUMBER,22]
+  35 - "ORGS"."ORG_ENTITY_ID"[NUMBER,22]
+  36 - "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22]
+  38 - "FLOW_UP_ORGS"."ORG_ENTITY_ID"[NUMBER,22]
+  39 - "T"."ORG_ENTITY_ID"[NUMBER,22]
+  40 - "T"."ORG_ENTITY_ID"[NUMBER,22], "PARENT_ORG_ENTITY_ID"[NUMBER,22], STRDEF[7], PRIOR NULL[22], ANY[22], 
+       LEVEL[4]
+  41 - (#keys=1) "T"."ORG_ENTITY_ID"[NUMBER,22], "TL"."ORG_ENTITY_ID"[NUMBER,22], "END_DATE"[DATE,7], 
+       "PARENT_ORG_ENTITY_ID"[NUMBER,22], "TL"."LOCALE_ID"[NUMBER,22]
+  42 - "T"."ORG_ENTITY_ID"[NUMBER,22], "PARENT_ORG_ENTITY_ID"[NUMBER,22], "END_DATE"[DATE,7]
+  43 - "TL"."ORG_ENTITY_ID"[NUMBER,22], "TL"."LOCALE_ID"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

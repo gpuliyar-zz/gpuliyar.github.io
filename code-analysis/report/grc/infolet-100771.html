@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_GRC_ASST_ORB_Rpt_Inf (100771)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT asstSumm.OBJECT_ID AS Asset_id,  
+  asstSumm.OBJECT_NAME as Asset_name,
+  asstMlsSumm.ASSET_TYPE as Asset_Type,
+  asstMlsSumm.OBJECT_LEVEL as Asset_Level,
+  asstSumm.OBJECT_PARENT_NAME as Asset_Parent, 
+  asstMlsSumm.BUSINESS_CRITICALITY as Business_criticality, 
+  'MS_GRC_ASSET' as Additional_column3,
+  NULL as form_url,
+  'MS_GRC_ASSET' as ADDITIONAL_COLUMN4,
+  asstSumm.upper_object_name as upper_object_name
+FROM MS_GRC_ASSET_SUMMARY asstSumm,
+	   MS_GRC_ASSET_MLS_SUMMARY asstMlsSumm
+	 where asstSumm.OBJECT_ID = asstMlsSumm.OBJECT_ID  
+	 and asstMlsSumm.LOCALE_ID = (select LOCALE_ID from SI_USERS_T T1 ,SI_LOCALES T2 where USER_NAME = :1 and T1.LOCALE = T2.LOCALE_STRING)
+	and exists   (SELECT COLUMN_VALUE
+    FROM TABLE(CAST(ms_grc_orb_report_filter.Fn_Asset_Orb_Filters(:1,:3,:2,:5,:4,:7,:6) AS ms_varchar2_array))
+  where COLUMN_VALUE=asstSumm.OBJECT_ID
+) 
+and TRUNC(sysdate) between NVL(TRUNC(ASSTSUMM.VALID_FROM),TRUNC(sysdate)) and NVL(TRUNC(ASSTSUMM.VALID_UNTIL),TRUNC(sysdate))</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet extracts data from MS_GRC_ASSET_DENORM_RV view and is thereby used in MS_GRC_ASST_ORB_REPORT report</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 3538217202</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                           | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                    |                            |     1 |   127 |   101   (0)| 00:00:02 |
+|   1 |  NESTED LOOPS                       |                            |     1 |   127 |    97   (0)| 00:00:02 |
+|*  2 |   HASH JOIN SEMI                    |                            |     1 |    85 |    96   (0)| 00:00:02 |
+|*  3 |    INDEX FAST FULL SCAN             | MS_GRC_ASSET_SUMMARY_PK    |     4 |   332 |    67   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   4 |    COLLECTION ITERATOR PICKLER FETCH| FN_ASSET_ORB_FILTERS       |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|   5 |   TABLE ACCESS BY INDEX ROWID       | MS_GRC_ASSET_MLS_SUMMARY   |     1 |    42 |     1   (0)| 00:00:01 |
+|*  6 |    INDEX RANGE SCAN                 | MS_GRC_ASSET_MLS_SUMM_IDX2 |     1 |       |     1   (0)| 00:00:01 |
+|   7 |     NESTED LOOPS                    |                            |     1 |    30 |     4   (0)| 00:00:01 |
+|   8 |      TABLE ACCESS BY INDEX ROWID    | SI_USERS_T                 |     1 |    19 |     1   (0)| 00:00:01 |
+|*  9 |       INDEX RANGE SCAN              | SI_USERS_T_N3              |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 10 |      TABLE ACCESS FULL              | SI_LOCALES                 |     1 |    11 |     3   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$ABEA6AB6
+   3 - SEL$ABEA6AB6 / ASSTSUMM@SEL$1
+   4 - SEL$ABEA6AB6 / KOKBF$0@SEL$4
+   5 - SEL$ABEA6AB6 / ASSTMLSSUMM@SEL$1
+   6 - SEL$ABEA6AB6 / ASSTMLSSUMM@SEL$1
+   7 - SEL$2       
+   8 - SEL$2        / T1@SEL$2
+   9 - SEL$2        / T1@SEL$2
+  10 - SEL$2        / T2@SEL$2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("ASSTSUMM"."OBJECT_ID"=VALUE(KOKBF$))
+   3 - filter(NVL(TRUNC(INTERNAL_FUNCTION("ASSTSUMM"."VALID_FROM")),TRUNC(SYSDATE@!))<=TRUNC(SYSDATE@!) 
+              AND NVL(TRUNC(INTERNAL_FUNCTION("ASSTSUMM"."VALID_UNTIL")),TRUNC(SYSDATE@!))>=TRUNC(SYSDATE@!))
+   6 - access("ASSTSUMM"."OBJECT_ID"="ASSTMLSSUMM"."OBJECT_ID")
+       filter(TO_NUMBER("ASSTMLSSUMM"."LOCALE_ID")= (SELECT "LOCALE_ID" FROM "SI_LOCALES" 
+              "T2","SI_USERS_T" "T1" WHERE "USER_NAME"=:1 AND "T1"."LOCALE"="T2"."LOCALE_STRING"))
+   9 - access("USER_NAME"=:1)
+  10 - filter("T1"."LOCALE"="T2"."LOCALE_STRING")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=0) "ASSTSUMM"."OBJECT_ID"[VARCHAR2,400], "ASSTSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "ASSTSUMM"."OBJECT_PARENT_NAME"[VARCHAR2,4000], "ASSTSUMM"."OBJECT_NAME"[VARCHAR2,4000], 
+       "ASSTMLSSUMM"."BUSINESS_CRITICALITY"[VARCHAR2,400], "ASSTMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,400], 
+       "ASSTMLSSUMM"."ASSET_TYPE"[VARCHAR2,1020]
+   2 - (#keys=1) "ASSTSUMM"."OBJECT_ID"[VARCHAR2,400], "ASSTSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "ASSTSUMM"."OBJECT_PARENT_NAME"[VARCHAR2,4000], "ASSTSUMM"."OBJECT_NAME"[VARCHAR2,4000]
+   3 - "ASSTSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], "ASSTSUMM"."OBJECT_ID"[VARCHAR2,400], 
+       "ASSTSUMM"."OBJECT_NAME"[VARCHAR2,4000], "ASSTSUMM"."OBJECT_PARENT_NAME"[VARCHAR2,4000]
+   4 - VALUE(A0)[8000]
+   5 - "ASSTMLSSUMM"."BUSINESS_CRITICALITY"[VARCHAR2,400], "ASSTMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,400], 
+       "ASSTMLSSUMM"."ASSET_TYPE"[VARCHAR2,1020]
+   6 - "ASSTMLSSUMM".ROWID[ROWID,10]
+   7 - (#keys=0) "LOCALE_ID"[NUMBER,22]
+   8 - "T1"."LOCALE"[VARCHAR2,100]
+   9 - "T1".ROWID[ROWID,10]
+  10 - "LOCALE_ID"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_CROS_PER_RPT_L2OPR_OR_INFOL (102163)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>Select organization_id,b.object_name scenario_name,d.ORG_ENTITY_NAME as Organization_name,b.SCENARIO_ID,
+Ms_rsk_assessments_task.Fn_Get_Previous_range(residual_rollup_rating) as residual_rollup_rating,a.assessment_type , c.level_num 
+from Ms_Rsk_Organization_Rollup a,
+     Ms_Rsk_Scenarios_Scn b,
+     ms_rsk_org_levels c,
+     si_org_entities d
+Where version_no = (Select max(version_no)
+                   from  Ms_Rsk_Organization_Rollup e
+                   Where a.organization_id = e.organization_id
+                   and   a.assessment_type = e.assessment_type
+                   and   a.scenario_id     = e.scenario_id )
+and   a.organization_id = d.ORG_ENTITY_ID   
+And   a.scenario_id = b.scenario_id    
+and   a.organization_id = c.org_id 
+and   d.parent_org_entity_id = :1
+and   b.scenario_id     in (:2)         
+and   b.assessment_type = :3           
+Group by   b.object_name,a.assessment_type,c.level_num,b.SCENARIO_ID,organization_id, residual_rollup_rating,d.ORG_ENTITY_NAME</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>null</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2274328970</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                           | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                    |                            |     1 |   122 |    13   (8)| 00:00:01 |
+|   1 |  SORT GROUP BY                      |                            |     1 |   122 |    13   (8)| 00:00:01 |
+|*  2 |   FILTER                            |                            |       |       |            |          |
+|   3 |    NESTED LOOPS                     |                            |     1 |   122 |     9   (0)| 00:00:01 |
+|   4 |     NESTED LOOPS                    |                            |     1 |   122 |     9   (0)| 00:00:01 |
+|*  5 |      HASH JOIN OUTER                |                            |     1 |   112 |     8   (0)| 00:00:01 |
+|*  6 |       HASH JOIN                     |                            |     1 |   105 |     5   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   7 |        MERGE JOIN CARTESIAN         |                            |     2 |   160 |     2   (0)| 00:00:01 |</font>
+|*  8 |         TABLE ACCESS BY INDEX ROWID | MS_RSK_SCENARIOS_SCN       |     1 |    50 |     1   (0)| 00:00:01 |
+|*  9 |          INDEX RANGE SCAN           | MS_RSK_SCENARIOS_SCN_UK    |     1 |       |     1   (0)| 00:00:01 |
+|  10 |         BUFFER SORT                 |                            |     5 |   150 |     1   (0)| 00:00:01 |
+|  11 |          TABLE ACCESS BY INDEX ROWID| SI_ORG_ENTITIES_T          |     5 |   150 |     1   (0)| 00:00:01 |
+|* 12 |           INDEX RANGE SCAN          | SI_ORG_ENTITIES_N3         |     5 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 13 |        TABLE ACCESS FULL            | MS_RSK_ORGANIZATION_ROLLUP |     5 |   125 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 14 |       TABLE ACCESS FULL             | SI_ORG_ENTITIES_TL         |     2 |    14 |     3   (0)| 00:00:01 |</font>
+|* 15 |      INDEX RANGE SCAN               | MS_RSK_ORG_LEVELS_ORG_ID   |     1 |       |     1   (0)| 00:00:01 |
+|  16 |     TABLE ACCESS BY INDEX ROWID     | MS_RSK_ORG_LEVELS          |     1 |    10 |     1   (0)| 00:00:01 |
+|  17 |    SORT AGGREGATE                   |                            |     1 |    23 |            |          |
+<font style="background-color: lightblue; color: red">|* 18 |     TABLE ACCESS FULL               | MS_RSK_ORGANIZATION_ROLLUP |     2 |    46 |     3   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$F5BB74E1
+   8 - SEL$F5BB74E1 / B@SEL$1
+   9 - SEL$F5BB74E1 / B@SEL$1
+  11 - SEL$F5BB74E1 / T@SEL$2
+  12 - SEL$F5BB74E1 / T@SEL$2
+  13 - SEL$F5BB74E1 / A@SEL$1
+  14 - SEL$F5BB74E1 / TL@SEL$2
+  15 - SEL$F5BB74E1 / C@SEL$1
+  16 - SEL$F5BB74E1 / C@SEL$1
+  17 - SEL$3       
+  18 - SEL$3        / E@SEL$3
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - filter("VERSION_NO"= (SELECT MAX("VERSION_NO") FROM "MS_RSK_ORGANIZATION_ROLLUP" "E" WHERE 
+              "E"."ORGANIZATION_ID"=:B1 AND "E"."SCENARIO_ID"=:B2 AND "E"."ASSESSMENT_TYPE"=:B3))
+   5 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+))
+   6 - access("T"."ORG_ENTITY_ID"=TO_NUMBER("A"."ORGANIZATION_ID") AND 
+              "A"."SCENARIO_ID"="B"."SCENARIO_ID")
+   8 - filter("B"."ASSESSMENT_TYPE"=:3)
+   9 - access("B"."SCENARIO_ID"=:2)
+  12 - access("PARENT_ORG_ENTITY_ID"=TO_NUMBER(:1))
+  13 - filter("A"."SCENARIO_ID"=:2)
+  14 - filter("TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  15 - access("A"."ORGANIZATION_ID"="C"."ORG_ID")
+  18 - filter("E"."ORGANIZATION_ID"=:B1 AND "E"."SCENARIO_ID"=:B2 AND "E"."ASSESSMENT_TYPE"=:B3)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=7) "B"."OBJECT_NAME"[VARCHAR2,800], "A"."ASSESSMENT_TYPE"[VARCHAR2,400], 
+       "C"."LEVEL_NUM"[NUMBER,22], "B"."SCENARIO_ID"[VARCHAR2,400], "ORGANIZATION_ID"[VARCHAR2,400], 
+       "RESIDUAL_ROLLUP_RATING"[VARCHAR2,400], "T"."ORG_ENTITY_NAME"[VARCHAR2,400]
+   2 - "RESIDUAL_ROLLUP_RATING"[VARCHAR2,400], "B"."SCENARIO_ID"[VARCHAR2,400], 
+       "B"."OBJECT_NAME"[VARCHAR2,800], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], "ORGANIZATION_ID"[VARCHAR2,400], 
+       "A"."ASSESSMENT_TYPE"[VARCHAR2,400], "C"."LEVEL_NUM"[NUMBER,22]
+   3 - (#keys=0) "RESIDUAL_ROLLUP_RATING"[VARCHAR2,400], "B"."SCENARIO_ID"[VARCHAR2,400], 
+       "A"."SCENARIO_ID"[VARCHAR2,400], "B"."OBJECT_NAME"[VARCHAR2,800], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "VERSION_NO"[NUMBER,22], "ORGANIZATION_ID"[VARCHAR2,400], "A"."ASSESSMENT_TYPE"[VARCHAR2,400], 
+       "C"."LEVEL_NUM"[NUMBER,22]
+   4 - (#keys=0) "RESIDUAL_ROLLUP_RATING"[VARCHAR2,400], "B"."SCENARIO_ID"[VARCHAR2,400], 
+       "A"."SCENARIO_ID"[VARCHAR2,400], "B"."OBJECT_NAME"[VARCHAR2,800], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "VERSION_NO"[NUMBER,22], "ORGANIZATION_ID"[VARCHAR2,400], "A"."ASSESSMENT_TYPE"[VARCHAR2,400], 
+       "C".ROWID[ROWID,10]
+   5 - (#keys=1) "RESIDUAL_ROLLUP_RATING"[VARCHAR2,400], "B"."SCENARIO_ID"[VARCHAR2,400], 
+       "A"."SCENARIO_ID"[VARCHAR2,400], "B"."OBJECT_NAME"[VARCHAR2,800], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "VERSION_NO"[NUMBER,22], "ORGANIZATION_ID"[VARCHAR2,400], "A"."ASSESSMENT_TYPE"[VARCHAR2,400]
+   6 - (#keys=2) "T"."ORG_ENTITY_ID"[NUMBER,22], "B"."SCENARIO_ID"[VARCHAR2,400], 
+       "A"."SCENARIO_ID"[VARCHAR2,400], "B"."OBJECT_NAME"[VARCHAR2,800], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "VERSION_NO"[NUMBER,22], "ORGANIZATION_ID"[VARCHAR2,400], "A"."ASSESSMENT_TYPE"[VARCHAR2,400], 
+       "RESIDUAL_ROLLUP_RATING"[VARCHAR2,400]
+   7 - (#keys=0) "B"."OBJECT_NAME"[VARCHAR2,800], "B"."SCENARIO_ID"[VARCHAR2,400], 
+       "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400]
+   8 - "B"."OBJECT_NAME"[VARCHAR2,800], "B"."SCENARIO_ID"[VARCHAR2,400]
+   9 - "B".ROWID[ROWID,10], "B"."SCENARIO_ID"[VARCHAR2,400]
+  10 - (#keys=0) "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400]
+  11 - "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400]
+  12 - "T".ROWID[ROWID,10]
+  13 - "A"."SCENARIO_ID"[VARCHAR2,400], "ORGANIZATION_ID"[VARCHAR2,400], 
+       "A"."ASSESSMENT_TYPE"[VARCHAR2,400], "RESIDUAL_ROLLUP_RATING"[VARCHAR2,400], "VERSION_NO"[NUMBER,22]
+  14 - "TL"."ORG_ENTITY_ID"[NUMBER,22]
+  15 - "C".ROWID[ROWID,10]
+  16 - "C"."LEVEL_NUM"[NUMBER,22]
+  17 - (#keys=0) MAX("VERSION_NO")[22]
+  18 - "VERSION_NO"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

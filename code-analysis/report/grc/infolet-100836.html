@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_GRC_Exception_Report_Infolet (100836)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>select Exception_Id,Exception_for,
+      type_of_exception,Applies_To_Organizations,
+      OBJ_CREATED_ON,
+      OBJ_CREATED_BY,
+      OBJ_MODIFIED_ON,
+      OBJ_MODIFIED_BY,
+      Related_Areas_Of_Compliance,Related_Asset_Classes,Related_Assets,
+      Related_Controls,RELATED_FRAMEWORK_REFERENCES,Related_Processes,
+      Related_References,Related_Requirements,Related_Standards,
+      valid_from,
+      expires_on,
+      status,
+      items,
+      (SELECT usr.first_name
+	|| ' '
+	|| usr.last_name
+   FROM si_users_t usr
+  WHERE exception_approver = usr.user_name
+  ) as  exception_approver,
+      explanation,
+      edit
+,
+ exception_approver AS APPROVER_1,
+  (MS_GRC_UTILITIES.FN_GET_REPORT_JSON((SELECT METRIC_ID FROM SI_METRICS_T 
+WHERE METRIC_NAME='MS_GRC_EXCEPTION'),DD_PROCESS_INSTANCE_ID,(SELECT MAX(INSTANCE_ID) FROM MS_GRC_EXCEPTION_V WHERE OBJECT_ID=OBJECT_ID),
+'''flag=1'||CHR(38)||'emd=1'||CHR(38)||'x_edit_mode=Yes'||CHR (38)|| 'wrapper= No'|| CHR (38)|| 'mode=view''')) as report_json,Related_Risks
+   from table(ms_grc_reportbrowser_filters.GET_Filters_exception(ms_grc_array_type(:1,:2,:3,:4,:5,:6,:7,to_char(:8,'YYYY-MM-DD'),TO_CHAR(:9,'YYYY-MM-DD'),:10,:11,TO_CHAR(:12,'YYYY-MM-DD'),
+              TO_CHAR(:13,'YYYY-MM-DD'),TO_CHAR(:14,'YYYY-MM-DD'),TO_CHAR(:15,'YYYY-MM-DD'),:16,:17,:18,:19,:20,:21,:22,:23,:24,:25,'',:26)))</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet is used for fetching the Library data for Exception list report. It consists of the parameters specific to Exception object and also the related library object parmaters. It does not contain any mandatory parameter.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1918614615</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------
+| Id  | Operation                         | Name                  | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                  |                       |  8168 | 16336 |    29   (0)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID      | SI_USERS_T            |     1 |    28 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX RANGE SCAN                | SI_USERS_T_N3         |     1 |       |     1   (0)| 00:00:01 |
+|   3 |  TABLE ACCESS BY INDEX ROWID      | SI_METRICS_T          |     1 |    34 |     1   (0)| 00:00:01 |
+|*  4 |   INDEX RANGE SCAN                | SI_METRICS_T_N7       |     1 |       |     1   (0)| 00:00:01 |
+|   5 |   SORT AGGREGATE                  |                       |     1 |  2015 |            |          |
+<font style="background-color: lightblue; color: red">|*  6 |    TABLE ACCESS FULL              | SI_101115_T           |     1 |  2015 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|   7 |  COLLECTION ITERATOR PICKLER FETCH| GET_FILTERS_EXCEPTION |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+-----------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2        / USR@SEL$2
+   2 - SEL$2        / USR@SEL$2
+   3 - SEL$3        / SI_METRICS_T@SEL$3
+   4 - SEL$3        / SI_METRICS_T@SEL$3
+   5 - SEL$7286615E
+   6 - SEL$7286615E / SI_101115_T@SEL$5
+   7 - SEL$560A7E3C / KOKBF$0@SEL$6
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("USR"."USER_NAME"=:B1)
+   4 - access("METRIC_NAME"='MS_GRC_EXCEPTION')
+   6 - filter("OBJECT_ID" IS NOT NULL)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "USR".ROWID[ROWID,10], "USR"."LAST_NAME"[VARCHAR2,100], "USR"."FIRST_NAME"[VARCHAR2,100]
+   2 - "USR".ROWID[ROWID,10]
+   3 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22]
+   4 - "SI_METRICS_T".ROWID[ROWID,10]
+   5 - (#keys=0) MAX("INSTANCE_ID")[22]
+   6 - "INSTANCE_ID"[NUMBER,22]
+   7 - VALUE(A0)[400], VALUE(A0)[1016], VALUE(A0)[16000], VALUE(A0)[21], VALUE(A0)[21], 
+       VALUE(A0)[400], VALUE(A0)[21], VALUE(A0)[1020], VALUE(A0)[21], VALUE(A0)[400], VALUE(A0)[16000], 
+       VALUE(A0)[16000], VALUE(A0)[16000], VALUE(A0)[32767], VALUE(A0)[16000], VALUE(A0)[32767], 
+       VALUE(A0)[32767], VALUE(A0)[32767], VALUE(A0)[32767], VALUE(A0)[32767], VALUE(A0)[32767], 
+       VALUE(A0)[32767], VALUE(A0)[32767], VALUE(A0)[32767], VALUE(A0)[32767], VALUE(A0)[32767], 
+       VALUE(A0)[32767], VALUE(A0)[400], VALUE(A0)[22], VALUE(A0)[22], VALUE(A0)[4], VALUE(A0)[16000], 
+       VALUE(A0)[22], VALUE(A0)[16000], VALUE(A0)[400], VALUE(A0)[420], VALUE(A0)[4]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

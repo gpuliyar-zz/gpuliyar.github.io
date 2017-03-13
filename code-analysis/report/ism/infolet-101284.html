@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_ISM_ISSUE_AGEING_REPORT (101284)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>select Lov_T.displayed_value     as ISSUE_SOURCE_TYPE,
+  NVL(SUM(OVERDUE_THIS_MONTH),0)    as OVER_DUE,
+  NVL(SUM(DUE_THIS_MONTH),0)        as DUE_THIS_MONTH,
+  NVL(SUM(OD_PAST_THREE_MONTH),0)   as OVERDUE_PAST_3_MONTH,
+  NVL(SUM(OD_BEYOND_THREE_MONTH),0) as DUE_BEYOND_3_MONTH,
+  NVL(SUM(DUE_WITHIN_X_MONTH),0)    as DUE_NEXT_X_MONTH,
+  NVL(SUM(DUE_BEYOND_X_MONTH),0)    as DUE_BEYOND_X_MONTH,
+  SUM((nvl(OVERDUE_THIS_MONTH,0)+nvl(DUE_THIS_MONTH,0)+nvl(OD_PAST_THREE_MONTH,0)+nvl(OD_BEYOND_THREE_MONTH,0)+nvl(DUE_WITHIN_X_MONTH,0)+nvl(DUE_BEYOND_X_MONTH,0)))
+  ||'$==$'
+  ||ms_apps_utilities.get_parameter_value (1, 'MS_ISM_Configuration', 'Enable_Ageing_Due_In_Months')
+AS total,
+  NVL(:1,'') AS Owner_Org,
+  1          AS Col1,
+  2          AS Col2,
+  3          AS COL3
+FROM
+  (SELECT SOURCE_TYPE_Stored,
+    DECODE(OVERDUE_THIS_MONTH,'Y',COUNT(OVERDUE_THIS_MONTH))       AS OVERDUE_THIS_MONTH,
+    DECODE(DUE_THIS_MONTH,'Y',COUNT(DUE_THIS_MONTH))               AS DUE_THIS_MONTH,
+    DECODE(OD_PAST_THREE_MONTH,'Y',COUNT(OD_PAST_THREE_MONTH))     AS OD_PAST_THREE_MONTH,
+    DECODE(OD_BEYOND_THREE_MONTH,'Y',COUNT(OD_BEYOND_THREE_MONTH)) AS OD_BEYOND_THREE_MONTH,
+    DECODE(DUE_WITHIN_X_MONTH,'Y',COUNT(DUE_WITHIN_X_MONTH))       AS DUE_WITHIN_X_MONTH,
+    DECODE(DUE_BEYOND_X_MONTH,'Y',COUNT(DUE_BEYOND_X_MONTH))       AS DUE_BEYOND_X_MONTH
+  FROM MS_ISM_ISSUE_REPORTING_V 
+  WHERE ((1 = ms_ism_security_pkg.fn_ism_view_issue(:2) 
+           AND 1 = ms_ism_security_pkg.fn_ism_view_issue_org(:2,ISSUE_OWNER_ORG,ISSUE_APPROVERORG,ACT_PLAN_APPROVERORG,FINAL_ISS_APPROVERORG)) 
+           OR 1 = ms_ism_security_pkg.fn_ism_view_issue_all(:2)
+           OR 1 = decode(tgt_obj_id,NULL,-1,ms_ism_security_pkg.fn_ism_view_issue_orb(:2,tgt_obj_id)))
+  And (:1 Is Null Or Issue_Owner_Org =:1)
+  GROUP BY SOURCE_TYPE_Stored,
+    OVERDUE_THIS_MONTH,
+    DUE_THIS_MONTH,
+    OD_PAST_THREE_MONTH,
+    OD_BEYOND_THREE_MONTH,
+    DUE_WITHIN_X_MONTH,
+    Due_Beyond_X_Month
+  ) Tmp, Ms_Qs_Ism_Lov_Org_Values_V Lov_T,Si_Users_T A, Si_Locales B
+  Where Tmp.Source_Type_Stored = Lov_T.Stored_Value(+)
+  And Lov_T.Lov_Name(+)   = 'MS ISM Source Type'
+  And User_Name = :2 And B.Locale_String = A.Locale
+  and lov_t.locale_id = b.locale_id
+GROUP BY Lov_T.displayed_value</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet will fetch data that will provide the ageing of all the approved issues raised in the system.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2760566946</h2></header><pre><code>
+ 
+---------------------------------------------------------------------------------------------------------------
+| Id  | Operation                           | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                    |                         |     1 |  2213 |    36   (6)| 00:00:01 |
+|   1 |  SORT GROUP BY                      |                         |     1 |  2213 |    36   (6)| 00:00:01 |
+|*  2 |   HASH JOIN OUTER                   |                         |     1 |  2213 |    35   (3)| 00:00:01 |
+|   3 |    NESTED LOOPS                     |                         |     1 |  2206 |    32   (4)| 00:00:01 |
+|   4 |     NESTED LOOPS                    |                         |     1 |  2198 |    31   (4)| 00:00:01 |
+|*  5 |      HASH JOIN OUTER                |                         |     1 |  2187 |    30   (4)| 00:00:01 |
+|*  6 |       HASH JOIN                     |                         |     1 |   159 |    28   (4)| 00:00:01 |
+|*  7 |        HASH JOIN                    |                         |     6 |   774 |    27   (4)| 00:00:01 |
+|   8 |         NESTED LOOPS                |                         |     1 |    99 |     7  (15)| 00:00:01 |
+|   9 |          TABLE ACCESS BY INDEX ROWID| SI_USERS_T              |     1 |    19 |     1   (0)| 00:00:01 |
+|* 10 |           INDEX RANGE SCAN          | SI_USERS_T_N3           |     1 |       |     1   (0)| 00:00:01 |
+|  11 |          VIEW                       |                         |     1 |    80 |     6  (17)| 00:00:01 |
+|  12 |           SORT GROUP BY             |                         |     1 |    42 |     6  (17)| 00:00:01 |
+|  13 |            NESTED LOOPS             |                         |     1 |    42 |     5   (0)| 00:00:01 |
+|  14 |             FAST DUAL               |                         |     1 |       |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 15 |             TABLE ACCESS FULL       | MS_ISM_ISSUE_REPORTING  |     1 |    42 |     3   (0)| 00:00:01 |</font>
+|  16 |         VIEW                        |                         |  5524 |   161K|    20   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  17 |          MERGE JOIN CARTESIAN       |                         |  5524 |   172K|    20   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 18 |           TABLE ACCESS FULL         | SI_LOCALES              |     1 |     6 |     3   (0)| 00:00:01 |</font>
+|  19 |           BUFFER SORT               |                         |  5524 |   140K|    17   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  20 |            TABLE ACCESS FULL        | MS_QS_LIST_OF_VALUES_T  |  5524 |   140K|    17   (0)| 00:00:01 |</font>
+|  21 |        TABLE ACCESS BY INDEX ROWID  | MS_QS_LOV_NAMES         |     1 |    30 |     1   (0)| 00:00:01 |
+|* 22 |         INDEX RANGE SCAN            | MS_QS_LOV_NAMES_N1      |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  23 |       TABLE ACCESS FULL             | MS_QS_LIST_OF_VALUES_TL |     1 |  2028 |     2   (0)| 00:00:01 |</font>
+|* 24 |      TABLE ACCESS BY INDEX ROWID    | SI_LOCALES              |     1 |    11 |     1   (0)| 00:00:01 |
+|* 25 |       INDEX UNIQUE SCAN             | SI_LOCALES_U1           |     1 |       |     1   (0)| 00:00:01 |
+|* 26 |     INDEX RANGE SCAN                | SI_ORG_ENTITIES_N1      |     1 |     8 |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 27 |    TABLE ACCESS FULL                | SI_ORG_ENTITIES_TL      |     2 |    14 |     3   (0)| 00:00:01 |</font>
+---------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$900D94AE
+   9 - SEL$900D94AE / A@SEL$1
+  10 - SEL$900D94AE / A@SEL$1
+  11 - SEL$641071AC / TMP@SEL$1
+  12 - SEL$641071AC
+  14 - SEL$641071AC / DUAL@SEL$4
+  15 - SEL$641071AC / A@SEL$3
+  16 - SEL$68B588A0 / X@SEL$5
+  17 - SEL$68B588A0
+  18 - SEL$68B588A0 / SI_LOCALES@SEL$7
+  20 - SEL$68B588A0 / T@SEL$6
+  21 - SEL$900D94AE / N@SEL$5
+  22 - SEL$900D94AE / N@SEL$5
+  23 - SEL$900D94AE / TL@SEL$5
+  24 - SEL$900D94AE / B@SEL$1
+  25 - SEL$900D94AE / B@SEL$1
+  26 - SEL$900D94AE / T@SEL$8
+  27 - SEL$900D94AE / TL@SEL$8
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+))
+   5 - access("X"."LOCALE_ID"="TL"."LOCALE_ID"(+) AND "X"."LOV_VALUE_ID"="TL"."LOV_VALUE_ID"(+))
+   6 - access("X"."LOV_ID"="N"."LOV_ID")
+   7 - access("TMP"."SOURCE_TYPE_STORED"="X"."STORED_VALUE")
+  10 - access("USER_NAME"=:2)
+  15 - filter(("ISSUE_OWNER_ORG"=:1 OR :1 IS NULL) AND 
+              ("MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE_ALL"(:2)=1 OR 
+              DECODE("ORB_TGT_OBJ_ID",NULL,(-1),"MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE_ORB"(:2,"ORB_TGT_OBJ_ID"))=1
+               OR "MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE"(:2)=1 AND 
+              "MS_ISM_SECURITY_PKG"."FN_ISM_VIEW_ISSUE_ORG"(:2,"ISSUE_OWNER_ORG","ISSUE_APPROVERORG","ACT_PLAN_APPROV
+              ERORG","FINAL_ISS_APPROVERORG")=1))
+  18 - filter("ENABLED_FLAG"='Y')
+  22 - access("N"."LOV_NAME"='MS ISM Source Type')
+  24 - filter("B"."LOCALE_STRING"="A"."LOCALE")
+  25 - access("X"."LOCALE_ID"="B"."LOCALE_ID")
+  26 - access("T"."ENTERPRISE_ID"="X"."ENTERPRISE_ID" AND "T"."ORG_ENTITY_ID"="X"."ORG_ENTITY_ID")
+  27 - filter("TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) NVL("TL"."DISPLAYED_VALUE","X"."DISPLAYED_VALUE")[4000], 
+       SUM(NVL("OVERDUE_THIS_MONTH",0)+NVL("DUE_THIS_MONTH",0)+NVL("OD_PAST_THREE_MONTH",0)+NVL("OD_BEYOND_THR
+       EE_MONTH",0)+NVL("DUE_WITHIN_X_MONTH",0)+NVL("DUE_BEYOND_X_MONTH",0))[22], 
+       SUM("DUE_BEYOND_X_MONTH")[22], SUM("DUE_WITHIN_X_MONTH")[22], SUM("OD_BEYOND_THREE_MONTH")[22], 
+       SUM("OD_PAST_THREE_MONTH")[22], SUM("DUE_THIS_MONTH")[22], SUM("OVERDUE_THIS_MONTH")[22]
+   2 - (#keys=1) "DUE_BEYOND_X_MONTH"[NUMBER,22], "OVERDUE_THIS_MONTH"[NUMBER,22], 
+       "DUE_THIS_MONTH"[NUMBER,22], "OD_PAST_THREE_MONTH"[NUMBER,22], "OD_BEYOND_THREE_MONTH"[NUMBER,22], 
+       "DUE_WITHIN_X_MONTH"[NUMBER,22], "X"."DISPLAYED_VALUE"[VARCHAR2,4000], 
+       "TL"."DISPLAYED_VALUE"[VARCHAR2,4000]
+   3 - (#keys=0) "DUE_BEYOND_X_MONTH"[NUMBER,22], "OVERDUE_THIS_MONTH"[NUMBER,22], 
+       "DUE_THIS_MONTH"[NUMBER,22], "OD_PAST_THREE_MONTH"[NUMBER,22], "OD_BEYOND_THREE_MONTH"[NUMBER,22], 
+       "DUE_WITHIN_X_MONTH"[NUMBER,22], "X"."DISPLAYED_VALUE"[VARCHAR2,4000], 
+       "TL"."DISPLAYED_VALUE"[VARCHAR2,4000], "T"."ORG_ENTITY_ID"[NUMBER,22]
+   4 - (#keys=0) "DUE_BEYOND_X_MONTH"[NUMBER,22], "OVERDUE_THIS_MONTH"[NUMBER,22], 
+       "DUE_THIS_MONTH"[NUMBER,22], "OD_PAST_THREE_MONTH"[NUMBER,22], "OD_BEYOND_THREE_MONTH"[NUMBER,22], 
+       "DUE_WITHIN_X_MONTH"[NUMBER,22], "X"."ENTERPRISE_ID"[NUMBER,22], "X"."DISPLAYED_VALUE"[VARCHAR2,4000], 
+       "X"."ORG_ENTITY_ID"[NUMBER,22], "TL"."DISPLAYED_VALUE"[VARCHAR2,4000]
+   5 - (#keys=2) "X"."LOCALE_ID"[NUMBER,22], "A"."LOCALE"[VARCHAR2,100], 
+       "DUE_BEYOND_X_MONTH"[NUMBER,22], "OVERDUE_THIS_MONTH"[NUMBER,22], "DUE_THIS_MONTH"[NUMBER,22], 
+       "OD_PAST_THREE_MONTH"[NUMBER,22], "OD_BEYOND_THREE_MONTH"[NUMBER,22], "DUE_WITHIN_X_MONTH"[NUMBER,22], 
+       "X"."ENTERPRISE_ID"[NUMBER,22], "X"."DISPLAYED_VALUE"[VARCHAR2,4000], "X"."ORG_ENTITY_ID"[NUMBER,22], 
+       "TL"."DISPLAYED_VALUE"[VARCHAR2,4000]
+   6 - (#keys=1) "A"."LOCALE"[VARCHAR2,100], "DUE_BEYOND_X_MONTH"[NUMBER,22], 
+       "OVERDUE_THIS_MONTH"[NUMBER,22], "DUE_THIS_MONTH"[NUMBER,22], "OD_PAST_THREE_MONTH"[NUMBER,22], 
+       "OD_BEYOND_THREE_MONTH"[NUMBER,22], "DUE_WITHIN_X_MONTH"[NUMBER,22], "X"."ENTERPRISE_ID"[NUMBER,22], 
+       "X"."DISPLAYED_VALUE"[VARCHAR2,4000], "X"."LOV_VALUE_ID"[NUMBER,22], "X"."ORG_ENTITY_ID"[NUMBER,22], 
+       "X"."LOCALE_ID"[NUMBER,22]
+   7 - (#keys=1) "A"."LOCALE"[VARCHAR2,100], "DUE_BEYOND_X_MONTH"[NUMBER,22], 
+       "OVERDUE_THIS_MONTH"[NUMBER,22], "DUE_THIS_MONTH"[NUMBER,22], "OD_PAST_THREE_MONTH"[NUMBER,22], 
+       "OD_BEYOND_THREE_MONTH"[NUMBER,22], "DUE_WITHIN_X_MONTH"[NUMBER,22], "X"."ENTERPRISE_ID"[NUMBER,22], 
+       "X"."LOV_ID"[NUMBER,22], "X"."LOV_VALUE_ID"[NUMBER,22], "X"."ORG_ENTITY_ID"[NUMBER,22], 
+       "X"."LOCALE_ID"[NUMBER,22], "X"."DISPLAYED_VALUE"[VARCHAR2,4000]
+   8 - (#keys=0) "A"."LOCALE"[VARCHAR2,100], "TMP"."SOURCE_TYPE_STORED"[VARCHAR2,400], 
+       "OVERDUE_THIS_MONTH"[NUMBER,22], "DUE_THIS_MONTH"[NUMBER,22], "OD_PAST_THREE_MONTH"[NUMBER,22], 
+       "OD_BEYOND_THREE_MONTH"[NUMBER,22], "DUE_WITHIN_X_MONTH"[NUMBER,22], "DUE_BEYOND_X_MONTH"[NUMBER,22]
+   9 - "A"."LOCALE"[VARCHAR2,100]
+  10 - "A".ROWID[ROWID,10]
+  11 - "TMP"."SOURCE_TYPE_STORED"[VARCHAR2,400], "OVERDUE_THIS_MONTH"[NUMBER,22], 
+       "DUE_THIS_MONTH"[NUMBER,22], "OD_PAST_THREE_MONTH"[NUMBER,22], "OD_BEYOND_THREE_MONTH"[NUMBER,22], 
+       "DUE_WITHIN_X_MONTH"[NUMBER,22], "DUE_BEYOND_X_MONTH"[NUMBER,22]
+  12 - (#keys=7) "SOURCE_TYPE_STORED"[VARCHAR2,400], CASE  WHEN 
+       (TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))>=TRUNC(SYSDATE@!,'fmmonth') AND 
+       TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))<TRUNC(SYSDATE@!)) THEN 'Y' ELSE 'N' END [1], CASE  WHEN 
+       (TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))>=TRUNC(SYSDATE@!) AND 
+       TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))<=LAST_DAY(TRUNC(SYSDATE@!))) THEN 'Y' ELSE 'N' END [1], 
+       CASE  WHEN (TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))>=ADD_MONTHS(TRUNC(SYSDATE@!,'fmmonth'),-3) AND 
+       TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))<TRUNC(SYSDATE@!,'fmmonth')) THEN 'Y' ELSE 'N' END [1], CASE 
+        WHEN TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))<ADD_MONTHS(TRUNC(SYSDATE@!,'fmmonth'),-3) THEN 'Y' 
+       ELSE 'N' END [1], CASE  WHEN (TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))>LAST_DAY(TRUNC(SYSDATE@!)) 
+       AND TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))<=LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE@!,'fmmonth'),TO_NUMBE
+       R("MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS_ISM_Configuration','Enable_Ageing_Due_In_Months')))))
+        THEN 'Y' ELSE 'N' END [1], CASE  WHEN TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))>LAST_DAY(TRUNC(ADD_MO
+       NTHS(TRUNC(SYSDATE@!,'fmmonth'),TO_NUMBER("MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS_ISM_Configura
+       tion','Enable_Ageing_Due_In_Months'))))) THEN 'Y' ELSE 'N' END [1], COUNT(CASE  WHEN 
+       TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))>LAST_DAY(TRUNC(ADD_MONTHS(TRUNC(SYSDATE@!,'fmmonth'),TO_NUMB
+       ER("MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS_ISM_Configuration','Enable_Ageing_Due_In_Months'))))
+       ) THEN 'Y' ELSE 'N' END )[22], COUNT(CASE  WHEN (TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))>LAST_DAY(TR
+       UNC(SYSDATE@!)) AND TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))<=LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE@!,'fm
+       month'),TO_NUMBER("MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS_ISM_Configuration','Enable_Ageing_Due
+       _In_Months'))))) THEN 'Y' ELSE 'N' END )[22], COUNT(CASE  WHEN 
+       TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))<ADD_MONTHS(TRUNC(SYSDATE@!,'fmmonth'),-3) THEN 'Y' ELSE 'N' 
+       END )[22], COUNT(CASE  WHEN (TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))>=ADD_MONTHS(TRUNC(SYSDATE@!,'fm
+       month'),-3) AND TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))<TRUNC(SYSDATE@!,'fmmonth')) THEN 'Y' ELSE 
+       'N' END )[22], COUNT(CASE  WHEN (TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))>=TRUNC(SYSDATE@!) AND 
+       TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))<=LAST_DAY(TRUNC(SYSDATE@!))) THEN 'Y' ELSE 'N' END )[22], 
+       COUNT(CASE  WHEN (TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))>=TRUNC(SYSDATE@!,'fmmonth') AND 
+       TRUNC(INTERNAL_FUNCTION("ISSUE_DUE_DATE"))<TRUNC(SYSDATE@!)) THEN 'Y' ELSE 'N' END )[22]
+  13 - (#keys=0) "SOURCE_TYPE_STORED"[VARCHAR2,400], "ISSUE_DUE_DATE"[DATE,7]
+  15 - "SOURCE_TYPE_STORED"[VARCHAR2,400], "ISSUE_DUE_DATE"[DATE,7]
+  16 - "X"."ENTERPRISE_ID"[NUMBER,22], "X"."LOV_ID"[NUMBER,22], "X"."LOV_VALUE_ID"[NUMBER,22], 
+       "X"."ORG_ENTITY_ID"[NUMBER,22], "X"."STORED_VALUE"[VARCHAR2,400], 
+       "X"."DISPLAYED_VALUE"[VARCHAR2,4000], "X"."LOCALE_ID"[NUMBER,22]
+  17 - (#keys=0) "LOCALE_ID"[NUMBER,22], "T"."LOV_VALUE_ID"[NUMBER,22], "T"."LOV_ID"[NUMBER,22], 
+       "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."STORED_VALUE"[VARCHAR2,400], 
+       "T"."DISPLAYED_VALUE"[VARCHAR2,4000], "T"."ENTERPRISE_ID"[NUMBER,22]
+  18 - "LOCALE_ID"[NUMBER,22]
+  19 - (#keys=0) "T"."LOV_VALUE_ID"[NUMBER,22], "T"."LOV_ID"[NUMBER,22], 
+       "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."STORED_VALUE"[VARCHAR2,400], 
+       "T"."DISPLAYED_VALUE"[VARCHAR2,4000], "T"."ENTERPRISE_ID"[NUMBER,22]
+  20 - "T"."LOV_VALUE_ID"[NUMBER,22], "T"."LOV_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22], 
+       "T"."STORED_VALUE"[VARCHAR2,400], "T"."DISPLAYED_VALUE"[VARCHAR2,4000], "T"."ENTERPRISE_ID"[NUMBER,22]
+  21 - "N"."LOV_ID"[NUMBER,22]
+  22 - "N".ROWID[ROWID,10]
+  23 - "TL"."LOV_VALUE_ID"[NUMBER,22], "TL"."DISPLAYED_VALUE"[VARCHAR2,4000], 
+       "TL"."LOCALE_ID"[NUMBER,22]
+  25 - "B".ROWID[ROWID,10]
+  26 - "T"."ORG_ENTITY_ID"[NUMBER,22]
+  27 - "TL"."ORG_ENTITY_ID"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

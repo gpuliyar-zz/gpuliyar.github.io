@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_GRC_LIB_ORGANIZATIONS (100937)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT org.org_entity_id   AS org_entity_id
+, org.parent_org_entity_id    AS parent_org_entity_id
+, org.org_entity_name          AS org_entity_name
+, porg.org_entity_name       AS parent_org_entity_name
+, org.description                   AS org_description
+, loc.location_name            AS org_location
+, ohl.org_level                       AS org_level
+, ohl.org_hierarchy_name          AS org_hierarchy_name
+FROM si_org_entities org
+, si_org_locations loc
+, si_org_hierarchy_levels ohl
+, si_org_entities porg
+WHERE org.location_id = loc.location_id (+)
+AND SYSDATE BETWEEN org.start_date AND Nvl(org.end_date, SYSDATE)
+AND org.org_hierarchy_id = ohl.org_hierarchy_id
+AND org.parent_org_entity_id = porg.org_entity_id (+)
+and ORG.ORG_ENTITY_id <> 1
+Order By org.org_entity_name </code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet extracts data from si_org_entities, si_org_locations, si_org_hierarchy_levels tables and is thereby used in Risk form</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 68311949</h2></header><pre><code>
+ 
+---------------------------------------------------------------------------------------------------------------
+| Id  | Operation                         | Name                      | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                  |                           |     4 |  5196 |    13   (8)| 00:00:01 |
+|   1 |  SORT ORDER BY                    |                           |     4 |  5196 |    13   (8)| 00:00:01 |
+|*  2 |   HASH JOIN                       |                           |     4 |  5196 |    12   (0)| 00:00:01 |
+|   3 |    NESTED LOOPS OUTER             |                           |     4 |  5112 |     9   (0)| 00:00:01 |
+|   4 |     NESTED LOOPS OUTER            |                           |     4 |  5064 |     8   (0)| 00:00:01 |
+|   5 |      VIEW                         | SI_ORG_ENTITIES           |     4 |  4964 |     6   (0)| 00:00:01 |
+|*  6 |       HASH JOIN OUTER             |                           |     4 |   384 |     6   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  7 |        TABLE ACCESS FULL          | SI_ORG_ENTITIES_T         |     4 |   272 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|*  8 |        TABLE ACCESS FULL          | SI_ORG_ENTITIES_TL        |     2 |    56 |     3   (0)| 00:00:01 |</font>
+|   9 |      VIEW PUSHED PREDICATE        | SI_ORG_ENTITIES           |     1 |    25 |     1   (0)| 00:00:01 |
+|* 10 |       HASH JOIN OUTER             |                           |     1 |    32 |     4   (0)| 00:00:01 |
+|  11 |        TABLE ACCESS BY INDEX ROWID| SI_ORG_ENTITIES_T         |     1 |    25 |     1   (0)| 00:00:01 |
+|* 12 |         INDEX RANGE SCAN          | SI_ORG_ENTITIES_N5        |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 13 |        TABLE ACCESS FULL          | SI_ORG_ENTITIES_TL        |     1 |     7 |     3   (0)| 00:00:01 |</font>
+|  14 |     TABLE ACCESS BY INDEX ROWID   | SI_ORG_LOCATIONS_T        |     1 |    12 |     1   (0)| 00:00:01 |
+|* 15 |      INDEX RANGE SCAN             | SI_ORG_LOCATIONS_N1       |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  16 |    TABLE ACCESS FULL              | SI_ORG_HIERARCHY_LEVELS_T |     9 |   189 |     3   (0)| 00:00:01 |</font>
+---------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$3B14A707
+   5 - SEL$2        / ORG@SEL$1
+   6 - SEL$2       
+   7 - SEL$2        / T@SEL$2
+   8 - SEL$2        / TL@SEL$2
+   9 - SEL$693A5C0E / PORG@SEL$1
+  10 - SEL$693A5C0E
+  11 - SEL$693A5C0E / T@SEL$5
+  12 - SEL$693A5C0E / T@SEL$5
+  13 - SEL$693A5C0E / TL@SEL$5
+  14 - SEL$3B14A707 / SI_ORG_LOCATIONS_T@SEL$3
+  15 - SEL$3B14A707 / SI_ORG_LOCATIONS_T@SEL$3
+  16 - SEL$3B14A707 / SI_ORG_HIERARCHY_LEVELS_T@SEL$4
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("ORG"."ORG_HIERARCHY_ID"="ORG_HIERARCHY_ID")
+   6 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+))
+   7 - filter(NVL("END_DATE",SYSDATE@!)>=SYSDATE@! AND "T"."ORG_ENTITY_ID"<>1 AND 
+              "START_DATE"<=SYSDATE@!)
+   8 - filter("TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()) AND 
+              "TL"."ORG_ENTITY_ID"(+)<>1)
+  10 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+))
+  12 - access("T"."ORG_ENTITY_ID"="ORG"."PARENT_ORG_ENTITY_ID")
+  13 - filter("TL"."ORG_ENTITY_ID"(+)="ORG"."PARENT_ORG_ENTITY_ID" AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  15 - access("ORG"."LOCATION_ID"="LOCATION_ID"(+))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "ORG"."ORG_ENTITY_NAME"[VARCHAR2,400], "ORG"."ORG_ENTITY_ID"[NUMBER,22], 
+       "ORG"."PARENT_ORG_ENTITY_ID"[NUMBER,22], "ORG_HIERARCHY_NAME"[VARCHAR2,400], 
+       "PORG"."ORG_ENTITY_NAME"[VARCHAR2,400], "ORG"."DESCRIPTION"[VARCHAR2,2000], 
+       "LOCATION_NAME"[VARCHAR2,400], "ORG_LEVEL"[NUMBER,22]
+   2 - (#keys=1) "ORG"."ORG_ENTITY_ID"[NUMBER,22], "ORG"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "ORG"."DESCRIPTION"[VARCHAR2,2000], "LOCATION_NAME"[VARCHAR2,400], 
+       "ORG"."PARENT_ORG_ENTITY_ID"[NUMBER,22], "PORG"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "ORG_LEVEL"[NUMBER,22], "ORG_HIERARCHY_NAME"[VARCHAR2,400]
+   3 - (#keys=0) "ORG"."ORG_ENTITY_ID"[NUMBER,22], "ORG"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "ORG"."DESCRIPTION"[VARCHAR2,2000], "ORG"."ORG_HIERARCHY_ID"[NUMBER,22], 
+       "ORG"."PARENT_ORG_ENTITY_ID"[NUMBER,22], "PORG"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "LOCATION_NAME"[VARCHAR2,400]
+   4 - (#keys=0) "ORG"."ORG_ENTITY_ID"[NUMBER,22], "ORG"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "ORG"."DESCRIPTION"[VARCHAR2,2000], "ORG"."ORG_HIERARCHY_ID"[NUMBER,22], 
+       "ORG"."PARENT_ORG_ENTITY_ID"[NUMBER,22], "ORG"."LOCATION_ID"[NUMBER,22], 
+       "PORG"."ORG_ENTITY_NAME"[VARCHAR2,400]
+   5 - "ORG"."ORG_ENTITY_ID"[NUMBER,22], "ORG"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "ORG"."DESCRIPTION"[VARCHAR2,2000], "ORG"."ORG_HIERARCHY_ID"[NUMBER,22], 
+       "ORG"."PARENT_ORG_ENTITY_ID"[NUMBER,22], "ORG"."LOCATION_ID"[NUMBER,22]
+   6 - (#keys=1) "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "T"."DESCRIPTION"[VARCHAR2,1000], "ORG_HIERARCHY_ID"[NUMBER,22], "PARENT_ORG_ENTITY_ID"[NUMBER,22], 
+       "LOCATION_ID"[NUMBER,22], "TL"."DESCRIPTION"[VARCHAR2,2000]
+   7 - "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "T"."DESCRIPTION"[VARCHAR2,1000], "ORG_HIERARCHY_ID"[NUMBER,22], "PARENT_ORG_ENTITY_ID"[NUMBER,22], 
+       "LOCATION_ID"[NUMBER,22]
+   8 - "TL"."ORG_ENTITY_ID"[NUMBER,22], "TL"."DESCRIPTION"[VARCHAR2,2000]
+   9 - "PORG"."ORG_ENTITY_NAME"[VARCHAR2,400]
+  10 - (#keys=1) "T"."ORG_ENTITY_NAME"[VARCHAR2,400]
+  11 - "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400]
+  12 - "T".ROWID[ROWID,10], "T"."ORG_ENTITY_ID"[NUMBER,22]
+  13 - "TL"."ORG_ENTITY_ID"[NUMBER,22]
+  14 - "LOCATION_NAME"[VARCHAR2,400]
+  15 - "SI_ORG_LOCATIONS_T".ROWID[ROWID,10]
+  16 - "ORG_HIERARCHY_ID"[NUMBER,22], "ORG_HIERARCHY_NAME"[VARCHAR2,400], "ORG_LEVEL"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

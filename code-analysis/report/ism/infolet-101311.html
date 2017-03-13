@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_ISM_Issue_By_GRC_Object (101311)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>select b.tgt_obj_name,b.tgt_obj_id,b.Overdue As Overdue,b.DueBetween As DueBetween,b.Ongoing As Ongoing,b.Total_Count As Total_Count
+from (
+select b.tgt_obj_name,b.tgt_obj_id,
+ms_ism_helper.get_issue_count_for_grc_object(b.tgt_obj_id,'2','OVERDUE_BY',:1) As Overdue,
+ms_ism_helper.get_issue_count_for_grc_object(b.tgt_obj_id,'2','DUE_BETWEEN',:1) As DueBetween,
+ms_ism_helper.get_issue_count_for_grc_object(b.tgt_obj_id,'2','ONGOING',:1) As Ongoing,
+ms_ism_helper.get_issue_count_for_grc_object(b.tgt_obj_id,'2','TOTAL_COUNT',:1) As Total_Count,
+dense_rank() over(order by ms_ism_helper.get_issue_count_for_grc_object(b.tgt_obj_id,'2','TOTAL_COUNT',:1) desc) rn
+from ms_ism_issue a,ms_ism_orb_relation_orb b
+where a.issue_id=b.rel_source_id 
+and b.rel_config_id='2'
+and a.issue_status not in('10','1','5','6','7','None')
+group by b.tgt_obj_id ,b.tgt_obj_name) b
+where b.rn <=5</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet  used in Issue By GRC Object  By default Area Of Compliance</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 3680993891</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------
+| Id  | Operation                  | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT           |                         |    11 | 44759 |     7  (29)| 00:00:01 |
+|*  1 |  VIEW                      |                         |    11 | 44759 |     7  (29)| 00:00:01 |
+|*  2 |   WINDOW SORT PUSHED RANK  |                         |    11 |   759 |     7  (29)| 00:00:01 |
+|   3 |    SORT GROUP BY           |                         |    11 |   759 |     7  (29)| 00:00:01 |
+|*  4 |     HASH JOIN              |                         |    11 |   759 |     5   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  5 |      TABLE ACCESS FULL     | MS_ISM_ORB_RELATION_ORB |    11 |   561 |     3   (0)| 00:00:01 |</font>
+|   6 |      VIEW                  | index$_join$_002        |    20 |   360 |     2   (0)| 00:00:01 |
+|*  7 |       HASH JOIN            |                         |       |       |            |          |
+|*  8 |        INDEX FAST FULL SCAN| IDX_ISS_DELEGT_STATUS   |    20 |   360 |     1   (0)| 00:00:01 |
+|   9 |        INDEX FAST FULL SCAN| MS_ISM_ISSUE_PK         |    20 |   360 |     1   (0)| 00:00:01 |
+------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2        / B@SEL$1
+   2 - SEL$2       
+   5 - SEL$2        / B@SEL$2
+   6 - SEL$2EC840C7 / A@SEL$2
+   7 - SEL$2EC840C7
+   8 - SEL$2EC840C7 / indexjoin$_alias$_001@SEL$2EC840C7
+   9 - SEL$2EC840C7 / indexjoin$_alias$_002@SEL$2EC840C7
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - filter("B"."RN"<=5)
+   2 - filter(DENSE_RANK() OVER ( ORDER BY "MS_ISM_HELPER"."GET_ISSUE_COUNT_FOR_GRC_OBJECT"("B
+              "."TGT_OBJ_ID",'2','TOTAL_COUNT',:1) DESC )<=5)
+   4 - access("A"."ISSUE_ID"="B"."REL_SOURCE_ID")
+   5 - filter("B"."REL_CONFIG_ID"='2')
+   7 - access(ROWID=ROWID)
+   8 - filter("A"."ISSUE_STATUS"<>'None' AND "A"."ISSUE_STATUS"<>'7' AND 
+              "A"."ISSUE_STATUS"<>'6' AND "A"."ISSUE_STATUS"<>'5' AND "A"."ISSUE_STATUS"<>'1' AND 
+              "A"."ISSUE_STATUS"<>'10')
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "B"."TGT_OBJ_NAME"[VARCHAR2,4000], "B"."TGT_OBJ_ID"[VARCHAR2,4000], 
+       "B"."OVERDUE"[NUMBER,22], "B"."DUEBETWEEN"[NUMBER,22], "B"."ONGOING"[NUMBER,22], 
+       "B"."TOTAL_COUNT"[NUMBER,22], "B"."RN"[NUMBER,22]
+   2 - (#keys=1) "MS_ISM_HELPER"."GET_ISSUE_COUNT_FOR_GRC_OBJECT"("B"."TGT_OBJ_ID",'2','TOTAL_
+       COUNT',:1)[22], "B"."TGT_OBJ_ID"[VARCHAR2,4000], "B"."TGT_OBJ_NAME"[VARCHAR2,4000], 
+       DENSE_RANK() OVER ( ORDER BY "MS_ISM_HELPER"."GET_ISSUE_COUNT_FOR_GRC_OBJECT"("B"."TGT_OBJ_ID"
+       ,'2','TOTAL_COUNT',:1) DESC )[22]
+   3 - (#keys=2) "B"."TGT_OBJ_ID"[VARCHAR2,4000], "B"."TGT_OBJ_NAME"[VARCHAR2,4000]
+   4 - (#keys=1) "B"."TGT_OBJ_NAME"[VARCHAR2,4000], "B"."TGT_OBJ_ID"[VARCHAR2,4000]
+   5 - "B"."TGT_OBJ_NAME"[VARCHAR2,4000], "B"."TGT_OBJ_ID"[VARCHAR2,4000], 
+       "B"."REL_SOURCE_ID"[VARCHAR2,1020]
+   6 - "A"."ISSUE_ID"[VARCHAR2,1020]
+   7 - (#keys=1) "A"."ISSUE_ID"[VARCHAR2,1020]
+   8 - ROWID[ROWID,10]
+   9 - ROWID[ROWID,10], "A"."ISSUE_ID"[VARCHAR2,1020]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

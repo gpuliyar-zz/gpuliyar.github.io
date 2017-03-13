@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS RSK Scenario Details (102096)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT valid_from, valid_until, scenario_algorithm, NULL AS owner_organization, assessed_by, (SELECT MS_JOIN_FOR_DISPLAY
+                     (ms_apps_utilities.get_display_value
+                                          ((SELECT enterprise_id
+                      FROM si_ent_active_v),
+                                           'MS GRC Risk Category',
+                                           RISK_CATEGORIES
+                                          )
+                     )
+             FROM MS_RSK_SCENARIOS_RSC ff
+            WHERE a.SCENARIO_ID = ff.SCENARIO_ID) AS risk_categories, object_name,  additional_information, a.object_id
+      ,continuous_assessment continuous_assessment
+      ,ms_apps_utilities.get_display_value (100000, 'MS RSK Yes No', continuous_assessment, 1, NULL, NULL) continuous_assessment_disp
+      ,calculate_residual_scores residual_scores
+      ,ms_apps_utilities.get_display_value (100000, 'MS RSK Yes No', calculate_residual_scores, 1, NULL, NULL) residual_score_disp
+      ,default_scenario default_scenario
+      ,ms_apps_utilities.get_display_value (100000, 'MS RSK Yes No', default_scenario, 1, NULL, NULL) default_scenario_disp
+      ,assessment_type assessment_type
+      ,ms_apps_utilities.get_display_value (100000, 'MS RSK List of Assessment Types', assessment_type, 1, NULL, NULL) assessment_type_disp
+  FROM ms_rsk_scenarios_scn a
+ WHERE scenario_ID = :1</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>Scenario Details</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2616671268</h2></header><pre><code>
+ 
+-------------------------------------------------------------------------------------------------------
+| Id  | Operation                   | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT            |                         |     1 |   145 |     1   (0)| 00:00:01 |
+|   1 |  VIEW                       | SI_ENT_ACTIVE_V         |     1 |    13 |     4  (25)| 00:00:01 |
+|   2 |   SORT ORDER BY             |                         |     1 |    33 |     4  (25)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  3 |    TABLE ACCESS FULL        | SI_ENT                  |     1 |    33 |     3   (0)| 00:00:01 |</font>
+|   4 |  SORT AGGREGATE             |                         |     1 |    14 |            |          |
+<font style="background-color: lightblue; color: red">|*  5 |   INDEX SKIP SCAN           | MS_RSK_SCENARIOS_RSC_UK |     2 |    28 |     1   (0)| 00:00:01 |</font>
+|   6 |  TABLE ACCESS BY INDEX ROWID| MS_RSK_SCENARIOS_SCN    |     1 |   145 |     1   (0)| 00:00:01 |
+|*  7 |   INDEX RANGE SCAN          | MS_RSK_SCENARIOS_SCN_UK |     1 |       |     1   (0)| 00:00:01 |
+-------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$4 / SI_ENT_ACTIVE_V@SEL$3
+   2 - SEL$4
+   3 - SEL$4 / SI_ENT@SEL$4
+   4 - SEL$2
+   5 - SEL$2 / FF@SEL$2
+   6 - SEL$1 / A@SEL$1
+   7 - SEL$1 / A@SEL$1
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   3 - filter("START_DATE"<=SYSDATE@! AND ("END_DATE" IS NULL OR "END_DATE">=SYSDATE@!))
+   5 - access("FF"."SCENARIO_ID"=:B1)
+       filter("FF"."SCENARIO_ID"=:B1)
+   7 - access("SCENARIO_ID"=:1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "ENTERPRISE_ID"[NUMBER,22]
+   2 - (#keys=1) INTERNAL_FUNCTION("CREATION_DATE")[7], "ENTERPRISE_ID"[NUMBER,22]
+   3 - "ENTERPRISE_ID"[NUMBER,22], "CREATION_DATE"[DATE,7]
+   4 - (#keys=0) "MS_JOIN_FOR_DISPLAY"("MS_APPS_UTILITIES"."GET_DISPLAY_VALUE"( (SELECT 
+       "ENTERPRISE_ID" FROM  (SELECT "ENTERPRISE_ID" "ENTERPRISE_ID","ENTERPRISE_NAME" 
+       "ENTERPRISE_NAME","SI_APP_SV"."CHECK_APP_EXISTS"("ENTERPRISE_ID") "APPLICATION_FLAG" FROM 
+       METRICSTREAM."SI_ENT" "SI_ENT" WHERE "START_DATE"<=SYSDATE@! AND ("END_DATE" IS NULL OR 
+       "END_DATE">=SYSDATE@!) ORDER BY "CREATION_DATE" DESC) "SI_ENT_ACTIVE_V"),'MS GRC Risk 
+       Category',"RISK_CATEGORIES"))[4000]
+   5 - "RISK_CATEGORIES"[VARCHAR2,4000]
+   6 - "OBJECT_NAME"[VARCHAR2,800], "SCENARIO_ID"[VARCHAR2,400], "VALID_FROM"[DATE,7], 
+       "SCENARIO_ALGORITHM"[VARCHAR2,40], "VALID_UNTIL"[DATE,7], "ADDITIONAL_INFORMATION"[LOB,4000], 
+       "ASSESSED_BY"[VARCHAR2,400], "CONTINUOUS_ASSESSMENT"[VARCHAR2,40], 
+       "CALCULATE_RESIDUAL_SCORES"[VARCHAR2,40], "DEFAULT_SCENARIO"[VARCHAR2,40], 
+       "ASSESSMENT_TYPE"[VARCHAR2,40], "A"."OBJECT_ID"[VARCHAR2,400]
+   7 - "A".ROWID[ROWID,10], "SCENARIO_ID"[VARCHAR2,400], "A"."OBJECT_ID"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

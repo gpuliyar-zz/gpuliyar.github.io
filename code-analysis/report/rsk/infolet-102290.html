@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_RSK_HM_NAME_INF (102290)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT 
+ASSESSMENT_TYPE, 
+SCENARIO_NAME, 
+ORG_ID, 
+ORG_NAME, 
+CORE_OBJECT_ID, 
+CORE_OBJECT_NAME, 
+RISK_ID, 
+RISK_NAME, 
+PREV_INHERENT_SCORE, 
+CURR_INHERENT_SCORE, 
+SHORT_NAME, 
+TREND_VALUE_INHERENT, 
+CREATED_BY, 
+CREATION_DATE, 
+LAST_UPDATED_BY, 
+LAST_UPDATE_DATE, 
+X_AXIS_INHERENT, 
+Y_AXIS_INHERENT, 
+BUBBLE_SIZE_INHERENT, 
+BUBBLE_SHAPE_INHERENT, 
+BUBBLE_COLOR_INHERENT, 
+TREND_INHERENT, 
+CURR_RESIDUAL_SCORE, 
+PREV_RESIDUAL_SCORE, 
+LEVEL_NUM, 
+X_AXIS_RESIDUAL, 
+Y_AXIS_RESIDUAL, 
+TREND_RESIDUAL, 
+TREND_VALUE_RESIDUAL, 
+INHERENT_RATING, 
+RESIDUAL_RATING, 
+BUBBLE_SIZE_RESIDUAL, 
+BUBBLE_SHAPE_RESIDUAL, 
+BUBBLE_COLOR_RESIDUAL, 
+SCENARIO_ID, 
+PREV_RESIDUAL_RATING, 
+PREV_INHERENT_RATING, 
+TREND_SIGN_INHERENT, 
+TREND_SIGN_RESIDUAL, 
+FLAG,
+'View' AS VIEW_ASSESSMENT1,
+ASSESSMENT_TYPE1 as ASSESSMENT_TYPE1,
+LEVEL_NAME,
+RISK_CATEGORIES,
+OBJECT_OWNERS,
+CORE_OBJECT_URL,
+RISK_NAME_URL
+FROM
+  (SELECT (SELECT Ms_Apps_Utilities.Get_Display_Values (Ms_Grc_Utilities.Active_Ent_Id, 'MS RSK List of Assessment Types', Assessment_Type, ',') FROM DUAL) AS ASSESSMENT_TYPE,
+    SCENARIO_NAME,
+    ORG_ID,
+    ORG_NAME,
+    CORE_OBJECT_ID,
+    CORE_OBJECT_NAME,
+    RISK_ID,
+    RISK_NAME,
+    PREV_INHERENT_SCORE,
+    CURR_INHERENT_SCORE,
+    SHORT_NAME,
+    TREND_VALUE_INHERENT,
+    CREATED_BY,
+    CREATION_DATE,
+    LAST_UPDATED_BY,
+    LAST_UPDATE_DATE,
+    X_AXIS_INHERENT,
+    Y_AXIS_INHERENT,
+    BUBBLE_SIZE_INHERENT,
+    BUBBLE_SHAPE_INHERENT,
+    BUBBLE_COLOR_INHERENT,
+    TREND_INHERENT,
+    CURR_RESIDUAL_SCORE,
+    PREV_RESIDUAL_SCORE,
+    LEVEL_NUM,
+    X_AXIS_RESIDUAL,
+    Y_AXIS_RESIDUAL,
+    TREND_RESIDUAL,
+    TREND_VALUE_RESIDUAL,
+    INHERENT_RATING,
+    RESIDUAL_RATING,
+    BUBBLE_SIZE_RESIDUAL,
+    BUBBLE_SHAPE_RESIDUAL,
+    BUBBLE_COLOR_RESIDUAL,
+    SCENARIO_ID,
+    PREV_RESIDUAL_RATING,
+    PREV_INHERENT_RATING,
+    (SELECT DECODE( TREND_SIGN_INHERENT,1,'<img border="0" src="/images/icons/Upward.png">', -1,'<img border="0" src="/images/icons/Downward.png">', 0,'<img border="0" src="/images/icons/No_Change.png">', 2, NULL, TREND_SIGN_INHERENT) FROM DUAL) AS TREND_SIGN_INHERENT,
+    (SELECT DECODE( TREND_SIGN_RESIDUAL,1,'<img border="0" src="/images/icons/Upward.png">', -1,'<img border="0" src="/images/icons/Downward.png">', 0,'<img border="0" src="/images/icons/No_Change.png">', 2, NULL, TREND_SIGN_RESIDUAL) FROM DUAL) AS TREND_SIGN_RESIDUAL,
+    Flag,
+    'View',
+    ASSESSMENT_TYPE                                                                                       AS ASSESSMENT_TYPE1,
+    (SELECT ms_apps_utilities.get_display_values (MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_LEVEL', LEVEL_NUM, ',') FROM DUAL) AS LEVEL_NAME,
+    RISK_CATEGORIES,
+    OBJECT_OWNERS,
+    (SELECT Ms_Rsk_Rpt_Utils.build_form_Url_Heatmap_ass_ent('MS_GRC_PROCESS', NULL, NULL,Core_Object_Id,'PRC','N',Core_Object_Name ) FROM DUAL) AS Core_Object_Url,
+    (SELECT Ms_Rsk_Rpt_Utils.Build_Form_Url_Heatmap('MS_GRC_RISK', NULL, NULL,Risk_Id,'RSK','N',Risk_Name )  FROM DUAL)               AS Risk_Name_Url,
+    (SELECT Ms_join(Object_Id)
+    FROM TABLE(Ms_Rsk_Rpt_Utils.Rsk_Hm_Return_Object_Id(Scenario_Id,:1,'1,2,3,4',Flag) )
+    ) AS Object_Id
+  FROM Ms_Rsk_Hm_Master
+  )
+WHERE 
+NVL(Risk_Id,'RISK') in (SELECT COLUMN_VALUE FROM TABLE (MS_APPS_UTILITIES.SPLIT(NVL(Object_Id,'OBJ'))))
+OR NVL(Core_Object_Id,'PRCS') in (SELECT COLUMN_VALUE FROM TABLE (MS_APPS_UTILITIES.SPLIT(NVL(Object_Id,'OBJ'))))
+OR NVL(Org_Id,'ORG') in (SELECT COLUMN_VALUE FROM TABLE (MS_APPS_UTILITIES.SPLIT(NVL(Object_Id,'OBJ'))))</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This Infolet is used to display all Heat Map Report by Name</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Error</h2></header><pre><code>
+ORA-06553: PLS-307: too many declarations of 'GET_DISPLAY_VALUES' match this call
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

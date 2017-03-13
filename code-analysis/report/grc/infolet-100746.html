@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_GRC_61_SP2_STANDARD_LIST_INF (100746)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>select STDSUMM.OBJECT_ID,
+stdSumm.OBJECT_NAME,
+stdMlsSumm.OBJECT_STATUS,
+stdMlsSumm.OBJECT_LEVEL,
+stdSumm.PARENT,
+stdSumm.CREATED_ON,
+MS_GRC_UTILITIES.FN_user_name(stdSumm.created_by) AS created_by,     
+stdSumm.UPDATED_ON,
+MS_GRC_UTILITIES.FN_user_name(stdSumm.Updated_By) AS Updated_By,
+STDSUMM.VALID_FROM,
+STDSUMM.VALID_UNTIL,
+STDSUMM.DESCRIPTION,
+STDSUMM.OWNER_ORG_NAMES,
+STDSUMM.OWNER_NAME,
+MS_GRC_UTILITIES.FN_user_name(stdSumm.LEVEL_1_APPROVER) AS LEVEL_1_APPROVER,
+MS_GRC_UTILITIES.FN_user_name(stdSumm.LEVEL_2_APPROVER) AS LEVEL_2_APPROVER,
+REL_ORGANIZATION_NAMES,
+REL_AOC_OBJ_NAME_AGG,
+REL_MOD_REF_OBJ_NAME_AGG,
+REL_OBJECTIVE_OBJ_NAME_AGG,
+REL_PROCESS_OBJ_NAME_AGG,
+REL_PRODUCT_NAME_AGG,
+REL_REFRENCES_OBJ_NAME_AGG,
+REL_REG_BODY_OBJ_NAME_AGG,
+REL_REQUIREMENT_OBJ_NAME_AGG,
+REL_RISK_OBJ_NAME_AGG
+,(MS_GRC_UTILITIES.FN_GET_REPORT_JSON((SELECT METRIC_ID FROM SI_METRICS_T WHERE METRIC_NAME='MS_GRC_STANDARD'),stdSumm.DD_PROCESS_INSTANCE_ID,(SELECT DD_INSTANCE_ID FROM MS_GRC_STANDARD WHERE OBJECT_ID=stdSumm.OBJECT_ID),
+'''flag=1'||CHR(38)||'emd=1'||CHR(38)||'x_edit_mode=Yes'||CHR (38)|| 'wrapper= No'|| CHR (38)|| 'mode=view''')) as REPORT_JSON
+,stdMlsSumm.STD_TYPE AS STD_TYPE,
+STDSUMM.OBJ_PARENT_ID,
+stdSumm.LEVEL_1_APPROVER as LEVEL_1_APPR,
+STDSUMM.LEVEL_2_APPROVER as LEVEL_2_APPR,
+STDSUMM.UPPER_OBJECT_NAME AS UPPER_OBJECT_NAME
+from  MS_GRC_STANDARD_SUMMARY stdSumm,
+ms_grc_standard_mls_summary stdmlssumm,  (select column_value 
+from table( cast (ms_grc_rep_browser_fil_denorm.fn_std_report_filter(ms_grc_array_type(:1,:2, :3,:4,:5,:6,:7,TO_CHAR(:8,'YYYY-MM-DD'),TO_CHAR(:9,'YYYY-MM-DD'),:10,:11,TO_CHAR(:12,'YYYY-MM-DD'),TO_CHAR(:13,'YYYY-MM-DD'), TO_CHAR(:14,'YYYY-MM-DD'),TO_CHAR(:15,'YYYY-MM-DD'),:16,:17,:18,:19, :20,:21,null,null,null,null,null,:22,null,null,:23,null,:24,:25,:26,:27,:28, :29,null,'MS_GRC_STANDARD',:30))
+AS ms_varchar2_array)))  COLVAL, (select LOCALE_ID from SI_USERS_T T1 ,SI_LOCALES T2 where USER_NAME = :30 and T1.LOCALE = T2.LOCALE_STRING) LOC
+where COLVAL.column_value = stdMlsSumm.OBJECT_ID
+and colval.column_value = stdsumm.object_id
+and LOC.LOCALE_ID = stdMlsSumm.LOCALE_ID</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet is used for fetching the Library data for Standard list report. It consists of the parameters specific to Standard object and also the related library object parmaters. It does not contain any mandatory parameter.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1647778374</h2></header><pre><code>
+ 
+---------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                             | Name                        | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                      |                             |  4084 |  5846K|    40   (0)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID          | SI_METRICS_T                |     1 |    34 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX RANGE SCAN                    | SI_METRICS_T_N7             |     1 |       |     1   (0)| 00:00:01 |
+|   3 |   TABLE ACCESS BY INDEX ROWID         | MS_GRC_STANDARD             |     1 |    18 |     1   (0)| 00:00:01 |
+|*  4 |    INDEX UNIQUE SCAN                  | MS_GRC_STANDARD_PK          |     1 |       |     1   (0)| 00:00:01 |
+|*  5 |  HASH JOIN                            |                             |  4084 |  5846K|    40   (0)| 00:00:01 |
+|   6 |   INDEX FULL SCAN                     | MS_GRC_STD_SUMMARY_PK       |    30 | 41670 |     4   (0)| 00:00:01 |
+|*  7 |   HASH JOIN                           |                             |  4084 |   307K|    36   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   8 |    TABLE ACCESS FULL                  | MS_GRC_STANDARD_MLS_SUMMARY |    30 |  1350 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|   9 |    MERGE JOIN CARTESIAN               |                             |  8168 |   255K|    33   (0)| 00:00:01 |</font>
+|  10 |     NESTED LOOPS                      |                             |     1 |    30 |     4   (0)| 00:00:01 |
+|  11 |      TABLE ACCESS BY INDEX ROWID      | SI_USERS_T                  |     1 |    19 |     1   (0)| 00:00:01 |
+|* 12 |       INDEX RANGE SCAN                | SI_USERS_T_N3               |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 13 |      TABLE ACCESS FULL                | SI_LOCALES                  |     1 |    11 |     3   (0)| 00:00:01 |</font>
+|  14 |     BUFFER SORT                       |                             |  8168 | 16336 |    30   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  15 |      COLLECTION ITERATOR PICKLER FETCH| FN_STD_REPORT_FILTER        |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+---------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2        / SI_METRICS_T@SEL$2
+   2 - SEL$2        / SI_METRICS_T@SEL$2
+   3 - SEL$3        / MS_GRC_STANDARD@SEL$3
+   4 - SEL$3        / MS_GRC_STANDARD@SEL$3
+   5 - SEL$2416F508
+   6 - SEL$2416F508 / STDSUMM@SEL$1
+   8 - SEL$2416F508 / STDMLSSUMM@SEL$1
+  11 - SEL$2416F508 / T1@SEL$6
+  12 - SEL$2416F508 / T1@SEL$6
+  13 - SEL$2416F508 / T2@SEL$6
+  15 - SEL$2416F508 / KOKBF$0@SEL$5
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("METRIC_NAME"='MS_GRC_STANDARD')
+   4 - access("OBJECT_ID"=:B1)
+   5 - access("STDSUMM"."OBJECT_ID"=VALUE(KOKBF$))
+   7 - access("STDMLSSUMM"."OBJECT_ID"=VALUE(KOKBF$) AND "LOCALE_ID"=TO_NUMBER("STDMLSSUMM"."LOCALE_ID"))
+  12 - access("USER_NAME"=:30)
+  13 - filter("T1"."LOCALE"="T2"."LOCALE_STRING")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22]
+   2 - "SI_METRICS_T".ROWID[ROWID,10]
+   3 - "MS_GRC_STANDARD".ROWID[ROWID,10], "DD_INSTANCE_ID"[NUMBER,22]
+   4 - "MS_GRC_STANDARD".ROWID[ROWID,10]
+   5 - (#keys=1) "STDSUMM"."OBJECT_ID"[VARCHAR2,400], "STDSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "REL_RISK_OBJ_NAME_AGG"[LOB,4000], "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."PARENT"[VARCHAR2,400], 
+       "STDSUMM"."OBJ_PARENT_ID"[VARCHAR2,4000], "STDSUMM"."DESCRIPTION"[LOB,4000], 
+       "STDSUMM"."VALID_UNTIL"[DATE,7], "STDSUMM"."VALID_FROM"[DATE,7], 
+       "STDSUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "STDSUMM"."OWNER_NAME"[LOB,4000], 
+       "STDSUMM"."OWNER_ORG_NAMES"[LOB,4000], "STDSUMM"."LEVEL_1_APPROVER"[VARCHAR2,1000], 
+       "STDSUMM"."LEVEL_2_APPROVER"[VARCHAR2,1000], "STDSUMM"."UPDATED_BY"[VARCHAR2,804], 
+       "STDSUMM"."UPDATED_ON"[DATE,7], "STDSUMM"."CREATED_BY"[VARCHAR2,804], "STDSUMM"."CREATED_ON"[DATE,7], 
+       "REL_AOC_OBJ_NAME_AGG"[LOB,4000], "REL_MOD_REF_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], "REL_ORGANIZATION_NAMES"[LOB,4000], 
+       "REL_PROCESS_OBJ_NAME_AGG"[LOB,4000], "REL_PRODUCT_NAME_AGG"[LOB,4000], 
+       "REL_REFRENCES_OBJ_NAME_AGG"[LOB,4000], "REL_REG_BODY_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], "STDMLSSUMM"."STD_TYPE"[VARCHAR2,800], 
+       "STDMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], "STDMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,800]
+   6 - "STDSUMM".ROWID[ROWID,3034], "STDSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,3000], 
+       "OBJ_STD_SUMM_WID"[NUMBER,22], "STDSUMM"."OBJECT_ID"[VARCHAR2,400], "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], 
+       "STDSUMM"."PARENT"[VARCHAR2,400], "STDSUMM"."OBJ_PARENT_ID"[VARCHAR2,4000], 
+       "STDSUMM"."DESCRIPTION"[LOB,4000], "STDSUMM"."VALID_UNTIL"[DATE,7], "STDSUMM"."VALID_FROM"[DATE,7], 
+       "STDSUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "STDSUMM"."OWNER_NAME"[LOB,4000], 
+       "STDSUMM"."OWNER_ORG_NAMES"[LOB,4000], "STDSUMM"."LEVEL_1_APPROVER"[VARCHAR2,1000], 
+       "STDSUMM"."LEVEL_2_APPROVER"[VARCHAR2,1000], "STDSUMM"."UPDATED_BY"[VARCHAR2,804], 
+       "STDSUMM"."UPDATED_ON"[DATE,7], "STDSUMM"."CREATED_BY"[VARCHAR2,804], "STDSUMM"."CREATED_ON"[DATE,7], 
+       "REL_AOC_OBJ_NAME_AGG"[LOB,4000], "REL_MOD_REF_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], "REL_ORGANIZATION_NAMES"[LOB,4000], 
+       "REL_PROCESS_OBJ_NAME_AGG"[LOB,4000], "REL_PRODUCT_NAME_AGG"[LOB,4000], 
+       "REL_REFRENCES_OBJ_NAME_AGG"[LOB,4000], "REL_REG_BODY_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], "REL_RISK_OBJ_NAME_AGG"[LOB,4000]
+   7 - (#keys=2) "STDMLSSUMM"."STD_TYPE"[VARCHAR2,800], "STDMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], 
+       "STDMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,800], VALUE(A0)[8000]
+   8 - "STDMLSSUMM"."OBJECT_ID"[VARCHAR2,400], "STDMLSSUMM"."LOCALE_ID"[VARCHAR2,400], 
+       "STDMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], "STDMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,800], 
+       "STDMLSSUMM"."STD_TYPE"[VARCHAR2,800]
+   9 - (#keys=0) "LOCALE_ID"[NUMBER,22], VALUE(A0)[8000]
+  10 - (#keys=0) "LOCALE_ID"[NUMBER,22]
+  11 - "T1"."LOCALE"[VARCHAR2,100]
+  12 - "T1".ROWID[ROWID,10]
+  13 - "LOCALE_ID"[NUMBER,22]
+  14 - (#keys=0) VALUE(A0)[8000]
+  15 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

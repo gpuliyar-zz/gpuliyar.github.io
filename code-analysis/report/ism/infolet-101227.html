@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<td><b>Name</b></td>
+														<td>MS_ISM_Action_Users (101227)</td>
+													</tr>
+													<tr>
+														<td><b>SQL</b></td>
+														<td><pre><code>SELECT user_id
+, user_name
+, user_full_name
+, activity_id
+, activity_short_name
+, activity_name
+ ,Ms_Grc_General_Utilities.get_user_locale_id(:1) as local_id
+FROM (SELECT DISTINCT user_id
+, user_name
+, user_full_name
+, activity_id
+, activity_short_name
+, activity_name
+from si_user_org_act_view)</code></pre></td>
+													</tr>
+													<tr>
+														<td><b>Description</b></td>
+														<td>This infolet will fetch users who are having activity to work on action form</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 572985029</h2></header><pre><code>
+ 
+---------------------------------------------------------------------------------------------------------------
+| Id  | Operation                            | Name                   | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                     |                        |     1 |  2416 |    19   (6)| 00:00:01 |
+|   1 |  VIEW                                |                        |     1 |  2416 |    19   (6)| 00:00:01 |
+|   2 |   SORT UNIQUE                        |                        |     1 |   220 |    19   (6)| 00:00:01 |
+|   3 |    NESTED LOOPS                      |                        |     1 |   220 |    18   (0)| 00:00:01 |
+|   4 |     NESTED LOOPS                     |                        |     1 |   220 |    18   (0)| 00:00:01 |
+|   5 |      NESTED LOOPS                    |                        |     1 |   162 |    17   (0)| 00:00:01 |
+|   6 |       NESTED LOOPS                   |                        |     1 |   152 |    16   (0)| 00:00:01 |
+|   7 |        NESTED LOOPS                  |                        |     1 |   146 |    15   (0)| 00:00:01 |
+|   8 |         NESTED LOOPS                 |                        |     1 |   112 |    14   (0)| 00:00:01 |
+|   9 |          NESTED LOOPS                |                        |     1 |   102 |    13   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  10 |           MERGE JOIN CARTESIAN       |                        |     1 |    87 |    12   (0)| 00:00:01 |</font>
+|* 11 |            HASH JOIN                 |                        |     1 |    82 |    11   (0)| 00:00:01 |
+|* 12 |             HASH JOIN                |                        |     1 |    65 |     8   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 13 |              TABLE ACCESS FULL       | MS_QS_PARAMETER_TYPES  |     1 |    32 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 14 |              TABLE ACCESS FULL       | MS_QS_PARAMETER_NAMES  |     3 |    99 |     5   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 15 |             TABLE ACCESS FULL        | MS_QS_PARAMETER_VALUES |   257 |  4369 |     3   (0)| 00:00:01 |</font>
+|  16 |            BUFFER SORT               |                        |    54 |   270 |     9   (0)| 00:00:01 |
+|  17 |             INDEX FULL SCAN          | SI_ROLES_N2            |    54 |   270 |     1   (0)| 00:00:01 |
+|  18 |           TABLE ACCESS BY INDEX ROWID| SI_ORG_ROLES           |     1 |    15 |     1   (0)| 00:00:01 |
+|* 19 |            INDEX RANGE SCAN          | SI_ORG_ROLES_N2        |     1 |       |     1   (0)| 00:00:01 |
+|* 20 |          INDEX RANGE SCAN            | SI_USER_ORG_ROLES_N2   |     2 |    20 |     1   (0)| 00:00:01 |
+|* 21 |         TABLE ACCESS BY INDEX ROWID  | SI_USERS_T             |     1 |    34 |     1   (0)| 00:00:01 |
+|* 22 |          INDEX UNIQUE SCAN           | SI_USERS_T_N1          |     1 |       |     1   (0)| 00:00:01 |
+|* 23 |        TABLE ACCESS BY INDEX ROWID   | SI_ORG_ENTITIES_T      |     1 |     6 |     1   (0)| 00:00:01 |
+|* 24 |         INDEX RANGE SCAN             | SI_ORG_ENTITIES_N5     |     1 |       |     1   (0)| 00:00:01 |
+|* 25 |       INDEX RANGE SCAN               | SI_ROLE_ACTIVITIES_N2  |    12 |   120 |     1   (0)| 00:00:01 |
+|* 26 |      INDEX RANGE SCAN                | SI_ACTIVITIES_N1       |     1 |       |     1   (0)| 00:00:01 |
+|  27 |     TABLE ACCESS BY INDEX ROWID      | SI_ACTIVITIES_T        |     1 |    58 |     1   (0)| 00:00:01 |
+---------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$335DD26A / from$_subquery$_001@SEL$1
+   2 - SEL$335DD26A
+  13 - SEL$335DD26A / PTYPE@SEL$3
+  14 - SEL$335DD26A / PNAME@SEL$3
+  15 - SEL$335DD26A / PVALUE@SEL$3
+  17 - SEL$335DD26A / ROLES@SEL$3
+  18 - SEL$335DD26A / ORG_ROLES@SEL$3
+  19 - SEL$335DD26A / ORG_ROLES@SEL$3
+  20 - SEL$335DD26A / USR_ORG_ROLES@SEL$3
+  21 - SEL$335DD26A / USERS@SEL$3
+  22 - SEL$335DD26A / USERS@SEL$3
+  23 - SEL$335DD26A / ORGS@SEL$3
+  24 - SEL$335DD26A / ORGS@SEL$3
+  25 - SEL$335DD26A / ROLE_ACT@SEL$3
+  26 - SEL$335DD26A / ACT@SEL$3
+  27 - SEL$335DD26A / ACT@SEL$3
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+  11 - access("PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND 
+              "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID")
+  12 - access("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID")
+  13 - filter(UPPER("PTYPE"."PARAMETER_TYPE")='MS APPS USER NAME DISPLAY FORMAT')
+  14 - filter(UPPER("PNAME"."PARAMETER_NAME")='DISPLAY_FORMAT')
+  15 - filter("PVALUE"."ORG_ENTITY_ID"=1)
+  19 - access("ROLES"."ROLE_ID"="ORG_ROLES"."ROLE_ID")
+  20 - access("USR_ORG_ROLES"."ORG_ROLE_ID"="ORG_ROLES"."ORG_ROLE_ID")
+  21 - filter(NVL("USERS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  22 - access("USERS"."USER_ID"="USR_ORG_ROLES"."USER_ID")
+  23 - filter(NVL("ORGS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  24 - access("ORGS"."ORG_ENTITY_ID"="ORG_ROLES"."ORG_ENTITY_ID")
+  25 - access("ROLE_ACT"."ROLE_ID"="ORG_ROLES"."ROLE_ID")
+  26 - access("ROLE_ACT"."ACTIVITY_ID"="ACT"."ACTIVITY_ID")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "USER_ID"[NUMBER,22], "USER_NAME"[VARCHAR2,80], "USER_FULL_NAME"[VARCHAR2,285], 
+       "ACTIVITY_ID"[NUMBER,22], "ACTIVITY_SHORT_NAME"[VARCHAR2,4000], "ACTIVITY_NAME"[VARCHAR2,400]
+   2 - (#keys=6) "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,80], CASE 
+       "PVALUE"."PARAMETER_VALUE" WHEN '2' THEN "USERS"."LAST_NAME"||' '||"USERS"."FIRST_NAME" WHEN '3' THEN 
+       "USERS"."LAST_NAME"||','||' '||"USERS"."FIRST_NAME"||' '||'('||"USERS"."USER_NAME"||')' WHEN '1' THEN 
+       "USERS"."FIRST_NAME"||' '||"USERS"."LAST_NAME" WHEN '4' THEN "USERS"."FIRST_NAME"||','||' 
+       '||"USERS"."LAST_NAME"||' '||'('||"USERS"."USER_NAME"||')' ELSE "USERS"."LAST_NAME"||' 
+       '||"USERS"."FIRST_NAME" END [285], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_SHORT_NAME"[VARCHAR2,4000], "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+   3 - (#keys=0) "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."LAST_NAME"[VARCHAR2,100], "USERS"."FIRST_NAME"[VARCHAR2,100], 
+       "USERS"."USER_NAME"[VARCHAR2,80], "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "ACT"."ACTIVITY_SHORT_NAME"[VARCHAR2,4000]
+   4 - (#keys=0) "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."LAST_NAME"[VARCHAR2,100], "USERS"."FIRST_NAME"[VARCHAR2,100], 
+       "USERS"."USER_NAME"[VARCHAR2,80], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22]
+   5 - (#keys=0) "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."LAST_NAME"[VARCHAR2,100], "USERS"."FIRST_NAME"[VARCHAR2,100], 
+       "USERS"."USER_NAME"[VARCHAR2,80], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22]
+   6 - (#keys=0) "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400], "ORG_ROLES"."ROLE_ID"[NUMBER,22], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."LAST_NAME"[VARCHAR2,100], "USERS"."FIRST_NAME"[VARCHAR2,100], 
+       "USERS"."USER_NAME"[VARCHAR2,80]
+   7 - (#keys=0) "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400], "ORG_ROLES"."ORG_ENTITY_ID"[NUMBER,22], 
+       "ORG_ROLES"."ROLE_ID"[NUMBER,22], "USERS"."USER_ID"[NUMBER,22], "USERS"."LAST_NAME"[VARCHAR2,100], 
+       "USERS"."FIRST_NAME"[VARCHAR2,100], "USERS"."USER_NAME"[VARCHAR2,80]
+   8 - (#keys=0) "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400], "ORG_ROLES"."ORG_ENTITY_ID"[NUMBER,22], 
+       "ORG_ROLES"."ROLE_ID"[NUMBER,22], "USR_ORG_ROLES"."USER_ID"[NUMBER,22]
+   9 - (#keys=0) "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400], "ORG_ROLES"."ORG_ROLE_ID"[NUMBER,22], 
+       "ORG_ROLES"."ORG_ENTITY_ID"[NUMBER,22], "ORG_ROLES"."ROLE_ID"[NUMBER,22]
+  10 - (#keys=0) "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400], "ROLES"."ROLE_ID"[NUMBER,22]
+  11 - (#keys=2) "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+  12 - (#keys=1) "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], "PNAME"."PARAMETER_ID"[NUMBER,22]
+  13 - "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  14 - "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22]
+  15 - "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+  16 - (#keys=0) "ROLES"."ROLE_ID"[NUMBER,22]
+  17 - "ROLES"."ROLE_ID"[NUMBER,22]
+  18 - "ORG_ROLES"."ORG_ROLE_ID"[NUMBER,22], "ORG_ROLES"."ORG_ENTITY_ID"[NUMBER,22], 
+       "ORG_ROLES"."ROLE_ID"[NUMBER,22]
+  19 - "ORG_ROLES".ROWID[ROWID,10], "ORG_ROLES"."ROLE_ID"[NUMBER,22]
+  20 - "USR_ORG_ROLES"."USER_ID"[NUMBER,22]
+  21 - "USERS"."USER_ID"[NUMBER,22], "USERS"."LAST_NAME"[VARCHAR2,100], 
+       "USERS"."FIRST_NAME"[VARCHAR2,100], "USERS"."USER_NAME"[VARCHAR2,80]
+  22 - "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22]
+  24 - "ORGS".ROWID[ROWID,10]
+  25 - "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22]
+  26 - "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22]
+  27 - "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ACT"."ACTIVITY_SHORT_NAME"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:rnd@metricstream.com?Subject=Reg - Static Code Analysis Tool" target="_top">rnd@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>
