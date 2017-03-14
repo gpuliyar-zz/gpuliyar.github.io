@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS GRC FUNC Entp List Rpt Inf</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_GRC_LOV_ORG_VALUES_V">MS_GRC_LOV_ORG_VALUES_V</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_GRC_LOV_ORG_VALUES_V" ("ENTERPRISE_ID", "LOV_ID", "LOV_NAME", "LOV_VALUE_ID", "ORG_ENTITY_ID", "ORG_ENTITY_NAME", "STORED_VALUE", "DISPLAYED_VALUE", "START_DATE", "END_DATE", "LOCALE_ID", "DISPLAY_ORDER") AS 
+  SELECT
+lovvalue.ENTERPRISE_ID,
+lovvalue.LOV_ID,
+lovname.LOV_NAME,
+Lovvalue.Lov_Value_Id,
+Null As Org_Entity_Id,
+null as org_entity_name,
+lovvalue.STORED_VALUE,
+lovvalue.DISPLAYED_VALUE,
+lovvalue.START_DATE,
+lovvalue.END_DATE,
+lovvalue.LOCALE_ID,
+lovvalue.DISPLAY_ORDER
+FROM
+MS_QS_LIST_OF_VALUES lovvalue,
+MS_QS_LOV_NAMES_V lovname
+Where
+lovvalue.lov_id=lovname.lov_id</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                        <div class="no-panel no-panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Infolets</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Asset_Type.html" >MS GRC Asset Type</a></td>
+                                            <td><a href="../infolets/MS_GRC_Asset_Type_dbf.html" >MS GRC Asset Type dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Levels_infolet.html" >MS GRC Levels infolet</a></td>
+                                            <td><a href="../infolets/MS_GRC_Levels_infolet_report.html" >MS GRC Levels infolet report</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Model_Reference_Type.html" >MS GRC Model Reference Type</a></td>
+                                            <td><a href="../infolets/MS_GRC_Product_Category.html" >MS GRC Product Category</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Product_Category_dbf.html" >MS GRC Product Category dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Product_Sales_Channel.html" >MS GRC Product Sales Channel</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Product_Sales_Channel_dbf.html" >MS GRC Product Sales Channel dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Reference_Type.html" >MS GRC Reference Type</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Reference_Type_dbf.html" >MS GRC Reference Type dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Yes_No.html" >MS GRC Yes No</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_Grc_Basel_Entity.html" >MS Grc Basel Entity</a></td>
+                                            <td><a href="../infolets/MS_Grc_Basel_Entity_dbf.html" >MS Grc Basel Entity dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_61_SP2_AOC_TYPE.html" >MS GRC 61 SP2 AOC TYPE</a></td>
+                                            <td><a href="../infolets/MS_GRC_61_SP2_MOD_REF_TYPE.html" >MS GRC 61 SP2 MOD REF TYPE</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_61_SP2_MOD_REF_TYPE_dbf.html" >MS GRC 61 SP2 MOD REF TYPE dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_61_SP2_OBJECTIVE_TYPES.html" >MS GRC 61 SP2 OBJECTIVE TYPES</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_61_SP2_QUESTION_CATEGORY_INF.html" >MS GRC 61 SP2 QUESTION CATEGORY INF</a></td>
+                                            <td><a href="../infolets/MS_GRC_61_SP2_QUESTION_CATEGORY_INF_dbf.html" >MS GRC 61 SP2 QUESTION CATEGORY INF dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_61_SP2_QUESTION_MANUAL_AUTO_INF.html" >MS GRC 61 SP2 QUESTION MANUAL AUTO INF</a></td>
+                                            <td><a href="../infolets/MS_GRC_61_SP2_QUESTION_MANUAL_AUTO_INF_dbf.html" >MS GRC 61 SP2 QUESTION MANUAL AUTO INF dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_61_SP2_QUESTION_TYPE_INF.html" >MS GRC 61 SP2 QUESTION TYPE INF</a></td>
+                                            <td><a href="../infolets/MS_GRC_61_SP2_QUESTION_TYPE_INF_dbf.html" >MS GRC 61 SP2 QUESTION TYPE INF dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_61_SP2_QUES_CATEGORY_INF.html" >MS GRC 61 SP2 QUES CATEGORY INF</a></td>
+                                            <td><a href="../infolets/MS_GRC_AOC_TYPES_Inf.html" >MS GRC AOC TYPES Inf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_AOC_TYPES_Inf_dbf.html" >MS GRC AOC TYPES Inf dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Area_of_Impact_Inf.html" >MS GRC Area of Impact Inf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Asset_Class_Type.html" >MS GRC Asset Class Type</a></td>
+                                            <td><a href="../infolets/MS_GRC_Bus_Criticality.html" >MS GRC Bus Criticality</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Business_Criticality.html" >MS GRC Business Criticality</a></td>
+                                            <td><a href="../infolets/MS_GRC_Business_Criticality_Inf.html" >MS GRC Business Criticality Inf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Business_Criticality_dbf.html" >MS GRC Business Criticality dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_CIA_VALUES.html" >MS GRC CIA VALUES</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_CURRENCY.html" >MS GRC CURRENCY</a></td>
+                                            <td><a href="../infolets/MS_GRC_Control_Category.html" >MS GRC Control Category</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Control_Category_dbf.html" >MS GRC Control Category dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Control_Frequency.html" >MS GRC Control Frequency</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Control_Frequency_dbf.html" >MS GRC Control Frequency dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Control_Type.html" >MS GRC Control Type</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Control_Type_dbf.html" >MS GRC Control Type dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_DURATION_VALUES.html" >MS GRC DURATION VALUES</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Financial_Account_Category.html" >MS GRC Financial Account Category</a></td>
+                                            <td><a href="../infolets/MS_GRC_Financial_Account_Category_dbf.html" >MS GRC Financial Account Category dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Financial_Account_Type.html" >MS GRC Financial Account Type</a></td>
+                                            <td><a href="../infolets/MS_GRC_Financial_Account_Type_dbf.html" >MS GRC Financial Account Type dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_GET_CAUSE_CONSEQUENCE.html" >MS GRC GET CAUSE CONSEQUENCE</a></td>
+                                            <td><a href="../infolets/MS_GRC_GET_CONTROL_PRIORITY.html" >MS GRC GET CONTROL PRIORITY</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_GET_CONTROL_PRIORITY_dbf.html" >MS GRC GET CONTROL PRIORITY dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_GET_CONTROL_SOURCE.html" >MS GRC GET CONTROL SOURCE</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_GET_CONTROL_SOURCE_dbf.html" >MS GRC GET CONTROL SOURCE dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_GET_CONTROL_TYPE.html" >MS GRC GET CONTROL TYPE</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_GET_CONTROL_TYPE_dbf.html" >MS GRC GET CONTROL TYPE dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_GET_REQ_CATEGORY.html" >MS GRC GET REQ CATEGORY</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_KEY_CONTROL.html" >MS GRC KEY CONTROL</a></td>
+                                            <td><a href="../infolets/MS_GRC_KEY_VALUES_Inf.html" >MS_GRC_KEY_VALUES_Inf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Model_Reference_Source.html" >MS GRC Model Reference Source</a></td>
+                                            <td><a href="../infolets/MS_GRC_OBJ_STATUS_dbf.html" >MS GRC OBJ STATUS dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Objective_Type_Inf.html" >MS GRC Objective Type Inf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Objectives_COSO_Type.html" >MS GRC Objectives COSO Type</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Objectives_COSO_Type_dbf.html" >MS GRC Objectives COSO Type dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Objectives_Type.html" >MS GRC Objectives Type</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Physical_Location.html" >MS GRC Physical Location</a></td>
+                                            <td><a href="../infolets/MS_GRC_Physical_Location_dbf.html" >MS GRC Physical Location dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Process_Category.html" >MS GRC Process Category</a></td>
+                                            <td><a href="../infolets/MS_GRC_Process_Category_dbf.html" >MS GRC Process Category dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Process_Type.html" >MS GRC Process Type</a></td>
+                                            <td><a href="../infolets/MS_GRC_Process_Type_dbf.html" >MS GRC Process Type dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Prod_Locs_Inf.html" >MS GRC Prod Locs Inf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Product_Locations.html" >MS GRC Product Locations</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Product_Locations_Inf.html" >MS_GRC_Product_Locations_Inf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Product_Locations_dbf.html" >MS GRC Product Locations dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_QUESTION_MANUAL_INFOLET.html" >MS GRC QUESTION MANUAL INFOLET</a></td>
+                                            <td><a href="../infolets/MS_GRC_QUESTION_RESPONSE_TYPE.html" >MS GRC QUESTION RESPONSE TYPE</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_QUESTION_RESPONSE_TYPE_dbf.html" >MS GRC QUESTION RESPONSE TYPE dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_REQUIREMENT_IMPACT.html" >MS GRC REQUIREMENT IMPACT</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_REQUIREMENT_IMPACT_dbf.html" >MS GRC REQUIREMENT IMPACT dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_RESTRICTED_ACCESS_TO_LIST.html" >MS GRC RESTRICTED ACCESS TO LIST</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_RESTRICTED_ACCESS_TO_LIST_DU.html" >MS GRC RESTRICTED ACCESS TO LIST DU</a></td>
+                                            <td><a href="../infolets/MS_GRC_Reference_URL_Type.html" >MS GRC Reference URL Type</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Reference_URL_Type_dbf.html" >MS GRC Reference URL Type dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Req_Impact.html" >MS GRC Req Impact</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Requirement_Frequency.html" >MS GRC Requirement Frequency</a></td>
+                                            <td><a href="../infolets/MS_GRC_Requirement_Frequency_dbf.html" >MS GRC Requirement Frequency dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Requirement_Type.html" >MS GRC Requirement Type</a></td>
+                                            <td><a href="../infolets/MS_GRC_Risk_Category.html" >MS GRC Risk Category</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Risk_Category_Inf.html" >MS GRC Risk Category Inf</a></td>
+                                            <td><a href="../infolets/MS_GRC_Risk_Category_dbf.html" >MS GRC Risk Category dbf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Risk_Classification_Type.html" >MS GRC Risk Classification Type</a></td>
+                                            <td><a href="../infolets/MS_GRC_Standard_Type_Infolet.html" >MS GRC Standard Type Infolet</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Standard_Type_Infolet_dbf.html" >MS GRC Standard Type Infolet dbf</a></td>
+                                            <td><a href="../infolets/MS_GRC_TIER_VALUES.html" >MS GRC TIER VALUES</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_VIOL_RISK_FACTOR.html" >MS GRC VIOL RISK FACTOR</a></td>
+                                            <td><a href="../infolets/MS_GRC_VIOL_SEV_LEVEL.html" >MS GRC VIOL SEV LEVEL</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_YES_NO_NEW.html" >MS GRC YES NO NEW</a></td>
+                                            <td><a href="../infolets/MS_GRC_Yes_No_Infolet.html" >MS GRC Yes No Infolet</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_GRC_Yes_No_dbf.html" >MS GRC Yes No dbf</a></td>
+                                            <td><a href="../infolets/MS_Grc_Basel_Entity_Inf.html" >MS Grc Basel Entity Inf</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/Ms_GRC_Reference_Category.html" >Ms GRC Reference Category</a></td>
+                                            <td></td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

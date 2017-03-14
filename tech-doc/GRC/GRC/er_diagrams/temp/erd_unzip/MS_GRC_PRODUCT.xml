@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><schemadiagramrequest xmlns="http://www.metricstream.com/xsd"><module>GRC</module><display_number_of_columns></display_number_of_columns><schemadiagram><name>MS_GRC_PRODUCT</name><tables><table><name>MS_GRC_ORB_RELATIONS</name><pkcolumn><column>REL_SOURCE_ID</column></pkcolumn></table>
+<table><name>MS_GRC_ORB_RELATIONS_ORB</name><pkcolumn><column>REL_INST_ID</column><column>REL_SOURCE_ID</column></pkcolumn><fkcolumn><column>REL_SOURCE_ID</column></fkcolumn></table>
+<table><name>MS_GRC_ORB_RELATIONS_STK</name><pkcolumn><column>STAKE_HOLDERS</column></pkcolumn><fkcolumn><column>REL_INST_ID</column><column>REL_SOURCE_ID</column></fkcolumn></table>
+<table><name>MS_GRC_PRODUCT</name><pkcolumn><column>OBJECT_ID</column></pkcolumn></table>
+<table><name>MS_GRC_PRODUCT_LOC</name><pkcolumn><column>PRODUCT_LOCATION</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_PRODUCT_OGN</name><pkcolumn><column>OWNER_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_PRODUCT_OWN</name><pkcolumn><column>OWNERS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_PRODUCT_SCH</name><pkcolumn><column>SALES_CHANNEL</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_PRODUCT_TYP</name><pkcolumn><column>PRODUCT_TYPE</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+</tables><relationships><relationship name="" logical="1-*">
+<from><table>MS_GRC_ORB_RELATIONS</table>
+</from><to><table>MS_GRC_ORB_RELATIONS_ORB</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_GRC_ORB_RELATIONS_ORB</table>
+</from><to><table>MS_GRC_ORB_RELATIONS_STK</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_GRC_PRODUCT</table>
+</from><to><table>MS_GRC_PRODUCT_TYP</table><table>MS_GRC_PRODUCT_LOC</table><table>MS_GRC_PRODUCT_OGN</table><table>MS_GRC_PRODUCT_OWN</table><table>MS_GRC_PRODUCT_SCH</table></to></relationship>
+</relationships></schemadiagram></schemadiagramrequest>

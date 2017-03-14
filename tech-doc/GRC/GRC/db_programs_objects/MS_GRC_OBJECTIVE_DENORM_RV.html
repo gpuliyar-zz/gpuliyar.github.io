@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS GRC 61 SP2 PO BROWSER</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_GRC_OBJECTIVE_DENORM_RV">MS_GRC_OBJECTIVE_DENORM_RV</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_GRC_OBJECTIVE_DENORM_RV" ("OBJECT_ID", "OBJECT_NAME", "LOCALE_ID", "LOCALE", "OBJECT_NAME_URL", "KEY_OBJECTIVE", "OBJECTIVE_TYPE", "COSO_TYPE", "OBJECT_LEVEL", "OBJECT_PARENT", "OBJECT_STATUS", "CREATED_DATE", "CREATED_BY", "UPDATED_DATE", "UPDATED_BY", "VALID_FROM", "VALID_UNTIL", "DESCRIPTION", "OWNER_IDS", "OWNER_NAME", "OWNER_ORG_IDS", "OWNER_ORG_NAMES", "LEVEL_1_APPROVER", "LEVEL_2_APPROVER", "REL_AOC_OBJ_ID_AGG", "REL_AOC_OBJ_NAME_AGG", "REL_ASSET_CLASS_OBJ_ID_AGG", "REL_ASSET_CLASS_OBJ_NAME_AGG", "REL_ASSET_OBJ_ID_AGG", "REL_ASSET_OBJ_NAME_AGG", "REL_CTRL_OBJ_ID_AGG", "REL_CTRL_OBJ_NAME_AGG", "REL_EVIDENCE_OBJ_ID_AGG", "REL_EVIDENCE_OBJ_NAME_AGG", "REL_EXCEPTION_OBJ_ID_AGG", "REL_EXCEPTION_OBJ_NAME_AGG", "REL_FIN_ACT_OBJ_ID_AGG", "REL_FIN_ACT_OBJ_NAME_AGG", "REL_FUNCTION_OBJ_ID_AGG", "REL_FUNCTION_OBJ_NAME_AGG", "REL_KPIKRI_DEF_OBJ_ID_AGG", "REL_KPIKRI_DEF_OBJ_NAME_AGG", "REL_MOD_REF_OBJ_ID_AGG", "REL_MOD_REF_OBJ_NAME_AGG", "REL_OBJECTIVE_OBJ_ID_AGG", "REL_OBJECTIVE_OBJ_NAME_AGG", "REL_ORGANIZATION_IDS", "REL_ORGANIZATION_NAMES", "REL_ORG_PROFILE_OBJ_ID_AGG", "REL_ORG_PROFILE_OBJ_NAME_AGG", "REL_PROCESS_OBJ_ID_AGG", "REL_PROCESS_OBJ_NAME_AGG", "REL_PRODUCT_ID_AGG", "REL_PRODUCT_NAME_AGG", "REL_QUE_OBJECT_ID_AGG", "REL_QUE_PROC_OBJ_NAME_AGG", "REL_REFRENCES_OBJ_ID_AGG", "REL_REFRENCES_OBJ_NAME_AGG", "REL_REG_BODY_OBJ_ID_AGG", "REL_REG_BODY_OBJ_NAME_AGG", "REL_REQUIREMENT_OBJ_ID_AGG", "REL_REQUIREMENT_OBJ_NAME_AGG", "REL_RISK_OBJ_ID_AGG", "REL_RISK_OBJ_NAME_AGG", "REL_STANDARD_OBJ_ID_AGG", "REL_STANDARD_OBJ_NAME_AGG", "RESTRICT_ACCESS_TO", "DD_EDIT_FLAG", "DD_OBJECT_TYPE", "DD_INSTANCE_ID", "DD_PROCESS_INSTANCE_ID", "OVER_RIDE_ACTION", "EDIT_ACTION_PARAMETERS", "EXPIRED_FLAG", "ATTACHMENTS", "IS_ORPHAN", "OBJECT_PARENT_ID", "LEVEL_1_APPR", "LEVEL_2_APPR", "UPPER_OBJECT_NAME") AS 
+  SELECT objSumm.object_id,
+    objSumm.object_Name,
+    mlsSumm.LOCALE_ID,
+    Mlssumm.Locale,
+    Objsumm.Object_Name_Url AS OBJECT_NAME_URL,
+    mlsSumm.KEY_OBJECTIVE,
+    to_char(mlsSumm.OBJECTIVE_TYPE) as OBJECTIVE_TYPE,
+    mlsSumm.COSO_TYPE,
+    mlsSumm.object_level,
+    (SELECT object_name
+    FROM MS_GRC_OBJECTIVES objc
+    WHERE objc.object_id = objSumm.parent
+    ) AS OBJECT_PARENT,
+    mlsSumm.Object_Status,
+    objSumm.Created_Date,
+    (SELECT usr.first_name
+      || ' '
+      || usr.last_name
+    FROM si_users_t usr
+    WHERE objSumm.Created_By = usr.user_name
+    ) AS Created_By,
+    objSumm.Updated_Date,
+    (SELECT usr.first_name
+      || ' '
+      || usr.last_name
+    FROM si_users_t usr
+    WHERE objSumm.Updated_By = usr.user_name
+    ) AS Updated_By,
+    objSumm.valid_from,
+    objSumm.valid_until,
+    objSumm.description,
+    objSumm.OWNER_IDS,
+    objSumm.OWNER_NAME,
+    objSumm.OWNER_ORG_IDS,
+    objSumm.OWNER_ORG_NAMES,
+    (SELECT usr.first_name
+      || ' '
+      || usr.last_name
+    FROM si_users_t usr
+    WHERE objSumm.level_1_approver = usr.user_name
+    ) AS level_1_approver,
+    (SELECT usr.first_name
+      || ' '
+      || usr.last_name
+    FROM si_users_t usr
+    WHERE objSumm.level_2_approver = usr.user_name
+    ) AS level_2_approver,
+    objSumm.REL_AOC_OBJ_ID_AGG,
+    objSumm.REL_AOC_OBJ_NAME_AGG,
+    objSumm.REL_ASSET_CLASS_OBJ_ID_AGG,
+    objSumm.REL_ASSET_CLASS_OBJ_NAME_AGG,
+    objSumm.REL_ASSET_OBJ_ID_AGG,
+    objSumm.REL_ASSET_OBJ_NAME_AGG,
+    objSumm.REL_CTRL_OBJ_ID_AGG,
+    objSumm.REL_CTRL_OBJ_NAME_AGG,
+    objSumm.REL_EVIDENCE_OBJ_ID_AGG,
+    objSumm.REL_EVIDENCE_OBJ_NAME_AGG,
+    objSumm.REL_EXCEPTION_OBJ_ID_AGG,
+    objSumm.REL_EXCEPTION_OBJ_NAME_AGG,
+    objSumm.REL_FIN_ACT_OBJ_ID_AGG,
+    objSumm.REL_FIN_ACT_OBJ_NAME_AGG,
+    objSumm.REL_FUNCTION_OBJ_ID_AGG,
+    objSumm.REL_FUNCTION_OBJ_NAME_AGG,
+    objSumm.REL_KPIKRI_DEF_OBJ_ID_AGG,
+    objSumm.REL_KPIKRI_DEF_OBJ_NAME_AGG,
+    objSumm.REL_MOD_REF_OBJ_ID_AGG,
+    objSumm.REL_MOD_REF_OBJ_NAME_AGG,
+    objSumm.REL_OBJECTIVE_OBJ_ID_AGG,
+    objSumm.REL_OBJECTIVE_OBJ_NAME_AGG,
+    objSumm.REL_ORGANIZATION_IDS,
+    objSumm.REL_ORGANIZATION_NAMES,
+    objSumm.REL_ORG_PROFILE_OBJ_ID_AGG,
+    objSumm.REL_ORG_PROFILE_OBJ_NAME_AGG,
+    objSumm.REL_PROCESS_OBJ_ID_AGG,
+    objSumm.REL_PROCESS_OBJ_NAME_AGG,
+    objSumm.REL_PRODUCT_ID_AGG,
+    objSumm.REL_PRODUCT_NAME_AGG,
+    objSumm.REL_QUE_OBJECT_ID_AGG,
+    objSumm.REL_QUE_PROC_OBJ_NAME_AGG,
+    objSumm.REL_REFRENCES_OBJ_ID_AGG,
+    objSumm.REL_REFRENCES_OBJ_NAME_AGG,
+    objSumm.REL_REG_BODY_OBJ_ID_AGG,
+    objSumm.REL_REG_BODY_OBJ_NAME_AGG,
+    objSumm.REL_REQUIREMENT_OBJ_ID_AGG,
+    objSumm.REL_REQUIREMENT_OBJ_NAME_AGG,
+    objSumm.REL_RISK_OBJ_ID_AGG,
+    objSumm.REL_RISK_OBJ_NAME_AGG,
+    objSumm.REL_STANDARD_OBJ_ID_AGG,
+    objSumm.REL_STANDARD_OBJ_NAME_AGG,
+    objSumm.restrict_access_to,
+    objSumm.dd_edit_flag,
+    objSumm.dd_object_type,
+    objSumm.dd_instance_id,
+    objSumm.dd_process_instance_id,
+    Objsumm.Over_Ride_Action,
+    Objsumm.Edit_Action_Parameters AS EDIT_ACTION_PARAMETERS,
+    objSumm.expired_flag,
+    OBJSUMM.ATTACHMENTS,
+    OBJSUMM.IS_ORPHAN,
+    OBJSUMM.parent           AS Object_parent_id,
+    OBJSUMM.LEVEL_1_APPROVER AS LEVEL_1_APPR,
+    objSumm.LEVEL_2_APPROVER AS level_2_appr,
+    objSumm.upper_object_name
+  FROM MS_GRC_OBJECTIVE_SUMMARY objSumm,
+    MS_GRC_OBJECTIVE_MLS_SUMMARY mlsSumm
+  WHERE Objsumm.Object_Id = Mlssumm.Object_Id</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><schemadiagramrequest xmlns="http://www.metricstream.com/xsd"><module>GRC</module><display_number_of_columns></display_number_of_columns><schemadiagram><name>MS_GRC_QUESTION_PROCEDURE</name><tables><table><name>MS_GRC_ORB_RELATIONS</name><pkcolumn><column>REL_SOURCE_ID</column></pkcolumn></table>
+<table><name>MS_GRC_ORB_RELATIONS_ORB</name><pkcolumn><column>REL_INST_ID</column><column>REL_SOURCE_ID</column></pkcolumn><fkcolumn><column>REL_SOURCE_ID</column></fkcolumn></table>
+<table><name>MS_GRC_ORB_RELATIONS_STK</name><pkcolumn><column>STAKE_HOLDERS</column></pkcolumn><fkcolumn><column>REL_INST_ID</column><column>REL_SOURCE_ID</column></fkcolumn></table>
+<table><name>MS_GRC_QUESTION_PROC</name><pkcolumn><column>OBJECT_ID</column></pkcolumn></table>
+<table><name>MS_GRC_QUESTION_PROC_AOC</name><pkcolumn><column>APPLIES_TO_AOC</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_QUESTION_PROC_ATO</name><pkcolumn><column>ATO_ORGANIZATION</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_QUESTION_PROC_CAT</name><pkcolumn><column>CATEGORY_QUEST</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_QUESTION_PROC_CON</name><pkcolumn><column>APPLIES_TO_CONTROLS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_QUESTION_PROC_COR</name><pkcolumn><column>APPLIES_TO_CORE_OBJECTS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_QUESTION_PROC_ORG</name><pkcolumn><column>OWNER_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_QUESTION_PROC_OWN</name><pkcolumn><column>OWNERS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_QUESTION_PROC_REQ</name><pkcolumn><column>APPLIES_TO_REQUIREMENTS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+</tables><relationships><relationship name="" logical="1-*">
+<from><table>MS_GRC_ORB_RELATIONS</table>
+</from><to><table>MS_GRC_ORB_RELATIONS_ORB</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_GRC_ORB_RELATIONS_ORB</table>
+</from><to><table>MS_GRC_ORB_RELATIONS_STK</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_GRC_QUESTION_PROC</table>
+</from><to><table>MS_GRC_QUESTION_PROC_REQ</table><table>MS_GRC_QUESTION_PROC_AOC</table><table>MS_GRC_QUESTION_PROC_ATO</table><table>MS_GRC_QUESTION_PROC_CAT</table><table>MS_GRC_QUESTION_PROC_CON</table><table>MS_GRC_QUESTION_PROC_COR</table><table>MS_GRC_QUESTION_PROC_ORG</table><table>MS_GRC_QUESTION_PROC_OWN</table></to></relationship>
+</relationships></schemadiagram></schemadiagramrequest>

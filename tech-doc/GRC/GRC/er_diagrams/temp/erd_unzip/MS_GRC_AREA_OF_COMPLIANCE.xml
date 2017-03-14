@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><schemadiagramrequest xmlns="http://www.metricstream.com/xsd"><module>GRC</module><display_number_of_columns></display_number_of_columns><schemadiagram><name>MS_GRC_AREA_OF_COMPLIANCE</name><tables><table><name>MS_GRC_AREA_OF_COMPLIA</name><pkcolumn><column>OBJECT_ID</column></pkcolumn></table>
+<table><name>MS_GRC_AREA_OF_COMPLIA_AOW</name><pkcolumn><column>OWNERS_ATO</column></pkcolumn><fkcolumn><column>OBJECT_ID</column><column>ORGANIZATION_NAME</column></fkcolumn></table>
+<table><name>MS_GRC_AREA_OF_COMPLIA_ATO</name><pkcolumn><column>OBJECT_ID</column><column>ORGANIZATION_NAME</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_AREA_OF_COMPLIA_FNC</name><pkcolumn><column>FUNCTION_NAME</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_AREA_OF_COMPLIA_MRE</name><pkcolumn><column>MODEL_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_AREA_OF_COMPLIA_ORG</name><pkcolumn><column>OWNER_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_AREA_OF_COMPLIA_OWN</name><pkcolumn><column>OWNERS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_AREA_OF_COMPLIA_REF</name><pkcolumn><column>REF_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_AREA_OF_COMPLIA_REG</name><pkcolumn><column>REGULATORY_BODY</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_AREA_OF_COMPLIA_TYP</name><pkcolumn><column>AOC_TYPE</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_GRC_ORB_RELATIONS</name><pkcolumn><column>REL_SOURCE_ID</column></pkcolumn></table>
+<table><name>MS_GRC_ORB_RELATIONS_ORB</name><pkcolumn><column>REL_INST_ID</column><column>REL_SOURCE_ID</column></pkcolumn><fkcolumn><column>REL_SOURCE_ID</column></fkcolumn></table>
+<table><name>MS_GRC_ORB_RELATIONS_STK</name><pkcolumn><column>STAKE_HOLDERS</column></pkcolumn><fkcolumn><column>REL_INST_ID</column><column>REL_SOURCE_ID</column></fkcolumn></table>
+</tables><relationships><relationship name="" logical="1-*">
+<from><table>MS_GRC_AREA_OF_COMPLIA</table>
+</from><to><table>MS_GRC_AREA_OF_COMPLIA_TYP</table><table>MS_GRC_AREA_OF_COMPLIA_ATO</table><table>MS_GRC_AREA_OF_COMPLIA_FNC</table><table>MS_GRC_AREA_OF_COMPLIA_MRE</table><table>MS_GRC_AREA_OF_COMPLIA_ORG</table><table>MS_GRC_AREA_OF_COMPLIA_OWN</table><table>MS_GRC_AREA_OF_COMPLIA_REF</table><table>MS_GRC_AREA_OF_COMPLIA_REG</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_GRC_AREA_OF_COMPLIA_ATO</table>
+</from><to><table>MS_GRC_AREA_OF_COMPLIA_AOW</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_GRC_ORB_RELATIONS</table>
+</from><to><table>MS_GRC_ORB_RELATIONS_ORB</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_GRC_ORB_RELATIONS_ORB</table>
+</from><to><table>MS_GRC_ORB_RELATIONS_STK</table></to></relationship>
+</relationships></schemadiagram></schemadiagramrequest>

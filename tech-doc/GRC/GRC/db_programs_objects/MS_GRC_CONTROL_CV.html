@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS_RSK_GRC_CTL_INLINE_RPT_VIEW</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_GRC_CONTROL_CV">MS_GRC_CONTROL_CV</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_GRC_CONTROL_CV" ("CONFIGURED_OBJECT_TYPES", "MODIF_REQ_BY_HIDDEN", "CREATED_BY_HIDDEN", "SAMPLING_SIZE_HIDDEN", "COMPLIANCE_CATEGORY", "ORB_RPT_NAME", "TEMP_FIELD_OBJ_ID", "ATTRIBUTE_COLUMN_H3", "ATTRIBUTE_COLUMN_H2", "ADDITIONAL_COLUMN_H1", "CHECK_USER_AVAIL", "OBJ_STATUS_TEMP", "REFERENCE_ID", "FREQUENCY_DATE", "OWN_APP_CONFIG_TEMP", "OWN_APP_CONFIG", "RTF_ATTACH", "OBJECT_ID", "ACTION_COMMENTS", "ATTACHMENTS", "OBJ_MODIFIED_ON", "OBJ_CREATED_ON", "ASSOCIATED_WITH_TYPE", "REL_SOURCE_OBJECT_ID", "REL_SOURCE_ID", "REL_COMMENTS", "SRC_OBJ_ID", "TYPE_OF_OWNER", "NATURE_OF_REL_PTOA", "PTOA_INPUT", "ATO_ORB_TEMP", "ADDITIONAL_COLUMN5", "ADDITIONAL_COLUMN4", "ORB_FORM_URL", "ADDITIONAL_DETAILS_WITH_ID", "ADDITIONAL_COLUMN3", "ADDITIONAL_COLUMN2", "ADDITIONAL_COLUMN1", "ADDITIONAL_DETAILS", "ORB_REL_SOURCE_ID", "ROW_NUM", "TGT_OBJ_TYPE", "REL_VALID_FROM", "SELF_REL_TYPE", "PARENT_REL_INST_ID", "REL_VALID_UNTIL", "TGT_OBJ_ID", "TGT_OBJ_NAME", "REL_CONFIG_ID", "REL_INST_ID", "VALID_UNTIL", "VALID_FROM", "SAMPLE_SIZE", "NEXT_SCHEDULED_DATE", "DUE_BY", "START_AFTER", "CONTROL_ACCESS_FLAG", "LEGACY_ID", "DESCRIPTION", "KEY_COMPLIANCE", "OBJECT_NAME", "DD_CURRENT_STATUS", "DD_ACTION", "DD_PROCESS_CODE", "DD_ENTERPRISE_INFO", "INSTANCE_REC_NUM", "INSTANCE_ID", "METRIC_ID", "METRIC_RUN_DATE", "METRIC_COMPLETED_DATE", "LATEST_FLAG", "CREATED_BY", "CREATION_DATE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "MULTIROW_GROUP_NAME", "ELECTRONICALLY_SIGNED", "MULTIROW_REGION_ID", "UNIQUE_ROW_ID", "DESCRIPTION_HTM", "NATURE_TYPE", "COMPLIANCE_TYPE", "STAKE_HOLDERS", "ORB_KEY_RISK", "NATURE_OF_RELATIONSHIP", "CAUSE_CONSEQUENCE", "PRIORITY_TYPE", "SOURCE_TYPE", "CONTROL_TYPE", "PURPOSE", "APPLICABLE_TO", "OWNERS", "OWNER_ORGANIZATIONS", "OBJECT_PARENT", "OBJECT_LEVEL", "OBJ_MODIFIED_BY", "OBJ_CREATED_BY", "OBJ_STATUS", "FREQUENCY", "LEVEL_2_APPROVER", "RESTRICT_ACCESS_TO", "OBJECT_ACTION", "LEVEL_1_APPROVER", "DD_CURRENT_STAGE", "DD_EVENT_USER_NAME", "DD_CURRENT_USER_NAME", "DD_OBJECT_TYPE", "LOCALE_ID", "LOCALE_STRING", "CONFIG_PARAM_APP", "WFI_DISPLAY", "WFI_STORED") AS 
+  SELECT "CONFIGURED_OBJECT_TYPES",
+    "MODIF_REQ_BY_HIDDEN",
+    "CREATED_BY_HIDDEN",
+    "SAMPLING_SIZE_HIDDEN",
+    "COMPLIANCE_CATEGORY",
+    "ORB_RPT_NAME",
+    "TEMP_FIELD_OBJ_ID",
+    "ATTRIBUTE_COLUMN_H3",
+    "ATTRIBUTE_COLUMN_H2",
+    "ADDITIONAL_COLUMN_H1",
+    "CHECK_USER_AVAIL",
+    "OBJ_STATUS_TEMP",
+    "REFERENCE_ID",
+    "FREQUENCY_DATE",
+    "OWN_APP_CONFIG_TEMP",
+    "OWN_APP_CONFIG",
+    "RTF_ATTACH",
+    "OBJECT_ID",
+    replace(DBMS_XMLGEN.CONVERT(ACTION_COMMENTS,1),chr(10),'<br>') as "ACTION_COMMENTS",
+    "ATTACHMENTS",
+    "OBJ_MODIFIED_ON",
+    "OBJ_CREATED_ON",
+    "ASSOCIATED_WITH_TYPE",
+    "REL_SOURCE_OBJECT_ID",
+    "REL_SOURCE_ID",
+    "REL_COMMENTS",
+    "SRC_OBJ_ID",
+    "TYPE_OF_OWNER",
+    "NATURE_OF_REL_PTOA",
+    "PTOA_INPUT",
+    "ATO_ORB_TEMP",
+    "ADDITIONAL_COLUMN5",
+    "ADDITIONAL_COLUMN4",
+    "ORB_FORM_URL",
+    "ADDITIONAL_DETAILS_WITH_ID",
+    "ADDITIONAL_COLUMN3",
+    "ADDITIONAL_COLUMN2",
+    "ADDITIONAL_COLUMN1",
+    "ADDITIONAL_DETAILS",
+    "ORB_REL_SOURCE_ID",
+    "ROW_NUM",
+    "TGT_OBJ_TYPE",
+    "REL_VALID_FROM",
+    MS_APPS_UTILITIES.GET_DISPLAY_VALUE( I_ENTERPRISE_ID => MS_GRC_UTILITIES.ACTIVE_ENT_ID, I_LOV_NAME => 'MS GRC Physical Location',
+                                           i_stored_value => SELF_REL_TYPE, I_LOCALE_ID => locale_id) "SELF_REL_TYPE", 
+    "PARENT_REL_INST_ID",
+    "REL_VALID_UNTIL",
+    "TGT_OBJ_ID",
+    "TGT_OBJ_NAME",
+    "REL_CONFIG_ID",
+    "REL_INST_ID",
+    "VALID_UNTIL",
+    "VALID_FROM",
+    "SAMPLE_SIZE",
+    "NEXT_SCHEDULED_DATE",
+    "DUE_BY",
+    "START_AFTER",
+    "CONTROL_ACCESS_FLAG",
+    "LEGACY_ID",
+    (
+    CASE
+      WHEN dbms_lob.getlength(DESCRIPTION_HTM)=0
+      THEN NULL
+      ELSE DESCRIPTION_HTM
+    END) AS DESCRIPTION,
+    decode(key_compliance,'yes','Yes','no','No',key_compliance) as "KEY_COMPLIANCE",
+    "OBJECT_NAME",
+    "DD_CURRENT_STATUS",
+    "DD_ACTION",
+    "DD_PROCESS_CODE",
+    "DD_ENTERPRISE_INFO",
+    "INSTANCE_REC_NUM",
+    "INSTANCE_ID",
+    "METRIC_ID",
+    "METRIC_RUN_DATE",
+    "METRIC_COMPLETED_DATE",
+    "LATEST_FLAG",
+    "CREATED_BY",
+    "CREATION_DATE",
+    "PROCESS_FLOW_STATUS",
+    "PROCESS_INSTANCE_ID",
+    "MULTIROW_GROUP_NAME",
+    "ELECTRONICALLY_SIGNED",
+    "MULTIROW_REGION_ID",
+    "UNIQUE_ROW_ID",
+    "DESCRIPTION_HTM",
+    ms_apps_utilities.get_display_values ( MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_COMPLIANCE_TYPE', NATURE_TYPE, 1, locale_id) "NATURE_TYPE",
+    ms_apps_utilities.get_display_values ( MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_COMPLIANCE_TYPE', compliance_type, 1, locale_id) "COMPLIANCE_TYPE",
+    MS_APPS_UTILITIES.GET_USER_FULL_NAME(STAKE_HOLDERS) AS "STAKE_HOLDERS",
+    ms_apps_utilities.get_display_value ( MS_GRC_UTILITIES.active_ent_id, 'MS GRC Yes No', ORB_KEY_RISK, 1, locale_id) "ORB_KEY_RISK",
+    ms_apps_utilities.get_display_value ( MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_Nature_of_Relationship', NATURE_OF_RELATIONSHIP, 1, locale_id) "NATURE_OF_RELATIONSHIP",
+    ms_apps_utilities.get_display_value ( MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_CAUSE_CONSEQUENCE', CAUSE_CONSEQUENCE, 1, locale_id) CAUSE_CONSEQUENCE,
+    ms_apps_utilities.get_display_values ( MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_CONTROL_PRIORITY', PRIORITY_TYPE, 1, locale_id) "PRIORITY_TYPE",
+    ms_apps_utilities.get_display_values ( MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_CONTROL_SOURCE', SOURCE_TYPE, 1, locale_id) "SOURCE_TYPE",
+    ms_apps_utilities.get_display_values ( MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_CONTROL_TYPE', CONTROL_TYPE, 1, locale_id) "CONTROL_TYPE",
+    ms_apps_utilities.get_display_values ( MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_COMPLIANCE_CATEGORY', PURPOSE, 1, locale_id) "PURPOSE",
+    ms_apps_utilities.get_display_value ( MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_Core_Object_ATO_Applies_To', APPLICABLE_TO, 1, locale_id) "APPLICABLE_TO",
+    MS_GRC_UTILITIES.get_users (owners) "OWNERS",
+    ms_apps_utilities.get_display_values ( MS_GRC_UTILITIES.active_ent_id, 'ORGENTITY', owner_organizations ) "OWNER_ORGANIZATIONS",
+    ms_grc_utilities.prfn_return_object_name(object_parent, 'MS_GRC_CONTROL') AS "OBJECT_PARENT",
+    ms_apps_utilities.get_display_value ( MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_LEVEL', object_level, 1, locale_id) object_level,
+    ms_apps_utilities.get_user_full_name(OBJ_MODIFIED_BY)AS "OBJ_MODIFIED_BY",
+    ms_apps_utilities.get_user_full_name(OBJ_CREATED_BY) AS "OBJ_CREATED_BY",
+    ms_grc_utilities.get_Status_name (dd_current_user_name, obj_status) "OBJ_STATUS",
+    ms_apps_utilities.get_display_value ( MS_GRC_UTILITIES.active_ent_id, 'MS_GRC_Frequency', frequency, 1, locale_id) "FREQUENCY",
+    ms_apps_utilities.get_user_full_name (level_2_approver) level_2_approver,
+    ms_apps_utilities.get_display_value ( MS_GRC_UTILITIES.active_ent_id, 'MS GRC Restrict Access To', restrict_access_to, 1, locale_id) restrict_access_to,
+    ms_apps_utilities.get_display_value ( MS_GRC_UTILITIES.active_ent_id, 'MS GRC Action', object_action, 1, locale_id) "OBJECT_ACTION",
+    ms_apps_utilities.get_user_full_name (level_1_approver) level_1_approver,
+    ms_grc_utilities.get_wf_stage_desc(loc.locale_id, DD_CURRENT_STAGE) AS "DD_CURRENT_STAGE",
+    ms_apps_utilities.get_user_full_name (dd_event_user_name) "DD_EVENT_USER_NAME",
+    ms_apps_utilities.get_user_full_name (dd_current_user_name) "DD_CURRENT_USER_NAME",
+    (SELECT FORM_TITLE
+    FROM ms_grc_orb_config_form_title conf
+    WHERE conf.object_type = DD_OBJECT_TYPE
+    AND loc.LOCALE_ID      = conf.LOCALE_ID
+    ) AS "DD_OBJECT_TYPE",
+    loc.LOCALE_ID,
+    loc.LOCALE_STRING,
+    CONFIG_PARAM_APP,
+    WFI_DISPLAY,
+    WFI_STORED
+      FROM MS_GRC_CONTROL_V vwOut,
+    (SELECT LOCALE_ID, LOCALE_STRING FROM si_locales WHERE enabled_flag = 'Y'
+    ) loc
+  WHERE (process_instance_id,instance_id) in 
+ (SELECT process_instance_id,MAX(INSTANCE_ID) as INSTANCE_ID
+                                            FROM MS_GRC_CONTROL_V a
+                                            WHERE process_instance_id=vwOut.process_instance_id
+                                            and a.instance_rec_num = 1
+                                            AND a.DD_CURRENT_STAGE != 'NONE'
+                                            GROUP BY a.process_instance_id,
+                                                     a.dd_current_stage,
+                                                     a.CREATION_DATE)</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

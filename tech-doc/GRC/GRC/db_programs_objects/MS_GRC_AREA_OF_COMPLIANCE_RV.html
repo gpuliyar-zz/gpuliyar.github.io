@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>GRC Area Of Compliance Workflow</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_GRC_AREA_OF_COMPLIANCE_RV">MS_GRC_AREA_OF_COMPLIANCE_RV</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_GRC_AREA_OF_COMPLIANCE_RV" ("OBJECT_NAME", "OBJECT_ID", "OBJ_STATUS", "DESCRIPTION", "OWNERS", "VALID_UNTIL", "VALID_FROM", "DD_OBJECT_TYPE", "ATO_ORGANIZATIONS", "DD_PROCESS_INSTANCE_ID", "DD_INSTANCE_ID", "DD_EDIT_FLAG", "DISPLAY_NAME", "OVER_RIDE_ACTION", "EDIT_ACTION_PARAMETERS", "RESTRICT_ACCESS_TO", "OBJECT_NAME_URL", "RELATED_FRAMEWORK_REFERENCES", "RELATED_RISKS", "RELATED_PROCESS", "RELATED_CONTROL", "RELATED_REQUIREMENT", "RELATED_REGULATORY_BODY", "RELATED_FUNCTION", "RELATED_REFERENCE", "REL_FRAME_REFERENCE_TYPE", "RELATED_STANDARDS", "OWNER_ORG_IDS", "EXPIRED_FLAG", "AOC_TYPE") AS 
+  SELECT
+    a.object_name,
+    a.object_id,
+    a.obj_status,
+    a.description,
+      ( SELECT ms_concat(usr.first_name
+    || ' '
+    || usr.last_name) AS owners
+  FROM ms_grc_Area_of_COmplia_own d,
+    si_users_t usr  , si_ent e
+  WHERE usr.user_name = d.owners
+  and  usr.enterprise_id = e.ENTERPRISE_ID
+AND a.OBJECT_ID     = D.OBJECT_ID ) AS OWNERS,
+      valid_until,
+    valid_from,
+    dd_object_type,
+       (
+ SELECT MS_GRC_FN_CONCAT(orb.tgt_obj_id)
+  FROM ms_grc_orb_relations_pub_v orb,
+    si_org_entities_t base
+  WHERE src_obj_type   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  AND orb.tgt_obj_type = 'MS_GRC_ORGANIZATION'
+  AND orb.src_obj_id   = a.object_id
+  AND orb.tgt_obj_id   = base.org_entity_id
+  ) AS ATO_ORGANIZATIONS,
+    dd_process_instance_id,
+    dd_instance_id,
+    NVL (dd_edit_flag, 'Y') AS DD_EDIT_FLAG,
+    SUBSTR (object_name, 1, 30) as display_name,
+    'Y' AS OVER_RIDE_ACTION,
+     'proc='|| TO_CHAR(dd_process_instance_id)||'|instid='||TO_CHAR(dd_instance_id)||'|edit_flag='||NVL(dd_edit_flag,'Y')  AS EDIT_ACTION_PARAMETERS,
+    restrict_access_to,
+    ms_grc_utilities.get_edit_url (dd_object_type, dd_process_instance_id,dd_instance_id,NVL(DD_EDIT_FLAG,'Y'),
+	a.OBJECT_NAME) AS object_name_url,
+         (
+  SELECT MS_GRC_FN_CONCAT(orb.tgt_obj_id)
+  FROM ms_grc_orb_relations_pub_v orb,
+    ms_grc_model_reference base
+  WHERE src_obj_type   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  AND orb.tgt_obj_type = 'MS_GRC_MODEL_REFERENCE'
+  AND orb.src_obj_id   = a.object_id
+  AND orb.tgt_obj_id   = base.object_id
+  ) AS Related_framework_references,
+      (
+SELECT MS_GRC_FN_CONCAT(orb.tgt_obj_id)
+  FROM ms_grc_orb_relations_pub_v orb,
+    ms_grc_risk base
+  WHERE src_obj_type   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  AND orb.tgt_obj_type = 'MS_GRC_RISK'
+  AND orb.src_obj_id   = a.object_id
+  AND orb.tgt_obj_id   = base.object_id
+  ) AS Related_risks,
+      (
+SELECT MS_GRC_FN_CONCAT(orb.tgt_obj_id)
+  FROM ms_grc_orb_relations_pub_v orb,
+    ms_grc_core_object base
+  WHERE src_obj_type   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  AND orb.tgt_obj_type = 'MS_GRC_PROCESS'
+  AND orb.src_obj_id   = a.object_id
+  AND orb.tgt_obj_id   = base.object_id
+  ) AS related_process,
+        (
+  SELECT MS_GRC_FN_CONCAT(orb.tgt_obj_id)
+  FROM ms_grc_orb_relations_pub_v orb,
+    ms_grc_compliance_obje base
+  WHERE src_obj_type   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  AND orb.tgt_obj_type = 'MS_GRC_CONTROL'
+  AND orb.src_obj_id   = a.object_id
+  AND orb.tgt_obj_id   = base.object_id
+  ) AS related_control,
+        (
+  SELECT MS_GRC_FN_CONCAT(orb.tgt_obj_id)
+  FROM ms_grc_orb_relations_pub_v orb,
+    MS_GRC_REQUIREMENT base
+  WHERE src_obj_type   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  AND orb.tgt_obj_type = 'MS_GRC_REQUIREMENT'
+  AND orb.src_obj_id   = a.object_id
+  AND orb.tgt_obj_id   = base.object_id
+  ) AS related_requirement,
+      (
+ SELECT MS_GRC_FN_CONCAT(orb.tgt_obj_id)
+  FROM ms_grc_orb_relations_pub_v orb,
+    MS_GRC_REGULATORY_BODY base
+  WHERE src_obj_type   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  AND orb.tgt_obj_type = 'MS_GRC_REGULATORY_BODY'
+  AND orb.src_obj_id   = a.object_id
+  AND orb.tgt_obj_id   = base.object_id
+  ) AS related_regulatory_body,
+        (
+   SELECT MS_GRC_FN_CONCAT(orb.tgt_obj_id)
+  FROM ms_grc_orb_relations_pub_v orb,
+    ms_grc_function base
+  WHERE src_obj_type   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  AND orb.tgt_obj_type = 'MS_GRC_FUNCTION'
+  AND orb.src_obj_id   = a.object_id
+  AND orb.tgt_obj_id   = base.object_id
+  ) AS related_function,
+        (
+   SELECT MS_GRC_FN_CONCAT(orb.tgt_obj_id)
+  FROM ms_grc_orb_relations_pub_v orb,
+    MS_GRC_REFERENCE base
+  WHERE src_obj_type   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  AND orb.tgt_obj_type = 'MS_GRC_REFERENCE'
+  AND orb.src_obj_id   = a.object_id
+  AND orb.tgt_obj_id   = base.object_id
+  ) AS related_reference,
+        (
+  SELECT MS_GRC_FN_CONCAT(orb.tgt_obj_id)
+  FROM ms_grc_orb_relations_pub_v orb,
+    ms_grc_model_reference base
+  WHERE src_obj_type   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  AND orb.tgt_obj_type = 'MS_GRC_MODEL_REFERENCE'
+  AND orb.src_obj_id   = a.object_id
+  AND orb.tgt_obj_id   = base.object_id
+  ) AS Rel_Frame_Reference_Type,
+     (
+  SELECT MS_GRC_FN_CONCAT(orb.tgt_obj_id)
+  FROM ms_grc_orb_relations_pub_v orb,
+    ms_grc_area_of_complia base
+  WHERE src_obj_type   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  AND orb.tgt_obj_type = 'MS_GRC_STANDARD'
+  AND orb.src_obj_id   = a.object_id
+  AND orb.tgt_obj_id   = base.object_id
+  ) AS Related_Standards,
+    (
+      SELECT
+        MS_CONCAT (OWNER_ORGANIZATIONS)
+      FROM
+        MS_GRC_Area_of_complia_ORG E
+      WHERE
+        E.OBJECT_ID = A.OBJECT_ID
+    ) AS owner_org_ids,
+	ms_Grc_utilities.INCLUDE_eXPIRED(VALID_FROM,VALID_UNTIL) AS EXPIRED_FLAG,
+    (
+      SELECT
+        MS_CONCAT (t.AOC_TYPE)
+      FROM
+       MS_GRC_AREA_OF_COMPLIA_TYP t
+      WHERE
+        t.OBJECT_ID = A.OBJECT_ID
+    ) AS AOC_TYPE
+  FROM
+    ms_grc_AREA_OF_COMPLIA a 
+  WHERE
+    dd_object_type='MS_GRC_AREA_OF_COMPLIANCE'</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                        <div class="no-panel no-panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Packages</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../pldoc/index.html#MS_GRC_REPORTBROWSER_FILTERS" target="tab">MS_GRC_REPORTBROWSER_FILTERS</a></td>
+                                            <td><a href="../pldoc/index.html#MS_GRC_REPORT_FILTERS" target="tab">MS_GRC_REPORT_FILTERS</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Procedures</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>MS_QSM_CREQSM_CREQSM_PROD</td>
+                                            <td></td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>GRC Process Workflow</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_GRC_PROCESS_EDS_V">MS_GRC_PROCESS_EDS_V</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_GRC_PROCESS_EDS_V" ("ID", "NAME", "STATUS", "LVL", "PARENT", "DESCRIPTION", "REFERENCE_ID", "LEGACY_ID", "BUSINESS_CRITICALITY", "CONFIDENTIALITY", "INTEGRITY", "AVAILABILITY", "CATEGORY", "TYPE", "RECOVER_RTO", "RECOVER_DURATION_RTO", "RECOVER_RPO", "RECOVER_DURATION_RPO", "RECOVER_WRT", "RECOVER_DURATION_WRT", "MTD", "RECOVER_DURATION_MTD", "RTA", "DURATION_RTA", "OWNER_ORG_IDS", "OWNER_ORG_NAMES", "OWNER_IDS", "OWNER_NAME", "L1_APPROVER", "L2_APPROVER", "RESTRICT_ACCESS_TO", "VALID_FROM", "VALID_UNTIL", "CREATED_BY", "CREATED_ON", "MODIFIED_BY", "MODIFIED_ON", "ATTACHMENTS") AS 
+  SELECT /*@public*/
+A.OBJECT_ID AS ID,
+A.OBJECT_NAME AS NAME,
+(SELECT Z.STATUS_NAME FROM MS_GRC_STATUS Z WHERE Z.STATUS_CODE=A.OBJ_STATUS_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) AS STATUS,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS_GRC_LEVEL') AND Z.STORED_VALUE=A.OBJ_LEVEL_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) AS LVL,
+(SELECT Z.OBJECT_NAME FROM MS_GRC_ORG_PRO_SUMMARY Z WHERE Z.OBJECT_ID=A.OBJ_PARENT) AS PARENT,
+REGEXP_REPLACE(A.DESCRIPTION,'<[^>]+>', NULL) AS DESCRIPTION,
+A.REFERENCE_ID_SV AS REFERENCE_ID,
+A.LEGACY_PROCESS_ID_SV as LEGACY_ID,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS_GRC_Business_Criticality') AND Z.STORED_VALUE=A.BUSINESS_CRITICALITY_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id)
+ AS BUSINESS_CRITICALITY,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS_GRC_Business_Criticality') AND Z.STORED_VALUE=A.CONFIDENTIALITY_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS CONFIDENTIALITY,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS_GRC_Business_Criticality') AND Z.STORED_VALUE=A.INTEGRITY_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS INTEGRITY,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS_GRC_Business_Criticality') AND Z.STORED_VALUE=A.AVAILIBILITY_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id)
+ AS AVAILABILITY,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS GRC Core Category') AND Z.STORED_VALUE=A.CATEGORY_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS CATEGORY,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS GRC Process Type') AND Z.STORED_VALUE=A.TYPE_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS TYPE,
+A.RTO_SV AS RECOVER_RTO,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS_GRC_Duration_Values') AND Z.STORED_VALUE=A.DURATION_RTO_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS RECOVER_DURATION_RTO,
+A.RPO_SV AS RECOVER_RPO,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS_GRC_Duration_Values') AND Z.STORED_VALUE=A.DURATION_RPO_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS RECOVER_DURATION_RPO,
+A.WRT_SV AS RECOVER_WRT,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS_GRC_Duration_Values') AND Z.STORED_VALUE=A.DURATION_WRT_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS RECOVER_DURATION_WRT,
+A.MDT_SV AS MTD,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS_GRC_Duration_Values') AND Z.STORED_VALUE=A.DURATION_MDT_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS RECOVER_DURATION_MTD,
+A.RTA_SV AS RTA,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE (TRIM(Z.LOV_NAME)='MS_GRC_Duration_Values') AND Z.STORED_VALUE=A.DURATION_RTA_SV
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id)
+ DURATION_RTA,
+A.OWNER_ORG_IDS AS OWNER_ORG_IDS,
+A.OWNER_ORG_NAMES AS OWNER_ORG_NAMES,
+A.OWNER_IDS AS OWNER_IDS,
+A.OWNER_NAME AS OWNER_NAME,
+A.LEVEL_1_APPROVER AS l1_approver,
+A.LEVEL_2_APPROVER AS l2_approver,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME = 'MS GRC Restrict Access To' AND Z.STORED_VALUE=A.RESTRICT_ACCESS_TO
+and z.locale_id=ms_grc_common_utils.fn_get_default_locale_id)
+ AS Restrict_Access_To,
+A.VALID_FROM AS VALID_FROM,
+A.VALID_UNTIL AS VALID_UNTIL,
+A.CREATED_BY AS CREATED_BY,
+A.CREATED_ON AS created_on,
+A.UPDATED_BY AS modified_by,
+A.UPDATED_ON AS modified_on,
+A.ATTACHMENTS AS ATTACHMENTS
+FROM MS_GRC_PROCESS_SUMMARY A</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
