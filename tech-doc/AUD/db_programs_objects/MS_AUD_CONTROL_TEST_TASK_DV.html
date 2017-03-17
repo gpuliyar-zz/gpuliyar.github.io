@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS AUD ControlTsk WrkPaper</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_AUD_CONTROL_TEST_TASK_DV">MS_AUD_CONTROL_TEST_TASK_DV</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_AUD_CONTROL_TEST_TASK_DV" ("ACTION_APPROVER", "ACTION_COMMENTS", "ACTION_REVIEWER", "AC_ACTION_DESCRIPTION", "AC_ACTION_DESCRIPTION_HTM", "AC_ACTION_OWNER", "AC_ACTION_TITLE", "AC_DUE_BY", "AC_DUE_DATE", "AC_FINDING_ID", "AC_ID", "AC_ISSUE_TITLE", "AC_OWNER_ORGANIZATION", "AC_PRIORITY", "APPROVER", "ASSIGNEE", "AUDITOR", "AUDITOR_GROUP", "AUDIT_DATE", "AUDIT_ID", "AUDIT_MANAGER", "AUDIT_TITLE", "BUDGETED_HOURS", "CONDUCTED_BY", "CONFIG_FLAG", "CORE_OBJECTS", "CREATED_BY", "CREATION_DATE", "CT_ADDITIONAL_CONTROL", "CT_CONTROL_FREQUENCY", "CT_CONTROL_ID", "CT_DESCRIPTION", "CT_DESCRIPTION_HTM", "CT_DESIGN_EFFECTIVENESS", "CT_EXPECTATION", "CT_EXPECTATION_HTM", "CT_ID", "CT_JUSTIFICATION", "CT_JUSTIFICATION_HTM", "CT_KEY_CONTROL", "CT_METHODOLOGY", "CT_NAME", "CT_OPERATING_EFFECTIVENESS", "CT_RISK_NAME", "CT_RS_ID", "CT_SAMPLE_DESCRIPTION", "CT_SAMPLE_DESCRIPTION_HTM", "CT_SAMPLE_PASSED", "CT_SAMPLE_TESTED", "DD_CURRENT_STAGE", "DD_CURRENT_USER_NAME", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_OBJECT_TYPE", "DO_CATEGORY", "DO_COMMENTS", "DO_DOCUMENT", "DO_ID", "DO_LINK", "DO_NAME", "DO_TYPE", "ELECTRONICALLY_SIGNED", "FINAL_APPROVER", "FN_CLASSIFICATION", "FN_CONTRIBUTING_FACTORS", "FN_CONTROL_REFERENCE", "FN_CORE_OBJECTS", "FN_DISPOSITION", "FN_FINDING_DETAILS", "FN_FINDING_DETAILS_HTM", "FN_FINDING_TITLE", "FN_ID", "FN_ISSUE_DUE_DATE", "FN_ISSUE_OWNER", "FN_ISSUE_RATING", "FN_ISSUE_RESOLUTION", "FN_ORGANIZATIONS", "FN_OWNER_ORGANIZATION", "FN_RECOMMENDATION", "FN_RECOMMENDATION_HTM", "FN_RELATED_RISKS", "FN_ROOT_CAUSE", "FN_TEST_REFERENCE", "FORM_NAME", "INSTANCE_ID", "INSTANCE_REC_NUM", "INSTRUCTIONS", "INSTRUCTIONS_HTM", "KEY_COL_NAME", "LATEST_FLAG", "LEAD_AUDITOR", "METRIC_COMPLETED_DATE", "METRIC_ID", "METRIC_RUN_DATE", "MULTIROW_GROUP_NAME", "MULTIROW_REGION_ID", "OPENED_FORM", "ORGANIZATIONS", "PLANNED_AUDIT_LENGTH", "PLANNED_COMPLETION_DATE", "PLANNED_START_DATE", "PREVIOUS_STAGE", "PRIOR_FINDING", "PROCESS_AE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "PURPOSE", "PURPOSE_HTM", "RELATED_CONTROLS", "RELATED_RISKS", "RELATED_TESTS", "RESTRICT_ACCESS_TO", "RESULTS", "RESULTS_HTM", "RS_ID", "RS_RISK_ID", "RS_RISK_NAME", "RTF_ATTACH", "SCOPE_BASED_ON", "SETUP_ACTION_PLAN_CAN_CREATED", "SETUP_APPROVALS_REQUIRED", "SETUP_AUDITEE_RESP_REQUIRED", "SETUP_AUDITORS_CREATE_TASKS", "SETUP_AUDITOR_TASK_REVIEW", "SETUP_ENABLE_AUDIT_SCORING", "SETUP_PLANNING_SCOPING", "SETUP_QUALITY_REVIEWER", "SETUP_REPORT_TEMPLATE", "SETUP_SINGLE_AUDITOR_PROCESS", "SETUP_TASK_SPECIFIED_DATES", "STATUS", "TASK_ACTION", "TASK_ADDITIONAL_WORK_DONE", "TASK_ADDITIONAL_WORK_DONE_HTM", "TASK_CATEGORY", "TASK_COMMENTS", "TASK_COMPLETION_DATE", "TASK_EXECUTION_RESULT", "TASK_ID", "TASK_INITIATED_BY", "TASK_NAME", "TASK_OWNER", "TASK_REVIEWER", "TASK_START_DATE", "TASK_STATUS", "TASK_TYPE", "TCT_ACT_ID_GEN", "TCT_CTL_ID_GEN", "TCT_FND_ID_GEN", "TCT_RSK_ID_GEN", "TCT_TST_ID_GEN", "TIME_SPENT", "TMP_CORE_OBJECTS", "TMP_FND_CORE_OBJECTS", "TMP_FND_ORGANIZATIONS", "TMP_FND_ORGANIZATIONS_2", "TMP_FND_RELATED_RISKS", "TMP_FND_RELATED_RISKS_2", "TMP_ORGANIZATIONS", "TMP_RELATED_RISKS", "TS_ADDITIONAL_TEST", "TS_CT_ID", "TS_DESCRIPTION", "TS_DESCRIPTION_HTM", "TS_ID", "TS_NAME", "TS_OUTCOME_RESULTS", "TS_OUTCOME_RESULTS_HTM", "TS_TEST_ID", "TS_WORK_DONE", "TS_WORK_DONE_HTM", "WORK_DONE", "WORK_DONE_HTM") AS 
+  SELECT action_approver,
+    action_comments,
+    ms_apps_utilities.get_user_full_name (action_reviewer) AS action_reviewer,
+    ac_action_description,
+    ac_action_description_htm,
+    ac_action_owner,
+    ac_action_title,
+    ac_due_by,
+    ac_due_date,
+    ac_finding_id,
+    ac_id,
+    ac_issue_title,
+    ac_owner_organization,
+    ac_priority,
+    ms_apps_utilities.get_user_full_name (approver) AS approver,
+    assignee,
+    auditor,
+    auditor_group,
+    audit_date,
+    audit_id,
+    audit_manager,
+    (select a.audit_title from ms_aud_audit a where a.audit_id = MS_AUD_CONTROL_TEST_TASK_V.audit_id) as audit_title,
+    budgeted_hours,
+    conducted_by,
+    config_flag,
+    core_objects,
+    created_by,
+    creation_date,
+    ct_additional_control,
+    ct_control_frequency,
+    ct_control_id,
+    ct_description,
+    ct_description_htm,
+    ct_design_effectiveness,
+    ct_expectation,
+    ct_expectation_htm,
+    ct_id,
+    ct_justification,
+    ct_justification_htm,
+    ct_key_control,
+    ct_methodology,
+    ct_name,
+    ct_operating_effectiveness,
+    ct_risk_name,
+    ct_rs_id,
+    ct_sample_description,
+    ct_sample_description_htm,
+    ct_sample_passed,
+    ct_sample_tested,
+    dd_current_stage,
+    ms_apps_utilities.get_user_full_name (dd_current_user_name) as dd_current_user_name,
+    dd_enterprise_info,
+    dd_event_user_name,
+    dd_object_type,
+    do_category,
+    do_comments,
+    do_document,
+    do_id,
+    do_link,
+    do_name,
+    do_type,
+    electronically_signed,
+    final_approver,
+    fn_classification,
+    fn_contributing_factors,
+    fn_control_reference,
+    fn_core_objects,
+    fn_disposition,
+    fn_finding_details,
+    fn_finding_details_htm,
+    fn_finding_title,
+    fn_id,
+    fn_issue_due_date,
+    fn_issue_owner,
+    fn_issue_rating,
+    fn_issue_resolution,
+    fn_organizations,
+    fn_owner_organization,
+    fn_recommendation,
+    fn_recommendation_htm,
+    fn_related_risks,
+    fn_root_cause,
+    fn_test_reference,
+    form_name,
+    instance_id,
+    instance_rec_num,
+    instructions,
+    instructions_htm,
+    key_col_name,
+    latest_flag,
+    lead_auditor,
+    metric_completed_date,
+    metric_id,
+    metric_run_date,
+    multirow_group_name,
+    multirow_region_id,
+    opened_form,
+    organizations,
+    planned_audit_length,
+    planned_completion_date,
+    planned_start_date,
+    previous_stage,
+    prior_finding,
+    process_ae,
+    process_flow_status,
+    process_instance_id,
+    purpose,
+    purpose_htm,
+   -- ms_aud_utilities.mlov_values (task_id, 'task_id', 'CT_NAME', 'MS_AUD_CTRL_TEST_TASK_CTL') AS related_controls,
+   ms_aud_report_utils.fn_get_rel_ctl_disp_val (task_id,null)  AS related_controls,
+  --  ms_aud_notification_utilities.FN_GET_ADHOC_RISK_DISP_VALUES (related_risks,audit_id)                               AS related_risks,
+    ms_aud_report_utils.fn_get_rel_risk_disp_val(related_risks,scope_based_on,audit_id) AS related_risks,
+   -- ms_aud_utilities.mlov_values (task_id, 'task_id', 'TS_NAME', 'MS_AUD_CTRL_TEST_TASK_TST') AS related_tests,
+   ms_aud_report_utils.fn_get_rel_tst_disp_val (task_id,null)  AS related_tests,
+    restrict_access_to,
+    results,
+    results_htm,
+    rs_id,
+    rs_risk_id,
+    rs_risk_name,
+    rtf_attach,
+    scope_based_on,
+    setup_action_plan_can_created,
+    setup_approvals_required,
+    setup_auditee_resp_required,
+    setup_auditors_create_tasks,
+    setup_auditor_task_review,
+    setup_enable_audit_scoring,
+    setup_planning_scoping,
+    setup_quality_reviewer,
+    setup_report_template,
+    setup_single_auditor_process,
+    setup_task_specified_dates,
+    status,
+    task_action,
+    task_additional_work_done,
+    task_additional_work_done_htm,
+    task_category,
+    task_comments,
+    task_completion_date,
+    task_execution_result,
+    task_id,
+    ms_apps_utilities.get_user_full_name (task_initiated_by) AS task_initiated_by,
+    task_name,
+    ms_apps_utilities.get_user_full_name (task_owner)    AS task_owner,
+    ms_apps_utilities.get_user_full_name (task_reviewer) AS task_reviewer,
+    task_start_date,
+    task_status,
+    task_type,
+    tct_act_id_gen,
+    tct_ctl_id_gen,
+    tct_fnd_id_gen,
+    tct_rsk_id_gen,
+    tct_tst_id_gen,
+    time_spent,
+    tmp_core_objects,
+    tmp_fnd_core_objects,
+    tmp_fnd_organizations,
+    tmp_fnd_organizations_2,
+    tmp_fnd_related_risks,
+    tmp_fnd_related_risks_2,
+    tmp_organizations,
+    tmp_related_risks,
+    ts_additional_test,
+    ts_ct_id,
+    ts_description,
+    ts_description_htm,
+    ts_id,
+    ts_name,
+    ts_outcome_results,
+    ts_outcome_results_htm,
+    ts_test_id,
+    ts_work_done,
+    ts_work_done_htm,
+    work_done,
+    work_done_htm
+  FROM MS_AUD_CONTROL_TEST_TASK_V
+</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                        <div class="no-panel no-panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Workflows</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../workflows/F007/F007.html" >AUD Test Control Test</a></td>
+                                            <td></td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

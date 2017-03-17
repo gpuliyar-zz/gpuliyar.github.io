@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>AUD Audits Planning</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_AUD_PLAN_SCOPE_CV">MS_AUD_PLAN_SCOPE_CV</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_AUD_PLAN_SCOPE_CV" ("CREATED_BY", "CREATION_DATE", "INSTANCE_ID", "INSTANCE_REC_NUM", "PROCESS_INSTANCE_ID", "DD_CURRENT_STAGE", "APPROVAL", "ASSIGNED_BY", "ACTIONS", "AE_AUDITABLE_ENTITY", "AE_DESCOPE_FLAG", "AE_DUPLICATE_VERSION", "AE_ID", "AE_OBJ_TYPE", "AE_OBJ_VALUE", "AE_ORG_ID", "AE_REL_PARENT_ID", "AE_RISK_RELATION", "AE_SCOPE_FLAG", "APPROVE_FLAG", "APPROVE_NULL", "APPROVE_USERS", "ASSIGNED_ON", "AUDITABLE_ENTITY_ID", "AUDIT_CLASSIFICATION", "AUDIT_DATE", "AUDIT_END_DATE", "AUDIT_ID", "AUDIT_MANAGER", "AUDIT_MANAGER_MLOV", "AUDIT_STATUS", "AUDIT_TITLE", "AUDIT_TYPE", "AUE_AUDIT_ID", "AUE_FORM_TYPE", "AUE_PARENT_ID", "AUE_TMP_PK_ID", "COM", "CONDUCTED_BY_ORG", "CONFIG_FLAG", "CONFIG_FLAG_PARAM", "CONTROL_ID", "CROSS_FUNCTIONAL", "CTL_AUDIT_ID", "CTL_CONTROL_NAME", "CTL_FORM_TYPE", "CTL_PARENT_ID", "CTL_RADIO", "CTL_TMP_PK_ID", "CT_DESCOPE_FLAG", "CT_ID", "CT_ID_GEN", "CT_OBJ_TYPE", "CT_OBJ_VALUE", "CT_REL_PARENT_ID", "CT_REL_TO", "CT_RS_ID", "CT_SCOPE_FLAG", "DATA_CORRECTION_FLAG", "DD_ACTION", "DD_CURRENT_STATUS", "DD_CURRENT_USER_NAME", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_OBJECT_TYPE", "DD_PROCESS_CODE", "DOC_AUDIT_ID", "DOC_FORM_TYPE", "DO_COMMENTS", "DO_DOCUMENT", "DO_ID", "DO_LINK", "DO_NAME", "DO_TYPE", "EDITABLE_FIELDS_JSON", "EDITABLE_USER", "ELECTRONICALLY_SIGNED", "FORM_NAME", "FORM_TYPE", "IS_FORM_SUBMITTED", "KEY_COL_NAME", "LATEST_FLAG", "LEAD_AUDITOR", "LEAD_AUDITOR_MLOV", "LEGACY_ID", "MEETING_DATE", "METRIC_COMPLETED_DATE", "METRIC_ID", "METRIC_RUN_DATE", "MULTIROW_GROUP_NAME", "MULTIROW_REGION_ID", "NON_EDITABLE_USER", "ORGANIZATION_ID", "ORG_AE_ID", "ORG_AUDIT_ID", "ORG_DESCOPE_FLAG", "ORG_FORM_TYPE", "ORG_ID", "ORG_OBJ_TYPE", "ORG_OBJ_VALUE", "ORG_PARENT_ID", "ORG_REL_PARENT_ID", "ORG_SCOPE_FLAG", "ORG_TMP_PK_ID", "PREVIOUS_STAGE", "PROCESS_FLOW_STATUS", "RISK_ID", "RSK_AUDIT_ID", "RSK_FORM_TYPE", "RSK_PARENT_ID", "RSK_RADIO", "RSK_TMP_PK_ID", "RS_AE_ID", "RS_CATEGORY", "RS_DESCOPE_FLAG", "RS_ID", "RS_ID_GEN", "RS_OBJ_TYPE", "RS_OBJ_VALUE", "RS_ORG_ID", "RS_REL_PARENT_ID", "RS_REL_TO", "RS_RISK_NAME", "RS_RISK_NAME_ADHOC", "RS_SCOPE", "RS_SCOPE_FLAG", "RTF_ATTACH", "SCOPE_BASED_ON", "STATUS", "TEST_ID", "TST_AUDIT_ID", "TST_FORM_TYPE", "TST_PARENT_ID", "TST_RADIO", "TST_TMP_PK_ID", "TS_CT_ID", "TS_ID", "TS_ID_GEN", "TS_OBJ_TYPE", "TS_OBJ_VALUE", "TS_REL_PARENT_ID", "TS_REL_TO", "TS_SCOPE_FLAG", "TS_DESCOPE_FLAG", "CT_SCOPING_EXPLN", "CTL_CONTROL_DESCRIPTION", "ORG_SCOPING_EXPLANATION", "TS_SCOPING_EXPLN", "TS_TEST_DESCRIPTION", "MEETING_DESCRIPTION", "AE_SCOPING_EXPLANATION", "RS_SCOPING_EXPLANATION", "RS_DESCRIPTION", "AREAS_OF_CONSIDERATION", "ANALYTICAL_REVIEW", "AUDIT_OBJECTIVES", "MNG_EXT_AUD_CONCERNS", "PLANNING_MEETING_RESULTS", "TS_TEST_NAME", "UNIQUE_ROW_ID", "UPLOAD_CHK_FLAG", "UPLOAD_FLAG", "LOCALE_ID", "AE_SCOPE", "ORG_SCOPE", "CT_SCOPE", "TS_SCOPE", "ORG_ORGANIZATION", "DO_CATEGORY", "RS_ID_VAL", "RS_RUN_FLAG", "CT_RUN_FLAG", "CT_ID_VAL", "TS_ID_VAL", "TS_RUN_FLAG", "ORG_ORDER_KEY", "ORG_ORDER_TYPE", "RS_ORDER_KEY", "RS_ORDER_TYPE", "AE_ORDER_KEY", "AE_ORDER_TYPE", "CT_ORDER_KEY", "CT_ORDER_TYPE", "TS_ORDER_KEY", "TS_ORDER_TYPE") AS 
+  SELECT (select user_id from si_users_t where user_name = C.DD_CURRENT_USER_NAME) as CREATED_BY,
+C.CREATION_DATE,INSTANCE_ID,INSTANCE_REC_NUM,PROCESS_INSTANCE_ID,MS_AUD_CHANGE_HISTORY_UTILS.GET_STAGE_NAME(DD_CURRENT_STAGE) AS DD_CURRENT_STAGE,
+MS_AUD_CHANGE_HISTORY_UTILS.fn_get_user_dv(APPROVAL) as APPROVAL ,MS_AUD_CHANGE_HISTORY_UTILS.fn_get_user_dv(ASSIGNED_BY) as ASSIGNED_BY,
+ACTIONS,
+AE_AUDITABLE_ENTITY,
+AE_DESCOPE_FLAG,
+AE_DUPLICATE_VERSION,
+AE_ID,
+AE_OBJ_TYPE,
+AE_OBJ_VALUE,
+AE_ORG_ID,
+AE_REL_PARENT_ID,
+AE_RISK_RELATION,
+AE_SCOPE_FLAG,
+APPROVE_FLAG,
+APPROVE_NULL,
+APPROVE_USERS,
+ASSIGNED_ON,
+AUDITABLE_ENTITY_ID,
+AUDIT_CLASSIFICATION,
+AUDIT_DATE,
+AUDIT_END_DATE,
+AUDIT_ID,
+AUDIT_MANAGER,
+AUDIT_MANAGER_MLOV,
+AUDIT_STATUS,
+AUDIT_TITLE,
+AUDIT_TYPE,
+AUE_AUDIT_ID,
+AUE_FORM_TYPE,
+AUE_PARENT_ID,
+AUE_TMP_PK_ID,
+COM,
+CONDUCTED_BY_ORG,
+CONFIG_FLAG,
+CONFIG_FLAG_PARAM,
+CONTROL_ID,
+CROSS_FUNCTIONAL,
+CTL_AUDIT_ID,
+CTL_CONTROL_NAME,
+CTL_FORM_TYPE,
+CTL_PARENT_ID,
+CTL_RADIO,
+CTL_TMP_PK_ID,
+CT_DESCOPE_FLAG,
+CT_ID,
+CT_ID_GEN,
+CT_OBJ_TYPE,
+CT_OBJ_VALUE,
+CT_REL_PARENT_ID,
+CT_REL_TO,
+CT_RS_ID,
+CT_SCOPE_FLAG,
+DATA_CORRECTION_FLAG,
+DD_ACTION,
+DD_CURRENT_STATUS,
+DD_CURRENT_USER_NAME,
+DD_ENTERPRISE_INFO,
+DD_EVENT_USER_NAME,
+DD_OBJECT_TYPE,
+DD_PROCESS_CODE,
+DOC_AUDIT_ID,
+DOC_FORM_TYPE,
+DO_COMMENTS,
+DO_DOCUMENT,
+DO_ID,
+DO_LINK,
+DO_NAME,
+DO_TYPE,
+EDITABLE_FIELDS_JSON,
+EDITABLE_USER,
+ELECTRONICALLY_SIGNED,
+FORM_NAME,
+FORM_TYPE,
+IS_FORM_SUBMITTED,
+KEY_COL_NAME,
+LATEST_FLAG,
+LEAD_AUDITOR,
+LEAD_AUDITOR_MLOV,
+LEGACY_ID,
+MEETING_DATE,
+METRIC_COMPLETED_DATE,
+METRIC_ID,
+METRIC_RUN_DATE,
+MULTIROW_GROUP_NAME,
+MULTIROW_REGION_ID,
+NON_EDITABLE_USER,
+ORGANIZATION_ID,
+ORG_AE_ID,
+ORG_AUDIT_ID,
+ORG_DESCOPE_FLAG,
+ORG_FORM_TYPE,
+ORG_ID,
+ORG_OBJ_TYPE,
+ORG_OBJ_VALUE,
+ORG_PARENT_ID,
+ORG_REL_PARENT_ID,
+ORG_SCOPE_FLAG,
+ORG_TMP_PK_ID,
+PREVIOUS_STAGE,
+PROCESS_FLOW_STATUS,
+RISK_ID,
+RSK_AUDIT_ID,
+RSK_FORM_TYPE,
+RSK_PARENT_ID,
+RSK_RADIO,
+RSK_TMP_PK_ID,
+RS_AE_ID,
+RS_CATEGORY,
+RS_DESCOPE_FLAG,
+RS_ID,
+RS_ID_GEN,
+RS_OBJ_TYPE,
+RS_OBJ_VALUE,
+RS_ORG_ID,
+RS_REL_PARENT_ID,
+RS_REL_TO,
+RS_RISK_NAME,
+RS_RISK_NAME_ADHOC,
+RS_SCOPE,
+RS_SCOPE_FLAG,
+RTF_ATTACH,
+SCOPE_BASED_ON,
+STATUS,
+TEST_ID,
+TST_AUDIT_ID,
+TST_FORM_TYPE,
+TST_PARENT_ID,
+TST_RADIO,
+TST_TMP_PK_ID,
+TS_CT_ID,
+TS_ID,
+TS_ID_GEN,
+TS_OBJ_TYPE,
+TS_OBJ_VALUE,
+TS_REL_PARENT_ID,
+TS_REL_TO,
+TS_SCOPE_FLAG,
+TS_DESCOPE_FLAG,
+(CASE WHEN dbms_lob.getlength(C.CT_SCOPING_EXPLN_HTM)=0 THEN NULL ELSE  C.CT_SCOPING_EXPLN_HTM END)  AS CT_SCOPING_EXPLN,
+(CASE WHEN dbms_lob.getlength(C.CTL_CONTROL_DESCRIPTION_HTM)=0 THEN NULL ELSE  C.CTL_CONTROL_DESCRIPTION_HTM END)  AS CTL_CONTROL_DESCRIPTION,
+(CASE WHEN dbms_lob.getlength(C.ORG_SCOPING_EXPLANATION_HTM)=0 THEN NULL ELSE  C.ORG_SCOPING_EXPLANATION_HTM END)  AS ORG_SCOPING_EXPLANATION,
+(CASE WHEN dbms_lob.getlength(C.TS_SCOPING_EXPLN_HTM)=0 THEN NULL ELSE  C.TS_SCOPING_EXPLN_HTM END)  AS TS_SCOPING_EXPLN,
+(CASE WHEN dbms_lob.getlength(C.TS_TEST_DESCRIPTION_HTM)=0 THEN NULL ELSE  C.TS_TEST_DESCRIPTION_HTM END)  AS TS_TEST_DESCRIPTION,
+(CASE WHEN dbms_lob.getlength(C.MEETING_DESCRIPTION_HTM)=0 THEN NULL ELSE  C.MEETING_DESCRIPTION_HTM END)  AS MEETING_DESCRIPTION,
+(CASE WHEN dbms_lob.getlength(C.AE_SCOPING_EXPLANATION_HTM)=0 THEN NULL ELSE  C.AE_SCOPING_EXPLANATION_HTM END)  AS AE_SCOPING_EXPLANATION,
+(CASE WHEN dbms_lob.getlength(C.RS_SCOPING_EXPLANATION_HTM)=0 THEN NULL ELSE  C.RS_SCOPING_EXPLANATION_HTM END)  AS RS_SCOPING_EXPLANATION,
+(CASE WHEN dbms_lob.getlength(C.RS_DESCRIPTION_HTM)=0 THEN NULL ELSE  C.RS_DESCRIPTION_HTM END)  AS RS_DESCRIPTION,
+(CASE WHEN dbms_lob.getlength(C.AREAS_OF_CONSIDERATION_HTM)=0 THEN NULL ELSE  C.AREAS_OF_CONSIDERATION_HTM END)  AS AREAS_OF_CONSIDERATION,
+(CASE WHEN dbms_lob.getlength(C.ANALYTICAL_REVIEW_HTM)=0 THEN NULL ELSE  C.ANALYTICAL_REVIEW_HTM END)  AS ANALYTICAL_REVIEW,
+(CASE WHEN dbms_lob.getlength(C.AUDIT_OBJECTIVES_HTM)=0 THEN NULL ELSE  C.AUDIT_OBJECTIVES_HTM END)  AS AUDIT_OBJECTIVES,
+(CASE WHEN dbms_lob.getlength(C.MNG_EXT_AUD_CONCERNS_HTM)=0 THEN NULL ELSE  C.MNG_EXT_AUD_CONCERNS_HTM END)  AS MNG_EXT_AUD_CONCERNS,
+(CASE WHEN dbms_lob.getlength(C.PLANNING_MEETING_RESULTS_HTM)=0 THEN NULL ELSE  C.PLANNING_MEETING_RESULTS_HTM END)  AS PLANNING_MEETING_RESULTS,
+TS_TEST_NAME,
+UNIQUE_ROW_ID,
+UPLOAD_CHK_FLAG,
+UPLOAD_FLAG,
+B.LOCALE_ID,
+DECODE(AE_SCOPE,1,'In-scope',2,'Out of Scope','In-scope') as AE_SCOPE,
+DECODE(ORG_SCOPE,1,'In-scope',2,'Out of Scope','In-scope') as ORG_SCOPE,
+DECODE(CT_SCOPE,1,'In-scope',2,'Out of Scope','In-scope') as CT_SCOPE,
+DECODE(TS_SCOPE,1,'In-scope',2,'Out of Scope','In-scope') as TS_SCOPE,
+(select org_entity_name from si_org_entities_t where org_entity_id=ORG_ORGANIZATION and rownum=1) as ORG_ORGANIZATION,
+( SELECT displayed_value
+           FROM ms_qs_lov_org_values_v
+          WHERE stored_value = C.DO_CATEGORY
+            AND lov_name = 'MS AUD Document Categories' AND locale_id = 1009) as DO_CATEGORY,
+RS_ID_VAL,
+RS_RUN_FLAG,
+CT_RUN_FLAG,
+CT_ID_VAL,
+TS_ID_VAL,
+TS_RUN_FLAG,
+ORG_ORDER_KEY,
+ORG_ORDER_TYPE,
+RS_ORDER_KEY,
+RS_ORDER_TYPE,
+AE_ORDER_KEY,
+AE_ORDER_TYPE,
+CT_ORDER_KEY,
+CT_ORDER_TYPE,
+TS_ORDER_KEY,
+TS_ORDER_TYPE			
+		FROM	MS_AUD_PLAN_SCOPE_V C,
+    SI_ENABLED_LOCALES B
+  WHERE C.PROCESS_FLOW_STATUS <> '2'</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

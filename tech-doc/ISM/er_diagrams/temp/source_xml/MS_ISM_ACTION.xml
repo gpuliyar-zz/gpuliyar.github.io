@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><schemadiagramrequest xmlns="http://www.metricstream.com/xsd"><module>ISM</module><display_number_of_columns></display_number_of_columns><schemadiagram><name>MS_ISM_ACTION</name><tables><table><name>MS_ISM_ACTION</name><pkcolumn><column>ACTION_ID</column></pkcolumn></table>
+<table><name>MS_ISM_ACTION_DOC</name><pkcolumn><column>DOC_ID</column></pkcolumn><fkcolumn><column>ACTION_ID</column></fkcolumn></table>
+<table><name>MS_ISM_ACTION_IOR</name><pkcolumn><column>OTHER_IMPACT</column></pkcolumn><fkcolumn><column>ACTION_ID</column></fkcolumn></table>
+</tables><relationships><relationship name="" logical="1-*">
+<from><table>MS_ISM_ACTION</table>
+</from><to><table>MS_ISM_ACTION_IOR</table><table>MS_ISM_ACTION_DOC</table></to></relationship>
+</relationships></schemadiagram></schemadiagramrequest>

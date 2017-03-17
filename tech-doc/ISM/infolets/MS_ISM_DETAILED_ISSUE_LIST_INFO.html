@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Infolets</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">                                <h4 class="infolet-tooltip"><span class="icn icn-infolet" style="margin-right:10px"></span>  
+                                <span data-toggle="tooltip" data-placement="top" title="Category: Human Resource" class="fa fa-cubes fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Output Type: Ordinary Graph" class="fa fa-sign-out fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Type: SQL Based" class="fa fa-globe fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Non Persistent" class="fa fa fa-thumbs-down fa-fw"></span>
+                                                                                                <span class="headerAlign" id="MS_ISM_DETAILED_ISSUE_LIST_INFO">MS ISM DETAILED ISSUE LIST INFO</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Name</th>
+                                                <td>MS_ISM_DETAILED_ISSUE_LIST_INFO</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This infolet used in Deatiled Issue List Report</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#query-pill" data-toggle="tab">Query</a></li>
+                                        <li><a href="#xml-pill" data-toggle="tab">XML</a></li>
+                                        <li><a href="#params-pill" data-toggle="tab">Parameters</a></li>
+                                        <li><a href="#filters-pill" data-toggle="tab">Filters</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-c">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Type</th>
+                                                            <th>Result Column Name</th>
+                                                            <th>User Column Name</th>
+                                                            <th>Default Infolet/<br>Input Infolet</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>ISSUE_TITLE_ADT</td>
+                                                                <td>Data Object</td>
+                                                                <td>ISSUE_TITLE_ADT</td>
+                                                                <td>ISSUE_TITLE_ADT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>ISSUE_STATUS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>STATUS</td>
+                                                                <td>Status</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>ISSUE_OWNER_ORG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>OWNED_BY_ORGANIZATION</td>
+                                                                <td>Owned By Organization</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>ISSUE_OWNER_ADT</td>
+                                                                <td>User</td>
+                                                                <td>ISSUE_OWNER_ADT</td>
+                                                                <td>ISSUE_OWNER_ADT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>ISSUE_APPROVERORG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>INITIAL_APPROVER_ORGANIZATION</td>
+                                                                <td>Initial Approver Organization</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>ISSUE_APPROVER_ADT</td>
+                                                                <td>User</td>
+                                                                <td>ISSUE_APPROVER_ADT</td>
+                                                                <td>ISSUE_APPROVER_ADT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>ACTION_PLAN_APPROVERORG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ACTION_PLAN_APPROVER_ORGANIZAT</td>
+                                                                <td>Action Plan Approver Organizat</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>ACTION_PLAN_APPROVER_ADT</td>
+                                                                <td>User</td>
+                                                                <td>ACTION_PLAN_APPROVER_ADT</td>
+                                                                <td>ACTION_PLAN_APPROVER_ADT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td>FINAL_APPROVERORG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>FINAL_APPROVER_ORGANIZATION</td>
+                                                                <td>Final Approver Organization</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>FINAL_APPROVER_ADT</td>
+                                                                <td>User</td>
+                                                                <td>FINAL_APPROVER_ADT</td>
+                                                                <td>FINAL_APPROVER_ADT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>SOURCE_ID</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SOURCE_ID</td>
+                                                                <td>Source ID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>ISSUE_DETAILS</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>ISSUE_DESCRIPTION</td>
+                                                                <td>Issue Description</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>13</td>
+                                                                <td>FIRST_IDENTIFIED_ON</td>
+                                                                <td>Date</td>
+                                                                <td>DATE_FIRST_IDENTIFIED</td>
+                                                                <td>Date First Identified</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>14</td>
+                                                                <td>RELATED_ISSUES</td>
+                                                                <td>Varchar2</td>
+                                                                <td>RELATED_ISSUES</td>
+                                                                <td>Related Issues</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>15</td>
+                                                                <td>ISSUE_TYPE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_TYPE</td>
+                                                                <td>Issue Type</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>16</td>
+                                                                <td>REPEAT_ISSUE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>REPEAT_ISSUE</td>
+                                                                <td>Repeat Issue</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>17</td>
+                                                                <td>EXCEPTION_TYPE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>EXCEPTION_TYPE</td>
+                                                                <td>Exception Type</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>18</td>
+                                                                <td>SOURCE_TYPE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SOURCE_TYPE</td>
+                                                                <td>Source Type</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>19</td>
+                                                                <td>ISSUE_SOURCE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SOURCE</td>
+                                                                <td>Source</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>20</td>
+                                                                <td>ADHOC_SRC_DETAILS</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>SOURCE_DETAILS</td>
+                                                                <td>Source Details</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>21</td>
+                                                                <td>PRIORITY</td>
+                                                                <td>Varchar2</td>
+                                                                <td>PRIORITY</td>
+                                                                <td>Priority</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>22</td>
+                                                                <td>ISSUE_DUE_DATE</td>
+                                                                <td>Date</td>
+                                                                <td>ISSUE_DUE_DATE</td>
+                                                                <td>Issue Due Date</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>23</td>
+                                                                <td>ISSUE_RATING</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_RATING</td>
+                                                                <td>Issue Rating</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>24</td>
+                                                                <td>ISSUE_RISK_IMPACT</td>
+                                                                <td>Varchar2</td>
+                                                                <td>IMPACT</td>
+                                                                <td>Impact</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>25</td>
+                                                                <td>ISSUE_RISK_LIKLIHOOD</td>
+                                                                <td>Varchar2</td>
+                                                                <td>LIKELIHOOD</td>
+                                                                <td>Likelihood</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>26</td>
+                                                                <td>ISSUE_RISK_LOSS_GAIN</td>
+                                                                <td>Varchar2</td>
+                                                                <td>LOSSGAIN</td>
+                                                                <td>LossGain</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>27</td>
+                                                                <td>ISSUE_RISK_LOSS_GAIN_AMT</td>
+                                                                <td>Number</td>
+                                                                <td>LOSSGAIN_AMOUNT</td>
+                                                                <td>LossGain Amount</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>28</td>
+                                                                <td>REOPEN_ISSUE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>NO_OF_ISSUE_REOPENS</td>
+                                                                <td>No of Issue Reopens</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>29</td>
+                                                                <td>NO_OF_EXTENSIONS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>NO_OF_ISSUE_DUE_DATE_EXTENSION</td>
+                                                                <td>No of Issue Due Date Extension</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>30</td>
+                                                                <td>NO_OF_ACTIONS</td>
+                                                                <td>Number</td>
+                                                                <td>NO_OF_ACTION</td>
+                                                                <td>No of action</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>31</td>
+                                                                <td>ISSUE_CLOSED_ON</td>
+                                                                <td>Date</td>
+                                                                <td>ISSUE_CLOSED_ON</td>
+                                                                <td>Issue Closed On</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>32</td>
+                                                                <td>ISSUE_INITIATOR</td>
+                                                                <td>User</td>
+                                                                <td>ISSUE_INITIATOR</td>
+                                                                <td>ISSUE_INITIATOR</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>33</td>
+                                                                <td>ISSUE_ID</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_ID</td>
+                                                                <td>ISSUE_ID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>34</td>
+                                                                <td>OWNERORG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>OWNERORG</td>
+                                                                <td>OWNERORG</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>35</td>
+                                                                <td>APPROVERORG</td>
+                                                                <td>Varchar2</td>
+                                                                <td>APPROVERORG</td>
+                                                                <td>APPROVERORG</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>36</td>
+                                                                <td>PROGRESS_STATUS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>PROGRESS_STATUS</td>
+                                                                <td>PROGRESS_STATUS</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>37</td>
+                                                                <td>PID</td>
+                                                                <td>Number</td>
+                                                                <td>PID</td>
+                                                                <td>PID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>38</td>
+                                                                <td>INSTANCEID</td>
+                                                                <td>Number</td>
+                                                                <td>INSTANCEID</td>
+                                                                <td>INSTANCEID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>39</td>
+                                                                <td>REACHED_MANAGE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>REACHED_MANAGE</td>
+                                                                <td>REACHED_MANAGE</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>40</td>
+                                                                <td>ORG_ISSUE_TITL</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ORG_ISSUE_TITL</td>
+                                                                <td>ORG_ISSUE_TITL</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>41</td>
+                                                                <td>REPORT_JSON</td>
+                                                                <td>Varchar2</td>
+                                                                <td>REPORT_JSON</td>
+                                                                <td>REPORT_JSON</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>42</td>
+                                                                <td>ISSUE_OWNER_STORED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_OWNER_STORED</td>
+                                                                <td>ISSUE_OWNER_STORED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>43</td>
+                                                                <td>ISSUE_APPROVER_STORED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_APPROVER_STORED</td>
+                                                                <td>ISSUE_APPROVER_STORED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>44</td>
+                                                                <td>ACTION_PLAN_APPROVER_STORED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ACTION_PLAN_APPROVER_STORED</td>
+                                                                <td>ACTION_PLAN_APPROVER_STORED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>45</td>
+                                                                <td>FINAL_APPROVER_STORED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>FINAL_APPROVER_STORED</td>
+                                                                <td>FINAL_APPROVER_STORED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>46</td>
+                                                                <td>SOURCE_TYPE_STORED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SOURCE_TYPE_STORED</td>
+                                                                <td>SOURCE_TYPE_STORED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>47</td>
+                                                                <td>ISSUE_SOURCE_TYPE_ADT</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_SOURCE_TYPE_ADT</td>
+                                                                <td>ISSUE_SOURCE_TYPE_ADT</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>48</td>
+                                                                <td>ISSUE_INITIATOR_STORED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ISSUE_INITIATOR_STORED</td>
+                                                                <td>ISSUE_INITIATOR_STORED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>49</td>
+                                                                <td>RATING_STORED</td>
+                                                                <td>Varchar2</td>
+                                                                <td>RATING_STORED</td>
+                                                                <td>RATING_STORED</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>50</td>
+                                                                <td>ISSUE_RECOMMENDATION</td>
+                                                                <td>Long Varchar</td>
+                                                                <td>ISSUE_RECOMMENDATION</td>
+                                                                <td>ISSUE_RECOMMENDATION</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>51</td>
+                                                                <td>REL_OBJECT_DETL</td>
+                                                                <td>Varchar2</td>
+                                                                <td>REL_OBJECT_DETL</td>
+                                                                <td>REL_OBJECT_DETL</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="filters-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-fnr">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Expression</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Issue Title</td>
+                                                                <td>(upper(ORG_ISSUE_TITL) Like upper('%'||:Title||'%'))</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Issue Owner</td>
+                                                                <td>(ISSUE_OWNER_ADT = :Owner)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Issue Rating</td>
+                                                                <td>(ISSUE_RATING = :Rating)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Issue Status</td>
+                                                                <td>(STATUS IN :Status)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Priority</td>
+                                                                <td>(PRIORITY = :Priority)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Issue Type</td>
+                                                                <td>(trim(UPPER((:Types))) in (select column_value from table(ms_grc_str_common_utilities.Split_String_display(UPPER(ISSUE_TYPE)))))</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Source ID</td>
+                                                                <td>(SOURCE_ID Like :Source_ID)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Owner Organization</td>
+                                                                <td>(OWNERORG = :Owner_Organization)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Exception Type</td>
+                                                                <td>(EXCEPTION_TYPE = :Exception_Type)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Source Type</td>
+                                                                <td>(SOURCE_TYPE = :Source_Type)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="params-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-p">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Source Infolet</th>
+                                                            <th>Mandatory</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>LOGIN_ID</td>
+                                                                <td></td>
+                                                                <td>N</td>
+                                                                <td>Login Id</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Area_of_Compliance</td>
+                                                                <td><a href="MS_ISM_AREA_OF_COMPLIANCE.html">MS ISM AREA OF COMPLIANCE</a></td>
+                                                                <td>N</td>
+                                                                <td>Area of Compliance</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Requirement</td>
+                                                                <td><a href="MS_ISM_RELATED_REQUIREMENT.html">MS_ISM_RELATED_REQUIREMENT</a></td>
+                                                                <td>N</td>
+                                                                <td>Requirement</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Process</td>
+                                                                <td><a href="MS_ISM_RELATED_PROCESS.html">MS_ISM_RELATED_PROCESS</a></td>
+                                                                <td>N</td>
+                                                                <td>Process</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Risk</td>
+                                                                <td><a href="MS_ISM_RELATED_TO_RISKS.html">MS ISM RELATED TO RISKS</a></td>
+                                                                <td>N</td>
+                                                                <td>Risk</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Control</td>
+                                                                <td><a href="MS_ISM_RELATED_TO_CONTROLS.html">MS ISM RELATED TO CONTROLS</a></td>
+                                                                <td>N</td>
+                                                                <td>Control</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Asset</td>
+                                                                <td><a href="MS_ISM_RELATED_ASSET.html">MS_ISM_RELATED_ASSET</a></td>
+                                                                <td>N</td>
+                                                                <td>Asset</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Asset_Class</td>
+                                                                <td><a href="MS_ISM_RELATED_ASSEST_CLASS.html">MS_ISM_RELATED_ASSEST_CLASS</a></td>
+                                                                <td>N</td>
+                                                                <td>Asset Class</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Org</td>
+                                                                <td><a href="MS_ISM_ORGANIZATION_LIST.html">MS ISM ORGANIZATION LIST</a></td>
+                                                                <td>N</td>
+                                                                <td>Organization</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Core_Object</td>
+                                                                <td><a href="MS_ISM_RELATED_CORE_OBJECT.html">MS_ISM_RELATED_CORE_OBJECT</a></td>
+                                                                <td>N</td>
+                                                                <td>Core Object</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Assertion</td>
+                                                                <td><a href="MS_ISM_RELATED_ASSERTION.html">MS_ISM_RELATED_ASSERTION</a></td>
+                                                                <td>N</td>
+                                                                <td>Assertion</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Fin_Accnt</td>
+                                                                <td><a href="MS_ISM_RELATED_FINAN_ACUNT.html">MS_ISM_RELATED_FINAN_ACUNT</a></td>
+                                                                <td>N</td>
+                                                                <td>Financial Account</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Frame_Ref</td>
+                                                                <td><a href="MS_ISM_RELATED_FRAME_REF.html">MS_ISM_RELATED_FRAME_REF</a></td>
+                                                                <td>N</td>
+                                                                <td>Framework Reference</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Function</td>
+                                                                <td><a href="MS_ISM_RELATED_FUNCTION.html">MS_ISM_RELATED_FUNCTION</a></td>
+                                                                <td>N</td>
+                                                                <td>Function</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Objective</td>
+                                                                <td><a href="MS_ISM_RELATED_OBJECTIVE.html">MS_ISM_RELATED_OBJECTIVE</a></td>
+                                                                <td>N</td>
+                                                                <td>Objective</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Product</td>
+                                                                <td><a href="MS_ISM_RELATED_PRODUCT.html">MS_ISM_RELATED_PRODUCT</a></td>
+                                                                <td>N</td>
+                                                                <td>Product</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Ques_Proc</td>
+                                                                <td><a href="MS_ISM_RELATED_QUES_PROC.html">MS_ISM_RELATED_QUES_PROC</a></td>
+                                                                <td>N</td>
+                                                                <td>Question Procedure</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Reg_Body</td>
+                                                                <td><a href="MS_ISM_RELATED_REG_BODY.html">MS_ISM_RELATED_REG_BODY</a></td>
+                                                                <td>N</td>
+                                                                <td>Regularity Body</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Standard</td>
+                                                                <td><a href="MS_ISM_RELATED_STANDARD.html">MS_ISM_RELATED_STANDARD</a></td>
+                                                                <td>N</td>
+                                                                <td>Standard</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Reference</td>
+                                                                <td><a href="MS_ISM_RELATED_REFERENCE.html">MS_ISM_RELATED_REFERENCE</a></td>
+                                                                <td>N</td>
+                                                                <td>Reference</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="query-pill">
+                                            <div class="modal-dialog"">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-sql')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-sql">select 
+ISSUE_TITLE as ISSUE_TITLE_ADT, 
+ISSUE_STATUS As ISSUE_STATUS, 
+ISSUE_OWNER_ORG As ISSUE_OWNER_ORG, 
+ISSUE_OWNER As ISSUE_OWNER_ADT, 
+ISSUE_APPROVERORG As ISSUE_APPROVERORG, 
+ISSUE_APPROVER As ISSUE_APPROVER_ADT,
+ACTION_PLAN_APPROVERORG as ACTION_PLAN_APPROVERORG,
+ACTION_PLAN_APPROVER as ACTION_PLAN_APPROVER_ADT,
+FINAL_APPROVERORG as FINAL_APPROVERORG,
+FINAL_APPROVER AS FINAL_APPROVER_ADT,
+ISSUE_SOURCE_STORED As SOURCE_ID,
+ISSUE_DETAILS As ISSUE_DETAILS, 
+FIRST_IDENTIFIED_ON AS FIRST_IDENTIFIED_ON, 
+RELATED_ISSUES As RELATED_ISSUES,
+ISSUE_TYPE As ISSUE_TYPE,
+REPEAT_ISSUE As REPEAT_ISSUE,
+EXCEPTION_TYPE As EXCEPTION_TYPE,
+SOURCE_TYPE As SOURCE_TYPE, 
+issue_source As issue_source,
+ADHOC_SRC_DETAILS As ADHOC_SRC_DETAILS,
+PRIORITY As PRIORITY, 
+ISSUE_DUE_DATE As ISSUE_DUE_DATE, 
+ISSUE_RATING As ISSUE_RATING, 
+issue_risk_impact As issue_risk_impact,
+issue_risk_liklihood As issue_risk_liklihood,
+issue_risk_loss_gain As issue_risk_loss_gain,
+issue_risk_loss_gain_amt As issue_risk_loss_gain_amt,
+REOPEN_ISSUE  As REOPEN_ISSUE,
+NO_OF_EXTENSIONS As NO_OF_EXTENSIONS,
+decode(NO_OF_ACTIONS,null,0,NO_OF_ACTIONS) AS NO_OF_ACTIONS, 
+ISSUE_CLOSED_ON AS ISSUE_CLOSED_ON,
+ISSUE_INITIATOR As ISSUE_INITIATOR, 
+ISSUE_ID As ISSUE_ID, 
+OWNERORG As OWNERORG, 
+APPROVERORG As APPROVERORG, 
+PROGRESS_STATUS as PROGRESS_STATUS, 
+PID As PID,
+INSTANCEID As INSTANCEID, 
+reached_manage As reached_manage,
+org_issue_title As org_issue_titl,
+REPORT_JSON_VAL As report_json,
+ISSUE_OWNER_STORED,
+ISSUE_APPROVER_STORED,
+ACTION_PLAN_APPROVER_STORED,
+FINAL_APPROVER_STORED,
+SOURCE_TYPE_STORED,
+ISSUE_SOURCE_TYPE_ADT,
+ISSUE_INITIATOR_STORED,rating_stored,
+issue_recommendation,
+rel_object_detl
+FROM table(<a class="codeLink" href="../pldoc/index.html#MS_ISM_RPT_UTILS" target="tab">Ms_Ism_Rpt_Utils</a>.Fn_Get_Detl_Issue_List_Rep(<span class="parameter-style">:LOGIN_ID</span>, ms_ism_issues_rpt_filter_rec(<span class="parameter-style">:Area_of_Compliance</span>, <span class="parameter-style">:Requirement</span>, <span class="parameter-style">:Process</span>, <span class="parameter-style">:Risk</span>, <span class="parameter-style">:Control</span>, <span class="parameter-style">:Asset</span>, <span class="parameter-style">:Asset_Class</span>, <span class="parameter-style">:Org</span>, <span class="parameter-style">:LOGIN_ID</span>0, <span class="parameter-style">:LOGIN_ID</span>1, <span class="parameter-style">:LOGIN_ID</span>2, <span class="parameter-style">:LOGIN_ID</span>3, <span class="parameter-style">:LOGIN_ID</span>4, <span class="parameter-style">:LOGIN_ID</span>5,
+<span class="parameter-style">:LOGIN_ID</span>6, <span class="parameter-style">:LOGIN_ID</span>7, <span class="parameter-style">:LOGIN_ID</span>8, <span class="parameter-style">:LOGIN_ID</span>9,<span class="parameter-style">:Area_of_Compliance</span>0)))
+order by Org_Issue_Title</pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <div class="tab-pane fade" id="xml-pill">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-xml')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-xml">&lt;?xml version=&quot;1.0&quot;?&gt;&lt;METRIC_DEPLOYMENT&gt;&lt;METRIC   MODE=&quot;CLASS&quot;     PROCESS=&quot;0&quot;  INSTANCE=&quot;0&quot;  NOTIFY=&quot;YES&quot;   RETURN=&quot;RESULTSET&quot; &gt;&lt;RESULTMAP &gt;&lt;/RESULTMAP&gt;&lt;/METRIC&gt;&lt;/METRIC_DEPLOYMENT&gt;</pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                </div>
+                                <!--panel-default -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+
+      
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.infolet-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.infolet-table-c').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-cnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-f').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-fnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-p').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "22%" },    // 1st column width 
+                        { "sWidth": "30%" },    // 2nd column width
+                        { "sWidth": "13%" },    // 3rd column width 
+                        { "sWidth": "35%" }     // 4th column width 
+                    ]
+                });
+                $('.infolet-table-pnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "22%" },    // 1st column width 
+                        { "sWidth": "30%" },    // 2nd column width
+                        { "sWidth": "13%" },    // 3rd column width 
+                        { "sWidth": "35%" }     // 4th column width 
+                    ]
+                });
+                $('.infolet-table-r').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-rnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

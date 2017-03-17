@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>AUD Plan Scope</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_AUD_PLAN_SCOPE_VS">MS_AUD_PLAN_SCOPE_VS</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_AUD_PLAN_SCOPE_VS" ("COM", "EDITABLE_USER", "APPROVAL", "ACTIONS", "MEETING_DATE", "MEETING_DESCRIPTION", "DO_LINK", "DO_ID", "DOC_FORM_TYPE", "DOC_AUDIT_ID", "DO_COMMENTS", "DO_DOCUMENT", "DO_CATEGORY", "DO_NAME", "DO_TYPE", "TS_RUN_FLAG", "TS_ID_VAL", "TS_ORDER_TYPE", "TS_ORDER_KEY", "TS_DESCOPE_FLAG", "TS_REL_PARENT_ID", "TS_REL_TO", "TST_PARENT_ID", "TS_OBJ_VALUE", "TS_SCOPE_FLAG", "TST_FORM_TYPE", "TST_TMP_PK_ID", "TST_AUDIT_ID", "TS_OBJ_TYPE", "TS_ID_GEN", "TS_CT_ID", "TS_ID", "TS_SCOPING_EXPLN", "TS_TEST_DESCRIPTION", "TS_SCOPE", "TS_TEST_NAME", "TEST_ID", "TST_RADIO", "CT_RUN_FLAG", "CT_ID_VAL", "CT_ORDER_TYPE", "CT_ORDER_KEY", "CT_DESCOPE_FLAG", "CT_REL_PARENT_ID", "CT_REL_TO", "CTL_PARENT_ID", "CT_OBJ_VALUE", "CT_SCOPE_FLAG", "CTL_FORM_TYPE", "CTL_AUDIT_ID", "CTL_TMP_PK_ID", "CT_OBJ_TYPE", "CT_ID_GEN", "CT_ID", "CT_RS_ID", "CT_SCOPING_EXPLN", "CTL_CONTROL_DESCRIPTION", "CT_SCOPE", "CTL_CONTROL_NAME", "CONTROL_ID", "CTL_RADIO", "RS_RUN_FLAG", "RS_ID_VAL", "RS_ORDER_TYPE", "RS_ORDER_KEY", "RS_DESCOPE_FLAG", "RS_REL_PARENT_ID", "RSK_PARENT_ID", "RS_OBJ_VALUE", "RS_SCOPE_FLAG", "RS_CATEGORY", "RS_REL_TO", "RS_ORG_ID", "RS_AE_ID", "RSK_FORM_TYPE", "RSK_TMP_PK_ID", "RSK_AUDIT_ID", "RISK_ID", "RS_OBJ_TYPE", "RS_ID_GEN", "RS_ID", "RS_SCOPING_EXPLANATION", "RS_DESCRIPTION", "RS_SCOPE", "RS_RISK_NAME_ADHOC", "RS_RISK_NAME", "RSK_RADIO", "ORG_ORDER_TYPE", "ORG_ORDER_KEY", "ORG_DESCOPE_FLAG", "ORG_REL_PARENT_ID", "ORG_PARENT_ID", "ORG_OBJ_VALUE", "ORG_SCOPE_FLAG", "ORG_AE_ID", "ORG_FORM_TYPE", "ORG_TMP_PK_ID", "ORG_AUDIT_ID", "ORG_ID", "ORGANIZATION_ID", "ORG_OBJ_TYPE", "ORG_SCOPING_EXPLANATION", "ORG_SCOPE", "ORG_ORGANIZATION", "AE_ORDER_TYPE", "AE_ORDER_KEY", "AE_DESCOPE_FLAG", "AE_REL_PARENT_ID", "AUE_PARENT_ID", "AE_OBJ_VALUE", "AE_SCOPE_FLAG", "AE_ORG_ID", "AUE_FORM_TYPE", "AUE_TMP_PK_ID", "AUE_AUDIT_ID", "AE_ID", "AUDITABLE_ENTITY_ID", "AE_OBJ_TYPE", "AE_SCOPING_EXPLANATION", "AE_SCOPE", "AE_AUDITABLE_ENTITY", "PLANNING_MEETING_RESULTS", "MNG_EXT_AUD_CONCERNS", "APPROVE_FLAG", "FORM_NAME", "KEY_COL_NAME", "CONFIG_FLAG_PARAM", "APPROVE_USERS", "NON_EDITABLE_USER", "SCOPE_BASED_ON", "CONFIG_FLAG", "PREVIOUS_STAGE", "AUDIT_ID", "AUDIT_TYPE", "AUDIT_CLASSIFICATION", "LEAD_AUDITOR_MLOV", "AUDIT_MANAGER_MLOV", "LEAD_AUDITOR", "AUDIT_MANAGER", "CONDUCTED_BY_ORG", "AUDIT_END_DATE", "AUDIT_DATE", "STATUS", "AUDIT_TITLE", "AREAS_OF_CONSIDERATION", "ANALYTICAL_REVIEW", "AUDIT_OBJECTIVES", "IS_FORM_SUBMITTED", "ASSIGNED_ON", "ASSIGNED_BY", "AE_RISK_RELATION", "CROSS_FUNCTIONAL", "AE_DUPLICATE_VERSION", "UPLOAD_CHK_FLAG", "LEGACY_ID", "DATA_CORRECTION_FLAG", "EDITABLE_FIELDS_JSON", "UPLOAD_FLAG", "FORM_TYPE", "AUDIT_STATUS", "RTF_ATTACH", "APPROVE_NULL", "DD_CURRENT_STATUS", "DD_ACTION", "DD_PROCESS_CODE", "DD_CURRENT_STAGE", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_CURRENT_USER_NAME", "DD_OBJECT_TYPE", "INSTANCE_REC_NUM", "INSTANCE_ID", "METRIC_ID", "METRIC_RUN_DATE", "METRIC_COMPLETED_DATE", "LATEST_FLAG", "CREATED_BY", "CREATION_DATE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "MULTIROW_GROUP_NAME", "ELECTRONICALLY_SIGNED", "MULTIROW_REGION_ID", "UNIQUE_ROW_ID", "IS_AUTOSAVE", "AUDIT_OBJECTIVES_HTM", "ANALYTICAL_REVIEW_HTM", "AREAS_OF_CONSIDERATION_HTM", "MNG_EXT_AUD_CONCERNS_HTM", "PLANNING_MEETING_RESULTS_HTM", "AE_SCOPING_EXPLANATION_HTM", "ORG_SCOPING_EXPLANATION_HTM", "RS_DESCRIPTION_HTM", "RS_SCOPING_EXPLANATION_HTM", "CTL_CONTROL_DESCRIPTION_HTM", "CT_SCOPING_EXPLN_HTM", "TS_TEST_DESCRIPTION_HTM", "TS_SCOPING_EXPLN_HTM", "MEETING_DESCRIPTION_HTM") AS 
+  select "COM","EDITABLE_USER","APPROVAL","ACTIONS","MEETING_DATE","MEETING_DESCRIPTION","DO_LINK","DO_ID","DOC_FORM_TYPE","DOC_AUDIT_ID","DO_COMMENTS","DO_DOCUMENT","DO_CATEGORY","DO_NAME","DO_TYPE","TS_RUN_FLAG","TS_ID_VAL","TS_ORDER_TYPE","TS_ORDER_KEY","TS_DESCOPE_FLAG","TS_REL_PARENT_ID","TS_REL_TO","TST_PARENT_ID","TS_OBJ_VALUE","TS_SCOPE_FLAG","TST_FORM_TYPE","TST_TMP_PK_ID","TST_AUDIT_ID","TS_OBJ_TYPE","TS_ID_GEN","TS_CT_ID","TS_ID","TS_SCOPING_EXPLN","TS_TEST_DESCRIPTION","TS_SCOPE","TS_TEST_NAME","TEST_ID","TST_RADIO","CT_RUN_FLAG","CT_ID_VAL","CT_ORDER_TYPE","CT_ORDER_KEY","CT_DESCOPE_FLAG","CT_REL_PARENT_ID","CT_REL_TO","CTL_PARENT_ID","CT_OBJ_VALUE","CT_SCOPE_FLAG","CTL_FORM_TYPE","CTL_AUDIT_ID","CTL_TMP_PK_ID","CT_OBJ_TYPE","CT_ID_GEN","CT_ID","CT_RS_ID","CT_SCOPING_EXPLN","CTL_CONTROL_DESCRIPTION","CT_SCOPE","CTL_CONTROL_NAME","CONTROL_ID","CTL_RADIO","RS_RUN_FLAG","RS_ID_VAL","RS_ORDER_TYPE","RS_ORDER_KEY","RS_DESCOPE_FLAG","RS_REL_PARENT_ID","RSK_PARENT_ID","RS_OBJ_VALUE","RS_SCOPE_FLAG","RS_CATEGORY","RS_REL_TO","RS_ORG_ID","RS_AE_ID","RSK_FORM_TYPE","RSK_TMP_PK_ID","RSK_AUDIT_ID","RISK_ID","RS_OBJ_TYPE","RS_ID_GEN","RS_ID","RS_SCOPING_EXPLANATION","RS_DESCRIPTION","RS_SCOPE","RS_RISK_NAME_ADHOC","RS_RISK_NAME","RSK_RADIO","ORG_ORDER_TYPE","ORG_ORDER_KEY","ORG_DESCOPE_FLAG","ORG_REL_PARENT_ID","ORG_PARENT_ID","ORG_OBJ_VALUE","ORG_SCOPE_FLAG","ORG_AE_ID","ORG_FORM_TYPE","ORG_TMP_PK_ID","ORG_AUDIT_ID","ORG_ID","ORGANIZATION_ID","ORG_OBJ_TYPE","ORG_SCOPING_EXPLANATION","ORG_SCOPE","ORG_ORGANIZATION","AE_ORDER_TYPE","AE_ORDER_KEY","AE_DESCOPE_FLAG","AE_REL_PARENT_ID","AUE_PARENT_ID","AE_OBJ_VALUE","AE_SCOPE_FLAG","AE_ORG_ID","AUE_FORM_TYPE","AUE_TMP_PK_ID","AUE_AUDIT_ID","AE_ID","AUDITABLE_ENTITY_ID","AE_OBJ_TYPE","AE_SCOPING_EXPLANATION","AE_SCOPE","AE_AUDITABLE_ENTITY","PLANNING_MEETING_RESULTS","MNG_EXT_AUD_CONCERNS","APPROVE_FLAG","FORM_NAME","KEY_COL_NAME","CONFIG_FLAG_PARAM","APPROVE_USERS","NON_EDITABLE_USER","SCOPE_BASED_ON","CONFIG_FLAG","PREVIOUS_STAGE","AUDIT_ID","AUDIT_TYPE","AUDIT_CLASSIFICATION","LEAD_AUDITOR_MLOV","AUDIT_MANAGER_MLOV","LEAD_AUDITOR","AUDIT_MANAGER","CONDUCTED_BY_ORG","AUDIT_END_DATE","AUDIT_DATE","STATUS","AUDIT_TITLE","AREAS_OF_CONSIDERATION","ANALYTICAL_REVIEW","AUDIT_OBJECTIVES","IS_FORM_SUBMITTED","ASSIGNED_ON","ASSIGNED_BY","AE_RISK_RELATION","CROSS_FUNCTIONAL","AE_DUPLICATE_VERSION","UPLOAD_CHK_FLAG","LEGACY_ID","DATA_CORRECTION_FLAG","EDITABLE_FIELDS_JSON","UPLOAD_FLAG","FORM_TYPE","AUDIT_STATUS","RTF_ATTACH","APPROVE_NULL","DD_CURRENT_STATUS","DD_ACTION","DD_PROCESS_CODE","DD_CURRENT_STAGE","DD_ENTERPRISE_INFO","DD_EVENT_USER_NAME","DD_CURRENT_USER_NAME","DD_OBJECT_TYPE","INSTANCE_REC_NUM","INSTANCE_ID","METRIC_ID","METRIC_RUN_DATE","METRIC_COMPLETED_DATE","LATEST_FLAG","CREATED_BY","CREATION_DATE","PROCESS_FLOW_STATUS","PROCESS_INSTANCE_ID","MULTIROW_GROUP_NAME","ELECTRONICALLY_SIGNED","MULTIROW_REGION_ID","UNIQUE_ROW_ID","IS_AUTOSAVE","AUDIT_OBJECTIVES_HTM","ANALYTICAL_REVIEW_HTM","AREAS_OF_CONSIDERATION_HTM","MNG_EXT_AUD_CONCERNS_HTM","PLANNING_MEETING_RESULTS_HTM","AE_SCOPING_EXPLANATION_HTM","ORG_SCOPING_EXPLANATION_HTM","RS_DESCRIPTION_HTM","RS_SCOPING_EXPLANATION_HTM","CTL_CONTROL_DESCRIPTION_HTM","CT_SCOPING_EXPLN_HTM","TS_TEST_DESCRIPTION_HTM","TS_SCOPING_EXPLN_HTM","MEETING_DESCRIPTION_HTM" from SI_103066_TS</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                        <div class="no-panel no-panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Packages</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../pldoc/index.html#MS_AUD_F013_HELPER" target="tab">MS_AUD_F013_HELPER</a></td>
+                                            <td></td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

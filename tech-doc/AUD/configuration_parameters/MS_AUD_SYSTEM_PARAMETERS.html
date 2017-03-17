@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Configuration Parameters</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                    <h4><span class="icn icn-tools" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_AUD_SYSTEM_PARAMETERS">MS_AUD_SYSTEM_PARAMETERS</span> </h4>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Scope</th>
+                                                <td>Enterprise</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This parameter is used to define System Level Parameters for Audits.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <table class="table table-hover configuration-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th><span style="color:brown">Parameter Title</span><br/>Parameter Name</th>
+                                                        <th>Description</th>
+                                                        <th>List Of Value</th>
+                                                        <th>Value</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><span style="color:brown">Allow Audit Closure with Open assignments</span><br/>Allow Audit Closure with Open assignments</td>
+                                                        <td>You can type the following values:
+ Y: Allows audit to be closed even with pending or open assignments in the system
+ N: Does not allow to close audits if there are pending or open assignments in the system</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Audits being conducted in next X months</span><br/>Audits being conducted in next X months</td>
+                                                        <td>This parameter is used by Audit Status Pie Chart to filter the audits based on the duration (in months) specified</td>
+                                                        <td></td>
+                                                        <td> 6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Audits closed in past X months</span><br/>Audits closed in past X months</td>
+                                                        <td>All the audits closed within the value defined will be displayed in this report.
+Default value is 12 months</td>
+                                                        <td></td>
+                                                        <td> 12</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Audits Conducted In Past X Months</span><br/>Audits_Conducted_In_Past_X_Months</td>
+                                                        <td>This parameter is used by Audit Status Pie Chart to filter the audits based on the duration (in months) specified</td>
+                                                        <td></td>
+                                                        <td> 6</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Auto Populate Related Controls And Tests</span><br/>Auto_Populate_Related_Controls_And_Tests</td>
+                                                        <td>This parameter id to auto populate all the related controls & tests for the risks defined as part of the scope in the plan scope form</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Autopopulate Distribution List In Audit Report</span><br/>Autopopulate_Distribution_List_In_Audit_Report</td>
+                                                        <td>This parameter is used to auto populate the distribution list grid in Audit Report form</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">CAN Lead Auditor From Any Org</span><br/>CAN_Lead_Auditor_From_Any_Org</td>
+                                                        <td>This parameter determines whether the Lead Auditor for an Audit can be from any organization or should be only from the Created By (Organization).</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Can add adhoc team members</span><br/>Can add adhoc team members</td>
+                                                        <td>This parameter is to enable the option of adding the additional team members in the Audit Form even when RSM is integrated with Audits</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Create Adhoc Risks in APS form</span><br/>Create Adhoc Risks in APS form</td>
+                                                        <td>This parameter allows the Audit Manager & Lead Auditor to define adhoc risks in APS form of the Audit Project.</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Edit Audit Report ID</span><br/>Edit Audit Report ID</td>
+                                                        <td>This parameter is set to Y by default which will allow the user to edit the Audit report ID in the Audit Report form. 
+If this parameter is set to N, system will auto populate the report ID in the following format AUD ID – YYYY - 000</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Editability of APS form for Auditors</span><br/>Editability of APS form for Auditors</td>
+                                                        <td>This parameter allows the auditors to update the plan scope. Y: Auditors are allowed to update the plan scope. N: Only Lead Auditor or Audit Manager is allowed to update plan scope</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Editable actual dates for system events in milestone templates</span><br/>Editable_Actual_Dates_for_System_Events_in_Milestone_Templates</td>
+                                                        <td>If the Parameter 'Editable_Actual_Dates_for_System_Events_in_Milestone_Templates' is 'Y' then for System Events, Column 'Edit Actual Dates' will be auto populated to 'No' and the field is editable. For Non System Events, Column 'Edit Actual Dates' will be auto populated to 'Yes' and the field is editable.
+If the Parameter 'Editable_Actual_Dates_for_System_Events_in_Milestone_Templates' is 'N' then for System Events, Column 'Edit Actual Dates' will be auto populated to 'No' and the field is non editable. For Non System Events, Column 'Edit Actual Dates' will be auto populated to 'Yes' and the field is editable.</td>
+                                                        <td></td>
+                                                        <td> N</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Enable Re opening of Approved Workpapers</span><br/>Enable Re-opening of Approved Tasks</td>
+                                                        <td>This parameter is to define if the AM/LA should be allowed to reopen the approved tasks</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Enable Single Publish of Final Report</span><br/>Enable Single Publish of Final Report</td>
+                                                        <td>You can type the following values:
+ Y: Allows generation of the report only once for an audit in the system.
+ N: Allows generation of the report as many times for an audit in the system.</td>
+                                                        <td></td>
+                                                        <td> N</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Enable non workflow based coaching notes</span><br/>Enable non-workflow based coaching notes</td>
+                                                        <td>This parameter is to define if the AM/LA should be allowed to provide comments in the RTF fields when they are not part of the task workflow</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Enable print for Workpapers and Draft Issues</span><br/>Enable print for Tasks and Draft Issues</td>
+                                                        <td>You can type the following values:
+ Y: If you want enable the Print functionality in the Tasks and Draft Issues
+form, type this value.
+ N: If you do not want to enable the Print functionality in the Tasks and Draft
+Issues form, type this value.</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Enable Create Workpapers For Scheduled Audits</span><br/>Enable_Create_Tasks_For_Scheduled_Audits</td>
+                                                        <td>This parameter is to enable task creation for scheduled audits</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Enable Draft Issues For Active Audit</span><br/>Enable_Draft_Issues_For_Active_Audit</td>
+                                                        <td>Parameter to enable draft issues icon for an active audit.</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Enable Organization For Ae Risk Org</span><br/>Enable_Organization_For_Ae_Risk_Org</td>
+                                                        <td>This parameter determines to enable the Organization field for scopes based on AE-Risk.</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Escalation Email to be triggered to the Workpaper Approver and Final Approver</span><br/>Escalation Email to be triggered to the Task Approver and Final Approver</td>
+                                                        <td>This parameter is to send an escalation email to Task Approver and Final Approver for Tasks that is overdue. X is to define the no of days after the Planned Task End date.</td>
+                                                        <td></td>
+                                                        <td> 1</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Hide Scope Based On Field</span><br/>Hide_Scope_Based_On_Field</td>
+                                                        <td>This parameter is to show /hide the scope based on field</td>
+                                                        <td></td>
+                                                        <td> N</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS ADD QST SCORE INCLUDED</span><br/>IS_ADD_QST_SCORE_INCLUDED</td>
+                                                        <td>This parameter will decide whether the additional question score should be includedin scoring calculation or not</td>
+                                                        <td></td>
+                                                        <td> N</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS AE Risks Relation Required</span><br/>IS_AE_Risks_Relation_Required</td>
+                                                        <td>This parameter is to define if the relationship between AE & Risk is required or not</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Audit Recurrence</span><br/>IS_Audit_Recurrence</td>
+                                                        <td>This parameter enables the capability to define recurring audits.</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Audit Title Editable</span><br/>IS_Audit_Title_Editable</td>
+                                                        <td>This parameter determines whether the Audit title can be edited after the audit has started.</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Auditee Can Delegate Findings</span><br/>IS_Auditee_Can_Delegate_Findings</td>
+                                                        <td>This parameter determines whether the auditee can delegate Issues to other users.</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Detailed Estimation Required</span><br/>IS_Detailed_Estimation_Required</td>
+                                                        <td>This parameter is used to enable displaying the detailed estimation multi-row within the audit candidates</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Enable Root Cause and Contributing Factors</span><br/>IS_Enable_Root_Cause_and_Contributing_Factors</td>
+                                                        <td>This parameter determines whether the root cause and contributing factors fields are enabled on the task forms</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Enable Samples in Control Test</span><br/>IS_Enable_Samples_in_Control_Test</td>
+                                                        <td>This parameter enabled the fields related to Samples in Test control task.</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Locations Required</span><br/>IS_Locations_Required</td>
+                                                        <td>This parameter is used to enable the location field in the Plan audit and manage audit form.</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Management Response Editable</span><br/>IS_Management_Response_Editable</td>
+                                                        <td>This parameter is used to set whether the field Management Response in Draft Issues will be editable or not</td>
+                                                        <td></td>
+                                                        <td> N</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Plan Additional Detail Required</span><br/>IS_Plan_Additional_Detail_Required</td>
+                                                        <td>This parameter enables the additional details tab in the plan form</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Plan Reviewer Required</span><br/>IS_Plan_Reviewer_Required</td>
+                                                        <td>This will enable the Send for Review option in the plan form</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Re Audit Required</span><br/>IS_Re_Audit_Required</td>
+                                                        <td>This parameter is used to enable the re-audit option during audit closure.</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Risk Mandatory for Ae Risk Org</span><br/>IS_Risk_Mandatory_for_Ae_Risk_Org</td>
+                                                        <td>If  system level parameter “IS_AE_Risk_Mandatory= N” then the risk field becomes optional for only Planned Audit when scope is Process/AE-Risk Audit</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">IS Use Assessment From Mandatory</span><br/>IS_Use_Assessment_From_Mandatory</td>
+                                                        <td>This parameter is used to decide if the use assessment field should be made mandatory or not</td>
+                                                        <td></td>
+                                                        <td> N</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Is Risk Control Matrix report required</span><br/>Is_Risk_Control_Matrix_report_required</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">List all core objects in advisors as per GRCF</span><br/>List_all_core_objects_in_advisors_as_per_GRCF</td>
+                                                        <td>This parameter is to display all the core objects of GRCF (based on the basic security) in the advisor</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">MS AUD AE Enable Auto Approval</span><br/>MS_AUD_AE_Enable_Auto_Approval</td>
+                                                        <td>This parameter is to define the approval workflow for the uploaded AE’s.  Auto Approve & To Owners or Approvers will be the List of Values</td>
+                                                        <td><a href="../list_of_values/MS_AUD_AUTO_APPROVE_OBJ.html">MS AUD AUTO APPROVE OBJ</a></td>
+                                                        <td> To Owners Or Approvers</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">MS OnGoingAudits window</span><br/>MS_OnGoingAudits_window</td>
+                                                        <td>This parameter is used to display audits in the My audits view x days prior to the start of the audit</td>
+                                                        <td></td>
+                                                        <td> 4000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Make Controls and Tests non-mandatory for ongoing audits</span><br/>Make_Controls_and_Tests_nonmandatory</td>
+                                                        <td>Mark this parameters as "Yes" to make adding of control and tests as non mandatory in the APS form and create task forms for the control test workpaper for the ongoing audits. </td>
+                                                        <td></td>
+                                                        <td> N</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Mandate Controls Tests in APS and Create Workpaper forms for Scheduled Audits</span><br/>Mandate_Controls_Tests_in_APS_and_Create_Workpaper_forms_for_Scheduled_Audits</td>
+                                                        <td>This parameter is to make the controls & tests mandatory in the Plan Scope and Create Workpaper form for scheduled Audits</td>
+                                                        <td></td>
+                                                        <td> N</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Needs Audit Closure Process</span><br/>Needs Audit Closure Process</td>
+                                                        <td>This parameter is used to close the audit without going through the closure form</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Out frequency in Advisors</span><br/>Out_frequency_in_Advisors</td>
+                                                        <td>Auditable Entity, Risk and Organization that has not been considered in the plan/not conducted within the configured frequency will be highlighted with an exclamatory mark.</td>
+                                                        <td></td>
+                                                        <td> 5</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Reference In progress Workpapers</span><br/>Reference In-progress Tasks</td>
+                                                        <td>Auditor will be able to reference the Approved workpapers by default, based on a system level parameter Reference In-progress . If this is set to Y Auditor will be able to reference the in-progress workpapers.</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Reminder Email to be triggered to the Workpaper Owner and Co Auditors</span><br/>Reminder Email to be triggered to the Task Owner and Co-Auditors</td>
+                                                        <td>This parameter is to send a reminder email to Task owner and Co-Auditors for Tasks due within X days from the Planned Task End date. X is to define the no of days before the Planned Task End date.</td>
+                                                        <td></td>
+                                                        <td> 5</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Reminder Notification x Days Prior To Audit</span><br/>Reminder_Notification_x_Days_Prior_To_Audit</td>
+                                                        <td>The parameter x determines the email notification that is sent to all the stakeholders before the start of the audit</td>
+                                                        <td></td>
+                                                        <td> 23</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Reminder email to be triggered X days before AE expire date</span><br/>Reminder_email_to_be_triggered_X_days_before_AE_expire_date</td>
+                                                        <td>This parameter is to send a reminder email about expiry of Auditable Entity to Auditable Entity owner before X days of expiry date. X is to define the no of days before the Auditable Entity End date.</td>
+                                                        <td></td>
+                                                        <td> 5</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Set Debugger On</span><br/>Set_Debugger_On</td>
+                                                        <td>This Parameter is used to enable debug mode</td>
+                                                        <td></td>
+                                                        <td> Y</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span style="color:brown">Set Default Scope</span><br/>Set_Default_Scope</td>
+                                                        <td>This parameter is used to default the scope in plan &Audit form</td>
+                                                        <td><a href="../list_of_values/MS_AUD_Audit_Based_On.html">MS AUD Audit Based On</a></td>
+                                                        <td> Auditable Entity-Risk-Auditee Organization Audit</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- panel-default -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                                <div class="no-panel no-panel-success">
+                                    <div class="panel-heading">
+                                        <h4>References</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <th colspan="2" style="background-color:rgb(221, 221, 221);">Infolets</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="../infolets/MS_AUD_Calendar_View_Audits.html" >MS AUD Calendar View Audits</a></td>
+                                                    <td><a href="../infolets/MS_AUD_Config_parameters.html" >MS AUD Config parameters</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="../infolets/MS_AUD_Flow_Actions.html" >MS AUD Flow Actions</a></td>
+                                                    <td><a href="../infolets/MS_AUD_Manager_Config_Parameters.html" >MS AUD Manager Config Parameters</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <th colspan="2" style="background-color:rgb(221, 221, 221);">Packages</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="../pldoc/index.html#MS_AUD_DATA_UPLOAD_UTILS" target="tab">MS_AUD_DATA_UPLOAD_UTILS</a></td>
+                                                    <td><a href="../pldoc/index.html#MS_AUD_EXECUTION_RPT_UTILS" target="tab">MS_AUD_EXECUTION_RPT_UTILS</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="../pldoc/index.html#MS_AUD_F006_HELPER" target="tab">MS_AUD_F006_HELPER</a></td>
+                                                    <td><a href="../pldoc/index.html#MS_AUD_F017_HELPER" target="tab">MS_AUD_F017_HELPER</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="../pldoc/index.html#MS_AUD_INTEGRATION" target="tab">MS_AUD_INTEGRATION</a></td>
+                                                    <td><a href="../pldoc/index.html#MS_AUD_SCHEDULED_EMAILS" target="tab">MS_AUD_SCHEDULED_EMAILS</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><a href="../pldoc/index.html#MS_AUD_UTILITIES" target="tab">MS_AUD_UTILITIES</a></td>
+                                                    <td></td>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <th colspan="2" style="background-color:rgb(221, 221, 221);">Procedures</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="../pldoc/index.html#MS_AUD_LOG_ACTIVITY" target="tab">MS_AUD_LOG_ACTIVITY</a></td>
+                                                    <td></td>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- panel-body -->
+                                </div>
+                                <!-- panel-success -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+        <script>
+            $(document).ready(function() {
+                $('.tooltip-c').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                });
+                $('.configuration-table-nr').DataTable({
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "25%" },    // 1st column width 
+                        { "sWidth": "25%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                        { "sWidth": "25%" }     // 4th column width 
+                    ]
+                });
+                $('.configuration-table').DataTable({
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "25%" },    // 1st column width 
+                        { "sWidth": "25%" },    // 2nd column width 
+                        { "sWidth": "25%" },    // 3rd column width 
+                        { "sWidth": "25%" }     // 4th column width 
+                    ]
+                });
+            });
+            $('#data-Modal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#data-Modal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

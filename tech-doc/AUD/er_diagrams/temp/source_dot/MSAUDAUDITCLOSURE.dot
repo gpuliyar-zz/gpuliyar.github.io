@@ -1,0 +1,120 @@
+digraph MSAUDAUDITCLOSURE {
+graph [ dpi = 100 ]
+node [shape=plaintext]
+splines="ortho"
+MS_AUD_AUDIT_CLOSURE [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_AUDIT_CLOSURE</td></tr>
+<tr><td PORT="FORM_TYPE"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>FORM_TYPE</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="CURRENT_USER_NAME"> </td><td align="left"><font color="black">CURRENT_USER_NAME</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="APPROVER"> </td><td align="left"><font color="black">APPROVER</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="FOLLOW_UP_ORG_ID_HIDDEN"> </td><td align="left"><font color="black">FOLLOW_UP_ORG_ID_HIDDEN</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="OPEN_ASSGNMT"> </td><td align="left"><font color="black">OPEN_ASSGNMT</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="OPEN_FLAG"> </td><td align="left"><font color="black">OPEN_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="AUD_END_DATE"> </td><td align="left"><font color="black">AUD_END_DATE</font></td><td align="left"><font color="black">DATE</font></td></tr>
+<tr><td PORT="DD_OBJECT_TYPE"> </td><td align="left"><font color="black">DD_OBJECT_TYPE</font></td><td align="left"><font color="black">VARCHAR2 (400)</font></td></tr>
+<tr><td PORT="DD_PROCESS_INSTANCE_ID"> </td><td align="left"><font color="black">DD_PROCESS_INSTANCE_ID</font></td><td align="left"><font color="black">NUMBER (22)</font></td></tr>
+<tr><td PORT="DD_INSTANCE_ID"> </td><td align="left"><font color="black">DD_INSTANCE_ID</font></td><td align="left"><font color="black">NUMBER (22)</font></td></tr>
+<tr><td PORT="DD_CREATED_ON"> </td><td align="left"><font color="black">DD_CREATED_ON</font></td><td align="left"><font color="black">DATE</font></td></tr>
+<tr><td PORT="DD_CREATED_BY"> </td><td align="left"><font color="black">DD_CREATED_BY</font></td><td align="left"><font color="black">VARCHAR2 (400)</font></td></tr>
+<tr><td PORT="DD_MODIFIED_ON"> </td><td align="left"><font color="black">DD_MODIFIED_ON</font></td><td align="left"><font color="black">DATE</font></td></tr>
+<tr><td PORT="DD_MODIFIED_BY"> </td><td align="left"><font color="black">DD_MODIFIED_BY</font></td><td align="left"><font color="black">VARCHAR2 (400)</font></td></tr>
+<tr><td PORT="DD_PROCESS_CODE"> </td><td align="left"><font color="black">DD_PROCESS_CODE</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="DD_EDIT_FLAG"> </td><td align="left"><font color="black">DD_EDIT_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+<tr><td PORT="CLOSING_COMMENTS"> </td><td align="left"><font color="black">CLOSING_COMMENTS</font></td><td align="left"><font color="black">CLOB</font></td></tr>
+<tr><td PORT="FOLLOW_UP_DATE"> </td><td align="left"><font color="black">FOLLOW_UP_DATE</font></td><td align="left"><font color="black">DATE</font></td></tr>
+<tr><td PORT="RE_AUDIT_START_DATE"> </td><td align="left"><font color="black">RE_AUDIT_START_DATE</font></td><td align="left"><font color="black">DATE</font></td></tr>
+<tr><td PORT="RE_AUD_LEAD_AUDITOR"> </td><td align="left"><font color="black">RE_AUD_LEAD_AUDITOR</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="FOLLOW_UP_STATUS"> </td><td align="left"><font color="black">FOLLOW_UP_STATUS</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="FOLLOW_UP_AUDITOR"> </td><td align="left"><font color="black">FOLLOW_UP_AUDITOR</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="ATTACHMENTS"> </td><td align="left"><font color="black">ATTACHMENTS</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+</table>>];
+MS_AUD_AUDIT_CLOSURE_AAM [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_AUDIT_CLOSURE_AAM</td></tr>
+<tr><td PORT="AUDIT_MANAGER_MLOV"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_MANAGER_MLOV</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="FORM_TYPE"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>FORM_TYPE</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_AUDIT_CLOSURE_ALA [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_AUDIT_CLOSURE_ALA</td></tr>
+<tr><td PORT="LEAD_AUDITOR_MLOV"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>LEAD_AUDITOR_MLOV</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="FORM_TYPE"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>FORM_TYPE</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_AUDIT_CLOSURE_AUE [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_AUDIT_CLOSURE_AUE</td></tr>
+<tr><td PORT="AE_ID"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>AE_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (40)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="FORM_TYPE"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>FORM_TYPE</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="AE_RISK_RATING"> </td><td align="left"><font color="black">AE_RISK_RATING</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="AE_CLOSING_COMMENTS"> </td><td align="left"><font color="black">AE_CLOSING_COMMENTS</font></td><td align="left"><font color="black">CLOB</font></td></tr>
+<tr><td PORT="AE_AUDIT_RATING"> </td><td align="left"><font color="black">AE_AUDIT_RATING</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_AUDIT_CLOSURE_DCM [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_AUDIT_CLOSURE_DCM</td></tr>
+<tr><td PORT="DOC_ID"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>DOC_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="FORM_TYPE"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>FORM_TYPE</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DOC_TYPE"> </td><td align="left"><font color="black">DOC_TYPE</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="DOC_CATEGORY"> </td><td align="left"><font color="black">DOC_CATEGORY</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="DOC_DOCUMENT"> </td><td align="left"><font color="black">DOC_DOCUMENT</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="DOC_NAME"> </td><td align="left"><font color="black">DOC_NAME</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="DOC_COMMENTS"> </td><td align="left"><font color="black">DOC_COMMENTS</font></td><td align="left"><font color="black">CLOB</font></td></tr>
+<tr><td PORT="DOC_LINK"> </td><td align="left"><font color="black">DOC_LINK</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="DOC_NAME_FOR_MANAGED"> </td><td align="left"><font color="black">DOC_NAME_FOR_MANAGED</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="DOC_NUMBER_FOR_MANAGED"> </td><td align="left"><font color="black">DOC_NUMBER_FOR_MANAGED</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="DOC_ID_FOR_PDF_CONVERTER"> </td><td align="left"><font color="black">DOC_ID_FOR_PDF_CONVERTER</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="DOC_PDF_CONV_FLAG"> </td><td align="left"><font color="black">DOC_PDF_CONV_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="DOC_PDF_CONV_FLAG_FOR_IN_PROC"> </td><td align="left"><font color="black">DOC_PDF_CONV_FLAG_FOR_IN_PROC</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="DOC_MEETING_DESCRIPTION"> </td><td align="left"><font color="black">DOC_MEETING_DESCRIPTION</font></td><td align="left"><font color="black">CLOB</font></td></tr>
+<tr><td PORT="DOC_MEETING_DATE"> </td><td align="left"><font color="black">DOC_MEETING_DATE</font></td><td align="left"><font color="black">DATE</font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_AUDIT_CLOSURE_ORG [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_AUDIT_CLOSURE_ORG</td></tr>
+<tr><td PORT="ORG_ID"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>ORG_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (40)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="FORM_TYPE"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>FORM_TYPE</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="ORG_AUDIT_RATING"> </td><td align="left"><font color="black">ORG_AUDIT_RATING</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+<tr><td PORT="ORG_RISK_RATING"> </td><td align="left"><font color="black">ORG_RISK_RATING</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="ORG_CLOSING_COMMENTS"> </td><td align="left"><font color="black">ORG_CLOSING_COMMENTS</font></td><td align="left"><font color="black">CLOB</font></td></tr>
+</table>>];
+MS_AUD_AUDIT_CLOSURE_RLA [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_AUDIT_CLOSURE_RLA</td></tr>
+<tr><td PORT="RE_AUD_LEAD_AUDITOR_MLOV"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>RE_AUD_LEAD_AUDITOR_MLOV</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="FORM_TYPE"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>FORM_TYPE</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_AUDIT_CLOSURE_RSK [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_AUDIT_CLOSURE_RSK</td></tr>
+<tr><td PORT="RS_ID"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>RS_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (40)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="FORM_TYPE"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>FORM_TYPE</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="RS_CLOSING_COMMENTS"> </td><td align="left"><font color="black">RS_CLOSING_COMMENTS</font></td><td align="left"><font color="black">CLOB</font></td></tr>
+<tr><td PORT="RS_RISK_RATING"> </td><td align="left"><font color="black">RS_RISK_RATING</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="RS_AUDIT_RATING"> </td><td align="left"><font color="black">RS_AUDIT_RATING</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+
+MS_AUD_AUDIT_CLOSURE -> MS_AUD_AUDIT_CLOSURE_RSK [label=""] [arrowhead=crowtee]; 
+MS_AUD_AUDIT_CLOSURE -> MS_AUD_AUDIT_CLOSURE_AAM [label=""] [arrowhead=crowtee]; 
+MS_AUD_AUDIT_CLOSURE -> MS_AUD_AUDIT_CLOSURE_ALA [label=""] [arrowhead=crowtee]; 
+MS_AUD_AUDIT_CLOSURE -> MS_AUD_AUDIT_CLOSURE_AUE [label=""] [arrowhead=crowtee]; 
+MS_AUD_AUDIT_CLOSURE -> MS_AUD_AUDIT_CLOSURE_DCM [label=""] [arrowhead=crowtee]; 
+MS_AUD_AUDIT_CLOSURE -> MS_AUD_AUDIT_CLOSURE_ORG [label=""] [arrowhead=crowtee]; 
+MS_AUD_AUDIT_CLOSURE -> MS_AUD_AUDIT_CLOSURE_RLA [label=""] [arrowhead=crowtee]; 
+}

@@ -1,0 +1,204 @@
+digraph MSAUDTASK {
+graph [ dpi = 100 ]
+node [shape=plaintext]
+splines="ortho"
+MS_AUD_TASK [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK</td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="DD_INSTANCE_ID"> </td><td align="left"><font color="black">DD_INSTANCE_ID</font></td><td align="left"><font color="black">NUMBER (22)</font></td></tr>
+<tr><td PORT="DD_CREATED_ON"> </td><td align="left"><font color="black">DD_CREATED_ON</font></td><td align="left"><font color="black">DATE</font></td></tr>
+<tr><td PORT="DD_CREATED_BY"> </td><td align="left"><font color="black">DD_CREATED_BY</font></td><td align="left"><font color="black">VARCHAR2 (400)</font></td></tr>
+<tr><td PORT="DD_MODIFIED_ON"> </td><td align="left"><font color="black">DD_MODIFIED_ON</font></td><td align="left"><font color="black">DATE</font></td></tr>
+<tr><td PORT="DD_MODIFIED_BY"> </td><td align="left"><font color="black">DD_MODIFIED_BY</font></td><td align="left"><font color="black">VARCHAR2 (400)</font></td></tr>
+<tr><td PORT="DD_PROCESS_CODE"> </td><td align="left"><font color="black">DD_PROCESS_CODE</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="DD_EDIT_FLAG"> </td><td align="left"><font color="black">DD_EDIT_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+<tr><td PORT="CROSS_FUNCTIONAL"> </td><td align="left"><font color="black">CROSS_FUNCTIONAL</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="CANCEL_TASK"> </td><td align="left"><font color="black">CANCEL_TASK</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="STATUS"> </td><td align="left"><font color="black">STATUS</font></td><td align="left"><font color="black">VARCHAR2 (404)</font></td></tr>
+<tr><td PORT="PICKLIST_OBJECT_ID"> </td><td align="left"><font color="black">PICKLIST_OBJECT_ID</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="AUDIT_END_DATE"> </td><td align="left"><font color="black">AUDIT_END_DATE</font></td><td align="left"><font color="black">DATE</font></td></tr>
+<tr><td PORT="AUDIT_CLASSIFICATION"> </td><td align="left"><font color="black">AUDIT_CLASSIFICATION</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="SETUP_ENABLE_COLLABORATION"> </td><td align="left"><font color="black">SETUP_ENABLE_COLLABORATION</font></td><td align="left"><font color="black">VARCHAR2 (40)</font></td></tr>
+<tr><td PORT="UPLOAD_FLAG"> </td><td align="left"><font color="black">UPLOAD_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (40)</font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+<tr><td PORT="DD_OBJECT_TYPE"> </td><td align="left"><font color="black">DD_OBJECT_TYPE</font></td><td align="left"><font color="black">VARCHAR2 (400)</font></td></tr>
+<tr><td PORT="DD_PROCESS_INSTANCE_ID"> </td><td align="left"><font color="black">DD_PROCESS_INSTANCE_ID</font></td><td align="left"><font color="black">NUMBER (22)</font></td></tr>
+<tr><td PORT="PICKLIST_OBJECT_TYPE"> </td><td align="left"><font color="black">PICKLIST_OBJECT_TYPE</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="RTF_ATTACH"> </td><td align="left"><font color="black">RTF_ATTACH</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TMP_AUD_ID"> </td><td align="left"><font color="black">TMP_AUD_ID</font></td><td align="left"><font color="black">VARCHAR2 (1016)</font></td></tr>
+</table>>];
+MS_AUD_TASK_AAM [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_AAM</td></tr>
+<tr><td PORT="AUDIT_MANAGER_MLOV"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_MANAGER_MLOV</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_ALA [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_ALA</td></tr>
+<tr><td PORT="LEAD_AUDITOR_MLOV"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>LEAD_AUDITOR_MLOV</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_CAD [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_CAD</td></tr>
+<tr><td PORT="TS_CO_AUDITORS"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TS_CO_AUDITORS</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_CTS [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_CTS</td></tr>
+<tr><td PORT="TS_RELATED_CONTROLS"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TS_RELATED_CONTROLS</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_ORG [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_ORG</td></tr>
+<tr><td PORT="TS_ORGANIZATIONS"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TS_ORGANIZATIONS</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_OT2 [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_OT2</td></tr>
+<tr><td PORT="TMP_TSK_ORGANIZATIONS_2"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TMP_TSK_ORGANIZATIONS_2</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_RSK [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_RSK</td></tr>
+<tr><td PORT="TS_RELATED_RISKS"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TS_RELATED_RISKS</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_SEC [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_SEC</td></tr>
+<tr><td PORT="TS_CHECKLIST_SCOPE"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TS_CHECKLIST_SCOPE</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_TCR [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_TCR</td></tr>
+<tr><td PORT="TMP_TSK_CORE_OBJECTS"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TMP_TSK_CORE_OBJECTS</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_TO1 [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_TO1</td></tr>
+<tr><td PORT="TMP_TSK_ORGANIZATIONS"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TMP_TSK_ORGANIZATIONS</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_TR1 [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_TR1</td></tr>
+<tr><td PORT="TMP_TSK_RELATED_RISKS"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TMP_TSK_RELATED_RISKS</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_TSK [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_TSK</td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="RELATED_AE_FOR_RSK"> </td><td align="left"><font color="black">RELATED_AE_FOR_RSK</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TREE_PICKLIST_TASK_DATA"> </td><td align="left"><font color="black">TREE_PICKLIST_TASK_DATA</font></td><td align="left"><font color="black">CLOB</font></td></tr>
+<tr><td PORT="RELATED_RISK_FOR_AE"> </td><td align="left"><font color="black">RELATED_RISK_FOR_AE</font></td><td align="left"><font color="black">CLOB</font></td></tr>
+<tr><td PORT="RELATED_AE_FOR_ORG"> </td><td align="left"><font color="black">RELATED_AE_FOR_ORG</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_FINAL_APPROVER"> </td><td align="left"><font color="black">TS_FINAL_APPROVER</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TMP_AE"> </td><td align="left"><font color="black">TMP_AE</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_TASK_TYPE"> </td><td align="left"><font color="black">TS_TASK_TYPE</font></td><td align="left"><font color="black">VARCHAR2 (200)</font></td></tr>
+<tr><td PORT="TMP_TST"> </td><td align="left"><font color="black">TMP_TST</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_CORE_OBJECTS"> </td><td align="left"><font color="black">TS_CORE_OBJECTS</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_SCOPING_REASON"> </td><td align="left"><font color="black">TS_SCOPING_REASON</font></td><td align="left"><font color="black">CLOB</font></td></tr>
+<tr><td PORT="TMP_AE_SCOPE_3"> </td><td align="left"><font color="black">TMP_AE_SCOPE_3</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_CHECKLIST_NAME"> </td><td align="left"><font color="black">TS_CHECKLIST_NAME</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_BUDGETED_DAYS"> </td><td align="left"><font color="black">TS_BUDGETED_DAYS</font></td><td align="left"><font color="black">NUMBER (22)</font></td></tr>
+<tr><td PORT="TS_ADD_ATTACHMENTS"> </td><td align="left"><font color="black">TS_ADD_ATTACHMENTS</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TMP_RISK"> </td><td align="left"><font color="black">TMP_RISK</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_TASK_START_DATE"> </td><td align="left"><font color="black">TS_TASK_START_DATE</font></td><td align="left"><font color="black">DATE</font></td></tr>
+<tr><td PORT="TREE_TASK_DATA"> </td><td align="left"><font color="black">TREE_TASK_DATA</font></td><td align="left"><font color="black">CLOB</font></td></tr>
+<tr><td PORT="TMP_REL_RISKS_WO_AE"> </td><td align="left"><font color="black">TMP_REL_RISKS_WO_AE</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_INSTRUCTIONS"> </td><td align="left"><font color="black">TS_INSTRUCTIONS</font></td><td align="left"><font color="black">CLOB</font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+<tr><td PORT="RELATED_TEST_FOR_CTRL"> </td><td align="left"><font color="black">RELATED_TEST_FOR_CTRL</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_TASK_NAME"> </td><td align="left"><font color="black">TS_TASK_NAME</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="TASK_STATUS"> </td><td align="left"><font color="black">TASK_STATUS</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="RELATED_RISK_FOR_AE_SCOPE_3"> </td><td align="left"><font color="black">RELATED_RISK_FOR_AE_SCOPE_3</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_TASK_APPROVER"> </td><td align="left"><font color="black">TS_TASK_APPROVER</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_TASK_CATEGORY"> </td><td align="left"><font color="black">TS_TASK_CATEGORY</font></td><td align="left"><font color="black">VARCHAR2 (204)</font></td></tr>
+<tr><td PORT="TS_CHECKLIST_VERSION"> </td><td align="left"><font color="black">TS_CHECKLIST_VERSION</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="RELATED_RISK_FOR_ORG"> </td><td align="left"><font color="black">RELATED_RISK_FOR_ORG</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TMP_ORG"> </td><td align="left"><font color="black">TMP_ORG</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_TASK_OWNER"> </td><td align="left"><font color="black">TS_TASK_OWNER</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_TASK_COMPLETION_DATE"> </td><td align="left"><font color="black">TS_TASK_COMPLETION_DATE</font></td><td align="left"><font color="black">DATE</font></td></tr>
+<tr><td PORT="TMP_CTL"> </td><td align="left"><font color="black">TMP_CTL</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="RELATED_CTRL_FOR_RISK"> </td><td align="left"><font color="black">RELATED_CTRL_FOR_RISK</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+<tr><td PORT="TS_CHECKLIST_ID"> </td><td align="left"><font color="black">TS_CHECKLIST_ID</font></td><td align="left"><font color="black">VARCHAR2 (1020)</font></td></tr>
+<tr><td PORT="TMP_ORG_SCOPE_3"> </td><td align="left"><font color="black">TMP_ORG_SCOPE_3</font></td><td align="left"><font color="black">VARCHAR2 (4000)</font></td></tr>
+</table>>];
+MS_AUD_TASK_TST [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_TST</td></tr>
+<tr><td PORT="TS_RELATED_TESTS"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TS_RELATED_TESTS</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+MS_AUD_TASK_TT2 [label=<
+<table border="0" cellborder="1" cellspacing="0" align="left">
+<tr><td BGCOLOR="Lavender" colspan="3">MS_AUD_TASK_TT2</td></tr>
+<tr><td PORT="TMP_TSK_RELATED_RISKS_2"><img src="../../../template_files/dist/icons/content_icon/pkey.png"></img></td><td align="left"><font color="black"><B>TMP_TSK_RELATED_RISKS_2</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (4000)</B></font></td></tr>
+<tr><td PORT="AUDIT_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>AUDIT_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1020)</B></font></td></tr>
+<tr><td PORT="CREATE_TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>CREATE_TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (1016)</B></font></td></tr>
+<tr><td PORT="TASK_ID"><img src="../../../template_files/dist/icons/content_icon/fkey.png"></img></td><td align="left"><font color="black"><B>TASK_ID</B></font></td><td align="left"><font color="black"><B>VARCHAR2 (400)</B></font></td></tr>
+<tr><td PORT="DD_STATUS_FLAG"> </td><td align="left"><font color="black">DD_STATUS_FLAG</font></td><td align="left"><font color="black">VARCHAR2 (4)</font></td></tr>
+</table>>];
+
+MS_AUD_TASK -> MS_AUD_TASK_TSK [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK -> MS_AUD_TASK_AAM [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK -> MS_AUD_TASK_ALA [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK_TSK -> MS_AUD_TASK_TT2 [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK_TSK -> MS_AUD_TASK_CAD [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK_TSK -> MS_AUD_TASK_CTS [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK_TSK -> MS_AUD_TASK_ORG [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK_TSK -> MS_AUD_TASK_OT2 [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK_TSK -> MS_AUD_TASK_RSK [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK_TSK -> MS_AUD_TASK_SEC [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK_TSK -> MS_AUD_TASK_TCR [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK_TSK -> MS_AUD_TASK_TO1 [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK_TSK -> MS_AUD_TASK_TR1 [label=""] [arrowhead=crowtee]; 
+MS_AUD_TASK_TSK -> MS_AUD_TASK_TST [label=""] [arrowhead=crowtee]; 
+}

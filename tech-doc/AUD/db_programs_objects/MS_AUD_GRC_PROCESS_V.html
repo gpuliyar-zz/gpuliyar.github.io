@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS AUD AUDITABLE ENTITY BROWSER</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_AUD_GRC_PROCESS_V">MS_AUD_GRC_PROCESS_V</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_AUD_GRC_PROCESS_V" ("PROCESS_NAME", "PROCESS_ID", "DESCRIPTION", "OWNERS", "OWNER_ORGS", "OWNER_ORGANIZATIONS", "ATO_ORGANIZATIONS", "VALID_UNTIL", "VALID_FROM", "CORE_CATEGORY", "CORE_TYPE") AS 
+  SELECT a.object_name,
+    a.object_id,
+    description,
+    ms_aud_utilities.prfn_return_owners (a.object_id, a.dd_object_type ) owners,
+    ms_aud_utilities.prfn_return_owner_orgs (a.object_id, a.dd_object_type ) owner_orgs,
+    a.owner_organizations,
+    b.src_obj_id ato_organizations,
+    a.valid_until,
+    a.valid_from,
+    a.core_category,
+    a.core_type
+  FROM ms_aud_grc_core_object_pub_v a,
+    ms_aud_grc_process_org_v b
+  WHERE a.object_id = b.tgt_obj_id 
+ 
+ </pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                        <div class="no-panel no-panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Infolets</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../infolets/MS_AUD_DU_Auditable_Entity.html" >MS AUD DU Auditable Entity</a></td>
+                                            <td><a href="../infolets/MS_AUD_Get_Auditable_Entities.html" >MS_AUD_Get_Auditable_Entities</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_AUD_Get_Core_object_Details.html" >MS_AUD_Get_Core_object_Details</a></td>
+                                            <td><a href="../infolets/MS_AUD_Get_Org_Plan_Scope_DU.html" >MS AUD Get Org Plan Scope DU</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_AUD_Org_Link_Report.html" >MS AUD Org Link Report</a></td>
+                                            <td><a href="../infolets/MS_AUD_Process_Mlov.html" >MS AUD Process Mlov</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_AUD_RPT_Organizations.html" >MS AUD RPT Organizations</a></td>
+                                            <td><a href="../infolets/MS_AUD_Tmp_Auditee_Org.html" >MS_AUD_Tmp_Auditee_Org</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Packages</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../pldoc/index.html#MS_AUD_EXECUTION_RPT_UTILS" target="tab">MS_AUD_EXECUTION_RPT_UTILS</a></td>
+                                            <td><a href="../pldoc/index.html#MS_AUD_INTEGRATION" target="tab">MS_AUD_INTEGRATION</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Views</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../db_programs_objects/MS_AUD_AC_CORE_OBJECTS_V.html" >MS_AUD_AC_CORE_OBJECTS_V</a></td>
+                                            <td></td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

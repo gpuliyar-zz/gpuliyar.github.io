@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><schemadiagramrequest xmlns="http://www.metricstream.com/xsd"><module>AUD</module><display_number_of_columns></display_number_of_columns><schemadiagram><name>MS_AUD_PLAN_SCOPE</name><tables><table><name>MS_AUD_PLAN_SCOPE</name><pkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></pkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_AAM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_ALA</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_AUE</name><pkcolumn><column>AE_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_CTL</name><pkcolumn><column>CT_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_DOC</name><pkcolumn><column>DO_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_ORG</name><pkcolumn><column>ORG_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_RSK</name><pkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column><column>RS_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_RTG</name><pkcolumn><column>RS_CATEGORY</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column><column>RS_ID</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_TST</name><pkcolumn><column>TS_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+</tables><relationships><relationship name="" logical="1-*">
+<from><table>MS_AUD_PLAN_SCOPE</table>
+</from><to><table>MS_AUD_PLAN_SCOPE_TST</table><table>MS_AUD_PLAN_SCOPE_AAM</table><table>MS_AUD_PLAN_SCOPE_ALA</table><table>MS_AUD_PLAN_SCOPE_AUE</table><table>MS_AUD_PLAN_SCOPE_CTL</table><table>MS_AUD_PLAN_SCOPE_DOC</table><table>MS_AUD_PLAN_SCOPE_ORG</table><table>MS_AUD_PLAN_SCOPE_RSK</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_PLAN_SCOPE_RSK</table>
+</from><to><table>MS_AUD_PLAN_SCOPE_RTG</table></to></relationship>
+</relationships></schemadiagram></schemadiagramrequest>

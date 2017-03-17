@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS_AUD_F013_HELPER</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_AUD_AUDIT_LIST_REPORT_V">MS_AUD_AUDIT_LIST_REPORT_V</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_AUD_AUDIT_LIST_REPORT_V" ("AUDIT_ID", "AUDIT_TITLE", "AUDIT_TITLE_LINK", "PLAN_TITLE", "AUDIT_TYPE", "AUDIT_CATEGORY", "AUDIT_STATUS", "CORE_OBJECTS", "ORGANIZATIONS", "RELATED_RISKS", "CREATED_BY", "AUDIT_START_DATE", "AUDIT_END_DATE", "VIEW_TASKS", "RESTRICT_ACCESS_TO", "TEAM_MEMBER", "APPROVE_FLAG", "STATUS", "CONDUCTED_BY_ORG", "DD_OBJECT_TYPE", "AUDIT_MANAGER", "LEAD_AUDITOR", "AUDIT_CLASSIFICATION", "AUDIT_CLOSURE_DATE", "DD_PROCESS_INSTANCE_ID", "DD_INSTANCE_ID") AS 
+  SELECT a.audit_id AS audit_id,
+    a.audit_title   AS audit_title,
+    a.audit_title AS Audit_Title_Link,
+    COALESCE(
+    CASE
+      WHEN a.plan_title='AD-ID'
+      THEN 'Adhoc'
+      ELSE
+        (SELECT plan_title
+        FROM ms_aud_audit_plan
+        WHERE internal_plan_id = a.plan_title
+        AND rownum             =1
+        )
+    END,'Adhoc')AS Plan_Title,
+    (SELECT code_description
+    FROM ms_aud_lov_config_tl_v
+    WHERE locale_id         =NVL(CAST(si_db_locale_sv.getvalue AS NUMBER),1009)
+    AND code_group          = 'MS AUD Audit Type'
+    AND code_code           = a.audit_type
+    AND COALESCE(status,'Y')='Y'
+    ) AS Audit_Type,
+    (SELECT code_description
+    FROM ms_aud_lov_config_tl_v
+    WHERE locale_id         =NVL(CAST(si_db_locale_sv.getvalue AS NUMBER),1009)
+    AND code_group          = 'MS AUD Classification'
+    AND code_code           = a.audit_classification
+    AND COALESCE(status,'Y')='Y'
+    )AS Audit_Category,
+    (SELECT status_name
+    FROM ms_aud_status_tl_v
+    WHERE locale_id=NVL(CAST(si_db_locale_sv.getvalue AS NUMBER),1009)
+    AND status_id  =a.audit_status
+    ) AS Audit_Status ,
+    ms_aud_report_utils.fn_get_audit_core_objects(a.audit_id,a.SCOPE_BASED_ON) AS core_objects ,
+    ms_Aud_report_utils.fn_get_audit_organizations(a.audit_id,a.SCOPE_BASED_ON) AS organizations,
+    ms_Aud_report_utils.fn_get_audit_related_risks(a.audit_id,a.SCOPE_BASED_ON) AS related_risks,
+    (SELECT full_name FROM SI_USERS_T WHERE user_name = a.dd_created_by
+    )                  AS Created_By,
+    a.audit_start_date AS Audit_Start_Date,
+    a.audit_end_date   AS audit_end_date,
+    (SELECT to_number(DECODE(COUNT(t.task_id),0,NULL,COUNT(t.task_id)))
+    FROM ms_aud_audit_task t
+    WHERE t.audit_id = a.audit_id
+    AND t.TASK_TYPE IN ('2','3','4')
+    )                        AS view_tasks,
+    a.restrict_access_to     AS restrict_access_to,
+    NULL                     AS Team_Member,
+    a.approve_flag           AS approve_flag,
+    a.status                 AS status,
+    a.conducted_by_org       AS conducted_by_org,
+    a.dd_object_type         AS dd_object_type,
+    a.audit_manager          AS audit_manager,
+    a.lead_auditor           AS lead_auditor,
+    a.audit_classification   AS audit_classification,
+    a.audit_closure_date     AS audit_closure_date,
+    a.dd_process_instance_id AS dd_process_instance_id,
+    a.dd_instance_id         as dd_instance_id
+  FROM ms_aud_audit a
+</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                        <div class="no-panel no-panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Infolets</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../infolets/MS_AUD_Audit_List_For_AE_Advisor.html" >MS_AUD_Audit_List_For_AE_Advisor</a></td>
+                                            <td><a href="../infolets/MS_AUD_RPT_AuditList_Report.html" >MS AUD RPT AuditList Report</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_AUD_RPT_Audit_Details_For_Advisor.html" >MS AUD RPT Audit Details For Advisor</a></td>
+                                            <td><a href="../infolets/MS_AUD_RPT_Audit_List_For_Org_Advisor.html" >MS_AUD_RPT_Audit_List_For_Org_Advisor</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="../infolets/MS_AUD_RPT_Audit_List_For_Risk_Advisor.html" >MS_AUD_RPT_Audit_List_For_Risk_Advisor</a></td>
+                                            <td><a href="../infolets/MS_AUD_RPT_Audit_List_Report.html" >MS AUD RPT Audit List Report</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

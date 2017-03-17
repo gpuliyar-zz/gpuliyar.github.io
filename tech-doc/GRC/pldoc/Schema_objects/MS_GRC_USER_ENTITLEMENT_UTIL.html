@@ -1,0 +1,884 @@
+<HTML xmlns:lxslt="http://xml.apache.org/xslt" xmlns:exslt="http://exslt.org/common">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>GRC - 7.0.0.0.0.0.0.20170228162547</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF="../css/customstyle.css" TITLE="Style">
+<script src="../js/jquery-1.11.1.min.js"></script>
+<link href="../css/jquery.mCustomScrollbar.css" rel="stylesheet">
+<!--
+        sameCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesLowerCase=FALSE
+        namesUpperCase=FALSE
+        namesDefaultCase=TRUE
+        defaultNamesCase=UPPER
+        namesFromCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesToCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-->
+<style>
+		html, body{ height: 100%; }
+	</style>
+</HEAD>
+<BODY>
+<div class="loading"></div>
+<div id="outer">
+<div id="menubar"></div>
+<div class="outermenu">
+<div class="menuliclass">
+<a class="menuaclass" HREF="../summary.html">Overview</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../deprecated-list.html">Deprecated</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../public-api-list.html">Public API</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../index-list.html">Index</a>
+</div>
+</div>
+<b>GRC - 7.0.0.0.0.0.0.20170228162547</b>
+<br>
+<div style="margin-top:60px;">
+<table class="summarytable">
+<tr>
+<td>SUMMARY:</td><td><A HREF="#field_summary">FIELD</A> |</td><td><A HREF="#type_summary">TYPE</A> |</td><td><A HREF="#method_summary">METHOD</A></td>
+</tr>
+<tr>
+<td>DETAIL:</td><td><A HREF="#field_detail">FIELD</A> | </td><td><A HREF="#type_detail">TYPE</A> | </td><td><A HREF="#method_detail">METHOD</A></td>
+</tr>
+</table>
+</div>
+<HR>
+<H2>Package&nbsp;MS_GRC_USER_ENTITLEMENT_UTIL</H2>
+<P></P>
+<DL></DL>
+<HR>
+<P></P>
+<A NAME="field_summary"></A><A NAME="type_summary"></A><A NAME="method_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_CHECK_USER_ACT_BY_ORG_ID"></A><TD><CODE><B><A HREF="#FN_CHECK_USER_ACT_BY_ORG_ID(VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2)">FN_CHECK_USER_ACT_BY_ORG_ID</A></B>(IP_USER_NAME IN VARCHAR2, IP_ACTIVITY IN VARCHAR2, IP_OWNER_ORG IN VARCHAR2 DEFAULT NULL, IP_FLOW_UP_DOWN IN VARCHAR2 DEFAULT NULL)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: This function verifies the user security entitlement for the given activity and organization id
+              Returns 1 if activity exists else 0
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW,SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=4 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_CHECK_USER_ACT_BY_ORGNAME"></A><TD><CODE><B><A HREF="#FN_CHECK_USER_ACT_BY_ORGNAME(VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2)">FN_CHECK_USER_ACT_BY_ORGNAME</A></B>(IP_USER_NAME IN VARCHAR2, IP_ACTIVITY IN VARCHAR2, IP_OWNER_ORG IN VARCHAR2 DEFAULT NULL, IP_FLOW_UP_DOWN IN VARCHAR2 DEFAULT NULL)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: This function verifies the user security entitlement for the given activity and organization name
+              Returns 1 if activity exists else 0
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW,SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_GET_KIP_KRI_USERS"></A><TD><CODE><B><A HREF="#FN_GET_KIP_KRI_USERS(VARCHAR2,NUMBER)">FN_GET_KIP_KRI_USERS</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: Fn_Get_Kip_KRI_Users takes FLOW CODE, STAGE CODE, PID and instance
+              and returns list of user names for activity 'GRC-Edit KPI-KRI Definition/GRC- Edit All KPI-KRI Definitions'
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->CLOB</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_GET_KIP_KRI_USERS_CLOB"></A><TD><CODE><B><A HREF="#FN_GET_KIP_KRI_USERS_CLOB(VARCHAR2,NUMBER)">FN_GET_KIP_KRI_USERS_CLOB</A></B>(IP_FLOW_CODE IN VARCHAR2, IP_ID IN NUMBER)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: Fn_Get_Kip_KRI_Users takes FLOW CODE, STAGE CODE, PID and instance
+              and returns list of user names clob for activity 'GRC-Edit KPI-KRI Definition/GRC- Edit All KPI-KRI Definitions'
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=1 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_GET_USER_NAMES_BY_ID"></A><TD><CODE><B><A HREF="#FN_GET_USER_NAMES_BY_ID(VARCHAR2)">FN_GET_USER_NAMES_BY_ID</A></B>(IP_USER_LIST IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: This function accepts a list of user id's and returns the respective user full names as
+              Comma seperated string
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->CLOB</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=1 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_GET_USER_NAMES_BY_ID_CLOB"></A><TD><CODE><B><A HREF="#FN_GET_USER_NAMES_BY_ID_CLOB(VARCHAR2)">FN_GET_USER_NAMES_BY_ID_CLOB</A></B>(IP_USER_LIST IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: This function accepts a list of user id's and returns the respective user full names as
+              Comma seperated Clob
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=1 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_GET_USER_NAMES_BY_NAME"></A><TD><CODE><B><A HREF="#FN_GET_USER_NAMES_BY_NAME(VARCHAR2)">FN_GET_USER_NAMES_BY_NAME</A></B>(IP_USER_LIST IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: This function accepts a list of user names and returns the respective user full names as comma sep str
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->CLOB</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=1 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_GET_USER_NAMES_BY_NAME_CLOB"></A><TD><CODE><B><A HREF="#FN_GET_USER_NAMES_BY_NAME_CLOB(VARCHAR2)">FN_GET_USER_NAMES_BY_NAME_CLOB</A></B>(IP_USER_LIST IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: This function accepts a list of user names and returns the respective user full names as comma sep CLOB
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_GET_USERS_BY_ACT_ORGID"></A><TD><CODE><B><A HREF="#FN_GET_USERS_BY_ACT_ORGID(VARCHAR2,VARCHAR2,VARCHAR2)">FN_GET_USERS_BY_ACT_ORGID</A></B>(IP_ACTIVITY IN VARCHAR2, IP_ORG_ID IN VARCHAR2, IP_FLOW_UP_DOWN_FLG IN VARCHAR2 DEFAULT 'FLAT')</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: This function accepts activity name and org entity id
+              Retrun the user names
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->CLOB</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=3 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_GET_USERS_BY_ACT_ORGID_CLOB"></A><TD><CODE><B><A HREF="#FN_GET_USERS_BY_ACT_ORGID_CLOB(VARCHAR2,VARCHAR2,VARCHAR2)">FN_GET_USERS_BY_ACT_ORGID_CLOB</A></B>(IP_ACTIVITY IN VARCHAR2, IP_ORG_ID IN VARCHAR2, IP_FLOW_UP_DOWN_FLG IN VARCHAR2 DEFAULT 'FLAT')</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: This function accepts activity name and org entity id
+              Retrun the user names Clob
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->VARCHAR2</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_GET_USERS_BY_ACTS"></A><TD><CODE><B><A HREF="#FN_GET_USERS_BY_ACTS(VARCHAR2,VARCHAR2)">FN_GET_USERS_BY_ACTS</A></B>(IP_ACT_LIST IN VARCHAR2, IP_ORG_LIST IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: Fn_Get_Users_By_Acts takes a list of activities and org id's
+              and returns the user names for the first activity in the list for which users are found
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->CLOB</CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="FN_GET_USERS_BY_ACTS_CLOB"></A><TD><CODE><B><A HREF="#FN_GET_USERS_BY_ACTS_CLOB(VARCHAR2,VARCHAR2)">FN_GET_USERS_BY_ACTS_CLOB</A></B>(IP_ACT_LIST IN VARCHAR2, IP_ORG_LIST IN VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       Module: Common Util
+ Description: Fn_Get_Users_By_Acts_Clob takes a list of activities and org id's
+              and returns the user names clob for the first activity in the list for which users are found
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <B>Public.</B>&nbsp;<I>
+        </I></TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="trigger_summary"></A><A NAME="field_detail"></A><A NAME="type_detail"></A><A NAME="method_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="FN_CHECK_USER_ACT_BY_ORG_ID(VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2)"></A>
+<H3>FN_CHECK_USER_ACT_BY_ORG_ID</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->NUMBER <B>FN_CHECK_USER_ACT_BY_ORG_ID</B>(IP_USER_NAME IN VARCHAR2, <BR>                                          IP_ACTIVITY IN VARCHAR2, <BR>                                          IP_OWNER_ORG IN VARCHAR2 DEFAULT NULL, <BR>                                          IP_FLOW_UP_DOWN IN VARCHAR2 DEFAULT NULL)</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: This function verifies the user security entitlement for the given activity and organization id
+              Returns 1 if activity exists else 0
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW,SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="FN_CHECK_USER_ACT_BY_ORGNAME(VARCHAR2,VARCHAR2,VARCHAR2,VARCHAR2)"></A>
+<H3>FN_CHECK_USER_ACT_BY_ORGNAME</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->NUMBER <B>FN_CHECK_USER_ACT_BY_ORGNAME</B>(IP_USER_NAME IN VARCHAR2, <BR>                                           IP_ACTIVITY IN VARCHAR2, <BR>                                           IP_OWNER_ORG IN VARCHAR2 DEFAULT NULL, <BR>                                           IP_FLOW_UP_DOWN IN VARCHAR2 DEFAULT NULL)</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: This function verifies the user security entitlement for the given activity and organization name
+              Returns 1 if activity exists else 0
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW,SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="FN_GET_KIP_KRI_USERS(VARCHAR2,NUMBER)"></A>
+<H3>FN_GET_KIP_KRI_USERS</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>FN_GET_KIP_KRI_USERS</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                                     IP_ID IN NUMBER)</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: Fn_Get_Kip_KRI_Users takes FLOW CODE, STAGE CODE, PID and instance
+              and returns list of user names for activity 'GRC-Edit KPI-KRI Definition/GRC- Edit All KPI-KRI Definitions'
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="FN_GET_KIP_KRI_USERS_CLOB(VARCHAR2,NUMBER)"></A>
+<H3>FN_GET_KIP_KRI_USERS_CLOB</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->CLOB <B>FN_GET_KIP_KRI_USERS_CLOB</B>(IP_FLOW_CODE IN VARCHAR2, <BR>                                      IP_ID IN NUMBER)</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: Fn_Get_Kip_KRI_Users takes FLOW CODE, STAGE CODE, PID and instance
+              and returns list of user names clob for activity 'GRC-Edit KPI-KRI Definition/GRC- Edit All KPI-KRI Definitions'
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="FN_GET_USER_NAMES_BY_ID(VARCHAR2)"></A>
+<H3>FN_GET_USER_NAMES_BY_ID</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>FN_GET_USER_NAMES_BY_ID</B>(IP_USER_LIST IN VARCHAR2)</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: This function accepts a list of user id's and returns the respective user full names as
+              Comma seperated string
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="FN_GET_USER_NAMES_BY_ID_CLOB(VARCHAR2)"></A>
+<H3>FN_GET_USER_NAMES_BY_ID_CLOB</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->CLOB <B>FN_GET_USER_NAMES_BY_ID_CLOB</B>(IP_USER_LIST IN VARCHAR2)</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: This function accepts a list of user id's and returns the respective user full names as
+              Comma seperated Clob
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="FN_GET_USER_NAMES_BY_NAME(VARCHAR2)"></A>
+<H3>FN_GET_USER_NAMES_BY_NAME</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>FN_GET_USER_NAMES_BY_NAME</B>(IP_USER_LIST IN VARCHAR2)</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: This function accepts a list of user names and returns the respective user full names as comma sep str
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="FN_GET_USER_NAMES_BY_NAME_CLOB(VARCHAR2)"></A>
+<H3>FN_GET_USER_NAMES_BY_NAME_CLOB</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->CLOB <B>FN_GET_USER_NAMES_BY_NAME_CLOB</B>(IP_USER_LIST IN VARCHAR2)</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: This function accepts a list of user names and returns the respective user full names as comma sep CLOB
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="FN_GET_USERS_BY_ACT_ORGID(VARCHAR2,VARCHAR2,VARCHAR2)"></A>
+<H3>FN_GET_USERS_BY_ACT_ORGID</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>FN_GET_USERS_BY_ACT_ORGID</B>(IP_ACTIVITY IN VARCHAR2, <BR>                                          IP_ORG_ID IN VARCHAR2, <BR>                                          IP_FLOW_UP_DOWN_FLG IN VARCHAR2 DEFAULT 'FLAT')</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: This function accepts activity name and org entity id
+              Retrun the user names
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="FN_GET_USERS_BY_ACT_ORGID_CLOB(VARCHAR2,VARCHAR2,VARCHAR2)"></A>
+<H3>FN_GET_USERS_BY_ACT_ORGID_CLOB</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->CLOB <B>FN_GET_USERS_BY_ACT_ORGID_CLOB</B>(IP_ACTIVITY IN VARCHAR2, <BR>                                           IP_ORG_ID IN VARCHAR2, <BR>                                           IP_FLOW_UP_DOWN_FLG IN VARCHAR2 DEFAULT 'FLAT')</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: This function accepts activity name and org entity id
+              Retrun the user names Clob
+
+ Tables:
+       SI_USER_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="FN_GET_USERS_BY_ACTS(VARCHAR2,VARCHAR2)"></A>
+<H3>FN_GET_USERS_BY_ACTS</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=VARCHAR2
+       localTypeName=
+       schema=Schema_objects
+       fieldType=VARCHAR2
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->VARCHAR2 <B>FN_GET_USERS_BY_ACTS</B>(IP_ACT_LIST IN VARCHAR2, <BR>                                     IP_ORG_LIST IN VARCHAR2)</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: Fn_Get_Users_By_Acts takes a list of activities and org id's
+              and returns the user names for the first activity in the list for which users are found
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="FN_GET_USERS_BY_ACTS_CLOB(VARCHAR2,VARCHAR2)"></A>
+<H3>FN_GET_USERS_BY_ACTS_CLOB</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=CLOB
+       localTypeName=
+       schema=Schema_objects
+       fieldType=CLOB
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->CLOB <B>FN_GET_USERS_BY_ACTS_CLOB</B>(IP_ACT_LIST IN VARCHAR2, <BR>                                      IP_ORG_LIST IN VARCHAR2)</PRE>
+<DL>
+<DD> Module: Common Util
+ Description: Fn_Get_Users_By_Acts_Clob takes a list of activities and org id's
+              and returns the user names clob for the first activity in the list for which users are found
+
+ Tables:
+       SI_USER_FLOW_DOWN_ORG_ACT_VIEW
+ CRUD: Read
+ COMMIT/ROLLBACK: No/No
+</DD>
+<DD>
+<DL>
+<DT>Throws:
+        <DD>
+<CODE>NO_DATA_FOUND</CODE> -
+                       When data is not found for the given inputs</DD>
+<DD>
+<CODE>EXCEPTION</CODE> -
+                          General exception is thrown if some
+                              Unexpected operation is occurred.</DD>
+</DT>
+</DL>
+</DD>
+<DL>
+<DT>Public:</DT>
+<DD>
+        </DD>
+</DL>
+</DL>
+<HR>
+<A NAME="trigger_detail"></A><script src="../js/jquery.mCustomScrollbar.concat.min.js"></script><script>
+		(function($){
+			$(window).load(function(){
+				$("#outer").addClass('loader');	
+				$(".loading").fadeOut("slow");	
+				$("body").mCustomScrollbar({
+					theme:"minimal",
+					mouseWheel:{ scrollAmount: "300px" }
+				});
+				
+			});
+		})(jQuery);
+	</script>
+</div>
+</BODY>
+</HTML>

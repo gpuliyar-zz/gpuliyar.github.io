@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><schemadiagramrequest xmlns="http://www.metricstream.com/xsd"><module>AUD</module><display_number_of_columns></display_number_of_columns><schemadiagram><name>MS_AUD_AUDITOR_PROFILE</name><tables><table><name>MS_AUD_AUDITOR_PROFILE</name><pkcolumn><column>AUDITOR_USER_NAME</column></pkcolumn></table>
+<table><name>MS_AUD_AUDITOR_PROFILE_AUG</name><pkcolumn><column>AUDITOR_GROUP</column></pkcolumn><fkcolumn><column>AUDITOR_USER_NAME</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITOR_PROFILE_LNS</name><pkcolumn><column>LANGUAGE_SKILLS</column></pkcolumn><fkcolumn><column>AUDITOR_USER_NAME</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITOR_PROFILE_PRO</name><pkcolumn><column>PROFESSIONAL_QUAL</column></pkcolumn><fkcolumn><column>AUDITOR_USER_NAME</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITOR_PROFILE_SME</name><pkcolumn><column>SUBJECT_MATTER_EXPERT</column></pkcolumn><fkcolumn><column>AUDITOR_USER_NAME</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITOR_PROFILE_TRN</name><pkcolumn><column>TRAINING</column></pkcolumn><fkcolumn><column>AUDITOR_USER_NAME</column></fkcolumn></table>
+</tables><relationships><relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDITOR_PROFILE</table>
+</from><to><table>MS_AUD_AUDITOR_PROFILE_TRN</table><table>MS_AUD_AUDITOR_PROFILE_AUG</table><table>MS_AUD_AUDITOR_PROFILE_LNS</table><table>MS_AUD_AUDITOR_PROFILE_PRO</table><table>MS_AUD_AUDITOR_PROFILE_SME</table></to></relationship>
+</relationships></schemadiagram></schemadiagramrequest>

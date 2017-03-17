@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?><schemadiagramrequest xmlns="http://www.metricstream.com/xsd"><module>AUD</module><display_number_of_columns></display_number_of_columns><schemadiagram><name>AUD</name><tables><table><name>MS_AUD_AUDIT</name><pkcolumn><column>AUDIT_ID</column></pkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT</name><pkcolumn><column>OBJECT_ID</column></pkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_AOC</name><pkcolumn><column>AOC_ID</column><column>OBJECT_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_AOW</name><pkcolumn><column>ATO_OWNER</column></pkcolumn><fkcolumn><column>OBJECT_ID</column><column>ORG_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_CON</name><pkcolumn><column>CONTROL_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_DOC</name><pkcolumn><column>DOC_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_GDE</name><pkcolumn><column>GEO_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_GIM</name><pkcolumn><column>GEO_IMP_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_MRE</name><pkcolumn><column>MODEL_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_OBJ</name><pkcolumn><column>OTHER_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_OGN</name><pkcolumn><column>OWNER_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_ORG</name><pkcolumn><column>OBJECT_ID</column><column>ORG_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_OWN</name><pkcolumn><column>OWNERS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_REQ</name><pkcolumn><column>REQUIREMENT</column></pkcolumn><fkcolumn><column>AOC_ID</column><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_RG1</name><pkcolumn><column>AE_MLOV_RG1</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_RG2</name><pkcolumn><column>AE_MLOV_RG2</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_RIS</name><pkcolumn><column>RISK_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_SYS</name><pkcolumn><column>SYS_NAME</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITOR_PROFILE</name><pkcolumn><column>AUDITOR_USER_NAME</column></pkcolumn></table>
+<table><name>MS_AUD_AUDITOR_PROFILE_AUG</name><pkcolumn><column>AUDITOR_GROUP</column></pkcolumn><fkcolumn><column>AUDITOR_USER_NAME</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITOR_PROFILE_LNS</name><pkcolumn><column>LANGUAGE_SKILLS</column></pkcolumn><fkcolumn><column>AUDITOR_USER_NAME</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITOR_PROFILE_PRO</name><pkcolumn><column>PROFESSIONAL_QUAL</column></pkcolumn><fkcolumn><column>AUDITOR_USER_NAME</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITOR_PROFILE_SME</name><pkcolumn><column>SUBJECT_MATTER_EXPERT</column></pkcolumn><fkcolumn><column>AUDITOR_USER_NAME</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITOR_PROFILE_TRN</name><pkcolumn><column>TRAINING</column></pkcolumn><fkcolumn><column>AUDITOR_USER_NAME</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_AEO</name><pkcolumn><column>AUDITEE_ORGS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_ALM</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_AMM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_APB</name><pkcolumn><column>SETUP_ACTION_PLAN_CAN_CREATED</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_AUC</name><pkcolumn><column>AUDITEE_CONTACTS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_AUE</name><pkcolumn><column>CORE_OBJECTS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_AUO</name><pkcolumn><column>AUDIT_ORGS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_CLOSURE</name><pkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></pkcolumn></table>
+<table><name>MS_AUD_AUDIT_CLOSURE_AAM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_CLOSURE_ALA</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_CLOSURE_AUE</name><pkcolumn><column>AE_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_CLOSURE_DCM</name><pkcolumn><column>DOC_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_CLOSURE_ORG</name><pkcolumn><column>ORG_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_CLOSURE_RLA</name><pkcolumn><column>RE_AUD_LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_CLOSURE_RSK</name><pkcolumn><column>RS_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_CON</name><pkcolumn><column>AUDIT_ID</column><column>CO_CONTACT_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_DOC</name><pkcolumn><column>DO_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_KMS</name><pkcolumn><column>KM_MILESTONES</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_LOC</name><pkcolumn><column>LOCATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_ORG</name><pkcolumn><column>MANAGE_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN</name><pkcolumn><column>PLAN_ID</column></pkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_ACD</name><pkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></pkcolumn><fkcolumn><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_ACN</name><pkcolumn><column>AC_AUDITEE_CONTACT</column></pkcolumn><fkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_ALM</name><pkcolumn><column>AC_LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_AMM</name><pkcolumn><column>AC_AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_APR</name><pkcolumn><column>APPROVER</column></pkcolumn><fkcolumn><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_AUE</name><pkcolumn><column>AC_CORE_OBJECT</column></pkcolumn><fkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_CRO</name><pkcolumn><column>TMP_CORE_OBJECTS</column></pkcolumn><fkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_DOC</name><pkcolumn><column>DO_ID</column></pkcolumn><fkcolumn><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_LOC</name><pkcolumn><column>AC_LOCATIONS</column></pkcolumn><fkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_OOR</name><pkcolumn><column>OWNER_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_ORG</name><pkcolumn><column>AC_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_PNY</name><pkcolumn><column>AC_PLAN_YEARS</column></pkcolumn><fkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_RPL</name><pkcolumn><column>RP_ID</column></pkcolumn><fkcolumn><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_RSK</name><pkcolumn><column>AC_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_TOR</name><pkcolumn><column>TMP_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_PLAN_TRS</name><pkcolumn><column>TMP_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AC_CANDIDATE_ID</column><column>PLAN_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT</name><pkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></pkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_AAM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_ACT</name><pkcolumn><column>AC_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_ALA</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_ASA</name><pkcolumn><column>AR_SELECT_ACTION</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_ASI</name><pkcolumn><column>AR_SELECT_ISSUES</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_COF</name><pkcolumn><column>FN_CONTRIBUTING_FACTORS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_CON</name><pkcolumn><column>CO_CONTACT_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_DOC</name><pkcolumn><column>DO_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_FCO</name><pkcolumn><column>FN_CORE_OBJS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_FND</name><pkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_ORG</name><pkcolumn><column>FN_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_RSK</name><pkcolumn><column>FN_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_RUC</name><pkcolumn><column>FN_ROOT_CAUSE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_SAC</name><pkcolumn><column>SELECT_ACTION</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_REPORT_SID</name><pkcolumn><column>AR_SELECT_ISSUE_DISPLAY</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_RIS</name><pkcolumn><column>RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_SAN</name><pkcolumn><column>CO_NOTIFICATION_OPTIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CO_CONTACT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK</name><pkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></pkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_AAM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_ACT</name><pkcolumn><column>AC_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_ADE</name><pkcolumn><column>DO_AUDITABLE_ENTITIES</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>DO_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_ALA</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_CAD</name><pkcolumn><column>CO_AUDITORS_AT</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_CAU</name><pkcolumn><column>ACTION_CO_AUDITORS_AT</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_COB</name><pkcolumn><column>CORE_OBJECTS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_COF</name><pkcolumn><column>FN_CONTRIBUTING_FACTORS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_CRF</name><pkcolumn><column>CR_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_DOC</name><pkcolumn><column>AUDIT_ID</column><column>DO_ID</column><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_DRR</name><pkcolumn><column>DO_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>DO_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_FND</name><pkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_ORG</name><pkcolumn><column>FN_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_RAU</name><pkcolumn><column>PROCESS_AE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_ROR</name><pkcolumn><column>ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_RRS</name><pkcolumn><column>RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_RSK</name><pkcolumn><column>FN_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TASK_RUC</name><pkcolumn><column>FN_ROOT_CAUSE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TEM</name><pkcolumn><column>RSM_TEAM_MEMBER</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TMM</name><pkcolumn><column>TEAM_MEMBER</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDIT_TMR</name><pkcolumn><column>TMR_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK</name><pkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></pkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_AAM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_ACT</name><pkcolumn><column>AC_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_ADE</name><pkcolumn><column>DO_AUDITABLE_ENTITIES</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>DO_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_ALA</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_CAR</name><pkcolumn><column>CO_AUDITORS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_CAT</name><pkcolumn><column>ACTION_CO_AUDITORS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_CBJ</name><pkcolumn><column>TMP_FND_CORE_OBJECTS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_COB</name><pkcolumn><column>CORE_OBJECTS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_COF</name><pkcolumn><column>FN_CONTRIBUTING_FACTORS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_CRF</name><pkcolumn><column>CR_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_CSS</name><pkcolumn><column>CHECKLIST_SCOPE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_DOC</name><pkcolumn><column>AUDIT_ID</column><column>DO_ID</column><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_DRR</name><pkcolumn><column>DO_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>DO_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_FND</name><pkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_ORG</name><pkcolumn><column>FN_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_QRF</name><pkcolumn><column>QUESTION_REFERENCE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_RAU</name><pkcolumn><column>PROCESS_AE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_ROR</name><pkcolumn><column>ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_RRS</name><pkcolumn><column>RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_RSK</name><pkcolumn><column>FN_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHECKLIST_TASK_RUC</name><pkcolumn><column>FN_ROOT_CAUSE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHK_QUESTION</name><pkcolumn><column>QST_AUDIT_ID</column><column>QST_CHECKLIST_ID</column><column>QST_TASK_ID</column></pkcolumn></table>
+<table><name>MS_AUD_CHK_QUESTION_LOV</name><pkcolumn><column>QS_RESPONSE_LOV</column></pkcolumn><fkcolumn><column>QST_AUDIT_ID</column><column>QST_CHECKLIST_ID</column><column>QST_PK</column><column>QST_TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHK_QUESTION_QCF</name><pkcolumn><column>QS_CONTRIBUTING_FACTORS</column></pkcolumn><fkcolumn><column>QST_AUDIT_ID</column><column>QST_CHECKLIST_ID</column><column>QST_PK</column><column>QST_TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHK_QUESTION_QRC</name><pkcolumn><column>QS_ROOT_CAUSE</column></pkcolumn><fkcolumn><column>QST_AUDIT_ID</column><column>QST_CHECKLIST_ID</column><column>QST_PK</column><column>QST_TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHK_QUESTION_QST</name><pkcolumn><column>QST_AUDIT_ID</column><column>QST_CHECKLIST_ID</column><column>QST_PK</column><column>QST_TASK_ID</column></pkcolumn><fkcolumn><column>QST_AUDIT_ID</column><column>QST_CHECKLIST_ID</column><column>QST_TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CHK_SECTION</name><pkcolumn><column>SEC_AUDIT_ID</column><column>SEC_CHECKLIST_ID</column><column>SEC_TASK_ID</column></pkcolumn></table>
+<table><name>MS_AUD_CHK_SECTION_SEC</name><pkcolumn><column>SEC_PK</column></pkcolumn><fkcolumn><column>SEC_AUDIT_ID</column><column>SEC_CHECKLIST_ID</column><column>SEC_TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_COPY_AUDIT</name><pkcolumn><column>AUDIT_ID</column></pkcolumn></table>
+<table><name>MS_AUD_COPY_AUDIT_ALM</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_COPY_AUDIT_AMM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_COPY_AUDIT_TSK</name><pkcolumn><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK</name><pkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></pkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_AAM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_ACT</name><pkcolumn><column>AC_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_ADE</name><pkcolumn><column>DO_AUDITABLE_ENTITIES</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>DO_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_ALA</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_AUE</name><pkcolumn><column>AE_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_AUG</name><pkcolumn><column>AUDITOR_GROUP</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_CAR</name><pkcolumn><column>CO_AUDITORS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_CAT</name><pkcolumn><column>ACTION_CO_AUDITORS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_COB</name><pkcolumn><column>CORE_OBJECTS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_COF</name><pkcolumn><column>FN_CONTRIBUTING_FACTORS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_CRF</name><pkcolumn><column>CR_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_CTL</name><pkcolumn><column>CT_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_CTS</name><pkcolumn><column>RELATED_CONTROLS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_DOC</name><pkcolumn><column>AUDIT_ID</column><column>DO_ID</column><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_DRR</name><pkcolumn><column>DO_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>DO_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_FND</name><pkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_OGZ</name><pkcolumn><column>OZ_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_ORG</name><pkcolumn><column>FN_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_QRF</name><pkcolumn><column>SA_QUESTION_REFERENCE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>SA_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_RAU</name><pkcolumn><column>PROCESS_AE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_RCR</name><pkcolumn><column>CONTROL_REFERENCE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_ROR</name><pkcolumn><column>ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_RRR</name><pkcolumn><column>RS_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_RRS</name><pkcolumn><column>RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_RSK</name><pkcolumn><column>FN_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_RUC</name><pkcolumn><column>FN_ROOT_CAUSE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_SAM</name><pkcolumn><column>AUDIT_ID</column><column>SA_ID</column><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_TRF</name><pkcolumn><column>TEST_REFERENCE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_CTRL_TEST_TASK_TST</name><pkcolumn><column>TS_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES</name><pkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></pkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_AAM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_ACT</name><pkcolumn><column>AC_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_ALA</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_AUG</name><pkcolumn><column>AUDITOR_GROUP</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_COB</name><pkcolumn><column>CORE_OBJECTS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_COF</name><pkcolumn><column>FN_CONTRIBUTING_FACTORS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_DOC</name><pkcolumn><column>DO_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_FCO</name><pkcolumn><column>FN_CORE_OBJS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_FND</name><pkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_ORG</name><pkcolumn><column>FN_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_RAU</name><pkcolumn><column>PROCESS_AE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_ROR</name><pkcolumn><column>ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_RRS</name><pkcolumn><column>RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_RSK</name><pkcolumn><column>FN_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_DRAFT_ISSUES_RUC</name><pkcolumn><column>FN_ROOT_CAUSE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK</name><pkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></pkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_AAM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_ACT</name><pkcolumn><column>AC_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_ALA</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_COB</name><pkcolumn><column>CORE_OBJECTS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_COF</name><pkcolumn><column>FN_CONTRIBUTING_FACTORS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_DOC</name><pkcolumn><column>DO_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_FCO</name><pkcolumn><column>FN_CORE_OBJS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_FND</name><pkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_ORG</name><pkcolumn><column>FN_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_RSK</name><pkcolumn><column>FN_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_RUC</name><pkcolumn><column>FN_ROOT_CAUSE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_SAC</name><pkcolumn><column>SELECT_ACTION</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_SIS</name><pkcolumn><column>SELECT_ISSUES</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_TCO</name><pkcolumn><column>TMP_CORE_OBJECT</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ISSUE_REV_TASK_TRR</name><pkcolumn><column>TMP_FND_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FN_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_MILESTONE</name><pkcolumn><column>TEMPLATE_ID</column></pkcolumn></table>
+<table><name>MS_AUD_MILESTONE_MSS</name><pkcolumn><column>MSS_ORDER_NO</column></pkcolumn><fkcolumn><column>TEMPLATE_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ORB_RELATIONS</name><pkcolumn><column>REL_SOURCE_ID</column></pkcolumn></table>
+<table><name>MS_AUD_ORB_RELATIONS_ORB</name><pkcolumn><column>REL_INST_ID</column></pkcolumn><fkcolumn><column>REL_SOURCE_ID</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE</name><pkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></pkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_AAM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_ALA</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_AUE</name><pkcolumn><column>AE_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_CTL</name><pkcolumn><column>CT_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_DOC</name><pkcolumn><column>DO_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_ORG</name><pkcolumn><column>ORG_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_RSK</name><pkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column><column>RS_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_RTG</name><pkcolumn><column>RS_CATEGORY</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column><column>RS_ID</column></fkcolumn></table>
+<table><name>MS_AUD_PLAN_SCOPE_TST</name><pkcolumn><column>TS_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>FORM_TYPE</column></fkcolumn></table>
+<table><name>MS_AUD_TASK</name><pkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column></pkcolumn></table>
+<table><name>MS_AUD_TASK_AAM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_ALA</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_CAD</name><pkcolumn><column>TS_CO_AUDITORS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_CTS</name><pkcolumn><column>TS_RELATED_CONTROLS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_ORG</name><pkcolumn><column>TS_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_OT2</name><pkcolumn><column>TMP_TSK_ORGANIZATIONS_2</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_RSK</name><pkcolumn><column>TS_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_SEC</name><pkcolumn><column>TS_CHECKLIST_SCOPE</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_TCR</name><pkcolumn><column>TMP_TSK_CORE_OBJECTS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_TO1</name><pkcolumn><column>TMP_TSK_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_TR1</name><pkcolumn><column>TMP_TSK_RELATED_RISKS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_TSK</name><pkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_TST</name><pkcolumn><column>TS_RELATED_TESTS</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></fkcolumn></table>
+<table><name>MS_AUD_TASK_TT2</name><pkcolumn><column>TMP_TSK_RELATED_RISKS_2</column></pkcolumn><fkcolumn><column>AUDIT_ID</column><column>CREATE_TASK_ID</column><column>TASK_ID</column></fkcolumn></table>
+</tables><relationships><relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDIT</table>
+</from><to><table>MS_AUD_AUDIT_AEO</table><table>MS_AUD_AUDIT_TMR</table><table>MS_AUD_AUDIT_TMM</table><table>MS_AUD_AUDIT_TEM</table><table>MS_AUD_AUDIT_RIS</table><table>MS_AUD_AUDIT_ORG</table><table>MS_AUD_AUDIT_LOC</table><table>MS_AUD_AUDIT_KMS</table><table>MS_AUD_AUDIT_DOC</table><table>MS_AUD_AUDIT_CON</table><table>MS_AUD_AUDIT_AUO</table><table>MS_AUD_AUDIT_AUE</table><table>MS_AUD_AUDIT_AUC</table><table>MS_AUD_AUDIT_APB</table><table>MS_AUD_AUDIT_AMM</table><table>MS_AUD_AUDIT_ALM</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDITABLE_ENTIT</table>
+</from><to><table>MS_AUD_AUDITABLE_ENTIT_AOC</table><table>MS_AUD_AUDITABLE_ENTIT_SYS</table><table>MS_AUD_AUDITABLE_ENTIT_RIS</table><table>MS_AUD_AUDITABLE_ENTIT_RG2</table><table>MS_AUD_AUDITABLE_ENTIT_RG1</table><table>MS_AUD_AUDITABLE_ENTIT_OWN</table><table>MS_AUD_AUDITABLE_ENTIT_ORG</table><table>MS_AUD_AUDITABLE_ENTIT_OGN</table><table>MS_AUD_AUDITABLE_ENTIT_OBJ</table><table>MS_AUD_AUDITABLE_ENTIT_MRE</table><table>MS_AUD_AUDITABLE_ENTIT_GIM</table><table>MS_AUD_AUDITABLE_ENTIT_GDE</table><table>MS_AUD_AUDITABLE_ENTIT_DOC</table><table>MS_AUD_AUDITABLE_ENTIT_CON</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDITABLE_ENTIT_AOC</table>
+</from><to><table>MS_AUD_AUDITABLE_ENTIT_REQ</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDITABLE_ENTIT_ORG</table>
+</from><to><table>MS_AUD_AUDITABLE_ENTIT_AOW</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDITOR_PROFILE</table>
+</from><to><table>MS_AUD_AUDITOR_PROFILE_AUG</table><table>MS_AUD_AUDITOR_PROFILE_TRN</table><table>MS_AUD_AUDITOR_PROFILE_SME</table><table>MS_AUD_AUDITOR_PROFILE_PRO</table><table>MS_AUD_AUDITOR_PROFILE_LNS</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDIT_CLOSURE</table>
+</from><to><table>MS_AUD_AUDIT_CLOSURE_AAM</table><table>MS_AUD_AUDIT_CLOSURE_RSK</table><table>MS_AUD_AUDIT_CLOSURE_RLA</table><table>MS_AUD_AUDIT_CLOSURE_ORG</table><table>MS_AUD_AUDIT_CLOSURE_DCM</table><table>MS_AUD_AUDIT_CLOSURE_AUE</table><table>MS_AUD_AUDIT_CLOSURE_ALA</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDIT_CON</table>
+</from><to><table>MS_AUD_AUDIT_SAN</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDIT_PLAN</table>
+</from><to><table>MS_AUD_AUDIT_PLAN_ACD</table><table>MS_AUD_AUDIT_PLAN_RPL</table><table>MS_AUD_AUDIT_PLAN_OOR</table><table>MS_AUD_AUDIT_PLAN_DOC</table><table>MS_AUD_AUDIT_PLAN_APR</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDIT_PLAN_ACD</table>
+</from><to><table>MS_AUD_AUDIT_PLAN_ACN</table><table>MS_AUD_AUDIT_PLAN_TRS</table><table>MS_AUD_AUDIT_PLAN_TOR</table><table>MS_AUD_AUDIT_PLAN_RSK</table><table>MS_AUD_AUDIT_PLAN_PNY</table><table>MS_AUD_AUDIT_PLAN_ORG</table><table>MS_AUD_AUDIT_PLAN_LOC</table><table>MS_AUD_AUDIT_PLAN_CRO</table><table>MS_AUD_AUDIT_PLAN_AUE</table><table>MS_AUD_AUDIT_PLAN_AMM</table><table>MS_AUD_AUDIT_PLAN_ALM</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDIT_REPORT</table>
+</from><to><table>MS_AUD_AUDIT_REPORT_AAM</table><table>MS_AUD_AUDIT_REPORT_SID</table><table>MS_AUD_AUDIT_REPORT_SAC</table><table>MS_AUD_AUDIT_REPORT_FND</table><table>MS_AUD_AUDIT_REPORT_DOC</table><table>MS_AUD_AUDIT_REPORT_CON</table><table>MS_AUD_AUDIT_REPORT_ASI</table><table>MS_AUD_AUDIT_REPORT_ASA</table><table>MS_AUD_AUDIT_REPORT_ALA</table><table>MS_AUD_AUDIT_REPORT_ACT</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDIT_REPORT_FND</table>
+</from><to><table>MS_AUD_AUDIT_REPORT_COF</table><table>MS_AUD_AUDIT_REPORT_RUC</table><table>MS_AUD_AUDIT_REPORT_RSK</table><table>MS_AUD_AUDIT_REPORT_ORG</table><table>MS_AUD_AUDIT_REPORT_FCO</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDIT_TASK</table>
+</from><to><table>MS_AUD_AUDIT_TASK_AAM</table><table>MS_AUD_AUDIT_TASK_RRS</table><table>MS_AUD_AUDIT_TASK_ROR</table><table>MS_AUD_AUDIT_TASK_RAU</table><table>MS_AUD_AUDIT_TASK_FND</table><table>MS_AUD_AUDIT_TASK_DOC</table><table>MS_AUD_AUDIT_TASK_CRF</table><table>MS_AUD_AUDIT_TASK_COB</table><table>MS_AUD_AUDIT_TASK_CAU</table><table>MS_AUD_AUDIT_TASK_CAD</table><table>MS_AUD_AUDIT_TASK_ALA</table><table>MS_AUD_AUDIT_TASK_ACT</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDIT_TASK_DOC</table>
+</from><to><table>MS_AUD_AUDIT_TASK_ADE</table><table>MS_AUD_AUDIT_TASK_DRR</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDIT_TASK_FND</table>
+</from><to><table>MS_AUD_AUDIT_TASK_COF</table><table>MS_AUD_AUDIT_TASK_RUC</table><table>MS_AUD_AUDIT_TASK_RSK</table><table>MS_AUD_AUDIT_TASK_ORG</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_CHECKLIST_TASK</table>
+</from><to><table>MS_AUD_CHECKLIST_TASK_AAM</table><table>MS_AUD_CHECKLIST_TASK_RRS</table><table>MS_AUD_CHECKLIST_TASK_ROR</table><table>MS_AUD_CHECKLIST_TASK_RAU</table><table>MS_AUD_CHECKLIST_TASK_FND</table><table>MS_AUD_CHECKLIST_TASK_DOC</table><table>MS_AUD_CHECKLIST_TASK_CSS</table><table>MS_AUD_CHECKLIST_TASK_CRF</table><table>MS_AUD_CHECKLIST_TASK_COB</table><table>MS_AUD_CHECKLIST_TASK_CAT</table><table>MS_AUD_CHECKLIST_TASK_CAR</table><table>MS_AUD_CHECKLIST_TASK_ALA</table><table>MS_AUD_CHECKLIST_TASK_ACT</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_CHECKLIST_TASK_DOC</table>
+</from><to><table>MS_AUD_CHECKLIST_TASK_ADE</table><table>MS_AUD_CHECKLIST_TASK_DRR</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_CHECKLIST_TASK_FND</table>
+</from><to><table>MS_AUD_CHECKLIST_TASK_CBJ</table><table>MS_AUD_CHECKLIST_TASK_RUC</table><table>MS_AUD_CHECKLIST_TASK_RSK</table><table>MS_AUD_CHECKLIST_TASK_QRF</table><table>MS_AUD_CHECKLIST_TASK_ORG</table><table>MS_AUD_CHECKLIST_TASK_COF</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_CHK_QUESTION</table>
+</from><to><table>MS_AUD_CHK_QUESTION_QST</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_CHK_QUESTION_QST</table>
+</from><to><table>MS_AUD_CHK_QUESTION_LOV</table><table>MS_AUD_CHK_QUESTION_QRC</table><table>MS_AUD_CHK_QUESTION_QCF</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_CHK_SECTION</table>
+</from><to><table>MS_AUD_CHK_SECTION_SEC</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_COPY_AUDIT</table>
+</from><to><table>MS_AUD_COPY_AUDIT_ALM</table><table>MS_AUD_COPY_AUDIT_TSK</table><table>MS_AUD_COPY_AUDIT_AMM</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_CTRL_TEST_TASK</table>
+</from><to><table>MS_AUD_CTRL_TEST_TASK_AAM</table><table>MS_AUD_CTRL_TEST_TASK_TST</table><table>MS_AUD_CTRL_TEST_TASK_SAM</table><table>MS_AUD_CTRL_TEST_TASK_RRS</table><table>MS_AUD_CTRL_TEST_TASK_RRR</table><table>MS_AUD_CTRL_TEST_TASK_ROR</table><table>MS_AUD_CTRL_TEST_TASK_RAU</table><table>MS_AUD_CTRL_TEST_TASK_OGZ</table><table>MS_AUD_CTRL_TEST_TASK_FND</table><table>MS_AUD_CTRL_TEST_TASK_DOC</table><table>MS_AUD_CTRL_TEST_TASK_CTS</table><table>MS_AUD_CTRL_TEST_TASK_CTL</table><table>MS_AUD_CTRL_TEST_TASK_CRF</table><table>MS_AUD_CTRL_TEST_TASK_COB</table><table>MS_AUD_CTRL_TEST_TASK_CAT</table><table>MS_AUD_CTRL_TEST_TASK_CAR</table><table>MS_AUD_CTRL_TEST_TASK_AUG</table><table>MS_AUD_CTRL_TEST_TASK_AUE</table><table>MS_AUD_CTRL_TEST_TASK_ALA</table><table>MS_AUD_CTRL_TEST_TASK_ACT</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_CTRL_TEST_TASK_DOC</table>
+</from><to><table>MS_AUD_CTRL_TEST_TASK_ADE</table><table>MS_AUD_CTRL_TEST_TASK_DRR</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_CTRL_TEST_TASK_FND</table>
+</from><to><table>MS_AUD_CTRL_TEST_TASK_COF</table><table>MS_AUD_CTRL_TEST_TASK_TRF</table><table>MS_AUD_CTRL_TEST_TASK_RUC</table><table>MS_AUD_CTRL_TEST_TASK_RSK</table><table>MS_AUD_CTRL_TEST_TASK_RCR</table><table>MS_AUD_CTRL_TEST_TASK_ORG</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_CTRL_TEST_TASK_SAM</table>
+</from><to><table>MS_AUD_CTRL_TEST_TASK_QRF</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_DRAFT_ISSUES</table>
+</from><to><table>MS_AUD_DRAFT_ISSUES_AAM</table><table>MS_AUD_DRAFT_ISSUES_RRS</table><table>MS_AUD_DRAFT_ISSUES_ROR</table><table>MS_AUD_DRAFT_ISSUES_RAU</table><table>MS_AUD_DRAFT_ISSUES_FND</table><table>MS_AUD_DRAFT_ISSUES_DOC</table><table>MS_AUD_DRAFT_ISSUES_COB</table><table>MS_AUD_DRAFT_ISSUES_AUG</table><table>MS_AUD_DRAFT_ISSUES_ALA</table><table>MS_AUD_DRAFT_ISSUES_ACT</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_DRAFT_ISSUES_FND</table>
+</from><to><table>MS_AUD_DRAFT_ISSUES_COF</table><table>MS_AUD_DRAFT_ISSUES_RUC</table><table>MS_AUD_DRAFT_ISSUES_RSK</table><table>MS_AUD_DRAFT_ISSUES_ORG</table><table>MS_AUD_DRAFT_ISSUES_FCO</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_ISSUE_REV_TASK</table>
+</from><to><table>MS_AUD_ISSUE_REV_TASK_AAM</table><table>MS_AUD_ISSUE_REV_TASK_SIS</table><table>MS_AUD_ISSUE_REV_TASK_SAC</table><table>MS_AUD_ISSUE_REV_TASK_FND</table><table>MS_AUD_ISSUE_REV_TASK_DOC</table><table>MS_AUD_ISSUE_REV_TASK_COB</table><table>MS_AUD_ISSUE_REV_TASK_ALA</table><table>MS_AUD_ISSUE_REV_TASK_ACT</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_ISSUE_REV_TASK_FND</table>
+</from><to><table>MS_AUD_ISSUE_REV_TASK_COF</table><table>MS_AUD_ISSUE_REV_TASK_TRR</table><table>MS_AUD_ISSUE_REV_TASK_TCO</table><table>MS_AUD_ISSUE_REV_TASK_RUC</table><table>MS_AUD_ISSUE_REV_TASK_RSK</table><table>MS_AUD_ISSUE_REV_TASK_ORG</table><table>MS_AUD_ISSUE_REV_TASK_FCO</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_MILESTONE</table>
+</from><to><table>MS_AUD_MILESTONE_MSS</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_ORB_RELATIONS</table>
+</from><to><table>MS_AUD_ORB_RELATIONS_ORB</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_PLAN_SCOPE</table>
+</from><to><table>MS_AUD_PLAN_SCOPE_AAM</table><table>MS_AUD_PLAN_SCOPE_TST</table><table>MS_AUD_PLAN_SCOPE_RSK</table><table>MS_AUD_PLAN_SCOPE_ORG</table><table>MS_AUD_PLAN_SCOPE_DOC</table><table>MS_AUD_PLAN_SCOPE_CTL</table><table>MS_AUD_PLAN_SCOPE_AUE</table><table>MS_AUD_PLAN_SCOPE_ALA</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_PLAN_SCOPE_RSK</table>
+</from><to><table>MS_AUD_PLAN_SCOPE_RTG</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_TASK</table>
+</from><to><table>MS_AUD_TASK_AAM</table><table>MS_AUD_TASK_TSK</table><table>MS_AUD_TASK_ALA</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_TASK_TSK</table>
+</from><to><table>MS_AUD_TASK_CAD</table><table>MS_AUD_TASK_TT2</table><table>MS_AUD_TASK_TST</table><table>MS_AUD_TASK_TR1</table><table>MS_AUD_TASK_TO1</table><table>MS_AUD_TASK_TCR</table><table>MS_AUD_TASK_SEC</table><table>MS_AUD_TASK_RSK</table><table>MS_AUD_TASK_OT2</table><table>MS_AUD_TASK_ORG</table><table>MS_AUD_TASK_CTS</table></to></relationship>
+</relationships></schemadiagram></schemadiagramrequest>

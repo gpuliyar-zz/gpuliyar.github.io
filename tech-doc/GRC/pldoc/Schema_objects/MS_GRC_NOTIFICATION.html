@@ -1,0 +1,256 @@
+<HTML xmlns:lxslt="http://xml.apache.org/xslt" xmlns:exslt="http://exslt.org/common">
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>GRC - 7.0.0.0.0.0.0.20170228162547</TITLE>
+<LINK REL="stylesheet" TYPE="text/css" HREF="../css/customstyle.css" TITLE="Style">
+<script src="../js/jquery-1.11.1.min.js"></script>
+<link href="../css/jquery.mCustomScrollbar.css" rel="stylesheet">
+<!--
+        sameCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesLowerCase=FALSE
+        namesUpperCase=FALSE
+        namesDefaultCase=TRUE
+        defaultNamesCase=UPPER
+        namesFromCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+        namesToCase=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-->
+<style>
+		html, body{ height: 100%; }
+	</style>
+</HEAD>
+<BODY>
+<div class="loading"></div>
+<div id="outer">
+<div id="menubar"></div>
+<div class="outermenu">
+<div class="menuliclass">
+<a class="menuaclass" HREF="../summary.html">Overview</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../deprecated-list.html">Deprecated</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../public-api-list.html">Public API</a>
+</div>
+<div class="menuliclass">
+<a class="menuaclass" HREF="../index-list.html">Index</a>
+</div>
+</div>
+<b>GRC - 7.0.0.0.0.0.0.20170228162547</b>
+<br>
+<div style="margin-top:60px;">
+<table class="summarytable">
+<tr>
+<td>SUMMARY:</td><td><A HREF="#field_summary">FIELD</A> |</td><td><A HREF="#type_summary">TYPE</A> |</td><td><A HREF="#method_summary">METHOD</A></td>
+</tr>
+<tr>
+<td>DETAIL:</td><td><A HREF="#field_detail">FIELD</A> | </td><td><A HREF="#type_detail">TYPE</A> | </td><td><A HREF="#method_detail">METHOD</A></td>
+</tr>
+</table>
+</div>
+<HR>
+<H2>Package&nbsp;MS_GRC_NOTIFICATION</H2>
+<P></P>
+<DL></DL>
+<HR>
+<P></P>
+<A NAME="field_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Field Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#GN_LOG_ID">GN_LOG_ID</A></B> := NULL</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      FUNCTION fn_get_first_scheduled_date (
+p_object_id             ms_grc_kpi_kri_defn.object_id%TYPE,
+p_error_code      OUT   NUMBER,
+p_error_message   OUT   VARCHAR2
+)
+RETURN DATE;
+cursor lv_vur_kpi_kri_defn is
+SELECT A.*, (SELECT MS_CONCAT(OWNERS) FROM MS_GRC_KPI_KRI_DEFN_OWN B WHERE A.OBJECT_ID=B.OBJECT_ID)    AS OWNERS,(
+select ms_concat(owner_organizations)from ms_grc_kpi_kri_defn_ogn c where c.object_id=a.object_id)  as owner_organizations                        --&lt;&lt;replace with column names&gt;&gt;
+from ms_grc_kpi_kri_defn a     ;
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=NUMBER
+       localTypeName=
+       schema=Schema_objects
+       fieldType=NUMBER
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached-->NUMBER</CODE></FONT></TD><TD><CODE><B><A HREF="#GN_LOG_KEY">GN_LOG_KEY</A></B> := NULL</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="type_summary"></A><A NAME="method_summary"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_GRC_EXCEPTION_ESCAL_REMIND"></A><TD><CODE><B><A HREF="#MS_GRC_EXCEPTION_ESCAL_REMIND(NUMBER,VARCHAR2)">MS_GRC_EXCEPTION_ESCAL_REMIND</A></B>(XN_ERROR_CODE OUT NUMBER, XN_ERROR_MESSAGE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        This Procedure for Generating the expired and reminder mails for the Exception object
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        This Procedure for Generating the expired and reminder mails for the Exception object
+</TD>
+</TR>
+<TR CLASS="TableRowColor">
+<TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;<!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached--></CODE></FONT></TD>
+<!-- 
+		siblingCount=0 
+		argumentCount=2 
+		predecessorCount=0 
+		siblingNoArgumentCount=0--><A NAME="MS_GRC_EXPIRED_REMINDER_MAILS"></A><TD><CODE><B><A HREF="#MS_GRC_EXPIRED_REMINDER_MAILS(NUMBER,VARCHAR2)">MS_GRC_EXPIRED_REMINDER_MAILS</A></B>(PN_ERROR_CODE OUT NUMBER, PN_ERROR_MESSAGE OUT VARCHAR2)</CODE>
+<BR>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        This Procedure for Generating the expired and reminder mails for the input object type
+<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        This Procedure for Generating the expired and reminder mails for the input object type
+</TD>
+</TR>
+</TABLE>
+<P></P>
+<A NAME="trigger_summary"></A><A NAME="field_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Field Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="GN_LOG_ID"></A>
+<H3>GN_LOG_ID</H3>
+<PRE>
+        public NUMBER <B>GN_LOG_ID</B> := NULL</PRE>
+<DL>
+<DD>FUNCTION fn_get_first_scheduled_date (
+p_object_id             ms_grc_kpi_kri_defn.object_id%TYPE,
+p_error_code      OUT   NUMBER,
+p_error_message   OUT   VARCHAR2
+)
+RETURN DATE;
+cursor lv_vur_kpi_kri_defn is
+SELECT A.*, (SELECT MS_CONCAT(OWNERS) FROM MS_GRC_KPI_KRI_DEFN_OWN B WHERE A.OBJECT_ID=B.OBJECT_ID)    AS OWNERS,(
+select ms_concat(owner_organizations)from ms_grc_kpi_kri_defn_ogn c where c.object_id=a.object_id)  as owner_organizations                        --&lt;&lt;replace with column names&gt;&gt;
+from ms_grc_kpi_kri_defn a     ;
+</DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="GN_LOG_KEY"></A>
+<H3>GN_LOG_KEY</H3>
+<PRE>
+        public NUMBER <B>GN_LOG_KEY</B> := NULL</PRE>
+<DL>
+<DD></DD>
+<DD>
+<DL></DL>
+</DD>
+</DL>
+<HR>
+<A NAME="type_detail"></A><A NAME="method_detail"></A>
+<TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1">
+<TR CLASS="TableHeadingColor">
+<TD COLSPAN="1"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="MS_GRC_EXCEPTION_ESCAL_REMIND(NUMBER,VARCHAR2)"></A>
+<H3>MS_GRC_EXCEPTION_ESCAL_REMIND</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached--> <B>MS_GRC_EXCEPTION_ESCAL_REMIND</B>(XN_ERROR_CODE OUT NUMBER, <BR>                                      XN_ERROR_MESSAGE OUT VARCHAR2)</PRE>
+<DL>
+<DD>  This Procedure for Generating the expired and reminder mails for the Exception object
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>XN_ERROR_CODE</CODE> -
+              --   Returns  Error code if exception occurs</DD>
+<DD>
+<CODE>XN_ERROR_MESSAGE</CODE> -
+              --   Returns Error  message if exception occurs</DD>
+</DT>
+</DL>
+</DD>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="MS_GRC_EXPIRED_REMINDER_MAILS(NUMBER,VARCHAR2)"></A>
+<H3>MS_GRC_EXPIRED_REMINDER_MAILS</H3>
+<PRE>public <!--
+       schemaName=Schema_objects
+       typeName=
+       localTypeName=
+       schema=Schema_objects
+       fieldType=
+       synonymsFile=,C:\dev\report\GRC_7.0.0.0.0.0.0.20170228162547\GRC_7.0.0.0.0.0.0.20170228162547\pldoc\synonyms.xml,--><!--GenerateTypeLink: default reached--> <B>MS_GRC_EXPIRED_REMINDER_MAILS</B>(PN_ERROR_CODE OUT NUMBER, <BR>                                      PN_ERROR_MESSAGE OUT VARCHAR2)</PRE>
+<DL>
+<DD>  This Procedure for Generating the expired and reminder mails for the input object type
+</DD>
+<DD>
+<DL>
+<DT>Parameters:
+        <DD>
+<CODE>PN_ERROR_CODE</CODE> -
+              --   Returns  Error code if exception occurs</DD>
+</DT>
+</DL>
+</DD>
+<DL></DL>
+</DL>
+<HR>
+<A NAME="trigger_detail"></A><script src="../js/jquery.mCustomScrollbar.concat.min.js"></script><script>
+		(function($){
+			$(window).load(function(){
+				$("#outer").addClass('loader');	
+				$(".loading").fadeOut("slow");	
+				$("body").mCustomScrollbar({
+					theme:"minimal",
+					mouseWheel:{ scrollAmount: "300px" }
+				});
+				
+			});
+		})(jQuery);
+	</script>
+</div>
+</BODY>
+</HTML>

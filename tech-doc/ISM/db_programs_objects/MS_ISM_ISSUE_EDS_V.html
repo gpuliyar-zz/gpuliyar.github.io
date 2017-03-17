@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>ISM Issue Flow</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_ISM_ISSUE_EDS_V">MS_ISM_ISSUE_EDS_V</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_ISM_ISSUE_EDS_V" ("ISSUE_ID", "ISSUE_TITLE", "STATUS", "OWNER_ORG_ID", "OWNER_ORG_NAME", "OWNER_ID", "OWNER_NAME", "DESCRIPTION", "IDENTIFIED_ON", "TYPE", "EXCEPTION_TYPE", "RELATED_ISSUES", "REPEAT_ISSUE", "SOURCE_TYPE", "SOURCE", "ADHOC_SOURCE", "SOURCE_DETAILS", "REOPEN_ISSUE", "PRIORITY", "DUE_DATE", "ORIGINAL_DUE_DATE", "RATING", "IMPACT", "LIKELIHOOD", "LOSS_GAIN", "LOSS_GAIN_AMT", "SAME_APPROVER_FLAG", "ACTION_PLAN_APPROVER_ORG_ID", "ACTION_PLAN_APPROVER_ORG_NAME", "ACTION_PLAN_APPROVER_ID", "ACTION_PLAN_APPROVER_NAME", "FINAL_APPROVER_ORG_ID", "FINAL_APPROVER_ORG_NAME", "FINAL_APPROVER_ID", "FINAL_APPROVER_NAME", "APPROVER_ORG_ID", "APPROVER_ORG_NAME", "APPROVER_ID", "APPROVER_NAME", "ACTION_APPROVAL_BY", "ATTACH_FILES", "CLOSED_ON", "RESOLUTION_SUMMARY", "REVIEWER_ID", "REVIEWER_NAME", "CREATED_BY", "CREATED_ON", "MODIFIED_BY", "MODIFIED_ON", "RECOMMENDATION") AS 
+  SELECT /*@public*/
+A.ISSUE_ID AS ISSUE_ID,
+A.ISSUE_TITLE AS ISSUE_TITLE,
+(SELECT Z.STATUS_NAME FROM MS_ISM_STATUS_TL_V Z WHERE Z.STATUS_ID=A.ISSUE_STATUS) AS STATUS,
+A.ISSUE_OWNERORG AS OWNER_ORG_ID,
+(SELECT Z.ORG_ENTITY_NAME FROM SI_ORG_ENTITIES_T Z WHERE Z.ORG_ENTITY_ID=A.ISSUE_OWNERORG) AS OWNER_ORG_NAME,
+A.ISSUE_OWNER AS OWNER_ID,
+(SELECT Z.USER_FULL_NAME FROM MS_GRC_USER_FULL_NAME_V Z WHERE Z.USER_NAME=A.ISSUE_OWNER) AS OWNER_NAME,
+TO_CHAR(Regexp_Replace(A.ISSUE_DETAILS,'<[^>]+>',NULL)) AS DESCRIPTION,
+A.ISSUE_IDENTIFIED_ON AS IDENTIFIED_ON,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME = 'MS ISM Issue Type' AND Z.STORED_VALUE=B.ISSUE_TYPE
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) AS TYPE,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME = 'MS_CMP_ISM_EXCEPTION_TYPE' AND Z.STORED_VALUE=A.TYPE_OF_EXECUTION
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id)
+ AS EXCEPTION_TYPE,
+C.ISSUE_RELATED_ISSUES AS RELATED_ISSUES,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME = 'MS_ISM_YES_NO' AND Z.STORED_VALUE=A.REPEAT_ISSUE
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) AS REPEAT_ISSUE,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME = 'MS ISM Source Type' AND Z.STORED_VALUE=A.ISSUE_SOURCE_TYPE
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) AS SOURCE_TYPE,
+A.ISSUE_SOURCE AS SOURCE,
+A.ADHOC_SOURCE AS ADHOC_SOURCE,
+TO_CHAR(Regexp_Replace(A.ADHOC_SRC_DETAILS,'<[^>]+>',NULL)) AS SOURCE_DETAILS,
+A.REOPEN_ISSUE AS REOPEN_ISSUE,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME = 'MS ISM Priority' AND Z.STORED_VALUE=A.ISSUE_RISK_PRIORITY
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) AS PRIORITY,
+A.ISSUE_DUE_DATE AS DUE_DATE,
+A.ORIG_ISSUE_DUE_DT AS ORIGINAL_DUE_DATE,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME = 'MS ISM Risk Rating' AND Z.STORED_VALUE=A.ISSUE_RISK_RATING
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) AS RATING,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME = 'MS ISM Impact' AND Z.STORED_VALUE=A.ISSUE_RISK_IMPACT
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) AS IMPACT,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME = 'MS ISM Likelihood' AND Z.STORED_VALUE=A.ISSUE_RISK_LIKLIHOOD
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS LIKELIHOOD,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME = 'MS ISM Loss Gain' AND Z.STORED_VALUE=A.ISSUE_RISK_LOSS_GAIN
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS LOSS_GAIN,
+A.ISSUE_RISK_LOSS_GAIN_AMT AS LOSS_GAIN_AMT,
+A.SAME_APPROVER_FLAG AS SAME_APPROVER_FLAG,
+A.ACT_PLAN_APPROVERORG AS ACTION_PLAN_APPROVER_ORG_ID,
+(SELECT Z.ORG_ENTITY_NAME FROM SI_ORG_ENTITIES_T Z WHERE Z.ORG_ENTITY_ID=A.ACT_PLAN_APPROVERORG) AS ACTION_PLAN_APPROVER_ORG_NAME,
+A.ACTION_PLAN_APPROVER AS ACTION_PLAN_APPROVER_ID,
+(SELECT Z.USER_FULL_NAME FROM MS_GRC_USER_FULL_NAME_V Z WHERE Z.USER_NAME=A.ACTION_PLAN_APPROVER) AS ACTION_PLAN_APPROVER_NAME,
+A.FINAL_ISS_APPROVERORG AS FINAL_APPROVER_ORG_ID,
+(SELECT Z.ORG_ENTITY_NAME FROM SI_ORG_ENTITIES_T Z WHERE Z.ORG_ENTITY_ID=A.FINAL_ISS_APPROVERORG) AS FINAL_APPROVER_ORG_NAME,
+A.FINAL_ISS_APPROVER AS FINAL_APPROVER_ID,
+(SELECT Z.USER_FULL_NAME FROM MS_GRC_USER_FULL_NAME_V Z WHERE Z.USER_NAME=A.FINAL_ISS_APPROVER) AS FINAL_APPROVER_NAME,
+A.DUMMY_APPROVER_ORG AS Approver_Org_ID,
+(SELECT Z.ORG_ENTITY_NAME FROM SI_ORG_ENTITIES_T Z WHERE Z.ORG_ENTITY_ID=A.DUMMY_APPROVER_ORG) AS APPROVER_ORG_NAME,
+A.DUMMY_APPROVER AS APPROVER_ID,
+(SELECT Z.USER_FULL_NAME FROM MS_GRC_USER_FULL_NAME_V Z WHERE Z.USER_NAME=A.DUMMY_APPROVER) AS APPROVER_NAME,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_ISM_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS ISM Final Action Approval' AND Z.STORED_VALUE=A.FINAL_ACTION_APPROVAL
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS ACTION_APPROVAL_BY,
+SUBSTR(A.ISSUE_ATTACH_FILES,1,INSTR(A.ISSUE_ATTACH_FILES,'#',1,1)-1) AS ATTACH_FILES,
+A.ISSUE_CLOSED_ON AS CLOSED_ON,
+TO_CHAR(Regexp_Replace(A.ISSUE_RESOLUTION_SUMMARY,'<[^>]+>',NULL))AS RESOLUTION_SUMMARY,
+A.ISSUE_REVIEWER AS REVIEWER_ID,
+(SELECT Z.USER_FULL_NAME FROM MS_GRC_USER_FULL_NAME_V Z WHERE Z.USER_NAME=A.ISSUE_REVIEWER) AS REVIEWER_NAME,
+A.DD_CREATED_BY AS CREATED_BY,
+A.DD_CREATED_ON AS CREATED_ON,
+A.DD_MODIFIED_BY AS MODIFIED_BY,
+A.DD_MODIFIED_ON AS MODIFIED_ON,
+TO_CHAR(Regexp_Replace(A.ISSUE_RECOMMENDATION,'<[^>]+>',NULL))AS RECOMMENDATION
+FROM MS_ISM_ISSUE A
+LEFT JOIN MS_ISM_ISSUE_IST B ON
+A.ISSUE_ID=B.ISSUE_ID
+LEFT JOIN MS_ISM_ISSUE_RIS C ON
+A.ISSUE_ID=C.ISSUE_ID</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><schemadiagramrequest xmlns="http://www.metricstream.com/xsd"><module>AUD</module><display_number_of_columns></display_number_of_columns><schemadiagram><name>MS_AUD_AUDITABLE_ENTITY</name><tables><table><name>MS_AUD_AUDITABLE_ENTIT</name><pkcolumn><column>OBJECT_ID</column></pkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_AOC</name><pkcolumn><column>AOC_ID</column><column>OBJECT_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_AOW</name><pkcolumn><column>ATO_OWNER</column></pkcolumn><fkcolumn><column>OBJECT_ID</column><column>ORG_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_CON</name><pkcolumn><column>CONTROL_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_DOC</name><pkcolumn><column>DOC_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_GDE</name><pkcolumn><column>GEO_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_GIM</name><pkcolumn><column>GEO_IMP_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_MRE</name><pkcolumn><column>MODEL_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_OBJ</name><pkcolumn><column>OTHER_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_OGN</name><pkcolumn><column>OWNER_ORGANIZATIONS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_ORG</name><pkcolumn><column>OBJECT_ID</column><column>ORG_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_OWN</name><pkcolumn><column>OWNERS</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_REQ</name><pkcolumn><column>REQUIREMENT</column></pkcolumn><fkcolumn><column>AOC_ID</column><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_RG1</name><pkcolumn><column>AE_MLOV_RG1</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_RG2</name><pkcolumn><column>AE_MLOV_RG2</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_RIS</name><pkcolumn><column>RISK_ID</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_AUDITABLE_ENTIT_SYS</name><pkcolumn><column>SYS_NAME</column></pkcolumn><fkcolumn><column>OBJECT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_ORB_RELATIONS</name><pkcolumn><column>REL_SOURCE_ID</column></pkcolumn></table>
+<table><name>MS_AUD_ORB_RELATIONS_ORB</name><pkcolumn><column>REL_INST_ID</column></pkcolumn><fkcolumn><column>REL_SOURCE_ID</column></fkcolumn></table>
+</tables><relationships><relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDITABLE_ENTIT</table>
+</from><to><table>MS_AUD_AUDITABLE_ENTIT_SYS</table><table>MS_AUD_AUDITABLE_ENTIT_AOC</table><table>MS_AUD_AUDITABLE_ENTIT_CON</table><table>MS_AUD_AUDITABLE_ENTIT_DOC</table><table>MS_AUD_AUDITABLE_ENTIT_GDE</table><table>MS_AUD_AUDITABLE_ENTIT_GIM</table><table>MS_AUD_AUDITABLE_ENTIT_MRE</table><table>MS_AUD_AUDITABLE_ENTIT_OBJ</table><table>MS_AUD_AUDITABLE_ENTIT_OGN</table><table>MS_AUD_AUDITABLE_ENTIT_ORG</table><table>MS_AUD_AUDITABLE_ENTIT_OWN</table><table>MS_AUD_AUDITABLE_ENTIT_RG1</table><table>MS_AUD_AUDITABLE_ENTIT_RG2</table><table>MS_AUD_AUDITABLE_ENTIT_RIS</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDITABLE_ENTIT_AOC</table>
+</from><to><table>MS_AUD_AUDITABLE_ENTIT_REQ</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_AUDITABLE_ENTIT_ORG</table>
+</from><to><table>MS_AUD_AUDITABLE_ENTIT_AOW</table></to></relationship>
+<relationship name="" logical="1-*">
+<from><table>MS_AUD_ORB_RELATIONS</table>
+</from><to><table>MS_AUD_ORB_RELATIONS_ORB</table></to></relationship>
+</relationships></schemadiagram></schemadiagramrequest>

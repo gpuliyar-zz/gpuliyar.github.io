@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS_AUD_INTEGRATION</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_AUD_GRC_PROCESS_RV">MS_AUD_GRC_PROCESS_RV</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_AUD_GRC_PROCESS_RV" ("DD_OBJECT_TYPE", "OBJECT_NAME", "OBJECT_ID", "DESCRIPTION", "OWNERS", "OWNERS_STORED", "OWNER_ORGANIZATIONS", "VALID_UNTIL", "VALID_FROM", "TYPE", "CATEGORY", "OBJECT_LEVEL", "DD_PROCESS_INSTANCE_ID", "DD_INSTANCE_ID", "DD_EDIT_FLAG", "OWNER_ORG_IDS", "RESTRICT_ACCESS_TO", "PARENT", "STATUS", "RELATED_RISKS_ID", "RELATED_RISKS", "RELATED_CONTROLS_ID", "RELATED_CONTROLS", "RELATED_AREAS_OF_CMPLNCE_ID", "RELATED_AREAS_OF_COMPLIANCE", "RELATED_REQUIREMENTS_ID", "RELATED_REQUIREMENTS", "RELATED_FRAMEWORK_REF_ID", "RELATED_FRAMEWORK_REFERENCES", "RELATED_OBJECTIVES_ID", "RELATED_OBJECTIVES", "RELATED_FINANCIAL_ACC_ID", "RELATED_FINANCIAL_ACCOUNTS", "RELATED_REFERENCES_ID", "RELATED_REFERENCES", "RELATED_FUNCTIONS_ID", "RELATED_FUNCTIONS", "APPLIES_TO_ORGANIZATIONS_ID", "APPLIES_TO_ORGANIZATIONS", "CORE_OBJECT_TYPE", "VERSION_NO", "PRIM_COUNTRY", "PRIM_REGION", "PRIM_LOCATION", "GD_BUSINESS_HIERARCHY", "GD_BUSINESS_ENTITIES", "GD_LEGAL_ENTITIES", "GM_COUNTRY", "GM_REGIONS", "GM_LOCATIONS", "GE_BUSINESS_HIERARCHY", "GE_BUSINESS_ENTITIES", "GE_LEGAL_ENTITIES", "LEVEL_1_APPROVER", "LEVEL_2_APPROVER", "LEVEL_1_APPROVER_STORED", "LEVEL_2_APPROVER_STORED") AS 
+  SELECT a.dd_object_type,
+  a.object_name,
+  a.object_id,
+  REGEXP_REPLACE(description, '<[^>]+>', NULL) description,
+  (SELECT ms_concat (ms_grc_utilities.get_users (d.owners))
+  FROM ms_grc_core_object_own d
+  WHERE a.object_id = d.object_id
+  ) owners,
+  (SELECT ms_concat (d.owners)
+  FROM ms_grc_core_object_own d
+  WHERE a.object_id = d.object_id
+  )  as owners_stored,
+  (SELECT ms_concat (ms_apps_utilities.get_display_values (ms_grc_utilities.active_ent_id, 'ORGENTITY', d.owner_organizations, ',' ) )
+  FROM ms_grc_core_object_ogn d
+  WHERE a.object_id = d.object_id
+  ) owner_organizations,
+  valid_until,
+  valid_from,
+  (SELECT displayed_value
+  FROM ms_qs_list_of_values lovvalue,
+    ms_qs_lov_names lovname
+  WHERE lovvalue.lov_id      = lovname.lov_id
+  AND lovvalue.org_entity_id = 1
+  AND lovname.lov_name      IN('MS_AUD_AE_Process_Type','MS GRC Process Type')
+  AND lovvalue.locale_id     = NVL(CAST(si_db_locale_sv.getvalue AS NUMBER),1009)
+  AND stored_value           =a.core_type
+  ) TYPE,
+  (SELECT displayed_value
+  FROM ms_qs_list_of_values lovvalue,
+    ms_qs_lov_names lovname
+  WHERE lovvalue.lov_id      = lovname.lov_id
+  AND lovvalue.org_entity_id = 1
+  AND lovname.lov_name      IN('MS GRC Core Category','MS_AUD_AE_Category_Type')
+  AND lovvalue.locale_id     = NVL(CAST(si_db_locale_sv.getvalue AS NUMBER),1009)
+  AND stored_value           =a.core_category
+  ) CATEGORY,
+  ms_apps_utilities.get_display_value (ms_grc_utilities.active_ent_id, 'MS_GRC_LEVEL', object_level ) object_level,
+  b.dd_process_instance_id,
+  b.dd_instance_id,
+  NVL (a.dd_edit_flag, 'Y') AS dd_edit_flag,
+  (SELECT ms_concat (owner_organizations)
+  FROM ms_grc_core_object_ogn e
+  WHERE e.object_id = a.object_id
+  ) AS owner_org_ids,
+  restrict_access_to,
+  (SELECT object_name FROM ms_grc_core_object WHERE object_id = a.object_parent
+  )          AS PARENT,
+  obj_status AS status,
+  rel_risk.object_id AS related_risks_id,
+  rel_risk.object_name AS related_risks,
+  rel_control.object_id AS related_controls_id,
+  rel_control.object_name AS related_controls,
+  rel_aoc.object_id AS related_areas_of_cmplnce_id,
+  rel_aoc.object_name AS related_areas_of_compliance,
+  rel_req.object_id AS related_requirements_id,
+  rel_req.object_name AS related_requirements,
+  rel_model_ref.object_id AS related_framework_ref_id,
+  rel_model_ref.object_name AS related_framework_references,
+  rel_objectives.object_id AS related_objectives_id,
+  rel_objectives.object_name AS related_objectives,
+  rel_fin.object_id AS related_financial_acc_id,
+  rel_fin.object_name AS related_financial_accounts,
+  rel_ref.object_id AS related_references_id,
+  rel_ref.object_name AS related_references,
+  rel_func.object_id AS related_functions_id,
+  rel_func.object_name AS related_functions,
+  /*null AS related_areas_of_cmplnce_id,
+  null AS related_areas_of_compliance,
+  null AS related_requirements_id,
+  null AS related_requirements,
+  null AS related_framework_ref_id,
+  null AS related_framework_references,
+  null AS related_objectives_id,
+  null AS related_objectives,
+  null AS related_financial_acc_id,
+  null AS related_financial_accounts,
+  null AS related_references_id,
+  null AS related_references,
+  null AS related_functions_id,
+  null AS related_functions,*/
+  rel_org.object_id AS applies_to_organizations_id,
+  rel_org.object_name AS applies_to_organizations, 
+  NVL (
+  (SELECT display_name
+  FROM ms_apps_entity_v b
+  WHERE b.db_table_name = a.dd_object_type
+  ), 'Auditable Entity' ) AS core_object_type,
+  (SELECT ae_version FROM MS_AUD_AUDITABLE_ENTIT WHERE object_id=b.object_id
+  ) AS version_no,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_COUNTRY
+  WHERE ID IN
+    (SELECT DISTINCT(primary_country)
+    FROM ms_aud_auditable_entit_gde
+    WHERE object_id      =b.object_id
+    AND primary_country IS NOT NULL
+    )
+  ) AS prim_country,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_REGION
+  WHERE ID IN
+    (SELECT DISTINCT(primary_region)
+    FROM ms_aud_auditable_entit_gde
+    WHERE object_id     =b.object_id
+    AND primary_region IS NOT NULL
+    )
+  ) AS prim_region,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_LOCATION
+  WHERE ID IN
+    (SELECT DISTINCT(primary_location)
+    FROM ms_aud_auditable_entit_gde
+    WHERE object_id       =b.object_id
+    AND primary_location IS NOT NULL
+    )
+  ) AS prim_location,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_BUSI_HIRARCHY
+  WHERE ID IN
+    (SELECT DISTINCT(GD_BUSINESS_HIERARCHY)
+    FROM ms_aud_auditable_entit_gde
+    WHERE object_id            =b.object_id
+    AND GD_BUSINESS_HIERARCHY IS NOT NULL
+    )
+  ) AS GD_BUSINESS_HIERARCHY,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_BUSI_ENT
+  WHERE ID IN
+    (SELECT DISTINCT(GD_BUSINESS_ENTITIES)
+    FROM ms_aud_auditable_entit_gde
+    WHERE object_id           =b.object_id
+    AND GD_BUSINESS_ENTITIES IS NOT NULL
+    )
+  ) AS GD_BUSINESS_ENTITIES,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_LEGAL_ENT
+  WHERE ID IN
+    (SELECT DISTINCT(GD_LEGAL_ENTITIES)
+    FROM ms_aud_auditable_entit_gde
+    WHERE object_id        =b.object_id
+    AND GD_LEGAL_ENTITIES IS NOT NULL
+    )
+  ) AS GD_LEGAL_ENTITIES,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_COUNTRY
+  WHERE ID IN
+    (SELECT DISTINCT(gm_country)
+    FROM ms_aud_auditable_entit_gim
+    WHERE object_id =b.object_id
+    AND gm_country IS NOT NULL
+    )
+  ) AS gm_country,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_REGION
+  WHERE ID IN
+    (SELECT DISTINCT(gm_regions)
+    FROM ms_aud_auditable_entit_gim
+    WHERE object_id =b.object_id
+    AND gm_regions IS NOT NULL
+    )
+  ) AS gm_regions,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_LOCATION
+  WHERE ID IN
+    (SELECT DISTINCT(gm_locations)
+    FROM ms_aud_auditable_entit_gim
+    WHERE object_id   =b.object_id
+    AND gm_locations IS NOT NULL
+    )
+  ) AS gm_locations,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_BUSI_HIRARCHY
+  WHERE ID IN
+    (SELECT DISTINCT(GE_BUSINESS_HIERARCHY)
+    FROM ms_aud_auditable_entit_gim
+    WHERE object_id            =b.object_id
+    AND GE_BUSINESS_HIERARCHY IS NOT NULL
+    )
+  ) AS GE_BUSINESS_HIERARCHY,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_BUSI_ENT
+  WHERE ID IN
+    (SELECT DISTINCT(GE_BUSINESS_ENTITIES)
+    FROM ms_aud_auditable_entit_gim
+    WHERE object_id           =b.object_id
+    AND GE_BUSINESS_ENTITIES IS NOT NULL
+    )
+  ) AS GE_BUSINESS_ENTITIES,
+  (SELECT MS_CONCAT(NAME)
+  FROM MS_AUD_AE_LEGAL_ENT
+  WHERE ID IN
+    (SELECT DISTINCT(GE_LEGAL_ENTITIES)
+    FROM ms_aud_auditable_entit_gim
+    WHERE object_id        =b.object_id
+    AND GE_LEGAL_ENTITIES IS NOT NULL
+    )
+  ) AS GE_LEGAL_ENTITIES,
+  MS_APPS_UTILITIES.GET_USER_FULL_NAME(A.LEVEL_1_APPROVER) AS LEVEL_1_APPROVER,
+  MS_APPS_UTILITIES.GET_USER_FULL_NAME(A.LEVEL_2_APPROVER) AS LEVEL_2_APPROVER,
+  LEVEL_1_APPROVER AS LEVEL_1_APPROVER_STORED,
+  LEVEL_2_APPROVER as LEVEL_2_APPROVER_STORED
+FROM ms_grc_core_object a,
+  ms_aud_auditable_entit b,
+  (
+  SELECT 'MS_GRC_RISK' typ,
+    ms_concat(tgt_obj_id) Object_ID,
+   to_char(substr(MS_JOIN_CLOB_FOR_DISPLAY(risk.OBJECT_NAME),1,4000)) Object_Name,
+    tgt_obj_type,
+    src_obj_type,
+    src_obj_id
+  FROM ms_aud_grc_orb_relations_pub_v f,
+    MS_GRC_RISK_PUB_V risk
+  WHERE f.TGT_OBJ_ID         = risk.object_id
+  AND  (f.src_obj_type) = 'MS_AUD_AUDITABLE_ENTITY'
+  AND  (tgt_obj_type)   = 'MS_GRC_RISK'
+  GROUP BY tgt_obj_type,
+    src_obj_type,
+    src_obj_id
+  ) rel_risk,
+
+  (SELECT 'MS_GRC_ORGANIZATION' typ ,
+    ms_concat(f.tgt_obj_id) Object_ID,
+    ms_concat(org.ORG_ENTITY_NAME) Object_Name,
+    f.tgt_obj_type,
+    f.src_obj_type,
+    f.src_obj_id
+  FROM ms_aud_grc_orb_relations_pub_v f,
+    SI_ORG_ENTITIES org
+  WHERE f.TGT_OBJ_ID         = TO_CHAR(org.ORG_ENTITY_ID)
+  AND  (f.src_obj_type) = 'MS_AUD_AUDITABLE_ENTITY'
+  AND  (tgt_obj_type)   = 'MS_GRC_ORGANIZATION'
+  GROUP BY tgt_obj_type,
+    src_obj_type,
+    src_obj_id) rel_org,
+    
+-- For Control
+ ( SELECT 'MS_GRC_CONTROL' typ,
+    ms_concat(tgt_obj_id) Object_ID,
+    ms_concat(ctrl.OBJECT_NAME) Object_Name,
+    tgt_obj_type,
+    src_obj_type,
+    src_obj_id
+  FROM ms_aud_grc_orb_relations_pub_v f,
+    MS_GRC_COMPLIANCE_OBJE_PUB_V ctrl
+  WHERE f.TGT_OBJ_ID         = ctrl.object_id
+  AND  (f.src_obj_type) = 'MS_AUD_AUDITABLE_ENTITY'
+  AND  (tgt_obj_type)   = 'MS_GRC_CONTROL'
+  GROUP BY tgt_obj_type,
+    src_obj_type,
+    src_obj_id) rel_control,
+  
+  -- For Process
+ /* (SELECT 'MS_GRC_PROCESS' typ,
+    ms_concat(tgt_obj_id) Object_ID,
+    ms_concat(prc.OBJECT_NAME) Object_Name,
+    tgt_obj_type,
+    src_obj_type,
+    src_obj_id
+  FROM ms_aud_grc_orb_relations_pub_v f,
+    MS_GRC_CORE_OBJECT prc
+  WHERE f.TGT_OBJ_ID         = prc.object_id
+  AND  (f.src_obj_type) = 'MS_AUD_AUDITABLE_ENTITY'
+  AND  (tgt_obj_type)   = 'MS_GRC_PROCESS'
+  GROUP BY tgt_obj_type,
+    src_obj_type,
+    src_obj_id ) rel_process,*/
+ 
+  -- For Area of Compliance
+ ( SELECT 'MS_GRC_AREA_OF_COMPLIANCE' typ,
+    ms_concat(tgt_obj_id) Object_ID,
+    ms_concat(cmpl.OBJECT_NAME) Object_Name,
+    tgt_obj_type,
+    src_obj_type,
+    src_obj_id
+  FROM ms_aud_grc_orb_relations_pub_v f,
+    MS_GRC_AREA_OF_COMPLIA cmpl
+  WHERE f.TGT_OBJ_ID         = cmpl.object_id
+  AND UPPER (f.src_obj_type) = 'MS_AUD_AUDITABLE_ENTITY'
+  AND UPPER (tgt_obj_type)   = 'MS_GRC_AREA_OF_COMPLIANCE'
+  GROUP BY tgt_obj_type,
+    src_obj_type,
+    src_obj_id) rel_aoc,
+  
+   -- For Function
+  (SELECT 'MS_GRC_FUNCTION' typ,
+    ms_concat(tgt_obj_id) Object_ID,
+    ms_concat(fnc.OBJECT_NAME) Object_Name,
+    tgt_obj_type,
+    src_obj_type,
+    src_obj_id
+  FROM ms_aud_grc_orb_relations_pub_v f,
+    MS_GRC_FUNCTION_PUB_V fnc
+  WHERE f.TGT_OBJ_ID         = fnc.object_id
+  AND UPPER (f.src_obj_type) = 'MS_AUD_AUDITABLE_ENTITY'
+  AND UPPER (tgt_obj_type)   = 'MS_GRC_FUNCTION'
+  GROUP BY tgt_obj_type,
+    src_obj_type,
+    src_obj_id) rel_func,
+  
+  -- For objectives
+  (SELECT 'MS_GRC_OBJECTIVES' typ,
+    ms_concat(tgt_obj_id) Object_ID,
+    ms_concat(objt.OBJECT_NAME) Object_Name,
+    tgt_obj_type,
+    src_obj_type,
+    src_obj_id
+  FROM ms_aud_grc_orb_relations_pub_v f,
+    MS_GRC_OBJECTIVES_PUB_V objt
+  WHERE f.TGT_OBJ_ID         = objt.object_id
+  AND UPPER (f.src_obj_type) = 'MS_AUD_AUDITABLE_ENTITY'
+  AND UPPER (tgt_obj_type)   = 'MS_GRC_OBJECTIVES'
+  GROUP BY tgt_obj_type,
+    src_obj_type,
+    src_obj_id) rel_objectives,
+ 
+ --For Model Reference
+ ( SELECT 'MS_GRC_MODEL_REFERENCE' typ,
+    ms_concat(tgt_obj_id) Object_ID,
+    ms_concat(mdlref.OBJECT_NAME) Object_Name,
+    tgt_obj_type,
+    src_obj_type,
+    src_obj_id
+  FROM ms_aud_grc_orb_relations_pub_v f,
+    MS_GRC_MODEL_REFERENCE_PUB_V mdlref
+  WHERE f.TGT_OBJ_ID         = mdlref.object_id
+  AND UPPER (f.src_obj_type) = 'MS_AUD_AUDITABLE_ENTITY'
+  AND UPPER (tgt_obj_type)   = 'MS_GRC_MODEL_REFERENCE'
+  GROUP BY tgt_obj_type,
+    src_obj_type,
+    src_obj_id) rel_model_ref,
+  
+   -- For Reference
+  (SELECT 'MS_GRC_REFERENCE' typ,
+    ms_concat(tgt_obj_id) Object_ID,
+    ms_concat(refrnce.OBJECT_NAME) Object_Name,
+    tgt_obj_type,
+    src_obj_type,
+    src_obj_id
+  FROM ms_aud_grc_orb_relations_pub_v f,
+    MS_GRC_REFERENCE_PUB_V refrnce
+  WHERE f.TGT_OBJ_ID         = refrnce.object_id
+  AND UPPER (f.src_obj_type) = 'MS_AUD_AUDITABLE_ENTITY'
+  AND UPPER (tgt_obj_type)   = 'MS_GRC_REFERENCE'
+  GROUP BY tgt_obj_type,
+    src_obj_type,
+    src_obj_id) rel_ref,
+  
+  -- For Requirement
+  (SELECT 'MS_GRC_REQUIREMENT' typ,
+    ms_concat(tgt_obj_id) Object_ID,
+    ms_concat(req.OBJECT_NAME) Object_Name,
+    tgt_obj_type,
+    src_obj_type,
+    src_obj_id
+  FROM ms_aud_grc_orb_relations_pub_v f,
+    MS_GRC_REQUIREMENT_PUB_V req
+  WHERE f.TGT_OBJ_ID         = req.object_id
+  AND UPPER (f.src_obj_type) = 'MS_AUD_AUDITABLE_ENTITY'
+  AND UPPER (tgt_obj_type)   = 'MS_GRC_REQUIREMENT'
+  GROUP BY tgt_obj_type,
+    src_obj_type,
+    src_obj_id) rel_req,
+  
+  --For Financial Account
+  (SELECT 'MS_GRC_FINANCIAL_ACCOUNTS' typ,
+    ms_concat(tgt_obj_id) Object_ID,
+    ms_concat(fin.OBJECT_NAME) Object_Name,
+    tgt_obj_type,
+    src_obj_type,
+    src_obj_id
+  FROM ms_aud_grc_orb_relations_pub_v f,
+    MS_GRC_FINANCIAL_ACCOU_PUB_V fin
+  WHERE f.TGT_OBJ_ID         = fin.object_id
+  AND UPPER (f.src_obj_type) = 'MS_AUD_AUDITABLE_ENTITY'
+  AND UPPER (tgt_obj_type)   = 'MS_GRC_FINANCIAL_ACCOUNTS'
+  GROUP BY tgt_obj_type,
+    src_obj_type,
+    src_obj_id) rel_fin
+where b.dd_object_type = 'MS_AUD_AUDITABLE_ENTITY'
+AND a.object_id        = b.object_id
+and rel_risk.src_obj_id (+)=a.object_id
+and rel_org.src_obj_id (+)=a.object_id
+and rel_control.src_obj_id (+)=a.object_id
+--and rel_process.src_obj_id (+)=a.object_id
+and rel_aoc.src_obj_id (+)=a.object_id
+and rel_func.src_obj_id (+)=a.object_id
+and rel_objectives.src_obj_id (+)=a.object_id
+and rel_model_ref.src_obj_id (+)=a.object_id
+and rel_ref.src_obj_id (+)=a.object_id
+and rel_req.src_obj_id (+)=a.object_id
+and rel_fin.src_obj_id (+)=a.object_id</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                        <div class="no-panel no-panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Infolets</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../infolets/MS_AUD_AE_List_Report.html" >MS AUD AE List Report</a></td>
+                                            <td><a href="../infolets/MS_AUD_AUDITABLE_ENTITY_BROWSER.html" >MS AUD AUDITABLE ENTITY BROWSER</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

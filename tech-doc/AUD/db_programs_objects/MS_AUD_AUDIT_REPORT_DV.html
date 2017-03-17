@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS_IAD_UTILITIES</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_AUD_AUDIT_REPORT_DV">MS_AUD_AUDIT_REPORT_DV</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_AUD_AUDIT_REPORT_DV" ("ACT_REF_ID", "AC_ACTION_DESCRIPTION", "AC_ACTION_DESCRIPTION_HTM", "AC_ACTION_OWNER", "AC_ACTION_TITLE", "AC_DUE_DATE", "AC_FINDING_ID", "AC_ID", "AC_ISSUE_TITLE", "AC_OWNER_ORGANIZATION", "AC_PRIORITY", "AR_ACTION", "AR_ACTION2", "AR_ACTION3", "AR_APPROVER", "AR_APPROVER2", "AR_AUDITEE", "AR_AUDITEE2", "AR_COMMENT3", "AR_LA_COMMENTS", "AR_ORGANIZATION", "AR_REPORT", "AR_REPORT3", "AR_REVIEWER", "AR_REVIEWER2", "AR_SELECT_ACTION", "AR_SELECT_ISSUES", "AR_YEAR", "ASSIGNEE", "AUDIT_DATE", "AUDIT_ID", "AUDIT_MANAGER", "AUDIT_RATING", "AUDIT_REPORT_ID", "AUDIT_TITLE", "CONDUCTED_BY_ORG", "CONFIG_FLAG", "CREATED_BY", "CREATION_DATE", "DD_CURRENT_STAGE", "DD_CURRENT_USER_NAME", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_OBJECT_TYPE", "ELECTRONICALLY_SIGNED", "EXECUTIVE_SUMMARY", "EXECUTIVE_SUMMARY_HTM", "FN_CONTRIBUTING_FACTORS", "FN_CORE_OBJECTS", "FN_DISPOSITION", "FN_FINDING_DETAILS", "FN_FINDING_DETAILS_HTM", "FN_FINDING_TITLE", "FN_ID", "FN_ISSUE_DUE_DATE", "FN_ISSUE_OWNER", "FN_ISSUE_RATING", "FN_ISSUE_RESOLUTION", "FN_ORGANIZATIONS", "FN_OWNER_ORGANIZATION", "FN_RECOMMENDATION", "FN_RECOMMENDATION_HTM", "FN_REF_ID", "FN_REF_TASK_ID", "FN_RELATED_RISKS", "FN_ROOT_CAUSE", "FORM_NAME", "INSTANCE_ID", "INSTANCE_REC_NUM", "KEY_COL_NAME", "LATEST_FLAG", "LEAD_AUDITOR", "METRIC_COMPLETED_DATE", "METRIC_ID", "METRIC_RUN_DATE", "MULTIROW_GROUP_NAME", "MULTIROW_REGION_ID", "OPENED_FORM", "PFR_COMMENTS", "PFR_FINAL_REPORT", "PFR_MANAGEMENT_SUPPORT", "PFR_MANAGEMENT_SUPPORT2", "PFR_UPDATED_FINAL_REPORT", "POPULATE_FINDING", "PREVIOUS_STAGE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "RADR_COOMENTS", "RADR_REPORT", "RADR_RESPONSE", "REPORT_TYPE", "RESTRICT_ACCESS_TO", "RTF_ATTACH", "SCOPE_BASED_ON", "SELECT_ACTION", "STATUS", "TASK_ID", "TASK_NAME", "TASK_OWNER", "TASK_STATUS", "TASK_TYPE", "TCT_ACT_ID_GEN", "TCT_FND_ID_GEN", "TMP_FLAG", "TMP_FND_CORE_OBJECTS", "TMP_FND_ORGANIZATIONS", "TMP_FND_RELATED_RISKS") AS 
+  SELECT act_ref_id,
+    ac_action_description,
+    ac_action_description_htm,
+    ms_apps_utilities.get_user_full_name (ac_action_owner) AS ac_action_owner,
+    ac_action_title,
+    ac_due_date,
+    ac_finding_id,
+    ac_id,
+    ac_issue_title,
+    MS_GRC_COMMON_UTILS.Fn_Get_Org_Display_Names(ac_owner_organization) AS ac_owner_organization,
+    ac_priority,
+    ar_action,
+    ar_action2,
+    ar_action3,
+    ms_apps_utilities.get_user_full_name (ar_approver)  AS ar_approver,
+    ms_apps_utilities.get_user_full_name (ar_approver2) AS ar_approver2,
+    ms_apps_utilities.get_user_full_name (ar_auditee)   AS ar_auditee,
+    ms_apps_utilities.get_user_full_name (ar_auditee2)  AS ar_auditee2,
+    ar_comment3,
+    ar_la_comments,
+    MS_GRC_COMMON_UTILS.Fn_Get_Org_Display_Names (ar_organization) AS ar_organization,
+    ar_report,
+    ar_report3,
+    ms_apps_utilities.get_user_full_name (ar_reviewer)  AS ar_reviewer,
+    ms_apps_utilities.get_user_full_name (ar_reviewer2) AS ar_reviewer2,
+    ar_select_action,
+    ar_select_issues,
+    ar_year,
+    ms_apps_utilities.get_user_full_name (assignee) AS assignee,
+    audit_date,
+    audit_id,
+    --ms_apps_utilities.get_user_full_name (audit_manager) AS audit_manager,
+    NVL(ms_apps_utilities.get_user_full_name(audit_manager), ms_aud_report_utils.fn_get_mlov_aud_man_disp(ms_aud_utilities.mlov_values(audit_id,'AUDIT_ID','audit_manager_mlov','ms_aud_audit_report_aam'))) AS audit_manager,
+    --audit_rating,
+    (SELECT lovvalue.displayed_value AS displayed_value
+  FROM ms_qs_list_of_values lovvalue,
+    ms_qs_lov_names lovname
+  WHERE lovvalue.lov_id      = lovname.lov_id
+  AND lovvalue.org_entity_id = 1
+  AND lovname.lov_name       = 'MS AUD Audit Rating'
+  AND lovvalue.locale_id     = NVL(CAST(si_db_locale_sv.getvalue AS NUMBER),1009)
+  AND stored_value           = audit_rating
+  AND lovvalue.enterprise_id =(SELECT enterprise_id FROM si_ent)
+  AND (lovname.end_date     IS NULL
+  OR lovname.end_date        > SYSDATE)
+  AND lovname.start_date    <= sysdate
+  AND (lovvalue.end_date    IS NULL
+  OR lovvalue.end_date       > SYSDATE)
+  ) as audit_rating,
+    audit_report_id,
+    (select a.audit_title from ms_aud_audit a where a.audit_id = b.audit_id) as audit_title,
+    MS_GRC_COMMON_UTILS.Fn_Get_Org_Display_Names (conducted_by_org) AS conducted_by_org,
+    config_flag,
+    ms_apps_utilities.get_user_full_name (created_by) AS created_by,
+    creation_date,
+    dd_current_stage,
+    ms_apps_utilities.get_user_full_name (dd_current_user_name) AS dd_current_user_name,
+    dd_enterprise_info,
+    ms_apps_utilities.get_user_full_name (dd_event_user_name) AS dd_event_user_name,
+    dd_object_type,
+    electronically_signed,
+    executive_summary,
+    executive_summary_htm,
+    fn_contributing_factors,
+    --ms_aud_report_utils.fn_get_core_display_values (fn_core_objects) AS fn_core_objects,
+    ms_aud_report_utils.fn_get_core_obj_disp_val (fn_core_objects,scope_based_on) AS fn_core_objects,
+    fn_disposition,
+    fn_finding_details,
+    fn_finding_details_htm,
+    fn_finding_title,
+    fn_id,
+    fn_issue_due_date,
+    ms_apps_utilities.get_user_full_name (fn_issue_owner) AS fn_issue_owner,
+    fn_issue_rating,
+    fn_issue_resolution,
+    --ms_aud_report_utils.fn_get_org_display_values (fn_organizations)      AS fn_organizations,
+    ms_aud_report_utils.fn_get_org_disp_val (fn_organizations,scope_based_on)      AS fn_organizations,
+    MS_GRC_COMMON_UTILS.Fn_Get_Org_Display_Names (fn_owner_organization) AS fn_owner_organization,
+    fn_recommendation,
+    fn_recommendation_htm,
+    fn_ref_id,
+    fn_ref_task_id,
+    --ms_aud_report_utils.fn_get_risk_display_values (fn_related_risks) AS fn_related_risks,
+    ms_aud_report_utils.fn_get_rel_risk_disp_val (fn_related_risks,scope_based_on,audit_id) AS fn_related_risks,
+    fn_root_cause,
+    form_name,
+    instance_id,
+    instance_rec_num,
+    key_col_name,
+    latest_flag,
+    --ms_apps_utilities.get_user_full_name (lead_auditor) AS lead_auditor,
+    NVL(ms_apps_utilities.get_user_full_name(lead_auditor), ms_aud_report_utils.fn_get_mlov_lead_aud_disp(ms_aud_utilities.mlov_values(audit_id,'AUDIT_ID','lead_auditor_mlov','ms_aud_audit_report_ala'))) AS lead_auditor,
+    metric_completed_date,
+    metric_id,
+    metric_run_date,
+    multirow_group_name,
+    multirow_region_id,
+    opened_form,
+    pfr_comments,
+    pfr_final_report,
+    pfr_management_support,
+    pfr_management_support2,
+    pfr_updated_final_report,
+    populate_finding,
+    previous_stage,
+    process_flow_status,
+    process_instance_id,
+    radr_cooments,
+    radr_report,
+    radr_response,
+    report_type,
+    restrict_access_to,
+    rtf_attach,
+    scope_based_on,
+    select_action,
+    status,
+    task_id,
+    task_name,
+    ms_apps_utilities.get_user_full_name (task_owner) AS task_owner,
+    task_status,
+    task_type,
+    tct_act_id_gen,
+    tct_fnd_id_gen,
+    tmp_flag,
+     MS_GRC_COMMON_UTILS.Fn_Get_Display_Names(tmp_fnd_core_objects,'MS_GRC_CORE_OBJECT_PUB_V')   AS tmp_fnd_core_objects,
+    MS_GRC_COMMON_UTILS.Fn_Get_Org_Display_Names (tmp_fnd_organizations)  AS tmp_fnd_organizations,
+    ms_aud_report_utils.fn_get_risk_display_values (tmp_fnd_related_risks) AS tmp_fnd_related_risks
+  FROM ms_aud_audit_report_v b</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                        <div class="no-panel no-panel-success">
+                            <div class="panel-heading">
+                                <h4>References</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <th colspan="2" style="background-color:rgb(221, 221, 221);">Workflows</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="../workflows/F009/F009.html" >AUD Audit Report</a></td>
+                                            <td></td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- panel-body -->
+                        </div>
+                        <!-- panel-success -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

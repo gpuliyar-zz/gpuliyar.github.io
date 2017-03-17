@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS_AUD_F013_HELPER</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_AUD_AUDIT_EDS_V">MS_AUD_AUDIT_EDS_V</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_AUD_AUDIT_EDS_V" ("ID", "TITLE", "START_DATE", "CONDUCTED_BY_ORG", "CLASSIFICATION", "TYPE", "STATUS", "LEAD_AUDITOR", "AUDIT_MANAGER", "RESTRICT_ACCESS_TO", "NOTIFICATION_TEMPLATE", "MILESTONE_TEMPLATE", "TASK_OWNER_CAN_SEND_TSK_REVIEW", "APPROVALS_REQUIRED", "AUDITORS_CAN_SEND_ISS_REV", "ACTION_PLAN_CREATED_BY", "AUDITORS_CAN_CREATE_TASK", "ENABLE_TASK_DATES", "ENABLE_SCORING", "AUDITORS_CAN_ADD_QUESTIONS", "RECURRENCE_TYPE", "SCOPE_BASED_ON", "ORGANIZATIONS", "AUDITABLE_ENTITIES", "RELATED_RISKS", "LOCATIONS", "BUDGETED_EFFORT", "ACTUAL_EFFORT_DAYS", "PURPOSE_RATIONALE", "RESOURCE_POOL_ALLOCATION", "AUDIT_TEAM", "CONTACT_ID", "USER_IN_SYSTEM", "CONTACT_NAME", "SEND_OR_NOTIFY", "CONTACT_TITLE", "AUDITEE_CONTACT", "CONTACT_COMMENTS", "MILESTONE", "PROPOSED_DATE", "ACTUAL_DATE", "MILESTONE_COMMENTS", "MILESTONE_ATTACHMENTS", "DOCUMENT_ID", "DOCUMENT_NAME", "DOCUMENT_TYPE", "DOCUMENT_CATEGORY", "DOCUMENT_ATTACHMENTS", "DOCUMENT_COMMENTS", "PLAN_TITLE", "CREATED_BY", "CREATED_ON", "MODIFIED_BY", "MODIFIED_ON") AS 
+  SELECT /*@public*/
+A.AUDIT_ID AS ID,
+A.AUDIT_TITLE AS TITLE,
+A.AUDIT_START_DATE AS START_DATE,
+(SELECT Z.ORG_ENTITY_NAME FROM SI_ORG_ENTITIES_T Z WHERE Z.ORG_ENTITY_ID=A.CONDUCTED_BY_ORG) AS CONDUCTED_BY_ORG,
+(SELECT Z.CODE_DESCRIPTION FROM MS_AUD_LOV_CONFIG_TL_V Z WHERE Z.CODE_GROUP='MS AUD Classification' AND Z.CODE_CODE=A.AUDIT_CLASSIFICATION) AS CLASSIFICATION,
+(SELECT Z.CODE_DESCRIPTION FROM MS_AUD_LOV_CONFIG_TL_V Z WHERE Z.CODE_GROUP='MS AUD Audit Type' AND Z.CODE_CODE=A.AUDIT_TYPE) AS TYPE,
+(SELECT Z.STATUS_NAME FROM MS_AUD_STATUS_TL_V Z WHERE Z.STATUS_ID=A.AUDIT_STATUS) AS STATUS,
+(SELECT Z.USER_FULL_NAME FROM MS_GRC_USER_FULL_NAME_V Z WHERE Z.USER_NAME=A.LEAD_AUDITOR) AS LEAD_AUDITOR,
+(SELECT Z.USER_FULL_NAME FROM MS_GRC_USER_FULL_NAME_V Z WHERE Z.USER_NAME=A.AUDIT_MANAGER) AS AUDIT_MANAGER,
+
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Restrict Access' AND Z.STORED_VALUE=A.RESTRICT_ACCESS_TO
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id)
+ AS RESTRICT_ACCESS_TO,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Notification Template' AND Z.STORED_VALUE=A.AU_NOTIFICATION
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id)
+ AS NOTIFICATION_TEMPLATE,
+(SELECT Z.MILESTONE_TEMPLATE_NAME FROM MS_AUD_MILESTONE Z WHERE Z.TEMPLATE_ID=A.MILESTONE_TEMPLATE) AS MILESTONE_TEMPLATE,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Yes No' AND Z.STORED_VALUE=A.SETUP_AUDITOR_TASK_REVIEW
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS TASK_OWNER_CAN_SEND_TSK_REVIEW,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Approval Reqd' AND Z.STORED_VALUE=A.SETUP_APPROVALS_REQUIRED
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS APPROVALS_REQUIRED,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Yes No' AND Z.STORED_VALUE=A.SETUP_AUDITOR_SEND_ISSUES
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS AUDITORS_CAN_SEND_ISS_REV,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME = 'MS AUD Action Plan Created By' 
+AND Z.STORED_VALUE=D.SETUP_ACTION_PLAN_CAN_CREATED
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) AS ACTION_PLAN_CREATED_BY,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Yes No' AND Z.STORED_VALUE=A.SETUP_AUDITORS_CREATE_TASKS
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id)
+ AS AUDITORS_CAN_CREATE_TASK,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Yes No' AND Z.STORED_VALUE=A.SETUP_TASK_SPECIFIED_DATES
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS ENABLE_TASK_DATES,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Yes No' AND Z.STORED_VALUE=A.SETUP_ENABLE_AUDIT_SCORING
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS ENABLE_SCORING,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Yes No' AND Z.STORED_VALUE=A.SETUP_AUDTIORS_ADD_ADDITI_QUES
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS AUDITORS_CAN_ADD_QUESTIONS,
+
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Audit Recurrence' AND Z.STORED_VALUE=A.AUDIT_RECURRENCE
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS RECURRENCE_TYPE,
+
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Audit Based On' AND Z.STORED_VALUE=A.SCOPE_BASED_ON
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS SCOPE_BASED_ON,
+(SELECT Z.ORG_ENTITY_NAME FROM SI_ORG_ENTITIES_T Z WHERE to_char(Z.ORG_ENTITY_ID)=J.MANAGE_ORGANIZATIONS) AS ORGANIZATIONS,
+(SELECT Z.OBJECT_NAME FROM MS_GRC_CORE_OBJECT Z WHERE Z.OBJECT_ID=E.CORE_OBJECTS) AS AUDITABLE_ENTITIES,
+(SELECT Z.OBJECT_NAME FROM MS_GRC_RISK_RV Z WHERE Z.OBJECT_ID=K.RELATED_RISKS) AS RELATED_RISKS,
+(SELECT Z.LOCATION_NAME FROM SI_ORG_LOCATIONS_T Z WHERE Z.LOCATION_ID=I.LOCATIONS) AS LOCATIONS,
+A.PLANNED_AUDIT_LENGTH AS BUDGETED_EFFORT,
+A.ACTUAL_EFFORT AS ACTUAL_EFFORT_DAYS,
+TO_CHAR(Regexp_Replace(A.PURPOSE,'<[^>]+>',NULL)) AS PURPOSE_RATIONALE,
+M.TEAM_MEMBER AS RESOURCE_POOL_ALLOCATION,
+(SELECT Z.USER_FULL_NAME FROM MS_GRC_USER_FULL_NAME_V Z WHERE Z.USER_NAME=N.RSM_TEAM_MEMBER) AS AUDIT_TEAM,
+F.CO_CONTACT_ID AS CONTACT_ID,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Yes No' AND Z.STORED_VALUE=F.CO_USER_IN_SYSTEM
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS USER_IN_SYSTEM,
+(SELECT Z.USER_FULL_NAME FROM MS_GRC_USER_FULL_NAME_V Z WHERE Z.USER_NAME=F.CO_NAME) AS CONTACT_NAME,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Notify Send' AND Z.STORED_VALUE=L.CO_NOTIFICATION_OPTIONS
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id)
+ AS SEND_OR_NOTIFY,
+F.CO_TITLE AS CONTACT_TITLE,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Yes No' AND Z.STORED_VALUE=F.CO_AUDITEE_CONTACT
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS AUDITEE_CONTACT,
+F.CO_COMMENTS AS CONTACT_COMMENTS,
+H.KM_MILESTONES AS MILESTONE,
+H.KM_PROPOSED_DATE AS PROPOSED_DATE,
+H.KM_ACTUAL_DATE AS ACTUAL_DATE,
+H.KM_COMMENTS AS MILESTONE_COMMENTS,
+TO_CHAR(SUBSTR(H.KM_ATTACHMENTS,1,INSTR(H.KM_ATTACHMENTS,'#',1,1)-1)) AS MILESTONE_ATTACHMENTS,
+
+G.DO_ID AS DOCUMENT_ID,
+G.DO_NAME AS DOCUMENT_NAME,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Document Types' AND Z.STORED_VALUE=G.DO_TYPE
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS DOCUMENT_TYPE,
+(SELECT Z.DISPLAYED_VALUE FROM MS_QS_LOV_ORG_VALUES_V Z WHERE Z.LOV_NAME='MS AUD Document Categories' AND Z.STORED_VALUE=G.DO_CATEGORY
+AND z.locale_id=ms_grc_common_utils.fn_get_default_locale_id) 
+AS DOCUMENT_CATEGORY,
+TO_CHAR(SUBSTR(G.DO_DOCUMENT,1,INSTR(G.DO_DOCUMENT,'#',1,1)-1)) AS DOCUMENT_ATTACHMENTS,
+G.DO_COMMENTS AS DOCUMENT_COMMENTS,
+A.PLAN_TITLE AS PLAN_TITLE,
+A.DD_CREATED_BY AS CREATED_BY,
+A.DD_CREATED_ON AS CREATED_ON,
+A.DD_MODIFIED_BY AS MODIFIED_BY,
+A.DD_MODIFIED_ON AS MODIFIED_ON
+FROM MS_AUD_AUDIT A
+LEFT JOIN MS_AUD_AUDIT_APB D ON 
+A.AUDIT_ID=D.AUDIT_ID
+LEFT JOIN MS_AUD_AUDIT_AUE E ON 
+A.AUDIT_ID=E.AUDIT_ID
+LEFT JOIN MS_AUD_AUDIT_CON F ON 
+A.AUDIT_ID=F.AUDIT_ID
+LEFT JOIN MS_AUD_AUDIT_KMS H ON 
+A.AUDIT_ID=H.AUDIT_ID
+LEFT JOIN MS_AUD_AUDIT_LOC I ON 
+A.AUDIT_ID=I.AUDIT_ID
+LEFT JOIN MS_AUD_AUDIT_ORG J ON 
+A.AUDIT_ID=J.AUDIT_ID
+LEFT JOIN MS_AUD_AUDIT_RIS K ON 
+A.AUDIT_ID=K.AUDIT_ID
+LEFT JOIN MS_AUD_AUDIT_SAN L ON 
+A.AUDIT_ID=L.AUDIT_ID AND
+F.CO_CONTACT_ID=L.CO_CONTACT_ID
+LEFT JOIN MS_AUD_AUDIT_SEC M ON 
+A.INTERNAL_PLAN_ID=M.PLAN_ID AND
+A.AUDIT_ID=M.AUDIT_ID AND
+A.SCHEDULE_ID=M.SCHEDULE_ID
+LEFT JOIN MS_AUD_AUDIT_TEM N ON 
+A.AUDIT_ID=N.AUDIT_ID
+LEFT JOIN MS_AUD_AUDIT_DOC G ON 
+A.AUDIT_ID=G.AUDIT_ID</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

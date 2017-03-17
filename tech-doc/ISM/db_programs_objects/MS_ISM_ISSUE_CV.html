@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS_RSK_ISM_INTG_PUB_V</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_ISM_ISSUE_CV">MS_ISM_ISSUE_CV</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_ISM_ISSUE_CV" ("IAP_ACTION_ID", "ORB_REL_SOURCE_ID", "IAP_ISSUE_ID", "FIELD_VALIDATION", "EDITABILITY_JSON", "ISSUE_AUTO_CLOSED", "UPLOADED_ISSUE", "POPULATE_APPROVER_COMMENTS", "JSON_APPROVER_COMMENTS", "DUMMY_APPROVER_ORG", "DUMMY_APPROVER", "CONFIG_NOTE", "SAME_APPROVER_FLAG", "FINAL_ISS_APPROVERORG", "FINAL_ISS_APPROVER", "ACT_PLAN_APPROVERORG", "ACTION_PLAN_APPROVER", "PRIVATE_PUBLIC", "UPDATE_ISSUE", "REOPEN_ISSUE", "REPEAT_ISSUE", "ISSUE_CLOSED_FROM", "ADDITIONAL_COLUMN5", "ADDITIONAL_COLUMN4", "ORB_FORM_URL", "ADDITIONAL_DETAILS_WITH_ID", "ADDITIONAL_COLUMN3", "ADDITIONAL_COLUMN2", "ADDITIONAL_COLUMN1", "ADDITIONAL_DETAILS", "APPLICABLE_TO", "ROW_NUM", "TGT_OBJ_TYPE", "SELF_REL_TYPE", "PARENT_REL_INST_ID", "REL_COMMENTS", "REL_VALID_UNTIL", "REL_VALID_FROM", "TGT_OBJ_ID", "TGT_OBJ_NAME", "ISSUE_ID", "REL_CONFIG_ID", "REL_INST_ID", "ATTRIBUTE_COLUMN_H2", "ATTRIBUTE_COLUMN_H3", "ADDITIONAL_COLUMN_H1", "ASSOCIATED_WITH_TYPE", "CONFIGURED_OBJECT_TYPES", "REL_SOURCE_OBJECT_ID", "REL_SOURCE_ID", "ID_GEN", "ISSUE_LEGACY_ID", "ADHOC_SRC_DETAILS", "ADHOC_SOURCE", "C_TEXT_5", "C_TEXT_4", "C_TEXT_3", "C_TEXT_2", "C_TEXT_1", "C_RTF_2", "C_RTF_1", "C_DATE_5", "C_DATE_4", "C_DATE_3", "C_DATE_2", "C_DATE_1", "DUMMY_ISSUE_OWNER", "ISSUE_CLOSED_ON", "ISSUE_RELATED_ISSUES", "CONFIG_FLAG", "IAP_SAVE", "REACHED_MANAGE", "OTHER_IMPACT", "ACTION_ID", "DELEGATED", "ISSUE_LOGIN", "DUMMY_RELATED_ISSUES", "CUSTOM_FIELD3", "ACTION_STATE", "ISSUE_DELEGATEE", "REMOVE_DELEGATION", "ISSUE_ACTION_ID", "REQ_DUE_DATE_EXTN", "CUSTOM_FIELD2", "CUSTOM_FIELD1", "RTF_ATTACH", "F_LAST_MODIFIED_ON", "F_LAST_MODIFIED_BY", "F_CREATED_ON", "F_CREATED_BY", "OWNER_ORGANIZATIONS", "RESTRICT_ACCESS_TO", "ACTION_METRIC_ID", "NO_OF_EXTENSIONS", "HIDDEN_APPROVER_ORG", "ISSUE_RESOLUTION_SUMMARY", "FINAL_ACTION_APPROVAL", "ISSUE_ACTION", "ORIG_ISSUE_DUE_DT", "CONFIG_FLAG_DUMMY", "ASSIGNEE", "ISSUE_TYPE", "PROGRESS_STATUS", "REASSIGNED_ISSUE_OWNER", "TYPE_OF_EXECUTION", "ACTION_EXIST", "ISSUE_INITIATOR", "ACTIVITIES", "ASSIGN_TO", "PREVIOUS_STAGE", "ACTION_APPROVER1", "ACTION_APPROVER2", "ACTION_CATEGORY", "ACTION_DESCRIPTION", "ACTION_DUE_DATE", "ACTION_OWNER", "ACTION_PRIORITY", "ACTION_RELATED_TO", "ACTION_START_DATE", "ACTION_TITLE", "ACTION_TYPE", "ISSUE_APPROVER", "ISSUE_APPROVERORG", "ISSUE_ATTACH_FILES", "ISSUE_COMMENTS", "ISSUE_DETAILS", "ISSUE_DUE_DATE", "ISSUE_IDENTIFIED_ON", "ISSUE_OWNER", "ISSUE_OWNERORG", "ISSUE_REVIEWER", "ISSUE_RISK_IMPACT", "ISSUE_RISK_LIKLIHOOD", "ISSUE_RISK_LOSS_GAIN", "ISSUE_RISK_LOSS_GAIN_AMT", "ISSUE_RISK_PRIORITY", "ISSUE_RISK_RATING", "ISSUE_SOURCE", "ISSUE_SOURCE_REF", "ISSUE_SOURCE_TYPE", "ISSUE_STATUS", "ISSUE_TITLE", "DD_PROCESS_CODE", "DD_CURRENT_STAGE", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_CURRENT_USER_NAME", "DD_OBJECT_TYPE", "INSTANCE_REC_NUM", "INSTANCE_ID", "METRIC_ID", "METRIC_RUN_DATE", "METRIC_COMPLETED_DATE", "LATEST_FLAG", "CREATED_BY", "CREATION_DATE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "MULTIROW_GROUP_NAME", "ELECTRONICALLY_SIGNED", "MULTIROW_REGION_ID", "ISSUE_DETAILS_HTM", "ACTION_DESCRIPTION_HTM", "ISSUE_RESOLUTION_SUMMARY_HTM", "C_RTF_1_HTM", "C_RTF_2_HTM", "ADHOC_SRC_DETAILS_HTM", "CONFIG_FLAG_SETUP", "NO_OF_ACTION", "ACT_RESULTS", "ACT_WORK_DONE", "ACT_RESULTS_HTM", "ACT_WORK_DONE_HTM", "ACTION_COUNT", "ACTION_REOPEN_PARAM", "DD_ACTION", "DD_CURRENT_STATUS", "ISSUE_SOURCE_TYPE_ADT", "LSI_DETL", "RELATED_ISSUE_PARAM", "UNIQUE_ROW_ID", "UPSTREAM_SOURCE_TYPE", "SELECTED_APPROVER", "RECOMMENDATION", "LOCALE_ID", "LOCALE_STRING") AS 
+  WITH DUMMY_APPROVER_ORG_TB1 AS
+ (SELECT ORG_ENTITY_NAME,ORG_ENTITY_ID
+    FROM SI_ORG_ENTITIES_T
+    WHERE ORG_ENTITY_ID IN (SELECT DUMMY_APPROVER_ORG FROM MS_ISM_ISSUE_V)
+    ),
+    FINAL_ISS_APPROVERORG_TB1 AS
+       (SELECT ORG_ENTITY_NAME,ORG_ENTITY_ID
+    FROM SI_ORG_ENTITIES_T
+    WHERE ORG_ENTITY_ID IN(SELECT FINAL_ISS_APPROVERORG FROM MS_ISM_ISSUE_V)),
+    ACT_PLAN_APPROVERORG_TB1 AS 
+      (SELECT ORG_ENTITY_NAME,ORG_ENTITY_ID
+    FROM SI_ORG_ENTITIES_T
+    WHERE ORG_ENTITY_ID IN(SELECT ACT_PLAN_APPROVERORG FROM MS_ISM_ISSUE_V)
+    ),
+    OWNER_ORGANIZATIONS_TB1 AS 
+     (SELECT ORG_ENTITY_NAME,ORG_ENTITY_ID
+    FROM SI_ORG_ENTITIES_T
+    WHERE ORG_ENTITY_ID IN(SELECT OWNER_ORGANIZATIONS FROM MS_ISM_ISSUE_V)
+    ),
+    ISSUE_APPROVERORG_TB1 AS 
+      (SELECT ORG_ENTITY_NAME,ORG_ENTITY_ID
+    FROM SI_ORG_ENTITIES_T
+    WHERE ORG_ENTITY_ID IN (SELECT issue_approverorg FROM MS_ISM_ISSUE_V)
+    ),
+    ISSUE_OWNERORG_TB1 AS 
+    (SELECT ORG_ENTITY_NAME,ORG_ENTITY_ID
+    FROM SI_ORG_ENTITIES_T
+    WHERE ORG_ENTITY_ID IN(SELECT issue_ownerorg FROM MS_ISM_ISSUE_V)
+    )     
+    SELECT IAP_ACTION_ID,
+    ORB_REL_SOURCE_ID,
+    IAP_ISSUE_ID,
+    FIELD_VALIDATION,
+    EDITABILITY_JSON,
+    ISSUE_AUTO_CLOSED,
+    UPLOADED_ISSUE,
+    POPULATE_APPROVER_COMMENTS,
+    JSON_APPROVER_COMMENTS,
+    (SELECT ORG_ENTITY_NAME FROM DUMMY_APPROVER_ORG_TB1 WHERE DUMMY_APPROVER_ORG=ORG_ENTITY_ID ) AS DUMMY_APPROVER_ORG,
+    (select user_full_name from ms_grc_user_full_name_v where user_name = DUMMY_APPROVER) AS DUMMY_APPROVER,
+   CONFIG_NOTE,
+    Initcap(SAME_APPROVER_FLAG) as SAME_APPROVER_FLAG,
+    (SELECT ORG_ENTITY_NAME FROM FINAL_ISS_APPROVERORG_TB1 WHERE ORG_ENTITY_ID = FINAL_ISS_APPROVERORG) AS FINAL_ISS_APPROVERORG,
+    (select user_full_name from ms_grc_user_full_name_v where user_name = FINAL_ISS_APPROVER) AS FINAL_ISS_APPROVER,
+  (SELECT ORG_ENTITY_NAME FROM ACT_PLAN_APPROVERORG_TB1 WHERE ORG_ENTITY_ID = ACT_PLAN_APPROVERORG) AS ACT_PLAN_APPROVERORG,
+    (select user_full_name from ms_grc_user_full_name_v where user_name = ACTION_PLAN_APPROVER)             AS ACTION_PLAN_APPROVER,
+    PRIVATE_PUBLIC,
+    UPDATE_ISSUE,
+    REOPEN_ISSUE,
+    A.Repeat_Issue AS REPEAT_ISSUE,
+    ISSUE_CLOSED_FROM,
+    ADDITIONAL_COLUMN5,
+    ADDITIONAL_COLUMN4,
+    ORB_FORM_URL,
+    ADDITIONAL_DETAILS_WITH_ID,
+    ADDITIONAL_COLUMN3,
+    ADDITIONAL_COLUMN2,
+    ADDITIONAL_COLUMN1,
+    ADDITIONAL_DETAILS,
+    APPLICABLE_TO,
+    ROW_NUM,
+    TGT_OBJ_TYPE,
+    SELF_REL_TYPE,
+    PARENT_REL_INST_ID,
+    REL_COMMENTS,
+    REL_VALID_UNTIL,
+    REL_VALID_FROM,
+    TGT_OBJ_ID,
+    TGT_OBJ_NAME,
+    ISSUE_ID,
+    REL_CONFIG_ID,
+    REL_INST_ID,
+    ATTRIBUTE_COLUMN_H2,
+    ATTRIBUTE_COLUMN_H3,
+    ADDITIONAL_COLUMN_H1,
+    ASSOCIATED_WITH_TYPE,
+    CONFIGURED_OBJECT_TYPES,
+    REL_SOURCE_OBJECT_ID,
+    REL_SOURCE_ID,
+    ID_GEN,
+    ISSUE_LEGACY_ID,
+    (CASE WHEN dbms_lob.getlength(Adhoc_Src_Details)=0 THEN NULL ELSE  Adhoc_Src_Details END) as Adhoc_Src_Details,
+    ADHOC_SOURCE,
+    C_TEXT_5,
+    C_TEXT_4,
+    C_TEXT_3,
+    C_TEXT_2,
+    C_TEXT_1,
+    C_RTF_2,
+    C_RTF_1,
+    C_DATE_5,
+    C_DATE_4,
+    C_DATE_3,
+    C_DATE_2,
+    C_DATE_1,
+    (select user_full_name from ms_grc_user_full_name_v where user_name =DUMMY_ISSUE_OWNER) AS DUMMY_ISSUE_OWNER,
+    ISSUE_CLOSED_ON,
+    ms_ism_helper.get_mlov_val_chng_histr('ISSUE_RELATED_ISSUES',issue_id,instance_id,'','') AS ISSUE_RELATED_ISSUES,
+    CONFIG_FLAG,
+    IAP_SAVE,
+    REACHED_MANAGE,
+    ms_ism_helper. get_comma_sep_display_value (OTHER_IMPACT,'ORG') AS OTHER_IMPACT,
+    ACTION_ID,
+    DELEGATED,
+    ISSUE_LOGIN,
+    DUMMY_RELATED_ISSUES,
+    CUSTOM_FIELD3,
+    ACTION_STATE,
+    (select user_full_name from ms_grc_user_full_name_v where user_name =Issue_Delegatee) AS ISSUE_DELEGATEE,
+    REMOVE_DELEGATION,
+    ISSUE_ACTION_ID,
+    REQ_DUE_DATE_EXTN,
+    (select user_full_name from ms_grc_user_full_name_v where user_name =CUSTOM_FIELD2) AS CUSTOM_FIELD2,
+    CUSTOM_FIELD1,
+    RTF_ATTACH,
+    F_LAST_MODIFIED_ON,
+    (select user_full_name from ms_grc_user_full_name_v where user_name =f_last_modified_by) AS F_LAST_MODIFIED_BY,
+    F_CREATED_ON,
+      (select user_full_name from ms_grc_user_full_name_v where user_name =f_created_by) AS F_CREATED_BY,
+    (SELECT ORG_ENTITY_NAME FROM OWNER_ORGANIZATIONS_TB1 WHERE ORG_ENTITY_ID = OWNER_ORGANIZATIONS) AS OWNER_ORGANIZATIONS,
+    RESTRICT_ACCESS_TO,
+    ACTION_METRIC_ID,
+    NO_OF_EXTENSIONS,
+    HIDDEN_APPROVER_ORG,
+    (CASE WHEN dbms_lob.getlength(ISSUE_RESOLUTION_SUMMARY)=0 THEN NULL ELSE  ISSUE_RESOLUTION_SUMMARY END) AS ISSUE_RESOLUTION_SUMMARY,
+    ms_grc_comm_lov_cache_pkg.get_display_value_lov ('MS_ISM', 'MS ISM Final Action Approval', Final_Action_Approval, NULL, Locale_String) AS Final_Action_Approval,
+    (SELECT Action_Name
+    FROM Ms_Ism_Actions_Tl_V
+    WHERE Action_Id = Issue_Action
+    AND locale_id   = loc.locale_id
+    ) AS ISSUE_ACTION,
+    ORIG_ISSUE_DUE_DT,
+    CONFIG_FLAG_DUMMY,
+    (select user_full_name from ms_grc_user_full_name_v where user_name =Assignee) AS Assignee,
+    ms_ism_helper.get_mlov_val_chng_histr ('ISSUE_TYPE',issue_id,instance_id,'MS ISM Issue Type',locale_id)           AS ISSUE_TYPE,
+   ms_grc_comm_lov_cache_pkg.get_display_value_lov ('MS_ISM', 'MS ISM Update Status', progress_status, NULL, Locale_String) AS progress_status,
+      (select user_full_name from ms_grc_user_full_name_v where user_name =reassigned_issue_owner)                    AS REASSIGNED_ISSUE_OWNER,
+      ms_grc_comm_lov_cache_pkg.get_display_value_lov ('MS_ISM', 'MS ISM Classification Type', TYPE_OF_EXECUTION, NULL, Locale_String) AS TYPE_OF_EXECUTION,
+    ACTION_EXIST,
+    (select user_full_name from ms_grc_user_full_name_v where user_name =issue_initiator) AS ISSUE_INITIATOR,
+    ACTIVITIES,
+    (ms_ism_helper.get_comma_sep_display_value (assign_to, 'ASN')) AS ASSIGN_TO,
+    (SELECT Stage_Name
+    FROM Ms_Ism_Stages_Tl_V
+    WHERE Stage_Id = Previous_Stage
+    AND locale_id  = loc.locale_id
+    )                                                        AS PREVIOUS_STAGE,
+    (select user_full_name from ms_grc_user_full_name_v where user_name = action_approver1) AS ACTION_APPROVER1,
+    (select user_full_name from ms_grc_user_full_name_v where user_name =action_approver2) AS ACTION_APPROVER2,
+    ACTION_CATEGORY,
+    (CASE WHEN dbms_lob.getlength(ACTION_DESCRIPTION)=0 THEN NULL ELSE  ACTION_DESCRIPTION END) AS ACTION_DESCRIPTION,
+    ACTION_DUE_DATE,
+    (select user_full_name from ms_grc_user_full_name_v where user_name =action_owner) AS ACTION_OWNER,
+       ms_grc_comm_lov_cache_pkg.get_display_value_lov ('MS_ISM', 'MS ISM Priority', action_priority, NULL, Locale_String) AS action_priority,
+    ACTION_RELATED_TO,
+   ACTION_START_DATE,
+    ACTION_TITLE,
+     ms_grc_comm_lov_cache_pkg.get_display_value_lov ('MS_ISM', 'MS ISM Action Item Type', Action_Type, NULL, Locale_String) AS Action_Type,
+      (select user_full_name from ms_grc_user_full_name_v where user_name = issue_approver) AS ISSUE_APPROVER,
+    (SELECT ORG_ENTITY_NAME FROM ISSUE_APPROVERORG_TB1 WHERE ORG_ENTITY_ID = issue_approverorg) AS ISSUE_APPROVERORG,
+    ISSUE_ATTACH_FILES,
+    ISSUE_COMMENTS,
+    (CASE WHEN dbms_lob.getlength(ISSUE_DETAILS)=0 THEN NULL ELSE  ISSUE_DETAILS END) AS ISSUE_DETAILS,
+    ISSUE_DUE_DATE,
+    ISSUE_IDENTIFIED_ON,
+      (select user_full_name from ms_grc_user_full_name_v where user_name =issue_owner) AS ISSUE_OWNER,
+    (SELECT ORG_ENTITY_NAME FROM ISSUE_OWNERORG_TB1 WHERE ORG_ENTITY_ID = issue_ownerorg)   AS ISSUE_OWNERORG,
+      (select user_full_name from ms_grc_user_full_name_v where user_name =issue_reviewer)                      AS ISSUE_REVIEWER,
+       ms_grc_comm_lov_cache_pkg.get_display_value_lov ('MS_ISM', 'MS ISM Impact', ISSUE_RISK_IMPACT, NULL, Locale_String) AS ISSUE_RISK_IMPACT,
+         ms_grc_comm_lov_cache_pkg.get_display_value_lov ('MS_ISM', 'MS ISM Likelihood', ISSUE_RISK_LIKLIHOOD, NULL, Locale_String) AS ISSUE_RISK_LIKLIHOOD,
+           ms_grc_comm_lov_cache_pkg.get_display_value_lov ('MS_ISM', 'MS ISM Loss Gain', ISSUE_RISK_LOSS_GAIN, NULL, Locale_String) AS ISSUE_RISK_LOSS_GAIN,
+    ISSUE_RISK_LOSS_GAIN_AMT,
+             ms_grc_comm_lov_cache_pkg.get_display_value_lov ('MS_ISM', 'MS ISM Priority', issue_risk_priority, NULL, Locale_String) AS ISSUE_RISK_PRIORITY,
+            -- ms_apps_utilities.get_display_value (100000, 'MS ISM Risk Rating', issue_risk_rating, 1, Locale_Id, NULL) AS ISSUE_RISK_RATING,
+             ms_grc_comm_lov_cache_pkg.get_display_value_lov ('MS_ISM', 'MS ISM Risk Rating', issue_risk_rating, NULL, Locale_String) AS ISSUE_RISK_RATING,
+      DECODE (a.issue_source_type, '0', a.adhoc_source, MS_ISM_HELPER.get_Issue_Source_Title (a.issue_source_type,a.issue_source_type_adt,a.issue_source)) AS ISSUE_SOURCE,
+    ISSUE_SOURCE_REF,
+   ms_grc_comm_lov_cache_pkg.get_display_value_lov ('MS_ISM', 'MS ISM Source Type', Issue_Source_Type, NULL, Locale_String) AS Issue_Source_Type,
+   (SELECT status_name
+    FROM ms_ism_status_tl_v
+    WHERE locale_id = loc.locale_id
+    AND status_id   = issue_status
+    ) AS issue_status,
+    ISSUE_TITLE,
+    DD_PROCESS_CODE,
+    ms_ism_utilities.Fn_Get_Wrkflow_Stage(previous_stage,dd_current_stage,issue_action,loc.locale_id,issue_id) AS dd_current_stage,
+    DD_ENTERPRISE_INFO,
+    (select user_full_name from ms_grc_user_full_name_v where user_name = DD_EVENT_USER_NAME)   AS DD_EVENT_USER_NAME,
+      (select user_full_name from ms_grc_user_full_name_v where user_name =DD_CURRENT_USER_NAME) AS DD_CURRENT_USER_NAME,
+    (SUBSTR (TRIM (dd_object_type), 4, 3))                       AS DD_OBJECT_TYPE,
+    INSTANCE_REC_NUM,
+    INSTANCE_ID,
+    METRIC_ID,
+    METRIC_RUN_DATE,
+    METRIC_COMPLETED_DATE,
+    LATEST_FLAG,
+    (SELECT User_Id FROM Si_Users_T WHERE User_Name = Dd_Current_User_Name
+    ) AS CREATED_BY,
+    CREATION_DATE,
+    PROCESS_FLOW_STATUS,
+    PROCESS_INSTANCE_ID,
+    MULTIROW_GROUP_NAME,
+    ELECTRONICALLY_SIGNED,
+    MULTIROW_REGION_ID,
+    (CASE WHEN dbms_lob.getlength(Issue_Details_Htm)=0 THEN NULL ELSE  Issue_Details_Htm END) AS Issue_Details_Htm,
+    (CASE WHEN dbms_lob.getlength(ACTION_DESCRIPTION_HTM)=0 THEN NULL ELSE  ACTION_DESCRIPTION_HTM END) AS ACTION_DESCRIPTION_HTM,
+    (CASE WHEN dbms_lob.getlength(ISSUE_RESOLUTION_SUMMARY_HTM)=0 THEN NULL ELSE  ISSUE_RESOLUTION_SUMMARY_HTM END) AS ISSUE_RESOLUTION_SUMMARY_HTM,
+    C_RTF_1_HTM,
+    C_RTF_2_HTM,
+    (CASE WHEN dbms_lob.getlength(Adhoc_Src_Details_Htm)=0 THEN NULL ELSE  Adhoc_Src_Details_Htm END)  AS Adhoc_Src_Details_Htm,
+    CONFIG_FLAG_SETUP,
+    NO_OF_ACTION,
+    (CASE WHEN dbms_lob.getlength(ACT_RESULTS)=0 THEN NULL ELSE  ACT_RESULTS END) AS ACT_RESULTS,
+    (CASE WHEN dbms_lob.getlength(ACT_WORK_DONE)=0 THEN NULL ELSE  ACT_WORK_DONE END)  AS ACT_WORK_DONE,
+    (CASE WHEN dbms_lob.getlength(ACT_RESULTS_HTM)=0 THEN NULL ELSE  ACT_RESULTS_HTM END) AS ACT_RESULTS_HTM,
+    (CASE WHEN dbms_lob.getlength(ACT_WORK_DONE_HTM)=0 THEN NULL ELSE  ACT_WORK_DONE_HTM END) AS ACT_WORK_DONE_HTM,
+    ACTION_COUNT,
+	ACTION_REOPEN_PARAM,DD_ACTION,DD_CURRENT_STATUS,ISSUE_SOURCE_TYPE_ADT,LSI_DETL,RELATED_ISSUE_PARAM,UNIQUE_ROW_ID,UPSTREAM_SOURCE_TYPE,
+  SELECTED_APPROVER,
+  (CASE WHEN dbms_lob.getlength(RECOMMENDATION)=0 THEN NULL ELSE  RECOMMENDATION END)  AS RECOMMENDATION,
+    Loc.Locale_Id,
+    Loc.Locale_String
+  FROM Ms_Ism_Issue_V A,
+    (SELECT Locale_Id, Locale_String FROM Si_Locales WHERE Enabled_Flag = 'Y'
+    ) LOC
+    WHERE ID_GEN IS NULL
+	   AND  (process_instance_id,instance_id) in 
+ (SELECT process_instance_id,MAX(INSTANCE_ID) as INSTANCE_ID
+                                            FROM MS_ISM_ISSUE_V b
+                                            WHERE process_instance_id=A.process_instance_id
+                                            and b.instance_rec_num = 1
+                                            AND b.DD_CURRENT_STAGE != 'NONE'
+                                            GROUP BY b.process_instance_id,
+                                                     b.dd_current_stage,
+                                                     b.CREATION_DATE)</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

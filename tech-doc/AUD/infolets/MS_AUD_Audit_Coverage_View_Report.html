@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+   <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Infolets</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">                                <h4 class="infolet-tooltip"><span class="icn icn-infolet" style="margin-right:10px"></span>  
+                                <span data-toggle="tooltip" data-placement="top" title="Category: Human Resource" class="fa fa-cubes fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Output Type: Ordinary Graph" class="fa fa-sign-out fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Type: SQL Based" class="fa fa-globe fa-fw"></span>
+                                <span data-toggle="tooltip" data-placement="top" title="Non Persistent" class="fa fa fa-thumbs-down fa-fw"></span>
+                                                                                                <span class="headerAlign" id="MS_AUD_Audit_Coverage_View_Report">MS AUD Audit Coverage View Report</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:15%;">Name</th>
+                                                <td>MS_AUD_Audit_Coverage_View_Report</td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:15%;">Description</th>
+                                                <td>This infolet fetches Audit Coverage Details for Auditable Entity to be shown in View Reports</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- table-wrapper -->
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                    <ul class="nav nav-pills">
+                                        <li class="active"><a href="#columns-pill" data-toggle="tab">Columns</a></li>
+                                        <li><a href="#query-pill" data-toggle="tab">Query</a></li>
+                                        <li><a href="#xml-pill" data-toggle="tab">XML</a></li>
+                                        <li><a href="#params-pill" data-toggle="tab">Parameters</a></li>
+                                        <li><a href="#filters-pill" data-toggle="tab">Filters</a></li>
+                                        <li><a href="#usedin-pill" data-toggle="tab">Used In</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="columns-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-c">
+                                                        <thead>
+                                                            <th>#</th>
+                                                            <th>Name</th>
+                                                            <th>Type</th>
+                                                            <th>Result Column Name</th>
+                                                            <th>User Column Name</th>
+                                                            <th>Default Infolet/<br>Input Infolet</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>(SELECTMS_APPS_UTILITIES.GET_DISPLAY_VALUE(MS_APPS_UTILITIES.GET_ENTERPRISE_ID(MS_APPS_UTILITIES.GET_INFOLET_ID('MS_AUD_MANAGE_AUDIT')),'MSAUDAUDITRATING',AUDIT_RATING,'1',NVL(CAST(SI_DB_LOCALE_SV.GETVALUEASNUMBER),1009))FROM(SELECTAUDIT_RATING,ROW_NUMBER()OVER(PARTITIONBYAUDIT_IDORDERBYTASK_IDDESC)ASRNUM,AUDIT_IDFROMMS_AUD_AUDIT_REPORT)WHERERNUM=1ANDAUDIT_</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_RATING</td>
+                                                                <td>Audit Rating</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>(SELECTS.STATUS_NAMEFROMMS_AUD_PLAN_SCOPEPS,MS_AUD_STATUS_TL_VSWHEREPS.AUDIT_ID=A.AUDIT_IDANDPS.FORM_TYPE='P'ANDS.LOCALE_ID=(SELECTB.LOCALE_IDFROMSI_USERS_TA,SI_LOCALESBWHEREA.LOCALE=B.LOCALE_STRINGANDA.USER_NAME=:LOGIN_ID)ANDPS.STATUS=S.STATUS_ID)PS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>PLAN_SCOPE</td>
+                                                                <td>Plan Scope</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>A.AUDIT_START_DATE</td>
+                                                                <td>Date</td>
+                                                                <td>AUDIT_START_DATE</td>
+                                                                <td>Audit Start Date</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>(SELECTCODE_DESCRIPTIONFROMMS_AUD_LOV_CONFIG_TL_VWHERELOCALE_ID=NVL(CAST(SI_DB_LOCALE_SV.GETVALUEASNUMBER),1009)ANDCODE_GROUP='MSAUDAUDITTYPE'ANDCODE_CODE=A.AUDIT_TYPE)AUDTYPE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_TYPE</td>
+                                                                <td>Audit Type</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>(SELECTCODE_DESCRIPTIONFROMMS_AUD_LOV_CONFIG_TL_VWHERELOCALE_ID=NVL(CAST(SI_DB_LOCALE_SV.GETVALUEASNUMBER),1009)ANDCODE_GROUP='MSAUDCLASSIFICATION'ANDCODE_CODE=A.AUDIT_CLASSIFICATION)AUD_CLAS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_CLASSIFICATION</td>
+                                                                <td>Audit Classification</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td>A.ACTUAL_EFFORT</td>
+                                                                <td>Varchar2</td>
+                                                                <td>ACTUAL_EFFORT</td>
+                                                                <td>Actual Effort</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>A.PLANNED_AUDIT_LENGTH</td>
+                                                                <td>Varchar2</td>
+                                                                <td>BUDGETED_EFFORTS</td>
+                                                                <td>Budgeted Efforts</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>A.AUDIT_CLOSURE_DATE</td>
+                                                                <td>Date</td>
+                                                                <td>AUDIT_END_DATE</td>
+                                                                <td>Audit End Date</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>RNUM,AUDIT_IDFROMMS_AUD_AUDIT_REPORT)WHERERNUM=1ANDAUDIT_ID=A.AUDIT_ID)ARID</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_REPORT_ID</td>
+                                                                <td>Audit Report ID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>13</td>
+                                                                <td>(MS_AUD_F014_HELPER.FN_GET_OPEN_ISSUE_FOR_AE(:OBJECT_ID,A.AUDIT_ID,:INTERNAL_OBJECT_ID))ISSUE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>OPEN_ISSUES</td>
+                                                                <td>Open Issues</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>14</td>
+                                                                <td>(SELECTAE_VERSIONFROMMS_AUD_AUDITABLE_ENTITWHEREOBJECT_ID=(SELECTCORE_OBJECTSFROMMS_AUD_AUDIT_AUEWHEREAUDIT_ID=A.AUDIT_IDANDCORE_OBJECTSIN(SELECTOBJECT_IDFROMMS_AUD_AUDITABLE_ENTITWHEREINTERNAL_OBJECT_ID=:INTERNAL_OBJECT_IDANDOBJECT_ID&lt;=:OBJECT_ID)ANDROWNUM=1))AEV</td>
+                                                                <td>Varchar2</td>
+                                                                <td>VERSION_NO</td>
+                                                                <td>Version No</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>15</td>
+                                                                <td>MS_AUD_REPORT_UTILS.FN_GET_REPORT_JSON((SELECTMETRIC_IDFROMSI_METRICS_TWHEREMETRIC_NAME='MS_AUD_MANAGE_AUDIT'),A.DD_PROCESS_INSTANCE_ID,NULL,'FLAG=1'||CHR(38)||'EMD=2'||CHR(38)||'X_EDIT_MODE=NO'||CHR(38)||'AUDIT_ID='||A.AUDIT_ID)ASAJSON</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUD_JSON</td>
+                                                                <td>AUD_JSON</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>16</td>
+                                                                <td>MS_AUD_REPORT_UTILS.FN_GET_REPORT_JSON((SELECTMETRIC_IDFROMSI_METRICS_TWHEREMETRIC_NAME='MS_AUD_PLAN_SCOPE'),(SELECTPS.DD_PROCESS_INSTANCE_IDFROMMS_AUD_PLAN_SCOPEPSWHEREPS.AUDIT_ID=A.AUDIT_IDANDPS.FORM_TYPE='P'),(SELECTPS.DD_INSTANCE_IDFROMMS_AUD_PLAN_SCOPEPSWHEREPS.AUDIT_ID=A.AUDIT_IDANDPS.FORM_TYPE='P'),'FLAG=1'||CHR(38)||'EMD=51'||CHR(38)||'X_EDIT_MODE=NO'||C</td>
+                                                                <td>Varchar2</td>
+                                                                <td>SCOPE_JSON</td>
+                                                                <td>SCOPE_JSON</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>A.AUDIT_ID</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_ID</td>
+                                                                <td>Audit ID</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>A.AUDIT_TITLE</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_TITLE</td>
+                                                                <td>Audit Title</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>(SELECTSTATUS_NAMEFROMMS_AUD_STATUSWHERESTATUS_ID=A.AUDIT_STATUS)STATUS</td>
+                                                                <td>Varchar2</td>
+                                                                <td>AUDIT_STATUS</td>
+                                                                <td>Audit Status</td>
+                                                                <td>--/ --</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="filters-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-fnr">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Expression</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Audit Title Filter Text</td>
+                                                                <td>(AUDIT_TITLE Like :Audit Title)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Audit Classification Filter Drop down</td>
+                                                                <td>(AUDIT_CLASSIFICATION = :Audit Classification)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Audit Type Filter Drop down</td>
+                                                                <td>(AUDIT_TYPE = :Audit Type)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Started After filter Date</td>
+                                                                <td>(AUDIT_START_DATE > to_date(:Started After, 'yyyy-mm-dd hh24-mi-ss'))</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Completed Before filter Date</td>
+                                                                <td>(AUDIT_END_DATE < to_date(:Completed Before, 'yyyy-mm-dd hh24-mi-ss'))</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Audit Status Drop Down</td>
+                                                                <td>(AUDIT_STATUS IN :Audit Status)</td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="params-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-pnr">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Source Infolet</th>
+                                                            <th>Mandatory</th>
+                                                            <th>Description</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>LOGIN_ID</td>
+                                                                <td></td>
+                                                                <td>N</td>
+                                                                <td>LOGIN_ID</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>OBJECT_ID</td>
+                                                                <td></td>
+                                                                <td>N</td>
+                                                                <td>Auditable Entity ID</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Audit_Manager</td>
+                                                                <td><a href="MS_AUD_Audit_Managers.html">MS AUD Audit Managers</a></td>
+                                                                <td>N</td>
+                                                                <td>Audit Manager</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Lead_Auditor</td>
+                                                                <td><a href="MS_AUD_Lead_Auditors.html">MS AUD Lead Auditors</a></td>
+                                                                <td>N</td>
+                                                                <td>Lead Auditor</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Organizations</td>
+                                                                <td><a href="MS_AUD_All_Organizations_In_System.html">MS AUD All Organizations In System</a></td>
+                                                                <td>N</td>
+                                                                <td>Organizations</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>internal_object_id</td>
+                                                                <td></td>
+                                                                <td>N</td>
+                                                                <td>Internal Object ID</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="usedin-pill">
+                                            <div class="panel-body">
+                                                <div class="dataTable_wrapper">
+                                                    <table class="table table-hover infolet-table-rnr">
+                                                        <thead>
+                                                            <th>Used In</th>
+                                                            <th>Usage Type</th>
+                                                            <th>User</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>MS_AUD_Rpt_Audit_Coverage_View_Rpt</td>
+                                                                <td>Inline Report</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_AUD_Rpt_Audit_Coverage_View_Rpt</td>
+                                                                <td>Inline Report</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_AUD_Rpt_Audit_Coverage_View_Rpt</td>
+                                                                <td>Inline Report</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_AUD_Rpt_Audit_Coverage_View_Rpt</td>
+                                                                <td>Inline Report</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_AUD_Rpt_Audit_Coverage_View_Rpt</td>
+                                                                <td>Inline Report</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_AUD_Rpt_Audit_Coverage_View_Rpt</td>
+                                                                <td>Inline Report</td>
+                                                                <td>All</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>MS_AUD_Rpt_Audit_Coverage_View_Rpt</td>
+                                                                <td>Report</td>
+                                                                <td>pfadmin</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-wrapper -->
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
+                                        <div class="tab-pane fade" id="query-pill">
+                                            <div class="modal-dialog"">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-sql')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-sql">SELECT a.audit_id ,a.audit_title,(SELECT status_name FROM <a class="codeLink" href="../db_tables/MS_AUD_STATUS.html">ms_aud_status</a> WHERE status_id = a.audit_status) status,(SELECT ms_apps_utilities.get_display_value(ms_apps_utilities.get_enterprise_id (ms_apps_utilities.get_infolet_id(&#39;MS_AUD_MANAGE_AUDIT&#39;)), &#39;MS AUD Audit Rating&#39;,audit_rating,&#39;1&#39;,nvl(cast(si_db_locale_sv.getvalue as number),1009)) FROM (SELECT audit_rating,row_number() over (partition by audit_id  order by task_id DESC) AS rnum,audit_id FROM <a class="codeLink" href="../db_tables/MS_AUD_AUDIT_REPORT.html">ms_aud_audit_report</a> ) WHERE rnum  =1 AND audit_id=a.audit_id) AS aud_rate,(select s.status_name FROM <a class="codeLink" href="../db_tables/MS_AUD_PLAN_SCOPE.html">ms_aud_plan_scope</a> ps,<a class="codeLink" href="../db_tables/MS_AUD_STATUS_TL_V.html">ms_aud_status_tl_v</a> s where ps.audit_id= a.audit_id and ps.form_type=&#39;P&#39; and s.locale_id = (select b.locale_id from si_users_t a, si_locales b
+where a.locale = b.locale_string and a.user_name = <span class="parameter-style">:LOGIN_ID</span>) and ps.status = s.status_id) PS,a.audit_start_date,(select code_description from <a class="codeLink" href="../db_tables/MS_AUD_LOV_CONFIG_TL_V.html">ms_aud_lov_config_tl_v</a> where locale_id=nvl(cast(si_db_locale_sv.getvalue as number),1009) AND code_group = &#39;MS AUD Audit Type&#39; and code_code = a.audit_type) audtype,(select code_description from <a class="codeLink" href="../db_tables/MS_AUD_LOV_CONFIG_TL_V.html">ms_aud_lov_config_tl_v</a> where locale_id=nvl(cast(si_db_locale_sv.getvalue as number),1009) and code_group = &#39;MS AUD Classification&#39; and code_code = a.audit_classification) aud_clas,a.actual_effort,a.planned_audit_length,a.audit_closure_date,(SELECT audit_report_id FROM (SELECT audit_report_id,row_number() over (partition by audit_id order by task_id DESC) AS rnum,audit_id FROM <a class="codeLink" href="../db_tables/MS_AUD_AUDIT_REPORT.html">ms_aud_audit_report</a>) WHERE rnum  =1 AND audit_id=a.audit_id) ARID,(<a class="codeLink" href="../pldoc/index.html#MS_AUD_F014_HELPER" target="tab">ms_aud_f014_helper</a>.fn_get_open_issue_for_ae(<span class="parameter-style">:OBJECT_ID</span>,a.audit_id,<span class="parameter-style">:internal_object_id</span>)) ISSUE,(select ae_version from <a class="codeLink" href="../db_tables/MS_AUD_AUDITABLE_ENTIT.html">ms_aud_auditable_entit</a> where object_id = (SELECT core_objects from <a class="codeLink" href="../db_tables/MS_AUD_AUDIT_AUE.html">ms_aud_audit_aue</a> where audit_id=a.audit_id and core_objects IN  (SELECT object_id from <a class="codeLink" href="../db_tables/MS_AUD_AUDITABLE_ENTIT.html">ms_aud_auditable_entit</a> where internal_object_id=<span class="parameter-style">:internal_object_id</span> and object_id&lt;=<span class="parameter-style">:OBJECT_ID</span>) and rownum=1)) AEV,<a class="codeLink" href="../pldoc/index.html#MS_AUD_REPORT_UTILS" target="tab">ms_aud_report_utils</a>.fn_get_report_json((select metric_id from si_metrics_t where metric_name=&#39;MS_AUD_MANAGE_AUDIT&#39;),a.dd_process_instance_id,null,&#39;flag=1&#39;||CHR(38)||&#39;emd=2&#39;||CHR(38)||&#39;x_edit_mode=No&#39;|| CHR (38)||&#39;Audit_id=&#39;||a.audit_id )as AJSON,
+<a class="codeLink" href="../pldoc/index.html#MS_AUD_REPORT_UTILS" target="tab">ms_aud_report_utils</a>.fn_get_report_json((select metric_id from si_metrics_t where metric_name=&#39;MS_AUD_PLAN_SCOPE&#39;),(SELECT ps.dd_process_instance_id FROM <a class="codeLink" href="../db_tables/MS_AUD_PLAN_SCOPE.html">ms_aud_plan_scope</a> ps WHERE ps.audit_id= a.audit_id and ps.form_type=&#39;P&#39;),(SELECT ps.dd_instance_id FROM <a class="codeLink" href="../db_tables/MS_AUD_PLAN_SCOPE.html">ms_aud_plan_scope</a> ps WHERE ps.audit_id= a.audit_id and ps.form_type=&#39;P&#39;),
+&#39;flag=1&#39;||CHR(38)||&#39;emd=51&#39;||CHR(38)||&#39;x_edit_mode=No&#39;|| CHR (38)|| &#39;Audit_id=&#39;|| a.audit_id) SJSON FROM <a class="codeLink" href="../db_tables/MS_AUD_AUDIT.html">ms_aud_audit</a> a
+LEFT OUTER JOIN (SELECT alm.AUDIT_ID,
+ms_concat(LEAD_AUDITOR_MLOV) LEAD_AUDITOR_MLOV,
+ms_concat(user_full_name) la_disp_name
+FROM <a class="codeLink" href="../db_tables/MS_AUD_AUDIT_ALM.html">MS_AUD_AUDIT_ALM</a> alm,
+<a class="codeLink" href="../db_tables/MS_AUD_USERS_V.html">ms_aud_users_v</a> u
+WHERE u.user_name = alm.LEAD_AUDITOR_MLOV
+GROUP BY AUDIT_ID
+)LA ON (a.AUDIT_ID = LA.AUDIT_ID)
+LEFT OUTER JOIN (SELECT amm.AUDIT_ID,
+ms_concat(AUDIT_MANAGER_MLOV) AUDIT_MANAGER_MLOV,
+ms_concat(user_full_name) ma_disp_name
+FROM <a class="codeLink" href="../db_tables/MS_AUD_AUDIT_AMM.html">MS_AUD_AUDIT_AMM</a> amm,
+<a class="codeLink" href="../db_tables/MS_AUD_USERS_V.html">ms_aud_users_v</a> u
+WHERE u.user_name = amm.AUDIT_MANAGER_MLOV
+GROUP BY AUDIT_ID
+)MA
+ON (a.AUDIT_ID= MA.AUDIT_ID)
+WHERE
+ (NVL (a.lead_auditor,&#39;1&#39;)= NVL(<span class="parameter-style">:Lead_Auditor</span>, NVL (a.lead_auditor,&#39;1&#39;))
+OR INSTR(&#39;,&#39;
+||LA.LEAD_AUDITOR_MLOV
+||&#39;,&#39;, &#39;,&#39;
+||<span class="parameter-style">:Lead_Auditor</span>
+||&#39;,&#39;)&gt;0)
+AND (NVL(a.audit_manager,&#39;1&#39;) = NVL(<span class="parameter-style">:Audit_Manager</span>, NVL (a.audit_manager,&#39;1&#39;))
+OR INSTR(&#39;,&#39;
+||MA.AUDIT_MANAGER_MLOV
+||&#39;,&#39;,&#39;,&#39;
+||<span class="parameter-style">:Audit_Manager</span>
+||&#39;,&#39;)&gt;0)
+AND <a class="codeLink" href="../pldoc/index.html#MS_AUD_AUDIT_SECURITY" target="tab">ms_aud_audit_security</a>.check_view_access (a.AUDIT_ID,a.DD_OBJECT_TYPE,a.RESTRICT_ACCESS_TO,a.CONDUCTED_BY_ORG,<span class="parameter-style">:LOGIN_ID</span>,&#39;VIEW&#39;)=&#39;ACCESS&#39;
+AND a.status NOT IN (&#39;2&#39;,&#39;31&#39;,&#39;44&#39;,&#39;51&#39;,&#39;59&#39;,&#39;4&#39;)
+AND a.approve_flag  = &#39;1&#39;
+AND NVL (a.conducted_by_org, 1) =NVL(<span class="parameter-style">:Organizations</span>,NVL(a.conducted_by_org,&#39;1&#39;))
+AND EXISTS
+(SELECT 1 FROM <a class="codeLink" href="../db_tables/MS_AUD_AUDIT_AUE.html">ms_aud_audit_aue</a> WHERE audit_id=a.audit_id and core_objects IN (SELECT object_id from <a class="codeLink" href="../db_tables/MS_AUD_AUDITABLE_ENTIT.html">ms_aud_auditable_entit</a> 
+where internal_object_id=<span class="parameter-style">:internal_object_id</span>
+and object_id&lt;=<span class="parameter-style">:OBJECT_ID</span>
+))ORDER BY audit_start_date DESC</pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <div class="tab-pane fade" id="xml-pill">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="btn btn-primary" onclick="SelectText('selectme-xml')">Select All</button>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <pre id="selectme-xml">&lt;?xml version=&quot;1.0&quot;?&gt;&lt;METRIC_DEPLOYMENT&gt;&lt;METRIC   MODE=&quot;CLASS&quot;     PROCESS=&quot;0&quot;  INSTANCE=&quot;0&quot;  NOTIFY=&quot;YES&quot;   RETURN=&quot;RESULTSET&quot; &gt;&lt;RESULTMAP &gt;&lt;/RESULTMAP&gt;&lt;/METRIC&gt;&lt;/METRIC_DEPLOYMENT&gt;</pre>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                                </div>
+                                <!--panel-default -->
+                                <div class="no-panel no-panel-success">
+                                    <div class="panel-heading">
+                                        <h4>References</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <th colspan="2" style="background-color:rgb(221, 221, 221);">Reports</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><a href="../reports/100593.html">Audit Coverage Report</a></td>
+                                                    <td></td>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- panel-body -->
+                                </div>
+                                <!-- panel-success -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel panel-default -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+        <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+
+      
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('.infolet-tooltip').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+                $('.infolet-table-c').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-cnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "5%" },     // 1st column width 
+                        { "sWidth": "18%" },    // 2nd column width 
+                        { "sWidth": "10%" },    // 3rd column width 
+                        { "sWidth": "19%" },    // 4th column width 
+                        { "sWidth": "19%" },    // 5th column width 
+                        { "sWidth": "29%" }     // 6th column width 
+                    ]
+                });
+                $('.infolet-table-f').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-fnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "20%" },    // 1st column width 
+                        { "sWidth": "50%" },    // 2nd column width 
+                        { "sWidth": "30%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-p').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "22%" },    // 1st column width 
+                        { "sWidth": "30%" },    // 2nd column width
+                        { "sWidth": "13%" },    // 3rd column width 
+                        { "sWidth": "35%" }     // 4th column width 
+                    ]
+                });
+                $('.infolet-table-pnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "22%" },    // 1st column width 
+                        { "sWidth": "30%" },    // 2nd column width
+                        { "sWidth": "13%" },    // 3rd column width 
+                        { "sWidth": "35%" }     // 4th column width 
+                    ]
+                });
+                $('.infolet-table-r').DataTable({
+                    destroy:true,
+                    "responsive": true,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+                $('.infolet-table-rnr').DataTable({
+                    destroy:true,
+                    "bPaginate": false,
+                    "bFilter": false,
+                    "bAutoWidth": false,        // Disable the auto width calculation 
+                    "aoColumns": [
+                        { "sWidth": "58%" },    // 1st column width 
+                        { "sWidth": "17%" },    // 2nd column width 
+                        { "sWidth": "25%" }    // 3rd column width 
+                    ]
+                });
+            });
+            (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

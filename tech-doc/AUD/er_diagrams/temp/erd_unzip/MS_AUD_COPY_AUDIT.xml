@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><schemadiagramrequest xmlns="http://www.metricstream.com/xsd"><module>AUD</module><display_number_of_columns></display_number_of_columns><schemadiagram><name>MS_AUD_COPY_AUDIT</name><tables><table><name>MS_AUD_COPY_AUDIT</name><pkcolumn><column>AUDIT_ID</column></pkcolumn></table>
+<table><name>MS_AUD_COPY_AUDIT_ALM</name><pkcolumn><column>LEAD_AUDITOR_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_COPY_AUDIT_AMM</name><pkcolumn><column>AUDIT_MANAGER_MLOV</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+<table><name>MS_AUD_COPY_AUDIT_TSK</name><pkcolumn><column>TASK_ID</column></pkcolumn><fkcolumn><column>AUDIT_ID</column></fkcolumn></table>
+</tables><relationships><relationship name="" logical="1-*">
+<from><table>MS_AUD_COPY_AUDIT</table>
+</from><to><table>MS_AUD_COPY_AUDIT_TSK</table><table>MS_AUD_COPY_AUDIT_ALM</table><table>MS_AUD_COPY_AUDIT_AMM</table></to></relationship>
+</relationships></schemadiagram></schemadiagramrequest>

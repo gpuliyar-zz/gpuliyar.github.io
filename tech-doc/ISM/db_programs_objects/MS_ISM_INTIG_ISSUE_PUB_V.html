@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS_RSK_ISM_INTG_PUB_V</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_ISM_INTIG_ISSUE_PUB_V">MS_ISM_INTIG_ISSUE_PUB_V</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_ISM_INTIG_ISSUE_PUB_V" ("ISSUE_ID", "ISSUE_TITLE", "ISSUE_DETAILS", "ISSUE_STATUS", "ISSUE_DUE_DATE", "ORIG_ISSUE_DUE_DT", "ISSUE_IDENTIFIED_ON", "PROGRESS_STATUS", "ISSUE_SOURCE_TYPE", "ISSUE_SOURCE_TYPE_ADT", "ISSUE_SOURCE", "ISSUE_SOURCE_STORED", "ISSUE_SOURCE_REF", "CREATED_BY", "CREATED_ON", "LAST_MODIFIED_BY", "LAST_MODIFIED_ON", "ISSUE_CLOSED_ON", "OBJECT_TYPE", "ISSUE_OWNER", "ISSUE_OWNERORG", "ISSUE_DELEGATEE", "INITIAL_APPROVER", "INITIAL_APPR_ORG", "ACTION_PLAN_APPROVER", "ACT_PLAN_APPR_ORG", "FINAL_APPROVER", "FINAL_APPR_ORG", "NO_OF_REOPEN", "ISSUE_RATING", "PRIORITY", "NO_OF_ACTIONS_TRIGGERED", "FINAL_ACTION_APPROVAL", "IMPACT", "LIKELIHOOD", "LOSS_GAIN", "LOSS_GAIN_AMOUNT", "EXCEPTION_TYPE", "REACHED_TO_MANAGE", "REPEAT_ISSUE", "ISSUE_TYPE", "RELATED_ISSUES", "DD_PROCESS_INSTANCE_ID", "DD_INSTANCE_ID", "DD_METRIC_ID", "ISSUE_LINK", "ISSUE_POPUP_LINK", "EDIT_FORM_LINK") AS 
+  SELECT /*@public*/ a.issue_id                                                                                                               AS issue_id,
+    A.Issue_Title                                                                                                                 AS Issue_Title,
+    REGEXP_REPLACE (a.issue_details, '<[^>]+>', NULL)                                                                             AS issue_details,
+    a.issue_status                                                                                                                AS issue_status_stored,
+    A.Issue_Due_Date                                                                                                              AS Issue_Due_Date,
+    A.Orig_Issue_Due_Dt                                                                                                              AS Orig_Issue_Due_Dt,
+    A.Issue_identified_on                                                                                                         AS Issue_Identified_On,
+    A.progress_status                                                                                                             AS Progress_Status_stored,
+    A.Issue_Source_Type                                                                                                           AS Issue_Src_Type_Stored,
+    A.Issue_Source_Type_adt                                                                                                       AS Issue_Source_Type_adt,
+    DECODE (A.Issue_Source_Type, '0', A.Adhoc_Source, Ms_Ism_Helper.Get_Issue_Source_Title (a.Issue_Source_Type, A.Issue_Source_Type_adt,A.Issue_Source)) AS Issue_Source,
+    a.issue_source                                                                                                                AS ISSUE_SOURCE_STORED,
+    A.Issue_Source_Ref                                                                                                            AS Issue_Source_Ref,
+    A.Dd_Created_By                                                                                                               AS Created_By,
+    A.Dd_Created_On                                                                                                               AS Created_On,
+    A.Dd_Modified_By                                                                                                              AS Last_Modified_By,
+    A.Dd_Modified_On                                                                                                              AS Last_Modified_On,
+    A.Issue_Closed_On                                                                                                             AS Issue_Closed_On,
+    A.Dd_Object_Type                                                                                                              AS Object_Type,
+    A.Issue_Owner                                                                                                                 AS Issue_Owner,
+    A.Issue_OwnerOrg                                                                                                              AS Issue_Owner_Org_stored,
+    A.Issue_Delegatee                                                                                                             AS Issue_Delegatee,
+    A.Issue_Approver                                                                                                              AS Initial_Approver,
+    A.Issue_Approverorg                                                                                                           AS Initial_Appr_Org_Stored,
+    A.Action_Plan_Approver                                                                                                        AS Action_Plan_Approver,
+    A.Act_Plan_Approverorg                                                                                                        AS Act_Plan_Appr_Org_Stored,
+    A.Final_Iss_Approver                                                                                                          AS Final_Approver,
+    A.Final_Iss_Approverorg                                                                                                       AS Final_Appr_Org_Stored,
+    A.Reopen_Issue                                                                                                                AS Reopen_Count,
+    a.issue_risk_rating                                                                                                           AS issue_rating_stored,
+    A.Issue_Risk_Priority                                                                                                         AS Priority_Stored,
+    no_of_action                                                                                                                  AS No_Of_Actions_Added,
+    a.final_action_approval                                                                                                       AS final_action_approval,
+    A.Issue_Risk_Impact                                                                                                           AS Issue_Risk_Impact_stored,
+    A.Issue_Risk_Liklihood                                                                                                        AS Issue_Risk_Likhood_stored,
+    A.Issue_Risk_Loss_Gain                                                                                                        AS Issue_Loss_Gain_stored,
+    a.issue_risk_loss_gain_amt                                                                                                    AS loss_gain_amount,
+    A.Type_Of_Execution                                                                                                           AS Exception_Type_Stored,
+    A.Reached_Manage                                                                                                              AS Reached_To_Manage_Stage,
+    A.Repeat_Issue                                                                                                                AS Repeat_Issue_stored,
+    --Ms_Ism_Helper.Get_Comma_Sep_Iss_type_sto_val(A.Issue_Id)                                                                      AS Issue_Type_stored,
+    ist.iss_type                                                                                                                  AS Issue_Type_stored,
+    --Ms_Ism_Helper.Get_Comma_Sep_Related_Issues(A.Issue_Id)                                                                        AS Related_Issues,
+    rel.rel_issue                                                                                                                 AS Related_Issues,
+    Dd_Process_Instance_Id                                                                                                        AS Dd_Process_Instance_Id,
+    Dd_Instance_Id                                                                                                                AS Dd_Instance_Id,
+    met.metric_id      AS DD_Metric_ID,
+    (	MS_ISM_RPT_UTILS.fn_get_report_json
+                               (met.metric_id,
+                                 a.dd_process_instance_id,
+                                 null,
+                                '''flag=1'
+                                ||CHR(38)
+                                ||'emd=1'
+                                ||CHR(38)
+                                ||'x_edit_mode=No'
+                                || CHR (38)  
+                                || 'wrapper= No''') ) AS ISSUE_LINK,
+(MS_ISM_RPT_UTILS.fn_get_report_json
+                               (met.metric_id,
+                                 a.dd_process_instance_id,
+                                 null,
+                                '''flag=1'
+                                ||CHR(38)
+                                ||'emd=1'
+                                ||CHR(38)
+                                ||'x_edit_mode=No'
+                                || CHR (38)  
+                                || 'wrapper= No'
+                                || CHR (38)  
+                                || 'mode=view''') ) As Issue_Popup_Link,
+(MS_ISM_RPT_UTILS.fn_get_report_json
+                               (met.metric_id,
+                                 a.dd_process_instance_id,
+                                 null,
+                                '''flag=1'
+                                ||CHR(38)
+                                ||'emd=2'
+                                ||CHR(38)
+                                ||'x_edit_mode=No'
+                                || CHR (38)  
+                                || 'wrapper= No'
+                                || CHR (38)  
+                                || 'issue_status='
+								|| a.issue_status
+                ||'') ) AS EDIT_FORM_LINK
+  FROM Ms_Ism_Issue A, (select metric_id from si_metrics_t where metric_name='MS_ISM_ISSUE') met,
+  (select issue_id, MS_JOIN(issue_related_issues) rel_issue from ms_ism_issue_ris group by issue_id)rel,
+  (select issue_id, MS_JOIN(issue_type) iss_type from ms_ism_issue_ist group by issue_id)ist
+  WHERE NVL (Issue_Source_Type, '0') <> '0' and a.issue_id = rel.issue_id(+)
+  and a.issue_id = ist.issue_id(+)</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

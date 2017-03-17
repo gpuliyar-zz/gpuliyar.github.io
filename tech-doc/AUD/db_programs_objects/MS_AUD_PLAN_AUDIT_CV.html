@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS_AUD_UTILITIES</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_AUD_PLAN_AUDIT_CV">MS_AUD_PLAN_AUDIT_CV</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_AUD_PLAN_AUDIT_CV" ("UPLOAD_FLAG", "PLAN_ID", "PERF_CONFIG_FLAG", "REVIEWER_FLAG", "ADVISOR_RUN_FLAG", "CANDIDATE_STATUS", "CAN_ID", "TMP_PK_ID", "ADV_AUDIT_TITLE", "ADV_AUDIT_DELETE", "ADV_AUDIT_DELETE_PARAM", "ADV_PLAN_TITLE", "ADV_PLAN_TITLE_PARAM", "ADV_PLAN_ROW", "ADV_PLAN_TITLE_YEAR", "ADV_PLAN_TITLE_YEAR_PARAM", "ADV_PLAN_TYPE", "RPL_SAVE", "TEMP_CONFIG_FLAG", "FORM_NAME", "KEY_COL_NAME", "RTF_ATTACH", "INTERNAL_PLAN_ID", "ASSIGNEE", "OPENED_FORM", "APPROVED_BY", "APPROVED_ON", "ENTERPRISE_ID", "ORGANIZATION_LEVEL", "OWNER_ORGANIZATIONS", "PREVIOUS_STAGE", "CONFIG_FLAG", "PLAN_STAGE", "INITIATOR_ACTION", "PLAN_COMMENTS", "REVIEWER", "APPROVER", "PDF_CONV_FLAG_FOR_IN_PROCESS", "PDF_CONV_FLAG", "ID_FOR_PDF_CONVERTER", "DOC_PLAN_ID", "DO_NUMBER_FOR_MANAGED", "DO_ID", "DO_NAME_FOR_MANAGED", "DO_COMMENTS", "DO_DOCUMENT", "MEETING_DATE", "DO_NAME", "RPL_ORDER_KEY", "RPL_ORDER_TYPE", "PLAN_RESOURCE_POOL_GEN", "RPL_PLAN_ID", "RPL_ORDERKEY", "RP_CANDIDATE_ID", "RP_ID", "RP_JUSTIFICATION", "RP_ESTIMATED_EFFORT", "AC_END_DT", "AC_START_DATE_HIDDEN", "AC_PLAN_YEARS", "AC_SCHEDULE_DATE", "AC_TIME_WINDOW", "ACD_ORDER_KEY", "ACD_ORDER_TYPE", "RPL_ID_VAL", "RPL_RUN_FLAG", "ACD_ID_VAL", "ACD_RUN_FLAG", "ADVISOR_CALL_REPORT_ID", "AUDIT_BASED_ON", "AE_CALL_INFOLET", "AE_DUPLICAT_VERSION", "ACD_ORDERKEY", "ACD_TMP_PK_ID", "ACD_PLAN_ID", "BUDGETED_EFFORT_FOR_YEAR1", "BUDGETED_EFFORT_FOR_YEAR2", "BUDGETED_EFFORT_FOR_YEAR3", "BUDGETED_EFFORT_FOR_YEAR4", "AC_CANDIDATE_ID", "AC_EFFORT", "PROCESS_AE", "PLAN_AUDIT_CANDIDATE_GEN", "TREE_PICKLIST_PLAN_DATA", "DELETION_COMMENTS", "MARK_FOR_DELETION", "RESOURCE_POOL", "AC_LEAD_AUDITOR_MLOV", "AC_AUDIT_MANAGER_MLOV", "AC_LEAD_AUDITOR", "AC_AUDIT_MANAGER", "AC_RELATED_RISKS", "AC_CORE_OBJECT", "AC_ORGANIZATIONS", "TMP_ORGANIZATIONS", "TMP_RELATED_RISKS", "TMP_CORE_OBJECTS", "TREE_PLAN_DATA", "AC_STATUS", "AC_AUDIT_TITLE", "BUDGETED_EFFORT_LABEL4", "BUDGETED_EFFORT_LABEL3", "BUDGETED_EFFORT_LABEL2", "BUDGETED_EFFORT_LABEL1", "BUDGETED_EFFORT_FIELD4", "BUDGETED_EFFORT_FIELD3", "BUDGETED_EFFORT_FIELD2", "BUDGETED_EFFORT_FIELD1", "BUDGETED_COST", "BUDGETED_EFFORT_FROM_AC", "TOTAL_BUDGETED_EFFORT", "ASSIGNED_ON", "ASSIGNED_BY", "VERSION_NO", "INITIATOR", "PLAN_TITLE", "END_DATE", "START_DATE", "DD_CURRENT_STATUS", "DD_ACTION", "DD_PROCESS_CODE", "DD_CURRENT_STAGE", "DD_ENTERPRISE_INFO", "DD_EVENT_USER_NAME", "DD_CURRENT_USER_NAME", "DD_OBJECT_TYPE", "INSTANCE_REC_NUM", "INSTANCE_ID", "METRIC_ID", "METRIC_RUN_DATE", "METRIC_COMPLETED_DATE", "LATEST_FLAG", "CREATED_BY", "CREATION_DATE", "PROCESS_FLOW_STATUS", "PROCESS_INSTANCE_ID", "MULTIROW_GROUP_NAME", "ELECTRONICALLY_SIGNED", "MULTIROW_REGION_ID", "UNIQUE_ROW_ID", "OVERVIEW", "AC_PURPOSE", "ADD_SCOPE", "APPROACH", "BUSINESS_OVERVIEW", "PROCESS_OVERVIEW", "SIGNIFICANT_CHALLENGES", "MEETING_DESCRIPTION", "ACCOMPLISHMENTS", "LOCALE_ID", "RESTRICT_ACCESS_TO", "ACD_FOREIGN_KEY", "PLAN_TYPE", "HDR_ORGANIZATION", "USE_ASSESSMENT_FORM", "STATUS", "PLAN_ACTION", "RP_TEAM", "AC_SCHEDULE_YEARS", "AC_AUDIT_CLASSIFICATION", "AC_AUDIT_TYPE", "AC_RESTRICT_ACCESS_TO", "AC_SCOPE_BASED_ON", "AC_CROSS_FUNCTIONAL", "AC_LOCATIONS", "AC_AUDITEE_CONTACT", "DO_TYPE", "DO_CATEGORY") AS 
+  SELECT UPLOAD_FLAG,
+    PLAN_ID,
+    PERF_CONFIG_FLAG,
+    REVIEWER_FLAG,
+    ADVISOR_RUN_FLAG,
+    CANDIDATE_STATUS,
+    CAN_ID,
+    TMP_PK_ID,
+    ADV_AUDIT_TITLE,
+    ADV_AUDIT_DELETE,
+    ADV_AUDIT_DELETE_PARAM,
+    ADV_PLAN_TITLE,
+    ADV_PLAN_TITLE_PARAM,
+    ADV_PLAN_ROW,
+    ADV_PLAN_TITLE_YEAR,
+    ADV_PLAN_TITLE_YEAR_PARAM,
+    ADV_PLAN_TYPE,
+    RPL_SAVE,
+    TEMP_CONFIG_FLAG,
+    FORM_NAME,
+    KEY_COL_NAME,
+    RTF_ATTACH,
+    INTERNAL_PLAN_ID,
+    ASSIGNEE,
+    OPENED_FORM,
+    APPROVED_BY,
+    APPROVED_ON,
+    ENTERPRISE_ID,
+    ORGANIZATION_LEVEL,
+    OWNER_ORGANIZATIONS,
+    PREVIOUS_STAGE,
+    CONFIG_FLAG,
+    PLAN_STAGE,
+    INITIATOR_ACTION,
+    PLAN_COMMENTS,
+    MS_AUD_CHANGE_HISTORY_UTILS.fn_get_user_dv(REVIEWER) as REVIEWER,
+    MS_AUD_CHANGE_HISTORY_UTILS.fn_get_user_dv(APPROVER) as APPROVER,
+    PDF_CONV_FLAG_FOR_IN_PROCESS,
+    PDF_CONV_FLAG,
+    ID_FOR_PDF_CONVERTER,
+    DOC_PLAN_ID,
+    DO_NUMBER_FOR_MANAGED,
+    DO_ID,
+    DO_NAME_FOR_MANAGED,
+    DO_COMMENTS,
+    DO_DOCUMENT,
+    MEETING_DATE,
+    DO_NAME,
+    RPL_ORDER_KEY,
+    RPL_ORDER_TYPE,
+    PLAN_RESOURCE_POOL_GEN,
+    RPL_PLAN_ID,
+    RPL_ORDERKEY,
+    RP_CANDIDATE_ID,
+    RP_ID,
+    RP_JUSTIFICATION,
+    RP_ESTIMATED_EFFORT,
+    AC_END_DT,
+    AC_START_DATE_HIDDEN,
+	AC_PLAN_YEARS,
+    AC_SCHEDULE_DATE,
+    AC_TIME_WINDOW,
+    ACD_ORDER_KEY,
+    ACD_ORDER_TYPE,	
+	RPL_ID_VAL,
+	RPL_RUN_FLAG,
+	ACD_ID_VAL,
+	ACD_RUN_FLAG,
+    ADVISOR_CALL_REPORT_ID,
+    AUDIT_BASED_ON,
+    AE_CALL_INFOLET,
+    AE_DUPLICAT_VERSION,
+    ACD_ORDERKEY,
+    ACD_TMP_PK_ID,
+    ACD_PLAN_ID,
+    BUDGETED_EFFORT_FOR_YEAR1,
+    BUDGETED_EFFORT_FOR_YEAR2,
+    BUDGETED_EFFORT_FOR_YEAR3,
+    BUDGETED_EFFORT_FOR_YEAR4,
+    AC_CANDIDATE_ID,
+    AC_EFFORT,
+    PROCESS_AE,
+    PLAN_AUDIT_CANDIDATE_GEN,
+    TREE_PICKLIST_PLAN_DATA,
+    DELETION_COMMENTS,
+    MARK_FOR_DELETION,
+    RESOURCE_POOL,
+    MS_AUD_CHANGE_HISTORY_UTILS.fn_get_user_dv(AC_LEAD_AUDITOR_MLOV) as AC_LEAD_AUDITOR_MLOV,
+    MS_AUD_CHANGE_HISTORY_UTILS.fn_get_user_dv(AC_AUDIT_MANAGER_MLOV) as AC_AUDIT_MANAGER_MLOV,
+    MS_AUD_CHANGE_HISTORY_UTILS.fn_get_user_dv(AC_LEAD_AUDITOR) as AC_LEAD_AUDITOR,
+    MS_AUD_CHANGE_HISTORY_UTILS.fn_get_user_dv(AC_AUDIT_MANAGER) as AC_AUDIT_MANAGER,
+    ms_aud_report_utils.fn_get_rel_risk_disp_val (ac_related_risks, ac_scope_based_on, null) AS "AC_RELATED_RISKS",
+    ms_aud_report_utils.fn_get_core_obj_disp_val (ac_core_object, ac_scope_based_on) AS "AC_CORE_OBJECT",
+    ms_aud_report_utils.fn_get_org_disp_val (ac_organizations, ac_scope_based_on) AS "AC_ORGANIZATIONS",
+    MS_GRC_COMMON_UTILS.Fn_Get_Org_Display_Names (tmp_organizations, ac_scope_based_on) AS "TMP_ORGANIZATIONS",
+	ms_aud_report_utils.fn_get_rel_risk_disp_val (tmp_related_risks, ac_scope_based_on,null) AS "TMP_RELATED_RISKS",
+    ms_aud_report_utils.fn_get_core_obj_disp_val (tmp_core_objects, ac_scope_based_on) AS "TMP_CORE_OBJECTS",
+    TREE_PLAN_DATA,
+    AC_STATUS,
+    AC_AUDIT_TITLE,
+    BUDGETED_EFFORT_LABEL4,
+    BUDGETED_EFFORT_LABEL3,
+    BUDGETED_EFFORT_LABEL2,
+    BUDGETED_EFFORT_LABEL1,
+    BUDGETED_EFFORT_FIELD4,
+    BUDGETED_EFFORT_FIELD3,
+    BUDGETED_EFFORT_FIELD2,
+    BUDGETED_EFFORT_FIELD1,
+    BUDGETED_COST,
+    BUDGETED_EFFORT_FROM_AC,
+    TOTAL_BUDGETED_EFFORT,
+    ASSIGNED_ON,
+    MS_AUD_CHANGE_HISTORY_UTILS.fn_get_user_dv(ASSIGNED_BY) as ASSIGNED_BY,
+    VERSION_NO,
+    MS_AUD_CHANGE_HISTORY_UTILS.fn_get_user_dv(INITIATOR) as INITIATOR,
+    PLAN_TITLE,
+    END_DATE,
+    START_DATE,
+    DD_CURRENT_STATUS,
+    DD_ACTION,
+    DD_PROCESS_CODE,
+    MS_AUD_CHANGE_HISTORY_UTILS.GET_STAGE_NAME(DD_CURRENT_STAGE) AS DD_CURRENT_STAGE,
+    DD_ENTERPRISE_INFO,
+    DD_EVENT_USER_NAME,
+    DD_CURRENT_USER_NAME,
+    DD_OBJECT_TYPE,
+    A.INSTANCE_REC_NUM,
+    A.INSTANCE_ID,
+    METRIC_ID,
+    METRIC_RUN_DATE,
+    METRIC_COMPLETED_DATE,
+    LATEST_FLAG,
+    A.CREATED_BY,
+    A.CREATION_DATE,
+    PROCESS_FLOW_STATUS,
+    A.PROCESS_INSTANCE_ID,
+    MULTIROW_GROUP_NAME,
+    ELECTRONICALLY_SIGNED,
+    MULTIROW_REGION_ID,
+    UNIQUE_ROW_ID,
+    (CASE WHEN dbms_lob.getlength(C.OVERVIEW_HTM) = 0 THEN NULL ELSE C.OVERVIEW_HTM END) as OVERVIEW ,
+    (CASE WHEN dbms_lob.getlength(C.AC_PURPOSE_HTM)=0 THEN NULL ELSE C.AC_PURPOSE_HTM END) as  AC_PURPOSE,
+    (CASE WHEN dbms_lob.getlength(C.ADD_SCOPE_HTM)=0 THEN NULL ELSE C.ADD_SCOPE_HTM END) as ADD_SCOPE,
+    (CASE WHEN dbms_lob.getlength(C.APPROACH_HTM)=0 THEN NULL ELSE C.APPROACH_HTM END) as APPROACH,
+    (CASE WHEN dbms_lob.getlength(C.BUSINESS_OVERVIEW_HTM)=0 THEN NULL ELSE C.BUSINESS_OVERVIEW_HTM END) as BUSINESS_OVERVIEW,
+    (CASE WHEN dbms_lob.getlength(C.PROCESS_OVERVIEW_HTM)=0 THEN NULL ELSE C.PROCESS_OVERVIEW_HTM END) as PROCESS_OVERVIEW,
+    (CASE WHEN dbms_lob.getlength(C.SIGNIFICANT_CHALLENGES_HTM)=0 THEN NULL ELSE C.SIGNIFICANT_CHALLENGES_HTM END) as SIGNIFICANT_CHALLENGES,
+    (CASE WHEN dbms_lob.getlength(C.MEETING_DESCRIPTION_HTM)=0 THEN NULL ELSE C.MEETING_DESCRIPTION_HTM END) as MEETING_DESCRIPTION,
+    (CASE WHEN dbms_lob.getlength(C.ACCOMPLISHMENTS_HTM)=0 THEN NULL ELSE C.ACCOMPLISHMENTS_HTM END) as ACCOMPLISHMENTS,
+    B.LOCALE_ID,
+	RESTRICT_ACCESS_TO,ACD_FOREIGN_KEY,"9_DISP_VAL" AS PLAN_TYPE,"12_DISP_VAL" AS HDR_ORGANIZATION,"13_DISP_VAL" AS USE_ASSESSMENT_FORM,"15_DISP_VAL" AS STATUS,"115_DISP_VAL" AS PLAN_ACTION,"83_DISP_VAL" AS RP_TEAM,"74_DISP_VAL" AS AC_SCHEDULE_YEARS,"79_DISP_VAL" AS AC_AUDIT_CLASSIFICATION,"80_DISP_VAL" AS AC_AUDIT_TYPE,"82_DISP_VAL" AS AC_RESTRICT_ACCESS_TO,"34_DISP_VAL" AS AC_SCOPE_BASED_ON,"81_DISP_VAL" AS AC_CROSS_FUNCTIONAL,"45_DISP_VAL" AS AC_LOCATIONS,"42_DISP_VAL" AS AC_AUDITEE_CONTACT,"107_DISP_VAL" AS DO_TYPE,"102_DISP_VAL" AS DO_CATEGORY FROM SI_103057_DV_V A,(SELECT OVERVIEW_HTM,
+    AC_PURPOSE_HTM,
+    ADD_SCOPE_HTM,
+    APPROACH_HTM,
+    BUSINESS_OVERVIEW_HTM,
+    PROCESS_OVERVIEW_HTM,
+    SIGNIFICANT_CHALLENGES_HTM,
+    ACCOMPLISHMENTS_HTM,
+    MEETING_DESCRIPTION_HTM,process_instance_id,instance_id,instance_rec_num FROM MS_AUD_PLAN_AUDIT_V) C,
+    SI_ENABLED_LOCALES B
+  WHERE A.process_instance_id=C.process_instance_id and  a.instance_id=c.instance_id and a.instance_rec_num=c.instance_rec_num and A.CREATED_BY <> '100000'</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" class="doctool-7">
+       <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>MS_AUD_INTEGRATION</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="../../template_files/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="../../template_files/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- DataTables CSS -->
+        <link href="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+        <!-- DataTables Responsive CSS -->
+        <link href="../../template_files/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="../../template_files/dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="../../template_files/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../template_files/dist/css/jquery.mCustomScrollbar.css">
+        <link href="../../template_files/dist/css/style.css" rel="stylesheet">
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+        <script src="../../template_files/dist/js/selectAllJavaScript.js"></script>
+        <style>
+            html, body{ height: 100%; }
+        </style>
+    </head>
+
+    <body>
+	<div class="se-pre-con"></div>
+        <div id="wrapper">
+            <div id="page-wrapper">
+                <div class="row">
+                    <br/>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-D7">
+                            <div class="panel-heading">
+                                <h4><span class="icn icn-dc-grid" style="margin-right:10px"></span>  <span class="headerAlign" id="MS_AUD_HEADER_PUB_V">MS_AUD_HEADER_PUB_V</span> </h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="dataTable_wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn btn-primary" onclick="SelectText('selectme')">Select All</button>
+                                            </div>
+                                            <div class="modal-body" >
+                                                <pre id="selectme">
+  CREATE OR REPLACE FORCE VIEW "MS_AUD_HEADER_PUB_V" ("AUDIT_ID", "AUDIT_TITLE", "AUDIT_START_DATE", "CONDUCTED_BY_ORGANIZATION_STO", "CONDUCTED_BY_ORGANIZATION_DISP", "AUDIT_CLASSIFICATION_STO", "AUDIT_CLASSIFICATION_DISP", "AUDIT_TYPE_STO", "AUDIT_TYPE_DISP", "AUDIT_STATUS_STO", "AUDIT_STATUS_DISP", "LEAD_AUDITOR_STO", "LEAD_AUDITOR_DISP", "AUDIT_MANAGER", "AUDIT_MANAGER_DISP", "LEAD_AUDITOR_MLOV_STO", "LEAD_AUDITOR_MLOV_DISP", "AUDIT_MANAGER_MLOV_STO", "AUDIT_MANAGER_MLOV_DISP", "REFERENCE_ID", "SOURCE_MODULE") AS 
+  select a.AUDIT_ID AUDIT_ID,
+         a.AUDIT_TITLE AUDIT_TITLE,
+         a.AUDIT_START_DATE AUDIT_START_DATE,
+         a.CONDUCTED_BY_ORG CONDUCTED_BY_ORGANIZATION_STO,
+         MS_AUD_UTILITIES.FN_GET_ORG_DISPLAY_VALUE (a.CONDUCTED_BY_ORG) CONDUCTED_BY_ORGANIZATION_DISP,
+         a.audit_classification Audit_Classification_Sto,
+          (SELECT code_description
+          FROM ms_aud_lov_config
+          where CODE_GROUP = 'MS AUD Classification'
+          AND code_code    = a.audit_classification
+          ) AUDIT_CLASSIFICATION_DISP,
+         a.audit_type Audit_Type_Sto,
+          (SELECT code_description
+          FROM ms_aud_lov_config
+          where CODE_GROUP = 'MS AUD Audit Type'
+          AND code_code    = a.audit_type
+          ) AUDIT_TYPE_DISP,
+          a.AUDIT_STATUS AUDIT_STATUS_STO,
+          MS_AUD_UTILITIES.FN_GET_STATUS_DISPLAY_NAME (a.AUDIT_STATUS) AUDIT_STATUS_DISP,
+          a.LEAD_AUDITOR LEAD_AUDITOR_STO,
+          MS_APPS_UTILITIES.GET_USER_FULL_NAME (a.LEAD_AUDITOR) LEAD_AUDITOR_DISP,
+          a.AUDIT_MANAGER AUDIT_MANAGER,
+          MS_APPS_UTILITIES.GET_USER_FULL_NAME (a.AUDIT_MANAGER) AUDIT_MANAGER_DISP,
+          MS_AUD_UTILITIES.MLOV_VALUES (a.AUDIT_ID,a.AUDIT_ID, 'lead_auditor_mlov', 'ms_aud_audit_alm' ) LEAD_AUDITOR_MLOV_STO,
+          ms_aud_report_utils.FN_GET_MLOV_LEAD_AUD_DISP (MS_AUD_UTILITIES.MLOV_VALUES (a.AUDIT_ID,a.AUDIT_ID, 'lead_auditor_mlov', 'ms_aud_audit_alm' ) ) LEAD_AUDITOR_MLOV_DISP,
+          MS_AUD_UTILITIES.MLOV_VALUES (a.AUDIT_ID,a.AUDIT_ID, 'audit_manager_mlov', 'ms_aud_audit_amm' ) AUDIT_MANAGER_MLOV_STO,
+          ms_aud_report_utils.fn_get_mlov_aud_man_disp (MS_AUD_UTILITIES.MLOV_VALUES (a.AUDIT_ID,a.AUDIT_ID, 'audit_manager_mlov', 'ms_aud_audit_amm' ) ) AUDIT_MANAGER_MLOV_DISP,
+          (SELECT SOURCE_ID
+          from MS_AUD_TRIGGER_API_LOG
+          where audit_id = a.audit_id) REFERENCE_ID,
+          (SELECT SOURCE_MODULE
+          from MS_AUD_TRIGGER_API_LOG
+          where audit_id = a.audit_id) Source_module
+  FROM ms_aud_audit a
+</pre>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.table-wrapper -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel-info -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /page wrapper -->
+        </div>
+        <!-- /.wrapper-->
+
+                <!-- jQuery -->
+        <script src="../../template_files/js/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../template_files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="../../template_files/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="../../template_files/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
+        <script src="../../template_files/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="../../template_files/dist/js/sb-admin-2.js"></script>
+
+        <!-- Custom JS scripts for search capbility -->
+        <script type="text/javascript" src="../../template_files/dist/js/searchsidemenujavascript.js"></script>
+
+        <!-- Custom JS scripts for easy scrollbar -->
+        <script src="../../template_files/dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		
+       
+
+        <script>
+            $(document).ready(function() {
+                
+            });
+            $('#sciptModal').on('shown.bs.modal', function () {
+                $("body").mCustomScrollbar("disable");
+            });
+            $('#sciptModal').on('hidden.bs.modal', function () {
+                $("body").mCustomScrollbar("update");
+            });
+                        (function($){
+                         function scrollBody(){
+                        var referrer = document.URL;
+                        var res = referrer.split("#");
+                        var hashAddress="#"+res[1];
+                        $("body").mCustomScrollbar('scrollTo',$("body").find(hashAddress));  
+                        };
+                $(window).load(function(){
+					
+             
+                
+                $("body").mCustomScrollbar({
+                    theme:"minimal",
+                    mouseWheel:{ scrollAmount: "230px" }
+                });
+                scrollBody();
+				$(".se-pre-con").fadeOut("slow");
+			  
+            });
+            
+            $(window).on('hashchange', function(e){
+                 scrollBody();
+            });
+			 
+            })(jQuery);
+        </script>
+    </body>
+
+</html>
