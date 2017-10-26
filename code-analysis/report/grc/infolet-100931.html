@@ -1,0 +1,398 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_GRC_Get_ORB_Default_Report (100931)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT MS_JOIN(obj_type
+  ||'^*^'
+  || NVL(rep_title_rt2,report_title)
+  ||'$#$'
+  || nvl2(rep_title_rt2,NVL(rpt_disp_name_rr ,rpt_link_disp_name),rpt_link_disp_name)
+  ||'@#@'
+  ||img_path
+  ||'/'
+  ||img_file_name
+  || '%#%'
+  || rel_id
+  || '&#&'
+  || nvl2(rep_title_rt2,NVL(rep_title_rt2,form_titls),form_titls)) AS report_detail
+FROM
+  (SELECT obj_type,rep_title_rt2,report_title,rpt_disp_name_rr || decode(MANDATORY_YN,'Y','*') as rpt_disp_name_rr,rpt_link_disp_name || decode(MANDATORY_YN,'Y','*') as rpt_link_disp_name,img_path,img_file_name,form_titls,rel_id,MANDATORY_YN
+  FROM si_reports rt ,
+    (SELECT pp.report_id as rep_id,
+      pp.report_title as rep_title_rt2,
+      rr.form_title as form_title,
+      rr.rpt_link_display_name as rpt_disp_name_rr
+    FROM si_reports_tl pp ,
+      si_reports_t qq ,
+      (SELECT b.locale_id,
+        b.LOCALE_STRING
+      FROM si_users_t a ,
+        si_locales b
+      WHERE user_name = :1
+      AND a.LOCALE    =b.LOCALE_STRING
+      ) kk ,
+      MS_GRC_ORB_CONFIG_FORM_TITLE rr
+    WHERE pp.report_id = qq.report_id
+    AND pp.locale_id   = kk.locale_id
+    AND qq.report_name = rr.report_name(+)
+    AND rr.locale      = kk.locale_string
+    )rt_2,
+    (SELECT p.rel_id as rel_id,
+      p.dest_obj_type as dest_obj_type,
+      p.orb_report_name as orb_rep_name,
+      p.object_type as obj_type,
+      p.rpt_link_display_name as rpt_link_disp_name,
+      p.form_title as form_titls,
+      p.IMAGE_PATH as img_path,
+      p.IMAGE_FILE_NAME as img_file_name
+     ,p.MANDATORY_YN as MANDATORY_YN
+    FROM
+      (SELECT rel_id,
+        dest_obj_type,
+        b.report_name AS orb_report_name,
+        b.object_type,
+        b.rpt_link_display_name,
+        b.form_title,
+        b.IMAGE_PATH,
+        b.IMAGE_FILE_NAME
+,
+       a.MANDATORY_YN 
+      FROM ms_grc_rel_defn a,
+        MS_GRC_ORB_CONFIG_FORM_TITLE b,
+        si_locales d,SI_USERS_T usr
+      WHERE b.locale      = d.locale_string
+      AND src_obj_type    = :2
+      AND d.locale_string = USR.LOCALE
+      AND usr.user_name = :1
+      AND a.dest_obj_type = b.object_Type
+     AND a.enabled = 'Y'
+      )p
+    ) tt
+  WHERE tt.orb_rep_name = rt.report_name
+  AND rt.report_id         = rt_2.rep_id (+)
+  AND rt.CREATED_BY        =
+    (SELECT USER_ID FROM SI_USERS_T WHERE USER_NAME = 'pfadmin'
+    )
+  ORDER BY rpt_link_disp_name
+  )</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet extracts data from si_reports table and is thereby used in all GRC library forms including Area of Compliance, Asset, Asset Class, Control, Evidence, Exception, Financial Account, Function, Framework Reference, Objective, Organizational Profile, Process, Product, Question/Procedure, Reference, Regulatory Body, Requirement, Risk and Standard </td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 750166379</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                             | Name                          | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                      |                               |     1 | 10298 |    88   (2)| 00:00:02 |
+|   1 |  SORT AGGREGATE                       |                               |     1 | 10298 |            |          |
+|   2 |   VIEW                                |                               |     1 | 10298 |    88   (2)| 00:00:02 |
+|   3 |    SORT ORDER BY                      |                               |     1 |  1165 |    88   (2)| 00:00:02 |
+|   4 |     NESTED LOOPS OUTER                |                               |     1 |  1165 |    87   (0)| 00:00:02 |
+|   5 |      NESTED LOOPS                     |                               |     1 |  1126 |    86   (0)| 00:00:02 |
+|*  6 |       HASH JOIN                       |                               |     1 |  1078 |    85   (0)| 00:00:02 |
+|   7 |        VIEW                           | VW_SQ_1                       |     1 |     5 |     1   (0)| 00:00:01 |
+|   8 |         TABLE ACCESS BY INDEX ROWID   | SI_USERS_T                    |     1 |    18 |     1   (0)| 00:00:01 |
+|*  9 |          INDEX UNIQUE SCAN            | USER_NAME_UK                  |     1 |       |     1   (0)| 00:00:01 |
+|* 10 |        HASH JOIN                      |                               |    20 | 21460 |    84   (0)| 00:00:02 |
+|* 11 |         HASH JOIN                     |                               |     9 |  1179 |     7   (0)| 00:00:01 |
+|  12 |          NESTED LOOPS                 |                               |     1 |    26 |     4   (0)| 00:00:01 |
+|  13 |           TABLE ACCESS BY INDEX ROWID | SI_USERS_T                    |     1 |    19 |     1   (0)| 00:00:01 |
+|* 14 |            INDEX UNIQUE SCAN          | USER_NAME_UK                  |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 15 |           TABLE ACCESS FULL           | SI_LOCALES                    |     1 |     7 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 16 |          TABLE ACCESS FULL            | MS_GRC_ORB_CONFIG_FORM_TITLE  |    17 |  1785 |     3   (0)| 00:00:01 |</font>
+|  17 |         VIEW                          | SI_REPORTS                    |  2827 |  2600K|    77   (0)| 00:00:01 |
+|* 18 |          HASH JOIN                    |                               |  2827 |   300K|    77   (0)| 00:00:01 |
+|  19 |           VIEW                        | SI_REGISTER_APPLICATION_V     |    66 |   858 |     6   (0)| 00:00:01 |
+|  20 |            UNION-ALL                  |                               |       |       |            |          |
+|  21 |             NESTED LOOPS OUTER        |                               |    65 |  2145 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  22 |              TABLE ACCESS FULL        | SI_REGISTER_APPLICATION       |    65 |   455 |     3   (0)| 00:00:01 |</font>
+|* 23 |              INDEX RANGE SCAN         | SI_REGISTER_APPLICATION_TL_N1 |     1 |    26 |     1   (0)| 00:00:01 |
+|  24 |             FAST DUAL                 |                               |     1 |       |     2   (0)| 00:00:01 |
+|* 25 |           HASH JOIN RIGHT OUTER       |                               |  1328 |   124K|    71   (0)| 00:00:01 |
+|  26 |            TABLE ACCESS BY INDEX ROWID| SI_REPORTS_TL                 |    51 |  1479 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 27 |             INDEX SKIP SCAN           | SI_REPORTS_TL_N1              |    51 |       |     1   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  28 |            TABLE ACCESS FULL          | SI_REPORTS_T                  |  1328 | 88976 |    68   (0)| 00:00:01 |</font>
+|* 29 |       TABLE ACCESS BY INDEX ROWID     | MS_GRC_REL_DEFN               |     1 |    48 |     1   (0)| 00:00:01 |
+|* 30 |        INDEX RANGE SCAN               | MS_GRC_REL_DEFN_IDX1          |     1 |       |     1   (0)| 00:00:01 |
+|  31 |      VIEW PUSHED PREDICATE            |                               |     1 |    39 |     1   (0)| 00:00:01 |
+|* 32 |       HASH JOIN                       |                               |     1 |   134 |     7   (0)| 00:00:01 |
+|  33 |        NESTED LOOPS                   |                               |     1 |    95 |     4   (0)| 00:00:01 |
+|  34 |         NESTED LOOPS                  |                               |     1 |    95 |     4   (0)| 00:00:01 |
+|  35 |          NESTED LOOPS                 |                               |     1 |    59 |     3   (0)| 00:00:01 |
+|  36 |           NESTED LOOPS                |                               |     1 |    48 |     2   (0)| 00:00:01 |
+|  37 |            TABLE ACCESS BY INDEX ROWID| SI_USERS_T                    |     1 |    19 |     1   (0)| 00:00:01 |
+|* 38 |             INDEX UNIQUE SCAN         | USER_NAME_UK                  |     1 |       |     1   (0)| 00:00:01 |
+|  39 |            TABLE ACCESS BY INDEX ROWID| SI_REPORTS_TL                 |     1 |    29 |     1   (0)| 00:00:01 |
+|* 40 |             INDEX RANGE SCAN          | SI_REPORTS_TL_N1              |     1 |       |     1   (0)| 00:00:01 |
+|* 41 |           TABLE ACCESS BY INDEX ROWID | SI_LOCALES                    |     1 |    11 |     1   (0)| 00:00:01 |
+|* 42 |            INDEX UNIQUE SCAN          | SI_LOCALES_U1                 |     1 |       |     1   (0)| 00:00:01 |
+|* 43 |          INDEX RANGE SCAN             | SI_REPORTS_T_N1               |     1 |       |     1   (0)| 00:00:01 |
+|  44 |         TABLE ACCESS BY INDEX ROWID   | SI_REPORTS_T                  |     1 |    36 |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 45 |        TABLE ACCESS FULL              | MS_GRC_ORB_CONFIG_FORM_TITLE  |    17 |   663 |     3   (0)| 00:00:01 |</font>
+-----------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$1       
+   2 - SEL$58A1E29D / from$_subquery$_001@SEL$1
+   3 - SEL$58A1E29D
+   7 - SEL$F42BAC74 / VW_SQ_1@SEL$9D6B9848
+   8 - SEL$F42BAC74 / SI_USERS_T@SEL$16
+   9 - SEL$F42BAC74 / SI_USERS_T@SEL$16
+  13 - SEL$58A1E29D / USR@SEL$15
+  14 - SEL$58A1E29D / USR@SEL$15
+  15 - SEL$58A1E29D / D@SEL$15
+  16 - SEL$58A1E29D / B@SEL$15
+  17 - SEL$3        / RT@SEL$2
+  18 - SEL$3       
+  19 - SET$1        / RA@SEL$3
+  20 - SET$1       
+  21 - SEL$4       
+  22 - SEL$4        / T@SEL$4
+  23 - SEL$4        / TL@SEL$4
+  24 - SEL$7        / DUAL@SEL$7
+  26 - SEL$3        / TL@SEL$3
+  27 - SEL$3        / TL@SEL$3
+  28 - SEL$3        / T@SEL$3
+  29 - SEL$58A1E29D / A@SEL$15
+  30 - SEL$58A1E29D / A@SEL$15
+  31 - SEL$F0CF31C9 / RT_2@SEL$2
+  32 - SEL$F0CF31C9
+  37 - SEL$F0CF31C9 / A@SEL$13
+  38 - SEL$F0CF31C9 / A@SEL$13
+  39 - SEL$F0CF31C9 / PP@SEL$12
+  40 - SEL$F0CF31C9 / PP@SEL$12
+  41 - SEL$F0CF31C9 / B@SEL$13
+  42 - SEL$F0CF31C9 / B@SEL$13
+  43 - SEL$F0CF31C9 / QQ@SEL$12
+  44 - SEL$F0CF31C9 / QQ@SEL$12
+  45 - SEL$F0CF31C9 / RR@SEL$12
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   6 - access("RT"."CREATED_BY"="USER_ID")
+   9 - access("USER_NAME"='pfadmin')
+  10 - access("B"."REPORT_NAME"="RT"."REPORT_NAME")
+  11 - access("B"."LOCALE"="D"."LOCALE_STRING")
+  14 - access("USR"."USER_NAME"=:1)
+  15 - filter("D"."LOCALE_STRING"="USR"."LOCALE")
+  16 - filter("B"."REPORT_NAME" IS NOT NULL)
+  18 - access(NVL("T"."PACKAGE_ID",0)=NVL("RA"."PACKAGE_ID",0))
+  23 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE
+              "()))
+  25 - access("T"."REPORT_ID"="TL"."REPORT_ID"(+))
+  27 - access("TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+       filter("TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  29 - filter("A"."ENABLED"='Y')
+  30 - access("SRC_OBJ_TYPE"=:2 AND "A"."DEST_OBJ_TYPE"="B"."OBJECT_TYPE")
+  32 - access("QQ"."REPORT_NAME"="RR"."REPORT_NAME" AND "RR"."LOCALE"="B"."LOCALE_STRING")
+  38 - access("USER_NAME"=:1)
+  40 - access("PP"."REPORT_ID"="RT"."REPORT_ID")
+  41 - filter("A"."LOCALE"="B"."LOCALE_STRING")
+  42 - access("PP"."LOCALE_ID"="B"."LOCALE_ID")
+  43 - access("QQ"."REPORT_ID"="RT"."REPORT_ID")
+       filter("PP"."REPORT_ID"="QQ"."REPORT_ID")
+  45 - filter("RR"."REPORT_NAME" IS NOT NULL)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=0) "MS_JOIN"("OBJ_TYPE"||'^*^'||NVL("REP_TITLE_RT2","REPORT_TITLE")||'$#$'||NVL2("REP_TITLE_RT2",
+       NVL("RPT_DISP_NAME_RR","RPT_LINK_DISP_NAME"),"RPT_LINK_DISP_NAME")||'@#@'||"IMG_PATH"||'/'||"IMG_FILE_NAME"||'%
+       #%'||"REL_ID"||'&#&'||NVL2("REP_TITLE_RT2",NVL("REP_TITLE_RT2","FORM_TITLS"),"FORM_TITLS"))[4000]
+   2 - "OBJ_TYPE"[VARCHAR2,400], "REP_TITLE_RT2"[VARCHAR2,1800], "REPORT_TITLE"[VARCHAR2,1800], 
+       "RPT_DISP_NAME_RR"[VARCHAR2,4000], "RPT_LINK_DISP_NAME"[VARCHAR2,4000], "IMG_PATH"[VARCHAR2,4000], 
+       "IMG_FILE_NAME"[VARCHAR2,400], "FORM_TITLS"[VARCHAR2,4000], "REL_ID"[VARCHAR2,160]
+   3 - (#keys=1) "B"."RPT_LINK_DISPLAY_NAME"||DECODE("A"."MANDATORY_YN",'Y','*')[4000], 
+       "B"."OBJECT_TYPE"[VARCHAR2,400], "REP_TITLE_RT2"[VARCHAR2,1800], "REPORT_TITLE"[VARCHAR2,1800], 
+       "RPT_DISP_NAME_RR"||DECODE("A"."MANDATORY_YN",'Y','*')[4000], "B"."IMAGE_PATH"[VARCHAR2,4000], 
+       "B"."IMAGE_FILE_NAME"[VARCHAR2,400], "B"."FORM_TITLE"[VARCHAR2,4000], "REL_ID"[VARCHAR2,160]
+   4 - (#keys=0) "B"."OBJECT_TYPE"[VARCHAR2,400], "B"."FORM_TITLE"[VARCHAR2,4000], 
+       "B"."IMAGE_PATH"[VARCHAR2,4000], "B"."RPT_LINK_DISPLAY_NAME"[VARCHAR2,4000], 
+       "B"."IMAGE_FILE_NAME"[VARCHAR2,400], "REPORT_TITLE"[VARCHAR2,1800], "REL_ID"[VARCHAR2,160], 
+       "A"."MANDATORY_YN"[VARCHAR2,4], "REP_TITLE_RT2"[VARCHAR2,1800], "RPT_DISP_NAME_RR"[VARCHAR2,4000]
+   5 - (#keys=0) "B"."OBJECT_TYPE"[VARCHAR2,400], "B"."FORM_TITLE"[VARCHAR2,4000], 
+       "B"."IMAGE_PATH"[VARCHAR2,4000], "B"."RPT_LINK_DISPLAY_NAME"[VARCHAR2,4000], 
+       "B"."IMAGE_FILE_NAME"[VARCHAR2,400], "RT"."REPORT_ID"[NUMBER,22], "REPORT_TITLE"[VARCHAR2,1800], 
+       "REL_ID"[VARCHAR2,160], "A"."MANDATORY_YN"[VARCHAR2,4]
+   6 - (#keys=1) "B"."OBJECT_TYPE"[VARCHAR2,400], "B"."FORM_TITLE"[VARCHAR2,4000], 
+       "B"."IMAGE_PATH"[VARCHAR2,4000], "B"."RPT_LINK_DISPLAY_NAME"[VARCHAR2,4000], 
+       "B"."IMAGE_FILE_NAME"[VARCHAR2,400], "RT"."REPORT_ID"[NUMBER,22], "REPORT_TITLE"[VARCHAR2,1800]
+   7 - "USER_ID"[NUMBER,22]
+   8 - "USER_ID"[NUMBER,22]
+   9 - "SI_USERS_T".ROWID[ROWID,10]
+  10 - (#keys=1) "B"."OBJECT_TYPE"[VARCHAR2,400], "B"."FORM_TITLE"[VARCHAR2,4000], 
+       "B"."IMAGE_PATH"[VARCHAR2,4000], "B"."RPT_LINK_DISPLAY_NAME"[VARCHAR2,4000], 
+       "B"."IMAGE_FILE_NAME"[VARCHAR2,400], "RT"."REPORT_ID"[NUMBER,22], "RT"."CREATED_BY"[NUMBER,22], 
+       "REPORT_TITLE"[VARCHAR2,1800]
+  11 - (#keys=1) "B"."OBJECT_TYPE"[VARCHAR2,400], "B"."FORM_TITLE"[VARCHAR2,4000], 
+       "B"."REPORT_NAME"[VARCHAR2,200], "B"."RPT_LINK_DISPLAY_NAME"[VARCHAR2,4000], 
+       "B"."IMAGE_FILE_NAME"[VARCHAR2,400], "B"."IMAGE_PATH"[VARCHAR2,4000]
+  12 - (#keys=0) "D"."LOCALE_STRING"[VARCHAR2,400]
+  13 - "USR"."LOCALE"[VARCHAR2,400]
+  14 - "USR".ROWID[ROWID,10]
+  15 - "D"."LOCALE_STRING"[VARCHAR2,400]
+  16 - "B"."OBJECT_TYPE"[VARCHAR2,400], "B"."FORM_TITLE"[VARCHAR2,4000], "B"."REPORT_NAME"[VARCHAR2,200], 
+       "B"."RPT_LINK_DISPLAY_NAME"[VARCHAR2,4000], "B"."LOCALE"[VARCHAR2,40], "B"."IMAGE_PATH"[VARCHAR2,4000], 
+       "B"."IMAGE_FILE_NAME"[VARCHAR2,400]
+  17 - "RT"."REPORT_ID"[NUMBER,22], "RT"."REPORT_NAME"[VARCHAR2,1200], "REPORT_TITLE"[VARCHAR2,1800], 
+       "RT"."CREATED_BY"[NUMBER,22]
+  18 - (#keys=1) "T"."REPORT_ID"[NUMBER,22], "TL"."REPORT_TITLE"[VARCHAR2,1800], 
+       "T"."REPORT_NAME"[VARCHAR2,1200], "T"."REPORT_TITLE"[VARCHAR2,1200], "T"."CREATED_BY"[NUMBER,22]
+  19 - "RA"."PACKAGE_ID"[NUMBER,22]
+  20 - STRDEF[22]
+  21 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  22 - "T"."MODULE_ID"[NUMBER,22]
+  25 - (#keys=1) "T"."REPORT_ID"[NUMBER,22], "TL"."REPORT_TITLE"[VARCHAR2,1800], "T"."PACKAGE_ID"[NUMBER,22], 
+       "T"."REPORT_NAME"[VARCHAR2,1200], "T"."REPORT_TITLE"[VARCHAR2,1200], "T"."CREATED_BY"[NUMBER,22]
+  26 - "TL"."REPORT_ID"[NUMBER,22], "TL"."REPORT_TITLE"[VARCHAR2,1800]
+  27 - "TL".ROWID[ROWID,10], "TL"."REPORT_ID"[NUMBER,22]
+  28 - "T"."REPORT_ID"[NUMBER,22], "T"."REPORT_NAME"[VARCHAR2,1200], "T"."REPORT_TITLE"[VARCHAR2,1200], 
+       "T"."CREATED_BY"[NUMBER,22], "T"."PACKAGE_ID"[NUMBER,22]
+  29 - "REL_ID"[VARCHAR2,160], "A"."MANDATORY_YN"[VARCHAR2,4]
+  30 - "A".ROWID[ROWID,10]
+  31 - "REP_TITLE_RT2"[VARCHAR2,1800], "RPT_DISP_NAME_RR"[VARCHAR2,4000]
+  32 - (#keys=2) "PP"."REPORT_TITLE"[VARCHAR2,1800], "RR"."RPT_LINK_DISPLAY_NAME"[VARCHAR2,4000]
+  33 - (#keys=0) "PP"."REPORT_TITLE"[VARCHAR2,1800], "B"."LOCALE_STRING"[VARCHAR2,400], 
+       "QQ"."REPORT_NAME"[VARCHAR2,1200]
+  34 - (#keys=0) "PP"."REPORT_TITLE"[VARCHAR2,1800], "B"."LOCALE_STRING"[VARCHAR2,400], "QQ".ROWID[ROWID,10]
+  35 - (#keys=0) "PP"."REPORT_ID"[NUMBER,22], "PP"."REPORT_TITLE"[VARCHAR2,1800], 
+       "B"."LOCALE_STRING"[VARCHAR2,400]
+  36 - (#keys=0) "A"."LOCALE"[VARCHAR2,400], "PP"."REPORT_ID"[NUMBER,22], "PP"."REPORT_TITLE"[VARCHAR2,1800], 
+       "PP"."LOCALE_ID"[NUMBER,22]
+  37 - "A"."LOCALE"[VARCHAR2,400]
+  38 - "A".ROWID[ROWID,10]
+  39 - "PP"."REPORT_ID"[NUMBER,22], "PP"."REPORT_TITLE"[VARCHAR2,1800], "PP"."LOCALE_ID"[NUMBER,22]
+  40 - "PP".ROWID[ROWID,10], "PP"."REPORT_ID"[NUMBER,22], "PP"."LOCALE_ID"[NUMBER,22]
+  41 - "B"."LOCALE_STRING"[VARCHAR2,400]
+  42 - "B".ROWID[ROWID,10]
+  43 - "QQ".ROWID[ROWID,10]
+  44 - "QQ"."REPORT_NAME"[VARCHAR2,1200]
+  45 - "RR"."REPORT_NAME"[VARCHAR2,200], "RR"."RPT_LINK_DISPLAY_NAME"[VARCHAR2,4000], 
+       "RR"."LOCALE"[VARCHAR2,40]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

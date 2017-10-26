@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_GRC_KEY_CONTROL (100940)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>Select Stored_Value,
+       Displayed_Value,
+       Lov_Name,
+       Locale_Id,
+       Enterprise_Id,
+       Lov_Id,
+       Lov_Value_Id,
+       Org_Entity_Id,
+       Org_Entity_Name,
+       Start_Date,
+       End_Date
+From   MS_GRC_LOV_ORG_VALUES_V where (trim(LOV_NAME) = 'MS GRC Yes No')
+and NVL(END_DATE,sysdate) >= sysdate and NVL(START_DATE,sysdate) <= sysdate
+ 
+AND locale_id= ms_grc_utilities.get_user_locale(:1)
+order by display_order</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>MS_GRC_KEY_CONTROL</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2907053064</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                        | Name                          | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                 |                               |    88 |   202K|    36   (3)| 00:00:01 |
+|   1 |  SORT ORDER BY                   |                               |    88 |   202K|    36   (3)| 00:00:01 |
+|*  2 |   HASH JOIN RIGHT OUTER          |                               |    88 |   202K|    35   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   3 |    TABLE ACCESS FULL             | MS_QS_LIST_OF_VALUES_TL       |   265 |  6625 |     3   (0)| 00:00:01 |</font>
+|*  4 |    HASH JOIN                     |                               |    88 |   200K|    32   (0)| 00:00:01 |
+|*  5 |     HASH JOIN                    |                               |    19 |  1406 |    16   (0)| 00:00:01 |
+|   6 |      NESTED LOOPS OUTER          |                               |     9 |   549 |    10   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  7 |       TABLE ACCESS FULL          | MS_QS_LOV_NAMES               |     9 |   315 |     9   (0)| 00:00:01 |</font>
+|*  8 |       INDEX RANGE SCAN           | MS_QS_LOV_NAMES_TL_IDX        |     1 |    26 |     1   (0)| 00:00:01 |
+|   9 |      VIEW                        | SI_REGISTER_APPLICATION_V     |    66 |   858 |     6   (0)| 00:00:01 |
+|  10 |       UNION-ALL                  |                               |       |       |            |          |
+|  11 |        NESTED LOOPS OUTER        |                               |    65 |  2145 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  12 |         TABLE ACCESS FULL        | SI_REGISTER_APPLICATION       |    65 |   455 |     3   (0)| 00:00:01 |</font>
+|* 13 |         INDEX RANGE SCAN         | SI_REGISTER_APPLICATION_TL_N1 |     1 |    26 |     1   (0)| 00:00:01 |
+|  14 |        FAST DUAL                 |                               |     1 |       |     2   (0)| 00:00:01 |
+|  15 |     VIEW                         |                               |  4233 |  9350K|    16   (0)| 00:00:01 |
+|  16 |      NESTED LOOPS                |                               |  4233 |   206K|    16   (0)| 00:00:01 |
+|* 17 |       TABLE ACCESS BY INDEX ROWID| SI_LOCALES                    |     1 |     6 |     1   (0)| 00:00:01 |
+|* 18 |        INDEX UNIQUE SCAN         | SI_LOCALES_U1                 |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 19 |       TABLE ACCESS FULL          | MS_QS_LIST_OF_VALUES_T        |  4233 |   181K|    15   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$D3661FD6
+   3 - SEL$D3661FD6 / TL@SEL$3
+   7 - SEL$D3661FD6 / T@SEL$7
+   8 - SEL$D3661FD6 / TL@SEL$7
+   9 - SET$1        / SRA@SEL$6
+  10 - SET$1       
+  11 - SEL$8       
+  12 - SEL$8        / T@SEL$8
+  13 - SEL$8        / TL@SEL$8
+  14 - SEL$11       / DUAL@SEL$11
+  15 - SEL$7286615E / X@SEL$3
+  16 - SEL$7286615E
+  17 - SEL$7286615E / SI_LOCALES@SEL$5
+  18 - SEL$7286615E / SI_LOCALES@SEL$5
+  19 - SEL$7286615E / T@SEL$4
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("X"."LOV_VALUE_ID"="TL"."LOV_VALUE_ID"(+) AND "X"."LOCALE_ID"="TL"."LOCALE_ID"(+))
+   4 - access("X"."LOV_ID"="T"."LOV_ID")
+   5 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+   7 - filter(TRIM("T"."LOV_NAME")='MS GRC Yes No')
+   8 - access("T"."LOV_ID"="TL"."LOV_ID"(+) AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"
+              ()))
+  13 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  17 - filter("ENABLED_FLAG"='Y')
+  18 - access("LOCALE_ID"="MS_GRC_UTILITIES"."GET_USER_LOCALE"(:1))
+  19 - filter(NVL("T"."END_DATE",SYSDATE@!)>=SYSDATE@! AND NVL("T"."START_DATE",SYSDATE@!)<=SYSDATE@!)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "X"."DISPLAY_ORDER"[NUMBER,22], "X"."STORED_VALUE"[VARCHAR2,400], 
+       NVL("TL"."DISPLAYED_VALUE","X"."DISPLAYED_VALUE")[4000], "T"."LOV_NAME"[VARCHAR2,400], 
+       "X"."LOCALE_ID"[NUMBER,22], "X"."ENTERPRISE_ID"[NUMBER,22], "X"."LOV_ID"[NUMBER,22], 
+       "X"."LOV_VALUE_ID"[NUMBER,22], NULL[0], NULL[0], "X"."START_DATE"[DATE,7], "X"."END_DATE"[DATE,7]
+   2 - (#keys=2) "X"."LOV_VALUE_ID"[NUMBER,22], "X"."LOCALE_ID"[NUMBER,22], 
+       "TL"."DISPLAYED_VALUE"[VARCHAR2,4000], "X"."LOV_ID"[NUMBER,22], "T"."LOV_NAME"[VARCHAR2,400], 
+       "X"."ENTERPRISE_ID"[NUMBER,22], "X"."DISPLAY_ORDER"[NUMBER,22], "X"."STORED_VALUE"[VARCHAR2,400], 
+       "X"."DISPLAYED_VALUE"[VARCHAR2,4000], "X"."END_DATE"[DATE,7], "X"."START_DATE"[DATE,7]
+   3 - "TL"."LOV_VALUE_ID"[NUMBER,22], "TL"."DISPLAYED_VALUE"[VARCHAR2,4000], "TL"."LOCALE_ID"[NUMBER,22]
+   4 - (#keys=1) "X"."LOV_ID"[NUMBER,22], "T"."LOV_NAME"[VARCHAR2,400], "X"."LOV_VALUE_ID"[NUMBER,22], 
+       "X"."DISPLAY_ORDER"[NUMBER,22], "X"."STORED_VALUE"[VARCHAR2,400], "X"."DISPLAYED_VALUE"[VARCHAR2,4000], 
+       "X"."LOCALE_ID"[NUMBER,22], "X"."START_DATE"[DATE,7], "X"."END_DATE"[DATE,7], 
+       "X"."ENTERPRISE_ID"[NUMBER,22]
+   5 - (#keys=1) "T"."LOV_NAME"[VARCHAR2,400], "T"."LOV_ID"[NUMBER,22]
+   6 - (#keys=0) "T"."LOV_NAME"[VARCHAR2,400], "T"."LOV_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+   7 - "T"."LOV_NAME"[VARCHAR2,400], "T"."LOV_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+   9 - "SRA"."PACKAGE_ID"[NUMBER,22]
+  10 - STRDEF[22]
+  11 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  12 - "T"."MODULE_ID"[NUMBER,22]
+  15 - "X"."LOV_VALUE_ID"[NUMBER,22], "X"."LOV_ID"[NUMBER,22], "X"."STORED_VALUE"[VARCHAR2,400], 
+       "X"."DISPLAYED_VALUE"[VARCHAR2,4000], "X"."LOCALE_ID"[NUMBER,22], "X"."START_DATE"[DATE,7], 
+       "X"."END_DATE"[DATE,7], "X"."ENTERPRISE_ID"[NUMBER,22], "X"."DISPLAY_ORDER"[NUMBER,22]
+  16 - (#keys=0) "LOCALE_ID"[NUMBER,22], "T"."LOV_VALUE_ID"[NUMBER,22], "T"."LOV_ID"[NUMBER,22], 
+       "T"."STORED_VALUE"[VARCHAR2,400], "T"."DISPLAYED_VALUE"[VARCHAR2,4000], "T"."START_DATE"[DATE,7], 
+       "T"."END_DATE"[DATE,7], "T"."ENTERPRISE_ID"[NUMBER,22], "T"."DISPLAY_ORDER"[NUMBER,22]
+  17 - "LOCALE_ID"[NUMBER,22]
+  18 - "SI_LOCALES".ROWID[ROWID,10], "LOCALE_ID"[NUMBER,22]
+  19 - "T"."LOV_VALUE_ID"[NUMBER,22], "T"."LOV_ID"[NUMBER,22], "T"."STORED_VALUE"[VARCHAR2,400], 
+       "T"."DISPLAYED_VALUE"[VARCHAR2,4000], "T"."START_DATE"[DATE,7], "T"."END_DATE"[DATE,7], 
+       "T"."ENTERPRISE_ID"[NUMBER,22], "T"."DISPLAY_ORDER"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

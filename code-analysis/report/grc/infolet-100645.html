@@ -1,0 +1,426 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS GRC Control Infolet (100645)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT Summ.OBJECT_ID  AS Control_id,
+Summ.OBJECT_NAME AS Control_name,
+Summ.OBJECT_NAME AS Edit,
+mls.Key_Control,
+mls.CONTROL_PURPOSE,
+mls.CONTROL_TYPE,
+mls.CONTROL_NATURE,
+mls.CONTROL_SOURCE,
+mls.CONTROL_PRIORITY,
+mls.OBJECT_LEVEL,
+(SELECT object_name FROM MS_GRC_COMPLIANCE_OBJE comp WHERE comp.object_id=Summ.parent AND comp.dd_object_type = 'MS_GRC_CONTROL') AS OBJECT_PARENT,
+mls.OBJECT_STATUS,
+mls.CONTROL_FREQUENCY,
+Summ.CREATED_DATE,
+ (SELECT USER_FULL_NAME FROM MS_GRC_USER_FULL_NAME_V where user_name =  Summ.Created_By) AS CREATED_BY,
+Summ.UPDATED_DATE,
+ (SELECT USER_FULL_NAME FROM MS_GRC_USER_FULL_NAME_V where user_name =   Summ.Updated_By) AS UPDATED_BY,
+Summ.VALID_FROM,
+Summ.VALID_UNTIL,
+Summ.Description,
+Summ.OWNER_ORG_NAMES as OWNER_ORGANIZATION,
+Summ.OWNER_NAME AS OWNER_NAMES,
+Summ.LEVEL_1_APPROVER,
+Summ.LEVEL_2_APPROVER,
+Summ.REL_ORGANIZATION_NAMES as APPLIES_TO_ORGANIZATIONS,
+Summ.REL_AOC_OBJ_NAME_AGG as RELATED_AREAS_OF_COMPLIANCE,
+mls.assertions as RELATED_ASSERTIONS,
+Summ.REL_ASSET_OBJ_NAME_AGG as RELATED_ASSETS,
+Summ.REL_CTRL_OBJ_NAME_AGG as RELATED_CONTROLS,
+Summ.REL_ASSET_CLASS_OBJ_NAME_AGG as RELATED_ASSET_CLASSES,
+Summ.REL_EVIDENCE_OBJ_NAME_AGG as RELATED_EVIDENCES,
+Summ.REL_MOD_REF_OBJ_NAME_AGG as RELATED_FRAMEWORK_REFERENCES,
+Summ.REL_FUNCTION_OBJ_NAME_AGG as RELATED_FUNCTIONS,
+Summ.REL_OBJECTIVE_OBJ_NAME_AGG as RELATED_OBJECTIVES,
+Summ.REL_PROCESS_OBJ_NAME_AGG as RELATED_PROCESSES,
+Summ.REL_PRODUCT_NAME_AGG as RELATED_PRODUCTS,
+Summ.REL_QUE_PROC_OBJ_NAME_AGG as REALTED_QUES_PROCS,
+Summ.REL_REFRENCES_OBJ_NAME_AGG as RELATED_REFERENCES,
+Summ.REL_REQUIREMENT_OBJ_NAME_AGG as RELATED_REQUIREMENTS,
+Summ.REL_RISK_OBJ_NAME_AGG as RELATED_RISKS,
+Summ.report_json AS REPORT_JSON
+,( SELECT usr.LEVEL_1_APPROVER FROM MS_GRC_COMPLIANCE_OBJE USR WHERE Summ.OBJECT_ID=USR.OBJECT_ID ) AS LEVEL_1_APPR,
+(SELECT usr.LEVEL_2_APPROVER FROM MS_GRC_COMPLIANCE_OBJE USR WHERE Summ.OBJECT_ID=USR.OBJECT_ID ) AS LEVEL_2_APPR,
+Summ.parent AS OBJECT_PARENT_ID,
+Summ.UPPER_OBJECT_NAME AS UPPER_OBJECT_NAME,
+owner_ids AS OWNERS
+FROM MS_GRC_CONTROL_SUMMARY Summ,
+MS_GRC_CONTROL_MLS_SUMMARY mls
+where mls.object_id=Summ.object_id
+and mls.object_id in (SELECT COLUMN_VALUE FROM TABLE(cast(MS_GRC_REP_BROWSER_FIL_DENORM.FN_CONTROL_RPT_FILTERS(MS_GRC_ARRAY_TYPE(:1,:2,:3,:5,:6,:7,:8,:9,:10,:11,:12,to_char(:13,'YYYY-MM-DD'),to_char(:14,'YYYY-MM-DD'),:15,:16,:17,:18,to_char(:19,'YYYY-MM-DD'),to_char(:20,'YYYY-MM-DD'),to_char(:21,'YYYY-MM-DD'),to_char(:22,'YYYY-MM-DD'),:23,:24,:25,:26,:27,:28,:29,:30,:31,:32,NULL,:33,:34,NULL,:35,NULL,:36,:37,NULL,:39,:38,:40,NULL,'MS_GRC_CONTROL',NULL,:41)) AS ms_varchar2_array))
+) and mls.locale_id = (select LOCALE_ID from SI_USERS_T T1 ,SI_LOCALES T2 where USER_NAME = :41  and T1.LOCALE = T2.LOCALE_STRING) 
+and  NVL(IS_ORPHAN, 1)=NVL(:4,NVL(IS_ORPHAN,1))
+order by upper_object_name</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet is used for fetching the Library data for Control list report. It consists of the parameters specific to Control object and also the related library object parmaters. It does not contain any mandatory parameter.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2487291778</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                             | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                      |                            |     1 | 66041 |    37   (6)| 00:00:01 |
+|*  1 |  TABLE ACCESS BY INDEX ROWID          | MS_GRC_COMPLIANCE_OBJE     |     1 |    79 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX UNIQUE SCAN                   | MS_GRC_COMPLIANCE_OBJE_PK  |     1 |       |     1   (0)| 00:00:01 |
+|   3 |  NESTED LOOPS                         |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|   4 |   NESTED LOOPS                        |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|   5 |    NESTED LOOPS                       |                            |     1 |    66 |     2   (0)| 00:00:01 |
+|   6 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
+|*  7 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|*  8 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_TYPES      |     1 |    32 |     1   (0)| 00:00:01 |
+|*  9 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 10 |    INDEX RANGE SCAN                   | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
+|  11 |   TABLE ACCESS BY INDEX ROWID         | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
+|  12 |  TABLE ACCESS BY INDEX ROWID          | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
+|* 13 |   INDEX UNIQUE SCAN                   | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
+|  14 |  NESTED LOOPS                         |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|  15 |   NESTED LOOPS                        |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|  16 |    NESTED LOOPS                       |                            |     1 |    66 |     2   (0)| 00:00:01 |
+|  17 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
+|* 18 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 19 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_TYPES      |     1 |    32 |     1   (0)| 00:00:01 |
+|* 20 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 21 |    INDEX RANGE SCAN                   | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
+|  22 |   TABLE ACCESS BY INDEX ROWID         | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
+|  23 |  TABLE ACCESS BY INDEX ROWID          | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
+|* 24 |   INDEX UNIQUE SCAN                   | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
+|  25 |  TABLE ACCESS BY INDEX ROWID          | MS_GRC_COMPLIANCE_OBJE     |     1 |   410 |     1   (0)| 00:00:01 |
+|* 26 |   INDEX UNIQUE SCAN                   | MS_GRC_COMPLIANCE_OBJE_PK  |     1 |       |     1   (0)| 00:00:01 |
+|  27 |  TABLE ACCESS BY INDEX ROWID          | MS_GRC_COMPLIANCE_OBJE     |     1 |   410 |     1   (0)| 00:00:01 |
+|* 28 |   INDEX UNIQUE SCAN                   | MS_GRC_COMPLIANCE_OBJE_PK  |     1 |       |     1   (0)| 00:00:01 |
+|  29 |  SORT ORDER BY                        |                            |     1 | 66041 |    37   (6)| 00:00:01 |
+|  30 |   NESTED LOOPS                        |                            |     1 | 66041 |    32   (4)| 00:00:01 |
+|  31 |    NESTED LOOPS                       |                            |     1 | 19536 |    31   (4)| 00:00:01 |
+|  32 |     SORT UNIQUE                       |                            |  8168 | 16336 |    29   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  33 |      COLLECTION ITERATOR PICKLER FETCH| FN_CONTROL_RPT_FILTERS     |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|  34 |     TABLE ACCESS BY INDEX ROWID       | MS_GRC_CONTROL_MLS_SUMMARY |     1 | 19534 |     1   (0)| 00:00:01 |
+|* 35 |      INDEX RANGE SCAN                 | MS_GRC_CTRL_MLS_SUMM_IDX2  |     1 |       |     1   (0)| 00:00:01 |
+|  36 |       NESTED LOOPS                    |                            |     1 |    30 |     4   (0)| 00:00:01 |
+|  37 |        TABLE ACCESS BY INDEX ROWID    | SI_USERS_T                 |     1 |    19 |     1   (0)| 00:00:01 |
+|* 38 |         INDEX UNIQUE SCAN             | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 39 |        TABLE ACCESS FULL              | SI_LOCALES                 |     1 |    11 |     3   (0)| 00:00:01 |</font>
+|* 40 |    TABLE ACCESS BY INDEX ROWID        | MS_GRC_CONTROL_SUMMARY     |     1 | 46505 |     1   (0)| 00:00:01 |
+|* 41 |     INDEX UNIQUE SCAN                 | MS_GRC_COTRL_SUMM_IDX1     |     1 |       |     1   (0)| 00:00:01 |
+--------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2        / COMP@SEL$2
+   2 - SEL$2        / COMP@SEL$2
+   3 - SEL$9FBDA764
+   6 - SEL$9FBDA764 / PNAME@SEL$4
+   7 - SEL$9FBDA764 / PNAME@SEL$4
+   8 - SEL$9FBDA764 / PTYPE@SEL$4
+   9 - SEL$9FBDA764 / PTYPE@SEL$4
+  10 - SEL$9FBDA764 / PVALUE@SEL$4
+  11 - SEL$9FBDA764 / PVALUE@SEL$4
+  12 - SEL$24D5D062 / USERS@SEL$5
+  13 - SEL$24D5D062 / USERS@SEL$5
+  14 - SEL$67A6E4F6
+  17 - SEL$67A6E4F6 / PNAME@SEL$8
+  18 - SEL$67A6E4F6 / PNAME@SEL$8
+  19 - SEL$67A6E4F6 / PTYPE@SEL$8
+  20 - SEL$67A6E4F6 / PTYPE@SEL$8
+  21 - SEL$67A6E4F6 / PVALUE@SEL$8
+  22 - SEL$67A6E4F6 / PVALUE@SEL$8
+  23 - SEL$DA86A24D / USERS@SEL$9
+  24 - SEL$DA86A24D / USERS@SEL$9
+  25 - SEL$11       / USR@SEL$11
+  26 - SEL$11       / USR@SEL$11
+  27 - SEL$12       / USR@SEL$12
+  28 - SEL$12       / USR@SEL$12
+  29 - SEL$A22B3500
+  33 - SEL$A22B3500 / KOKBF$0@SEL$14
+  34 - SEL$A22B3500 / MLS@SEL$1
+  35 - SEL$A22B3500 / MLS@SEL$1
+  36 - SEL$15      
+  37 - SEL$15       / T1@SEL$15
+  38 - SEL$15       / T1@SEL$15
+  39 - SEL$15       / T2@SEL$15
+  40 - SEL$A22B3500 / SUMM@SEL$1
+  41 - SEL$A22B3500 / SUMM@SEL$1
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - filter("COMP"."DD_OBJECT_TYPE"='MS_GRC_CONTROL')
+   2 - access("COMP"."OBJECT_ID"=:B1)
+   7 - access("PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')
+   8 - filter("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID")
+   9 - access("PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format')
+  10 - access("PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND 
+              "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PVALUE"."ORG_ENTITY_ID"=1)
+  13 - access("USERS"."USER_NAME"=:B1)
+  18 - access("PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')
+  19 - filter("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID")
+  20 - access("PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format')
+  21 - access("PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND 
+              "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PVALUE"."ORG_ENTITY_ID"=1)
+  24 - access("USERS"."USER_NAME"=:B1)
+  26 - access("USR"."OBJECT_ID"=:B1)
+  28 - access("USR"."OBJECT_ID"=:B1)
+  35 - access("MLS"."OBJECT_ID"=VALUE(KOKBF$))
+       filter(TO_NUMBER("MLS"."LOCALE_ID")= (SELECT "LOCALE_ID" FROM "SI_LOCALES" "T2","SI_USERS_T" "T1" 
+              WHERE "USER_NAME"=:41 AND "T1"."LOCALE"="T2"."LOCALE_STRING"))
+  38 - access("USER_NAME"=:41)
+  39 - filter("T1"."LOCALE"="T2"."LOCALE_STRING")
+  40 - filter(NVL("IS_ORPHAN",1)=NVL(:4,NVL("IS_ORPHAN",1)))
+  41 - access("MLS"."OBJECT_ID"="SUMM"."OBJECT_ID")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "COMP".ROWID[ROWID,10], "OBJECT_NAME"[VARCHAR2,4000], "COMP"."DD_OBJECT_TYPE"[VARCHAR2,400]
+   2 - "COMP".ROWID[ROWID,10]
+   3 - (#keys=0) "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+   4 - (#keys=0) "PVALUE".ROWID[ROWID,10]
+   5 - (#keys=0) "PNAME"."PARAMETER_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+   6 - "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22]
+   7 - "PNAME".ROWID[ROWID,10]
+   8 - "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+   9 - "PTYPE".ROWID[ROWID,10]
+  10 - "PVALUE".ROWID[ROWID,10]
+  11 - "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+  12 - "USERS".ROWID[ROWID,10], "USERS"."LAST_NAME"[VARCHAR2,400], "USERS"."FIRST_NAME"[VARCHAR2,400], 
+       "USERS"."USER_NAME"[VARCHAR2,320]
+  13 - "USERS".ROWID[ROWID,10], "USERS"."USER_NAME"[VARCHAR2,320]
+  14 - (#keys=0) "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+  15 - (#keys=0) "PVALUE".ROWID[ROWID,10]
+  16 - (#keys=0) "PNAME"."PARAMETER_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  17 - "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22]
+  18 - "PNAME".ROWID[ROWID,10]
+  19 - "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  20 - "PTYPE".ROWID[ROWID,10]
+  21 - "PVALUE".ROWID[ROWID,10]
+  22 - "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+  23 - "USERS".ROWID[ROWID,10], "USERS"."LAST_NAME"[VARCHAR2,400], "USERS"."FIRST_NAME"[VARCHAR2,400], 
+       "USERS"."USER_NAME"[VARCHAR2,320]
+  24 - "USERS".ROWID[ROWID,10], "USERS"."USER_NAME"[VARCHAR2,320]
+  25 - "USR".ROWID[ROWID,10], "USR"."LEVEL_1_APPROVER"[VARCHAR2,4000]
+  26 - "USR".ROWID[ROWID,10]
+  27 - "USR".ROWID[ROWID,10], "USR"."LEVEL_2_APPROVER"[VARCHAR2,4000]
+  28 - "USR".ROWID[ROWID,10]
+  29 - (#keys=1) "SUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], "SUMM"."OBJECT_ID"[VARCHAR2,1600], 
+       "SUMM"."OBJECT_NAME"[VARCHAR2,4000], "SUMM"."OBJECT_NAME"[VARCHAR2,4000], 
+       "MLS"."KEY_CONTROL"[VARCHAR2,1020], "MLS"."CONTROL_PURPOSE"[LOB,4000], "MLS"."CONTROL_TYPE"[LOB,4000], 
+       "MLS"."CONTROL_NATURE"[LOB,4000], "MLS"."CONTROL_SOURCE"[VARCHAR2,4000], 
+       "MLS"."CONTROL_PRIORITY"[VARCHAR2,4000], "MLS"."OBJECT_LEVEL"[VARCHAR2,4000],  (SELECT "OBJECT_NAME" FROM 
+       "MS_GRC_COMPLIANCE_OBJE" "COMP" WHERE "COMP"."OBJECT_ID"=:B1 AND 
+       "COMP"."DD_OBJECT_TYPE"='MS_GRC_CONTROL')[4000], "MLS"."OBJECT_STATUS"[VARCHAR2,4000], 
+       "MLS"."CONTROL_FREQUENCY"[VARCHAR2,4000], "SUMM"."CREATED_DATE"[DATE,7],  (SELECT CASE  WHEN  (SELECT 
+       "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS_QS_PARAMETER_NAMES" 
+       "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE 
+       "PVALUE"."ORG_ENTITY_ID"=1 AND "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND 
+       "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name 
+       Display Format' AND "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND 
+       "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='2' THEN "USERS"."LAST_NAME"||' '||"USERS"."FIRST_NAME" WHEN  
+       (SELECT "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS_QS_PARAMETER_NAMES" 
+       "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE 
+       "PVALUE"."ORG_ENTITY_ID"=1 AND "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND 
+       "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name 
+       Display Format' AND "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND 
+       "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='3' THEN "USERS"."LAST_NAME"||','||' '||"USERS"."FIRST_NAME"||' 
+       '||'('||"USERS"."USER_NAME"||')' WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM 
+       METRICSTREAM."MS_QS_PARAMETER_NAMES" "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" 
+       "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE "PVALUE"."ORG_ENTITY_ID"=1 AND 
+       "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" 
+       AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format' AND 
+       "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='1' 
+       THEN "USERS"."FIRST_NAME"||' '||"USERS"."LAST_NAME" WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM 
+       METRICSTREAM."MS_QS_PARAMETER_NAMES" "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" 
+       "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE "PVALUE"."ORG_ENTITY_ID"=1 AND 
+       "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" 
+       AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format' AND 
+       "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='4' 
+       THEN "USERS"."FIRST_NAME"||','||' '||"USERS"."LAST_NAME"||' '||'('||"USERS"."USER_NAME"||')' ELSE 
+       "USERS"."LAST_NAME"||' '||"USERS"."FIRST_NAME" END  FROM METRICSTREAM."SI_USERS_T" "USERS" WHERE 
+       "USERS"."USER_NAME"=:B2)[1125], "SUMM"."UPDATED_DATE"[DATE,7],  (SELECT CASE  WHEN  (SELECT 
+       "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS_QS_PARAMETER_NAMES" 
+       "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE 
+       "PVALUE"."ORG_ENTITY_ID"=1 AND "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND 
+       "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name 
+       Display Format' AND "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND 
+       "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='2' THEN "USERS"."LAST_NAME"||' '||"USERS"."FIRST_NAME" WHEN  
+       (SELECT "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS_QS_PARAMETER_NAMES" 
+       "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE 
+       "PVALUE"."ORG_ENTITY_ID"=1 AND "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PTYPE"
+  30 - (#keys=0) "MLS"."CONTROL_PURPOSE"[LOB,4000], "MLS"."CONTROL_TYPE"[LOB,4000], 
+       "MLS"."CONTROL_NATURE"[LOB,4000], "MLS"."CONTROL_PRIORITY"[VARCHAR2,4000], 
+       "MLS"."CONTROL_SOURCE"[VARCHAR2,4000], "MLS"."CONTROL_FREQUENCY"[VARCHAR2,4000], 
+       "MLS"."ASSERTIONS"[LOB,4000], "MLS"."OBJECT_LEVEL"[VARCHAR2,4000], "MLS"."OBJECT_STATUS"[VARCHAR2,4000], 
+       "MLS"."KEY_CONTROL"[VARCHAR2,1020], "SUMM"."REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_RISK_OBJ_NAME_AGG"[LOB,4000], "SUMM"."REL_AOC_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_ASSET_CLASS_OBJ_NAME_AGG"[LOB,4000], "SUMM"."REL_ASSET_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_CTRL_OBJ_NAME_AGG"[LOB,4000], "SUMM"."REL_EVIDENCE_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_FUNCTION_OBJ_NAME_AGG"[LOB,4000], "SUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], 
+       "SUMM"."REPORT_JSON"[VARCHAR2,4000], "SUMM"."OWNER_NAME"[LOB,4000], "SUMM"."OWNER_ORG_NAMES"[LOB,4000], 
+       "SUMM"."OBJECT_ID"[VARCHAR2,1600], "SUMM"."OBJECT_NAME"[VARCHAR2,4000], "SUMM"."PARENT"[VARCHAR2,1600], 
+       "SUMM"."CREATED_DATE"[DATE,7], "SUMM"."CREATED_BY"[VARCHAR2,400], "SUMM"."UPDATED_DATE"[DATE,7], 
+       "SUMM"."UPDATED_BY"[VARCHAR2,400], "SUMM"."VALID_UNTIL"[DATE,7], "SUMM"."VALID_FROM"[DATE,7], 
+       "SUMM"."DESCRIPTION"[LOB,4000], "SUMM"."LEVEL_1_APPROVER"[VARCHAR2,400], 
+       "SUMM"."LEVEL_2_APPROVER"[VARCHAR2,400], "OWNER_IDS"[LOB,4000], 
+       "SUMM"."REL_MOD_REF_OBJ_NAME_AGG"[LOB,4000], "SUMM"."REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_ORGANIZATION_NAMES"[LOB,4000], "SUMM"."REL_PROCESS_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_PRODUCT_NAME_AGG"[LOB,4000], "SUMM"."REL_QUE_PROC_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_REFRENCES_OBJ_NAME_AGG"[LOB,4000]
+  31 - (#keys=0) "MLS"."OBJECT_ID"[VARCHAR2,1600], "MLS"."CONTROL_PURPOSE"[LOB,4000], 
+       "MLS"."CONTROL_TYPE"[LOB,4000], "MLS"."CONTROL_NATURE"[LOB,4000], "MLS"."CONTROL_PRIORITY"[VARCHAR2,4000], 
+       "MLS"."CONTROL_SOURCE"[VARCHAR2,4000], "MLS"."CONTROL_FREQUENCY"[VARCHAR2,4000], 
+       "MLS"."ASSERTIONS"[LOB,4000], "MLS"."OBJECT_LEVEL"[VARCHAR2,4000], "MLS"."OBJECT_STATUS"[VARCHAR2,4000], 
+       "MLS"."KEY_CONTROL"[VARCHAR2,1020]
+  32 - (#keys=1) VALUE(KOKBF$)[8000]
+  33 - VALUE(A0)[8000]
+  34 - "MLS"."OBJECT_ID"[VARCHAR2,1600], "MLS"."CONTROL_PURPOSE"[LOB,4000], "MLS"."CONTROL_TYPE"[LOB,4000], 
+       "MLS"."CONTROL_NATURE"[LOB,4000], "MLS"."CONTROL_PRIORITY"[VARCHAR2,4000], 
+       "MLS"."CONTROL_SOURCE"[VARCHAR2,4000], "MLS"."CONTROL_FREQUENCY"[VARCHAR2,4000], 
+       "MLS"."ASSERTIONS"[LOB,4000], "MLS"."OBJECT_LEVEL"[VARCHAR2,4000], "MLS"."OBJECT_STATUS"[VARCHAR2,4000], 
+       "MLS"."KEY_CONTROL"[VARCHAR2,1020]
+  35 - "MLS".ROWID[ROWID,10], "MLS"."OBJECT_ID"[VARCHAR2,1600]
+  36 - (#keys=0) "LOCALE_ID"[NUMBER,22]
+  37 - "T1"."LOCALE"[VARCHAR2,400]
+  38 - "T1".ROWID[ROWID,10]
+  39 - "LOCALE_ID"[NUMBER,22]
+  40 - "SUMM"."REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], "SUMM"."REL_RISK_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_AOC_OBJ_NAME_AGG"[LOB,4000], "SUMM"."REL_ASSET_CLASS_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_ASSET_OBJ_NAME_AGG"[LOB,4000], "SUMM"."REL_CTRL_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_EVIDENCE_OBJ_NAME_AGG"[LOB,4000], "SUMM"."REL_FUNCTION_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], "SUMM"."REPORT_JSON"[VARCHAR2,4000], 
+       "SUMM"."OWNER_NAME"[LOB,4000], "SUMM"."OWNER_ORG_NAMES"[LOB,4000], "SUMM"."OBJECT_ID"[VARCHAR2,1600], 
+       "SUMM"."OBJECT_NAME"[VARCHAR2,4000], "SUMM"."PARENT"[VARCHAR2,1600], "SUMM"."CREATED_DATE"[DATE,7], 
+       "SUMM"."CREATED_BY"[VARCHAR2,400], "SUMM"."UPDATED_DATE"[DATE,7], "SUMM"."UPDATED_BY"[VARCHAR2,400], 
+       "SUMM"."VALID_UNTIL"[DATE,7], "SUMM"."VALID_FROM"[DATE,7], "SUMM"."DESCRIPTION"[LOB,4000], 
+       "SUMM"."LEVEL_1_APPROVER"[VARCHAR2,400], "SUMM"."LEVEL_2_APPROVER"[VARCHAR2,400], "OWNER_IDS"[LOB,4000], 
+       "SUMM"."REL_MOD_REF_OBJ_NAME_AGG"[LOB,4000], "SUMM"."REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_ORGANIZATION_NAMES"[LOB,4000], "SUMM"."REL_PROCESS_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_PRODUCT_NAME_AGG"[LOB,4000], "SUMM"."REL_QUE_PROC_OBJ_NAME_AGG"[LOB,4000], 
+       "SUMM"."REL_REFRENCES_OBJ_NAME_AGG"[LOB,4000]
+  41 - "SUMM".ROWID[ROWID,10], "SUMM"."OBJECT_ID"[VARCHAR2,1600]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

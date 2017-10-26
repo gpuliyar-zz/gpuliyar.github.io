@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS GRC Objects Mapping Infolet (100665)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT t2.object_name AS NAME, t2.object_id AS ID,
+       '['||tgt_obj_type ||'] '||substr(t1.tgt_obj_name,1,3600) AS mapped_name, t1.tgt_obj_id AS mapped_id,
+       DECODE (NVL (t1.tgt_obj_name, 'n\a'), 'n\a', NULL, 'X') DATA,replace(replace(tgt_obj_Type,'(',''),')','') AS tgt_obj_Type,substr(t1.tgt_obj_name,1,3600) as mapped_name_only
+  FROM (SELECT               --c.tgt_obj_type,a.dest_obj_type,c.rel_config_id,
+               ms_grc_utilities.get_grc_object_name
+                  (b.rel_source_object_id,
+                   ms_apps_utilities.get_parameter_value
+                                           (1,
+                                            'MS GRC Mapping Report Parameter',
+                                            'Library Object'
+                                           )
+                  ) object_name,
+               b.rel_source_object_id AS object_id, c.tgt_obj_name,
+               c.tgt_obj_id,c.tgt_obj_type
+          FROM ms_grc_rel_defn a,
+               ms_grc_orb_relations b,
+               ms_grc_orb_relations_orb c
+         WHERE c.rel_config_id IN (
+                  SELECT rel_id
+                    FROM ms_grc_rel_defn d
+                   WHERE d.src_obj_type =
+                            ms_apps_utilities.get_parameter_value
+                                           (1,
+                                            'MS GRC Mapping Report Parameter',
+                                            'Library Object'
+                                           ))
+           AND c.rel_config_id = a.rel_id
+           AND b.rel_source_id = c.rel_source_id) t1,
+       (SELECT object_name,object_id,dd_object_Type
+          FROM ms_grc_all_published_objects_v
+         WHERE dd_object_type =
+                  ms_apps_utilities.get_parameter_value
+                                           (1,
+                                            'MS GRC Mapping Report Parameter',
+                                            'Library Object'
+                                           )) t2
+ WHERE t2.object_id = t1.object_id(+)</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>null</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 3713062765</h2></header><pre><code>
+ 
+-------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                        | Name                           | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                 |                                |       |  7410 |    31   (0)| 00:00:01 |
+|*  1 |  HASH JOIN OUTER                 |                                |    57 |  7410 |    31   (0)| 00:00:01 |
+|   2 |   VIEW                           | MS_GRC_ALL_PUBLISHED_OBJECTS_V |    55 |  3520 |    19   (0)| 00:00:01 |
+|   3 |    SORT UNIQUE                   |                                |       |       |            |          |
+|   4 |     UNION-ALL                    |                                |       |       |            |          |
+|   5 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_FINANCIAL_ACCOU         |     5 |   345 |     2   (0)| 00:00:01 |
+|*  6 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_ACCT     |     5 |       |     1   (0)| 00:00:01 |
+|   7 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_RISK                    |    39 |  1911 |     2   (0)| 00:00:01 |
+|*  8 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_RISK     |    39 |       |     1   (0)| 00:00:01 |
+|   9 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_AREA_OF_COMPLIA         |     6 |   378 |     2   (0)| 00:00:01 |
+|* 10 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_AOC      |     6 |       |     1   (0)| 00:00:01 |
+|  11 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_REFERENCE               |     1 |  2406 |     1   (0)| 00:00:01 |
+|* 12 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_REF      |     1 |       |     1   (0)| 00:00:01 |
+|  13 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_MODEL_REFERENCE         |     1 |  2406 |     1   (0)| 00:00:01 |
+|* 14 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_MREF     |     1 |       |     1   (0)| 00:00:01 |
+|  15 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_OBJECTIVES              |     6 |   612 |     2   (0)| 00:00:01 |
+|* 16 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_OBJC     |     6 |       |     1   (0)| 00:00:01 |
+|  17 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_QUESTION_PROC           |     9 |  1098 |     2   (0)| 00:00:01 |
+|* 18 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_QUES     |     9 |       |     1   (0)| 00:00:01 |
+|  19 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_FUNCTION                |    12 |   672 |     2   (0)| 00:00:01 |
+|* 20 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_FUNC     |    12 |       |     1   (0)| 00:00:01 |
+|  21 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_REQUIREMENT             |     5 |   275 |     2   (0)| 00:00:01 |
+|* 22 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_RQMT     |     5 |       |     1   (0)| 00:00:01 |
+|  23 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_REGULATORY_BODY         |     4 |   168 |     2   (0)| 00:00:01 |
+|* 24 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_REGB     |     4 |       |     1   (0)| 00:00:01 |
+|  25 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_ORG_PROFILE             |     1 |   916 |     1   (0)| 00:00:01 |
+|* 26 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_ORG      |     1 |       |     1   (0)| 00:00:01 |
+|  27 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_COMPLIANCE_OBJE         |    17 |  1343 |     4   (0)| 00:00:01 |
+|* 28 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_COMP_OBJ |    17 |       |     1   (0)| 00:00:01 |
+|  29 |      TABLE ACCESS BY INDEX ROWID | MS_GRC_CORE_OBJECT             |    17 |   986 |     2   (0)| 00:00:01 |
+|* 30 |       INDEX RANGE SCAN           | MS_GRC_IDX_DD_OBJ_TYP_CORE_OBJ |    17 |       |     1   (0)| 00:00:01 |
+|  31 |   VIEW                           |                                |   167 | 11022 |    12   (0)| 00:00:01 |
+|  32 |    NESTED LOOPS                  |                                |   167 | 23046 |    12   (0)| 00:00:01 |
+|* 33 |     HASH JOIN                    |                                |   167 | 21710 |    11   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  34 |      TABLE ACCESS FULL           | MS_GRC_ORB_RELATIONS           |   160 |  4960 |     5   (0)| 00:00:01 |</font>
+|* 35 |      HASH JOIN                   |                                |   167 | 16533 |     6   (0)| 00:00:01 |
+|  36 |       TABLE ACCESS BY INDEX ROWID| MS_GRC_REL_DEFN                |     9 |   234 |     1   (0)| 00:00:01 |
+|* 37 |        INDEX RANGE SCAN          | MS_GRC_REL_DEFN_IDX1           |     9 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  38 |       TABLE ACCESS FULL          | MS_GRC_ORB_RELATIONS_ORB       |   413 | 30149 |     5   (0)| 00:00:01 |</font>
+|* 39 |     INDEX UNIQUE SCAN            | MS_GRC_REL_DEFN_PK             |     1 |     8 |     1   (0)| 00:00:01 |
+-------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$004D2CAB
+   2 - SET$1        / MS_GRC_ALL_PUBLISHED_OBJECTS_V@SEL$4
+   3 - SET$1       
+   5 - SEL$5        / MS_GRC_FINANCIAL_ACCOU@SEL$5
+   6 - SEL$5        / MS_GRC_FINANCIAL_ACCOU@SEL$5
+   7 - SEL$6        / MS_GRC_RISK@SEL$6
+   8 - SEL$6        / MS_GRC_RISK@SEL$6
+   9 - SEL$7        / MS_GRC_AREA_OF_COMPLIA@SEL$7
+  10 - SEL$7        / MS_GRC_AREA_OF_COMPLIA@SEL$7
+  11 - SEL$8        / MS_GRC_REFERENCE@SEL$8
+  12 - SEL$8        / MS_GRC_REFERENCE@SEL$8
+  13 - SEL$9        / MS_GRC_MODEL_REFERENCE@SEL$9
+  14 - SEL$9        / MS_GRC_MODEL_REFERENCE@SEL$9
+  15 - SEL$10       / MS_GRC_OBJECTIVES@SEL$10
+  16 - SEL$10       / MS_GRC_OBJECTIVES@SEL$10
+  17 - SEL$11       / MS_GRC_QUESTION_PROC@SEL$11
+  18 - SEL$11       / MS_GRC_QUESTION_PROC@SEL$11
+  19 - SEL$12       / MS_GRC_FUNCTION@SEL$12
+  20 - SEL$12       / MS_GRC_FUNCTION@SEL$12
+  21 - SEL$13       / MS_GRC_REQUIREMENT@SEL$13
+  22 - SEL$13       / MS_GRC_REQUIREMENT@SEL$13
+  23 - SEL$14       / MS_GRC_REGULATORY_BODY@SEL$14
+  24 - SEL$14       / MS_GRC_REGULATORY_BODY@SEL$14
+  25 - SEL$15       / MS_GRC_ORG_PROFILE@SEL$15
+  26 - SEL$15       / MS_GRC_ORG_PROFILE@SEL$15
+  27 - SEL$16       / MS_GRC_COMPLIANCE_OBJE@SEL$16
+  28 - SEL$16       / MS_GRC_COMPLIANCE_OBJE@SEL$16
+  29 - SEL$17       / MS_GRC_CORE_OBJECT@SEL$17
+  30 - SEL$17       / MS_GRC_CORE_OBJECT@SEL$17
+  31 - SEL$BE5C8E5F / T1@SEL$1
+  32 - SEL$BE5C8E5F
+  34 - SEL$BE5C8E5F / B@SEL$2
+  36 - SEL$BE5C8E5F / D@SEL$3
+  37 - SEL$BE5C8E5F / D@SEL$3
+  38 - SEL$BE5C8E5F / C@SEL$2
+  39 - SEL$BE5C8E5F / A@SEL$2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - access("OBJECT_ID"="T1"."OBJECT_ID"(+))
+   6 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+   8 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  10 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  12 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  14 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  16 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  18 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  20 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  22 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  24 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  26 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  28 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  30 - access("DD_OBJECT_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  33 - access("B"."REL_SOURCE_ID"="C"."REL_SOURCE_ID")
+  35 - access("C"."REL_CONFIG_ID"="REL_ID")
+  37 - access("D"."SRC_OBJ_TYPE"="MS_APPS_UTILITIES"."GET_PARAMETER_VALUE"(1,'MS GRC Mapping Report 
+              Parameter','Library Object'))
+  39 - access("C"."REL_CONFIG_ID"="A"."REL_ID")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "TGT_OBJ_TYPE"[VARCHAR2,1020], 
+       "T1"."TGT_OBJ_NAME"[VARCHAR2,4000], "T1"."TGT_OBJ_ID"[VARCHAR2,4000]
+   2 - "OBJECT_NAME"[VARCHAR2,4000], "OBJECT_ID"[VARCHAR2,400]
+   3 - (#keys=3) STRDEF[4000], STRDEF[400], STRDEF[400]
+   4 - STRDEF[4000], STRDEF[400], STRDEF[400]
+   5 - "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,400]
+   6 - "MS_GRC_FINANCIAL_ACCOU".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+   7 - "OBJECT_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,400], "OBJECT_ID"[VARCHAR2,400]
+   8 - "MS_GRC_RISK".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+   9 - "DD_OBJECT_TYPE"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "OBJECT_ID"[VARCHAR2,400]
+  10 - "MS_GRC_AREA_OF_COMPLIA".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  11 - "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  12 - "MS_GRC_REFERENCE".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  13 - "OBJECT_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,400], "OBJECT_ID"[VARCHAR2,400]
+  14 - "MS_GRC_MODEL_REFERENCE".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  15 - "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  16 - "MS_GRC_OBJECTIVES".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  17 - "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  18 - "MS_GRC_QUESTION_PROC".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  19 - "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  20 - "MS_GRC_FUNCTION".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  21 - "DD_OBJECT_TYPE"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "OBJECT_ID"[VARCHAR2,400]
+  22 - "MS_GRC_REQUIREMENT".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  23 - "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  24 - "MS_GRC_REGULATORY_BODY".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  25 - "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,1020], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  26 - "MS_GRC_ORG_PROFILE".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  27 - "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  28 - "MS_GRC_COMPLIANCE_OBJE".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  29 - "OBJECT_ID"[VARCHAR2,400], "DD_OBJECT_TYPE"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000]
+  30 - "MS_GRC_CORE_OBJECT".ROWID[ROWID,10], "DD_OBJECT_TYPE"[VARCHAR2,400]
+  31 - "T1"."OBJECT_ID"[VARCHAR2,1016], "T1"."TGT_OBJ_NAME"[VARCHAR2,4000], 
+       "T1"."TGT_OBJ_ID"[VARCHAR2,4000], "TGT_OBJ_TYPE"[VARCHAR2,1020]
+  32 - (#keys=0) "B"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "C"."TGT_OBJ_NAME"[VARCHAR2,4000], 
+       "C"."TGT_OBJ_TYPE"[VARCHAR2,1020], "C"."TGT_OBJ_ID"[VARCHAR2,4000]
+  33 - (#keys=1) "B"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "C"."REL_CONFIG_ID"[VARCHAR2,1020], 
+       "C"."TGT_OBJ_NAME"[VARCHAR2,4000], "C"."TGT_OBJ_TYPE"[VARCHAR2,1020], "C"."TGT_OBJ_ID"[VARCHAR2,4000]
+  34 - "B"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "B"."REL_SOURCE_ID"[VARCHAR2,1020]
+  35 - (#keys=1) "C"."REL_CONFIG_ID"[VARCHAR2,1020], "C"."TGT_OBJ_NAME"[VARCHAR2,4000], 
+       "C"."TGT_OBJ_TYPE"[VARCHAR2,1020], "C"."REL_SOURCE_ID"[VARCHAR2,1020], "C"."TGT_OBJ_ID"[VARCHAR2,4000]
+  36 - "REL_ID"[VARCHAR2,160]
+  37 - "D".ROWID[ROWID,10]
+  38 - "C"."TGT_OBJ_NAME"[VARCHAR2,4000], "C"."TGT_OBJ_TYPE"[VARCHAR2,1020], 
+       "C"."REL_CONFIG_ID"[VARCHAR2,1020], "C"."TGT_OBJ_ID"[VARCHAR2,4000], "C"."REL_SOURCE_ID"[VARCHAR2,1020]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

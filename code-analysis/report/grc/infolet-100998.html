@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_GRC_PROC_ORB_Rpt_Inf (100998)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>select
+  ProcSumm.Object_Id  AS Process_ID,
+  ProcSumm.OBJECT_NAME AS Process_Name,
+  ProcMlsSumm.Object_Level as Process_Level,
+  ProcSumm.OBJ_PARENT AS Process_Parent,
+  ProcMlsSumm.PROCESS_TYPE     AS Process_Type,
+  ProcMlsSumm.PROCESS_CATEGORY AS Process_category,
+  PROCMLSSUMM.BUSINESS_CRITICALITY as BUSINESS_CRITICALITY,
+   'MS_GRC_PROCESS' as ADDITIONAL_COLUMN3,
+   null as FORM_URL,
+  'MS_GRC_PROCESS' as ADDITIONAL_COLUMN4,
+    ProcSumm.UPPER_OBJECT_NAME AS UPPER_OBJECT_NAME
+from MS_GRC_PROCESS_SUMMARY PROCSUMM,
+    MS_GRC_PROCESS_MLS_SUMMARY PROCMLSSUMM
+where PROCSUMM.OBJECT_ID = PROCMLSSUMM.OBJECT_ID
+and PROCMLSSUMM.LOCALE_ID = (select LOCALE_ID from SI_USERS_T T1 ,SI_LOCALES T2 where USER_NAME = :1 and T1.LOCALE = T2.LOCALE_STRING)
+and exists (
+                SELECT COLUMN_VALUE
+  from table(cast(MS_GRC_ORB_REPORT_FILTER.FN_PROCESS_ORB_FILTERS(:1,:2, :3, :7, :6, :4,:5) as MS_VARCHAR2_ARRAY))
+  where COLUMN_VALUE=PROCSUMM.OBJECT_ID
+)
+and TRUNC(sysdate) between NVL(TRUNC(ProcSumm.VALID_FROM),TRUNC(sysdate)) and NVL(TRUNC(ProcSumm.VALID_UNTIL),TRUNC(sysdate)) order by upper_object_name</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet extracts data from summary tables and is thereby used in MS_GRC_PROC_ORB_REPORT report</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1491729041</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                             | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                      |                            |     1 | 12840 |    37   (6)| 00:00:01 |
+|   1 |  SORT ORDER BY                        |                            |     1 | 12840 |    37   (6)| 00:00:01 |
+|   2 |   NESTED LOOPS                        |                            |     1 | 12840 |    32   (4)| 00:00:01 |
+|   3 |    MERGE JOIN SEMI                    |                            |     1 |  6828 |    31   (4)| 00:00:01 |
+|*  4 |     TABLE ACCESS BY INDEX ROWID       | MS_GRC_PROCESS_SUMMARY     |     1 |  6826 |     1   (0)| 00:00:01 |
+|   5 |      INDEX FULL SCAN                  | MS_GRC_PROCE_SUMM_IDX1     |     1 |       |     1   (0)| 00:00:01 |
+|*  6 |     SORT UNIQUE                       |                            |  8168 | 16336 |    30   (4)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   7 |      COLLECTION ITERATOR PICKLER FETCH| FN_PROCESS_ORB_FILTERS     |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|   8 |    TABLE ACCESS BY INDEX ROWID        | MS_GRC_PROCESS_MLS_SUMMARY |     1 |  6012 |     1   (0)| 00:00:01 |
+|*  9 |     INDEX RANGE SCAN                  | MS_GRC_PROC_MLS_SUMM_IDX2  |     1 |       |     1   (0)| 00:00:01 |
+|  10 |      NESTED LOOPS                     |                            |     1 |    30 |     4   (0)| 00:00:01 |
+|  11 |       TABLE ACCESS BY INDEX ROWID     | SI_USERS_T                 |     1 |    19 |     1   (0)| 00:00:01 |
+|* 12 |        INDEX UNIQUE SCAN              | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 13 |       TABLE ACCESS FULL               | SI_LOCALES                 |     1 |    11 |     3   (0)| 00:00:01 |</font>
+--------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$ABEA6AB6
+   4 - SEL$ABEA6AB6 / PROCSUMM@SEL$1
+   5 - SEL$ABEA6AB6 / PROCSUMM@SEL$1
+   7 - SEL$ABEA6AB6 / KOKBF$0@SEL$4
+   8 - SEL$ABEA6AB6 / PROCMLSSUMM@SEL$1
+   9 - SEL$ABEA6AB6 / PROCMLSSUMM@SEL$1
+  10 - SEL$2       
+  11 - SEL$2        / T1@SEL$2
+  12 - SEL$2        / T1@SEL$2
+  13 - SEL$2        / T2@SEL$2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   4 - filter(NVL(TRUNC(INTERNAL_FUNCTION("PROCSUMM"."VALID_FROM")),TRUNC(SYSDATE@!))<=TRUNC(SYSDATE@!) AND 
+              NVL(TRUNC(INTERNAL_FUNCTION("PROCSUMM"."VALID_UNTIL")),TRUNC(SYSDATE@!))>=TRUNC(SYSDATE@!))
+   6 - access("PROCSUMM"."OBJECT_ID"=VALUE(KOKBF$))
+       filter("PROCSUMM"."OBJECT_ID"=VALUE(KOKBF$))
+   9 - access("PROCSUMM"."OBJECT_ID"="PROCMLSSUMM"."OBJECT_ID")
+       filter(TO_NUMBER("PROCMLSSUMM"."LOCALE_ID")= (SELECT "LOCALE_ID" FROM "SI_LOCALES" "T2","SI_USERS_T" 
+              "T1" WHERE "USER_NAME"=:1 AND "T1"."LOCALE"="T2"."LOCALE_STRING"))
+  12 - access("USER_NAME"=:1)
+  13 - filter("T1"."LOCALE"="T2"."LOCALE_STRING")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "PROCSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], "PROCSUMM"."OBJECT_ID"[VARCHAR2,1600], 
+       "PROCSUMM"."OBJECT_NAME"[VARCHAR2,4000], "PROCMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,1600], 
+       "PROCSUMM"."OBJ_PARENT"[VARCHAR2,4000], "PROCMLSSUMM"."PROCESS_TYPE"[VARCHAR2,4000], 
+       "PROCMLSSUMM"."PROCESS_CATEGORY"[VARCHAR2,4000], "PROCMLSSUMM"."BUSINESS_CRITICALITY"[VARCHAR2,400], 
+       'MS_GRC_PROCESS'[14], NULL[0], 'MS_GRC_PROCESS'[14]
+   2 - (#keys=0) "PROCSUMM"."OBJECT_ID"[VARCHAR2,1600], "PROCSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], 
+       "PROCSUMM"."OBJECT_NAME"[VARCHAR2,4000], "PROCSUMM"."OBJ_PARENT"[VARCHAR2,4000], 
+       "PROCMLSSUMM"."BUSINESS_CRITICALITY"[VARCHAR2,400], "PROCMLSSUMM"."PROCESS_CATEGORY"[VARCHAR2,4000], 
+       "PROCMLSSUMM"."PROCESS_TYPE"[VARCHAR2,4000], "PROCMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,1600]
+   3 - (#keys=0) "PROCSUMM"."OBJECT_ID"[VARCHAR2,1600], "PROCSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], 
+       "PROCSUMM"."OBJECT_NAME"[VARCHAR2,4000], "PROCSUMM"."OBJ_PARENT"[VARCHAR2,4000]
+   4 - "PROCSUMM"."OBJECT_ID"[VARCHAR2,1600], "PROCSUMM"."OBJECT_NAME"[VARCHAR2,4000], 
+       "PROCSUMM"."OBJ_PARENT"[VARCHAR2,4000], "PROCSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000]
+   5 - "PROCSUMM".ROWID[ROWID,10], "PROCSUMM"."OBJECT_ID"[VARCHAR2,1600]
+   6 - (#keys=1) VALUE(KOKBF$)[8000]
+   7 - VALUE(A0)[8000]
+   8 - "PROCMLSSUMM"."BUSINESS_CRITICALITY"[VARCHAR2,400], "PROCMLSSUMM"."PROCESS_CATEGORY"[VARCHAR2,4000], 
+       "PROCMLSSUMM"."PROCESS_TYPE"[VARCHAR2,4000], "PROCMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,1600]
+   9 - "PROCMLSSUMM".ROWID[ROWID,10]
+  10 - (#keys=0) "LOCALE_ID"[NUMBER,22]
+  11 - "T1"."LOCALE"[VARCHAR2,400]
+  12 - "T1".ROWID[ROWID,10]
+  13 - "LOCALE_ID"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

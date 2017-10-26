@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS GRC ORB Add Types (100661)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>select rel_id,ve_title,src_obj_type,dest_obj_type,object_type_abb from
+(
+SELECT   rel_id, ORB_REL_TITLE AS ve_title, src_obj_type, dest_obj_type,display_order
+,object_type_abb
+    FROM ms_grc_rel_defn a, MS_GRC_ORB_CONFIG_FORM_TITLE b
+   WHERE src_obj_type = :1
+     AND a.dest_obj_type = b.object_Type
+    and a.enabled= 'Y'
+     and b.locale='en_US'
+    )       
+ORDER BY ve_title</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet extracts data from multiple tables such as ms_grc_rel_defn and MS_GRC_ORB_CONFIG_FORM_TITLE and is thereby used in all GRC library forms including Area of Compliance, Asset, Asset Class, Control, Evidence, Exception, Financial Account, Function, Framework Reference, Objective, Organizational Profile, Process, Product, Question/Procedure, Reference, Regulatory Body, Requirement, Risk and Standard </td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2524426919</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------
+| Id  | Operation                     | Name                         | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT              |                              |     8 |   704 |     5  (20)| 00:00:01 |
+|   1 |  SORT ORDER BY                |                              |     8 |   704 |     5  (20)| 00:00:01 |
+|*  2 |   HASH JOIN                   |                              |     8 |   704 |     4   (0)| 00:00:01 |
+|*  3 |    TABLE ACCESS BY INDEX ROWID| MS_GRC_REL_DEFN              |     9 |   414 |     1   (0)| 00:00:01 |
+|*  4 |     INDEX RANGE SCAN          | MS_GRC_REL_DEFN_IDX1         |     9 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  5 |    TABLE ACCESS FULL          | MS_GRC_ORB_CONFIG_FORM_TITLE |    21 |   882 |     3   (0)| 00:00:01 |</font>
+--------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$F5BB74E1
+   3 - SEL$F5BB74E1 / A@SEL$2
+   4 - SEL$F5BB74E1 / A@SEL$2
+   5 - SEL$F5BB74E1 / B@SEL$2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("A"."DEST_OBJ_TYPE"="B"."OBJECT_TYPE")
+   3 - filter("A"."ENABLED"='Y')
+   4 - access("SRC_OBJ_TYPE"=:1)
+   5 - filter("B"."LOCALE"='en_US')
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "ORB_REL_TITLE"[VARCHAR2,4000], "REL_ID"[VARCHAR2,160], 
+       "OBJECT_TYPE_ABB"[VARCHAR2,400], "SRC_OBJ_TYPE"[VARCHAR2,512], "DEST_OBJ_TYPE"[VARCHAR2,512]
+   2 - (#keys=1) "A"."DEST_OBJ_TYPE"[VARCHAR2,512], "REL_ID"[VARCHAR2,160], 
+       "SRC_OBJ_TYPE"[VARCHAR2,512], "OBJECT_TYPE_ABB"[VARCHAR2,400], "ORB_REL_TITLE"[VARCHAR2,4000]
+   3 - "REL_ID"[VARCHAR2,160], "SRC_OBJ_TYPE"[VARCHAR2,512], "A"."DEST_OBJ_TYPE"[VARCHAR2,512]
+   4 - "A".ROWID[ROWID,10], "SRC_OBJ_TYPE"[VARCHAR2,512], "A"."DEST_OBJ_TYPE"[VARCHAR2,512]
+   5 - "B"."OBJECT_TYPE"[VARCHAR2,400], "ORB_REL_TITLE"[VARCHAR2,4000], 
+       "OBJECT_TYPE_ABB"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

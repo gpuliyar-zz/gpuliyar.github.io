@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_GRC_61_SP2_CONTROL_PARENT_INF_dbf (100701)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT OBJECT_ID,  
+OBJECT_NAME 
+FROM MS_GRC_CONTROL_DENORM_RV Rv
+WHERE EXISTS
+(SELECT column_value
+FROM TABLE(cast(ms_grc_rep_browser_fil_denorm.fn_control_rpt_filters(ms_grc_array_type(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'MS_GRC_CONTROL',NULL,:1)) as ms_varchar2_array))
+WHERE column_value = Rv.OBJECT_ID
+) and locale_id=(select LOCALE_ID from SI_USERS_T T1 ,SI_LOCALES T2 where USER_NAME = :1  and T1.LOCALE = T2.LOCALE_STRING) 
+ORDER BY upper_Object_Name</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>MS_GRC_61_SP2_CONTROL_PARENT_INF_dbf</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 3246988915</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                              | Name                      | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                       |                           |     1 |  5812 |    36   (3)| 00:00:01 |
+|   1 |  SORT ORDER BY                         |                           |     1 |  5812 |    36   (3)| 00:00:01 |
+|   2 |   NESTED LOOPS                         |                           |     1 |  5812 |    31   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   3 |    MERGE JOIN CARTESIAN                |                           |     1 |  1006 |    30   (0)| 00:00:01 |</font>
+|*  4 |     INDEX FULL SCAN                    | MS_GRC_CTRL_MLS_SUMM_IDX2 |     1 |  1004 |     1   (0)| 00:00:01 |
+|   5 |      NESTED LOOPS                      |                           |     1 |    30 |     4   (0)| 00:00:01 |
+|   6 |       TABLE ACCESS BY INDEX ROWID      | SI_USERS_T                |     1 |    19 |     1   (0)| 00:00:01 |
+|*  7 |        INDEX UNIQUE SCAN               | USER_NAME_UK              |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  8 |       TABLE ACCESS FULL                | SI_LOCALES                |     1 |    11 |     3   (0)| 00:00:01 |</font>
+|   9 |     BUFFER SORT                        |                           |  8168 | 16336 |    29   (0)| 00:00:01 |
+|  10 |      SORT UNIQUE                       |                           |  8168 | 16336 |    29   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  11 |       COLLECTION ITERATOR PICKLER FETCH| FN_CONTROL_RPT_FILTERS    |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|  12 |    TABLE ACCESS BY INDEX ROWID         | MS_GRC_CONTROL_SUMMARY    |     1 |  4806 |     1   (0)| 00:00:01 |
+|* 13 |     INDEX UNIQUE SCAN                  | MS_GRC_COTRL_SUMM_IDX1    |     1 |       |     1   (0)| 00:00:01 |
+--------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$8C246A20
+   4 - SEL$8C246A20 / MLSSUMM@SEL$2
+   5 - SEL$10      
+   6 - SEL$10       / T1@SEL$10
+   7 - SEL$10       / T1@SEL$10
+   8 - SEL$10       / T2@SEL$10
+  11 - SEL$8C246A20 / KOKBF$0@SEL$9
+  12 - SEL$8C246A20 / CONTSUMM@SEL$2
+  13 - SEL$8C246A20 / CONTSUMM@SEL$2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   4 - filter(TO_NUMBER("MLSSUMM"."LOCALE_ID")= (SELECT "LOCALE_ID" FROM "SI_LOCALES" "T2","SI_USERS_T" 
+              "T1" WHERE "USER_NAME"=:1 AND "T1"."LOCALE"="T2"."LOCALE_STRING"))
+   7 - access("USER_NAME"=:1)
+   8 - filter("T1"."LOCALE"="T2"."LOCALE_STRING")
+  13 - access("CONTSUMM"."OBJECT_ID"=VALUE(KOKBF$))
+       filter("CONTSUMM"."OBJECT_ID"="MLSSUMM"."OBJECT_ID")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "CONTSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], "CONTSUMM"."OBJECT_ID"[VARCHAR2,1600], 
+       "CONTSUMM"."OBJECT_NAME"[VARCHAR2,4000]
+   2 - (#keys=0) "CONTSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], "CONTSUMM"."OBJECT_ID"[VARCHAR2,1600], 
+       "CONTSUMM"."OBJECT_NAME"[VARCHAR2,4000]
+   3 - (#keys=0) "MLSSUMM"."OBJECT_ID"[VARCHAR2,1600], VALUE(KOKBF$)[8000]
+   4 - "MLSSUMM"."OBJECT_ID"[VARCHAR2,1600]
+   5 - (#keys=0) "LOCALE_ID"[NUMBER,22]
+   6 - "T1"."LOCALE"[VARCHAR2,400]
+   7 - "T1".ROWID[ROWID,10]
+   8 - "LOCALE_ID"[NUMBER,22]
+   9 - (#keys=0) VALUE(KOKBF$)[8000]
+  10 - (#keys=1) VALUE(KOKBF$)[8000]
+  11 - VALUE(A0)[8000]
+  12 - "CONTSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], "CONTSUMM"."OBJECT_ID"[VARCHAR2,1600], 
+       "CONTSUMM"."OBJECT_NAME"[VARCHAR2,4000]
+  13 - "CONTSUMM".ROWID[ROWID,10], "CONTSUMM"."OBJECT_ID"[VARCHAR2,1600]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

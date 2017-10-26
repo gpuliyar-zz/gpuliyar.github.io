@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_GRC_ORG_Drilldown_Rpt_Inf (100978)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT aocTgt.org_entity_id as ORG_ID , aocTgt.org_entity_name AS ORG_NAME, ohl.org_hierarchy_name as org_hierarchy_name FROM (SELECT DISTINCT tgt_obj_id, Src_Obj_Id  FROM ms_grc_orb_relations_pub_v vw
+WHERE vw.tgt_obj_type = 'MS_GRC_ORGANIZATION' AND vw.src_obj_type = :1) inn, si_org_entities aocTgt, si_org_hierarchy_levels ohl  WHERE inn.Src_Obj_Id = :2 and inn.tgt_obj_id = aocTgt.org_entity_id and AOCTGT.org_hierarchy_id = ohl.org_hierarchy_id</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This drill-down report fetches related organisations.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1404435350</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                              | Name                         | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                       |                              |     2 |  4164 |    13   (8)| 00:00:01 |
+|*  1 |  HASH JOIN OUTER                       |                              |     2 |  4164 |    13   (8)| 00:00:01 |
+|   2 |   NESTED LOOPS                         |                              |     2 |  4112 |    11  (10)| 00:00:01 |
+|   3 |    NESTED LOOPS OUTER                  |                              |     2 |  4074 |    10  (10)| 00:00:01 |
+|   4 |     NESTED LOOPS                       |                              |     2 |  4060 |     9  (12)| 00:00:01 |
+|   5 |      VIEW                              |                              |     2 |  4004 |     8  (13)| 00:00:01 |
+|   6 |       SORT UNIQUE                      |                              |     2 |    56 |     8  (13)| 00:00:01 |
+|   7 |        VIEW                            | MS_GRC_ORB_RELATIONS_PUB_V   |     2 |    56 |     7   (0)| 00:00:01 |
+|   8 |         UNION-ALL                      |                              |       |       |            |          |
+|   9 |          NESTED LOOPS                  |                              |     1 |   125 |     3   (0)| 00:00:01 |
+|  10 |           NESTED LOOPS                 |                              |     4 |   125 |     3   (0)| 00:00:01 |
+|  11 |            NESTED LOOPS                |                              |     1 |    67 |     2   (0)| 00:00:01 |
+|* 12 |             INDEX UNIQUE SCAN          | UC_FORM_NAME                 |     1 |    19 |     1   (0)| 00:00:01 |
+|* 13 |             TABLE ACCESS BY INDEX ROWID| MS_GRC_ORB_RELATIONS         |     1 |    48 |     1   (0)| 00:00:01 |
+|* 14 |              INDEX RANGE SCAN          | MS_GRC_ORB_RELATIONS_IDX1    |     1 |       |     1   (0)| 00:00:01 |
+|* 15 |            INDEX RANGE SCAN            | MS_GRC_ORB_RELATIONS_ORB_FK2 |     4 |       |     1   (0)| 00:00:01 |
+|* 16 |           TABLE ACCESS BY INDEX ROWID  | MS_GRC_ORB_RELATIONS_ORB     |     2 |   116 |     1   (0)| 00:00:01 |
+|  17 |          NESTED LOOPS                  |                              |     1 |   110 |     4   (0)| 00:00:01 |
+|  18 |           NESTED LOOPS                 |                              |     8 |   110 |     4   (0)| 00:00:01 |
+|  19 |            NESTED LOOPS                |                              |     2 |   134 |     2   (0)| 00:00:01 |
+|* 20 |             INDEX UNIQUE SCAN          | UC_FORM_NAME                 |     1 |    19 |     1   (0)| 00:00:01 |
+|  21 |             TABLE ACCESS BY INDEX ROWID| MS_GRC_ORB_RELATIONS         |     2 |    96 |     1   (0)| 00:00:01 |
+|* 22 |              INDEX RANGE SCAN          | MS_GRC_ORB_RELATIONS_IDX2    |     2 |       |     1   (0)| 00:00:01 |
+|* 23 |            INDEX RANGE SCAN            | MS_GRC_ORB_RELATIONS_ORB_FK2 |     4 |       |     1   (0)| 00:00:01 |
+|* 24 |           TABLE ACCESS BY INDEX ROWID  | MS_GRC_ORB_RELATIONS_ORB     |     1 |    43 |     1   (0)| 00:00:01 |
+|  25 |      TABLE ACCESS BY INDEX ROWID       | SI_ORG_ENTITIES_T            |     1 |    28 |     1   (0)| 00:00:01 |
+|* 26 |       INDEX RANGE SCAN                 | SI_ORG_ENTITIES_N5           |     1 |       |     1   (0)| 00:00:01 |
+|* 27 |     INDEX RANGE SCAN                   | SI_ORG_ENTITIES_TL_IDX       |     1 |     7 |     1   (0)| 00:00:01 |
+|* 28 |    INDEX FULL SCAN                     | SI_ORG_HIERARCHY_LEVELS_N1   |     1 |    19 |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 29 |   TABLE ACCESS FULL                    | SI_ORG_HIERARCHY_LEVELS_TL   |     1 |    26 |     2   (0)| 00:00:01 |</font>
+-----------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$81435555
+   5 - SEL$2        / INN@SEL$1
+   6 - SEL$2       
+   7 - SET$1        / VW@SEL$2
+   8 - SET$1       
+   9 - SEL$3       
+  12 - SEL$3        / CO@SEL$3
+  13 - SEL$3        / REL@SEL$3
+  14 - SEL$3        / REL@SEL$3
+  15 - SEL$3        / REL_ORB@SEL$3
+  16 - SEL$3        / REL_ORB@SEL$3
+  17 - SEL$5       
+  20 - SEL$5        / CO@SEL$5
+  21 - SEL$5        / REL@SEL$5
+  22 - SEL$5        / REL@SEL$5
+  23 - SEL$5        / REL_ORB@SEL$5
+  24 - SEL$5        / REL_ORB@SEL$5
+  25 - SEL$81435555 / T@SEL$6
+  26 - SEL$81435555 / T@SEL$6
+  27 - SEL$81435555 / TL@SEL$6
+  28 - SEL$81435555 / T@SEL$7
+  29 - SEL$81435555 / TL@SEL$7
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - access("T"."ORG_HIERARCHY_ID"="TL"."ORG_HIERARCHY_ID"(+))
+  12 - access("CO"."FORM_NAME"=:1)
+  13 - filter("REL"."DD_OBJECT_TYPE"=:1)
+  14 - access("REL"."REL_SOURCE_OBJECT_ID"=:2)
+  15 - access("REL"."REL_SOURCE_ID"="REL_ORB"."REL_SOURCE_ID")
+  16 - filter("REL_ORB"."ADDITIONAL_COLUMN3"='MS_GRC_ORGANIZATION')
+  20 - access("CO"."FORM_NAME"='MS_GRC_ORGANIZATION')
+  22 - access("REL"."DD_OBJECT_TYPE"='MS_GRC_ORGANIZATION')
+  23 - access("REL"."REL_SOURCE_ID"="REL_ORB"."REL_SOURCE_ID")
+  24 - filter("REL_ORB"."TGT_OBJ_ID"=:2 AND "REL_ORB"."ADDITIONAL_COLUMN3"=:1)
+  26 - access("T"."ORG_ENTITY_ID"=TO_NUMBER("INN"."TGT_OBJ_ID"))
+  27 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+) AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  28 - access("ORG_HIERARCHY_ID"="T"."ORG_HIERARCHY_ID")
+       filter("ORG_HIERARCHY_ID"="T"."ORG_HIERARCHY_ID")
+  29 - filter("TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "ORG_HIERARCHY_NAME"[VARCHAR2,400]
+   2 - (#keys=0) "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "T"."ORG_HIERARCHY_ID"[NUMBER,22], "ORG_HIERARCHY_NAME"[VARCHAR2,400]
+   3 - (#keys=0) "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "ORG_HIERARCHY_ID"[NUMBER,22]
+   4 - (#keys=0) "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], 
+       "ORG_HIERARCHY_ID"[NUMBER,22]
+   5 - "INN"."TGT_OBJ_ID"[VARCHAR2,4000]
+   6 - (#keys=2) "TGT_OBJ_ID"[VARCHAR2,4000], "SRC_OBJ_ID"[VARCHAR2,4000]
+   7 - "SRC_OBJ_ID"[VARCHAR2,4000], "TGT_OBJ_ID"[VARCHAR2,4000]
+   8 - STRDEF[4000], STRDEF[4000], STRDEF[4000], STRDEF[4000]
+   9 - (#keys=0) "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,4000], "REL_ORB"."ADDITIONAL_COLUMN3"[VARCHAR2,4000]
+  10 - (#keys=0) "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "REL_ORB".ROWID[ROWID,10]
+  11 - (#keys=0) "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."REL_SOURCE_ID"[VARCHAR2,1020], 
+       "REL"."DD_OBJECT_TYPE"[VARCHAR2,400]
+  13 - "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."REL_SOURCE_ID"[VARCHAR2,1020], 
+       "REL"."DD_OBJECT_TYPE"[VARCHAR2,400]
+  14 - "REL".ROWID[ROWID,10], "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016]
+  15 - "REL_ORB".ROWID[ROWID,10]
+  16 - "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,4000], "REL_ORB"."ADDITIONAL_COLUMN3"[VARCHAR2,4000]
+  17 - (#keys=0) "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,4000], "REL_ORB"."ADDITIONAL_COLUMN3"[VARCHAR2,4000]
+  18 - (#keys=0) "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "REL_ORB".ROWID[ROWID,10]
+  19 - (#keys=0) "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."REL_SOURCE_ID"[VARCHAR2,1020], 
+       "REL"."DD_OBJECT_TYPE"[VARCHAR2,400]
+  21 - "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."REL_SOURCE_ID"[VARCHAR2,1020], 
+       "REL"."DD_OBJECT_TYPE"[VARCHAR2,400]
+  22 - "REL".ROWID[ROWID,10], "REL"."DD_OBJECT_TYPE"[VARCHAR2,400]
+  23 - "REL_ORB".ROWID[ROWID,10]
+  24 - "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,4000], "REL_ORB"."ADDITIONAL_COLUMN3"[VARCHAR2,4000]
+  25 - "T"."ORG_ENTITY_ID"[NUMBER,22], "T"."ORG_ENTITY_NAME"[VARCHAR2,400], "ORG_HIERARCHY_ID"[NUMBER,22]
+  26 - "T".ROWID[ROWID,10], "T"."ORG_ENTITY_ID"[NUMBER,22]
+  28 - "T"."ORG_HIERARCHY_ID"[NUMBER,22], "ORG_HIERARCHY_NAME"[VARCHAR2,400]
+  29 - "TL"."ORG_HIERARCHY_ID"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>
