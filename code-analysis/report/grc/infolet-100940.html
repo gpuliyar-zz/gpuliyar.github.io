@@ -83,11 +83,11 @@ order by display_order</code></pre></td>
 <font style="background-color: lightblue; color: red">|  12 |         TABLE ACCESS FULL        | SI_REGISTER_APPLICATION       |    65 |   455 |     3   (0)| 00:00:01 |</font>
 |* 13 |         INDEX RANGE SCAN         | SI_REGISTER_APPLICATION_TL_N1 |     1 |    26 |     1   (0)| 00:00:01 |
 |  14 |        FAST DUAL                 |                               |     1 |       |     2   (0)| 00:00:01 |
-|  15 |     VIEW                         |                               |  4233 |  9350K|    16   (0)| 00:00:01 |
-|  16 |      NESTED LOOPS                |                               |  4233 |   206K|    16   (0)| 00:00:01 |
+|  15 |     VIEW                         |                               |  4234 |  9352K|    16   (0)| 00:00:01 |
+|  16 |      NESTED LOOPS                |                               |  4234 |   206K|    16   (0)| 00:00:01 |
 |* 17 |       TABLE ACCESS BY INDEX ROWID| SI_LOCALES                    |     1 |     6 |     1   (0)| 00:00:01 |
 |* 18 |        INDEX UNIQUE SCAN         | SI_LOCALES_U1                 |     1 |       |     1   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|* 19 |       TABLE ACCESS FULL          | MS_QS_LIST_OF_VALUES_T        |  4233 |   181K|    15   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 19 |       TABLE ACCESS FULL          | MS_QS_LIST_OF_VALUES_T        |  4234 |   181K|    15   (0)| 00:00:01 |</font>
 ------------------------------------------------------------------------------------------------------------------
  
 </code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
@@ -182,6 +182,7 @@ order by display_order</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

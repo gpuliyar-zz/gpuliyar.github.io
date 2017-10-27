@@ -62,8 +62,8 @@ order by SECTION_LABEL</code></pre></td>
 ----------------------------------------------------------------------------------------------------------
 | Id  | Operation                      | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
 ----------------------------------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT               |                         |    30 |   960 |     6  (34)| 00:00:01 |
-|   1 |  SORT UNIQUE                   |                         |    30 |   960 |     5  (20)| 00:00:01 |
+|   0 | SELECT STATEMENT               |                         |    29 |   928 |     6  (34)| 00:00:01 |
+|   1 |  SORT UNIQUE                   |                         |    29 |   928 |     5  (20)| 00:00:01 |
 |*  2 |   HASH JOIN                    |                         |    74 |  2368 |     4   (0)| 00:00:01 |
 |   3 |    VIEW                        | VW_SQ_1                 |     1 |     6 |     1   (0)| 00:00:01 |
 |   4 |     TABLE ACCESS BY INDEX ROWID| SI_USERS_T              |     1 |    19 |     1   (0)| 00:00:01 |
@@ -122,6 +122,7 @@ order by SECTION_LABEL</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

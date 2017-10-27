@@ -50,7 +50,7 @@
       items,
       (select user_full_name from ms_grc_user_full_name_v where user_name=exception_approver) AS exception_approver1,
       explanation,
-      edit,
+     Exception_Id as object_id,
  exception_approver AS APPROVER_1,
  report_json,Related_Risks
    from table(ms_grc_reportbrowser_filters.GET_Filters_exception(ms_grc_array_type(:1,:2,:3,:4,:5,:6,to_char(:7,'YYYY-MM-DD'),to_char(:8,'YYYY-MM-DD'),:9,:10,TO_CHAR(:11,'YYYY-MM-DD'),TO_CHAR(:12,'YYYY-MM-DD'),
@@ -369,6 +369,7 @@
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

@@ -75,12 +75,10 @@ asstSumm.report_json AS REPORT_JSON
 ,asstSumm.UPPER_OBJECT_NAME AS UPPER_OBJECT_NAME,
 owner_ids AS OWNR_NAMES
 FROM MS_GRC_ASSET_SUMMARY asstSumm,
-  MS_GRC_ASSET_MLS_SUMMARY asstMlsSumm
+  MS_GRC_ASSET_MLS_SUMMARY asstMlsSumm, (select column_value
+FROM TABLE(ms_grc_rep_browser_fil_denorm.fn_ASSET_report_filters(MS_GRC_ARRAY_TYPE(:1,:2,:3,:4,:5,:6, :7,:8,:9,:10, :11, to_char(:12,'YYYY-MM-DD'),to_char(:13,'YYYY-MM-DD'),:14,:15,:16,:17,to_char(:18,'YYYY-MM-DD'),to_char(:19,'YYYY-MM-DD'),to_char(:20,'YYYY-MM-DD'),to_char(:21,'YYYY-MM-DD'), :22,:23,:24,:25,:26,NULL,:27,:28,NULL, :29,NULL, NULL,NULL,NULL,:30,NULL,NULL,:31,NULL,:32,:33, :34,:35,'MS_GRC_ASSET',:36)))) assetchange
 WHERE asstmlssumm.object_id = asstsumm.object_id
-AND asstmlssumm.object_id  IN
- (select column_value
-FROM TABLE(CAST(ms_grc_rep_browser_fil_denorm.fn_ASSET_report_filters(MS_GRC_ARRAY_TYPE(:1,:2,:3,:4,:5,:6, :7,:8,:9,:10, :11, to_char(:12,'YYYY-MM-DD'),to_char(:13,'YYYY-MM-DD'),:14,:15,:16,:17,to_char(:18,'YYYY-MM-DD'),to_char(:19,'YYYY-MM-DD'),to_char(:20,'YYYY-MM-DD'),to_char(:21,'YYYY-MM-DD'), :22,:23,:24,:25,:26,NULL,:27,:28,NULL, :29,NULL, NULL,NULL,NULL,:30,NULL,NULL,:31,NULL,:32,:33, :34,:35,'MS_GRC_ASSET',:36)) AS ms_varchar2_array))
-) 
+AND asstsumm.object_id  =assetchange.column_value
 AND asstmlssumm.locale_id =
   (SELECT LOCALE_ID
   FROM SI_USERS_T T1 ,
@@ -101,70 +99,69 @@ ORDER BY upper_object_name</code></pre></td>
 										<h2 align="center" id="content">Analysis Report</h2>
 										<hr>
 
-<header class="major"><h2>Plan hash value: 4238322121</h2></header><pre><code>
+<header class="major"><h2>Plan hash value: 2357389971</h2></header><pre><code>
  
---------------------------------------------------------------------------------------------------------------------
-| Id  | Operation                             | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
---------------------------------------------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT                      |                            |     1 | 45662 |    37   (6)| 00:00:01 |
-|   1 |  NESTED LOOPS                         |                            |     1 |    83 |     3   (0)| 00:00:01 |
-|   2 |   NESTED LOOPS                        |                            |     1 |    83 |     3   (0)| 00:00:01 |
-|   3 |    NESTED LOOPS                       |                            |     1 |    66 |     2   (0)| 00:00:01 |
-|   4 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
-|*  5 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
-|*  6 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_TYPES      |     1 |    32 |     1   (0)| 00:00:01 |
-|*  7 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
-|*  8 |    INDEX RANGE SCAN                   | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
-|   9 |   TABLE ACCESS BY INDEX ROWID         | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
-|  10 |  TABLE ACCESS BY INDEX ROWID          | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
-|* 11 |   INDEX UNIQUE SCAN                   | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
-|  12 |  NESTED LOOPS                         |                            |     1 |    83 |     3   (0)| 00:00:01 |
-|  13 |   NESTED LOOPS                        |                            |     1 |    83 |     3   (0)| 00:00:01 |
-|  14 |    NESTED LOOPS                       |                            |     1 |    66 |     2   (0)| 00:00:01 |
-|  15 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
-|* 16 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
-|* 17 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_TYPES      |     1 |    32 |     1   (0)| 00:00:01 |
-|* 18 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
-|* 19 |    INDEX RANGE SCAN                   | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
-|  20 |   TABLE ACCESS BY INDEX ROWID         | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
-|  21 |  TABLE ACCESS BY INDEX ROWID          | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
-|* 22 |   INDEX UNIQUE SCAN                   | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
-|  23 |  NESTED LOOPS                         |                            |     1 |    83 |     3   (0)| 00:00:01 |
-|  24 |   NESTED LOOPS                        |                            |     1 |    83 |     3   (0)| 00:00:01 |
-|  25 |    NESTED LOOPS                       |                            |     1 |    66 |     2   (0)| 00:00:01 |
-|  26 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
-|* 27 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
-|* 28 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_TYPES      |     1 |    32 |     1   (0)| 00:00:01 |
-|* 29 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
-|* 30 |    INDEX RANGE SCAN                   | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
-|  31 |   TABLE ACCESS BY INDEX ROWID         | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
-|  32 |  TABLE ACCESS BY INDEX ROWID          | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
-|* 33 |   INDEX UNIQUE SCAN                   | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
-|  34 |  NESTED LOOPS                         |                            |     1 |    83 |     3   (0)| 00:00:01 |
-|  35 |   NESTED LOOPS                        |                            |     1 |    83 |     3   (0)| 00:00:01 |
-|  36 |    NESTED LOOPS                       |                            |     1 |    66 |     2   (0)| 00:00:01 |
-|  37 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
-|* 38 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
-|* 39 |     TABLE ACCESS BY INDEX ROWID       | MS_QS_PARAMETER_TYPES      |     1 |    32 |     1   (0)| 00:00:01 |
-|* 40 |      INDEX RANGE SCAN                 | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
-|* 41 |    INDEX RANGE SCAN                   | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
-|  42 |   TABLE ACCESS BY INDEX ROWID         | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
-|  43 |  TABLE ACCESS BY INDEX ROWID          | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
-|* 44 |   INDEX UNIQUE SCAN                   | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
-|  45 |  SORT ORDER BY                        |                            |     1 | 45662 |    37   (6)| 00:00:01 |
-|  46 |   NESTED LOOPS                        |                            |     1 | 45662 |    32   (4)| 00:00:01 |
-|  47 |    NESTED LOOPS                       |                            |     1 |  6862 |    31   (4)| 00:00:01 |
-|  48 |     SORT UNIQUE                       |                            |  8168 | 16336 |    29   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|  49 |      COLLECTION ITERATOR PICKLER FETCH| FN_ASSET_REPORT_FILTERS    |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
-|  50 |     TABLE ACCESS BY INDEX ROWID       | MS_GRC_ASSET_MLS_SUMMARY   |     1 |  6860 |     1   (0)| 00:00:01 |
-|* 51 |      INDEX RANGE SCAN                 | MS_GRC_ASSET_MLS_SUMM_IDX2 |     1 |       |     1   (0)| 00:00:01 |
-|  52 |       NESTED LOOPS                    |                            |     1 |    30 |     4   (0)| 00:00:01 |
-|  53 |        TABLE ACCESS BY INDEX ROWID    | SI_USERS_T                 |     1 |    19 |     1   (0)| 00:00:01 |
-|* 54 |         INDEX UNIQUE SCAN             | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|* 55 |        TABLE ACCESS FULL              | SI_LOCALES                 |     1 |    11 |     3   (0)| 00:00:01 |</font>
-|  56 |    TABLE ACCESS BY INDEX ROWID        | MS_GRC_ASSET_SUMMARY       |     1 | 38800 |     1   (0)| 00:00:01 |
-|* 57 |     INDEX UNIQUE SCAN                 | MS_GRC_ASST_SUMM_IDX1      |     1 |       |     1   (0)| 00:00:01 |
---------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                            | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                     |                            |     1 | 45662 |    36   (3)| 00:00:01 |
+|   1 |  NESTED LOOPS                        |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|   2 |   NESTED LOOPS                       |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|   3 |    NESTED LOOPS                      |                            |     1 |    66 |     2   (0)| 00:00:01 |
+|   4 |     TABLE ACCESS BY INDEX ROWID      | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
+|*  5 |      INDEX RANGE SCAN                | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|*  6 |     TABLE ACCESS BY INDEX ROWID      | MS_QS_PARAMETER_TYPES      |     1 |    32 |     1   (0)| 00:00:01 |
+|*  7 |      INDEX RANGE SCAN                | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|*  8 |    INDEX RANGE SCAN                  | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
+|   9 |   TABLE ACCESS BY INDEX ROWID        | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
+|  10 |  TABLE ACCESS BY INDEX ROWID         | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
+|* 11 |   INDEX UNIQUE SCAN                  | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
+|  12 |  NESTED LOOPS                        |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|  13 |   NESTED LOOPS                       |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|  14 |    NESTED LOOPS                      |                            |     1 |    66 |     2   (0)| 00:00:01 |
+|  15 |     TABLE ACCESS BY INDEX ROWID      | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
+|* 16 |      INDEX RANGE SCAN                | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 17 |     TABLE ACCESS BY INDEX ROWID      | MS_QS_PARAMETER_TYPES      |     1 |    32 |     1   (0)| 00:00:01 |
+|* 18 |      INDEX RANGE SCAN                | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 19 |    INDEX RANGE SCAN                  | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
+|  20 |   TABLE ACCESS BY INDEX ROWID        | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
+|  21 |  TABLE ACCESS BY INDEX ROWID         | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
+|* 22 |   INDEX UNIQUE SCAN                  | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
+|  23 |  NESTED LOOPS                        |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|  24 |   NESTED LOOPS                       |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|  25 |    NESTED LOOPS                      |                            |     1 |    66 |     2   (0)| 00:00:01 |
+|  26 |     TABLE ACCESS BY INDEX ROWID      | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
+|* 27 |      INDEX RANGE SCAN                | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 28 |     TABLE ACCESS BY INDEX ROWID      | MS_QS_PARAMETER_TYPES      |     1 |    32 |     1   (0)| 00:00:01 |
+|* 29 |      INDEX RANGE SCAN                | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 30 |    INDEX RANGE SCAN                  | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
+|  31 |   TABLE ACCESS BY INDEX ROWID        | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
+|  32 |  TABLE ACCESS BY INDEX ROWID         | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
+|* 33 |   INDEX UNIQUE SCAN                  | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
+|  34 |  NESTED LOOPS                        |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|  35 |   NESTED LOOPS                       |                            |     1 |    83 |     3   (0)| 00:00:01 |
+|  36 |    NESTED LOOPS                      |                            |     1 |    66 |     2   (0)| 00:00:01 |
+|  37 |     TABLE ACCESS BY INDEX ROWID      | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
+|* 38 |      INDEX RANGE SCAN                | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 39 |     TABLE ACCESS BY INDEX ROWID      | MS_QS_PARAMETER_TYPES      |     1 |    32 |     1   (0)| 00:00:01 |
+|* 40 |      INDEX RANGE SCAN                | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 41 |    INDEX RANGE SCAN                  | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
+|  42 |   TABLE ACCESS BY INDEX ROWID        | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
+|  43 |  TABLE ACCESS BY INDEX ROWID         | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
+|* 44 |   INDEX UNIQUE SCAN                  | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
+|  45 |  SORT ORDER BY                       |                            |     1 | 45662 |    36   (3)| 00:00:01 |
+|  46 |   NESTED LOOPS                       |                            |     1 | 45662 |    31   (0)| 00:00:01 |
+|  47 |    NESTED LOOPS                      |                            |     1 | 38802 |    30   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  48 |     COLLECTION ITERATOR PICKLER FETCH| FN_ASSET_REPORT_FILTERS    |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|  49 |     TABLE ACCESS BY INDEX ROWID      | MS_GRC_ASSET_SUMMARY       |     1 | 38800 |     1   (0)| 00:00:01 |
+|* 50 |      INDEX UNIQUE SCAN               | MS_GRC_ASST_SUMM_IDX1      |     1 |       |     1   (0)| 00:00:01 |
+|  51 |    TABLE ACCESS BY INDEX ROWID       | MS_GRC_ASSET_MLS_SUMMARY   |     1 |  6860 |     1   (0)| 00:00:01 |
+|* 52 |     INDEX RANGE SCAN                 | MS_GRC_ASSET_MLS_SUMM_IDX2 |     1 |       |     1   (0)| 00:00:01 |
+|  53 |      NESTED LOOPS                    |                            |     1 |    30 |     4   (0)| 00:00:01 |
+|  54 |       TABLE ACCESS BY INDEX ROWID    | SI_USERS_T                 |     1 |    19 |     1   (0)| 00:00:01 |
+|* 55 |        INDEX UNIQUE SCAN             | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 56 |       TABLE ACCESS FULL              | SI_LOCALES                 |     1 |    11 |     3   (0)| 00:00:01 |</font>
+-------------------------------------------------------------------------------------------------------------------
  
 </code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
  
@@ -204,16 +201,16 @@ ORDER BY upper_object_name</code></pre></td>
   42 - SEL$28C398ED / PVALUE@SEL$15
   43 - SEL$D2366DAE / USERS@SEL$16
   44 - SEL$D2366DAE / USERS@SEL$16
-  45 - SEL$7B6CD1A2
-  49 - SEL$7B6CD1A2 / KOKBF$0@SEL$19
-  50 - SEL$7B6CD1A2 / ASSTMLSSUMM@SEL$1
-  51 - SEL$7B6CD1A2 / ASSTMLSSUMM@SEL$1
-  52 - SEL$20      
-  53 - SEL$20       / T1@SEL$20
+  45 - SEL$69293FD7
+  48 - SEL$69293FD7 / KOKBF$0@SEL$19
+  49 - SEL$69293FD7 / ASSTSUMM@SEL$1
+  50 - SEL$69293FD7 / ASSTSUMM@SEL$1
+  51 - SEL$69293FD7 / ASSTMLSSUMM@SEL$1
+  52 - SEL$69293FD7 / ASSTMLSSUMM@SEL$1
+  53 - SEL$20      
   54 - SEL$20       / T1@SEL$20
-  55 - SEL$20       / T2@SEL$20
-  56 - SEL$7B6CD1A2 / ASSTSUMM@SEL$1
-  57 - SEL$7B6CD1A2 / ASSTSUMM@SEL$1
+  55 - SEL$20       / T1@SEL$20
+  56 - SEL$20       / T2@SEL$20
  
 </code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
  
@@ -241,12 +238,12 @@ ORDER BY upper_object_name</code></pre></td>
   41 - access("PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND 
               "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PVALUE"."ORG_ENTITY_ID"=1)
   44 - access("USERS"."USER_NAME"=:B1)
-  51 - access("ASSTMLSSUMM"."OBJECT_ID"=VALUE(KOKBF$))
-       filter(TO_NUMBER("ASSTMLSSUMM"."LOCALE_ID")= (SELECT "LOCALE_ID" FROM "SI_LOCALES" "T2","SI_USERS_T" 
-              "T1" WHERE "USER_NAME"=:36 AND "T1"."LOCALE"="T2"."LOCALE_STRING"))
-  54 - access("USER_NAME"=:36)
-  55 - filter("T1"."LOCALE"="T2"."LOCALE_STRING")
-  57 - access("ASSTMLSSUMM"."OBJECT_ID"="ASSTSUMM"."OBJECT_ID")
+  50 - access("ASSTSUMM"."OBJECT_ID"=VALUE(KOKBF$))
+  52 - access("ASSTMLSSUMM"."OBJECT_ID"="ASSTSUMM"."OBJECT_ID")
+       filter(TO_NUMBER("ASSTMLSSUMM"."LOCALE_ID")= (SELECT "LOCALE_ID" FROM "SI_LOCALES" 
+              "T2","SI_USERS_T" "T1" WHERE "USER_NAME"=:36 AND "T1"."LOCALE"="T2"."LOCALE_STRING"))
+  55 - access("USER_NAME"=:36)
+  56 - filter("T1"."LOCALE"="T2"."LOCALE_STRING")
  
 </code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
  
@@ -307,14 +304,14 @@ ORDER BY upper_object_name</code></pre></td>
        "ASSTSUMM"."CREATED_ON"[DATE,7],  (SELECT CASE  WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM 
        METRICSTREAM."MS_QS_PARAMETER_NAMES" "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" 
        "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE "PVALUE"."ORG_ENTITY_ID"=1 AND 
-       "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" 
-       AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format' AND 
+       "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID"
+        AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format' AND 
        "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='2' 
        THEN "USERS"."LAST_NAME"||' '||"USERS"."FIRST_NAME" WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM 
        METRICSTREAM."MS_QS_PARAMETER_NAMES" "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" 
        "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE "PVALUE"."ORG_ENTITY_ID"=1 AND 
-       "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" 
-       AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format' AND 
+       "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID"
+        AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format' AND 
        "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='3' 
        THEN "USERS"."LAST_NAME"||','||' '||"USERS"."FIRST_NAME"||' '||'('||"USERS"."USER_NAME"||')' WHEN  (SELECT 
        "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS_QS_PARAMETER_NAMES" 
@@ -330,8 +327,8 @@ ORDER BY upper_object_name</code></pre></td>
        Display Format' AND "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND 
        "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='4' THEN "USERS"."FIRST_NAME"||','||' '||"USERS"."LAST_NAME"||' 
        '||'('||"USERS"."USER_NAME"||')' ELSE "USERS"."LAST_NAME"||' '||"USERS"."FIRST_NAME" END  FROM 
-       METRICSTREAM."SI_USERS_T" "USERS" WHERE "USERS"."USER_NAME"=:B1)[1125], "UPDATED_ON"[DATE,7],  (SELECT CASE 
-        WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS_QS_PARAMETER_NAMES" 
+       METRICSTREAM."SI_USERS_T" "USERS" WHERE "USERS"."USER_NAME"=:B1)[1125], "UPDATED_ON"[DATE,7],  (SELECT 
+       CASE  WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS_QS_PARAMETER_NAMES" 
        "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE 
        "PVALUE"."ORG_ENTITY_ID"=1 AND "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND 
        "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name 
@@ -341,11 +338,26 @@ ORDER BY upper_object_name</code></pre></td>
        "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE 
        "PVALUE"."ORG_ENTITY_ID"=1 AND "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND 
        "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND "PTYPE"."PARAMETER_TYPE"='MS Apps Use
-  46 - (#keys=0) "ASSTMLSSUMM"."BUSINESS_CRITICALITY"[VARCHAR2,400], 
-       "ASSTMLSSUMM"."CONFIDENTIALITY"[VARCHAR2,1020], "ASSTMLSSUMM"."INTEGRITY"[VARCHAR2,1020], 
-       "ASSTMLSSUMM"."AVAILABILITY"[VARCHAR2,1020], "ASSTMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], 
-       "ASSTMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,400], "ASSTMLSSUMM"."ASSET_TYPE"[VARCHAR2,1020], 
-       "ASSTMLSSUMM"."PHYSICAL_LOCATION"[VARCHAR2,4000], "REL_CTRL_OBJ_NAME_AGG"[LOB,4000], 
+  46 - (#keys=0) VALUE(A0)[8000], "ASSTSUMM".ROWID[ROWID,10], "REL_CTRL_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], "REL_ORGANIZATION_NAMES"[LOB,4000], 
+       "REL_PRODUCT_NAME_AGG"[LOB,4000], "REL_REFRENCES_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], "REL_RISK_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_STANDARD_OBJ_NAME_AGG"[LOB,4000], "ASSTSUMM"."OBJECT_PARENT_NAME"[VARCHAR2,4000], 
+       "OBJECT_PARENT_ID"[VARCHAR2,400], "ASSTSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], 
+       "ASSTSUMM"."REPORT_JSON"[VARCHAR2,4000], "ASSTSUMM"."OBJECT_ID"[VARCHAR2,400], 
+       "ASSTSUMM"."OBJECT_NAME"[VARCHAR2,4000], "ASSTSUMM"."DESCRIPTION"[LOB,4000], 
+       "ASSTSUMM"."VALID_UNTIL"[DATE,7], "ASSTSUMM"."VALID_FROM"[DATE,7], "OWNER_IDS"[LOB,4000], 
+       "OWNER_NAME"[LOB,4000], "OWNER_ORG_NAMES"[LOB,4000], "LEVEL_1_APPROVER"[VARCHAR2,1000], 
+       "LEVEL_2_APPROVER"[VARCHAR2,1000], "ASSTSUMM"."UPDATED_BY"[VARCHAR2,804], "UPDATED_ON"[DATE,7], 
+       "ASSTSUMM"."CREATED_BY"[VARCHAR2,804], "ASSTSUMM"."CREATED_ON"[DATE,7], 
+       "ASSTSUMM"."SERIAL_NUMBER"[VARCHAR2,1020], "REL_ASSET_CLASS_OBJ_NAME_AGG"[LOB,4000], 
+       "REL_ASSET_OBJ_NAME_AGG"[LOB,4000], "ASSTMLSSUMM".ROWID[ROWID,10], 
+       "ASSTMLSSUMM"."BUSINESS_CRITICALITY"[VARCHAR2,400], "ASSTMLSSUMM"."CONFIDENTIALITY"[VARCHAR2,1020], 
+       "ASSTMLSSUMM"."INTEGRITY"[VARCHAR2,1020], "ASSTMLSSUMM"."AVAILABILITY"[VARCHAR2,1020], 
+       "ASSTMLSSUMM"."OBJECT_ID"[VARCHAR2,400], "ASSTMLSSUMM"."LOCALE_ID"[VARCHAR2,400], 
+       "ASSTMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], "ASSTMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,400], 
+       "ASSTMLSSUMM"."ASSET_TYPE"[VARCHAR2,1020], "ASSTMLSSUMM"."PHYSICAL_LOCATION"[VARCHAR2,4000]
+  47 - (#keys=0) VALUE(A0)[8000], "ASSTSUMM".ROWID[ROWID,10], "REL_CTRL_OBJ_NAME_AGG"[LOB,4000], 
        "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], "REL_ORGANIZATION_NAMES"[LOB,4000], 
        "REL_PRODUCT_NAME_AGG"[LOB,4000], "REL_REFRENCES_OBJ_NAME_AGG"[LOB,4000], 
        "REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], "REL_RISK_OBJ_NAME_AGG"[LOB,4000], 
@@ -359,24 +371,8 @@ ORDER BY upper_object_name</code></pre></td>
        "ASSTSUMM"."CREATED_BY"[VARCHAR2,804], "ASSTSUMM"."CREATED_ON"[DATE,7], 
        "ASSTSUMM"."SERIAL_NUMBER"[VARCHAR2,1020], "REL_ASSET_CLASS_OBJ_NAME_AGG"[LOB,4000], 
        "REL_ASSET_OBJ_NAME_AGG"[LOB,4000]
-  47 - (#keys=0) "ASSTMLSSUMM"."BUSINESS_CRITICALITY"[VARCHAR2,400], 
-       "ASSTMLSSUMM"."CONFIDENTIALITY"[VARCHAR2,1020], "ASSTMLSSUMM"."INTEGRITY"[VARCHAR2,1020], 
-       "ASSTMLSSUMM"."AVAILABILITY"[VARCHAR2,1020], "ASSTMLSSUMM"."OBJECT_ID"[VARCHAR2,400], 
-       "ASSTMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], "ASSTMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,400], 
-       "ASSTMLSSUMM"."ASSET_TYPE"[VARCHAR2,1020], "ASSTMLSSUMM"."PHYSICAL_LOCATION"[VARCHAR2,4000]
-  48 - (#keys=1) VALUE(KOKBF$)[8000]
-  49 - VALUE(A0)[8000]
-  50 - "ASSTMLSSUMM"."BUSINESS_CRITICALITY"[VARCHAR2,400], "ASSTMLSSUMM"."CONFIDENTIALITY"[VARCHAR2,1020], 
-       "ASSTMLSSUMM"."INTEGRITY"[VARCHAR2,1020], "ASSTMLSSUMM"."AVAILABILITY"[VARCHAR2,1020], 
-       "ASSTMLSSUMM"."OBJECT_ID"[VARCHAR2,400], "ASSTMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], 
-       "ASSTMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,400], "ASSTMLSSUMM"."ASSET_TYPE"[VARCHAR2,1020], 
-       "ASSTMLSSUMM"."PHYSICAL_LOCATION"[VARCHAR2,4000]
-  51 - "ASSTMLSSUMM".ROWID[ROWID,10], "ASSTMLSSUMM"."OBJECT_ID"[VARCHAR2,400]
-  52 - (#keys=0) "LOCALE_ID"[NUMBER,22]
-  53 - "T1"."LOCALE"[VARCHAR2,400]
-  54 - "T1".ROWID[ROWID,10]
-  55 - "LOCALE_ID"[NUMBER,22]
-  56 - "REL_CTRL_OBJ_NAME_AGG"[LOB,4000], "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], 
+  48 - VALUE(A0)[8000]
+  49 - "REL_CTRL_OBJ_NAME_AGG"[LOB,4000], "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], 
        "REL_ORGANIZATION_NAMES"[LOB,4000], "REL_PRODUCT_NAME_AGG"[LOB,4000], 
        "REL_REFRENCES_OBJ_NAME_AGG"[LOB,4000], "REL_REQUIREMENT_OBJ_NAME_AGG"[LOB,4000], 
        "REL_RISK_OBJ_NAME_AGG"[LOB,4000], "REL_STANDARD_OBJ_NAME_AGG"[LOB,4000], 
@@ -389,7 +385,16 @@ ORDER BY upper_object_name</code></pre></td>
        "ASSTSUMM"."UPDATED_BY"[VARCHAR2,804], "UPDATED_ON"[DATE,7], "ASSTSUMM"."CREATED_BY"[VARCHAR2,804], 
        "ASSTSUMM"."CREATED_ON"[DATE,7], "ASSTSUMM"."SERIAL_NUMBER"[VARCHAR2,1020], 
        "REL_ASSET_CLASS_OBJ_NAME_AGG"[LOB,4000], "REL_ASSET_OBJ_NAME_AGG"[LOB,4000]
-  57 - "ASSTSUMM".ROWID[ROWID,10], "ASSTSUMM"."OBJECT_ID"[VARCHAR2,400]
+  50 - "ASSTSUMM".ROWID[ROWID,10], "ASSTSUMM"."OBJECT_ID"[VARCHAR2,400]
+  51 - "ASSTMLSSUMM"."BUSINESS_CRITICALITY"[VARCHAR2,400], "ASSTMLSSUMM"."CONFIDENTIALITY"[VARCHAR2,1020], 
+       "ASSTMLSSUMM"."INTEGRITY"[VARCHAR2,1020], "ASSTMLSSUMM"."AVAILABILITY"[VARCHAR2,1020], 
+       "ASSTMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], "ASSTMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,400], 
+       "ASSTMLSSUMM"."ASSET_TYPE"[VARCHAR2,1020], "ASSTMLSSUMM"."PHYSICAL_LOCATION"[VARCHAR2,4000]
+  52 - "ASSTMLSSUMM".ROWID[ROWID,10]
+  53 - (#keys=0) "LOCALE_ID"[NUMBER,22]
+  54 - "T1"."LOCALE"[VARCHAR2,400]
+  55 - "T1".ROWID[ROWID,10]
+  56 - "LOCALE_ID"[NUMBER,22]
 										</code></pre>
 								</section>
 						</div>
@@ -417,6 +422,7 @@ ORDER BY upper_object_name</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

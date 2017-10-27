@@ -38,7 +38,7 @@
 														<td><pre><code>SELECT   process_instance_id,
          instance_id,
          infolet_id,
-        replace(DBMS_XMLGEN.CONVERT(comments,1),chr(10),'<br>') as comments,
+        HTF.ESCAPE_SC(comments) as comments,
          user_name,
         ms_apps_utilities.get_user_full_name(user_full_name) as user_full_name,
          entered_date,
@@ -82,9 +82,8 @@
 </code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
  
    1 - (#keys=1) INTERNAL_FUNCTION("ENTERED_DATE")[7], "PROCESS_INSTANCE_ID"[NUMBER,22], 
-       "INSTANCE_ID"[NUMBER,22], "INFOLET_ID"[NUMBER,22], 
-       REPLACE("DBMS_XMLGEN"."CONVERT"("COMMENTS",1),' ','<br>')[4000], "USER_NAME"[VARCHAR2,400], 
-       "MS_APPS_UTILITIES"."GET_USER_FULL_NAME"("USER_FULL_NAME")[4000], 
+       "INSTANCE_ID"[NUMBER,22], "INFOLET_ID"[NUMBER,22], "HTF"."ESCAPE_SC"("COMMENTS")[4000], 
+       "USER_NAME"[VARCHAR2,400], "MS_APPS_UTILITIES"."GET_USER_FULL_NAME"("USER_FULL_NAME")[4000], 
        "COMMENTS_COLUMN_NAME"[VARCHAR2,4000]
    2 - "COMMENTS_COLUMN_NAME"[VARCHAR2,4000], "PROCESS_INSTANCE_ID"[NUMBER,22], 
        "INSTANCE_ID"[NUMBER,22], "INFOLET_ID"[NUMBER,22], "COMMENTS"[VARCHAR2,4000], 
@@ -117,6 +116,7 @@
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

@@ -75,11 +75,11 @@ order by display_order asc</code></pre></td>
 <font style="background-color: lightblue; color: red">|  12 |         TABLE ACCESS FULL        | SI_REGISTER_APPLICATION       |    65 |   455 |     3   (0)| 00:00:01 |</font>
 |* 13 |         INDEX RANGE SCAN         | SI_REGISTER_APPLICATION_TL_N1 |     1 |    26 |     1   (0)| 00:00:01 |
 |  14 |        FAST DUAL                 |                               |     1 |       |     2   (0)| 00:00:01 |
-|* 15 |     VIEW                         |                               |  4233 |  9296K|    18   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|  16 |      MERGE JOIN CARTESIAN        |                               |  4233 |   194K|    18   (0)| 00:00:01 |</font>
+|* 15 |     VIEW                         |                               |  4234 |  9299K|    18   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  16 |      MERGE JOIN CARTESIAN        |                               |  4234 |   194K|    18   (0)| 00:00:01 |</font>
 <font style="background-color: lightblue; color: red">|* 17 |       TABLE ACCESS FULL          | SI_LOCALES                    |     1 |     6 |     3   (0)| 00:00:01 |</font>
-|  18 |       BUFFER SORT                |                               |  4233 |   169K|    15   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|* 19 |        TABLE ACCESS FULL         | MS_QS_LIST_OF_VALUES_T        |  4233 |   169K|    15   (0)| 00:00:01 |</font>
+|  18 |       BUFFER SORT                |                               |  4234 |   169K|    15   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 19 |        TABLE ACCESS FULL         | MS_QS_LIST_OF_VALUES_T        |  4234 |   169K|    15   (0)| 00:00:01 |</font>
 |  20 |      NESTED LOOPS                |                               |     1 |    30 |     4   (0)| 00:00:01 |
 |  21 |       TABLE ACCESS BY INDEX ROWID| SI_USERS_T                    |     1 |    19 |     1   (0)| 00:00:01 |
 |* 22 |        INDEX UNIQUE SCAN         | USER_NAME_UK                  |     1 |       |     1   (0)| 00:00:01 |
@@ -180,6 +180,7 @@ order by display_order asc</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

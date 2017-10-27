@@ -78,11 +78,11 @@ and NVL(C.END_DATE,sysdate) >= sysdate and NVL(C.START_DATE,sysdate) <= sysdate 
 |*  9 |          INDEX UNIQUE SCAN         | USER_NAME_UK                  |     1 |       |     1   (0)| 00:00:01 |
 <font style="background-color: lightblue; color: red">|* 10 |         TABLE ACCESS FULL          | MS_QS_LOV_NAMES               |     9 |   315 |     9   (0)| 00:00:01 |</font>
 <font style="background-color: lightblue; color: red">|  11 |        TABLE ACCESS FULL           | SI_LOCALES                    |    35 |   385 |     3   (0)| 00:00:01 |</font>
-|  12 |       VIEW                         |                               |  4233 |  9296K|    18   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|  13 |        MERGE JOIN CARTESIAN        |                               |  4233 |   194K|    18   (0)| 00:00:01 |</font>
+|  12 |       VIEW                         |                               |  4234 |  9299K|    18   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  13 |        MERGE JOIN CARTESIAN        |                               |  4234 |   194K|    18   (0)| 00:00:01 |</font>
 <font style="background-color: lightblue; color: red">|* 14 |         TABLE ACCESS FULL          | SI_LOCALES                    |     1 |     6 |     3   (0)| 00:00:01 |</font>
-|  15 |         BUFFER SORT                |                               |  4233 |   169K|    15   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|* 16 |          TABLE ACCESS FULL         | MS_QS_LIST_OF_VALUES_T        |  4233 |   169K|    15   (0)| 00:00:01 |</font>
+|  15 |         BUFFER SORT                |                               |  4234 |   169K|    15   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 16 |          TABLE ACCESS FULL         | MS_QS_LIST_OF_VALUES_T        |  4234 |   169K|    15   (0)| 00:00:01 |</font>
 |* 17 |      INDEX RANGE SCAN              | MS_QS_LOV_NAMES_TL_IDX        |     1 |    26 |     1   (0)| 00:00:01 |
 |  18 |     TABLE ACCESS BY INDEX ROWID    | MS_QS_LIST_OF_VALUES_TL       |     1 |    25 |     1   (0)| 00:00:01 |
 |* 19 |      INDEX RANGE SCAN              | MS_QS_LIST_OF_VALUES_TL_IDX   |     1 |       |     1   (0)| 00:00:01 |
@@ -199,6 +199,7 @@ and NVL(C.END_DATE,sysdate) >= sysdate and NVL(C.START_DATE,sysdate) <= sysdate 
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

@@ -93,7 +93,7 @@ AND EXISTS
 --------------------------------------------------------------------------------------------------------------------------
 | Id  | Operation                                | Name                          | Rows  | Bytes | Cost (%CPU)| Time     |
 --------------------------------------------------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT                         |                               |     1 | 19592 |    53   (2)| 00:00:01 |
+|   0 | SELECT STATEMENT                         |                               |     1 | 21392 |    53   (2)| 00:00:01 |
 |   1 |  TABLE ACCESS BY INDEX ROWID             | SI_USERS_T                    |     1 |    28 |     1   (0)| 00:00:01 |
 |*  2 |   INDEX UNIQUE SCAN                      | USER_NAME_UK                  |     1 |       |     1   (0)| 00:00:01 |
 |   3 |  TABLE ACCESS BY INDEX ROWID             | SI_USERS_T                    |     1 |    28 |     1   (0)| 00:00:01 |
@@ -106,13 +106,13 @@ AND EXISTS
 |* 10 |   INDEX RANGE SCAN                       | SI_METRICS_T_N7               |     1 |       |     1   (0)| 00:00:01 |
 |  11 |   TABLE ACCESS BY INDEX ROWID            | MS_GRC_STANDARD               |     1 |    18 |     1   (0)| 00:00:01 |
 |* 12 |    INDEX UNIQUE SCAN                     | MS_GRC_STANDARD_PK            |     1 |       |     1   (0)| 00:00:01 |
-|  13 |  SORT ORDER BY                           |                               |     1 | 19592 |    53   (2)| 00:00:01 |
-|* 14 |   HASH JOIN                              |                               |     1 | 19592 |    52   (0)| 00:00:01 |
+|  13 |  SORT ORDER BY                           |                               |     1 | 21392 |    53   (2)| 00:00:01 |
+|* 14 |   HASH JOIN                              |                               |     1 | 21392 |    52   (0)| 00:00:01 |
 |  15 |    VIEW                                  | VW_SQ_1                       |     1 |     6 |     1   (0)| 00:00:01 |
 |  16 |     TABLE ACCESS BY INDEX ROWID          | SI_USERS_T                    |     1 |    19 |     1   (0)| 00:00:01 |
 |* 17 |      INDEX UNIQUE SCAN                   | USER_NAME_UK                  |     1 |       |     1   (0)| 00:00:01 |
-|  18 |    NESTED LOOPS                          |                               |     1 | 19586 |    51   (0)| 00:00:01 |
-|  19 |     NESTED LOOPS                         |                               |     1 | 16363 |    50   (0)| 00:00:01 |
+|  18 |    NESTED LOOPS                          |                               |     1 | 21386 |    51   (0)| 00:00:01 |
+|  19 |     NESTED LOOPS                         |                               |     1 | 18163 |    50   (0)| 00:00:01 |
 <font style="background-color: lightblue; color: red">|  20 |      MERGE JOIN CARTESIAN                |                               |  8168 |    16M|    49   (0)| 00:00:01 |</font>
 |  21 |       NESTED LOOPS OUTER                 |                               |     1 |  2071 |    20   (0)| 00:00:01 |
 |* 22 |        HASH JOIN                         |                               |     1 |  2046 |    19   (0)| 00:00:01 |
@@ -128,7 +128,7 @@ AND EXISTS
 |  32 |       BUFFER SORT                        |                               |  8168 | 16336 |    48   (0)| 00:00:01 |
 |  33 |        SORT UNIQUE                       |                               |  8168 | 16336 |    29   (0)| 00:00:01 |
 <font style="background-color: lightblue; color: red">|  34 |         COLLECTION ITERATOR PICKLER FETCH| FN_STD_REPORT_FILTER          |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
-|  35 |      TABLE ACCESS BY INDEX ROWID         | MS_GRC_STANDARD_SUMMARY       |     1 | 14290 |     1   (0)| 00:00:01 |
+|  35 |      TABLE ACCESS BY INDEX ROWID         | MS_GRC_STANDARD_SUMMARY       |     1 | 16090 |     1   (0)| 00:00:01 |
 |* 36 |       INDEX UNIQUE SCAN                  | MS_GRC_STDT_SUMM_IDX1         |     1 |       |     1   (0)| 00:00:01 |
 |  37 |     TABLE ACCESS BY INDEX ROWID          | MS_GRC_STANDARD_MLS_SUMMARY   |     1 |  3223 |     1   (0)| 00:00:01 |
 |* 38 |      INDEX RANGE SCAN                    | MS_GRC_STANDARD_MLS_SUMM_IDX1 |     1 |       |     1   (0)| 00:00:01 |
@@ -201,7 +201,7 @@ AND EXISTS
   12 - "MS_GRC_STANDARD".ROWID[ROWID,10]
   13 - (#keys=1) "STDSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."OBJECT_ID"[VARCHAR2,400], 
        "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], 'MS_GRC_STANDARD'[15], "STDMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], 
-       "STDMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,800], "STDSUMM"."PARENT"[VARCHAR2,400], "CREATED_ON"[DATE,7],  (SELECT 
+       "STDMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,800], "STDSUMM"."PARENT"[VARCHAR2,4000], "CREATED_ON"[DATE,7],  (SELECT 
        "USR"."FIRST_NAME"||' '||"USR"."LAST_NAME" FROM METRICSTREAM."SI_USERS_T" "USR" WHERE 
        "USR"."USER_NAME"=:B1)[801], "UPDATED_ON"[DATE,7],  (SELECT "USR"."FIRST_NAME"||' '||"USR"."LAST_NAME" FROM 
        METRICSTREAM."SI_USERS_T" "USR" WHERE "USR"."USER_NAME"=:B2)[801], "STDSUMM"."VALID_FROM"[DATE,7], 
@@ -219,7 +219,7 @@ AND EXISTS
        "MS_GRC_STANDARD" "MS_GRC_STANDARD" WHERE "OBJECT_ID"=:B5),'''flag=1&emd=1&x_edit_mode=Yes&wrapper= 
        No&mode=view''')[4000], "STDSUMM"."OBJ_PARENT_ID"[VARCHAR2,4000], "STDMLSSUMM"."STD_TYPE"[VARCHAR2,800]
   14 - (#keys=1) "X"."DISPLAYED_VALUE"[VARCHAR2,4000], "TL"."DISPLAYED_VALUE"[VARCHAR2,4000], 
-       "STDSUMM"."OBJECT_ID"[VARCHAR2,400], "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."PARENT"[VARCHAR2,400], 
+       "STDSUMM"."OBJECT_ID"[VARCHAR2,400], "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."PARENT"[VARCHAR2,4000], 
        "STDSUMM"."OBJ_PARENT_ID"[VARCHAR2,4000], "STDSUMM"."DESCRIPTION"[LOB,4000], "STDSUMM"."VALID_UNTIL"[DATE,7], 
        "STDSUMM"."VALID_FROM"[DATE,7], "STDSUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "OWNER_NAME"[LOB,4000], 
        "OWNER_ORG_NAMES"[LOB,4000], "STDSUMM"."LEVEL_1_APPROVER"[VARCHAR2,1000], 
@@ -231,7 +231,7 @@ AND EXISTS
   16 - "LOCALE"[VARCHAR2,400]
   17 - "SI_USERS_T".ROWID[ROWID,10]
   18 - (#keys=0) "X"."DISPLAYED_VALUE"[VARCHAR2,4000], "TL"."DISPLAYED_VALUE"[VARCHAR2,4000], 
-       "STDSUMM"."OBJECT_ID"[VARCHAR2,400], "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."PARENT"[VARCHAR2,400], 
+       "STDSUMM"."OBJECT_ID"[VARCHAR2,400], "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."PARENT"[VARCHAR2,4000], 
        "STDSUMM"."OBJ_PARENT_ID"[VARCHAR2,4000], "STDSUMM"."DESCRIPTION"[LOB,4000], "STDSUMM"."VALID_UNTIL"[DATE,7], 
        "STDSUMM"."VALID_FROM"[DATE,7], "STDSUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "OWNER_NAME"[LOB,4000], 
        "OWNER_ORG_NAMES"[LOB,4000], "STDSUMM"."LEVEL_1_APPROVER"[VARCHAR2,1000], 
@@ -241,7 +241,7 @@ AND EXISTS
        "STDMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,800], "STDMLSSUMM"."STD_TYPE"[VARCHAR2,800]
   19 - (#keys=0) "X"."LOCALE_ID"[NUMBER,22], "X"."DISPLAYED_VALUE"[VARCHAR2,4000], 
        "TL"."DISPLAYED_VALUE"[VARCHAR2,4000], "STDSUMM"."OBJ_STD_SUMM_WID"[NUMBER,22], 
-       "STDSUMM"."OBJECT_ID"[VARCHAR2,400], "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."PARENT"[VARCHAR2,400], 
+       "STDSUMM"."OBJECT_ID"[VARCHAR2,400], "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."PARENT"[VARCHAR2,4000], 
        "STDSUMM"."OBJ_PARENT_ID"[VARCHAR2,4000], "STDSUMM"."DESCRIPTION"[LOB,4000], "STDSUMM"."VALID_UNTIL"[DATE,7], 
        "STDSUMM"."VALID_FROM"[DATE,7], "STDSUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "OWNER_NAME"[LOB,4000], 
        "OWNER_ORG_NAMES"[LOB,4000], "STDSUMM"."LEVEL_1_APPROVER"[VARCHAR2,1000], 
@@ -267,7 +267,7 @@ AND EXISTS
   33 - (#keys=1) VALUE(KOKBF$)[8000]
   34 - VALUE(A0)[8000]
   35 - "STDSUMM"."OBJ_STD_SUMM_WID"[NUMBER,22], "STDSUMM"."OBJECT_ID"[VARCHAR2,400], 
-       "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."PARENT"[VARCHAR2,400], 
+       "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."PARENT"[VARCHAR2,4000], 
        "STDSUMM"."OBJ_PARENT_ID"[VARCHAR2,4000], "STDSUMM"."DESCRIPTION"[LOB,4000], "STDSUMM"."VALID_UNTIL"[DATE,7], 
        "STDSUMM"."VALID_FROM"[DATE,7], "STDSUMM"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "OWNER_NAME"[LOB,4000], 
        "OWNER_ORG_NAMES"[LOB,4000], "STDSUMM"."LEVEL_1_APPROVER"[VARCHAR2,1000], 
@@ -304,6 +304,7 @@ AND EXISTS
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

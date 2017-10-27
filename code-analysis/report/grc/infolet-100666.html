@@ -94,7 +94,7 @@ where instr(','||:1||',', ','||fdo.org_entity_id||',') > 0</code></pre></td>
 |  29 |         INDEX FULL SCAN                           | SI_ORG_ROLES_N3                |   210 |  3150 |       |     1   (0)| 00:00:01 |
 <font style="background-color: lightblue; color: red">|  30 |        VIEW                                       | SI_FLOW_DOWN_ORG_V             |   525 |  1034K|       |    12  (17)| 00:00:01 |</font>
 <font style="background-color: lightblue; color: red">|  31 |         TEMP TABLE TRANSFORMATION                 |                                |       |       |       |            |          |</font>
-|  32 |          LOAD AS SELECT                           | SYS_TEMP_0FD9D6611_301B41      |       |       |       |            |          |
+|  32 |          LOAD AS SELECT                           | SYS_TEMP_0FD9D6614_301B4A      |       |       |       |            |          |
 |* 33 |           FILTER                                  |                                |       |       |       |            |          |
 |* 34 |            CONNECT BY NO FILTERING WITH START-WITH|                                |       |       |       |            |          |
 |  35 |             NESTED LOOPS OUTER                    |                                |   113 |  4407 |       |     4   (0)| 00:00:01 |
@@ -104,9 +104,9 @@ where instr(','||:1||',', ','||fdo.org_entity_id||',') > 0</code></pre></td>
 |  39 |           VIEW                                    | VW_SQ_1                        |   113 |  2938 |       |     4  (25)| 00:00:01 |
 |  40 |            SORT GROUP BY                          |                                |   113 |  2034 |       |     4  (25)| 00:00:01 |
 |  41 |             VIEW                                  |                                |   525 |  9450 |       |     3   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|  42 |              TABLE ACCESS FULL                    | SYS_TEMP_0FD9D6611_301B41      |   525 | 25200 |       |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  42 |              TABLE ACCESS FULL                    | SYS_TEMP_0FD9D6614_301B4A      |   525 | 25200 |       |     3   (0)| 00:00:01 |</font>
 |* 43 |           VIEW                                    |                                |   525 |  1037K|       |     3   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|  44 |            TABLE ACCESS FULL                      | SYS_TEMP_0FD9D6611_301B41      |   525 | 25200 |       |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  44 |            TABLE ACCESS FULL                      | SYS_TEMP_0FD9D6614_301B4A      |   525 | 25200 |       |     3   (0)| 00:00:01 |</font>
 |* 45 |       INDEX RANGE SCAN                            | SI_ROLES_N2                    |     1 |     5 |       |     1   (0)| 00:00:01 |
 |* 46 |      INDEX RANGE SCAN                             | SI_ROLE_ACTIVITIES_N2          |    23 |   230 |       |     1   (0)| 00:00:01 |
 --------------------------------------------------------------------------------------------------------------------------------------------
@@ -254,6 +254,7 @@ where instr(','||:1||',', ','||fdo.org_entity_id||',') > 0</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

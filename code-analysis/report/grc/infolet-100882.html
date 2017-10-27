@@ -84,11 +84,11 @@ order by c.display_order</code></pre></td>
 <font style="background-color: lightblue; color: red">|* 12 |           TABLE ACCESS FULL          | MS_QS_LOV_NAMES               |     9 |   315 |     9   (0)| 00:00:01 |</font>
 |* 13 |          INDEX RANGE SCAN            | MS_QS_LOV_NAMES_TL_IDX        |     1 |    26 |     1   (0)| 00:00:01 |
 <font style="background-color: lightblue; color: red">|  14 |         TABLE ACCESS FULL            | SI_LOCALES                    |    35 |   385 |     3   (0)| 00:00:01 |</font>
-|  15 |        VIEW                          |                               |  4233 |  9321K|    18   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|  16 |         MERGE JOIN CARTESIAN         |                               |  4233 |   219K|    18   (0)| 00:00:01 |</font>
+|  15 |        VIEW                          |                               |  4234 |  9323K|    18   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  16 |         MERGE JOIN CARTESIAN         |                               |  4234 |   219K|    18   (0)| 00:00:01 |</font>
 <font style="background-color: lightblue; color: red">|* 17 |          TABLE ACCESS FULL           | SI_LOCALES                    |     1 |     6 |     3   (0)| 00:00:01 |</font>
-|  18 |          BUFFER SORT                 |                               |  4233 |   194K|    15   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|* 19 |           TABLE ACCESS FULL          | MS_QS_LIST_OF_VALUES_T        |  4233 |   194K|    15   (0)| 00:00:01 |</font>
+|  18 |          BUFFER SORT                 |                               |  4234 |   194K|    15   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 19 |           TABLE ACCESS FULL          | MS_QS_LIST_OF_VALUES_T        |  4234 |   194K|    15   (0)| 00:00:01 |</font>
 |  20 |       TABLE ACCESS BY INDEX ROWID    | SI_ORG_ENTITIES_T             |     1 |    26 |     1   (0)| 00:00:01 |
 |* 21 |        INDEX RANGE SCAN              | SI_ORG_ENTITIES_N1            |     1 |       |     1   (0)| 00:00:01 |
 |* 22 |      INDEX RANGE SCAN                | SI_ORG_ENTITIES_TL_IDX        |     1 |     7 |     1   (0)| 00:00:01 |
@@ -234,6 +234,7 @@ order by c.display_order</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

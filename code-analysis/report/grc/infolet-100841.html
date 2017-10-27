@@ -125,10 +125,10 @@ WHERE COLUMN_VALUE = RV.OBJECT_ID
 |*  8 |       INDEX RANGE SCAN             | MS_QS_LOV_NAMES_N1          |     1 |       |     1   (0)| 00:00:01 |
 |*  9 |     INDEX RANGE SCAN               | SI_ENT_N1                   |     1 |     3 |     1   (0)| 00:00:01 |
 |* 10 |    VIEW                            |                             |     1 |  2023 |    16   (0)| 00:00:01 |
-|  11 |     NESTED LOOPS                   |                             |  4320 |   168K|    16   (0)| 00:00:01 |
+|  11 |     NESTED LOOPS                   |                             |  4321 |   168K|    16   (0)| 00:00:01 |
 |* 12 |      TABLE ACCESS BY INDEX ROWID   | SI_LOCALES                  |     1 |     6 |     1   (0)| 00:00:01 |
 |* 13 |       INDEX UNIQUE SCAN            | SI_LOCALES_U1               |     1 |       |     1   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|* 14 |      TABLE ACCESS FULL             | MS_QS_LIST_OF_VALUES_T      |  4320 |   143K|    15   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 14 |      TABLE ACCESS FULL             | MS_QS_LIST_OF_VALUES_T      |  4321 |   143K|    15   (0)| 00:00:01 |</font>
 |  15 |   TABLE ACCESS BY INDEX ROWID      | MS_QS_LIST_OF_VALUES_TL     |     1 |    25 |     1   (0)| 00:00:01 |
 |* 16 |    INDEX RANGE SCAN                | MS_QS_LIST_OF_VALUES_TL_IDX |     1 |       |     1   (0)| 00:00:01 |
 |  17 |  NESTED LOOPS OUTER                |                             |     1 |  4288 |    20   (0)| 00:00:01 |
@@ -141,10 +141,10 @@ WHERE COLUMN_VALUE = RV.OBJECT_ID
 |* 24 |       INDEX RANGE SCAN             | MS_QS_LOV_NAMES_N1          |     1 |       |     1   (0)| 00:00:01 |
 |* 25 |     INDEX RANGE SCAN               | SI_ENT_N1                   |     1 |     3 |     1   (0)| 00:00:01 |
 |* 26 |    VIEW                            |                             |     1 |  2023 |    16   (0)| 00:00:01 |
-|  27 |     NESTED LOOPS                   |                             |  4320 |   168K|    16   (0)| 00:00:01 |
+|  27 |     NESTED LOOPS                   |                             |  4321 |   168K|    16   (0)| 00:00:01 |
 |* 28 |      TABLE ACCESS BY INDEX ROWID   | SI_LOCALES                  |     1 |     6 |     1   (0)| 00:00:01 |
 |* 29 |       INDEX UNIQUE SCAN            | SI_LOCALES_U1               |     1 |       |     1   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|* 30 |      TABLE ACCESS FULL             | MS_QS_LIST_OF_VALUES_T      |  4320 |   143K|    15   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 30 |      TABLE ACCESS FULL             | MS_QS_LIST_OF_VALUES_T      |  4321 |   143K|    15   (0)| 00:00:01 |</font>
 |  31 |   TABLE ACCESS BY INDEX ROWID      | MS_QS_LIST_OF_VALUES_TL     |     1 |    25 |     1   (0)| 00:00:01 |
 |* 32 |    INDEX RANGE SCAN                | MS_QS_LIST_OF_VALUES_TL_IDX |     1 |       |     1   (0)| 00:00:01 |
 |  33 |  FAST DUAL                         |                             |     1 |       |     2   (0)| 00:00:01 |
@@ -440,6 +440,7 @@ WHERE COLUMN_VALUE = RV.OBJECT_ID
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

@@ -80,11 +80,11 @@ and a.locale_string = b.locale and b.user_name = :1 and LOV_NAME ='MS_GRC_Curren
 |*  8 |         INDEX UNIQUE SCAN         | USER_NAME_UK                  |     1 |       |     1   (0)| 00:00:01 |
 |   9 |        TABLE ACCESS BY INDEX ROWID| MS_QS_LOV_NAMES               |     1 |    35 |     1   (0)| 00:00:01 |
 |* 10 |         INDEX RANGE SCAN          | MS_QS_LOV_NAMES_N1            |     1 |       |     1   (0)| 00:00:01 |
-|  11 |       VIEW                        |                               |  4233 |  9296K|    18   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|  12 |        MERGE JOIN CARTESIAN       |                               |  4233 |   194K|    18   (0)| 00:00:01 |</font>
+|  11 |       VIEW                        |                               |  4234 |  9299K|    18   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  12 |        MERGE JOIN CARTESIAN       |                               |  4234 |   194K|    18   (0)| 00:00:01 |</font>
 <font style="background-color: lightblue; color: red">|* 13 |         TABLE ACCESS FULL         | SI_LOCALES                    |     1 |     6 |     3   (0)| 00:00:01 |</font>
-|  14 |         BUFFER SORT               |                               |  4233 |   169K|    15   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|* 15 |          TABLE ACCESS FULL        | MS_QS_LIST_OF_VALUES_T        |  4233 |   169K|    15   (0)| 00:00:01 |</font>
+|  14 |         BUFFER SORT               |                               |  4234 |   169K|    15   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 15 |          TABLE ACCESS FULL        | MS_QS_LIST_OF_VALUES_T        |  4234 |   169K|    15   (0)| 00:00:01 |</font>
 |* 16 |      TABLE ACCESS BY INDEX ROWID  | SI_LOCALES                    |     1 |    11 |     1   (0)| 00:00:01 |
 |* 17 |       INDEX UNIQUE SCAN           | SI_LOCALES_U1                 |     1 |       |     1   (0)| 00:00:01 |
 |  18 |     TABLE ACCESS BY INDEX ROWID   | MS_QS_LIST_OF_VALUES_TL       |     1 |    25 |     1   (0)| 00:00:01 |
@@ -213,6 +213,7 @@ and a.locale_string = b.locale and b.user_name = :1 and LOV_NAME ='MS_GRC_Curren
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

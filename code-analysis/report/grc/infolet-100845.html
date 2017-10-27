@@ -41,7 +41,6 @@ c.locale_id as locale_id
     FROM SI_USER_ORG_ACT_VIEW a
     ,si_locales c,
 si_users_t d where 
-d.end_date is null and
 c.locale_string = d.locale
 AND d.user_name = :1
 and activity_name IN ('GRC - Edit GRC Object')</code></pre></td>
@@ -62,26 +61,26 @@ and activity_name IN ('GRC - Edit GRC Object')</code></pre></td>
 --------------------------------------------------------------------------------------------------------------------------------
 | Id  | Operation                                     | Name                           | Rows  | Bytes | Cost (%CPU)| Time     |
 --------------------------------------------------------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT                              |                                |     1 |   269 |    36   (3)| 00:00:01 |
-|   1 |  SORT UNIQUE                                  |                                |     1 |   269 |    36   (3)| 00:00:01 |
-|*  2 |   HASH JOIN                                   |                                |     1 |   269 |    35   (0)| 00:00:01 |
-|   3 |    NESTED LOOPS OUTER                         |                                |     1 |   256 |    29   (0)| 00:00:01 |
-|*  4 |     HASH JOIN                                 |                                |     1 |   247 |    28   (0)| 00:00:01 |
-|   5 |      NESTED LOOPS OUTER                       |                                |     1 |   239 |    18   (0)| 00:00:01 |
-|*  6 |       HASH JOIN                               |                                |     1 |   232 |    17   (0)| 00:00:01 |
-|*  7 |        HASH JOIN                              |                                |     1 |   224 |    13   (0)| 00:00:01 |
-|   8 |         NESTED LOOPS                          |                                |     1 |   213 |    10   (0)| 00:00:01 |
-|   9 |          NESTED LOOPS                         |                                |     1 |   213 |    10   (0)| 00:00:01 |
-|  10 |           NESTED LOOPS                        |                                |     1 |   176 |     9   (0)| 00:00:01 |
-|  11 |            NESTED LOOPS                       |                                |     1 |   166 |     8   (0)| 00:00:01 |
-|  12 |             NESTED LOOPS                      |                                |     1 |   160 |     7   (0)| 00:00:01 |
-|  13 |              NESTED LOOPS                     |                                |     1 |   145 |     6   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|  14 |               MERGE JOIN CARTESIAN            |                                |     1 |   135 |     5   (0)| 00:00:01 |</font>
-|  15 |                NESTED LOOPS                   |                                |     1 |   103 |     4   (0)| 00:00:01 |
-|  16 |                 NESTED LOOPS                  |                                |     1 |   103 |     4   (0)| 00:00:01 |
-|  17 |                  NESTED LOOPS                 |                                |     1 |    86 |     3   (0)| 00:00:01 |
-|  18 |                   NESTED LOOPS                |                                |     1 |    54 |     2   (0)| 00:00:01 |
-|* 19 |                    TABLE ACCESS BY INDEX ROWID| SI_USERS_T                     |     1 |    20 |     1   (0)| 00:00:01 |
+|   0 | SELECT STATEMENT                              |                                |     1 |   268 |    36   (3)| 00:00:01 |
+|   1 |  SORT UNIQUE                                  |                                |     1 |   268 |    36   (3)| 00:00:01 |
+|*  2 |   HASH JOIN                                   |                                |     1 |   268 |    35   (0)| 00:00:01 |
+|   3 |    NESTED LOOPS OUTER                         |                                |     1 |   255 |    29   (0)| 00:00:01 |
+|*  4 |     HASH JOIN                                 |                                |     1 |   246 |    28   (0)| 00:00:01 |
+|   5 |      NESTED LOOPS OUTER                       |                                |     1 |   238 |    18   (0)| 00:00:01 |
+|*  6 |       HASH JOIN                               |                                |     1 |   231 |    17   (0)| 00:00:01 |
+|*  7 |        HASH JOIN                              |                                |     1 |   223 |    13   (0)| 00:00:01 |
+|   8 |         NESTED LOOPS                          |                                |     1 |   212 |    10   (0)| 00:00:01 |
+|   9 |          NESTED LOOPS                         |                                |     1 |   212 |    10   (0)| 00:00:01 |
+|  10 |           NESTED LOOPS                        |                                |     1 |   175 |     9   (0)| 00:00:01 |
+|  11 |            NESTED LOOPS                       |                                |     1 |   165 |     8   (0)| 00:00:01 |
+|  12 |             NESTED LOOPS                      |                                |     1 |   159 |     7   (0)| 00:00:01 |
+|  13 |              NESTED LOOPS                     |                                |     1 |   144 |     6   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  14 |               MERGE JOIN CARTESIAN            |                                |     1 |   134 |     5   (0)| 00:00:01 |</font>
+|  15 |                NESTED LOOPS                   |                                |     1 |   102 |     4   (0)| 00:00:01 |
+|  16 |                 NESTED LOOPS                  |                                |     1 |   102 |     4   (0)| 00:00:01 |
+|  17 |                  NESTED LOOPS                 |                                |     1 |    85 |     3   (0)| 00:00:01 |
+|  18 |                   NESTED LOOPS                |                                |     1 |    53 |     2   (0)| 00:00:01 |
+|  19 |                    TABLE ACCESS BY INDEX ROWID| SI_USERS_T                     |     1 |    19 |     1   (0)| 00:00:01 |
 |* 20 |                     INDEX UNIQUE SCAN         | USER_NAME_UK                   |     1 |       |     1   (0)| 00:00:01 |
 |  21 |                    TABLE ACCESS BY INDEX ROWID| MS_QS_PARAMETER_NAMES          |     1 |    34 |     1   (0)| 00:00:01 |
 |* 22 |                     INDEX RANGE SCAN          | MS_QS_PARAMETER_NAMES_N2       |     1 |       |     1   (0)| 00:00:01 |
@@ -175,7 +174,6 @@ and activity_name IN ('GRC - Edit GRC Object')</code></pre></td>
    4 - access("C"."ROLE_ID"="A"."ROLE_ID" AND "C"."ENTERPRISE_ID"="B"."ENTERPRISE_ID")
    6 - access("B"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID")
    7 - access("C"."LOCALE_STRING"="D"."LOCALE")
-  19 - filter("D"."END_DATE" IS NULL)
   20 - access("D"."USER_NAME"=:1)
   22 - access(UPPER("PARAMETER_NAME")='DISPLAY_FORMAT')
   23 - access("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND UPPER("PARAMETER_TYPE")='MS APPS USER NAME 
@@ -302,6 +300,7 @@ and activity_name IN ('GRC - Edit GRC Object')</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

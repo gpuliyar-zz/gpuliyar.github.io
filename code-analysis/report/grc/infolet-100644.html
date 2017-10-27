@@ -70,9 +70,9 @@ order by c.display_order</code></pre></td>
 ----------------------------------------------------------------------------------------------------------------------
 | Id  | Operation                            | Name                          | Rows  | Bytes | Cost (%CPU)| Time     |
 ----------------------------------------------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT                     |                               |   249 |   587K|    46   (3)| 00:00:01 |
-|   1 |  SORT ORDER BY                       |                               |   249 |   587K|    46   (3)| 00:00:01 |
-|*  2 |   HASH JOIN                          |                               |   249 |   587K|    45   (0)| 00:00:01 |
+|   0 | SELECT STATEMENT                     |                               |   250 |   590K|    46   (3)| 00:00:01 |
+|   1 |  SORT ORDER BY                       |                               |   250 |   590K|    46   (3)| 00:00:01 |
+|*  2 |   HASH JOIN                          |                               |   250 |   590K|    45   (0)| 00:00:01 |
 |   3 |    VIEW                              | SI_REGISTER_APPLICATION_V     |    66 |   858 |     6   (0)| 00:00:01 |
 |   4 |     UNION-ALL                        |                               |       |       |            |          |
 |   5 |      NESTED LOOPS OUTER              |                               |    65 |  2145 |     4   (0)| 00:00:01 |
@@ -92,11 +92,11 @@ order by c.display_order</code></pre></td>
 |  19 |           TABLE ACCESS BY INDEX ROWID| SI_USERS_T                    |     1 |    19 |     1   (0)| 00:00:01 |
 |* 20 |            INDEX UNIQUE SCAN         | USER_NAME_UK                  |     1 |       |     1   (0)| 00:00:01 |
 <font style="background-color: lightblue; color: red">|* 21 |           TABLE ACCESS FULL          | SI_LOCALES                    |     1 |    11 |     3   (0)| 00:00:01 |</font>
-|  22 |          VIEW                        |                               |  4233 |  9321K|    18   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|  23 |           MERGE JOIN CARTESIAN       |                               |  4233 |   219K|    18   (0)| 00:00:01 |</font>
+|  22 |          VIEW                        |                               |  4234 |  9323K|    18   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  23 |           MERGE JOIN CARTESIAN       |                               |  4234 |   219K|    18   (0)| 00:00:01 |</font>
 <font style="background-color: lightblue; color: red">|* 24 |            TABLE ACCESS FULL         | SI_LOCALES                    |     1 |     6 |     3   (0)| 00:00:01 |</font>
-|  25 |            BUFFER SORT               |                               |  4233 |   194K|    15   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|* 26 |             TABLE ACCESS FULL        | MS_QS_LIST_OF_VALUES_T        |  4233 |   194K|    15   (0)| 00:00:01 |</font>
+|  25 |            BUFFER SORT               |                               |  4234 |   194K|    15   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 26 |             TABLE ACCESS FULL        | MS_QS_LIST_OF_VALUES_T        |  4234 |   194K|    15   (0)| 00:00:01 |</font>
 |* 27 |        INDEX RANGE SCAN              | SI_ORG_ENTITIES_TL_IDX        |     1 |     7 |     1   (0)| 00:00:01 |
 |* 28 |     INDEX RANGE SCAN                 | MS_QS_LOV_NAMES_TL_IDX        |     1 |    26 |     1   (0)| 00:00:01 |
 ----------------------------------------------------------------------------------------------------------------------
@@ -232,6 +232,7 @@ order by c.display_order</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

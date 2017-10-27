@@ -57,13 +57,13 @@ AND object_type NOT IN (SELECT column_value
 --------------------------------------------------------------------------------------------------------------------
 | Id  | Operation                           | Name                         | Rows  | Bytes | Cost (%CPU)| Time     |
 --------------------------------------------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT                    |                              |    10 |   760 |    34   (3)| 00:00:01 |
-|   1 |  SORT ORDER BY                      |                              |    10 |   760 |    34   (3)| 00:00:01 |
-|*  2 |   HASH JOIN ANTI SNA                |                              |    10 |   760 |    33   (0)| 00:00:01 |
-|   3 |    NESTED LOOPS                     |                              |    11 |   814 |     4   (0)| 00:00:01 |
+|   0 | SELECT STATEMENT                    |                              |    16 |  1216 |    34   (3)| 00:00:01 |
+|   1 |  SORT ORDER BY                      |                              |    16 |  1216 |    34   (3)| 00:00:01 |
+|*  2 |   HASH JOIN ANTI SNA                |                              |    16 |  1216 |    33   (0)| 00:00:01 |
+|   3 |    NESTED LOOPS                     |                              |    17 |  1258 |     4   (0)| 00:00:01 |
 |   4 |     TABLE ACCESS BY INDEX ROWID     | SI_USERS_T                   |     1 |    19 |     1   (0)| 00:00:01 |
 |*  5 |      INDEX UNIQUE SCAN              | USER_NAME_UK                 |     1 |       |     1   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|*  6 |     TABLE ACCESS FULL               | MS_GRC_ORB_CONFIG_FORM_TITLE |    11 |   605 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|*  6 |     TABLE ACCESS FULL               | MS_GRC_ORB_CONFIG_FORM_TITLE |    17 |   935 |     3   (0)| 00:00:01 |</font>
 <font style="background-color: lightblue; color: red">|*  7 |    COLLECTION ITERATOR PICKLER FETCH| PARSE_STRING                 |   408 |   816 |    29   (0)| 00:00:01 |</font>
 --------------------------------------------------------------------------------------------------------------------
  
@@ -118,6 +118,7 @@ AND object_type NOT IN (SELECT column_value
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

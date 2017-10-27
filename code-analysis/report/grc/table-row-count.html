@@ -25,20 +25,39 @@
 							<!-- Content -->
 								<section>
 									<!-- Content -->
-										<header class="major"><h2>MS_GRC_USER_ENTITLEMENT_UTIL</h2></header>
-										<pre>
-    20 |         EXECUTE IMMEDIATE 'SELECT 1 FROM DUAL A
-    33 |         EXECUTE IMMEDIATE 'SELECT 1 FROM DUAL A
-    46 | 	    EXECUTE IMMEDIATE 'SELECT 1 FROM DUAL A
-    83 |         EXECUTE IMMEDIATE 'SELECT 1 FROM DUAL A
-    95 |           EXECUTE IMMEDIATE 'SELECT 1 FROM DUAL A
-   108 |         EXECUTE IMMEDIATE 'SELECT 1 FROM DUAL A
-   286 |       	/* Commented this code to replace ms_concat to MS_JOIN_CLOB*/ /*  EXECUTE IMMEDIATE 'SELECT MS_CONCAT(DISTINCT user_name)*/
-   287 |       EXECUTE IMMEDIATE 'SELECT MS_JOIN_CLOB(to_clob(user_name)) FROM (SELECT DISTINCT user_name
-   320 |       		/* Commented this code to replace ms_grc_fn_concat to ms_join_clob*/ /* EXECUTE IMMEDIATE 'SELECT ms_grc_fn_concat(DISTINCT user_name)*/
-   321 |      EXECUTE IMMEDIATE 'SELECT ms_join_clob(to_clob(user_name)) FROM (SELECT DISTINCT user_name
+										<header class="major"><h2>MS Table Row Count</h2></header>
+										<p>Configured Threshold Row Count limit set : 1000</p>
+										<div class="table-wrapper">
+											<table>
+												<thead>
+													<tr>
+														<th>Table Name</th>
+														<th>Row Count</th>
+													</tr>
+												</thead>
+												<tbody>
+<tr><td>MS_GRC_AUDIT_FIELDS_SETUP</td><td>7485</td></tr>
+<tr><td>MS_GRC_FLOW_LOG</td><td>6804</td></tr>
 
-										</pre>
+												</tbody>
+											</table>
+										</div>
+										<header class="major"><h2>SI Table Row Count</h2></header>
+										<p>Configured Threshold Row Count limit set : 1000</p>
+										<div class="table-wrapper">
+											<table>
+												<thead>
+													<tr>
+														<th>Table Name</th>
+														<th>Row Count</th>
+													</tr>
+												</thead>
+												<tbody>
+<tr><td>SI_100644_T</td><td>19716</td></tr>
+
+												</tbody>
+											</table>
+										</div>
 								</section>
 						</div>
 					</div>

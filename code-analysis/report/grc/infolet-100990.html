@@ -242,11 +242,11 @@ order by stored_value asc</code></pre></td>
 <font style="background-color: lightblue; color: red">| 169 |                   TABLE ACCESS FULL                    | SI_REGISTER_APPLICATION        |    65 |   455 |     3   (0)| 00:00:01 |</font>
 |*170 |                   INDEX RANGE SCAN                     | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
 | 171 |                  FAST DUAL                             |                                |     1 |       |     2   (0)| 00:00:01 |
-| 172 |          VIEW                                          |                                |  4233 |  8424K|    18   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">| 173 |           MERGE JOIN CARTESIAN                         |                                |  4233 |   181K|    18   (0)| 00:00:01 |</font>
+| 172 |          VIEW                                          |                                |  4234 |  8426K|    18   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">| 173 |           MERGE JOIN CARTESIAN                         |                                |  4234 |   181K|    18   (0)| 00:00:01 |</font>
 <font style="background-color: lightblue; color: red">|*174 |            TABLE ACCESS FULL                           | SI_LOCALES                     |     1 |     6 |     3   (0)| 00:00:01 |</font>
-| 175 |            BUFFER SORT                                 |                                |  4233 |   157K|    15   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|*176 |             TABLE ACCESS FULL                          | MS_QS_LIST_OF_VALUES_T         |  4233 |   157K|    15   (0)| 00:00:01 |</font>
+| 175 |            BUFFER SORT                                 |                                |  4234 |   157K|    15   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*176 |             TABLE ACCESS FULL                          | MS_QS_LIST_OF_VALUES_T         |  4234 |   157K|    15   (0)| 00:00:01 |</font>
 |*177 |        INDEX RANGE SCAN                                | MS_QS_LOV_NAMES_TL_IDX         |     1 |    26 |     1   (0)| 00:00:01 |
 |*178 |       INDEX UNIQUE SCAN                                | SI_LOCALES_U1                  |     1 |       |     1   (0)| 00:00:01 |
 |*179 |      TABLE ACCESS BY INDEX ROWID                       | SI_LOCALES                     |     1 |    11 |     1   (0)| 00:00:01 |
@@ -690,6 +690,7 @@ order by stored_value asc</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

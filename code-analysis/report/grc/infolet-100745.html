@@ -89,7 +89,7 @@ order by upper_object_name</code></pre></td>
 -----------------------------------------------------------------------------------------------------------------------
 | Id  | Operation                             | Name                          | Rows  | Bytes | Cost (%CPU)| Time     |
 -----------------------------------------------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT                      |                               |     1 | 39498 |    37   (6)| 00:00:01 |
+|   0 | SELECT STATEMENT                      |                               |     1 | 41298 |    37   (6)| 00:00:01 |
 |   1 |  NESTED LOOPS                         |                               |     1 |    83 |     3   (0)| 00:00:01 |
 |   2 |   NESTED LOOPS                        |                               |     1 |    83 |     3   (0)| 00:00:01 |
 |   3 |    NESTED LOOPS                       |                               |     1 |    66 |     2   (0)| 00:00:01 |
@@ -134,8 +134,8 @@ order by upper_object_name</code></pre></td>
 |  42 |   TABLE ACCESS BY INDEX ROWID         | MS_QS_PARAMETER_VALUES        |     1 |    17 |     1   (0)| 00:00:01 |
 |  43 |  TABLE ACCESS BY INDEX ROWID          | SI_USERS_T                    |     1 |    28 |     1   (0)| 00:00:01 |
 |* 44 |   INDEX UNIQUE SCAN                   | USER_NAME_UK                  |     1 |       |     1   (0)| 00:00:01 |
-|  45 |  SORT ORDER BY                        |                               |     1 | 39498 |    37   (6)| 00:00:01 |
-|  46 |   NESTED LOOPS                        |                               |     1 | 39498 |    32   (4)| 00:00:01 |
+|  45 |  SORT ORDER BY                        |                               |     1 | 41298 |    37   (6)| 00:00:01 |
+|  46 |   NESTED LOOPS                        |                               |     1 | 41298 |    32   (4)| 00:00:01 |
 |  47 |    NESTED LOOPS                       |                               |     1 |  3212 |    31   (4)| 00:00:01 |
 |  48 |     SORT UNIQUE                       |                               |  8168 | 16336 |    29   (0)| 00:00:01 |
 <font style="background-color: lightblue; color: red">|  49 |      COLLECTION ITERATOR PICKLER FETCH| FN_STD_REPORT_FILTER          |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
@@ -145,7 +145,7 @@ order by upper_object_name</code></pre></td>
 |  53 |        TABLE ACCESS BY INDEX ROWID    | SI_USERS_T                    |     1 |    19 |     1   (0)| 00:00:01 |
 |* 54 |         INDEX UNIQUE SCAN             | USER_NAME_UK                  |     1 |       |     1   (0)| 00:00:01 |
 <font style="background-color: lightblue; color: red">|* 55 |        TABLE ACCESS FULL              | SI_LOCALES                    |     1 |    11 |     3   (0)| 00:00:01 |</font>
-|  56 |    TABLE ACCESS BY INDEX ROWID        | MS_GRC_STANDARD_SUMMARY       |     1 | 36286 |     1   (0)| 00:00:01 |
+|  56 |    TABLE ACCESS BY INDEX ROWID        | MS_GRC_STANDARD_SUMMARY       |     1 | 38086 |     1   (0)| 00:00:01 |
 |* 57 |     INDEX UNIQUE SCAN                 | MS_GRC_STDT_SUMM_IDX1         |     1 |       |     1   (0)| 00:00:01 |
 -----------------------------------------------------------------------------------------------------------------------
  
@@ -283,7 +283,7 @@ order by upper_object_name</code></pre></td>
   44 - "USERS".ROWID[ROWID,10], "USERS"."USER_NAME"[VARCHAR2,320]
   45 - (#keys=1) "STDSUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."OBJECT_ID"[VARCHAR2,400], 
        "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], 
-       "STDMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,800], "STDSUMM"."PARENT"[VARCHAR2,400], "STDSUMM"."CREATED_ON"[DATE,7],  
+       "STDMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,800], "STDSUMM"."PARENT"[VARCHAR2,4000], "STDSUMM"."CREATED_ON"[DATE,7],  
        (SELECT CASE  WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS_QS_PARAMETER_NAMES" 
        "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE 
        "PVALUE"."ORG_ENTITY_ID"=1 AND "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND 
@@ -323,10 +323,10 @@ order by upper_object_name</code></pre></td>
        "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name 
        Display Format' AND "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND 
        "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='3' THEN "USERS"."LAST_NAME"||','||' '||"USERS"."FIRST_NAME"||' 
-       '||'('||"USERS"."USER_NAME"||')' WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS_
+       '||'('||"USERS"."USER_NAME"||')' WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS
   46 - (#keys=0) "STDMLSSUMM"."OBJECT_STATUS"[VARCHAR2,4000], "STDMLSSUMM"."OBJECT_LEVEL"[VARCHAR2,800], 
        "STDMLSSUMM"."STD_TYPE"[VARCHAR2,800], "STDSUMM"."OBJECT_ID"[VARCHAR2,400], 
-       "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."PARENT"[VARCHAR2,400], 
+       "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDSUMM"."PARENT"[VARCHAR2,4000], 
        "STDSUMM"."OBJ_PARENT_ID"[VARCHAR2,4000], "STDSUMM"."DESCRIPTION"[LOB,4000], "STDSUMM"."VALID_UNTIL"[DATE,7], 
        "STDSUMM"."VALID_FROM"[DATE,7], "STDSUMM"."OWNER_NAME"[LOB,4000], "STDSUMM"."OWNER_ORG_NAMES"[LOB,4000], 
        "STDSUMM"."LEVEL_1_APPROVER"[VARCHAR2,1000], "STDSUMM"."LEVEL_2_APPROVER"[VARCHAR2,1000], 
@@ -349,12 +349,12 @@ order by upper_object_name</code></pre></td>
   54 - "T1".ROWID[ROWID,10]
   55 - "LOCALE_ID"[NUMBER,22]
   56 - "STDSUMM"."OBJECT_ID"[VARCHAR2,400], "STDSUMM"."OBJECT_NAME"[VARCHAR2,4000], 
-       "STDSUMM"."PARENT"[VARCHAR2,400], "STDSUMM"."OBJ_PARENT_ID"[VARCHAR2,4000], "STDSUMM"."DESCRIPTION"[LOB,4000], 
-       "STDSUMM"."VALID_UNTIL"[DATE,7], "STDSUMM"."VALID_FROM"[DATE,7], "STDSUMM"."OWNER_NAME"[LOB,4000], 
-       "STDSUMM"."OWNER_ORG_NAMES"[LOB,4000], "STDSUMM"."LEVEL_1_APPROVER"[VARCHAR2,1000], 
-       "STDSUMM"."LEVEL_2_APPROVER"[VARCHAR2,1000], "STDSUMM"."UPDATED_BY"[VARCHAR2,804], 
-       "STDSUMM"."UPDATED_ON"[DATE,7], "STDSUMM"."CREATED_BY"[VARCHAR2,804], "STDSUMM"."CREATED_ON"[DATE,7], 
-       "REL_AOC_OBJ_NAME_AGG"[LOB,4000], "REL_MOD_REF_OBJ_NAME_AGG"[LOB,4000], 
+       "STDSUMM"."PARENT"[VARCHAR2,4000], "STDSUMM"."OBJ_PARENT_ID"[VARCHAR2,4000], 
+       "STDSUMM"."DESCRIPTION"[LOB,4000], "STDSUMM"."VALID_UNTIL"[DATE,7], "STDSUMM"."VALID_FROM"[DATE,7], 
+       "STDSUMM"."OWNER_NAME"[LOB,4000], "STDSUMM"."OWNER_ORG_NAMES"[LOB,4000], 
+       "STDSUMM"."LEVEL_1_APPROVER"[VARCHAR2,1000], "STDSUMM"."LEVEL_2_APPROVER"[VARCHAR2,1000], 
+       "STDSUMM"."UPDATED_BY"[VARCHAR2,804], "STDSUMM"."UPDATED_ON"[DATE,7], "STDSUMM"."CREATED_BY"[VARCHAR2,804], 
+       "STDSUMM"."CREATED_ON"[DATE,7], "REL_AOC_OBJ_NAME_AGG"[LOB,4000], "REL_MOD_REF_OBJ_NAME_AGG"[LOB,4000], 
        "REL_OBJECTIVE_OBJ_NAME_AGG"[LOB,4000], "REL_ORGANIZATION_NAMES"[LOB,4000], 
        "REL_PROCESS_OBJ_NAME_AGG"[LOB,4000], "REL_PRODUCT_NAME_AGG"[LOB,4000], 
        "REL_REFRENCES_OBJ_NAME_AGG"[LOB,4000], "REL_REG_BODY_OBJ_NAME_AGG"[LOB,4000], 
@@ -388,6 +388,7 @@ order by upper_object_name</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

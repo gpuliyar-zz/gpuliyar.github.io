@@ -86,7 +86,7 @@ and a.metric_id=b.metric_id) order by form_name</code></pre></td>
 |   1 |  SORT ORDER BY                     |                           |    17 | 20910 |    10  (10)| 00:00:01 |
 |   2 |   VIEW                             |                           |    17 | 20910 |     9   (0)| 00:00:01 |
 <font style="background-color: lightblue; color: red">|   3 |    TEMP TABLE TRANSFORMATION       |                           |       |       |            |          |</font>
-|   4 |     LOAD AS SELECT                 | SYS_TEMP_0FD9D6612_301B41 |       |       |            |          |
+|   4 |     LOAD AS SELECT                 | SYS_TEMP_0FD9D6615_301B4A |       |       |            |          |
 |   5 |      INLIST ITERATOR               |                           |       |       |            |          |
 |   6 |       TABLE ACCESS BY INDEX ROWID  | SI_METRICS_T              |    16 |  1040 |     7   (0)| 00:00:01 |
 |*  7 |        INDEX RANGE SCAN            | SI_METRICS_T_N7           |    16 |       |     5   (0)| 00:00:01 |
@@ -95,12 +95,12 @@ and a.metric_id=b.metric_id) order by form_name</code></pre></td>
 <font style="background-color: lightblue; color: red">|* 10 |       TABLE ACCESS FULL            | SI_LOCALES                |     1 |    11 |     3   (0)| 00:00:01 |</font>
 |  11 |       BUFFER SORT                  |                           |    16 | 13072 |     2   (0)| 00:00:01 |
 |  12 |        VIEW                        |                           |    16 | 13072 |     2   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|  13 |         TABLE ACCESS FULL          | SYS_TEMP_0FD9D6612_301B41 |    16 |  1040 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  13 |         TABLE ACCESS FULL          | SYS_TEMP_0FD9D6615_301B4A |    16 |  1040 |     2   (0)| 00:00:01 |</font>
 |  14 |      NESTED LOOPS                  |                           |     1 |  1256 |     4   (0)| 00:00:01 |
 |  15 |       NESTED LOOPS                 |                           |     1 |  1256 |     4   (0)| 00:00:01 |
 |  16 |        NESTED LOOPS                |                           |     1 |  1243 |     3   (0)| 00:00:01 |
 |  17 |         VIEW                       |                           |    16 |   208 |     2   (0)| 00:00:01 |
-<font style="background-color: lightblue; color: red">|  18 |          TABLE ACCESS FULL         | SYS_TEMP_0FD9D6612_301B41 |    16 |  1040 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  18 |          TABLE ACCESS FULL         | SYS_TEMP_0FD9D6615_301B4A |    16 |  1040 |     2   (0)| 00:00:01 |</font>
 |  19 |         TABLE ACCESS BY INDEX ROWID| SI_METRICS_TL             |     1 |  1230 |     1   (0)| 00:00:01 |
 |* 20 |          INDEX RANGE SCAN          | SI_METRICS_TL_N1          |     1 |       |     1   (0)| 00:00:01 |
 |* 21 |        INDEX UNIQUE SCAN           | SI_LOCALES_U1             |     1 |       |     1   (0)| 00:00:01 |
@@ -204,6 +204,7 @@ and a.metric_id=b.metric_id) order by form_name</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

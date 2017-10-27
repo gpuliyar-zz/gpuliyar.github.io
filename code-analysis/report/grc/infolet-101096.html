@@ -71,11 +71,11 @@ order by upper_object_name</code></pre></td>
 -----------------------------------------------------------------------------------------------------------------------
 | Id  | Operation                             | Name                          | Rows  | Bytes | Cost (%CPU)| Time     |
 -----------------------------------------------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT                      |                               |     1 |  5636 |    37   (6)| 00:00:01 |
-|   1 |  SORT ORDER BY                        |                               |     1 |  5636 |    37   (6)| 00:00:01 |
-|   2 |   NESTED LOOPS                        |                               |     1 |  5636 |    32   (4)| 00:00:01 |
-|   3 |    MERGE JOIN SEMI                    |                               |     1 |  4428 |    31   (4)| 00:00:01 |
-|*  4 |     TABLE ACCESS BY INDEX ROWID       | MS_GRC_STANDARD_SUMMARY       |     1 |  4426 |     1   (0)| 00:00:01 |
+|   0 | SELECT STATEMENT                      |                               |     1 |  7436 |    37   (6)| 00:00:01 |
+|   1 |  SORT ORDER BY                        |                               |     1 |  7436 |    37   (6)| 00:00:01 |
+|   2 |   NESTED LOOPS                        |                               |     1 |  7436 |    32   (4)| 00:00:01 |
+|   3 |    MERGE JOIN SEMI                    |                               |     1 |  6228 |    31   (4)| 00:00:01 |
+|*  4 |     TABLE ACCESS BY INDEX ROWID       | MS_GRC_STANDARD_SUMMARY       |     1 |  6226 |     1   (0)| 00:00:01 |
 |   5 |      INDEX FULL SCAN                  | MS_GRC_STDT_SUMM_IDX1         |     1 |       |     1   (0)| 00:00:01 |
 |*  6 |     SORT UNIQUE                       |                               |  8168 | 16336 |    30   (4)| 00:00:01 |
 <font style="background-color: lightblue; color: red">|   7 |      COLLECTION ITERATOR PICKLER FETCH| FN_STANDARD_ORB_FILTER        |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
@@ -116,15 +116,15 @@ order by upper_object_name</code></pre></td>
  
    1 - (#keys=1) "STDT_SUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], "STDT_SUMM"."OBJECT_ID"[VARCHAR2,400], 
        "STDT_SUMM"."OBJECT_NAME"[VARCHAR2,4000], "MLS_SUMM"."OBJECT_LEVEL"[VARCHAR2,800], 
-       "STDT_SUMM"."PARENT"[VARCHAR2,400], "MLS_SUMM"."STD_TYPE"[VARCHAR2,800], 'MS_GRC_STANDARD'[15], NULL[0], 
+       "STDT_SUMM"."PARENT"[VARCHAR2,4000], "MLS_SUMM"."STD_TYPE"[VARCHAR2,800], 'MS_GRC_STANDARD'[15], NULL[0], 
        'MS_GRC_STANDARD'[15]
    2 - (#keys=0) "STDT_SUMM"."OBJECT_ID"[VARCHAR2,400], "STDT_SUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], 
-       "STDT_SUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDT_SUMM"."PARENT"[VARCHAR2,400], 
+       "STDT_SUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDT_SUMM"."PARENT"[VARCHAR2,4000], 
        "MLS_SUMM"."OBJECT_LEVEL"[VARCHAR2,800], "MLS_SUMM"."STD_TYPE"[VARCHAR2,800]
    3 - (#keys=0) "STDT_SUMM"."OBJECT_ID"[VARCHAR2,400], "STDT_SUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000], 
-       "STDT_SUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDT_SUMM"."PARENT"[VARCHAR2,400]
+       "STDT_SUMM"."OBJECT_NAME"[VARCHAR2,4000], "STDT_SUMM"."PARENT"[VARCHAR2,4000]
    4 - "STDT_SUMM"."OBJECT_ID"[VARCHAR2,400], "STDT_SUMM"."OBJECT_NAME"[VARCHAR2,4000], 
-       "STDT_SUMM"."PARENT"[VARCHAR2,400], "STDT_SUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000]
+       "STDT_SUMM"."PARENT"[VARCHAR2,4000], "STDT_SUMM"."UPPER_OBJECT_NAME"[VARCHAR2,4000]
    5 - "STDT_SUMM".ROWID[ROWID,10], "STDT_SUMM"."OBJECT_ID"[VARCHAR2,400]
    6 - (#keys=1) VALUE(KOKBF$)[8000]
    7 - VALUE(A0)[8000]
@@ -161,6 +161,7 @@ order by upper_object_name</code></pre></td>
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>

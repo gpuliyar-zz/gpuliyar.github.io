@@ -47,10 +47,11 @@
          display_name,
          DD_OBJECT_TYPE object_type,
          OVER_RIDE_ACTION,
-         EXPIRED_FLAG,EDIT_ACTION_PARAMETERS,OBJECT_ID
+         EXPIRED_FLAG,EDIT_ACTION_PARAMETERS, 
+OBJECT_ID AS DISPLAY_ID
   FROM   (SELECT  a.OBJECT_ID,
                    a.OBJECT_NAME,
-                   SUBSTR (a.object_name, 1, 30) display_name,
+                 a.object_name as display_name,
                    a.dd_object_type object_type,  b.object_level,
                    'Y' AS OVER_RIDE_ACTION,
                    ms_Grc_utilities.INCLUDE_eXPIRED (a.VALID_FROM, a.VALID_UNTIL)
@@ -90,11 +91,11 @@
 ------------------------------------------------------------------------------------------------------------
 | Id  | Operation                      | Name                      | Rows  | Bytes | Cost (%CPU)| Time     |
 ------------------------------------------------------------------------------------------------------------
-|   0 | SELECT STATEMENT               |                           |     1 |  8746 |     3  (34)| 00:00:01 |
+|   0 | SELECT STATEMENT               |                           |     1 | 10686 |     3  (34)| 00:00:01 |
 |   1 |  SORT AGGREGATE                |                           |     1 |    21 |            |          |
 |*  2 |   INDEX RANGE SCAN             | MS_GRC_STANDARD_ORG_UK    |     1 |    21 |     1   (0)| 00:00:01 |
-|   3 |  SORT ORDER BY                 |                           |     1 |  8746 |     3  (34)| 00:00:01 |
-|*  4 |   VIEW                         |                           |     1 |  8746 |     2   (0)| 00:00:01 |
+|   3 |  SORT ORDER BY                 |                           |     1 | 10686 |     3  (34)| 00:00:01 |
+|*  4 |   VIEW                         |                           |     1 | 10686 |     2   (0)| 00:00:01 |
 |   5 |    NESTED LOOPS                |                           |     1 |    95 |     2   (0)| 00:00:01 |
 |*  6 |     TABLE ACCESS BY INDEX ROWID| MS_GRC_AREA_OF_COMPLIA    |     1 |    79 |     1   (0)| 00:00:01 |
 |*  7 |      INDEX RANGE SCAN          | MS_GRC_IDX_DD_OBJ_TYP_AOC |     3 |       |     1   (0)| 00:00:01 |
@@ -131,10 +132,10 @@
    3 - (#keys=1) "OBJECT_NAME"[VARCHAR2,4000], "OBJECT_ID"[VARCHAR2,400], 
        "OBJECT_ID"[VARCHAR2,400], "OBJECT_LEVEL"[VARCHAR2,4000], "VALID_FROM"[DATE,7], 
        "VALID_UNTIL"[DATE,7], "RESTRICT_ACCESS_TO"[VARCHAR2,4000], "DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
-       "DD_INSTANCE_ID"[NUMBER,22], "OWNER_ORGANIZATIONS"[VARCHAR2,4000], "DISPLAY_NAME"[VARCHAR2,120], 
+       "DD_INSTANCE_ID"[NUMBER,22], "OWNER_ORGANIZATIONS"[VARCHAR2,4000], "DISPLAY_NAME"[VARCHAR2,4000], 
        "DD_OBJECT_TYPE"[VARCHAR2,400], "OVER_RIDE_ACTION"[CHARACTER,1], "EXPIRED_FLAG"[NUMBER,22], 
        "EDIT_ACTION_PARAMETERS"[VARCHAR2,420]
-   4 - "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "DISPLAY_NAME"[VARCHAR2,120], 
+   4 - "OBJECT_ID"[VARCHAR2,400], "OBJECT_NAME"[VARCHAR2,4000], "DISPLAY_NAME"[VARCHAR2,4000], 
        "OBJECT_LEVEL"[VARCHAR2,4000], "OVER_RIDE_ACTION"[CHARACTER,1], "EXPIRED_FLAG"[NUMBER,22], 
        "VALID_FROM"[DATE,7], "VALID_UNTIL"[DATE,7], "RESTRICT_ACCESS_TO"[VARCHAR2,4000], 
        "DD_OBJECT_TYPE"[VARCHAR2,400], "DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
@@ -179,6 +180,7 @@
 										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
 										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
 										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
 									</ul>
 								</li>
 								<li>
