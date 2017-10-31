@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_Certification_Status_RPT (103733)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>select  (SELECT FIRST_NAME||' '||LAST_NAME
+                  FROM si_users_t
+                  WHERE user_name = a.RESPONDED_BY)
+ AS Certifier,
+APPLIES_TO_OBJECT As OrgLevel,
+a.RESPONDED_ON AS Certified_On,(select STATUS_NAME from MS_QSM_STATUS where STATUS_ID=RESP_STATUS) As STATUS,
+(MS_QSM_UTILITIES.FN_GET_REPORT_JSON(ms_qsm_utilities.get_infolet_id('RESQSM'),a.PROCESS_INSTANCE_ID,'0',
+'''flag=1'||CHR(38)||'emd=1'||CHR(38)||'x_edit_mode=Yes'||CHR (38)|| 'wrapper= No'|| CHR (38)|| 'mode=edit'''))  as NAME_LINK
+from MS_QSM_QUESTNR_RESP_DUP_V a,
+MS_QSM_INIT_QUESTNR b
+where A.QUE_REQUEST_ID = b.
+QUE_REQUEST_ID
+AND b.SUB_CERTIFICATION_FOR=:1
+and B.QUE_REQUEST_TYPE = '3'
+and A.INSTANCE_ID = (SELECT MAX(c.INSTANCE_ID) FROM MS_QSM_QUESTNR_RESP_DUP_V c WHERE c.PROCESS_INSTANCE_ID=a.PROCESS_INSTANCE_ID 
+AND a.instance_rec_num=1
+AND ROWNUM =1)</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>Infolet is used to retrieve all the certifications that have been completed at the lower level.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 4100916740</h2></header><pre><code>
+ 
+-------------------------------------------------------------------------------------------------------
+| Id  | Operation                       | Name                | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                |                     |     1 |  8972 |     4   (0)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID    | SI_USERS_T          |     1 |    28 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX UNIQUE SCAN             | USER_NAME_UK        |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  3 |  TABLE ACCESS FULL              | MS_QSM_STATUS       |     1 |    17 |     3   (0)| 00:00:01 |</font>
+|*  4 |  FILTER                         |                     |       |       |            |          |
+|   5 |   NESTED LOOPS                  |                     |     1 |  8972 |     3   (0)| 00:00:01 |
+|   6 |    NESTED LOOPS                 |                     |     1 |  8972 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  7 |     TABLE ACCESS FULL           | MS_QSM_INIT_QUESTNR |     1 |   916 |     2   (0)| 00:00:01 |</font>
+|*  8 |     INDEX RANGE SCAN            | MS_QSM_RESP_DUP_ID3 |     1 |       |     1   (0)| 00:00:01 |
+|   9 |    TABLE ACCESS BY INDEX ROWID  | SI_103929_T         |     1 |  8056 |     1   (0)| 00:00:01 |
+|  10 |   SORT AGGREGATE                |                     |     1 |    26 |            |          |
+|* 11 |    COUNT STOPKEY                |                     |       |       |            |          |
+|* 12 |     FILTER                      |                     |       |       |            |          |
+|  13 |      FIRST ROW                  |                     |     1 |    26 |     1   (0)| 00:00:01 |
+|* 14 |       INDEX RANGE SCAN (MIN/MAX)| SI_103929_N2        |     1 |    26 |     1   (0)| 00:00:01 |
+-------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$2        / SI_USERS_T@SEL$2
+   2 - SEL$2        / SI_USERS_T@SEL$2
+   3 - SEL$3        / MS_QSM_STATUS@SEL$3
+   4 - SEL$04B730F9
+   7 - SEL$04B730F9 / B@SEL$1
+   8 - SEL$04B730F9 / SI_103929_T@SEL$5
+   9 - SEL$04B730F9 / SI_103929_T@SEL$5
+  10 - SEL$A731BD80
+  14 - SEL$A731BD80 / SI_103929_T@SEL$8
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("USER_NAME"=:B1)
+   3 - filter("STATUS_ID"=TO_NUMBER(:B1))
+   4 - filter("INSTANCE_ID"= (SELECT MAX("INSTANCE_ID") FROM METRICSTREAM."SI_103929_T" 
+              "SI_103929_T" WHERE :B1=1 AND ROWNUM=1 AND "PROCESS_INSTANCE_ID"=:B2))
+   7 - filter("B"."SUB_CERTIFICATION_FOR"=:1 AND "B"."QUE_REQUEST_TYPE"='3')
+   8 - access("QUE_REQUEST_ID"="B"."QUE_REQUEST_ID")
+  11 - filter(ROWNUM=1)
+  12 - filter(:B1=1)
+  14 - access("PROCESS_INSTANCE_ID"=:B1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "SI_USERS_T".ROWID[ROWID,10], "LAST_NAME"[VARCHAR2,400], "FIRST_NAME"[VARCHAR2,400]
+   2 - "SI_USERS_T".ROWID[ROWID,10]
+   3 - "STATUS_ID"[NUMBER,22], "STATUS_NAME"[VARCHAR2,160]
+   4 - "RESP_STATUS"[VARCHAR2,4000], "RESPONDED_ON"[DATE,7], "RESPONDED_BY"[VARCHAR2,4000], 
+       "APPLIES_TO_OBJECT"[VARCHAR2,4000], "PROCESS_INSTANCE_ID"[NUMBER,22]
+   5 - (#keys=0) "RESP_STATUS"[VARCHAR2,4000], "RESPONDED_ON"[DATE,7], 
+       "RESPONDED_BY"[VARCHAR2,4000], "APPLIES_TO_OBJECT"[VARCHAR2,4000], 
+       "INSTANCE_REC_NUM"[NUMBER,22], "INSTANCE_ID"[NUMBER,22], "PROCESS_INSTANCE_ID"[NUMBER,22]
+   6 - (#keys=0) "SI_103929_T".ROWID[ROWID,10]
+   7 - "B"."QUE_REQUEST_ID"[VARCHAR2,400]
+   8 - "SI_103929_T".ROWID[ROWID,10]
+   9 - "RESP_STATUS"[VARCHAR2,4000], "RESPONDED_ON"[DATE,7], "RESPONDED_BY"[VARCHAR2,4000], 
+       "APPLIES_TO_OBJECT"[VARCHAR2,4000], "INSTANCE_REC_NUM"[NUMBER,22], "INSTANCE_ID"[NUMBER,22], 
+       "PROCESS_INSTANCE_ID"[NUMBER,22]
+  10 - (#keys=0) MAX("INSTANCE_ID")[22]
+  11 - "INSTANCE_ID"[NUMBER,22]
+  12 - "INSTANCE_ID"[NUMBER,22]
+  13 - "INSTANCE_ID"[NUMBER,22]
+  14 - "INSTANCE_ID"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

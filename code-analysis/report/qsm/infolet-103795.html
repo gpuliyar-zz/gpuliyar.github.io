@@ -1,0 +1,686 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_ISSUE_LNK_RPT (103795)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT ISSUE_ID as ISSUE_ID , 
+ISSUE_SOURCE_REF as ISSUE_SOURCE_REF,
+ ISSUE_TITLE||' (Issue ID:'||substr(ISSUE_ID,7)||')' as ISSUE_TITLE,
+ ISSUE_STATUS as ISSUE_STATUS, 
+ CREATED_ON as CREATED_ON, 
+ ISSUE_DUE_DATE as ISSUE_DUE_DATE, 
+ ms_apps_utilities.get_user_full_name(ISSUE_OWNER) as ISSUE_OWNER,
+ OVERDUE_YN as OVERDUE_YN, 
+OPEN_YN as OPEN_YN  ,
+W.LINKED_QUESTIONS as LINKED_QUESTIONS
+FROM (
+SELECT distinct(X.FINDING_ID) ISSUE_ID, 
+X.FINDING_FK ISSUE_SOURCE_REF, 
+X.ISSUE_TITLE, 
+NVL((select ISSUE_STATUS from MS_QSM_ISM_RPT_V WHERE ISSUE_SOURCE_REF  = FINDING_FK AND ISSUE_TITLE=X.ISSUE_TITLE AND ROWNUM <=1 ),'Open')
+ISSUE_STATUS, 
+X.DD_CREATED_ON CREATED_ON, 
+X.ISSUE_DUE_DATE,
+X.ISSUE_OWNER,
+   Y.OVERDUE_YN OVERDUE_YN,
+   'Y' OPEN_YN   
+   
+   FROM MS_QSM_RESP_ISSUE X,MS_QSM_ISM_RPT_V Y,MS_QSM_RESP_ISSUE_LQS Z 
+   WHERE X.FINDING_FK IN (SELECT DISTINCT QUE_RESPONSE_ID FROM MS_QSM_QUESTNR_RESP_DUP_V WHERE QUE_REQUEST_ID=:1)
+   AND X.FINDING_FK = Y.ISSUE_SOURCE_REF(+)
+    and x.issue_title = y.issue_title(+)
+   AND NVL(Y.Issue_Status,'X') <> 'Closed'
+   and X.FINDING_ID  = Z.FINDING_ID  (+)
+   
+union all
+
+SELECT FINDING_ID, FINDING_FK ISSUE_SOURCE_REF, ISSUE_TITLE, NVL( (select ISSUE_STATUS from MS_QSM_ISM_RPT_V WHERE ISSUE_SOURCE_REF  = FINDING_FK AND ISSUE_TITLE=X.ISSUE_TITLE AND ROWNUM <=1),'Open')  ISSUE_STATUS, DD_CREATED_ON CREATED_ON, ISSUE_DUE_DATE, ISSUE_OWNER,
+   NULL    OVERDUE_YN,NULL OPEN_YN
+   FROM MS_QSM_RESP_ISSUE X
+   WHERE X.FINDING_FK = :2   
+   
+UNION ALL
+
+SELECT a.ISSUE_ID,a.ISSUE_SOURCE_REF,a.ISSUE_TITLE,a.ISSUE_STATUS,a.CREATED_ON,a.ISSUE_DUE_DATE,a.ISSUE_OWNER,a.OVERDUE_YN,a.OPEN_YN 
+FROM MS_QSM_ISM_RPT_V A,MS_QSM_OVERDUE_ISSUE_LOG B
+WHERE A.ISSUE_ID=B.ISSUE_ID
+AND B.SOURCE=:1
+AND B.CLOSURE_STATUS IS NULL
+
+UNION ALL
+
+SELECT a.ISSUE_ID,a.ISSUE_SOURCE_REF,a.ISSUE_TITLE,a.ISSUE_STATUS,a.CREATED_ON,a.ISSUE_DUE_DATE,a.ISSUE_OWNER,NULL as OVERDUE_YN, NULL as OPEN_YN 
+FROM MS_QSM_ISM_RPT_V A,MS_QSM_OVERDUE_ISSUE_LOG B
+WHERE A.ISSUE_ID=B.ISSUE_ID
+AND B.SOURCE_REFERENCE=:2
+)  A,
+ (
+ 
+SELECT (select QST_NAME from MS_QSM_QUESTION z where X.LINKED_QUESTIONS = Z.QST_ID_PK ) AS LINKED_QUESTIONS, 
+        y.finding_id AS finding_id,  x.dd_status_flag, LINKED_QUESTIONS as qst_id
+FROM   MS_QSM_RESP_ISSUE_LQS x,  MS_QSM_RESP_ISSUE y  
+WHERE x.finding_id(+) = Y.FINDING_ID
+and exists (SELECT DISTINCT 1 FROM MS_QSM_QUESTNR_RESP_DUP_V 
+            WHERE (QUE_REQUEST_ID=:1 or QUE_RESPONSE_ID = :2) and resp_status in (6,7,8,9) 
+            and QUE_RESPONSE_ID = y.FINDING_FK) 
+) W
+WHERE a.iSSUE_ID =W.finding_id
+ORDER BY ISSUE_TITLE,qst_id</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet will fetch the issues and will be used in the Issues link report.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 302920864</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                                | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                         |                            |     1 | 12316 |    24  (13)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID             | MS_QSM_QUESTION            |     1 |  2514 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX UNIQUE SCAN                      | MS_QSM_QUESTION_PK         |     1 |       |     1   (0)| 00:00:01 |
+|   3 |  SORT ORDER BY                           |                            |     1 | 12316 |    24  (13)| 00:00:01 |
+|   4 |   NESTED LOOPS SEMI                      |                            |     1 | 12316 |    23   (9)| 00:00:01 |
+|   5 |    NESTED LOOPS OUTER                    |                            |     1 |  6310 |    22  (10)| 00:00:01 |
+|   6 |     NESTED LOOPS                         |                            |     1 |  5596 |    21  (10)| 00:00:01 |
+|   7 |      VIEW                                |                            |     4 | 20768 |    20  (10)| 00:00:01 |
+|   8 |       UNION-ALL                          |                            |       |       |            |          |
+|   9 |        TABLE ACCESS BY INDEX ROWID       | MS_ISM_STATUS              |     1 |    18 |     1   (0)| 00:00:01 |
+|* 10 |         INDEX UNIQUE SCAN                | SYS_C0012081               |     1 |       |     1   (0)| 00:00:01 |
+|* 11 |        COUNT STOPKEY                     |                            |       |       |            |          |
+|  12 |         VIEW                             | MS_ISM_INTG_ISSUE_PUB_V    |     1 |  4086 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  13 |          TEMP TABLE TRANSFORMATION       |                            |       |       |            |          |</font>
+|  14 |           LOAD AS SELECT                 | SYS_TEMP_0FD9D6607_301AF3  |       |       |            |          |
+|  15 |            TABLE ACCESS BY INDEX ROWID   | SI_METRICS_T               |     1 |    34 |     1   (0)| 00:00:01 |
+|* 16 |             INDEX RANGE SCAN             | SI_METRICS_T_N7            |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 17 |           TABLE ACCESS FULL              | MS_ISM_ISSUE               |     1 | 15442 |     2   (0)| 00:00:01 |</font>
+|  18 |        TABLE ACCESS BY INDEX ROWID       | MS_ISM_STATUS              |     1 |    18 |     1   (0)| 00:00:01 |
+|* 19 |         INDEX UNIQUE SCAN                | SYS_C0012081               |     1 |       |     1   (0)| 00:00:01 |
+|  20 |        SORT UNIQUE                       |                            |     1 |  9431 |     8  (25)| 00:00:01 |
+|* 21 |         FILTER                           |                            |       |       |            |          |
+|* 22 |          HASH JOIN OUTER                 |                            |     1 |  9431 |     7  (15)| 00:00:01 |
+|  23 |           NESTED LOOPS                   |                            |     1 |  5342 |     4  (25)| 00:00:01 |
+|  24 |            NESTED LOOPS                  |                            |     1 |  5342 |     4  (25)| 00:00:01 |
+|  25 |             MERGE JOIN OUTER             |                            |     1 |  1338 |     3  (34)| 00:00:01 |
+|  26 |              TABLE ACCESS BY INDEX ROWID | MS_QSM_RESP_ISSUE          |     1 |  1136 |     1   (0)| 00:00:01 |
+|  27 |               INDEX FULL SCAN            | MS_QSM_RESP_ISSUE_PK       |     1 |       |     1   (0)| 00:00:01 |
+|* 28 |              SORT JOIN                   |                            |     1 |   202 |     2  (50)| 00:00:01 |
+|  29 |               INDEX FULL SCAN            | MS_QSM_RESP_ISSUE_LQS_UK   |     1 |   202 |     1   (0)| 00:00:01 |
+|* 30 |             INDEX RANGE SCAN             | MS_QSM_RESP_DUP_ID1        |     1 |       |     1   (0)| 00:00:01 |
+|* 31 |            TABLE ACCESS BY INDEX ROWID   | SI_103929_T                |     1 |  4004 |     1   (0)| 00:00:01 |
+|  32 |           VIEW                           | MS_QSM_ISM_RPT_V           |     1 |  4089 |     3   (0)| 00:00:01 |
+|  33 |            VIEW                          | MS_ISM_INTG_ISSUE_PUB_V    |     1 |  4095 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  34 |             TEMP TABLE TRANSFORMATION    |                            |       |       |            |          |</font>
+|  35 |              LOAD AS SELECT              | SYS_TEMP_0FD9D6606_301AF3  |       |       |            |          |
+|  36 |               TABLE ACCESS BY INDEX ROWID| SI_METRICS_T               |     1 |    34 |     1   (0)| 00:00:01 |
+|* 37 |                INDEX RANGE SCAN          | SI_METRICS_T_N7            |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 38 |              TABLE ACCESS FULL           | MS_ISM_ISSUE               |     1 | 15451 |     2   (0)| 00:00:01 |</font>
+|  39 |        TABLE ACCESS BY INDEX ROWID       | MS_ISM_STATUS              |     1 |    18 |     1   (0)| 00:00:01 |
+|* 40 |         INDEX UNIQUE SCAN                | SYS_C0012081               |     1 |       |     1   (0)| 00:00:01 |
+|* 41 |        COUNT STOPKEY                     |                            |       |       |            |          |
+|  42 |         VIEW                             | MS_ISM_INTG_ISSUE_PUB_V    |     1 |  4086 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  43 |          TEMP TABLE TRANSFORMATION       |                            |       |       |            |          |</font>
+|  44 |           LOAD AS SELECT                 | SYS_TEMP_0FD9D6608_301AF3  |       |       |            |          |
+|  45 |            TABLE ACCESS BY INDEX ROWID   | SI_METRICS_T               |     1 |    34 |     1   (0)| 00:00:01 |
+|* 46 |             INDEX RANGE SCAN             | SI_METRICS_T_N7            |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 47 |           TABLE ACCESS FULL              | MS_ISM_ISSUE               |     1 | 15442 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 48 |        TABLE ACCESS FULL                 | MS_QSM_RESP_ISSUE          |     1 |  1136 |     2   (0)| 00:00:01 |</font>
+|  49 |        TABLE ACCESS BY INDEX ROWID       | MS_ISM_STATUS              |     1 |    18 |     1   (0)| 00:00:01 |
+|* 50 |         INDEX UNIQUE SCAN                | SYS_C0012081               |     1 |       |     1   (0)| 00:00:01 |
+|  51 |        NESTED LOOPS                      |                            |     1 |    84 |     3   (0)| 00:00:01 |
+|  52 |         NESTED LOOPS                     |                            |     1 |    84 |     3   (0)| 00:00:01 |
+|  53 |          NESTED LOOPS                    |                            |     1 |    67 |     2   (0)| 00:00:01 |
+|  54 |           TABLE ACCESS BY INDEX ROWID    | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
+|* 55 |            INDEX RANGE SCAN              | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 56 |           TABLE ACCESS BY INDEX ROWID    | MS_QS_PARAMETER_TYPES      |     1 |    33 |     1   (0)| 00:00:01 |
+|* 57 |            INDEX RANGE SCAN              | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 58 |          INDEX RANGE SCAN                | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
+|  59 |         TABLE ACCESS BY INDEX ROWID      | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
+|  60 |        TABLE ACCESS BY INDEX ROWID       | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
+|* 61 |         INDEX UNIQUE SCAN                | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
+|* 62 |        HASH JOIN                         |                            |     1 |  9704 |     5   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 63 |         TABLE ACCESS FULL                | MS_QSM_OVERDUE_ISSUE_LOG   |     1 |  4516 |     2   (0)| 00:00:01 |</font>
+|  64 |         VIEW                             | MS_ISM_INTG_ISSUE_PUB_V    |     1 |  5188 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  65 |          TEMP TABLE TRANSFORMATION       |                            |       |       |            |          |</font>
+|  66 |           LOAD AS SELECT                 | SYS_TEMP_0FD9D6609_301AF3  |       |       |            |          |
+|  67 |            TABLE ACCESS BY INDEX ROWID   | SI_METRICS_T               |     1 |    34 |     1   (0)| 00:00:01 |
+|* 68 |             INDEX RANGE SCAN             | SI_METRICS_T_N7            |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 69 |           TABLE ACCESS FULL              | MS_ISM_ISSUE               |     1 | 15972 |     2   (0)| 00:00:01 |</font>
+|  70 |        TABLE ACCESS BY INDEX ROWID       | MS_ISM_STATUS              |     1 |    18 |     1   (0)| 00:00:01 |
+|* 71 |         INDEX UNIQUE SCAN                | SYS_C0012081               |     1 |       |     1   (0)| 00:00:01 |
+|  72 |        NESTED LOOPS                      |                            |     1 |    84 |     3   (0)| 00:00:01 |
+|  73 |         NESTED LOOPS                     |                            |     1 |    84 |     3   (0)| 00:00:01 |
+|  74 |          NESTED LOOPS                    |                            |     1 |    67 |     2   (0)| 00:00:01 |
+|  75 |           TABLE ACCESS BY INDEX ROWID    | MS_QS_PARAMETER_NAMES      |     1 |    34 |     1   (0)| 00:00:01 |
+|* 76 |            INDEX RANGE SCAN              | MS_QS_PARAMETER_NAMES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 77 |           TABLE ACCESS BY INDEX ROWID    | MS_QS_PARAMETER_TYPES      |     1 |    33 |     1   (0)| 00:00:01 |
+|* 78 |            INDEX RANGE SCAN              | MS_QS_PARAMETER_TYPES_N1   |     1 |       |     1   (0)| 00:00:01 |
+|* 79 |          INDEX RANGE SCAN                | MS_QS_PARAMETER_VALUES_IDX |     1 |       |     1   (0)| 00:00:01 |
+|  80 |         TABLE ACCESS BY INDEX ROWID      | MS_QS_PARAMETER_VALUES     |     1 |    17 |     1   (0)| 00:00:01 |
+|  81 |        TABLE ACCESS BY INDEX ROWID       | SI_USERS_T                 |     1 |    28 |     1   (0)| 00:00:01 |
+|* 82 |         INDEX UNIQUE SCAN                | USER_NAME_UK               |     1 |       |     1   (0)| 00:00:01 |
+|* 83 |        HASH JOIN                         |                            |     1 |  9192 |     5   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 84 |         TABLE ACCESS FULL                | MS_QSM_OVERDUE_ISSUE_LOG   |     1 |  4004 |     2   (0)| 00:00:01 |</font>
+|  85 |         VIEW                             | MS_ISM_INTG_ISSUE_PUB_V    |     1 |  5188 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  86 |          TEMP TABLE TRANSFORMATION       |                            |       |       |            |          |</font>
+|  87 |           LOAD AS SELECT                 | SYS_TEMP_0FD9D660A_301AF3  |       |       |            |          |
+|  88 |            TABLE ACCESS BY INDEX ROWID   | SI_METRICS_T               |     1 |    34 |     1   (0)| 00:00:01 |
+|* 89 |             INDEX RANGE SCAN             | SI_METRICS_T_N7            |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 90 |           TABLE ACCESS FULL              | MS_ISM_ISSUE               |     1 | 15972 |     2   (0)| 00:00:01 |</font>
+|  91 |      TABLE ACCESS BY INDEX ROWID         | MS_QSM_RESP_ISSUE          |     1 |   404 |     1   (0)| 00:00:01 |
+|* 92 |       INDEX UNIQUE SCAN                  | MS_QSM_RESP_ISSUE_PK       |     1 |       |     1   (0)| 00:00:01 |
+|* 93 |     INDEX FULL SCAN                      | MS_QSM_RESP_ISSUE_LQS_UK   |     1 |   714 |     1   (0)| 00:00:01 |
+|* 94 |    TABLE ACCESS BY INDEX ROWID           | SI_103929_T                |     1 |  6006 |     1   (0)| 00:00:01 |
+|* 95 |     INDEX RANGE SCAN                     | MS_QSM_RESP_DUP_ID1        |     1 |       |     1   (0)| 00:00:01 |
+-----------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$192      / Z@SEL$192
+   2 - SEL$192      / Z@SEL$192
+   3 - SEL$4A039228
+   7 - SET$1        / A@SEL$1
+   8 - SET$1       
+   9 - SEL$983DC36E / MS_ISM_STATUS@SEL$5
+  10 - SEL$983DC36E / MS_ISM_STATUS@SEL$5
+  11 - SEL$07BDC5B4
+  12 - SEL$7        / A@SEL$4
+  13 - SEL$7       
+  14 - SEL$6       
+  15 - SEL$6        / SI_METRICS_T@SEL$6
+  16 - SEL$6        / SI_METRICS_T@SEL$6
+  17 - SEL$7        / A@SEL$7
+  18 - SEL$FDA85813 / MS_ISM_STATUS@SEL$41
+  19 - SEL$FDA85813 / MS_ISM_STATUS@SEL$41
+  20 - SEL$B8FB477F
+  26 - SEL$B8FB477F / X@SEL$2
+  27 - SEL$B8FB477F / X@SEL$2
+  29 - SEL$B8FB477F / Z@SEL$2
+  30 - SEL$B8FB477F / SI_103929_T@SEL$78
+  31 - SEL$B8FB477F / SI_103929_T@SEL$78
+  32 - SEL$40       / Y@SEL$2
+  33 - SEL$43       / A@SEL$40
+  34 - SEL$43      
+  35 - SEL$42      
+  36 - SEL$42       / SI_METRICS_T@SEL$42
+  37 - SEL$42       / SI_METRICS_T@SEL$42
+  38 - SEL$43       / A@SEL$43
+  39 - SEL$804C8D67 / MS_ISM_STATUS@SEL$82
+  40 - SEL$804C8D67 / MS_ISM_STATUS@SEL$82
+  41 - SEL$0E835E3A
+  42 - SEL$84       / A@SEL$81
+  43 - SEL$84      
+  44 - SEL$83      
+  45 - SEL$83       / SI_METRICS_T@SEL$83
+  46 - SEL$83       / SI_METRICS_T@SEL$83
+  47 - SEL$84       / A@SEL$84
+  48 - SEL$79       / X@SEL$79
+  49 - SEL$55EE3D48 / MS_ISM_STATUS@SEL$119
+  50 - SEL$55EE3D48 / MS_ISM_STATUS@SEL$119
+  51 - SEL$DBEB89C9
+  54 - SEL$DBEB89C9 / PNAME@SEL$132
+  55 - SEL$DBEB89C9 / PNAME@SEL$132
+  56 - SEL$DBEB89C9 / PTYPE@SEL$132
+  57 - SEL$DBEB89C9 / PTYPE@SEL$132
+  58 - SEL$DBEB89C9 / PVALUE@SEL$132
+  59 - SEL$DBEB89C9 / PVALUE@SEL$132
+  60 - SEL$53D1266C / USERS@SEL$133
+  61 - SEL$53D1266C / USERS@SEL$133
+  62 - SEL$1FDA56B0
+  63 - SEL$1FDA56B0 / B@SEL$117
+  64 - SEL$121      / A@SEL$118
+  65 - SEL$121     
+  66 - SEL$120     
+  67 - SEL$120      / SI_METRICS_T@SEL$120
+  68 - SEL$120      / SI_METRICS_T@SEL$120
+  69 - SEL$121      / A@SEL$121
+  70 - SEL$FB388BD1 / MS_ISM_STATUS@SEL$156
+  71 - SEL$FB388BD1 / MS_ISM_STATUS@SEL$156
+  72 - SEL$6F05A2BC
+  75 - SEL$6F05A2BC / PNAME@SEL$169
+  76 - SEL$6F05A2BC / PNAME@SEL$169
+  77 - SEL$6F05A2BC / PTYPE@SEL$169
+  78 - SEL$6F05A2BC / PTYPE@SEL$169
+  79 - SEL$6F05A2BC / PVALUE@SEL$169
+  80 - SEL$6F05A2BC / PVALUE@SEL$169
+  81 - SEL$D100665C / USERS@SEL$170
+  82 - SEL$D100665C / USERS@SEL$170
+  83 - SEL$F0FAD245
+  84 - SEL$F0FAD245 / B@SEL$154
+  85 - SEL$158      / A@SEL$155
+  86 - SEL$158     
+  87 - SEL$157     
+  88 - SEL$157      / SI_METRICS_T@SEL$157
+  89 - SEL$157      / SI_METRICS_T@SEL$157
+  90 - SEL$158      / A@SEL$158
+  91 - SEL$4A039228 / Y@SEL$191
+  92 - SEL$4A039228 / Y@SEL$191
+  93 - SEL$4A039228 / X@SEL$191
+  94 - SEL$4A039228 / SI_103929_T@SEL$195
+  95 - SEL$4A039228 / SI_103929_T@SEL$195
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("Z"."QST_ID_PK"=:B1)
+  10 - access("STATUS_ID"=TO_NUMBER(:B1))
+  11 - filter(ROWNUM<=1)
+  16 - access("METRIC_NAME"='MS_ISM_ISSUE')
+  17 - filter("A"."ISSUE_SOURCE_REF"=:B1 AND "A"."ISSUE_TITLE"=:B2 AND NVL("ISSUE_SOURCE_TYPE",'0')<>'0')
+  19 - access("STATUS_ID"=TO_NUMBER(:B1))
+  21 - filter(NVL("Y"."ISSUE_STATUS",'X')<>'Closed')
+  22 - access("X"."FINDING_FK"="Y"."ISSUE_SOURCE_REF"(+) AND "X"."ISSUE_TITLE"="Y"."ISSUE_TITLE"(+))
+  28 - access("X"."FINDING_ID"="Z"."FINDING_ID"(+))
+       filter("X"."FINDING_ID"="Z"."FINDING_ID"(+))
+  30 - access("X"."FINDING_FK"="QUE_RESPONSE_ID")
+  31 - filter("QUE_REQUEST_ID"=:1)
+  37 - access("METRIC_NAME"='MS_ISM_ISSUE')
+  38 - filter(NVL("ISSUE_SOURCE_TYPE",'0')<>'0')
+  40 - access("STATUS_ID"=TO_NUMBER(:B1))
+  41 - filter(ROWNUM<=1)
+  46 - access("METRIC_NAME"='MS_ISM_ISSUE')
+  47 - filter("A"."ISSUE_SOURCE_REF"=:B1 AND "A"."ISSUE_TITLE"=:B2 AND NVL("ISSUE_SOURCE_TYPE",'0')<>'0')
+  48 - filter("X"."FINDING_FK"=:2)
+  50 - access("STATUS_ID"=TO_NUMBER(:B1))
+  55 - access("PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')
+  56 - filter("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID")
+  57 - access("PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format')
+  58 - access("PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND 
+              "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PVALUE"."ORG_ENTITY_ID"=1)
+  61 - access("USERS"."USER_NAME"=:B1)
+  62 - access("A"."ISSUE_ID"="B"."ISSUE_ID")
+  63 - filter("B"."CLOSURE_STATUS" IS NULL AND "B"."SOURCE"=:1)
+  68 - access("METRIC_NAME"='MS_ISM_ISSUE')
+  69 - filter(NVL("ISSUE_SOURCE_TYPE",'0')<>'0')
+  71 - access("STATUS_ID"=TO_NUMBER(:B1))
+  76 - access("PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')
+  77 - filter("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID")
+  78 - access("PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format')
+  79 - access("PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND 
+              "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PVALUE"."ORG_ENTITY_ID"=1)
+  82 - access("USERS"."USER_NAME"=:B1)
+  83 - access("A"."ISSUE_ID"="B"."ISSUE_ID")
+  84 - filter("B"."SOURCE_REFERENCE"=:2)
+  89 - access("METRIC_NAME"='MS_ISM_ISSUE')
+  90 - filter(NVL("ISSUE_SOURCE_TYPE",'0')<>'0')
+  92 - access("A"."ISSUE_ID"="Y"."FINDING_ID")
+  93 - access("X"."FINDING_ID"(+)="Y"."FINDING_ID")
+       filter("X"."FINDING_ID"(+)="Y"."FINDING_ID")
+  94 - filter(("QUE_REQUEST_ID"=:1 OR "QUE_RESPONSE_ID"=:2) AND (TO_NUMBER("RESP_STATUS")=6 OR 
+              TO_NUMBER("RESP_STATUS")=7 OR TO_NUMBER("RESP_STATUS")=8 OR TO_NUMBER("RESP_STATUS")=9))
+  95 - access("QUE_RESPONSE_ID"="Y"."FINDING_FK")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "Z".ROWID[ROWID,10], "QST_NAME"[VARCHAR2,4000]
+   2 - "Z".ROWID[ROWID,10]
+   3 - (#keys=2) "ISSUE_TITLE"||' (Issue ID:'||SUBSTR("ISSUE_ID",7)||')'[4000], 
+       "LINKED_QUESTIONS"[VARCHAR2,1020], "ISSUE_ID"[VARCHAR2,1020], "ISSUE_SOURCE_REF"[VARCHAR2,4000],  (SELECT 
+       "QST_NAME" FROM "MS_QSM_QUESTION" "Z" WHERE "Z"."QST_ID_PK"=:B1)[4000], "ISSUE_STATUS"[VARCHAR2,160], 
+       "CREATED_ON"[DATE,7], "ISSUE_DUE_DATE"[DATE,7], "MS_APPS_UTILITIES"."GET_USER_FULL_NAME"("ISSUE_OWNER")[4000], 
+       "OVERDUE_YN"[VARCHAR2,1], "OPEN_YN"[VARCHAR2,1]
+   4 - (#keys=0) "A"."ISSUE_ID"[VARCHAR2,1020], "ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_TITLE"[VARCHAR2,4000], "ISSUE_STATUS"[VARCHAR2,160], "CREATED_ON"[DATE,7], "ISSUE_DUE_DATE"[DATE,7], 
+       "ISSUE_OWNER"[VARCHAR2,1140], "OVERDUE_YN"[VARCHAR2,1], "OPEN_YN"[VARCHAR2,1], 
+       "X"."LINKED_QUESTIONS"[VARCHAR2,1020]
+   5 - (#keys=0) "A"."ISSUE_ID"[VARCHAR2,1020], "ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_TITLE"[VARCHAR2,4000], "ISSUE_STATUS"[VARCHAR2,160], "CREATED_ON"[DATE,7], "ISSUE_DUE_DATE"[DATE,7], 
+       "ISSUE_OWNER"[VARCHAR2,1140], "OVERDUE_YN"[VARCHAR2,1], "OPEN_YN"[VARCHAR2,1], "Y"."FINDING_FK"[VARCHAR2,400], 
+       "X"."LINKED_QUESTIONS"[VARCHAR2,1020]
+   6 - (#keys=0) "A"."ISSUE_ID"[VARCHAR2,1020], "ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_TITLE"[VARCHAR2,4000], "ISSUE_STATUS"[VARCHAR2,160], "CREATED_ON"[DATE,7], "ISSUE_DUE_DATE"[DATE,7], 
+       "ISSUE_OWNER"[VARCHAR2,1140], "OVERDUE_YN"[VARCHAR2,1], "OPEN_YN"[VARCHAR2,1], "Y"."FINDING_ID"[VARCHAR2,400], 
+       "Y"."FINDING_FK"[VARCHAR2,400]
+   7 - "A"."ISSUE_ID"[VARCHAR2,1020], "ISSUE_SOURCE_REF"[VARCHAR2,4000], "ISSUE_TITLE"[VARCHAR2,4000], 
+       "ISSUE_STATUS"[VARCHAR2,160], "CREATED_ON"[DATE,7], "ISSUE_DUE_DATE"[DATE,7], "ISSUE_OWNER"[VARCHAR2,1140], 
+       "OVERDUE_YN"[VARCHAR2,1], "OPEN_YN"[VARCHAR2,1]
+   8 - STRDEF[1020], STRDEF[4000], STRDEF[4000], STRDEF[160], STRDEF[7], STRDEF[7], STRDEF[1140], STRDEF[1], 
+       STRDEF[1]
+   9 - "MS_ISM_STATUS".ROWID[ROWID,10], "STATUS_ID"[NUMBER,22], "STATUS_NAME"[VARCHAR2,160]
+  10 - "MS_ISM_STATUS".ROWID[ROWID,10], "STATUS_ID"[NUMBER,22]
+  11 - "A"."ISSUE_STATUS"[VARCHAR2,160], ROWNUM[4]
+  12 - "A"."ISSUE_STATUS"[VARCHAR2,160]
+  13 - "A"."DD_MODIFIED_BY"[VARCHAR2,400], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."FINAL_ISS_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "A"."ACTION_PLAN_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."ISSUE_APPROVER"[VARCHAR2,4000], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."DD_CREATED_BY"[VARCHAR2,400]
+  14 - SYSDEF[4], SYSDEF[0], SYSDEF[1], SYSDEF[96], SYSDEF[0]
+  15 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22], "METRIC_NAME"[VARCHAR2,400]
+  16 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_NAME"[VARCHAR2,400]
+  17 - "A"."DD_MODIFIED_BY"[VARCHAR2,400], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."FINAL_ISS_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "A"."ACTION_PLAN_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."ISSUE_APPROVER"[VARCHAR2,4000], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."DD_CREATED_BY"[VARCHAR2,400]
+  18 - "MS_ISM_STATUS".ROWID[ROWID,10], "STATUS_ID"[NUMBER,22], "STATUS_NAME"[VARCHAR2,160]
+  19 - "MS_ISM_STATUS".ROWID[ROWID,10], "STATUS_ID"[NUMBER,22]
+  20 - (#keys=9) "X"."FINDING_ID"[VARCHAR2,400], "X"."FINDING_FK"[VARCHAR2,400], 
+       "X"."ISSUE_TITLE"[VARCHAR2,1020], NVL( (SELECT "A"."ISSUE_STATUS" FROM  (SELECT "A"."ISSUE_TITLE" 
+       "ISSUE_TITLE", (SELECT "STATUS_NAME" FROM METRICSTREAM."MS_ISM_STATUS" "MS_ISM_STATUS" WHERE 
+       "STATUS_ID"=TO_NUMBER(:B1)) "ISSUE_STATUS","A"."ISSUE_SOURCE_REF" "ISSUE_SOURCE_REF", (SELECT CASE  WHEN  
+       (SELECT "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS_QS_PARAMETER_NAMES" 
+       "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE 
+       "PVALUE"."ORG_ENTITY_ID"=1 AND "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND 
+       "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name 
+       Display Format' AND "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND 
+       "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='2' THEN "USERS"."LAST_NAME"||' '||"USERS"."FIRST_NAME" WHEN  
+       (SELECT "PVALUE"."PARAMETER_VALUE" FROM METRICSTREAM."MS_QS_PARAMETER_NAMES" 
+       "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE 
+       "PVALUE"."ORG_ENTITY_ID"=1 AND "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND 
+       "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name 
+       Display Format' AND "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND 
+       "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='3' THEN "USERS"."LAST_NAME"||','||' '||"USERS"."FIRST_NAME"||' 
+       '||'('||"USERS"."USER_NAME"||')' WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM 
+       METRICSTREAM."MS_QS_PARAMETER_NAMES" "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" 
+       "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE "PVALUE"."ORG_ENTITY_ID"=1 AND 
+       "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" 
+       AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format' AND 
+       "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='1' 
+       THEN "USERS"."FIRST_NAME"||' '||"USERS"."LAST_NAME" WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM 
+       METRICSTREAM."MS_QS_PARAMETER_NAMES" "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" 
+       "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE "PVALUE"."ORG_ENTITY_ID"=1 AND 
+       "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" 
+       AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format' AND 
+       "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='4' 
+       THEN "USERS"."FIRST_NAME"||','||' '||"USERS"."LAST_NAME"||' '||'('||"USERS"."USER_NAME"||')' ELSE 
+       "USERS"."LAST_NAME"||' '||"USERS"."FIRST_NAME" END  FROM METRICSTREAM."SI_USERS_T" "USERS" WHERE 
+       "USERS"."USER_NAME"=:B2) "CREATED_BY_FULL_NAME", (SELECT CASE  WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM 
+       METRICSTREAM."MS_QS_PARAMETER_NAMES" "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" 
+       "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE "PVALUE"."ORG_ENTITY_ID"=1 AND 
+       "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" 
+       AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format' AND 
+       "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='2' 
+       THEN "USERS"."LAST_NAME"||' '||"USERS"."FIRST_NAME" WHEN  (SELECT "PVALUE"."PARAMETER_VALUE" FROM 
+       METRICSTREAM."MS_QS_PARAMETER_NAMES" "PNAME",METRICSTREAM."MS_QS_PARAMETER_TYPES" 
+       "PTYPE",METRICSTREAM."MS_QS_PARAMETER_VALUES" "PVALUE" WHERE "PVALUE"."ORG_ENTITY_ID"=1 AND 
+       "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" 
+       AND "PTYPE"."PARAMETER_TYPE"='MS Apps User Name Display Format' AND 
+       "PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND "PNAME"."PARAMETER_NAME"='DISPLAY_FORMAT')='3' 
+       THEN "USERS"."LAST_NAME"||','||' '||"USERS"."FIRST_NAME"||' '||'('||"USERS"."USER_NAME"||')' WHEN  (SELECT "P
+  21 - "X"."FINDING_FK"[VARCHAR2,400], "X"."ISSUE_TITLE"[VARCHAR2,1020], "X"."FINDING_ID"[VARCHAR2,400], 
+       "X"."ISSUE_DUE_DATE"[DATE,7], "X"."DD_CREATED_ON"[DATE,7], "X"."ISSUE_OWNER"[VARCHAR2,400], 
+       "Y"."OVERDUE_YN"[CHARACTER,1]
+  22 - (#keys=2) "X"."FINDING_FK"[VARCHAR2,400], "X"."ISSUE_TITLE"[VARCHAR2,1020], 
+       "X"."FINDING_ID"[VARCHAR2,400], "X"."ISSUE_DUE_DATE"[DATE,7], "X"."DD_CREATED_ON"[DATE,7], 
+       "X"."ISSUE_OWNER"[VARCHAR2,400], "Y"."OVERDUE_YN"[CHARACTER,1], "Y"."ISSUE_STATUS"[VARCHAR2,160]
+  23 - (#keys=0) "X"."FINDING_ID"[VARCHAR2,400], "X"."ISSUE_DUE_DATE"[DATE,7], "X"."DD_CREATED_ON"[DATE,7], 
+       "X"."ISSUE_OWNER"[VARCHAR2,400], "X"."FINDING_FK"[VARCHAR2,400], "X"."ISSUE_TITLE"[VARCHAR2,1020]
+  24 - (#keys=0) "X"."FINDING_ID"[VARCHAR2,400], "X"."ISSUE_DUE_DATE"[DATE,7], "X"."DD_CREATED_ON"[DATE,7], 
+       "X"."ISSUE_OWNER"[VARCHAR2,400], "X"."FINDING_FK"[VARCHAR2,400], "X"."ISSUE_TITLE"[VARCHAR2,1020], 
+       "SI_103929_T".ROWID[ROWID,10]
+  25 - (#keys=0) "X"."FINDING_ID"[VARCHAR2,400], "X"."ISSUE_DUE_DATE"[DATE,7], "X"."DD_CREATED_ON"[DATE,7], 
+       "X"."ISSUE_OWNER"[VARCHAR2,400], "X"."FINDING_FK"[VARCHAR2,400], "X"."ISSUE_TITLE"[VARCHAR2,1020]
+  26 - "X"."ISSUE_DUE_DATE"[DATE,7], "X"."FINDING_ID"[VARCHAR2,400], "X"."ISSUE_OWNER"[VARCHAR2,400], 
+       "X"."FINDING_FK"[VARCHAR2,400], "X"."ISSUE_TITLE"[VARCHAR2,1020], "X"."DD_CREATED_ON"[DATE,7]
+  27 - "X".ROWID[ROWID,10], "X"."FINDING_ID"[VARCHAR2,400]
+  28 - (#keys=1) "Z"."FINDING_ID"[VARCHAR2,400]
+  29 - "Z"."FINDING_ID"[VARCHAR2,400]
+  30 - "SI_103929_T".ROWID[ROWID,10]
+  32 - "Y"."ISSUE_SOURCE_REF"[VARCHAR2,4000], "Y"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "Y"."ISSUE_STATUS"[VARCHAR2,160], "Y"."OVERDUE_YN"[CHARACTER,1]
+  33 - "A"."ISSUE_TITLE"[VARCHAR2,4000], "A"."ISSUE_STATUS"[VARCHAR2,160], "A"."ISSUE_DUE_DATE"[DATE,7], 
+       "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000]
+  34 - "A"."DD_MODIFIED_BY"[VARCHAR2,400], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."FINAL_ISS_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "A"."ISSUE_DUE_DATE"[DATE,7], "A"."ACTION_PLAN_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."ISSUE_APPROVER"[VARCHAR2,4000], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."DD_CREATED_BY"[VARCHAR2,400]
+  35 - SYSDEF[4], SYSDEF[0], SYSDEF[1], SYSDEF[96], SYSDEF[0]
+  36 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22], "METRIC_NAME"[VARCHAR2,400]
+  37 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_NAME"[VARCHAR2,400]
+  38 - "A"."DD_MODIFIED_BY"[VARCHAR2,400], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."FINAL_ISS_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "A"."ISSUE_DUE_DATE"[DATE,7], "A"."ACTION_PLAN_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."ISSUE_APPROVER"[VARCHAR2,4000], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."DD_CREATED_BY"[VARCHAR2,400]
+  39 - "MS_ISM_STATUS".ROWID[ROWID,10], "STATUS_ID"[NUMBER,22], "STATUS_NAME"[VARCHAR2,160]
+  40 - "MS_ISM_STATUS".ROWID[ROWID,10], "STATUS_ID"[NUMBER,22]
+  41 - "A"."ISSUE_STATUS"[VARCHAR2,160], ROWNUM[4]
+  42 - "A"."ISSUE_STATUS"[VARCHAR2,160]
+  43 - "A"."DD_MODIFIED_BY"[VARCHAR2,400], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."FINAL_ISS_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "A"."ACTION_PLAN_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."ISSUE_APPROVER"[VARCHAR2,4000], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."DD_CREATED_BY"[VARCHAR2,400]
+  44 - SYSDEF[4], SYSDEF[0], SYSDEF[1], SYSDEF[96], SYSDEF[0]
+  45 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22], "METRIC_NAME"[VARCHAR2,400]
+  46 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_NAME"[VARCHAR2,400]
+  47 - "A"."DD_MODIFIED_BY"[VARCHAR2,400], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."FINAL_ISS_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "A"."ACTION_PLAN_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."ISSUE_APPROVER"[VARCHAR2,4000], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."DD_CREATED_BY"[VARCHAR2,400]
+  48 - "ISSUE_DUE_DATE"[DATE,7], "FINDING_ID"[VARCHAR2,400], "ISSUE_OWNER"[VARCHAR2,400], 
+       "X"."FINDING_FK"[VARCHAR2,400], "ISSUE_TITLE"[VARCHAR2,1020], "DD_CREATED_ON"[DATE,7]
+  49 - "MS_ISM_STATUS".ROWID[ROWID,10], "STATUS_ID"[NUMBER,22], "STATUS_NAME"[VARCHAR2,160]
+  50 - "MS_ISM_STATUS".ROWID[ROWID,10], "STATUS_ID"[NUMBER,22]
+  51 - (#keys=0) "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], "PNAME"."PARAMETER_NAME"[VARCHAR2,400], "PTYPE".ROWID[ROWID,10], 
+       "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE"[VARCHAR2,400], "PVALUE".ROWID[ROWID,10], 
+       "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+  52 - (#keys=0) "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], "PNAME"."PARAMETER_NAME"[VARCHAR2,400], "PTYPE".ROWID[ROWID,10], 
+       "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE"[VARCHAR2,400], "PVALUE".ROWID[ROWID,10], 
+       "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22]
+  53 - (#keys=0) "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], "PNAME"."PARAMETER_NAME"[VARCHAR2,400], "PTYPE".ROWID[ROWID,10], 
+       "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE"[VARCHAR2,400]
+  54 - "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_NAME"[VARCHAR2,400]
+  55 - "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_NAME"[VARCHAR2,400]
+  56 - "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE"[VARCHAR2,400]
+  57 - "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE"[VARCHAR2,400]
+  58 - "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22]
+  59 - "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+  60 - "USERS".ROWID[ROWID,10], "USERS"."LAST_NAME"[VARCHAR2,400], "USERS"."FIRST_NAME"[VARCHAR2,400], 
+       "USERS"."USER_NAME"[VARCHAR2,320]
+  61 - "USERS".ROWID[ROWID,10], "USERS"."USER_NAME"[VARCHAR2,320]
+  62 - (#keys=1) "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ISSUE_OWNER_FULL_NAME"[VARCHAR2,1140], 
+       "A"."ISSUE_TITLE"[VARCHAR2,4000], "A"."ISSUE_STATUS"[VARCHAR2,160], "A"."ISSUE_DUE_DATE"[DATE,7], 
+       "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], "A"."CREATED_ON"[DATE,7]
+  63 - "B"."ISSUE_ID"[VARCHAR2,4000]
+  64 - "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ISSUE_TITLE"[VARCHAR2,4000], "A"."ISSUE_STATUS"[VARCHAR2,160], 
+       "A"."ISSUE_DUE_DATE"[DATE,7], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], "A"."CREATED_ON"[DATE,7], 
+       "A"."ISSUE_OWNER_FULL_NAME"[VARCHAR2,1140]
+  65 - "A"."DD_MODIFIED_BY"[VARCHAR2,400], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."FINAL_ISS_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "A"."ISSUE_DUE_DATE"[DATE,7], "A"."ACTION_PLAN_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."ISSUE_APPROVER"[VARCHAR2,4000], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."DD_CREATED_ON"[DATE,7], 
+       "A"."DD_CREATED_BY"[VARCHAR2,400]
+  66 - SYSDEF[4], SYSDEF[0], SYSDEF[1], SYSDEF[96], SYSDEF[0]
+  67 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22], "METRIC_NAME"[VARCHAR2,400]
+  68 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_NAME"[VARCHAR2,400]
+  69 - "A"."DD_MODIFIED_BY"[VARCHAR2,400], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."FINAL_ISS_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "A"."ISSUE_DUE_DATE"[DATE,7], "A"."ACTION_PLAN_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."ISSUE_APPROVER"[VARCHAR2,4000], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."DD_CREATED_ON"[DATE,7], 
+       "A"."DD_CREATED_BY"[VARCHAR2,400]
+  70 - "MS_ISM_STATUS".ROWID[ROWID,10], "STATUS_ID"[NUMBER,22], "STATUS_NAME"[VARCHAR2,160]
+  71 - "MS_ISM_STATUS".ROWID[ROWID,10], "STATUS_ID"[NUMBER,22]
+  72 - (#keys=0) "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], "PNAME"."PARAMETER_NAME"[VARCHAR2,400], "PTYPE".ROWID[ROWID,10], 
+       "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE"[VARCHAR2,400], "PVALUE".ROWID[ROWID,10], 
+       "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+  73 - (#keys=0) "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], "PNAME"."PARAMETER_NAME"[VARCHAR2,400], "PTYPE".ROWID[ROWID,10], 
+       "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE"[VARCHAR2,400], "PVALUE".ROWID[ROWID,10], 
+       "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22]
+  74 - (#keys=0) "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], "PNAME"."PARAMETER_NAME"[VARCHAR2,400], "PTYPE".ROWID[ROWID,10], 
+       "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE"[VARCHAR2,400]
+  75 - "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_NAME"[VARCHAR2,400]
+  76 - "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_NAME"[VARCHAR2,400]
+  77 - "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE"[VARCHAR2,400]
+  78 - "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE"[VARCHAR2,400]
+  79 - "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22]
+  80 - "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_VALUE"[VARCHAR2,400]
+  81 - "USERS".ROWID[ROWID,10], "USERS"."LAST_NAME"[VARCHAR2,400], "USERS"."FIRST_NAME"[VARCHAR2,400], 
+       "USERS"."USER_NAME"[VARCHAR2,320]
+  82 - "USERS".ROWID[ROWID,10], "USERS"."USER_NAME"[VARCHAR2,320]
+  83 - (#keys=1) "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ISSUE_OWNER_FULL_NAME"[VARCHAR2,1140], 
+       "A"."ISSUE_TITLE"[VARCHAR2,4000], "A"."ISSUE_STATUS"[VARCHAR2,160], "A"."ISSUE_DUE_DATE"[DATE,7], 
+       "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], "A"."CREATED_ON"[DATE,7]
+  84 - "B"."ISSUE_ID"[VARCHAR2,4000]
+  85 - "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ISSUE_TITLE"[VARCHAR2,4000], "A"."ISSUE_STATUS"[VARCHAR2,160], 
+       "A"."ISSUE_DUE_DATE"[DATE,7], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], "A"."CREATED_ON"[DATE,7], 
+       "A"."ISSUE_OWNER_FULL_NAME"[VARCHAR2,1140]
+  86 - "A"."DD_MODIFIED_BY"[VARCHAR2,400], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."FINAL_ISS_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "A"."ISSUE_DUE_DATE"[DATE,7], "A"."ACTION_PLAN_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."ISSUE_APPROVER"[VARCHAR2,4000], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."DD_CREATED_ON"[DATE,7], 
+       "A"."DD_CREATED_BY"[VARCHAR2,400]
+  87 - SYSDEF[4], SYSDEF[0], SYSDEF[1], SYSDEF[96], SYSDEF[0]
+  88 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22], "METRIC_NAME"[VARCHAR2,400]
+  89 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_NAME"[VARCHAR2,400]
+  90 - "A"."DD_MODIFIED_BY"[VARCHAR2,400], "A"."ISSUE_SOURCE_REF"[VARCHAR2,4000], 
+       "ISSUE_SOURCE_TYPE"[VARCHAR2,1020], "A"."FINAL_ISS_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_STATUS"[VARCHAR2,1020], "A"."ISSUE_DUE_DATE"[DATE,7], "A"."ACTION_PLAN_APPROVER"[VARCHAR2,4000], 
+       "A"."ISSUE_DELEGATEE"[VARCHAR2,4000], "A"."ISSUE_APPROVER"[VARCHAR2,4000], "A"."ISSUE_TITLE"[VARCHAR2,4000], 
+       "A"."ISSUE_ID"[VARCHAR2,1020], "A"."ISSUE_OWNER"[VARCHAR2,4000], "A"."DD_CREATED_ON"[DATE,7], 
+       "A"."DD_CREATED_BY"[VARCHAR2,400]
+  91 - "Y"."FINDING_ID"[VARCHAR2,400], "Y"."FINDING_FK"[VARCHAR2,400]
+  92 - "Y".ROWID[ROWID,10], "Y"."FINDING_ID"[VARCHAR2,400]
+  93 - "X"."LINKED_QUESTIONS"[VARCHAR2,1020]
+  95 - "SI_103929_T".ROWID[ROWID,10], "QUE_RESPONSE_ID"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_Download_Response_Rpt (103735)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>Select Checkbox, NAME_LINK, QUE_REQUEST_NAME, RESP_STATUS, RESP_STATUS_DISP,  RESPONSE_APPROVER_DISP, DUE_DATE , QUE_REQUEST_TYPE_DISP,Response_id
+from (
+select  '<input type=checkbox id="' || QUE_RESPONSE_ID || '" value="' || QUE_RESPONSE_ID || '"onClick=checkboxChange("' || QUE_RESPONSE_ID || '")></input>' AS Checkbox, 
+       A.Que_Request_Name AS NAME_LINK ,
+       A.que_request_name, 
+       A.resp_status, 
+       MS_QSM_RPT_UTIL.GET_RESP_STATUS_DISPLAY_VALUE(:1, A.RESP_STATUS) AS  RESP_STATUS_DISP,
+ a.due_date,
+       A.QUE_REQUEST_TYPE,
+       MS_QSM_RPT_UTIL.GET_DISPLAY_VALUE( :1, 'MS_QSM_Init_Questionnaire_Type' , A.QUE_REQUEST_TYPE, A.DD_OBJECT_TYPE ) AS QUE_REQUEST_TYPE_DISP,
+       A.response_approver,
+       A.Assignee,
+       (SELECT MS_JOIN_FOR_DISPLAY(MS_APPS_UTILITIES.GET_USER_FULL_NAME(COLUMN_VALUE)) FROM TABLE (ms_grc_str_common_utilities.Split_String_Stored (A.response_approver))) AS response_approver_disp, A.Que_response_Id as Response_id
+from ms_qsm_questnr_resp_rpt_v a
+WHERE (:1 IN (SELECT COLUMN_VALUE FROM TABLE (ms_grc_str_common_utilities.Split_String_Stored(A.Respondent))) OR :1 IS NULL) and trunc(a.due_date) >= trunc(sysdate) and a.RESP_STATUS ='4' and exists(select 1 from MS_QSM_INIT_QUESTNR X where QUE_REQUEST_ID = a.QUE_REQUEST_ID and X.EXCEL_BASED='yes')
+AND exists (select 1 from ms_Qsm_excel_survey_status z where z.que_response_id= a.que_response_id and z.upload_status IN ('P','F')) 
+) order by to_number(Response_id) desc</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet is used fetch the details of the offline surveys in the report Ms_Qsm_Download_responses</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 342335960</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                           | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                    |                            |     1 | 11385 |    14  (22)| 00:00:01 |
+|   1 |  SORT AGGREGATE                     |                            |     1 |     2 |            |          |
+<font style="background-color: lightblue; color: red">|   2 |   COLLECTION ITERATOR PICKLER FETCH | SPLIT_STRING_STORED        |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|   3 |  SORT ORDER BY                      |                            |     1 | 11385 |    14  (22)| 00:00:01 |
+|*  4 |   FILTER                            |                            |       |       |            |          |
+|   5 |    NESTED LOOPS SEMI                |                            |     1 | 11385 |    13  (16)| 00:00:01 |
+|   6 |     NESTED LOOPS                    |                            |     1 | 11161 |    12  (17)| 00:00:01 |
+|*  7 |      HASH JOIN                      |                            |     1 | 10757 |    11  (19)| 00:00:01 |
+|   8 |       NESTED LOOPS                  |                            |     1 |   534 |     5   (0)| 00:00:01 |
+|   9 |        VIEW                         |                            |     1 |       |     3   (0)| 00:00:01 |
+|  10 |         SORT AGGREGATE              |                            |     1 |    17 |            |          |
+<font style="background-color: lightblue; color: red">|* 11 |          TABLE ACCESS FULL          | MS_APPS_EVENTS             |     1 |    17 |     3   (0)| 00:00:01 |</font>
+|  12 |        SORT UNIQUE                  |                            |     1 |   534 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 13 |         TABLE ACCESS FULL           | MS_QSM_EXCEL_SURVEY_STATUS |     1 |   534 |     2   (0)| 00:00:01 |</font>
+|  14 |       VIEW                          | MS_QSM_RESP_DETAILS_V      |     2 | 20446 |     6  (34)| 00:00:01 |
+|  15 |        SORT UNIQUE                  |                            |     2 |   118K|     6  (34)| 00:00:01 |
+|  16 |         UNION-ALL                   |                            |       |       |            |          |
+<font style="background-color: lightblue; color: red">|* 17 |          TABLE ACCESS FULL          | MS_QSM_RESP_CONSD_DETAILS  |     1 | 30348 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 18 |          TABLE ACCESS FULL          | MS_QSM_RESP_FINAL_DETAILS  |     1 | 30348 |     2   (0)| 00:00:01 |</font>
+|  19 |      TABLE ACCESS BY INDEX ROWID    | MS_QSM_INIT_QUESTNR        |     1 |   404 |     1   (0)| 00:00:01 |
+|* 20 |       INDEX UNIQUE SCAN             | MS_QSM_INIT_QUESTNR_PK     |     1 |       |     1   (0)| 00:00:01 |
+|* 21 |     TABLE ACCESS BY INDEX ROWID     | MS_QSM_INIT_QUESTNR        |     1 |   224 |     1   (0)| 00:00:01 |
+|* 22 |      INDEX UNIQUE SCAN              | MS_QSM_INIT_QUESTNR_PK     |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 23 |    COLLECTION ITERATOR PICKLER FETCH| SPLIT_STRING_STORED        |     1 |     2 |     2   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$07BDC5B4
+   2 - SEL$07BDC5B4 / KOKBF$1@SEL$4
+   3 - SEL$41E70AB0
+   9 - SEL$13       / I@SEL$8
+  10 - SEL$13      
+  11 - SEL$13       / MS_APPS_EVENTS@SEL$13
+  13 - SEL$41E70AB0 / Z@SEL$17
+  14 - SET$1        / RV@SEL$8
+  15 - SET$1       
+  17 - SEL$11       / MS_QSM_RESP_CONSD_DETAILS@SEL$11
+  18 - SEL$12       / MS_QSM_RESP_FINAL_DETAILS@SEL$12
+  19 - SEL$41E70AB0 / IQ@SEL$8
+  20 - SEL$41E70AB0 / IQ@SEL$8
+  21 - SEL$41E70AB0 / X@SEL$16
+  22 - SEL$41E70AB0 / X@SEL$16
+  23 - SEL$1FB6C052 / KOKBF$2@SEL$15
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   4 - filter( EXISTS (SELECT 0 FROM TABLE() "KOKBF$2" WHERE VALUE(KOKBF$)=:1) OR :1 IS NULL)
+   7 - access("Z"."QUE_RESPONSE_ID"="RV"."QUE_RESPONSE_ID")
+  11 - filter("EVENT_NAME"='TRIGGER_ISSUE')
+  13 - filter("Z"."UPLOAD_STATUS"='F' OR "Z"."UPLOAD_STATUS"='P')
+  17 - filter("RESP_STATUS"='4' AND TRUNC(INTERNAL_FUNCTION("DUE_DATE"))>=TRUNC(SYSDATE@!))
+  18 - filter("RESP_STATUS"='4' AND TRUNC(INTERNAL_FUNCTION("DUE_DATE"))>=TRUNC(SYSDATE@!))
+  20 - access("RV"."QUE_REQUEST_ID"="IQ"."QUE_REQUEST_ID")
+  21 - filter("X"."EXCEL_BASED"='yes')
+  22 - access("QUE_REQUEST_ID"="RV"."QUE_REQUEST_ID")
+  23 - filter(VALUE(KOKBF$)=:1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=0) "MS_JOIN_FOR_DISPLAY"("MS_APPS_UTILITIES"."GET_USER_FULL_NAME"(VALUE(KOKBF$)))[4000]
+   2 - VALUE(A0)[8000]
+   3 - (#keys=1) TO_NUMBER("RV"."QUE_RESPONSE_ID")[22], '<input type=checkbox 
+       id="'||"RV"."QUE_RESPONSE_ID"||'" value="'||"RV"."QUE_RESPONSE_ID"||'"onClick=checkboxChange("'||"RV"."QUE
+       _RESPONSE_ID"||'")></input>'[670], "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], 
+       "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], "RV"."RESP_STATUS"[VARCHAR2,4000], 
+       "MS_QSM_RPT_UTIL"."GET_RESP_STATUS_DISPLAY_VALUE"(:1,"RV"."RESP_STATUS")[4000],  (SELECT 
+       "MS_JOIN_FOR_DISPLAY"("MS_APPS_UTILITIES"."GET_USER_FULL_NAME"(VALUE(KOKBF$))) FROM TABLE() 
+       "KOKBF$1")[4000], "RV"."DUE_DATE"[DATE,7], "MS_QSM_RPT_UTIL"."GET_DISPLAY_VALUE"(:1,'MS_QSM_Init_Questionn
+       aire_Type',"IQ"."QUE_REQUEST_TYPE","RV"."DD_OBJECT_TYPE")[4000], "RV"."QUE_RESPONSE_ID"[VARCHAR2,200]
+   4 - "RV"."QUE_RESPONSE_ID"[VARCHAR2,200], "RV"."RESPONSE_APPROVER"[VARCHAR2,4000], 
+       "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], "RV"."DD_OBJECT_TYPE"[VARCHAR2,4000], "RV"."DUE_DATE"[DATE,7], 
+       "RV"."RESP_STATUS"[VARCHAR2,4000], "IQ"."QUE_REQUEST_TYPE"[VARCHAR2,400]
+   5 - (#keys=0) "RV"."QUE_RESPONSE_ID"[VARCHAR2,200], "RV"."RESPONSE_APPROVER"[VARCHAR2,4000], 
+       "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], "RV"."DD_OBJECT_TYPE"[VARCHAR2,4000], 
+       "RV"."RESPONDENT"[VARCHAR2,4000], "RV"."DUE_DATE"[DATE,7], "RV"."RESP_STATUS"[VARCHAR2,4000], 
+       "IQ"."QUE_REQUEST_TYPE"[VARCHAR2,400]
+   6 - (#keys=0) "RV"."QUE_RESPONSE_ID"[VARCHAR2,200], "RV"."QUE_REQUEST_ID"[VARCHAR2,200], 
+       "RV"."RESPONSE_APPROVER"[VARCHAR2,4000], "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], 
+       "RV"."DD_OBJECT_TYPE"[VARCHAR2,4000], "RV"."RESPONDENT"[VARCHAR2,4000], "RV"."DUE_DATE"[DATE,7], 
+       "RV"."RESP_STATUS"[VARCHAR2,4000], "IQ"."QUE_REQUEST_TYPE"[VARCHAR2,400]
+   7 - (#keys=1) "RV"."QUE_RESPONSE_ID"[VARCHAR2,200], "RV"."QUE_REQUEST_ID"[VARCHAR2,200], 
+       "RV"."RESPONSE_APPROVER"[VARCHAR2,4000], "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], 
+       "RV"."DD_OBJECT_TYPE"[VARCHAR2,4000], "RV"."RESPONDENT"[VARCHAR2,4000], "RV"."DUE_DATE"[DATE,7], 
+       "RV"."RESP_STATUS"[VARCHAR2,4000]
+   8 - (#keys=0) "Z"."QUE_RESPONSE_ID"[VARCHAR2,1020]
+  10 - (#keys=0) COUNT(*)[22]
+  12 - (#keys=1) "Z"."QUE_RESPONSE_ID"[VARCHAR2,1020]
+  13 - "Z"."QUE_RESPONSE_ID"[VARCHAR2,1020]
+  14 - "RV"."QUE_REQUEST_ID"[VARCHAR2,200], "RV"."QUE_RESPONSE_ID"[VARCHAR2,200], 
+       "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], "RV"."DD_OBJECT_TYPE"[VARCHAR2,4000], 
+       "RV"."RESPONDENT"[VARCHAR2,4000], "RV"."DUE_DATE"[DATE,7], "RV"."RESP_STATUS"[VARCHAR2,4000], 
+       "RV"."RESPONSE_APPROVER"[VARCHAR2,4000]
+  15 - (#keys=26) STRDEF[200], STRDEF[200], STRDEF[22], STRDEF[22], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[22], 
+       STRDEF[4000], STRDEF[7], STRDEF[7], STRDEF[4000], STRDEF[7], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[4000], STRDEF[40], STRDEF[4000]
+  16 - STRDEF[200], STRDEF[200], STRDEF[22], STRDEF[22], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[22], STRDEF[4000], 
+       STRDEF[7], STRDEF[7], STRDEF[4000], STRDEF[7], STRDEF[4000], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[40], STRDEF[4000]
+  17 - "QUE_REQUEST_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,4000], "INSTANCE_ID"[NUMBER,22], 
+       "INSTANCE_REC_NUM"[NUMBER,22], "RESPONDENT"[VARCHAR2,4000], "QUE_REQUEST_TYPE"[VARCHAR2,40], 
+       "APPLIES_TO_OBJECT_CODE"[VARCHAR2,4000], "CREATION_DATE"[DATE,7], "RESPONDED_ON"[DATE,7], 
+       "RESPONDED_BY"[VARCHAR2,4000], "DUE_DATE"[DATE,7], "RESP_STATUS"[VARCHAR2,4000], 
+       "APPLIES_TO"[VARCHAR2,4000], "APPLIES_TO_OBJECT"[VARCHAR2,4000], "RESPONSE_APPROVER"[VARCHAR2,4000], 
+       "ASSIGNEE"[VARCHAR2,4000], "QUE_REQUEST_ID"[VARCHAR2,200], "QUE_RESPONSE_ID"[VARCHAR2,200], 
+       "PROCESS_INSTANCE_ID"[NUMBER,22], "R_IID"[NUMBER,22], "OVERALL_SCORE"[VARCHAR2,4000], 
+       "OVERALL_GRADE"[VARCHAR2,4000], "STAGE"[VARCHAR2,4000], "ACTION_COMMENT"[VARCHAR2,4000], 
+       "LOGIN_ID"[VARCHAR2,4000], "REFERENCE_PID"[NUMBER,22]
+  18 - "QUE_REQUEST_TYPE"[VARCHAR2,40], "APPLIES_TO_OBJECT_CODE"[VARCHAR2,4000], 
+       "QUE_REQUEST_ID"[VARCHAR2,200], "QUE_RESPONSE_ID"[VARCHAR2,200], "PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "R_IID"[NUMBER,22], "OVERALL_SCORE"[VARCHAR2,4000], "OVERALL_GRADE"[VARCHAR2,4000], 
+       "STAGE"[VARCHAR2,4000], "ACTION_COMMENT"[VARCHAR2,4000], "LOGIN_ID"[VARCHAR2,4000], 
+       "REFERENCE_PID"[NUMBER,22], "QUE_REQUEST_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,4000], 
+       "INSTANCE_ID"[NUMBER,22], "INSTANCE_REC_NUM"[NUMBER,22], "RESPONDENT"[VARCHAR2,4000], 
+       "CREATION_DATE"[DATE,7], "RESPONDED_ON"[DATE,7], "RESPONDED_BY"[VARCHAR2,4000], "DUE_DATE"[DATE,7], 
+       "RESP_STATUS"[VARCHAR2,4000], "APPLIES_TO"[VARCHAR2,4000], "APPLIES_TO_OBJECT"[VARCHAR2,4000], 
+       "RESPONSE_APPROVER"[VARCHAR2,4000], "ASSIGNEE"[VARCHAR2,4000]
+  19 - "IQ"."QUE_REQUEST_TYPE"[VARCHAR2,400]
+  20 - "IQ".ROWID[ROWID,10]
+  22 - "X".ROWID[ROWID,10]
+  23 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

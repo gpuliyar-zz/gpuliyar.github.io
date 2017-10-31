@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_RECALL_APPROVE_RFC (103831)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT distinct Que_Request_name,Respondent,due_date,rfc_on,cnt_rfc
+,case when maint_current_stage = 'OA' and Overall_Approver = :1 then
+process_instance_id||'##'||:1
+  when ((:1 IN (SELECT COLUMN_VALUE FROM TABLE (ms_grc_str_common_utilities.Split_String_Stored(response_approver))))  and NVL(maint_current_stage,'IA') != 'OA') then process_instance_id||'##'||:1 end Action_link,Respondent_stored
+FROM 
+(select ms_apps_utilities.get_user_full_name(Respondent) Respondent,que_response_id,response_approver,maint_current_stage,due_date,Overall_Approver,rfc_on,process_instance_id,Que_Request_name,dd_object_type
+,instance_id,max_iid,cnt_rfc,Respondent Respondent_stored from 
+(select RESPONDED_BY as Respondent ,a.que_response_id,response_approver,maint_current_stage,Que_Request_name,Resp_Status,Submit_Action,dd_object_type,a.process_instance_id,
+     Instance_Rec_Num, instance_id,due_date,rfc_on,Overall_Approver,cnt_rfc,
+     max(instance_id) over (Partition by a.process_instance_id order by a.process_instance_id) max_iid
+from ms_qsm_questnr_resp_dup_v a
+    ,(select count(instance_id) cnt_rfc,process_instance_id
+        from ms_qsm_resp_survey_details
+       where resp_status= 10 and Instance_Rec_Num=1
+       group by process_instance_id) b
+where a.process_instance_id=b.process_instance_id 
+AND ((:1 IN (SELECT COLUMN_VALUE FROM TABLE (ms_grc_str_common_utilities.Split_String_Stored(response_approver)))) or Overall_Approver = :1))a
+where Instance_Rec_Num=1 and submit_action in ('REQ_CLR','COLABORATE') and resp_status=10)
+WHERE instance_id=max_iid
+and (upper(trim(Respondent)) like '%'||upper(:2)||'%')</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet would show the details for all the surveys that are waiting for clarifications from the Respondent.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 875727057</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                             | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                      |                            |     1 | 14097 |     5  (40)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|*  1 |  COLLECTION ITERATOR PICKLER FETCH    | SPLIT_STRING_STORED        |     1 |     2 |     2   (0)| 00:00:01 |</font>
+|   2 |  SORT UNIQUE                          |                            |     1 | 14097 |     5  (40)| 00:00:01 |
+|*  3 |   VIEW                                |                            |     1 | 14097 |     4  (25)| 00:00:01 |
+|   4 |    WINDOW BUFFER                      |                            |     1 | 14097 |     4  (25)| 00:00:01 |
+|*  5 |     FILTER                            |                            |       |       |            |          |
+|   6 |      NESTED LOOPS                     |                            |     1 | 14097 |     4  (25)| 00:00:01 |
+|   7 |       NESTED LOOPS                    |                            |     1 | 14097 |     4  (25)| 00:00:01 |
+|   8 |        VIEW                           |                            |     1 |    26 |     3  (34)| 00:00:01 |
+|   9 |         SORT GROUP BY                 |                            |     1 |  2041 |     3  (34)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 10 |          TABLE ACCESS FULL            | MS_QSM_RESP_SURVEY_DETAILS |     1 |  2041 |     2   (0)| 00:00:01 |</font>
+|* 11 |        INDEX RANGE SCAN               | SI_103929_N2               |     1 |       |     1   (0)| 00:00:01 |
+|  12 |       TABLE ACCESS BY INDEX ROWID     | SI_103929_T                |     1 | 14071 |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 13 |      COLLECTION ITERATOR PICKLER FETCH| SPLIT_STRING_STORED        |     1 |     2 |     2   (0)| 00:00:01 |</font>
+--------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$335DD26A / KOKBF$1@SEL$3
+   2 - SEL$004D2CAB
+   3 - SEL$1B7D9AE9 / A@SEL$4
+   4 - SEL$1B7D9AE9
+   8 - SEL$8        / B@SEL$5
+   9 - SEL$8       
+  10 - SEL$8        / MS_QSM_RESP_SURVEY_DETAILS@SEL$8
+  11 - SEL$1B7D9AE9 / SI_103929_T@SEL$7
+  12 - SEL$1B7D9AE9 / SI_103929_T@SEL$7
+  13 - SEL$0EE6DB63 / KOKBF$0@SEL$10
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - filter(VALUE(KOKBF$)=:1)
+   3 - filter("INSTANCE_ID"="MAX_IID" AND UPPER(TRIM("MS_APPS_UTILITIES"."GET_USER_FULL_NAME"("RESPONDENT"))
+              ) LIKE '%'||UPPER(:2)||'%' AND "INSTANCE_REC_NUM"=1 AND ("SUBMIT_ACTION"='COLABORATE' OR 
+              "SUBMIT_ACTION"='REQ_CLR') AND TO_NUMBER("RESP_STATUS")=10)
+   5 - filter( EXISTS (SELECT 0 FROM TABLE() "KOKBF$0" WHERE VALUE(KOKBF$)=:1) OR "OVERALL_APPROVER"=:1)
+  10 - filter("INSTANCE_REC_NUM"=1 AND TO_NUMBER("RESP_STATUS")=10)
+  11 - access("PROCESS_INSTANCE_ID"="B"."PROCESS_INSTANCE_ID")
+  13 - filter(VALUE(KOKBF$)=:1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - VALUE(A0)[8000]
+   2 - (#keys=7) "QUE_REQUEST_NAME"[VARCHAR2,4000], "MS_APPS_UTILITIES"."GET_USER_FULL_NAME"("RESPONDENT")[4
+       000], "DUE_DATE"[DATE,7], "RFC_ON"[DATE,7], "CNT_RFC"[NUMBER,22], CASE  WHEN ("MAINT_CURRENT_STAGE"='OA' 
+       AND "OVERALL_APPROVER"=:1) THEN TO_CHAR("PROCESS_INSTANCE_ID")||'##'||:1 WHEN ( EXISTS (SELECT 0 FROM 
+       TABLE() "KOKBF$1" WHERE VALUE(KOKBF$)=:1) AND NVL("MAINT_CURRENT_STAGE",'IA')<>'OA') THEN 
+       TO_CHAR("PROCESS_INSTANCE_ID")||'##'||:1 END [74], "RESPONDENT"[VARCHAR2,4000]
+   3 - "RESPONDENT"[VARCHAR2,4000], "RESPONSE_APPROVER"[VARCHAR2,4000], 
+       "MAINT_CURRENT_STAGE"[VARCHAR2,4000], "QUE_REQUEST_NAME"[VARCHAR2,4000], "RESP_STATUS"[VARCHAR2,4000], 
+       "SUBMIT_ACTION"[VARCHAR2,4000], "PROCESS_INSTANCE_ID"[NUMBER,22], "INSTANCE_REC_NUM"[NUMBER,22], 
+       "INSTANCE_ID"[NUMBER,22], "DUE_DATE"[DATE,7], "RFC_ON"[DATE,7], "OVERALL_APPROVER"[VARCHAR2,4000], 
+       "CNT_RFC"[NUMBER,22], "MAX_IID"[NUMBER,22]
+   4 - (#keys=1) "PROCESS_INSTANCE_ID"[NUMBER,22], "CNT_RFC"[NUMBER,22], 
+       "B"."PROCESS_INSTANCE_ID"[NUMBER,22], "SI_103929_T".ROWID[ROWID,10], "SUBMIT_ACTION"[VARCHAR2,4000], 
+       "RFC_ON"[DATE,7], "RESP_STATUS"[VARCHAR2,4000], "RESPONSE_APPROVER"[VARCHAR2,4000], 
+       "RESPONDED_BY"[VARCHAR2,4000], "QUE_REQUEST_NAME"[VARCHAR2,4000], "OVERALL_APPROVER"[VARCHAR2,4000], 
+       "MAINT_CURRENT_STAGE"[VARCHAR2,4000], "DUE_DATE"[DATE,7], "INSTANCE_REC_NUM"[NUMBER,22], 
+       "INSTANCE_ID"[NUMBER,22], MAX("INSTANCE_ID") OVER ( PARTITION BY "PROCESS_INSTANCE_ID" ORDER BY  NULL  
+       RANGE  BETWEEN  UNBOUNDED  PRECEDING  AND  CURRENT ROW )[22]
+   5 - "CNT_RFC"[NUMBER,22], "B"."PROCESS_INSTANCE_ID"[NUMBER,22], "SI_103929_T".ROWID[ROWID,10], 
+       "SUBMIT_ACTION"[VARCHAR2,4000], "RFC_ON"[DATE,7], "RESP_STATUS"[VARCHAR2,4000], 
+       "RESPONSE_APPROVER"[VARCHAR2,4000], "RESPONDED_BY"[VARCHAR2,4000], "QUE_REQUEST_NAME"[VARCHAR2,4000], 
+       "OVERALL_APPROVER"[VARCHAR2,4000], "MAINT_CURRENT_STAGE"[VARCHAR2,4000], "DUE_DATE"[DATE,7], 
+       "INSTANCE_REC_NUM"[NUMBER,22], "INSTANCE_ID"[NUMBER,22], "PROCESS_INSTANCE_ID"[NUMBER,22]
+   6 - (#keys=0) "CNT_RFC"[NUMBER,22], "B"."PROCESS_INSTANCE_ID"[NUMBER,22], "SI_103929_T".ROWID[ROWID,10], 
+       "SUBMIT_ACTION"[VARCHAR2,4000], "RFC_ON"[DATE,7], "RESP_STATUS"[VARCHAR2,4000], 
+       "RESPONSE_APPROVER"[VARCHAR2,4000], "RESPONDED_BY"[VARCHAR2,4000], "QUE_REQUEST_NAME"[VARCHAR2,4000], 
+       "OVERALL_APPROVER"[VARCHAR2,4000], "MAINT_CURRENT_STAGE"[VARCHAR2,4000], "DUE_DATE"[DATE,7], 
+       "INSTANCE_REC_NUM"[NUMBER,22], "INSTANCE_ID"[NUMBER,22], "PROCESS_INSTANCE_ID"[NUMBER,22]
+   7 - (#keys=0) "CNT_RFC"[NUMBER,22], "B"."PROCESS_INSTANCE_ID"[NUMBER,22], "SI_103929_T".ROWID[ROWID,10], 
+       "PROCESS_INSTANCE_ID"[NUMBER,22], "INSTANCE_ID"[NUMBER,22]
+   8 - "CNT_RFC"[NUMBER,22], "B"."PROCESS_INSTANCE_ID"[NUMBER,22]
+   9 - (#keys=1) "PROCESS_INSTANCE_ID"[NUMBER,22], COUNT("INSTANCE_ID")[22]
+  10 - "INSTANCE_ID"[NUMBER,22], "PROCESS_INSTANCE_ID"[NUMBER,22]
+  11 - "SI_103929_T".ROWID[ROWID,10], "PROCESS_INSTANCE_ID"[NUMBER,22], "INSTANCE_ID"[NUMBER,22]
+  12 - "SI_103929_T".ROWID[ROWID,10], "SUBMIT_ACTION"[VARCHAR2,4000], "RFC_ON"[DATE,7], 
+       "RESP_STATUS"[VARCHAR2,4000], "RESPONSE_APPROVER"[VARCHAR2,4000], "RESPONDED_BY"[VARCHAR2,4000], 
+       "QUE_REQUEST_NAME"[VARCHAR2,4000], "OVERALL_APPROVER"[VARCHAR2,4000], "MAINT_CURRENT_STAGE"[VARCHAR2,4000], 
+       "DUE_DATE"[DATE,7], "INSTANCE_REC_NUM"[NUMBER,22]
+  13 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

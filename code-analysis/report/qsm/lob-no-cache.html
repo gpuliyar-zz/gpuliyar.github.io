@@ -1,0 +1,406 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Table LOB Columns with No Cache</h2></header>
+										<blockquote>
+										Find the alter scripts against every table object if you like to change the cache setting. It is your responsibility to login into the database server to manually execute the Script. Also, it is your responsibility to include the Script as part of the release process. The tool only facilitates information and nothing more.
+										</blockquote>
+										<div class="table-wrapper">
+											<table>
+												<thead>
+													<tr>
+														<th>Table Name</th>
+														<th colspan="3">Columns</th>
+													</tr>
+												</thead>
+												<tbody>
+<tr><td>MS_QSM_CHANGE_HISTORY_DETAILS</td>
+<td>CURRENT_VALUE</td>
+<td>PREVIOUS_VALUE</td>
+<td>SYS_NC00008$</td>
+</tr><tr>
+<td rowspan='3'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_CHANGE_HISTORY_DETAILS MODIFY LOB (CURRENT_VALUE) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_CHANGE_HISTORY_DETAILS MODIFY LOB (PREVIOUS_VALUE) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_CHANGE_HISTORY_DETAILS MODIFY LOB (SYS_NC00008$) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_CHILDFORM_XML_DATA</td>
+<td colspan='3'>PUSHFORM_XML</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_CHILDFORM_XML_DATA MODIFY LOB (PUSHFORM_XML) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_EXCEL_SURVEY_STATUS</td>
+<td colspan='3'>XML_DATA</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_EXCEL_SURVEY_STATUS MODIFY LOB (XML_DATA) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_FLOW_LOG</td>
+<td colspan='3'>LOG_CLOB</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_FLOW_LOG MODIFY LOB (LOG_CLOB) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_INIT_QUESTNR</td>
+<td>INSTRUCTIONS</td>
+<td colspan='2'>INSTRUCTIONS_DISPLAY</td>
+</tr><tr>
+<td rowspan='2'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_INIT_QUESTNR MODIFY LOB (INSTRUCTIONS) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_INIT_QUESTNR MODIFY LOB (INSTRUCTIONS_DISPLAY) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_INIT_QUESTNR_REASSIGN</td>
+<td colspan='3'>INSTRUCTIONS</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_INIT_QUESTNR_REASSIGN MODIFY LOB (INSTRUCTIONS) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_INTEGRATION_LOG</td>
+<td>SYS_NC00004$</td>
+<td>SYS_NC00008$</td>
+<td>SYS_NC00010$</td>
+</tr><tr>
+<td rowspan='3'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_INTEGRATION_LOG MODIFY LOB (SYS_NC00004$) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_INTEGRATION_LOG MODIFY LOB (SYS_NC00008$) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_INTEGRATION_LOG MODIFY LOB (SYS_NC00010$) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_INTEGRATION_LOG_REVOKE</td>
+<td>SYS_NC00002$</td>
+<td>SYS_NC00004$</td>
+<td>SYS_NC00006$</td>
+</tr><tr>
+<td rowspan='3'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_INTEGRATION_LOG_REVOKE MODIFY LOB (SYS_NC00002$) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_INTEGRATION_LOG_REVOKE MODIFY LOB (SYS_NC00004$) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_INTEGRATION_LOG_REVOKE MODIFY LOB (SYS_NC00006$) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_MLS_EMAILS</td>
+<td colspan='3'>PARAMETER_VALUE</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_MLS_EMAILS MODIFY LOB (PARAMETER_VALUE) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_PUSHFORM_CHANGE_HISTORY</td>
+<td>SYS_NC00010$</td>
+<td>SYS_NC00013$</td>
+<td>SYS_NC00015$</td>
+</tr><tr>
+<td rowspan='3'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_PUSHFORM_CHANGE_HISTORY MODIFY LOB (SYS_NC00010$) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_PUSHFORM_CHANGE_HISTORY MODIFY LOB (SYS_NC00013$) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_PUSHFORM_CHANGE_HISTORY MODIFY LOB (SYS_NC00015$) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_QUESTION</td>
+<td>QST_CONDITION</td>
+<td colspan='2'>QST_DESCRIPTION</td>
+</tr><tr>
+<td rowspan='2'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_QUESTION MODIFY LOB (QST_CONDITION) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_QUESTION MODIFY LOB (QST_DESCRIPTION) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_QUESTIONNAIRE</td>
+<td>CERTIFICATION_TEXT</td>
+<td>INSTRUCTIONS</td>
+<td>UNSORTED_LIST_TEMP</td>
+</tr><tr>
+<td rowspan='3'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_QUESTIONNAIRE MODIFY LOB (CERTIFICATION_TEXT) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_QUESTIONNAIRE MODIFY LOB (INSTRUCTIONS) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_QUESTIONNAIRE MODIFY LOB (UNSORTED_LIST_TEMP) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_QUESTIONNAIRE_TL</td>
+<td>CERTIFICATION_TEXT</td>
+<td colspan='2'>INSTRUCTIONS</td>
+</tr><tr>
+<td rowspan='2'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_QUESTIONNAIRE_TL MODIFY LOB (CERTIFICATION_TEXT) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_QUESTIONNAIRE_TL MODIFY LOB (INSTRUCTIONS) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_QUESTION_TL</td>
+<td>QST_DESCRIPTION</td>
+<td colspan='2'>QST_DESCRIPTION_HTM</td>
+</tr><tr>
+<td rowspan='2'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_QUESTION_TL MODIFY LOB (QST_DESCRIPTION) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_QUESTION_TL MODIFY LOB (QST_DESCRIPTION_HTM) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_QUESTNR_RESP</td>
+<td>INSTRUCTIONS_HTM</td>
+<td colspan='2'>SUBMIT_RESPONSE</td>
+</tr><tr>
+<td rowspan='2'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_QUESTNR_RESP MODIFY LOB (INSTRUCTIONS_HTM) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_QUESTNR_RESP MODIFY LOB (SUBMIT_RESPONSE) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_QUE_REASSIGN_SUR_HIST</td>
+<td>SYS_NC00004$</td>
+<td>SYS_NC00006$</td>
+<td>SYS_NC00008$</td>
+</tr><tr>
+<td rowspan='3'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_QUE_REASSIGN_SUR_HIST MODIFY LOB (SYS_NC00004$) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_QUE_REASSIGN_SUR_HIST MODIFY LOB (SYS_NC00006$) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_QUE_REASSIGN_SUR_HIST MODIFY LOB (SYS_NC00008$) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_REMINDER_EMAIL_LOG</td>
+<td colspan='3'>CC_USER_ROLE</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_REMINDER_EMAIL_LOG MODIFY LOB (CC_USER_ROLE) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_REMINDER_EMAIL_LOG_DTLS</td>
+<td colspan='3'>CC_USERS</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_REMINDER_EMAIL_LOG_DTLS MODIFY LOB (CC_USERS) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_REPHRASE_QST_RPQ_TL</td>
+<td colspan='3'>RQ_DESCRIPTION</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_REPHRASE_QST_RPQ_TL MODIFY LOB (RQ_DESCRIPTION) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_RESPONSE_API_LOG</td>
+<td>ERROR_XML</td>
+<td colspan='2'>RESPONSE_XML</td>
+</tr><tr>
+<td rowspan='2'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_RESPONSE_API_LOG MODIFY LOB (ERROR_XML) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESPONSE_API_LOG MODIFY LOB (RESPONSE_XML) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_RESP_CLOB_FLDS</td>
+<td>RESP_COMMENTS</td>
+<td>RESP_DESCRIPTION</td>
+<td>TO_RETRIEV_DESCRIPTION</td>
+</tr><tr>
+<td rowspan='3'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_RESP_CLOB_FLDS MODIFY LOB (RESP_COMMENTS) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_CLOB_FLDS MODIFY LOB (RESP_DESCRIPTION) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_CLOB_FLDS MODIFY LOB (TO_RETRIEV_DESCRIPTION) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_RESP_CONSD_DETAILS</td>
+<td colspan='3'>SUBMIT_RESP</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_RESP_CONSD_DETAILS MODIFY LOB (SUBMIT_RESP) (CACHE)</td>
+</tr>
+<tr><td rowspan='2'>MS_QSM_RESP_CONSD_QUESTIONS</td>
+<td>APPROVER_COMMENTS</td>
+<td>INTERNAL_COMMENT</td>
+<td>RESPONSE</td>
+</tr><tr><td>RESP_COMMENTS</td>
+<td>RESP_DISPLAY</td>
+<td>SUPPORTING_DOCS</td>
+</tr><tr>
+<td rowspan='6'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_RESP_CONSD_QUESTIONS MODIFY LOB (APPROVER_COMMENTS) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_CONSD_QUESTIONS MODIFY LOB (INTERNAL_COMMENT) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_CONSD_QUESTIONS MODIFY LOB (RESPONSE) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_CONSD_QUESTIONS MODIFY LOB (RESP_COMMENTS) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_CONSD_QUESTIONS MODIFY LOB (RESP_DISPLAY) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_CONSD_QUESTIONS MODIFY LOB (SUPPORTING_DOCS) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_RESP_FINAL_DETAILS</td>
+<td colspan='3'>SUBMIT_RESP</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_RESP_FINAL_DETAILS MODIFY LOB (SUBMIT_RESP) (CACHE)</td>
+</tr>
+<tr><td rowspan='2'>MS_QSM_RESP_FINAL_QUESTIONS</td>
+<td>APPROVER_COMMENTS</td>
+<td>INTERNAL_COMMENT</td>
+<td>RESPONSE</td>
+</tr><tr><td>RESP_COMMENTS</td>
+<td>RESP_DISPLAY</td>
+<td>SUPPORTING_DOCS</td>
+</tr><tr>
+<td rowspan='6'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_RESP_FINAL_QUESTIONS MODIFY LOB (APPROVER_COMMENTS) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_FINAL_QUESTIONS MODIFY LOB (INTERNAL_COMMENT) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_FINAL_QUESTIONS MODIFY LOB (RESPONSE) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_FINAL_QUESTIONS MODIFY LOB (RESP_COMMENTS) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_FINAL_QUESTIONS MODIFY LOB (RESP_DISPLAY) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_FINAL_QUESTIONS MODIFY LOB (SUPPORTING_DOCS) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_RESP_OLD_XML</td>
+<td colspan='3'>XML_TEMP</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_RESP_OLD_XML MODIFY LOB (XML_TEMP) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_RESP_SURVEY_DETAILS</td>
+<td colspan='3'>SUBMIT_RESP</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_RESP_SURVEY_DETAILS MODIFY LOB (SUBMIT_RESP) (CACHE)</td>
+</tr>
+<tr><td rowspan='2'>MS_QSM_RESP_SURVEY_QUESTIONS</td>
+<td>APPROVER_COMMENTS</td>
+<td>INTERNAL_COMMENT</td>
+<td>RESPONSE</td>
+</tr><tr><td>RESP_COMMENTS</td>
+<td>RESP_DISPLAY</td>
+<td>SUPPORTING_DOCS</td>
+</tr><tr>
+<td rowspan='6'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_RESP_SURVEY_QUESTIONS MODIFY LOB (APPROVER_COMMENTS) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_SURVEY_QUESTIONS MODIFY LOB (INTERNAL_COMMENT) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_SURVEY_QUESTIONS MODIFY LOB (RESPONSE) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_SURVEY_QUESTIONS MODIFY LOB (RESP_COMMENTS) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_SURVEY_QUESTIONS MODIFY LOB (RESP_DISPLAY) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_RESP_SURVEY_QUESTIONS MODIFY LOB (SUPPORTING_DOCS) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_SCHEDULER_MASTER</td>
+<td colspan='3'>RESPONDENTS_VAL</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_SCHEDULER_MASTER MODIFY LOB (RESPONDENTS_VAL) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_TRIGGERED_QUESTION</td>
+<td>QST_CONDITION</td>
+<td>QST_DESCRIPTION</td>
+<td>TABULAR_RESPONSES</td>
+</tr><tr>
+<td rowspan='3'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_TRIGGERED_QUESTION MODIFY LOB (QST_CONDITION) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_TRIGGERED_QUESTION MODIFY LOB (QST_DESCRIPTION) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_TRIGGERED_QUESTION MODIFY LOB (TABULAR_RESPONSES) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_TRIGGERED_QUESTIONNAIRE</td>
+<td>CERTIFICATION_TEXT</td>
+<td>INSTRUCTIONS</td>
+<td>UNSORTED_LIST_TEMP</td>
+</tr><tr>
+<td rowspan='3'>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_TRIGGERED_QUESTIONNAIRE MODIFY LOB (CERTIFICATION_TEXT) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_TRIGGERED_QUESTIONNAIRE MODIFY LOB (INSTRUCTIONS) (CACHE)</td></tr>
+<tr><td colspan='3'>ALTER TABLE MS_QSM_TRIGGERED_QUESTIONNAIRE MODIFY LOB (UNSORTED_LIST_TEMP) (CACHE)</td>
+</tr>
+<tr><td>MS_QSM_XML_TEMPLATES</td>
+<td colspan='3'>XML</td>
+</tr><tr>
+<td>Script</td>
+<td colspan='3'>ALTER TABLE MS_QSM_XML_TEMPLATES MODIFY LOB (XML) (CACHE)</td>
+</tr>
+
+												</tbody>
+											</table>
+										</div>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

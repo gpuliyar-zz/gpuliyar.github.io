@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_RESPONSE_DETAILS_RPT_RESPONDENTS (103851)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT         
+distinct (select first_name||' '||last_name from SI_USERS where user_name =case when (length(a.RESPONDENT)-length(replace(a.RESPONDENT,',','')))>0 then a.RESPONDED_BY else a.RESPONDENT end)  "User Full Name",    
+case when (length(a.RESPONDENT)-length(replace(a.RESPONDENT,',','')))>0 then a.RESPONDED_BY else a.RESPONDENT end  RESPONDED_BY,fn_qsm_get_user_locale(:1) as local_id, '1' filter_type,b.INTERNAL_QUESTNR_ID as questionnaire_id   
+FROM MS_QSM_RESP_FINAL_DETAILS a,        
+MS_QSM_TRIGGERED_QUESTIONNAIRE b     
+WHERE a.que_request_id     =b.que_request_id   
+UNION ALL   
+SELECT         
+distinct (select first_name||' '||last_name from SI_USERS where user_name =case when (length(RESPONDENT)-length(replace(RESPONDENT,',','')))>0 then RESPONDED_BY else RESPONDENT end)  "User Full Name",    
+case when (length(RESPONDENT)-length(replace(RESPONDENT,',','')))>0 then RESPONDED_BY else RESPONDENT end  RESPONDED_BY,fn_qsm_get_user_locale(:1) as local_id ,'2' filter_type,a.que_request_id   
+FROM MS_QSM_RESP_FINAL_DETAILS a</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet is used for the report Response Details Report.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 53742385</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------------
+| Id  | Operation                      | Name                           | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT               |                                |     2 | 17652 |     7  (29)| 00:00:01 |
+|   1 |  UNION-ALL                     |                                |       |       |            |          |
+|   2 |   NESTED LOOPS                 |                                |    29 |  1276 |     7   (0)| 00:00:01 |
+|   3 |    TABLE ACCESS BY INDEX ROWID | SI_USERS_T                     |     1 |    31 |     1   (0)| 00:00:01 |
+|*  4 |     INDEX UNIQUE SCAN          | USER_NAME_UK                   |     1 |       |     1   (0)| 00:00:01 |
+|*  5 |    VIEW                        | SI_REGISTER_APPLICATION_V      |    29 |   377 |     6   (0)| 00:00:01 |
+|   6 |     UNION-ALL                  |                                |       |       |            |          |
+|   7 |      NESTED LOOPS OUTER        |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   8 |       TABLE ACCESS FULL        | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|*  9 |       INDEX RANGE SCAN         | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+|  10 |      FAST DUAL                 |                                |     1 |       |     2   (0)| 00:00:01 |
+|  11 |   SORT UNIQUE                  |                                |     1 |  4720 |     4  (25)| 00:00:01 |
+|  12 |    NESTED LOOPS                |                                |     1 |  4720 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  13 |     TABLE ACCESS FULL          | MS_QSM_RESP_FINAL_DETAILS      |     1 |  4106 |     2   (0)| 00:00:01 |</font>
+|  14 |     TABLE ACCESS BY INDEX ROWID| MS_QSM_TRIGGERED_QUESTIONNAIRE |     1 |   614 |     1   (0)| 00:00:01 |
+|* 15 |      INDEX RANGE SCAN          | MS_QSM_TRIG_QUESTIONNAIRE_IDX  |     1 |       |     1   (0)| 00:00:01 |
+|  16 |   NESTED LOOPS                 |                                |    29 |  1276 |     7   (0)| 00:00:01 |
+|  17 |    TABLE ACCESS BY INDEX ROWID | SI_USERS_T                     |     1 |    31 |     1   (0)| 00:00:01 |
+|* 18 |     INDEX UNIQUE SCAN          | USER_NAME_UK                   |     1 |       |     1   (0)| 00:00:01 |
+|* 19 |    VIEW                        | SI_REGISTER_APPLICATION_V      |    29 |   377 |     6   (0)| 00:00:01 |
+|  20 |     UNION-ALL                  |                                |       |       |            |          |
+|  21 |      NESTED LOOPS OUTER        |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  22 |       TABLE ACCESS FULL        | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|* 23 |       INDEX RANGE SCAN         | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+|  24 |      FAST DUAL                 |                                |     1 |       |     2   (0)| 00:00:01 |
+|  25 |   SORT UNIQUE                  |                                |     1 |  4106 |     3  (34)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  26 |    TABLE ACCESS FULL           | MS_QSM_RESP_FINAL_DETAILS      |     1 |  4106 |     2   (0)| 00:00:01 |</font>
+-----------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SET$1       
+   2 - SEL$335DD26A
+   3 - SEL$335DD26A / SUT@SEL$3
+   4 - SEL$335DD26A / SUT@SEL$3
+   5 - SET$2        / SRA@SEL$3
+   6 - SET$2       
+   7 - SEL$4       
+   8 - SEL$4        / T@SEL$4
+   9 - SEL$4        / TL@SEL$4
+  10 - SEL$7        / DUAL@SEL$7
+  11 - SEL$1       
+  13 - SEL$1        / A@SEL$1
+  14 - SEL$1        / B@SEL$1
+  15 - SEL$1        / B@SEL$1
+  16 - SEL$1CF66C63
+  17 - SEL$1CF66C63 / SUT@SEL$14
+  18 - SEL$1CF66C63 / SUT@SEL$14
+  19 - SET$3        / SRA@SEL$14
+  20 - SET$3       
+  21 - SEL$15      
+  22 - SEL$15       / T@SEL$15
+  23 - SEL$15       / TL@SEL$15
+  24 - SEL$18       / DUAL@SEL$18
+  25 - SEL$12      
+  26 - SEL$12       / A@SEL$12
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   4 - access("USER_NAME"=CASE  WHEN (LENGTH(:B1)-LENGTH(REPLACE(:B2,',',''))>0) THEN :B3 ELSE :B4 END )
+   5 - filter(NVL("SUT"."PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+   9 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  15 - access("A"."QUE_REQUEST_ID"="B"."QUE_REQUEST_ID")
+  18 - access("USER_NAME"=CASE  WHEN (LENGTH(:B1)-LENGTH(REPLACE(:B2,',',''))>0) THEN :B3 ELSE :B4 END )
+  19 - filter(NVL("SUT"."PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+  23 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - STRDEF[801], STRDEF[4000], STRDEF[0], STRDEF[1], STRDEF[1020]
+   2 - (#keys=0) "LAST_NAME"[VARCHAR2,400], "FIRST_NAME"[VARCHAR2,400]
+   3 - "LAST_NAME"[VARCHAR2,400], "FIRST_NAME"[VARCHAR2,400], "SUT"."PACKAGE_ID"[NUMBER,22]
+   4 - "SUT".ROWID[ROWID,10]
+   5 - "SRA"."PACKAGE_ID"[NUMBER,22]
+   6 - STRDEF[22]
+   7 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+   8 - "T"."MODULE_ID"[NUMBER,22]
+  11 - (#keys=5)  (SELECT "FIRST_NAME"||' '||"LAST_NAME" FROM  ( (SELECT "T"."MODULE_ID" 
+       "PACKAGE_ID",NVL("TL"."PACKAGE_TITLE","T"."PACKAGE_TITLE") "PACKAGE_TITLE", (SELECT 
+       NVL("TL"."MEANING","T"."MEANING") FROM METRICSTREAM."SI_LOOKUPS_TL" "TL",METRICSTREAM."SI_LOOKUPS_T" "T" 
+       WHERE "T"."LOOKUP_CODE"=:B1 AND "T"."LOOKUP_TYPE"='PACKAGE_TYPE' AND 
+       "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()) AND "T"."LOOKUP_ID"="TL"."LOOKUP_ID"(+)) 
+       "PACKAGE_TYPE" FROM METRICSTREAM."SI_REGISTER_APPLICATION_TL" 
+       "TL",METRICSTREAM."SI_REGISTER_APPLICATION" "T" WHERE 
+       "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()) AND "TL"."MODULE_ID"(+)="T"."MODULE_ID") 
+       UNION ALL  (SELECT NULL "PACKAGE_ID", (SELECT NVL("TL"."MEANING","T"."MEANING") FROM 
+       METRICSTREAM."SI_LOOKUPS_TL" "TL",METRICSTREAM."SI_LOOKUPS_T" "T" WHERE "T"."LOOKUP_CODE"='U' AND 
+       "T"."LOOKUP_TYPE"='PACKAGE_TYPE' AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()) AND 
+       "T"."LOOKUP_ID"="TL"."LOOKUP_ID"(+)) "PACKAGE_TITLE", (SELECT NVL("TL"."MEANING","T"."MEANING") FROM 
+       METRICSTREAM."SI_LOOKUPS_TL" "TL",METRICSTREAM."SI_LOOKUPS_T" "T" WHERE "T"."LOOKUP_CODE"='U' AND 
+       "T"."LOOKUP_TYPE"='PACKAGE_TYPE' AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()) AND 
+       "T"."LOOKUP_ID"="TL"."LOOKUP_ID"(+)) "PACKAGE_TYPE" FROM "SYS"."DUAL" "DUAL")) 
+       "SRA",METRICSTREAM."SI_USERS_T" "SUT" WHERE "USER_NAME"=CASE  WHEN 
+       (LENGTH(:B2)-LENGTH(REPLACE(:B3,',',''))>0) THEN :B4 ELSE :B5 END  AND 
+       NVL("SUT"."PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))[801], CASE  WHEN 
+       LENGTH("A"."RESPONDENT")-LENGTH(REPLACE("A"."RESPONDENT",',',''))>0 THEN "A"."RESPONDED_BY" ELSE 
+       "A"."RESPONDENT" END [4000], TO_CHAR("FN_QSM_GET_USER_LOCALE"(:1))[40], '1'[1], 
+       "B"."INTERNAL_QUESTNR_ID"[VARCHAR2,1020]
+  12 - (#keys=0) "A"."RESPONDENT"[VARCHAR2,4000], "A"."RESPONDED_BY"[VARCHAR2,4000], 
+       "B"."INTERNAL_QUESTNR_ID"[VARCHAR2,1020]
+  13 - "A"."QUE_REQUEST_ID"[VARCHAR2,200], "A"."RESPONDENT"[VARCHAR2,4000], 
+       "A"."RESPONDED_BY"[VARCHAR2,4000]
+  14 - "B"."INTERNAL_QUESTNR_ID"[VARCHAR2,1020]
+  15 - "B".ROWID[ROWID,10]
+  16 - (#keys=0) "LAST_NAME"[VARCHAR2,400], "FIRST_NAME"[VARCHAR2,400]
+  17 - "LAST_NAME"[VARCHAR2,400], "FIRST_NAME"[VARCHAR2,400], "SUT"."PACKAGE_ID"[NUMBER,22]
+  18 - "SUT".ROWID[ROWID,10]
+  19 - "SRA"."PACKAGE_ID"[NUMBER,22]
+  20 - STRDEF[22]
+  21 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  22 - "T"."MODULE_ID"[NUMBER,22]
+  25 - (#keys=5)  (SELECT "FIRST_NAME"||' '||"LAST_NAME" FROM  ( (SELECT "T"."MODULE_ID" 
+       "PACKAGE_ID",NVL("TL"."PACKAGE_TITLE","T"."PACKAGE_TITLE") "PACKAGE_TITLE", (SELECT 
+       NVL("TL"."MEANING","T"."MEANING") FROM METRICSTREAM."SI_LOOKUPS_TL" "TL",METRICSTREAM."SI_LOOKUPS_T" "T" 
+       WHERE "T"."LOOKUP_CODE"=:B1 AND "T"."LOOKUP_TYPE"='PACKAGE_TYPE' AND 
+       "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()) AND "T"."LOOKUP_ID"="TL"."LOOKUP_ID"(+)) 
+       "PACKAGE_TYPE" FROM METRICSTREAM."SI_REGISTER_APPLICATION_TL" 
+       "TL",METRICSTREAM."SI_REGISTER_APPLICATION" "T" WHERE 
+       "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()) AND "TL"."MODULE_ID"(+)="T"."MODULE_ID") 
+       UNION ALL  (SELECT NULL "PACKAGE_ID", (SELECT NVL("TL"."MEANING","T"."MEANING") FROM 
+       METRICSTREAM."SI_LOOKUPS_TL" "TL",METRICSTREAM."SI_LOOKUPS_T" "T" WHERE "T"."LOOKUP_CODE"='U' AND 
+       "T"."LOOKUP_TYPE"='PACKAGE_TYPE' AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()) AND 
+       "T"."LOOKUP_ID"="TL"."LOOKUP_ID"(+)) "PACKAGE_TITLE", (SELECT NVL("TL"."MEANING","T"."MEANING") FROM 
+       METRICSTREAM."SI_LOOKUPS_TL" "TL",METRICSTREAM."SI_LOOKUPS_T" "T" WHERE "T"."LOOKUP_CODE"='U' AND 
+       "T"."LOOKUP_TYPE"='PACKAGE_TYPE' AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()) AND 
+       "T"."LOOKUP_ID"="TL"."LOOKUP_ID"(+)) "PACKAGE_TYPE" FROM "SYS"."DUAL" "DUAL")) 
+       "SRA",METRICSTREAM."SI_USERS_T" "SUT" WHERE "USER_NAME"=CASE  WHEN 
+       (LENGTH(:B2)-LENGTH(REPLACE(:B3,',',''))>0) THEN :B4 ELSE :B5 END  AND 
+       NVL("SUT"."PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))[801], CASE  WHEN 
+       LENGTH("RESPONDENT")-LENGTH(REPLACE("RESPONDENT",',',''))>0 THEN "RESPONDED_BY" ELSE "RESPONDENT" END 
+       [4000], TO_CHAR("FN_QSM_GET_USER_LOCALE"(:1))[40], '2'[1], "A"."QUE_REQUEST_ID"[VARCHAR2,200]
+  26 - "A"."QUE_REQUEST_ID"[VARCHAR2,200], "RESPONDENT"[VARCHAR2,4000], "RESPONDED_BY"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_SPREADSHEET_DATA_DRILLDOWN (103888)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT QUE_REQUEST_ID AS QUE_REQUEST_ID ,FIELD_NAME AS FIELD_NAME,DECODE(FIELD_TYPE,'1',SUBSTR(FIELD_VALUE,instr(FIELD_VALUE,'^',1)+1),FIELD_VALUE) AS FIELD_VALUE FROM (
+SELECT A.QUE_REQUEST_ID,B.FIELD_NAME,FIELD_TYPE,A.FIELD_VALUE,FLD_ID_PK FROM 
+      (SELECT QUE_REQUEST_ID as QUE_REQUEST_ID,FIELD_VALUE as FIELD_VALUE,FIELD_NAME as FIELD_NAME from MS_QSM_RESP_SPRD_DETAILS A
+       UNPIVOT INCLUDE NULLS (FIELD_VALUE FOR FIELD_NAME IN (FIELD_1 AS 'FLD1',FIELD_2 AS 'FLD2',FIELD_3 AS 'FLD3',FIELD_4 AS 'FLD4',FIELD_5 AS 'FLD5',FIELD_6 AS 'FLD6',FIELD_7 AS 'FLD7',
+                                                             FIELD_8 AS 'FLD8',FIELD_9 AS 'FLD9',FIELD_10 AS 'FLD10',FIELD_11 AS 'FLD11',FIELD_12 AS 'FLD12',FIELD_13 AS 'FLD13',FIELD_14 AS 'FLD14',
+                                                             FIELD_15 AS 'FLD15',FIELD_16 AS 'FLD16',FIELD_17 AS 'FLD17',FIELD_18 AS 'FLD18',FIELD_19 AS 'FLD19',FIELD_20 AS 'FLD20'))
+       WHERE QUE_REQUEST_ID=:1
+         and que_response_id=:2
+         and question_id=:3
+       ) A
+       ,MS_QSM_SPREADSHEET_FLD B
+       ,MS_QSM_TRIGGERED_QUESTION C
+       WHERE A.QUE_REQUEST_ID=C.QUE_REQUEST_ID
+       AND B.SPRD_SHEET_INTERNAL_ID=QST_SPRDSHEET_TEMPLATE
+       AND A.FIELD_NAME=FLD_ID_PK
+       AND QST_ID_PK=:3
+      and A.FIELD_VALUE is not null)
+      order by FLD_ID_PK</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet is used to get the spreadsheet related data for a given response id</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2621702530</h2></header><pre><code>
+ 
+-------------------------------------------------------------------------------------------------------------
+| Id  | Operation                       | Name                      | Rows  | Bytes | Cost (%CPU)| Time     |
+-------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                |                           |     1 |  9956 |    43   (3)| 00:00:01 |
+|   1 |  SORT ORDER BY                  |                           |     1 |  9956 |    43   (3)| 00:00:01 |
+|   2 |   NESTED LOOPS                  |                           |     1 |  9956 |    42   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   3 |    MERGE JOIN CARTESIAN         |                           |     1 |  4928 |    41   (0)| 00:00:01 |</font>
+|*  4 |     VIEW                        |                           |    20 | 46240 |    40   (0)| 00:00:01 |
+|   5 |      UNPIVOT                    |                           |       |       |            |          |
+<font style="background-color: lightblue; color: red">|*  6 |       TABLE ACCESS FULL         | MS_QSM_RESP_SPRD_DETAILS  |     1 | 40346 |     2   (0)| 00:00:01 |</font>
+|   7 |     BUFFER SORT                 |                           |     1 |  2616 |    41   (0)| 00:00:01 |
+|   8 |      TABLE ACCESS BY INDEX ROWID| MS_QSM_TRIGGERED_QUESTION |     1 |  2616 |     1   (0)| 00:00:01 |
+|*  9 |       INDEX RANGE SCAN          | MS_QSM_TRIG_QST_IDX2      |     1 |       |     1   (0)| 00:00:01 |
+|  10 |    TABLE ACCESS BY INDEX ROWID  | MS_QSM_SPREADSHEET_FLD    |     1 |  5028 |     1   (0)| 00:00:01 |
+|* 11 |     INDEX UNIQUE SCAN           | MS_QSM_SPREADSHEET_FLD_UK |     1 |       |     1   (0)| 00:00:01 |
+-------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$AD92E775
+   4 - SET$1        / from$_subquery$_004@SEL$23
+   5 - SET$1       
+   6 - SEL$22       / A@SEL$22
+   8 - SEL$AD92E775 / C@SEL$2
+   9 - SEL$AD92E775 / C@SEL$2
+  10 - SEL$AD92E775 / B@SEL$2
+  11 - SEL$AD92E775 / B@SEL$2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   4 - filter("FIELD_VALUE" IS NOT NULL)
+   6 - filter("A"."QUE_REQUEST_ID"=:1 AND "A"."QUE_RESPONSE_ID"=:2 AND "A"."QUESTION_ID"=:3)
+   9 - access("QST_ID_PK"=:3 AND "C"."QUE_REQUEST_ID"=:1)
+  11 - access("FIELD_NAME"="FLD_ID_PK" AND "B"."SPRD_SHEET_INTERNAL_ID"="QST_SPRDSHEET_TEMPLATE")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "FLD_ID_PK"[VARCHAR2,4000], "QUE_REQUEST_ID"[VARCHAR2,200], 
+       "B"."FIELD_NAME"[VARCHAR2,1020], DECODE("FIELD_TYPE",'1',SUBSTR("FIELD_VALUE",INSTR("FIELD_VALUE",'^'
+       ,1)+1),"FIELD_VALUE")[4000]
+   2 - (#keys=0) "QUE_REQUEST_ID"[VARCHAR2,200], "FIELD_VALUE"[VARCHAR2,4000], 
+       "FIELD_TYPE"[VARCHAR2,4000], "B"."FIELD_NAME"[VARCHAR2,1020], "FLD_ID_PK"[VARCHAR2,4000]
+   3 - (#keys=0) "QUE_REQUEST_ID"[VARCHAR2,200], "FIELD_NAME"[VARCHAR2,5], 
+       "FIELD_VALUE"[VARCHAR2,4000], "QST_SPRDSHEET_TEMPLATE"[VARCHAR2,4000]
+   4 - "QUE_REQUEST_ID"[VARCHAR2,200], "FIELD_NAME"[VARCHAR2,5], "FIELD_VALUE"[VARCHAR2,4000]
+   5 - STRDEF[200], STRDEF[200], STRDEF[200], STRDEF[5], STRDEF[4000]
+   6 - "A"."FIELD_17"[VARCHAR2,4000], "A"."FIELD_12"[VARCHAR2,4000], "A"."FIELD_9"[VARCHAR2,4000], 
+       "A"."FIELD_5"[VARCHAR2,4000], "A"."FIELD_2"[VARCHAR2,4000], "A"."FIELD_7"[VARCHAR2,4000], 
+       "A"."FIELD_6"[VARCHAR2,4000], "A"."FIELD_13"[VARCHAR2,4000], "A"."FIELD_18"[VARCHAR2,4000], 
+       "A"."FIELD_8"[VARCHAR2,4000], "A"."FIELD_20"[VARCHAR2,4000], "A"."FIELD_19"[VARCHAR2,4000], 
+       "A"."FIELD_16"[VARCHAR2,4000], "A"."FIELD_14"[VARCHAR2,4000], "A"."FIELD_11"[VARCHAR2,4000], 
+       "A"."FIELD_4"[VARCHAR2,4000], "A"."FIELD_10"[VARCHAR2,4000], "A"."FIELD_3"[VARCHAR2,4000], 
+       "A"."FIELD_15"[VARCHAR2,4000], "FIELD_1"[VARCHAR2,4000], "A"."QUESTION_ID"[VARCHAR2,200], 
+       "A"."QUE_RESPONSE_ID"[VARCHAR2,200], "A"."QUE_REQUEST_ID"[VARCHAR2,200]
+   7 - (#keys=0) "QST_SPRDSHEET_TEMPLATE"[VARCHAR2,4000]
+   8 - "QST_SPRDSHEET_TEMPLATE"[VARCHAR2,4000]
+   9 - "C".ROWID[ROWID,10]
+  10 - "FIELD_TYPE"[VARCHAR2,4000], "B"."FIELD_NAME"[VARCHAR2,1020], "FLD_ID_PK"[VARCHAR2,4000]
+  11 - "B".ROWID[ROWID,10], "FLD_ID_PK"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

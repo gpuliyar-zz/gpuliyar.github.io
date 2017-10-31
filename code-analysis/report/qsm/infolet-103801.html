@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_ONDEMAND_SURVEYS (103801)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>select QUE_REQUEST_NAME,QUE_REQUEST_ID,QUE_NAME,QUESTIONNAIRE_ID from MS_QSM_INIT_QUESTNR_RPT_V
+ a
+WHERE ((SCH_FREQUENCY='6' and DD_CREATED_BY=:1)
+OR (SCH_FREQUENCY ='8'
+AND MS_APPS_SECURITY_PKG.CHECK_OBJECT_ACCESS(DD_OBJECT_TYPE, RESTRICT_ACCESS_TO,(SELECT ms_join_clob (b.owner_organizations)
+                       FROM MS_QSM_INIT_QUESTNR_OWO b
+                      WHERE b.QUE_REQUEST_ID = a.QUE_REQUEST_ID),:1,'VIEW') = 'ACCESS'))</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>Fetches the survey names for On demand survey report</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 94346746</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------
+| Id  | Operation                       | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                |                            |     1 |  3880 |     5  (20)| 00:00:01 |
+|*  1 |  FILTER                         |                            |       |       |            |          |
+|   2 |   NESTED LOOPS                  |                            |     1 |  3880 |     5  (20)| 00:00:01 |
+|   3 |    NESTED LOOPS                 |                            |     1 |  3880 |     5  (20)| 00:00:01 |
+|   4 |     NESTED LOOPS OUTER          |                            |     1 |  2856 |     4  (25)| 00:00:01 |
+|   5 |      VIEW                       |                            |     1 |  2142 |     3  (34)| 00:00:01 |
+|   6 |       SORT ORDER BY             |                            |     1 | 35914 |     3  (34)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   7 |        TABLE ACCESS FULL        | MS_QSM_INIT_QUESTNR        |     1 | 35914 |     2   (0)| 00:00:01 |</font>
+|   8 |      TABLE ACCESS BY INDEX ROWID| MS_QSM_QUESTNR_SCH         |     1 |   714 |     1   (0)| 00:00:01 |
+|*  9 |       INDEX UNIQUE SCAN         | MS_QSM_QUESTNR_SCH_PK      |     1 |       |     1   (0)| 00:00:01 |
+|* 10 |     INDEX UNIQUE SCAN           | MS_QSM_QUESTIONNAIRE_PK    |     1 |       |     1   (0)| 00:00:01 |
+|  11 |    TABLE ACCESS BY INDEX ROWID  | MS_QSM_QUESTIONNAIRE       |     1 |  1024 |     1   (0)| 00:00:01 |
+|  12 |   SORT AGGREGATE                |                            |     1 |  2204 |            |          |
+<font style="background-color: lightblue; color: red">|* 13 |    INDEX SKIP SCAN              | MS_QSM_INIT_QUESTNR_OWO_UK |     1 |  2204 |     1   (0)| 00:00:01 |</font>
+--------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$ED731CA1
+   5 - SEL$15       / A@SEL$5
+   6 - SEL$15      
+   7 - SEL$15       / MS_QSM_INIT_QUESTNR@SEL$15
+   8 - SEL$ED731CA1 / B@SEL$5
+   9 - SEL$ED731CA1 / B@SEL$5
+  10 - SEL$ED731CA1 / C@SEL$5
+  11 - SEL$ED731CA1 / C@SEL$5
+  12 - SEL$16      
+  13 - SEL$16       / B@SEL$16
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - filter("B"."SCH_FREQUENCY"='6' AND "A"."DD_CREATED_BY"=:1 OR "B"."SCH_FREQUENCY"='8' AND 
+              "MS_APPS_SECURITY_PKG"."CHECK_OBJECT_ACCESS"("A"."DD_OBJECT_TYPE","A"."RESTRICT_ACCESS_TO",SYS_OP_CL2C
+              ( (SELECT "MS_JOIN_CLOB"(INTERNAL_FUNCTION("B"."OWNER_ORGANIZATIONS")) FROM "MS_QSM_INIT_QUESTNR_OWO" 
+              "B" WHERE "B"."QUE_REQUEST_ID"=:B1)),:1,'VIEW')='ACCESS')
+   9 - access("A"."QUE_REQUEST_ID"="B"."SCH_REQ_ID"(+))
+  10 - access("A"."QUESTIONNAIRE_ID"="C"."INTERNAL_QUESTNR_ID")
+  13 - access("B"."QUE_REQUEST_ID"=:B1)
+       filter("B"."QUE_REQUEST_ID"=:B1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "A"."QUE_REQUEST_ID"[VARCHAR2,400], "A"."QUE_REQUEST_NAME"[VARCHAR2,1020], 
+       "A"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "C"."QUE_NAME"[VARCHAR2,1020]
+   2 - (#keys=0) "A"."QUE_REQUEST_ID"[VARCHAR2,400], "A"."QUE_REQUEST_NAME"[VARCHAR2,1020], 
+       "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "A"."DD_CREATED_BY"[VARCHAR2,400], 
+       "A"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "A"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "B"."SCH_FREQUENCY"[VARCHAR2,1020], "C"."QUE_NAME"[VARCHAR2,1020]
+   3 - (#keys=0) "A"."QUE_REQUEST_ID"[VARCHAR2,400], "A"."QUE_REQUEST_NAME"[VARCHAR2,1020], 
+       "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "A"."DD_CREATED_BY"[VARCHAR2,400], 
+       "A"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "A"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "B"."SCH_FREQUENCY"[VARCHAR2,1020], "C".ROWID[ROWID,10]
+   4 - (#keys=0) "A"."QUE_REQUEST_ID"[VARCHAR2,400], "A"."QUE_REQUEST_NAME"[VARCHAR2,1020], 
+       "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "A"."DD_CREATED_BY"[VARCHAR2,400], 
+       "A"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "A"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "B"."SCH_FREQUENCY"[VARCHAR2,1020]
+   5 - "A"."QUE_REQUEST_ID"[VARCHAR2,400], "A"."QUE_REQUEST_NAME"[VARCHAR2,1020], 
+       "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "A"."DD_CREATED_BY"[VARCHAR2,400], 
+       "A"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "A"."RESTRICT_ACCESS_TO"[VARCHAR2,1020]
+   6 - (#keys=1) UPPER("MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME")[1020], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_ID"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_CREATED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."RESTRICT_ACCESS_TO"[VARCHAR2,1020]
+   7 - "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_ID"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_CREATED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."RESTRICT_ACCESS_TO"[VARCHAR2,1020]
+   8 - "B"."SCH_FREQUENCY"[VARCHAR2,1020]
+   9 - "B".ROWID[ROWID,10]
+  10 - "C".ROWID[ROWID,10]
+  11 - "C"."QUE_NAME"[VARCHAR2,1020]
+  12 - (#keys=0) "MS_JOIN_CLOB"(INTERNAL_FUNCTION("B"."OWNER_ORGANIZATIONS"))[4000]
+  13 - "B"."OWNER_ORGANIZATIONS"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

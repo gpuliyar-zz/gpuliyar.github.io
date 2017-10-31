@@ -1,0 +1,249 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_RESPOND_TO_ALL_RPT (103840)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code> SELECT A.que_request_name, 
+       A.resp_status, 
+       MS_QSM_RPT_UTIL.GET_RESP_STATUS_DISPLAY_VALUE(:1, A.RESP_STATUS) as  RESP_STATUS_DISP,
+       A.DUE_DATE,
+       decode(A.tmep_que_type,'2','Survey','3','Certification','4','Scorecard') as QUE_REQUEST_TYPE,
+       S.SCH_FREQUENCY,
+      (MS_QSM_UTILITIES.FN_GET_REPORT_JSON(a.metric_id,a.process_instance_id,'0',
+       '''flag=1'||CHR(38)||'emd=1'||CHR(38)||'x_edit_mode=Yes'||CHR (38)|| 'wrapper= No'|| CHR (38)|| 'mode=edit''')) as report_json       
+FROM (SELECT process_instance_id,INSTANCE_ID,metric_id,DUE_DATE,RESP_STATUS,tmep_que_type,que_request_name,QUE_REQUEST_ID
+       FROM (SELECT X.process_instance_id,X.INSTANCE_ID,x.metric_id,max(X.instance_id) over (partition by process_instance_id) MAX_IID,
+      X.DUE_DATE,X.RESP_STATUS,X.tmep_que_type,X.que_request_name,X.dd_object_type,X.QUE_REQUEST_ID
+      FROM MS_QSM_QUESTNR_RESP_DUP_V X
+      WHERE X.PROCESS_INSTANCE_ID IN ( select ea.process_instance_id 
+                                       from si_event_assignments ea 
+                                       where  ea.user_id=ms_apps_utilities.get_user_id(:1)
+                                       and ea.INFOLET_ID = (SELECT METRIC_ID 
+                                                            FROM SI_METRICS_T 
+                                                            WHERE METRIC_NAME='MS_QSM_QUESTNR_RESP_DUP')
+                                      and ea.status<>2
+                                      AND ea.assignment_id >0) 
+        and  X.instance_rec_num = 1) Y WHERE Y.INSTANCE_ID=Y.MAX_IID)A,MS_QSM_QUESTNR_SCH s
+WHERE  
+ a.que_request_id=s.SCH_REQ_ID
+   and a.resp_status in('4','10')
+  and sch_frequency <>'3'</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet is used to display all the response assignments that are assigned to the logged-in user.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 892393661</h2></header><pre><code>
+ 
+----------------------------------------------------------------------------------------------------------------
+| Id  | Operation                            | Name                    | Rows  | Bytes | Cost (%CPU)| Time     |
+----------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                     |                         |     1 |  8783 |     5  (40)| 00:00:01 |
+|   1 |  NESTED LOOPS                        |                         |     1 |  8783 |     5  (40)| 00:00:01 |
+|*  2 |   VIEW                               |                         |     1 |  8069 |     4  (50)| 00:00:01 |
+|   3 |    WINDOW BUFFER                     |                         |     1 |  8082 |     4  (50)| 00:00:01 |
+|   4 |     NESTED LOOPS                     |                         |     1 |  8082 |     3  (34)| 00:00:01 |
+|   5 |      NESTED LOOPS                    |                         |     1 |  8082 |     3  (34)| 00:00:01 |
+|   6 |       VIEW                           | VW_NSO_1                |     1 |    13 |     1   (0)| 00:00:01 |
+|   7 |        SORT UNIQUE                   |                         |     1 |    21 |            |          |
+|*  8 |         TABLE ACCESS BY INDEX ROWID  | SI_EVENT_ASSIGNMENTS    |     1 |    21 |     1   (0)| 00:00:01 |
+|*  9 |          INDEX RANGE SCAN            | SI_EVENT_ASSIGNMENTS_N2 |     1 |       |     1   (0)| 00:00:01 |
+|  10 |           TABLE ACCESS BY INDEX ROWID| SI_METRICS_T            |     1 |    34 |     1   (0)| 00:00:01 |
+|* 11 |            INDEX RANGE SCAN          | SI_METRICS_T_N7         |     1 |       |     1   (0)| 00:00:01 |
+|* 12 |       INDEX RANGE SCAN               | SI_103929_N2            |     1 |       |     1   (0)| 00:00:01 |
+|* 13 |      TABLE ACCESS BY INDEX ROWID     | SI_103929_T             |     1 |  8069 |     1   (0)| 00:00:01 |
+|* 14 |   TABLE ACCESS BY INDEX ROWID        | MS_QSM_QUESTNR_SCH      |     1 |   714 |     1   (0)| 00:00:01 |
+|* 15 |    INDEX UNIQUE SCAN                 | MS_QSM_QUESTNR_SCH_PK   |     1 |       |     1   (0)| 00:00:01 |
+----------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$F5BB74E1
+   2 - SEL$B13A65D2 / Y@SEL$2
+   3 - SEL$B13A65D2
+   6 - SEL$CE1D94FA / VW_NSO_1@SEL$B13A65D2
+   7 - SEL$CE1D94FA
+   8 - SEL$CE1D94FA / EA@SEL$6
+   9 - SEL$CE1D94FA / EA@SEL$6
+  10 - SEL$7        / SI_METRICS_T@SEL$7
+  11 - SEL$7        / SI_METRICS_T@SEL$7
+  12 - SEL$B13A65D2 / SI_103929_T@SEL$5
+  13 - SEL$B13A65D2 / SI_103929_T@SEL$5
+  14 - SEL$F5BB74E1 / S@SEL$1
+  15 - SEL$F5BB74E1 / S@SEL$1
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - filter(("RESP_STATUS"='10' OR "RESP_STATUS"='4') AND "Y"."INSTANCE_ID"="Y"."MAX_IID")
+   8 - filter("EA"."STATUS"<>2 AND "EA"."ASSIGNMENT_ID">0)
+   9 - access("EA"."USER_ID"="MS_APPS_UTILITIES"."GET_USER_ID"(:1) AND "EA"."INFOLET_ID"= (SELECT 
+              "METRIC_ID" FROM "SI_METRICS_T" "SI_METRICS_T" WHERE "METRIC_NAME"='MS_QSM_QUESTNR_RESP_DUP'))
+  11 - access("METRIC_NAME"='MS_QSM_QUESTNR_RESP_DUP')
+  12 - access("PROCESS_INSTANCE_ID"="PROCESS_INSTANCE_ID")
+  13 - filter("INSTANCE_REC_NUM"=1)
+  14 - filter("SCH_FREQUENCY"<>'3')
+  15 - access("QUE_REQUEST_ID"="S"."SCH_REQ_ID")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=0) "PROCESS_INSTANCE_ID"[NUMBER,22], "METRIC_ID"[NUMBER,22], "DUE_DATE"[DATE,7], 
+       "RESP_STATUS"[VARCHAR2,4000], "TMEP_QUE_TYPE"[VARCHAR2,4000], "QUE_REQUEST_NAME"[VARCHAR2,4000], 
+       "SCH_FREQUENCY"[VARCHAR2,1020]
+   2 - "PROCESS_INSTANCE_ID"[NUMBER,22], "Y"."INSTANCE_ID"[NUMBER,22], "METRIC_ID"[NUMBER,22], 
+       "Y"."MAX_IID"[NUMBER,22], "DUE_DATE"[DATE,7], "RESP_STATUS"[VARCHAR2,4000], 
+       "TMEP_QUE_TYPE"[VARCHAR2,4000], "QUE_REQUEST_NAME"[VARCHAR2,4000], "QUE_REQUEST_ID"[VARCHAR2,4000]
+   3 - (#keys=1) "PROCESS_INSTANCE_ID"[NUMBER,22], "PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "SI_103929_T".ROWID[ROWID,10], "TMEP_QUE_TYPE"[VARCHAR2,4000], "RESP_STATUS"[VARCHAR2,4000], 
+       "QUE_REQUEST_NAME"[VARCHAR2,4000], "QUE_REQUEST_ID"[VARCHAR2,4000], "DUE_DATE"[DATE,7], 
+       "INSTANCE_REC_NUM"[NUMBER,22], "INSTANCE_ID"[NUMBER,22], "METRIC_ID"[NUMBER,22], MAX("INSTANCE_ID") 
+       OVER ( PARTITION BY "PROCESS_INSTANCE_ID")[22]
+   4 - (#keys=0) "PROCESS_INSTANCE_ID"[NUMBER,22], "SI_103929_T".ROWID[ROWID,10], 
+       "TMEP_QUE_TYPE"[VARCHAR2,4000], "RESP_STATUS"[VARCHAR2,4000], "QUE_REQUEST_NAME"[VARCHAR2,4000], 
+       "QUE_REQUEST_ID"[VARCHAR2,4000], "DUE_DATE"[DATE,7], "INSTANCE_REC_NUM"[NUMBER,22], 
+       "INSTANCE_ID"[NUMBER,22], "METRIC_ID"[NUMBER,22], "PROCESS_INSTANCE_ID"[NUMBER,22]
+   5 - (#keys=0) "PROCESS_INSTANCE_ID"[NUMBER,22], "SI_103929_T".ROWID[ROWID,10], 
+       "PROCESS_INSTANCE_ID"[NUMBER,22], "INSTANCE_ID"[NUMBER,22]
+   6 - "PROCESS_INSTANCE_ID"[NUMBER,22]
+   7 - (#keys=1) "EA"."PROCESS_INSTANCE_ID"[NUMBER,22]
+   8 - "EA"."PROCESS_INSTANCE_ID"[NUMBER,22]
+   9 - "EA".ROWID[ROWID,10], "EA"."PROCESS_INSTANCE_ID"[NUMBER,22]
+  10 - "SI_METRICS_T".ROWID[ROWID,10], "METRIC_ID"[NUMBER,22]
+  11 - "SI_METRICS_T".ROWID[ROWID,10]
+  12 - "SI_103929_T".ROWID[ROWID,10], "PROCESS_INSTANCE_ID"[NUMBER,22], "INSTANCE_ID"[NUMBER,22]
+  13 - "SI_103929_T".ROWID[ROWID,10], "TMEP_QUE_TYPE"[VARCHAR2,4000], "RESP_STATUS"[VARCHAR2,4000], 
+       "QUE_REQUEST_NAME"[VARCHAR2,4000], "QUE_REQUEST_ID"[VARCHAR2,4000], "DUE_DATE"[DATE,7], 
+       "INSTANCE_REC_NUM"[NUMBER,22], "METRIC_ID"[NUMBER,22]
+  14 - "SCH_FREQUENCY"[VARCHAR2,1020]
+  15 - "S".ROWID[ROWID,10]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

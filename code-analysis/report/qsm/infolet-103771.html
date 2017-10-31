@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_GRC_QST_PROC (103771)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT object_id AS object_id  ,
+          object_name ,
+          question_htm AS question            ,'LOV_MS_QSM_Response_Type' as LOV_NAME,
+          ms_apps_utilities.get_display_value ( ms_grc_utilities.active_ent_id, 'MS_QSM_GRC_Response_Mapping', response_type ) AS response_type ,
+          decode(response_type,'2','1','1','3','3','5','4','2','5','6','6','7') AS response_type_stored,
+          decode(response_type,5,'Yes|No',MS_QSM_UTILITIES.convert_grc_to_qsm_lov(list_of_response)) as list_of_response
+     FROM ms_grc_question_proc_pub_v a,( select COLUMN_VALUE from table(ms_grc_security.get_object_list_by_user(:1,'MS_GRC_QUESTION_PROCEDURE'))) b
+     WHERE a.OBJECT_ID = B.column_value   and DD_OBJECT_TYPE = 'MS_GRC_QUESTION_PROCEDURE'
+          AND TRUNC(sysdate) BETWEEN NVL (TRUNC(valid_from), TRUNC(sysdate)) AND NVL (TRUNC(valid_until), TRUNC(sysdate))
+          AND ms_qsm_utilities.fn_compare_values(OWNER_ORGANIZATIONS,:2)>0
+          and case when response_type in (6) and MS_QSM_UTILITIES.convert_grc_to_qsm_lov(list_of_response) is null then '0' else '1' end ='1'
+        order by object_name</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet will fetch Question(s) / Procedure(s) data from GRC.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 3124478818</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                            | Name                        | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                     |                             |     1 |   605 |    33   (4)| 00:00:01 |
+|   1 |  SORT ORDER BY                       |                             |     1 |   605 |    33   (4)| 00:00:01 |
+|*  2 |   FILTER                             |                             |       |       |            |          |
+|*  3 |    HASH JOIN                         |                             |     1 |   605 |    31   (0)| 00:00:01 |
+|*  4 |     TABLE ACCESS BY INDEX ROWID      | MS_GRC_QUESTION_PROC        |     1 |   603 |     2   (0)| 00:00:01 |
+|*  5 |      INDEX RANGE SCAN                | MS_GRC_IDX_DD_OBJ_TYP_QUES  |     9 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|   6 |     COLLECTION ITERATOR PICKLER FETCH| GET_OBJECT_LIST_BY_USER     |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|   7 |    SORT AGGREGATE                    |                             |     1 |    23 |            |          |
+|*  8 |     INDEX RANGE SCAN                 | MS_GRC_QUESTION_PROC_ORG_UK |     1 |    23 |     1   (0)| 00:00:01 |
+--------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$3283198D
+   4 - SEL$3283198D / A@SEL$2
+   5 - SEL$3283198D / A@SEL$2
+   6 - SEL$3283198D / KOKBF$0@SEL$7
+   7 - SEL$4       
+   8 - SEL$4        / B@SEL$4
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - filter("MS_QSM_UTILITIES"."FN_COMPARE_VALUES"( (SELECT "MS_CONCAT"("OWNER_ORGANIZATIONS") FROM 
+              METRICSTREAM."MS_GRC_QUESTION_PROC_ORG" "B" WHERE "B"."OBJECT_ID"=:B1),:2)>0)
+   3 - access("A"."OBJECT_ID"=VALUE(KOKBF$))
+   4 - filter(NVL(TRUNC(INTERNAL_FUNCTION("A"."VALID_FROM")),TRUNC(SYSDATE@!))<=TRUNC(SYSDATE@!) AND 
+              NVL(TRUNC(INTERNAL_FUNCTION("A"."VALID_UNTIL")),TRUNC(SYSDATE@!))>=TRUNC(SYSDATE@!) AND CASE  WHEN 
+              (TO_NUMBER("RESPONSE_TYPE")=6 AND "MS_QSM_UTILITIES"."CONVERT_GRC_TO_QSM_LOV"("LIST_OF_RESPONSE") IS NULL) 
+              THEN '0' ELSE '1' END ='1')
+   5 - access("A"."DD_OBJECT_TYPE"='MS_GRC_QUESTION_PROCEDURE')
+   8 - access("B"."OBJECT_ID"=:B1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "A"."OBJECT_NAME"[VARCHAR2,4000], "A"."OBJECT_ID"[VARCHAR2,400], 
+       DECODE(TO_NUMBER("RESPONSE_TYPE"),5,'Yes|No',"MS_QSM_UTILITIES"."CONVERT_GRC_TO_QSM_LOV"("LIST_OF_RESPONSE")
+       )[4000], "A"."QUESTION"[LOB,4000], 'LOV_MS_QSM_Response_Type'[24], 
+       "MS_APPS_UTILITIES"."GET_DISPLAY_VALUE"("MS_GRC_UTILITIES"."ACTIVE_ENT_ID"(),'MS_QSM_GRC_Response_Mapping',"
+       RESPONSE_TYPE")[4000], DECODE("RESPONSE_TYPE",'2','1','1','3','3','5','4','2','5','6','6','7')[1]
+   2 - "A"."OBJECT_ID"[VARCHAR2,400], "RESPONSE_TYPE"[VARCHAR2,4000], "LIST_OF_RESPONSE"[VARCHAR2,4000], 
+       "A"."OBJECT_NAME"[VARCHAR2,4000], "A"."QUESTION"[LOB,4000]
+   3 - (#keys=1) "A"."OBJECT_ID"[VARCHAR2,400], "RESPONSE_TYPE"[VARCHAR2,4000], 
+       "LIST_OF_RESPONSE"[VARCHAR2,4000], "A"."OBJECT_NAME"[VARCHAR2,4000], "A"."QUESTION"[LOB,4000]
+   4 - "A".ROWID[ROWID,10], "A"."OBJECT_ID"[VARCHAR2,400], "RESPONSE_TYPE"[VARCHAR2,4000], 
+       "LIST_OF_RESPONSE"[VARCHAR2,4000], "A"."OBJECT_NAME"[VARCHAR2,4000], "A"."VALID_UNTIL"[DATE,7], 
+       "A"."VALID_FROM"[DATE,7], "A"."QUESTION"[LOB,4000], "A"."DD_OBJECT_TYPE"[VARCHAR2,400]
+   5 - "A".ROWID[ROWID,10], "A"."DD_OBJECT_TYPE"[VARCHAR2,400]
+   6 - VALUE(A0)[8000]
+   7 - (#keys=0) "MS_CONCAT"("OWNER_ORGANIZATIONS")[4000]
+   8 - "OWNER_ORGANIZATIONS"[VARCHAR2,4000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

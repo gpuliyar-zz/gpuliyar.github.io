@@ -1,0 +1,537 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_INDV_SEND_TO_USERS (103781)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT USER_NAME, USER_FULL_NAME
+  FROM ( 
+            SELECT DISTINCT fdo.user_name AS USER_NAME, 
+                        ms_apps_utilities.get_user_full_name (fdo.user_id) AS USER_FULL_NAME, 
+                        fdo.user_id, 
+                        fdo.activity_id, 
+                        fdo.activity_name 
+           FROM SI_USER_ORG_ACT_VIEW fdo 
+         WHERE     ORG_ENTITY_ID IN (:1)  
+               AND activity_name = 'QSM - Respond to Surveys'
+               AND (nvl(:2,'no')='no' OR (nvl(:2,'no')='yes')) 
+        UNION 
+        SELECT DISTINCT a.user_name,a.user_full_name,b.user_id,b.activity_id,b.activity_name FROM (select USER_NAME,USER_FULL_NAME FROM TABLE(MS_QSM_UTILITIES.MODULE_OBJECT_CONTACT_LIST(:3||'123'||:4))) a,SI_USER_ORG_ACT_VIEW b 
+       WHERE a.USER_NAME = B.USER_NAME 
+       AND  b.activity_name = 'QSM - Respond to Surveys'
+       AND nvl(:2,'no')='yes'   
+       ) order by USER_NAME asc</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet is used to fetch users to whom the Surveys will be initiated.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1928437004</h2></header><pre><code>
+ 
+---------------------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                                      | Name                           | Rows  | Bytes | Cost (%CPU)| Time     |
+---------------------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                               |                                |     2 |  8008 |    92   (4)| 00:00:02 |
+|   1 |  SORT ORDER BY                                 |                                |     2 |  8008 |    92   (4)| 00:00:02 |
+|   2 |   VIEW                                         |                                |     2 |  8008 |    91   (3)| 00:00:02 |
+|   3 |    SORT UNIQUE                                 |                                |     2 |  1994 |    91   (3)| 00:00:02 |
+|   4 |     UNION-ALL                                  |                                |       |       |            |          |
+|*  5 |      HASH JOIN                                 |                                |     1 |   220 |    29   (0)| 00:00:01 |
+|   6 |       NESTED LOOPS                             |                                |     1 |   207 |    23   (0)| 00:00:01 |
+|   7 |        NESTED LOOPS                            |                                |     1 |   207 |    23   (0)| 00:00:01 |
+|   8 |         NESTED LOOPS                           |                                |     1 |   175 |    22   (0)| 00:00:01 |
+|   9 |          NESTED LOOPS                          |                                |     1 |   165 |    21   (0)| 00:00:01 |
+|  10 |           NESTED LOOPS                         |                                |     1 |   143 |    20   (0)| 00:00:01 |
+|  11 |            NESTED LOOPS OUTER                  |                                |     1 |   133 |    19   (0)| 00:00:01 |
+|* 12 |             HASH JOIN                          |                                |     1 |   124 |    18   (0)| 00:00:01 |
+|  13 |              MERGE JOIN OUTER                  |                                |     1 |   116 |     8   (0)| 00:00:01 |
+|* 14 |               HASH JOIN                        |                                |     1 |   109 |     7   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  15 |                MERGE JOIN CARTESIAN            |                                |     1 |   101 |     5   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  16 |                 MERGE JOIN CARTESIAN           |                                |     1 |    86 |     4   (0)| 00:00:01 |</font>
+|  17 |                  NESTED LOOPS                  |                                |     1 |    80 |     3   (0)| 00:00:01 |
+|  18 |                   NESTED LOOPS                 |                                |     1 |    67 |     2   (0)| 00:00:01 |
+|  19 |                    TABLE ACCESS BY INDEX ROWID | MS_QS_PARAMETER_NAMES          |     1 |    34 |     1   (0)| 00:00:01 |
+|* 20 |                     INDEX RANGE SCAN           | MS_QS_PARAMETER_NAMES_N2       |     1 |       |     1   (0)| 00:00:01 |
+|* 21 |                    INDEX RANGE SCAN            | MS_QS_PARAMETERTYPE_TYPEID_IDX |     1 |    33 |     1   (0)| 00:00:01 |
+|* 22 |                   INDEX RANGE SCAN             | MS_QS_PARAMETER_VALUES_IDX     |     1 |    13 |     1   (0)| 00:00:01 |
+|  23 |                  BUFFER SORT                   |                                |     1 |     6 |     3   (0)| 00:00:01 |
+|* 24 |                   TABLE ACCESS BY INDEX ROWID  | SI_ORG_ENTITIES_T              |     1 |     6 |     1   (0)| 00:00:01 |
+|* 25 |                    INDEX RANGE SCAN            | SI_ORG_ENTITIES_N5             |     1 |       |     1   (0)| 00:00:01 |
+|  26 |                 BUFFER SORT                    |                                |     3 |    45 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 27 |                  INDEX SKIP SCAN               | SI_ORG_ROLES_N3                |     3 |    45 |     1   (0)| 00:00:01 |</font>
+|  28 |                VIEW                            | SI_ORG_ENTITIES                |     1 |     8 |     2   (0)| 00:00:01 |
+|  29 |                 MERGE JOIN OUTER               |                                |     1 |    15 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 30 |                  INDEX SKIP SCAN               | SI_ORG_ENTITIES_N1             |     1 |     8 |     1   (0)| 00:00:01 |</font>
+|  31 |                  BUFFER SORT                   |                                |     1 |     7 |     1   (0)| 00:00:01 |
+|* 32 |                   INDEX RANGE SCAN             | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+|  33 |               BUFFER SORT                      |                                |     1 |     7 |     8   (0)| 00:00:01 |
+|* 34 |                INDEX RANGE SCAN                | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+|  35 |              VIEW                              | SI_ROLES                       |   456 |  3648 |    10   (0)| 00:00:01 |
+|* 36 |               HASH JOIN                        |                                |   456 | 15504 |    10   (0)| 00:00:01 |
+|  37 |                NESTED LOOPS OUTER              |                                |   110 |  2310 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  38 |                 TABLE ACCESS FULL              | SI_ROLES_T                     |   110 |  1320 |     3   (0)| 00:00:01 |</font>
+|* 39 |                 INDEX RANGE SCAN               | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+|  40 |                VIEW                            | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+|  41 |                 UNION-ALL                      |                                |       |       |            |          |
+|  42 |                  NESTED LOOPS OUTER            |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  43 |                   TABLE ACCESS FULL            | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|* 44 |                   INDEX RANGE SCAN             | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+|  45 |                  FAST DUAL                     |                                |     1 |       |     2   (0)| 00:00:01 |
+|* 46 |             INDEX RANGE SCAN                   | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+|* 47 |            INDEX RANGE SCAN                    | SI_USER_ORG_ROLES_N2           |     3 |    30 |     1   (0)| 00:00:01 |
+|* 48 |           TABLE ACCESS BY INDEX ROWID          | SI_USERS_T                     |     1 |    22 |     1   (0)| 00:00:01 |
+|* 49 |            INDEX UNIQUE SCAN                   | SI_USERS_T_N1                  |     1 |       |     1   (0)| 00:00:01 |
+|* 50 |          INDEX RANGE SCAN                      | SI_ROLE_ACTIVITIES_N2          |    23 |   230 |     1   (0)| 00:00:01 |
+|* 51 |         INDEX RANGE SCAN                       | SI_ACTIVITIES_N1               |     1 |       |     1   (0)| 00:00:01 |
+|* 52 |        TABLE ACCESS BY INDEX ROWID             | SI_ACTIVITIES_T                |     1 |    32 |     1   (0)| 00:00:01 |
+|  53 |       VIEW                                     | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+|  54 |        UNION-ALL                               |                                |       |       |            |          |
+|* 55 |         FILTER                                 |                                |       |       |            |          |
+|  56 |          NESTED LOOPS OUTER                    |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  57 |           TABLE ACCESS FULL                    | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|* 58 |           INDEX RANGE SCAN                     | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+|* 59 |         FILTER                                 |                                |       |       |            |          |
+|  60 |          FAST DUAL                             |                                |     1 |       |     2   (0)| 00:00:01 |
+|* 61 |      HASH JOIN                                 |                                |     1 |   222 |    60   (0)| 00:00:01 |
+|* 62 |       HASH JOIN                                |                                |     1 |   220 |    31   (0)| 00:00:01 |
+|  63 |        NESTED LOOPS OUTER                      |                                |     1 |   207 |    25   (0)| 00:00:01 |
+|* 64 |         HASH JOIN                              |                                |     1 |   200 |    24   (0)| 00:00:01 |
+|  65 |          NESTED LOOPS OUTER                    |                                |     1 |   192 |    20   (0)| 00:00:01 |
+|* 66 |           HASH JOIN                            |                                |     1 |   183 |    19   (0)| 00:00:01 |
+|  67 |            NESTED LOOPS                        |                                |     1 |   175 |     9   (0)| 00:00:01 |
+|  68 |             NESTED LOOPS                       |                                |     1 |   175 |     9   (0)| 00:00:01 |
+|  69 |              NESTED LOOPS                      |                                |     1 |   153 |     8   (0)| 00:00:01 |
+|  70 |               NESTED LOOPS                     |                                |     1 |   143 |     7   (0)| 00:00:01 |
+|  71 |                NESTED LOOPS                    |                                |     1 |   137 |     6   (0)| 00:00:01 |
+|  72 |                 NESTED LOOPS                   |                                |     1 |   122 |     5   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  73 |                  MERGE JOIN CARTESIAN          |                                |     1 |   112 |     4   (0)| 00:00:01 |</font>
+|  74 |                   NESTED LOOPS                 |                                |     1 |    80 |     3   (0)| 00:00:01 |
+|  75 |                    NESTED LOOPS                |                                |     1 |    67 |     2   (0)| 00:00:01 |
+|  76 |                     TABLE ACCESS BY INDEX ROWID| MS_QS_PARAMETER_NAMES          |     1 |    34 |     1   (0)| 00:00:01 |
+|* 77 |                      INDEX RANGE SCAN          | MS_QS_PARAMETER_NAMES_N2       |     1 |       |     1   (0)| 00:00:01 |
+|* 78 |                     INDEX RANGE SCAN           | MS_QS_PARAMETERTYPE_TYPEID_IDX |     1 |    33 |     1   (0)| 00:00:01 |
+|* 79 |                    INDEX RANGE SCAN            | MS_QS_PARAMETER_VALUES_IDX     |     1 |    13 |     1   (0)| 00:00:01 |
+|  80 |                   BUFFER SORT                  |                                |     1 |    32 |     3   (0)| 00:00:01 |
+|  81 |                    TABLE ACCESS BY INDEX ROWID | SI_ACTIVITIES_T                |     1 |    32 |     1   (0)| 00:00:01 |
+|* 82 |                     INDEX RANGE SCAN           | SI_ACTIVITIES_N2               |     1 |       |     1   (0)| 00:00:01 |
+|* 83 |                  INDEX RANGE SCAN              | ROLE_ACTIVITY_UQ               |     5 |    50 |     1   (0)| 00:00:01 |
+|  84 |                 TABLE ACCESS BY INDEX ROWID    | SI_ORG_ROLES                   |     2 |    30 |     1   (0)| 00:00:01 |
+|* 85 |                  INDEX RANGE SCAN              | SI_ORG_ROLES_N2                |     2 |       |     1   (0)| 00:00:01 |
+|* 86 |                TABLE ACCESS BY INDEX ROWID     | SI_ORG_ENTITIES_T              |     1 |     6 |     1   (0)| 00:00:01 |
+|* 87 |                 INDEX RANGE SCAN               | SI_ORG_ENTITIES_N5             |     1 |       |     1   (0)| 00:00:01 |
+|* 88 |               INDEX RANGE SCAN                 | SI_USER_ORG_ROLES_N2           |     3 |    30 |     1   (0)| 00:00:01 |
+|* 89 |              INDEX UNIQUE SCAN                 | SI_USERS_T_N1                  |     1 |       |     1   (0)| 00:00:01 |
+|* 90 |             TABLE ACCESS BY INDEX ROWID        | SI_USERS_T                     |     1 |    22 |     1   (0)| 00:00:01 |
+|  91 |            VIEW                                | SI_ROLES                       |   456 |  3648 |    10   (0)| 00:00:01 |
+|* 92 |             HASH JOIN                          |                                |   456 | 15504 |    10   (0)| 00:00:01 |
+|  93 |              NESTED LOOPS OUTER                |                                |   110 |  2310 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  94 |               TABLE ACCESS FULL                | SI_ROLES_T                     |   110 |  1320 |     3   (0)| 00:00:01 |</font>
+|* 95 |               INDEX RANGE SCAN                 | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+|  96 |              VIEW                              | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+|  97 |               UNION-ALL                        |                                |       |       |            |          |
+|  98 |                NESTED LOOPS OUTER              |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  99 |                 TABLE ACCESS FULL              | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|*100 |                 INDEX RANGE SCAN               | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+| 101 |                FAST DUAL                       |                                |     1 |       |     2   (0)| 00:00:01 |
+|*102 |           INDEX RANGE SCAN                     | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+| 103 |          VIEW                                  | SI_ORG_ENTITIES                |   113 |   904 |     4   (0)| 00:00:01 |
+|*104 |           FILTER                               |                                |       |       |            |          |
+| 105 |            NESTED LOOPS OUTER                  |                                |   113 |  1695 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">| 106 |             TABLE ACCESS FULL                  | SI_ORG_ENTITIES_T              |   113 |   904 |     3   (0)| 00:00:01 |</font>
+|*107 |             INDEX RANGE SCAN                   | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+|*108 |         INDEX RANGE SCAN                       | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+| 109 |        VIEW                                    | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+| 110 |         UNION-ALL                              |                                |       |       |            |          |
+| 111 |          NESTED LOOPS OUTER                    |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">| 112 |           TABLE ACCESS FULL                    | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|*113 |           INDEX RANGE SCAN                     | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+| 114 |          FAST DUAL                             |                                |     1 |       |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">| 115 |       COLLECTION ITERATOR PICKLER FETCH        | MODULE_OBJECT_CONTACT_LIST     |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+---------------------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$1       
+   2 - SET$1        / from$_subquery$_001@SEL$1
+   3 - SET$1       
+   5 - SEL$CE5E12B5
+  19 - SEL$CE5E12B5 / PNAME@SEL$3
+  20 - SEL$CE5E12B5 / PNAME@SEL$3
+  21 - SEL$CE5E12B5 / PTYPE@SEL$3
+  22 - SEL$CE5E12B5 / PVALUE@SEL$3
+  24 - SEL$CE5E12B5 / ORGS@SEL$3
+  25 - SEL$CE5E12B5 / ORGS@SEL$3
+  27 - SEL$CE5E12B5 / A@SEL$4
+  28 - SEL$14       / B@SEL$4
+  29 - SEL$14      
+  30 - SEL$14       / T@SEL$14
+  32 - SEL$14       / TL@SEL$14
+  34 - SEL$CE5E12B5 / BL@SEL$4
+  35 - SEL$29F99543 / C@SEL$4
+  36 - SEL$29F99543
+  38 - SEL$29F99543 / T@SEL$16
+  39 - SEL$29F99543 / TL@SEL$16
+  40 - SET$3        / SRA@SEL$15
+  41 - SET$3       
+  42 - SEL$17      
+  43 - SEL$17       / T@SEL$17
+  44 - SEL$17       / TL@SEL$17
+  45 - SEL$20       / DUAL@SEL$20
+  46 - SEL$CE5E12B5 / CL@SEL$4
+  47 - SEL$CE5E12B5 / D@SEL$4
+  48 - SEL$CE5E12B5 / USERS@SEL$3
+  49 - SEL$CE5E12B5 / USERS@SEL$3
+  50 - SEL$CE5E12B5 / ROLE_ACT@SEL$3
+  51 - SEL$CE5E12B5 / ACT@SEL$3
+  52 - SEL$CE5E12B5 / ACT@SEL$3
+  53 - SET$2        / SRA@SEL$5
+  54 - SET$2       
+  55 - SEL$6       
+  57 - SEL$6        / T@SEL$6
+  58 - SEL$6        / TL@SEL$6
+  59 - SEL$9       
+  60 - SEL$9        / DUAL@SEL$9
+  61 - SEL$5D246222
+  76 - SEL$5D246222 / PNAME@SEL$28
+  77 - SEL$5D246222 / PNAME@SEL$28
+  78 - SEL$5D246222 / PTYPE@SEL$28
+  79 - SEL$5D246222 / PVALUE@SEL$28
+  81 - SEL$5D246222 / ACT@SEL$28
+  82 - SEL$5D246222 / ACT@SEL$28
+  83 - SEL$5D246222 / ROLE_ACT@SEL$28
+  84 - SEL$5D246222 / A@SEL$29
+  85 - SEL$5D246222 / A@SEL$29
+  86 - SEL$5D246222 / ORGS@SEL$28
+  87 - SEL$5D246222 / ORGS@SEL$28
+  88 - SEL$5D246222 / D@SEL$29
+  89 - SEL$5D246222 / USERS@SEL$28
+  90 - SEL$5D246222 / USERS@SEL$28
+  91 - SEL$5A0C3989 / C@SEL$29
+  92 - SEL$5A0C3989
+  94 - SEL$5A0C3989 / T@SEL$41
+  95 - SEL$5A0C3989 / TL@SEL$41
+  96 - SET$5        / SRA@SEL$40
+  97 - SET$5       
+  98 - SEL$42      
+  99 - SEL$42       / T@SEL$42
+ 100 - SEL$42       / TL@SEL$42
+ 101 - SEL$45       / DUAL@SEL$45
+ 102 - SEL$5D246222 / CL@SEL$29
+ 103 - SEL$39       / B@SEL$29
+ 104 - SEL$39      
+ 106 - SEL$39       / T@SEL$39
+ 107 - SEL$39       / TL@SEL$39
+ 108 - SEL$5D246222 / BL@SEL$29
+ 109 - SET$4        / SRA@SEL$30
+ 110 - SET$4       
+ 111 - SEL$31      
+ 112 - SEL$31       / T@SEL$31
+ 113 - SEL$31       / TL@SEL$31
+ 114 - SEL$34       / DUAL@SEL$34
+ 115 - SEL$5D246222 / KOKBF$0@SEL$27
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   5 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+  12 - access("C"."ROLE_ID"="A"."ROLE_ID" AND "C"."ENTERPRISE_ID"="B"."ENTERPRISE_ID")
+  14 - access("B"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID")
+  20 - access(UPPER("PARAMETER_NAME")='DISPLAY_FORMAT')
+  21 - access("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND UPPER("PARAMETER_TYPE")='MS APPS USER NAME 
+              DISPLAY FORMAT')
+  22 - access("PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND 
+              "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PVALUE"."ORG_ENTITY_ID"=1)
+  24 - filter(NVL("ORGS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  25 - access("ORGS"."ORG_ENTITY_ID"=TO_NUMBER(:1))
+  27 - access("A"."ORG_ENTITY_ID"=TO_NUMBER(:1))
+       filter("A"."ORG_ENTITY_ID"=TO_NUMBER(:1))
+  30 - access("T"."ORG_ENTITY_ID"=TO_NUMBER(:1))
+       filter("T"."ORG_ENTITY_ID"=TO_NUMBER(:1))
+  32 - access("TL"."ORG_ENTITY_ID"(+)=TO_NUMBER(:1) AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  34 - access("BL"."ORG_ENTITY_ID"(+)=TO_NUMBER(:1) AND "BL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  36 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+  39 - access("T"."ROLE_ID"="TL"."ROLE_ID"(+) AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  44 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  46 - access("C"."ROLE_ID"="CL"."ROLE_ID"(+) AND "CL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  47 - access("D"."ORG_ROLE_ID"="A"."ORG_ROLE_ID")
+  48 - filter(NVL("USERS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  49 - access("USERS"."USER_ID"="D"."USER_ID")
+       filter("USERS"."USER_ID" IS NOT NULL)
+  50 - access("ROLE_ACT"."ROLE_ID"="A"."ROLE_ID")
+  51 - access("ROLE_ACT"."ACTIVITY_ID"="ACT"."ACTIVITY_ID")
+  52 - filter("ACT"."ACTIVITY_NAME"='QSM - Respond to Surveys')
+  55 - filter(NVL(:2,'no')='no' OR NVL(:2,'no')='yes')
+  58 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  59 - filter(NVL(:2,'no')='no' OR NVL(:2,'no')='yes')
+  61 - access("USERS"."USER_NAME"=VALUE(KOKBF$))
+  62 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+  64 - access("B"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID" AND "C"."ENTERPRISE_ID"="B"."ENTERPRISE_ID")
+  66 - access("C"."ROLE_ID"="A"."ROLE_ID")
+  77 - access(UPPER("PARAMETER_NAME")='DISPLAY_FORMAT')
+  78 - access("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND UPPER("PARAMETER_TYPE")='MS APPS USER NAME 
+              DISPLAY FORMAT')
+  79 - access("PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND 
+              "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PVALUE"."ORG_ENTITY_ID"=1)
+  82 - access("ACT"."ACTIVITY_NAME"='QSM - Respond to Surveys')
+  83 - access("ROLE_ACT"."ACTIVITY_ID"="ACT"."ACTIVITY_ID")
+  85 - access("ROLE_ACT"."ROLE_ID"="A"."ROLE_ID")
+  86 - filter(NVL("ORGS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  87 - access("ORGS"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID")
+  88 - access("D"."ORG_ROLE_ID"="A"."ORG_ROLE_ID")
+  89 - access("USERS"."USER_ID"="D"."USER_ID")
+       filter("USERS"."USER_ID" IS NOT NULL)
+  90 - filter(NVL("USERS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  92 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+  95 - access("T"."ROLE_ID"="TL"."ROLE_ID"(+) AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 100 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 102 - access("C"."ROLE_ID"="CL"."ROLE_ID"(+) AND "CL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 104 - filter(NVL(:2,'no')='yes')
+ 107 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+) AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 108 - access("B"."ORG_ENTITY_ID"="BL"."ORG_ENTITY_ID"(+) AND 
+              "BL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 113 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) "USER_NAME"[VARCHAR2,4000], "USER_FULL_NAME"[VARCHAR2,4000]
+   2 - "USER_NAME"[VARCHAR2,4000], "USER_FULL_NAME"[VARCHAR2,4000]
+   3 - (#keys=5) STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[22], STRDEF[400]
+   4 - STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[22], STRDEF[400]
+   5 - (#keys=1) "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+   6 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "PACKAGE_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+   7 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "PACKAGE_ID"[NUMBER,22], 
+       "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22]
+   8 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "PACKAGE_ID"[NUMBER,22], 
+       "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22]
+   9 - (#keys=0) "A"."ROLE_ID"[NUMBER,22], "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], 
+       "PACKAGE_ID"[NUMBER,22]
+  10 - (#keys=0) "A"."ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22]
+  11 - (#keys=0) "A"."ROLE_ID"[NUMBER,22], "A"."ORG_ROLE_ID"[NUMBER,22]
+  12 - (#keys=2) "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], "A"."ORG_ROLE_ID"[NUMBER,22]
+  13 - (#keys=0) "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22]
+  14 - (#keys=1) "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22]
+  15 - (#keys=0) "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  16 - (#keys=0) 
+  17 - (#keys=0) 
+  18 - (#keys=0) "PNAME"."PARAMETER_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  19 - "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22]
+  20 - "PNAME".ROWID[ROWID,10], UPPER("PARAMETER_NAME")[VARCHAR2,400]
+  21 - "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  23 - (#keys=0) 
+  25 - "ORGS".ROWID[ROWID,10]
+  26 - (#keys=0) "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  27 - "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  28 - "B"."ENTERPRISE_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22]
+  29 - (#keys=0) "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+  30 - "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+  31 - (#keys=0) 
+  33 - (#keys=0) 
+  35 - "C"."ENTERPRISE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22]
+  36 - (#keys=1) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22]
+  37 - (#keys=0) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  38 - "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  40 - "SRA"."PACKAGE_ID"[NUMBER,22]
+  41 - STRDEF[22]
+  42 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  43 - "T"."MODULE_ID"[NUMBER,22]
+  47 - "D"."USER_ID"[NUMBER,22]
+  48 - "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "PACKAGE_ID"[NUMBER,22]
+  49 - "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22]
+  50 - "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22]
+  51 - "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22]
+  52 - "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+  53 - "SRA"."PACKAGE_ID"[NUMBER,22]
+  54 - STRDEF[22]
+  55 - "T"."MODULE_ID"[NUMBER,22]
+  56 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  57 - "T"."MODULE_ID"[NUMBER,22]
+  61 - (#keys=1) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "USERS"."USER_ID"[NUMBER,22], 
+       VALUE(A0)[16000], VALUE(A0)[16000]
+  62 - (#keys=1) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."USER_NAME"[VARCHAR2,320]
+  63 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "PACKAGE_ID"[NUMBER,22], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320]
+  64 - (#keys=2) "B"."ORG_ENTITY_ID"[NUMBER,22], "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "PACKAGE_ID"[NUMBER,22], "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320]
+  65 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "PACKAGE_ID"[NUMBER,22], "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "C"."ENTERPRISE_ID"[NUMBER,22]
+  66 - (#keys=1) "C"."ROLE_ID"[NUMBER,22], "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ORG_ENTITY_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."USER_NAME"[VARCHAR2,320], "C"."ENTERPRISE_ID"[NUMBER,22]
+  67 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "A"."ROLE_ID"[NUMBER,22], "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "PACKAGE_ID"[NUMBER,22]
+  68 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "A"."ROLE_ID"[NUMBER,22], "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22]
+  69 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "A"."ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22]
+  70 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  71 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  72 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT"."ROLE_ID"[NUMBER,22]
+  73 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+  74 - (#keys=0) 
+  75 - (#keys=0) "PNAME"."PARAMETER_ID"[NUMBER,22], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  76 - "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22]
+  77 - "PNAME".ROWID[ROWID,10], UPPER("PARAMETER_NAME")[VARCHAR2,400]
+  78 - "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  80 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+  81 - "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+  82 - "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+  83 - "ROLE_ACT"."ROLE_ID"[NUMBER,22]
+  84 - "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  85 - "A".ROWID[ROWID,10], "A"."ROLE_ID"[NUMBER,22]
+  87 - "ORGS".ROWID[ROWID,10]
+  88 - "D"."USER_ID"[NUMBER,22]
+  89 - "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22]
+  90 - "USERS"."USER_NAME"[VARCHAR2,320], "PACKAGE_ID"[NUMBER,22]
+  91 - "C"."ENTERPRISE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22]
+  92 - (#keys=1) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22]
+  93 - (#keys=0) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  94 - "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  96 - "SRA"."PACKAGE_ID"[NUMBER,22]
+  97 - STRDEF[22]
+  98 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  99 - "T"."MODULE_ID"[NUMBER,22]
+ 103 - "B"."ENTERPRISE_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22]
+ 104 - "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+ 105 - (#keys=0) "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+ 106 - "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+ 109 - "SRA"."PACKAGE_ID"[NUMBER,22]
+ 110 - STRDEF[22]
+ 111 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+ 112 - "T"."MODULE_ID"[NUMBER,22]
+ 115 - VALUE(A0)[16000], VALUE(A0)[16000], VALUE(A0)[16000], VALUE(A0)[16000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

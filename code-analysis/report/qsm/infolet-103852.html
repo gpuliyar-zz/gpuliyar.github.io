@@ -1,0 +1,506 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_RESPONSE_LIST_RPT (103852)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT QUE_RESPONSE_ID, QUE_REQUEST_ID, QUE_REQUEST_NAME, QUE_REQUEST_NAME_LINK,RESPONDENT, RESPONDENT_DISP, 
+ RESPONDED_ON, DUE_DATE, RESP_STATUS, RESP_STATUS_DISP,QUE_REQUEST_TYPE, QUE_REQUEST_TYPE_DISP,
+ RESP_GRADE, DECODE(RESP_STATUS,'4',NULL,'12',DECODE(RESPONDED_ON,NULL,NULL,ROUND(RESP_SCORE,2)),ROUND(RESP_SCORE,2)) RESP_SCORE,
+ APPLIES_TO, APPLIES_TO_OBJECT,RESPONSE_APPROVER, RESPONSE_APPROVER_DISP,
+ decode(NO_OF_FINDINGS,'0',null,MS_QSM_RPT_UTIL.GET_FINDINGS_COUNT(QUE_REQUEST_ID,QUE_RESPONSE_ID,NO_OF_FINDINGS)) AS NO_OF_FINDINGS,NULL_VALUE,Change_Hist_Rep,Change_Hist_Rep_link,Checkbox FROM (SELECT 
+ A.QUE_RESPONSE_ID,  A.QUE_REQUEST_ID, a.PROCESS_INSTANCE_ID, a.INSTANCE_ID, A.QUE_REQUEST_NAME, 
+  (MS_QSM_UTILITIES.FN_GET_REPORT_JSON(ms_apps_utilities.get_infolet_id(a.DD_OBJECT_TYPE),a.PROCESS_INSTANCE_ID,'0',
+'''flag=1'||CHR(38)||'emd=1'||CHR(38)||'x_edit_mode=Yes'||CHR (38)|| 'wrapper= No'|| CHR (38)|| 'mode=edit'''))  as QUE_REQUEST_NAME_LINK,
+ a.RESPONDENT,case when length(A.RESPONDENT)-length(replace(RESPONDENT,',')) >0 then 
+ nvl(MS_APPS_UTILITIES.GET_USER_FULL_NAME (RESPONDED_BY),'Assigned to Role') else NVL (MS_APPS_UTILITIES.GET_USER_FULL_NAME (RESPONDENT),
+(SELECT MS_CONCAT (MS_APPS_UTILITIES.GET_USER_FULL_NAME (COLUMN_VALUE))
+FROM TABLE (ms_apps_utilities.parse_string (RESPONDENT, ',')))) end AS RESPONDENT_DISP, A.RESPONDED_ON, A.DUE_DATE, A.RESP_STATUS,MS_QSM_RPT_UTIL.GET_RESP_STATUS_DISPLAY_VALUE(:1, A.RESP_STATUS) as  RESP_STATUS_DISP,
+ A.QUE_REQUEST_TYPE,MS_QSM_RPT_UTIL.GET_DISPLAY_VALUE( :1, 'MS_QSM_Init_Questionnaire_Type' , A.QUE_REQUEST_TYPE, A.DD_OBJECT_TYPE ) QUE_REQUEST_TYPE_DISP,
+(SELECT GRADE_NAME FROM MS_QSM_GRADE_CONFIG WHERE GRADE_ID = OVERALL_GRADE) AS RESP_GRADE,
+ DECODE(A.QUE_REQUEST_TYPE,3,NULL,OVERALL_SCORE) AS RESP_SCORE, A.APPLIES_TO,(CASE WHEN SURVEY_SCOPE_SELECTION =1 THEN NULL ELSE a.applies_to_object END) AS applies_to_object,
+A.RESPONSE_APPROVER,(SELECT MS_CONCAT (MS_APPS_UTILITIES.GET_USER_FULL_NAME (COLUMN_VALUE))
+         FROM TABLE (ms_apps_utilities.parse_string (RESPONSE_APPROVER, ','))) RESPONSE_APPROVER_DISP,(SELECT DECODE (I.ISM_YN, 'Y', COUNT (FINDING_ID), NULL)
+         FROM MS_QSM_RESP_ISSUE
+        WHERE FINDING_FK = QUE_RESPONSE_ID and resp_status in (6,7,8,9)) AS NO_OF_FINDINGS,NULL as NULL_VALUE,
+DECODE(RESP_STATUS,'4',NULL,'12',NULL,c.DATA) as Change_Hist_Rep, :1 as Change_Hist_Rep_link,(CASE WHEN (RESP_STATUS IN (4,10,1) AND EXISTS (select 1 from SI_USER_ORG_ACT_VIEW where ACTIVITY_NAME='QSM - Manage Survey Assignments' and user_name=:1 and rownum=1))
+THEN QUE_RESPONSE_ID||'##'||:1 
+ELSE NULL END ) Checkbox,(MS_QSM_UTILITIES.FN_GET_REPORT_JSON(ms_apps_utilities.get_infolet_id(A.DD_OBJECT_TYPE),A.PROCESS_INSTANCE_ID,'0',
+'''flag=1'||CHR(38)||'emd=1'||CHR(38)||'x_edit_mode=Yes'||CHR (38)|| 'wrapper= No'|| CHR (38)|| 'mode=view''')) AS report_json
+FROM (SELECT rv.*,SURVEY_SCOPE_SELECTION FROM MS_QSM_RESP_DETAILS_V rv,
+      (SELECT QUE_REQUEST_ID,SURVEY_SCOPE_SELECTION FROM MS_QSM_INIT_QUESTNR
+        WHERE QUE_REQUEST_ID IN
+      (SELECT COLUMN_VALUE FROM TABLE (ms_grc_str_common_utilities.Split_String_Stored(:3)))) init WHERE rv.QUE_REQUEST_ID=init.QUE_REQUEST_ID
+  AND rv.QUE_RESPONSE_ID in (SELECT column_value FROM TABLE(MS_QSM_RESP_SEC_PKG(:1)))) A,  
+     (SELECT DECODE (COUNT (*), 0, 'N', 'Y') ISM_YN FROM ms_apps_events
+       WHERE EVENT_NAME = 'TRIGGER_ISSUE') I,MS_QSM_MLS_DATA c
+WHERE c.LOCALE=:8 and c.CODE='View_MLS'
+AND QUE_REQUEST_TYPE = :2
+AND Respondent = NVL(:7,Respondent)
+AND (:4 IS NULL OR  :4 in (select column_value from table(ms_grc_str_common_utilities.Split_String_stored(RESPONSE_APPROVER))))
+AND (:5 IS NULL OR :5 = APPLIES_TO)
+AND (:6 IS NULL OR :6 in (select column_value from table(ms_grc_str_common_utilities.Split_String_Stored(Applies_To_Object_CODE))))
+)</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet is used for the report Response List Report .</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 630993594</h2></header><pre><code>
+ 
+----------------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                                 | Name                           | Rows  | Bytes | Cost (%CPU)| Time     |
+----------------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                          |                                |     1 | 22719 |    71   (3)| 00:00:01 |
+|   1 |  SORT AGGREGATE                           |                                |     1 |     2 |            |          |
+<font style="background-color: lightblue; color: red">|   2 |   COLLECTION ITERATOR PICKLER FETCH       | PARSE_STRING                   |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|   3 |  TABLE ACCESS BY INDEX ROWID              | MS_QSM_GRADE_CONFIG            |     1 |     9 |     1   (0)| 00:00:01 |
+|*  4 |   INDEX UNIQUE SCAN                       | SYS_C0012759                   |     1 |       |     1   (0)| 00:00:01 |
+|   5 |  SORT AGGREGATE                           |                                |     1 |     2 |            |          |
+<font style="background-color: lightblue; color: red">|   6 |   COLLECTION ITERATOR PICKLER FETCH       | PARSE_STRING                   |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|   7 |  SORT AGGREGATE                           |                                |     1 |   202 |            |          |
+|*  8 |   FILTER                                  |                                |       |       |            |          |
+<font style="background-color: lightblue; color: red">|*  9 |    TABLE ACCESS FULL                      | MS_QSM_RESP_ISSUE              |     1 |   202 |     2   (0)| 00:00:01 |</font>
+|* 10 |  COUNT STOPKEY                            |                                |       |       |            |          |
+|* 11 |   HASH JOIN                               |                                |     1 |   220 |    31   (0)| 00:00:01 |
+|  12 |    NESTED LOOPS OUTER                     |                                |     1 |   207 |    25   (0)| 00:00:01 |
+|* 13 |     HASH JOIN                             |                                |     1 |   200 |    24   (0)| 00:00:01 |
+|  14 |      NESTED LOOPS OUTER                   |                                |     1 |   192 |    20   (0)| 00:00:01 |
+|* 15 |       HASH JOIN                           |                                |     1 |   183 |    19   (0)| 00:00:01 |
+|  16 |        NESTED LOOPS                       |                                |     1 |   175 |     9   (0)| 00:00:01 |
+|  17 |         NESTED LOOPS                      |                                |     1 |   165 |     8   (0)| 00:00:01 |
+|  18 |          NESTED LOOPS                     |                                |     1 |   159 |     7   (0)| 00:00:01 |
+|  19 |           NESTED LOOPS                    |                                |     1 |   144 |     6   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  20 |            MERGE JOIN CARTESIAN           |                                |     1 |   134 |     5   (0)| 00:00:01 |</font>
+|  21 |             NESTED LOOPS                  |                                |     1 |   102 |     4   (0)| 00:00:01 |
+|  22 |              NESTED LOOPS                 |                                |     1 |    89 |     3   (0)| 00:00:01 |
+|  23 |               NESTED LOOPS                |                                |     1 |    56 |     2   (0)| 00:00:01 |
+|* 24 |                TABLE ACCESS BY INDEX ROWID| SI_USERS_T                     |     1 |    22 |     1   (0)| 00:00:01 |
+|* 25 |                 INDEX UNIQUE SCAN         | USER_NAME_UK                   |     1 |       |     1   (0)| 00:00:01 |
+|  26 |                TABLE ACCESS BY INDEX ROWID| MS_QS_PARAMETER_NAMES          |     1 |    34 |     1   (0)| 00:00:01 |
+|* 27 |                 INDEX RANGE SCAN          | MS_QS_PARAMETER_NAMES_N2       |     1 |       |     1   (0)| 00:00:01 |
+|* 28 |               INDEX RANGE SCAN            | MS_QS_PARAMETERTYPE_TYPEID_IDX |     1 |    33 |     1   (0)| 00:00:01 |
+|* 29 |              INDEX RANGE SCAN             | MS_QS_PARAMETER_VALUES_IDX     |     1 |    13 |     1   (0)| 00:00:01 |
+|  30 |             BUFFER SORT                   |                                |     1 |    32 |     4   (0)| 00:00:01 |
+|  31 |              TABLE ACCESS BY INDEX ROWID  | SI_ACTIVITIES_T                |     1 |    32 |     1   (0)| 00:00:01 |
+|* 32 |               INDEX RANGE SCAN            | SI_ACTIVITIES_N2               |     1 |       |     1   (0)| 00:00:01 |
+|* 33 |            INDEX RANGE SCAN               | ROLE_ACTIVITY_UQ               |     5 |    50 |     1   (0)| 00:00:01 |
+|  34 |           TABLE ACCESS BY INDEX ROWID     | SI_ORG_ROLES                   |     2 |    30 |     1   (0)| 00:00:01 |
+|* 35 |            INDEX RANGE SCAN               | SI_ORG_ROLES_N2                |     2 |       |     1   (0)| 00:00:01 |
+|* 36 |          TABLE ACCESS BY INDEX ROWID      | SI_ORG_ENTITIES_T              |     1 |     6 |     1   (0)| 00:00:01 |
+|* 37 |           INDEX RANGE SCAN                | SI_ORG_ENTITIES_N5             |     1 |       |     1   (0)| 00:00:01 |
+|* 38 |         INDEX RANGE SCAN                  | SI_USER_ORG_ROLES_N2           |     1 |    10 |     1   (0)| 00:00:01 |
+|  39 |        VIEW                               | SI_ROLES                       |   456 |  3648 |    10   (0)| 00:00:01 |
+|* 40 |         HASH JOIN                         |                                |   456 | 15504 |    10   (0)| 00:00:01 |
+|  41 |          NESTED LOOPS OUTER               |                                |   110 |  2310 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  42 |           TABLE ACCESS FULL               | SI_ROLES_T                     |   110 |  1320 |     3   (0)| 00:00:01 |</font>
+|* 43 |           INDEX RANGE SCAN                | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+|  44 |          VIEW                             | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+|  45 |           UNION-ALL                       |                                |       |       |            |          |
+|  46 |            NESTED LOOPS OUTER             |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  47 |             TABLE ACCESS FULL             | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|* 48 |             INDEX RANGE SCAN              | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+|  49 |            FAST DUAL                      |                                |     1 |       |     2   (0)| 00:00:01 |
+|* 50 |       INDEX RANGE SCAN                    | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+|  51 |      VIEW                                 | SI_ORG_ENTITIES                |   113 |   904 |     4   (0)| 00:00:01 |
+|  52 |       NESTED LOOPS OUTER                  |                                |   113 |  1695 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  53 |        TABLE ACCESS FULL                  | SI_ORG_ENTITIES_T              |   113 |   904 |     3   (0)| 00:00:01 |</font>
+|* 54 |        INDEX RANGE SCAN                   | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+|* 55 |     INDEX RANGE SCAN                      | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+|  56 |    VIEW                                   | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+|  57 |     UNION-ALL                             |                                |       |       |            |          |
+|  58 |      NESTED LOOPS OUTER                   |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  59 |       TABLE ACCESS FULL                   | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|* 60 |       INDEX RANGE SCAN                    | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+|  61 |      FAST DUAL                            |                                |     1 |       |     2   (0)| 00:00:01 |
+|* 62 |  FILTER                                   |                                |       |       |            |          |
+|* 63 |   HASH JOIN SEMI                          |                                |     1 | 22719 |    71   (3)| 00:00:01 |
+|  64 |    NESTED LOOPS                           |                                |     1 | 22717 |    42   (5)| 00:00:01 |
+|* 65 |     HASH JOIN                             |                                |   163 |  3551K|    41   (5)| 00:00:01 |
+|  66 |      VIEW                                 | MS_QSM_RESP_DETAILS_V          |     2 | 44558 |     6  (34)| 00:00:01 |
+|  67 |       SORT UNIQUE                         |                                |     2 |   118K|     6  (34)| 00:00:01 |
+|  68 |        UNION-ALL                          |                                |       |       |            |          |
+<font style="background-color: lightblue; color: red">|* 69 |         TABLE ACCESS FULL                 | MS_QSM_RESP_CONSD_DETAILS      |     1 | 30348 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 70 |         TABLE ACCESS FULL                 | MS_QSM_RESP_FINAL_DETAILS      |     1 | 30348 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  71 |      MERGE JOIN CARTESIAN                 |                                |  8168 |   271K|    35   (0)| 00:00:01 |</font>
+|  72 |       NESTED LOOPS                        |                                |     1 |    32 |     6   (0)| 00:00:01 |
+|  73 |        VIEW                               |                                |     1 |     2 |     3   (0)| 00:00:01 |
+|  74 |         SORT AGGREGATE                    |                                |     1 |    17 |            |          |
+<font style="background-color: lightblue; color: red">|* 75 |          TABLE ACCESS FULL                | MS_APPS_EVENTS                 |     1 |    17 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 76 |        TABLE ACCESS FULL                  | MS_QSM_MLS_DATA                |     1 |    30 |     3   (0)| 00:00:01 |</font>
+|  77 |       BUFFER SORT                         |                                |  8168 | 16336 |    32   (0)| 00:00:01 |
+|  78 |        SORT UNIQUE                        |                                |  8168 | 16336 |    29   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  79 |         COLLECTION ITERATOR PICKLER FETCH | MS_QSM_RESP_SEC_PKG            |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+|  80 |     TABLE ACCESS BY INDEX ROWID           | MS_QSM_INIT_QUESTNR            |     1 |   404 |     1   (0)| 00:00:01 |
+|* 81 |      INDEX UNIQUE SCAN                    | MS_QSM_INIT_QUESTNR_PK         |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  82 |    COLLECTION ITERATOR PICKLER FETCH      | SPLIT_STRING_STORED            |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 83 |   COLLECTION ITERATOR PICKLER FETCH       | SPLIT_STRING_STORED            |     1 |     2 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 84 |   COLLECTION ITERATOR PICKLER FETCH       | SPLIT_STRING_STORED            |     1 |     2 |     2   (0)| 00:00:01 |</font>
+----------------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$07BDC5B4
+   2 - SEL$07BDC5B4 / KOKBF$2@SEL$4
+   3 - SEL$5        / MS_QSM_GRADE_CONFIG@SEL$5
+   4 - SEL$5        / MS_QSM_GRADE_CONFIG@SEL$5
+   5 - SEL$68B588A0
+   6 - SEL$68B588A0 / KOKBF$3@SEL$7
+   7 - SEL$8       
+   9 - SEL$8        / MS_QSM_RESP_ISSUE@SEL$8
+  10 - SEL$A7FFE5C5
+  24 - SEL$A7FFE5C5 / USERS@SEL$10
+  25 - SEL$A7FFE5C5 / USERS@SEL$10
+  26 - SEL$A7FFE5C5 / PNAME@SEL$10
+  27 - SEL$A7FFE5C5 / PNAME@SEL$10
+  28 - SEL$A7FFE5C5 / PTYPE@SEL$10
+  29 - SEL$A7FFE5C5 / PVALUE@SEL$10
+  31 - SEL$A7FFE5C5 / ACT@SEL$10
+  32 - SEL$A7FFE5C5 / ACT@SEL$10
+  33 - SEL$A7FFE5C5 / ROLE_ACT@SEL$10
+  34 - SEL$A7FFE5C5 / A@SEL$11
+  35 - SEL$A7FFE5C5 / A@SEL$11
+  36 - SEL$A7FFE5C5 / ORGS@SEL$10
+  37 - SEL$A7FFE5C5 / ORGS@SEL$10
+  38 - SEL$A7FFE5C5 / D@SEL$11
+  39 - SEL$00A1922E / C@SEL$11
+  40 - SEL$00A1922E
+  42 - SEL$00A1922E / T@SEL$23
+  43 - SEL$00A1922E / TL@SEL$23
+  44 - SET$2        / SRA@SEL$22
+  45 - SET$2       
+  46 - SEL$24      
+  47 - SEL$24       / T@SEL$24
+  48 - SEL$24       / TL@SEL$24
+  49 - SEL$27       / DUAL@SEL$27
+  50 - SEL$A7FFE5C5 / CL@SEL$11
+  51 - SEL$21       / B@SEL$11
+  52 - SEL$21      
+  53 - SEL$21       / T@SEL$21
+  54 - SEL$21       / TL@SEL$21
+  55 - SEL$A7FFE5C5 / BL@SEL$11
+  56 - SET$1        / SRA@SEL$12
+  57 - SET$1       
+  58 - SEL$13      
+  59 - SEL$13       / T@SEL$13
+  60 - SEL$13       / TL@SEL$13
+  61 - SEL$16       / DUAL@SEL$16
+  62 - SEL$869FA44B
+  66 - SET$3        / RV@SEL$32
+  67 - SET$3       
+  69 - SEL$33       / MS_QSM_RESP_CONSD_DETAILS@SEL$33
+  70 - SEL$34       / MS_QSM_RESP_FINAL_DETAILS@SEL$34
+  73 - SEL$40       / I@SEL$2
+  74 - SEL$40      
+  75 - SEL$40       / MS_APPS_EVENTS@SEL$40
+  76 - SEL$869FA44B / C@SEL$2
+  79 - SEL$869FA44B / KOKBF$1@SEL$39
+  80 - SEL$869FA44B / MS_QSM_INIT_QUESTNR@SEL$35
+  81 - SEL$869FA44B / MS_QSM_INIT_QUESTNR@SEL$35
+  82 - SEL$869FA44B / KOKBF$0@SEL$37
+  83 - SEL$5BE7B2F8 / KOKBF$4@SEL$42
+  84 - SEL$1822E6ED / KOKBF$5@SEL$44
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   4 - access("GRADE_ID"=:B1)
+   8 - filter(TO_NUMBER(:B1)=6 OR TO_NUMBER(:B2)=7 OR TO_NUMBER(:B3)=8 OR TO_NUMBER(:B4)=9)
+   9 - filter("FINDING_FK"=:B1)
+  10 - filter(ROWNUM=1)
+  11 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+  13 - access("B"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID" AND "C"."ENTERPRISE_ID"="B"."ENTERPRISE_ID")
+  15 - access("C"."ROLE_ID"="A"."ROLE_ID")
+  24 - filter(NVL("USERS"."END_DATE",SYSDATE@!)>=SYSDATE@! AND "USERS"."USER_ID" IS NOT NULL)
+  25 - access("USERS"."USER_NAME"=:1)
+  27 - access(UPPER("PARAMETER_NAME")='DISPLAY_FORMAT')
+  28 - access("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND UPPER("PARAMETER_TYPE")='MS APPS USER 
+              NAME DISPLAY FORMAT')
+  29 - access("PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND 
+              "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PVALUE"."ORG_ENTITY_ID"=1)
+  32 - access("ACT"."ACTIVITY_NAME"='QSM - Manage Survey Assignments')
+  33 - access("ROLE_ACT"."ACTIVITY_ID"="ACT"."ACTIVITY_ID")
+  35 - access("ROLE_ACT"."ROLE_ID"="A"."ROLE_ID")
+  36 - filter(NVL("ORGS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  37 - access("ORGS"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID")
+  38 - access("D"."ORG_ROLE_ID"="A"."ORG_ROLE_ID" AND "USERS"."USER_ID"="D"."USER_ID")
+  40 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+  43 - access("T"."ROLE_ID"="TL"."ROLE_ID"(+) AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  48 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  50 - access("C"."ROLE_ID"="CL"."ROLE_ID"(+) AND "CL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  54 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+) AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  55 - access("B"."ORG_ENTITY_ID"="BL"."ORG_ENTITY_ID"(+) AND 
+              "BL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  60 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  62 - filter((:4 IS NULL OR  EXISTS (SELECT 0 FROM TABLE() "KOKBF$4" WHERE VALUE(KOKBF$)=:4)) AND (:6 IS NULL OR  
+              EXISTS (SELECT 0 FROM TABLE() "KOKBF$5" WHERE VALUE(KOKBF$)=:6)))
+  63 - access("QUE_REQUEST_ID"=VALUE(KOKBF$))
+  65 - access("RV"."QUE_RESPONSE_ID"=VALUE(KOKBF$))
+  69 - filter("QUE_REQUEST_TYPE"=:2 AND (:5 IS NULL OR "APPLIES_TO"=:5) AND "RESPONDENT"=NVL(:7,"RESPONDENT"))
+  70 - filter("QUE_REQUEST_TYPE"=:2 AND (:5 IS NULL OR "APPLIES_TO"=:5) AND "RESPONDENT"=NVL(:7,"RESPONDENT"))
+  75 - filter("EVENT_NAME"='TRIGGER_ISSUE')
+  76 - filter("C"."CODE"='View_MLS' AND "C"."LOCALE"=:8)
+  81 - access("RV"."QUE_REQUEST_ID"="QUE_REQUEST_ID")
+  83 - filter(VALUE(KOKBF$)=:4)
+  84 - filter(VALUE(KOKBF$)=:6)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=0) "MS_CONCAT"("MS_APPS_UTILITIES"."GET_USER_FULL_NAME"(VALUE(KOKBF$)))[4000]
+   2 - VALUE(A0)[8000]
+   3 - "MS_QSM_GRADE_CONFIG".ROWID[ROWID,10], "GRADE_NAME"[VARCHAR2,4000]
+   4 - "MS_QSM_GRADE_CONFIG".ROWID[ROWID,10]
+   5 - (#keys=0) "MS_CONCAT"("MS_APPS_UTILITIES"."GET_USER_FULL_NAME"(VALUE(KOKBF$)))[4000]
+   6 - VALUE(A0)[8000]
+   7 - (#keys=0) COUNT(*)[22]
+  10 - ROWNUM[4]
+  11 - (#keys=1) 
+  12 - (#keys=0) "PACKAGE_ID"[NUMBER,22]
+  13 - (#keys=2) "B"."ORG_ENTITY_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  14 - (#keys=0) "PACKAGE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "C"."ENTERPRISE_ID"[NUMBER,22]
+  15 - (#keys=1) "C"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "C"."ENTERPRISE_ID"[NUMBER,22]
+  16 - (#keys=0) "PACKAGE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  17 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  18 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  19 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22]
+  20 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "ACT"."ACTIVITY_ID"[NUMBER,22]
+  21 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  22 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  23 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22]
+  24 - "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  25 - "USERS".ROWID[ROWID,10]
+  26 - "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22]
+  27 - "PNAME".ROWID[ROWID,10], UPPER("PARAMETER_NAME")[VARCHAR2,400]
+  28 - "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  30 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22]
+  31 - "ACT"."ACTIVITY_ID"[NUMBER,22]
+  32 - "ACT".ROWID[ROWID,10]
+  33 - "ROLE_ACT"."ROLE_ID"[NUMBER,22]
+  34 - "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  35 - "A".ROWID[ROWID,10], "A"."ROLE_ID"[NUMBER,22]
+  37 - "ORGS".ROWID[ROWID,10]
+  39 - "C"."ENTERPRISE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22]
+  40 - (#keys=1) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22]
+  41 - (#keys=0) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  42 - "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  44 - "SRA"."PACKAGE_ID"[NUMBER,22]
+  45 - STRDEF[22]
+  46 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  47 - "T"."MODULE_ID"[NUMBER,22]
+  51 - "B"."ENTERPRISE_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22]
+  52 - (#keys=0) "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+  53 - "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+  56 - "SRA"."PACKAGE_ID"[NUMBER,22]
+  57 - STRDEF[22]
+  58 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  59 - "T"."MODULE_ID"[NUMBER,22]
+  62 - "RV"."QUE_RESPONSE_ID"[VARCHAR2,200], "RV"."QUE_REQUEST_ID"[VARCHAR2,200], 
+       "RV"."PROCESS_INSTANCE_ID"[NUMBER,22], "RV"."OVERALL_SCORE"[VARCHAR2,4000], "RV"."OVERALL_GRADE"[VARCHAR2,4000], 
+       "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], "RV"."DD_OBJECT_TYPE"[VARCHAR2,4000], "RV"."RESPONDENT"[VARCHAR2,4000], 
+       "RV"."RESPONDED_ON"[DATE,7], "RV"."RESPONDED_BY"[VARCHAR2,4000], "RV"."DUE_DATE"[DATE,7], 
+       "RV"."RESP_STATUS"[VARCHAR2,4000], "RV"."APPLIES_TO"[VARCHAR2,4000], "RV"."APPLIES_TO_OBJECT"[VARCHAR2,4000], 
+       "RV"."RESPONSE_APPROVER"[VARCHAR2,4000], "RV"."QUE_REQUEST_TYPE"[VARCHAR2,40], "I"."ISM_YN"[VARCHAR2,1], 
+       "C"."DATA"[VARCHAR2,4000], "SURVEY_SCOPE_SELECTION"[VARCHAR2,400]
+  63 - (#keys=1) "RV"."QUE_RESPONSE_ID"[VARCHAR2,200], "RV"."QUE_REQUEST_ID"[VARCHAR2,200], 
+       "RV"."APPLIES_TO_OBJECT_CODE"[VARCHAR2,4000], "RV"."PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "RV"."OVERALL_SCORE"[VARCHAR2,4000], "RV"."OVERALL_GRADE"[VARCHAR2,4000], "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], 
+       "RV"."DD_OBJECT_TYPE"[VARCHAR2,4000], "RV"."RESPONDENT"[VARCHAR2,4000], "RV"."RESPONDED_ON"[DATE,7], 
+       "RV"."RESPONDED_BY"[VARCHAR2,4000], "RV"."DUE_DATE"[DATE,7], "RV"."RESP_STATUS"[VARCHAR2,4000], 
+       "RV"."APPLIES_TO"[VARCHAR2,4000], "RV"."APPLIES_TO_OBJECT"[VARCHAR2,4000], "RV"."RESPONSE_APPROVER"[VARCHAR2,4000], 
+       "RV"."QUE_REQUEST_TYPE"[VARCHAR2,40], "I"."ISM_YN"[VARCHAR2,1], "C"."DATA"[VARCHAR2,4000], 
+       "SURVEY_SCOPE_SELECTION"[VARCHAR2,400]
+  64 - (#keys=0) "RV"."QUE_RESPONSE_ID"[VARCHAR2,200], "RV"."QUE_REQUEST_ID"[VARCHAR2,200], 
+       "RV"."APPLIES_TO_OBJECT_CODE"[VARCHAR2,4000], "RV"."PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "RV"."OVERALL_SCORE"[VARCHAR2,4000], "RV"."OVERALL_GRADE"[VARCHAR2,4000], "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], 
+       "RV"."DD_OBJECT_TYPE"[VARCHAR2,4000], "RV"."RESPONDENT"[VARCHAR2,4000], "RV"."RESPONDED_ON"[DATE,7], 
+       "RV"."RESPONDED_BY"[VARCHAR2,4000], "RV"."DUE_DATE"[DATE,7], "RV"."RESP_STATUS"[VARCHAR2,4000], 
+       "RV"."APPLIES_TO"[VARCHAR2,4000], "RV"."APPLIES_TO_OBJECT"[VARCHAR2,4000], "RV"."RESPONSE_APPROVER"[VARCHAR2,4000], 
+       "RV"."QUE_REQUEST_TYPE"[VARCHAR2,40], "I"."ISM_YN"[VARCHAR2,1], "C"."DATA"[VARCHAR2,4000], 
+       "QUE_REQUEST_ID"[VARCHAR2,400], "SURVEY_SCOPE_SELECTION"[VARCHAR2,400]
+  65 - (#keys=1) "RV"."QUE_RESPONSE_ID"[VARCHAR2,200], "RV"."QUE_REQUEST_ID"[VARCHAR2,200], 
+       "RV"."APPLIES_TO_OBJECT_CODE"[VARCHAR2,4000], "RV"."PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "RV"."OVERALL_SCORE"[VARCHAR2,4000], "RV"."OVERALL_GRADE"[VARCHAR2,4000], "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], 
+       "RV"."DD_OBJECT_TYPE"[VARCHAR2,4000], "RV"."RESPONDENT"[VARCHAR2,4000], "RV"."RESPONDED_ON"[DATE,7], 
+       "RV"."RESPONDED_BY"[VARCHAR2,4000], "RV"."DUE_DATE"[DATE,7], "RV"."RESP_STATUS"[VARCHAR2,4000], 
+       "RV"."APPLIES_TO"[VARCHAR2,4000], "RV"."APPLIES_TO_OBJECT"[VARCHAR2,4000], "RV"."RESPONSE_APPROVER"[VARCHAR2,4000], 
+       "RV"."QUE_REQUEST_TYPE"[VARCHAR2,40], "I"."ISM_YN"[VARCHAR2,1], "C"."DATA"[VARCHAR2,4000]
+  66 - "RV"."QUE_REQUEST_ID"[VARCHAR2,200], "RV"."QUE_RESPONSE_ID"[VARCHAR2,200], 
+       "RV"."PROCESS_INSTANCE_ID"[NUMBER,22], "RV"."OVERALL_SCORE"[VARCHAR2,4000], "RV"."OVERALL_GRADE"[VARCHAR2,4000], 
+       "RV"."QUE_REQUEST_NAME"[VARCHAR2,4000], "RV"."DD_OBJECT_TYPE"[VARCHAR2,4000], "RV"."RESPONDENT"[VARCHAR2,4000], 
+       "RV"."RESPONDED_ON"[DATE,7], "RV"."RESPONDED_BY"[VARCHAR2,4000], "RV"."DUE_DATE"[DATE,7], 
+       "RV"."RESP_STATUS"[VARCHAR2,4000], "RV"."APPLIES_TO"[VARCHAR2,4000], "RV"."APPLIES_TO_OBJECT"[VARCHAR2,4000], 
+       "RV"."RESPONSE_APPROVER"[VARCHAR2,4000], "RV"."QUE_REQUEST_TYPE"[VARCHAR2,40], 
+       "RV"."APPLIES_TO_OBJECT_CODE"[VARCHAR2,4000]
+  67 - (#keys=26) STRDEF[200], STRDEF[200], STRDEF[22], STRDEF[22], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[22], STRDEF[4000], 
+       STRDEF[7], STRDEF[7], STRDEF[4000], STRDEF[7], STRDEF[4000], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[40], STRDEF[4000]
+  68 - STRDEF[200], STRDEF[200], STRDEF[22], STRDEF[22], STRDEF[4000], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[22], STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[22], STRDEF[4000], STRDEF[7], STRDEF[7], 
+       STRDEF[4000], STRDEF[7], STRDEF[4000], STRDEF[4000], STRDEF[4000], STRDEF[4000], STRDEF[4000], STRDEF[40], 
+       STRDEF[4000]
+  69 - "QUE_REQUEST_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,4000], "INSTANCE_ID"[NUMBER,22], 
+       "INSTANCE_REC_NUM"[NUMBER,22], "RESPONDENT"[VARCHAR2,4000], "QUE_REQUEST_TYPE"[VARCHAR2,40], 
+       "APPLIES_TO_OBJECT_CODE"[VARCHAR2,4000], "CREATION_DATE"[DATE,7], "RESPONDED_ON"[DATE,7], 
+       "RESPONDED_BY"[VARCHAR2,4000], "DUE_DATE"[DATE,7], "RESP_STATUS"[VARCHAR2,4000], "APPLIES_TO"[VARCHAR2,4000], 
+       "APPLIES_TO_OBJECT"[VARCHAR2,4000], "RESPONSE_APPROVER"[VARCHAR2,4000], "ASSIGNEE"[VARCHAR2,4000], 
+       "QUE_REQUEST_ID"[VARCHAR2,200], "QUE_RESPONSE_ID"[VARCHAR2,200], "PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "R_IID"[NUMBER,22], "OVERALL_SCORE"[VARCHAR2,4000], "OVERALL_GRADE"[VARCHAR2,4000], "STAGE"[VARCHAR2,4000], 
+       "ACTION_COMMENT"[VARCHAR2,4000], "LOGIN_ID"[VARCHAR2,4000], "REFERENCE_PID"[NUMBER,22]
+  70 - "QUE_REQUEST_TYPE"[VARCHAR2,40], "APPLIES_TO_OBJECT_CODE"[VARCHAR2,4000], "QUE_REQUEST_ID"[VARCHAR2,200], 
+       "QUE_RESPONSE_ID"[VARCHAR2,200], "PROCESS_INSTANCE_ID"[NUMBER,22], "R_IID"[NUMBER,22], 
+       "OVERALL_SCORE"[VARCHAR2,4000], "OVERALL_GRADE"[VARCHAR2,4000], "STAGE"[VARCHAR2,4000], 
+       "ACTION_COMMENT"[VARCHAR2,4000], "LOGIN_ID"[VARCHAR2,4000], "REFERENCE_PID"[NUMBER,22], 
+       "QUE_REQUEST_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,4000], "INSTANCE_ID"[NUMBER,22], 
+       "INSTANCE_REC_NUM"[NUMBER,22], "RESPONDENT"[VARCHAR2,4000], "CREATION_DATE"[DATE,7], "RESPONDED_ON"[DATE,7], 
+       "RESPONDED_BY"[VARCHAR2,4000], "DUE_DATE"[DATE,7], "RESP_STATUS"[VARCHAR2,4000], "APPLIES_TO"[VARCHAR2,4000], 
+       "APPLIES_TO_OBJECT"[VARCHAR2,4000], "RESPONSE_APPROVER"[VARCHAR2,4000], "ASSIGNEE"[VARCHAR2,4000]
+  71 - (#keys=0) "I"."ISM_YN"[VARCHAR2,1], "C"."DATA"[VARCHAR2,4000], VALUE(KOKBF$)[8000]
+  72 - (#keys=0) "I"."ISM_YN"[VARCHAR2,1], "C"."DATA"[VARCHAR2,4000]
+  73 - "I"."ISM_YN"[VARCHAR2,1]
+  74 - (#keys=0) COUNT(*)[22]
+  76 - "C"."DATA"[VARCHAR2,4000]
+  77 - (#keys=0) VALUE(KOKBF$)[8000]
+  78 - (#keys=1) VALUE(KOKBF$)[8000]
+  79 - VALUE(A0)[8000]
+  80 - "QUE_REQUEST_ID"[VARCHAR2,400], "SURVEY_SCOPE_SELECTION"[VARCHAR2,400]
+  81 - "MS_QSM_INIT_QUESTNR".ROWID[ROWID,10], "QUE_REQUEST_ID"[VARCHAR2,400]
+  82 - VALUE(A0)[8000]
+  83 - VALUE(A0)[8000]
+  84 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

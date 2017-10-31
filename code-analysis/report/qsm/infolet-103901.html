@@ -1,0 +1,738 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_SURV_CERT_SCOR_RPT (103901)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>Select                          
+ QUE_REQUEST_ID, QUESTIONNAIRE_ID, QUE_REQUEST_NAME, QUE_REQUEST_TYPE, SCH_FREQUENCY, DD_OBJECT_TYPE,   
+ QUE_REQUEST_TYPE_DISP,   
+ SCH_FREQUENCY_DISP,   
+ LAST_SENT_DATE, SCH_NEXT_DATE, SENT, PROGRESS, COMPLETED, OPEN_ISSUES, ISSUES_PAST_DUE, NAME_LINK, QUE_NAME, OWNER_ORGANIZATIONS_DISP, OWNERS_DISP, LOGIN_ID, NULL_VALUE   
+ ,CANCELSURVEY   
+From (     
+select              
+ IQV.QUE_REQUEST_ID, IQV.QUESTIONNAIRE_ID, IQV.QUE_REQUEST_NAME, IQV.QUE_REQUEST_TYPE , IQV.SCH_FREQUENCY, IQV.DD_OBJECT_TYPE,   
+Ms_Qsm_Rpt_Util.get_lov_disp_val('MS_QSM_Init_Questionnaire_Type',IQV.QUE_REQUEST_TYPE) QUE_REQUEST_TYPE_DISP,   
+  Ms_Qsm_Rpt_Util.get_lov_disp_val('MS_QSM_Frequency',IQV.SCH_FREQUENCY) SCH_FREQUENCY_DISP,   
+ IQV.LAST_SENT_DATE,case when sch_frequency = 6 then null else SCH_NEXT_DATE end SCH_NEXT_DATE,IQV.SENT SENT, PROGRESS, IQV.COMPLETED COMPLETED,IQV.OPEN_ISSUES OPEN_ISSUES, IQV.ISSUES_PAST_DUE ISSUES_PAST_DUE,    
+MS_QSM_RPT_UTIL.fn_get_initiate_report_json(ms_apps_utilities.get_infolet_id(IQV.DD_OBJECT_TYPE),IQV.DD_PROCESS_INSTANCE_ID,null,null)  AS NAME_LINK,   
+IQV.QUE_NAME, OWNER_ORGANIZATIONS_DISP, OWNERS_DISP, :1 as LOGIN_ID, NULL as NULL_VALUE,   
+CASE WHEN MANAGE_SURVEY=1 and IQV.LAST_SENT_DATE is not null and DD_MODIFIED_ON>sch_start_date AND IQV.QUE_REQUEST_TYPE=MSQ.QUE_TYPE   
+ AND trunc(NVL(MSQ.VALID_UNTILL,SYSDATE))>=trunc(SYSDATE)   
+AND trunc(SCH_START_DATE) <= trunc(sysdate) AND EXISTS (select 1 from SI_USER_ORG_ACT_VIEW where ACTIVITY_NAME='QSM - Manage Survey Assignments' and user_name=:1 and rownum=1)   
+AND ((sch_frequency=6 AND trunc(SCH_CLOSE_DATE) >= trunc(SYSDATE) ) OR (sch_frequency<>6 AND trunc(SCH_END_BY) >= trunc(SYSDATE))) then   
+IQV.QUE_REQUEST_ID||'##'||:1
+ELSE   
+NULL   
+END as CANCELSURVEY,
+IQV.OWNER_ORGANIZATIONS,
+IQV.OWNERS
+From MS_QSM_INIT_QUESTNR_RPT_V IQV   
+, MS_QSM_QUESTIONNAIRE MSQ 
+WHERE    
+(   
+(MS_APPS_SECURITY_PKG.CHECK_OBJECT_ACCESS(IQV.DD_OBJECT_TYPE, IQV.RESTRICT_ACCESS_TO, IQV.OWNER_ORGANIZATIONS,:1,'VIEW') = 'ACCESS'     
+)   
+OR   
+(IQV.SCH_FREQUENCY='6' and IQV.DD_CREATED_BY=:1)   
+)   
+AND IQV.questionnaire_id = MSQ.INTERNAL_QUESTNR_ID
+)   
+WHERE QUESTIONNAIRE_ID=NVL(:2,QUESTIONNAIRE_ID)
+AND (QUE_REQUEST_ID IN (SELECT COLUMN_VALUE FROM TABLE (ms_grc_str_common_utilities.Split_String_Stored(:3))) OR :3 IS NULL)
+AND (QUE_REQUEST_TYPE_DISP IN (SELECT COLUMN_VALUE FROM TABLE (ms_grc_str_common_utilities.Split_String_Stored(:4))) OR :4 IS NULL)
+AND (trim(SCH_FREQUENCY_DISP) = NVL(:5,SCH_FREQUENCY_DISP))   
+AND (trunc(LAST_SENT_DATE) >= trunc(to_date(to_char(:6,'DDMMYYYY'),'DDMMYYYY')) or :6 IS NULL) 
+AND (trunc(LAST_SENT_DATE) <= trunc(to_date(to_char(:7,'DDMMYYYY'),'DDMMYYYY')) or :7  IS NULL)  
+AND (TRIM(:8) in (select column_value from table(ms_grc_str_common_utilities.Split_Clob_Stored(TRIM(OWNER_ORGANIZATIONS)))) OR :8 IS NULL)
+AND (TRIM(:9) in (select column_value from table(ms_grc_str_common_utilities.Split_Clob_Stored(TRIM(OWNERS)))) OR :9 IS NULL)</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet is used to populate the report Scheduled Surveys.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1786619135</h2></header><pre><code>
+ 
+----------------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                                 | Name                           | Rows  | Bytes | Cost (%CPU)| Time     |
+----------------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                          |                                |     1 | 18521 |     6  (17)| 00:00:01 |
+|   1 |  SORT AGGREGATE                           |                                |     1 |   211 |            |          |
+|   2 |   TABLE ACCESS BY INDEX ROWID             | MS_QSM_SCHEDULER_DETAILS       |     1 |   211 |     1   (0)| 00:00:01 |
+|*  3 |    INDEX RANGE SCAN                       | MS_QSM_SCH_DTL_REQ_IDX1        |     1 |       |     1   (0)| 00:00:01 |
+|   4 |  SORT AGGREGATE                           |                                |     1 |   202 |            |          |
+|*  5 |   INDEX RANGE SCAN                        | MS_QSM_SCH_DTL_REQ_IDX1        |     1 |   202 |     1   (0)| 00:00:01 |
+|   6 |  SORT AGGREGATE                           |                                |     1 |   102 |            |          |
+|*  7 |   INDEX RANGE SCAN                        | MS_QSM_RESP_FINAL_DETAILS_PK   |     1 |   102 |     1   (0)| 00:00:01 |
+|   8 |    SORT AGGREGATE                         |                                |     1 |  2104 |            |          |
+|*  9 |     TABLE ACCESS BY INDEX ROWID           | MS_QSM_RESP_CONSD_DETAILS      |     1 |  2104 |     1   (0)| 00:00:01 |
+|* 10 |      INDEX RANGE SCAN                     | MS_QSM_RESP_CONSD_DETAILS_PK   |     1 |       |     1   (0)| 00:00:01 |
+|  11 |  SORT GROUP BY                            |                                |     1 |  2227 |            |          |
+|  12 |   NESTED LOOPS                            |                                |     1 |  2227 |     2   (0)| 00:00:01 |
+|  13 |    NESTED LOOPS                           |                                |     1 |  2227 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 14 |     INDEX SKIP SCAN                       | MS_QSM_INIT_QUESTNR_OWO_UK     |     1 |  2204 |     1   (0)| 00:00:01 |</font>
+|* 15 |     INDEX RANGE SCAN                      | SI_ORG_ENTITIES_N5             |     1 |       |     1   (0)| 00:00:01 |
+|  16 |    TABLE ACCESS BY INDEX ROWID            | SI_ORG_ENTITIES_T              |     1 |    23 |     1   (0)| 00:00:01 |
+|  17 |  SORT AGGREGATE                           |                                |     1 |  2204 |            |          |
+<font style="background-color: lightblue; color: red">|* 18 |   INDEX SKIP SCAN                         | MS_QSM_INIT_QUESTNR_OWS_UK     |     1 |  2204 |     1   (0)| 00:00:01 |</font>
+|* 19 |  COUNT STOPKEY                            |                                |       |       |            |          |
+|* 20 |   HASH JOIN                               |                                |     1 |   220 |    31   (0)| 00:00:01 |
+|  21 |    NESTED LOOPS OUTER                     |                                |     1 |   207 |    25   (0)| 00:00:01 |
+|* 22 |     HASH JOIN                             |                                |     1 |   200 |    24   (0)| 00:00:01 |
+|  23 |      NESTED LOOPS OUTER                   |                                |     1 |   192 |    20   (0)| 00:00:01 |
+|* 24 |       HASH JOIN                           |                                |     1 |   183 |    19   (0)| 00:00:01 |
+|  25 |        NESTED LOOPS                       |                                |     1 |   175 |     9   (0)| 00:00:01 |
+|  26 |         NESTED LOOPS                      |                                |     1 |   165 |     8   (0)| 00:00:01 |
+|  27 |          NESTED LOOPS                     |                                |     1 |   159 |     7   (0)| 00:00:01 |
+|  28 |           NESTED LOOPS                    |                                |     1 |   144 |     6   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  29 |            MERGE JOIN CARTESIAN           |                                |     1 |   134 |     5   (0)| 00:00:01 |</font>
+|  30 |             NESTED LOOPS                  |                                |     1 |   102 |     4   (0)| 00:00:01 |
+|  31 |              NESTED LOOPS                 |                                |     1 |    89 |     3   (0)| 00:00:01 |
+|  32 |               NESTED LOOPS                |                                |     1 |    56 |     2   (0)| 00:00:01 |
+|* 33 |                TABLE ACCESS BY INDEX ROWID| SI_USERS_T                     |     1 |    22 |     1   (0)| 00:00:01 |
+|* 34 |                 INDEX UNIQUE SCAN         | USER_NAME_UK                   |     1 |       |     1   (0)| 00:00:01 |
+|  35 |                TABLE ACCESS BY INDEX ROWID| MS_QS_PARAMETER_NAMES          |     1 |    34 |     1   (0)| 00:00:01 |
+|* 36 |                 INDEX RANGE SCAN          | MS_QS_PARAMETER_NAMES_N2       |     1 |       |     1   (0)| 00:00:01 |
+|* 37 |               INDEX RANGE SCAN            | MS_QS_PARAMETERTYPE_TYPEID_IDX |     1 |    33 |     1   (0)| 00:00:01 |
+|* 38 |              INDEX RANGE SCAN             | MS_QS_PARAMETER_VALUES_IDX     |     1 |    13 |     1   (0)| 00:00:01 |
+|  39 |             BUFFER SORT                   |                                |     1 |    32 |     4   (0)| 00:00:01 |
+|  40 |              TABLE ACCESS BY INDEX ROWID  | SI_ACTIVITIES_T                |     1 |    32 |     1   (0)| 00:00:01 |
+|* 41 |               INDEX RANGE SCAN            | SI_ACTIVITIES_N2               |     1 |       |     1   (0)| 00:00:01 |
+|* 42 |            INDEX RANGE SCAN               | ROLE_ACTIVITY_UQ               |     5 |    50 |     1   (0)| 00:00:01 |
+|  43 |           TABLE ACCESS BY INDEX ROWID     | SI_ORG_ROLES                   |     2 |    30 |     1   (0)| 00:00:01 |
+|* 44 |            INDEX RANGE SCAN               | SI_ORG_ROLES_N2                |     2 |       |     1   (0)| 00:00:01 |
+|* 45 |          TABLE ACCESS BY INDEX ROWID      | SI_ORG_ENTITIES_T              |     1 |     6 |     1   (0)| 00:00:01 |
+|* 46 |           INDEX RANGE SCAN                | SI_ORG_ENTITIES_N5             |     1 |       |     1   (0)| 00:00:01 |
+|* 47 |         INDEX RANGE SCAN                  | SI_USER_ORG_ROLES_N2           |     1 |    10 |     1   (0)| 00:00:01 |
+|  48 |        VIEW                               | SI_ROLES                       |   456 |  3648 |    10   (0)| 00:00:01 |
+|* 49 |         HASH JOIN                         |                                |   456 | 15504 |    10   (0)| 00:00:01 |
+|  50 |          NESTED LOOPS OUTER               |                                |   110 |  2310 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  51 |           TABLE ACCESS FULL               | SI_ROLES_T                     |   110 |  1320 |     3   (0)| 00:00:01 |</font>
+|* 52 |           INDEX RANGE SCAN                | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+|  53 |          VIEW                             | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+|  54 |           UNION-ALL                       |                                |       |       |            |          |
+|  55 |            NESTED LOOPS OUTER             |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  56 |             TABLE ACCESS FULL             | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|* 57 |             INDEX RANGE SCAN              | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+|  58 |            FAST DUAL                      |                                |     1 |       |     2   (0)| 00:00:01 |
+|* 59 |       INDEX RANGE SCAN                    | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+|  60 |      VIEW                                 | SI_ORG_ENTITIES                |   113 |   904 |     4   (0)| 00:00:01 |
+|  61 |       NESTED LOOPS OUTER                  |                                |   113 |  1695 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  62 |        TABLE ACCESS FULL                  | SI_ORG_ENTITIES_T              |   113 |   904 |     3   (0)| 00:00:01 |</font>
+|* 63 |        INDEX RANGE SCAN                   | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+|* 64 |     INDEX RANGE SCAN                      | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+|  65 |    VIEW                                   | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+|  66 |     UNION-ALL                             |                                |       |       |            |          |
+|  67 |      NESTED LOOPS OUTER                   |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  68 |       TABLE ACCESS FULL                   | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|* 69 |       INDEX RANGE SCAN                    | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+|  70 |      FAST DUAL                            |                                |     1 |       |     2   (0)| 00:00:01 |
+|* 71 |  FILTER                                   |                                |       |       |            |          |
+|  72 |   SORT AGGREGATE                          |                                |     1 |  2204 |            |          |
+<font style="background-color: lightblue; color: red">|* 73 |    INDEX SKIP SCAN                        | MS_QSM_INIT_QUESTNR_OWO_UK     |     1 |  2204 |     1   (0)| 00:00:01 |</font>
+|  74 |   SORT AGGREGATE                          |                                |     1 |  2204 |            |          |
+<font style="background-color: lightblue; color: red">|* 75 |    INDEX SKIP SCAN                        | MS_QSM_INIT_QUESTNR_OWS_UK     |     1 |  2204 |     1   (0)| 00:00:01 |</font>
+|  76 |   NESTED LOOPS                            |                                |     1 | 18521 |     6  (17)| 00:00:01 |
+|* 77 |    VIEW                                   | MS_QSM_INIT_QUESTNR_RPT_V      |     1 | 15989 |     5  (20)| 00:00:01 |
+|* 78 |     FILTER                                |                                |       |       |            |          |
+|  79 |      NESTED LOOPS OUTER                   |                                |     1 |  5155 |     5  (20)| 00:00:01 |
+|  80 |       NESTED LOOPS                        |                                |     1 |  4405 |     4  (25)| 00:00:01 |
+|  81 |        VIEW                               |                                |     2 |  6762 |     3  (34)| 00:00:01 |
+|  82 |         SORT ORDER BY                     |                                |     2 | 71828 |     3  (34)| 00:00:01 |
+|  83 |          CONCATENATION                    |                                |       |       |            |          |
+|* 84 |           FILTER                          |                                |       |       |            |          |
+|  85 |            TABLE ACCESS BY INDEX ROWID    | MS_QSM_INIT_QUESTNR            |     1 | 35914 |     1   (0)| 00:00:01 |
+|* 86 |             INDEX FULL SCAN               | MS_QSM_INIT_QUESTNR_NU         |     1 |       |     1   (0)| 00:00:01 |
+|* 87 |           FILTER                          |                                |       |       |            |          |
+|  88 |            TABLE ACCESS BY INDEX ROWID    | MS_QSM_INIT_QUESTNR            |     1 | 35914 |     1   (0)| 00:00:01 |
+|* 89 |             INDEX RANGE SCAN              | MS_QSM_INIT_QUESTNR_NU         |     1 |       |     1   (0)| 00:00:01 |
+|  90 |        TABLE ACCESS BY INDEX ROWID        | MS_QSM_QUESTIONNAIRE           |     1 |  1024 |     1   (0)| 00:00:01 |
+|* 91 |         INDEX UNIQUE SCAN                 | MS_QSM_QUESTIONNAIRE_PK        |     1 |       |     1   (0)| 00:00:01 |
+|  92 |       TABLE ACCESS BY INDEX ROWID         | MS_QSM_QUESTNR_SCH             |     1 |   750 |     1   (0)| 00:00:01 |
+|* 93 |        INDEX UNIQUE SCAN                  | MS_QSM_QUESTNR_SCH_PK          |     1 |       |     1   (0)| 00:00:01 |
+|  94 |    TABLE ACCESS BY INDEX ROWID            | MS_QSM_QUESTIONNAIRE           |     1 |  2532 |     1   (0)| 00:00:01 |
+|* 95 |     INDEX UNIQUE SCAN                     | MS_QSM_QUESTIONNAIRE_PK        |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 96 |   COLLECTION ITERATOR PICKLER FETCH       | SPLIT_STRING_STORED            |     1 |     2 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 97 |   COLLECTION ITERATOR PICKLER FETCH       | SPLIT_STRING_STORED            |     1 |     2 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 98 |   COLLECTION ITERATOR PICKLER FETCH       | SPLIT_CLOB_STORED              |     1 |     2 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 99 |   COLLECTION ITERATOR PICKLER FETCH       | SPLIT_CLOB_STORED              |     1 |     2 |     2   (0)| 00:00:01 |</font>
+----------------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$30      
+   2 - SEL$30       / SA@SEL$30
+   3 - SEL$30       / SA@SEL$30
+   4 - SEL$31      
+   5 - SEL$31       / X@SEL$31
+   6 - SEL$9CF1E98E
+   7 - SEL$9CF1E98E / MS_QSM_RESP_FINAL_DETAILS@SEL$33
+   8 - SEL$34      
+   9 - SEL$34       / X@SEL$34
+  10 - SEL$34       / X@SEL$34
+  11 - SEL$36      
+  14 - SEL$36       / B@SEL$36
+  15 - SEL$36       / C@SEL$36
+  16 - SEL$36       / C@SEL$36
+  17 - SEL$38      
+  18 - SEL$38       / B@SEL$38
+  19 - SEL$631DF87E
+  33 - SEL$631DF87E / USERS@SEL$4
+  34 - SEL$631DF87E / USERS@SEL$4
+  35 - SEL$631DF87E / PNAME@SEL$4
+  36 - SEL$631DF87E / PNAME@SEL$4
+  37 - SEL$631DF87E / PTYPE@SEL$4
+  38 - SEL$631DF87E / PVALUE@SEL$4
+  40 - SEL$631DF87E / ACT@SEL$4
+  41 - SEL$631DF87E / ACT@SEL$4
+  42 - SEL$631DF87E / ROLE_ACT@SEL$4
+  43 - SEL$631DF87E / A@SEL$5
+  44 - SEL$631DF87E / A@SEL$5
+  45 - SEL$631DF87E / ORGS@SEL$4
+  46 - SEL$631DF87E / ORGS@SEL$4
+  47 - SEL$631DF87E / D@SEL$5
+  48 - SEL$97CCBC9E / C@SEL$5
+  49 - SEL$97CCBC9E
+  51 - SEL$97CCBC9E / T@SEL$17
+  52 - SEL$97CCBC9E / TL@SEL$17
+  53 - SET$2        / SRA@SEL$16
+  54 - SET$2       
+  55 - SEL$18      
+  56 - SEL$18       / T@SEL$18
+  57 - SEL$18       / TL@SEL$18
+  58 - SEL$21       / DUAL@SEL$21
+  59 - SEL$631DF87E / CL@SEL$5
+  60 - SEL$15       / B@SEL$5
+  61 - SEL$15      
+  62 - SEL$15       / T@SEL$15
+  63 - SEL$15       / TL@SEL$15
+  64 - SEL$631DF87E / BL@SEL$5
+  65 - SET$1        / SRA@SEL$6
+  66 - SET$1       
+  67 - SEL$7       
+  68 - SEL$7        / T@SEL$7
+  69 - SEL$7        / TL@SEL$7
+  70 - SEL$10       / DUAL@SEL$10
+  71 - SEL$F5BB74E1
+  72 - SEL$35      
+  73 - SEL$35       / B@SEL$35
+  74 - SEL$37      
+  75 - SEL$37       / B@SEL$37
+  77 - SEL$A35C1FEA / IQV@SEL$2
+  78 - SEL$A35C1FEA
+  81 - SEL$39       / A@SEL$29
+  82 - SEL$39      
+  85 - SEL$39_1     / MS_QSM_INIT_QUESTNR@SEL$39
+  86 - SEL$39_1     / MS_QSM_INIT_QUESTNR@SEL$39
+  88 - SEL$39_2     / MS_QSM_INIT_QUESTNR@SEL$39_2
+  89 - SEL$39_2     / MS_QSM_INIT_QUESTNR@SEL$39_2
+  90 - SEL$A35C1FEA / C@SEL$29
+  91 - SEL$A35C1FEA / C@SEL$29
+  92 - SEL$A35C1FEA / B@SEL$29
+  93 - SEL$A35C1FEA / B@SEL$29
+  94 - SEL$F5BB74E1 / MSQ@SEL$2
+  95 - SEL$F5BB74E1 / MSQ@SEL$2
+  96 - SEL$5A0C3989 / KOKBF$0@SEL$41
+  97 - SEL$956A709B / KOKBF$1@SEL$43
+  98 - SEL$BE0BA760 / KOKBF$2@SEL$45
+  99 - SEL$03AE7C5B / KOKBF$3@SEL$47
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   3 - access("SA"."SCH_REQ_ID"=:B1)
+   5 - access("X"."SCH_REQ_ID"=:B1)
+   7 - access("QUE_REQUEST_ID"=:B1)
+   9 - filter("RESP_STATUS"='12')
+  10 - access("X"."QUE_REQUEST_ID"=:B1)
+  14 - access("B"."QUE_REQUEST_ID"=:B1)
+       filter("B"."QUE_REQUEST_ID"=:B1)
+  15 - access("C"."ORG_ENTITY_ID"=TO_NUMBER("B"."OWNER_ORGANIZATIONS"))
+  18 - access("B"."QUE_REQUEST_ID"=:B1)
+       filter("B"."QUE_REQUEST_ID"=:B1)
+  19 - filter(ROWNUM=1)
+  20 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+  22 - access("B"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID" AND "C"."ENTERPRISE_ID"="B"."ENTERPRISE_ID")
+  24 - access("C"."ROLE_ID"="A"."ROLE_ID")
+  33 - filter(NVL("USERS"."END_DATE",SYSDATE@!)>=SYSDATE@! AND "USERS"."USER_ID" IS NOT NULL)
+  34 - access("USERS"."USER_NAME"=:1)
+  36 - access(UPPER("PARAMETER_NAME")='DISPLAY_FORMAT')
+  37 - access("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND UPPER("PARAMETER_TYPE")='MS APPS USER 
+              NAME DISPLAY FORMAT')
+  38 - access("PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND 
+              "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" AND "PVALUE"."ORG_ENTITY_ID"=1)
+  41 - access("ACT"."ACTIVITY_NAME"='QSM - Manage Survey Assignments')
+  42 - access("ROLE_ACT"."ACTIVITY_ID"="ACT"."ACTIVITY_ID")
+  44 - access("ROLE_ACT"."ROLE_ID"="A"."ROLE_ID")
+  45 - filter(NVL("ORGS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  46 - access("ORGS"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID")
+  47 - access("D"."ORG_ROLE_ID"="A"."ORG_ROLE_ID" AND "USERS"."USER_ID"="D"."USER_ID")
+  49 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+  52 - access("T"."ROLE_ID"="TL"."ROLE_ID"(+) AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  57 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  59 - access("C"."ROLE_ID"="CL"."ROLE_ID"(+) AND "CL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  63 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+) AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  64 - access("B"."ORG_ENTITY_ID"="BL"."ORG_ENTITY_ID"(+) AND 
+              "BL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  69 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  71 - filter(( EXISTS (SELECT 0 FROM TABLE() "KOKBF$0" WHERE VALUE(KOKBF$)=:B1) OR :3 IS NULL) AND ( EXISTS 
+              (SELECT 0 FROM TABLE() "KOKBF$1" WHERE "MS_QSM_RPT_UTIL"."GET_LOV_DISP_VAL"('MS_QSM_Init_Questionnaire_Type',:B2)=VA
+              LUE(KOKBF$)) OR :4 IS NULL) AND ( EXISTS (SELECT 0 FROM TABLE() "KOKBF$2" WHERE VALUE(KOKBF$)=TRIM(:8)) OR :8 IS 
+              NULL) AND ( EXISTS (SELECT 0 FROM TABLE() "KOKBF$3" WHERE VALUE(KOKBF$)=TRIM(:9)) OR :9 IS NULL))
+  73 - access("B"."QUE_REQUEST_ID"=:B1)
+       filter("B"."QUE_REQUEST_ID"=:B1)
+  75 - access("B"."QUE_REQUEST_ID"=:B1)
+       filter("B"."QUE_REQUEST_ID"=:B1)
+  77 - filter((TRUNC(INTERNAL_FUNCTION("IQV"."LAST_SENT_DATE"))>=TRUNC(TO_DATE(TO_CHAR(TO_NUMBER(:6),'DDMMYYYY'),'DD
+              MMYYYY')) OR :6 IS NULL) AND (TRUNC(INTERNAL_FUNCTION("IQV"."LAST_SENT_DATE"))<=TRUNC(TO_DATE(TO_CHAR(TO_NUMBER(:7),
+              'DDMMYYYY'),'DDMMYYYY')) OR :7 IS NULL) AND ("MS_APPS_SECURITY_PKG"."CHECK_OBJECT_ACCESS"("IQV"."DD_OBJECT_TYPE","IQ
+              V"."RESTRICT_ACCESS_TO",SYS_OP_CL2C("IQV"."OWNER_ORGANIZATIONS"),:1,'VIEW')='ACCESS' OR "IQV"."SCH_FREQUENCY"='6' 
+              AND "IQV"."DD_CREATED_BY"=:1))
+  78 - filter(TRIM("MS_QSM_RPT_UTIL"."GET_LOV_DISP_VAL"('MS_QSM_Frequency',"B"."SCH_FREQUENCY"))=NVL(:5,"MS_QSM_RPT_
+              UTIL"."GET_LOV_DISP_VAL"('MS_QSM_Frequency',"B"."SCH_FREQUENCY")))
+  84 - filter(:2 IS NULL)
+  86 - filter("MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID" IS NOT NULL)
+  87 - filter(:2 IS NOT NULL)
+  89 - access("MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"=:2)
+  91 - access("A"."QUESTIONNAIRE_ID"="C"."INTERNAL_QUESTNR_ID")
+  93 - access("A"."QUE_REQUEST_ID"="B"."SCH_REQ_ID"(+))
+  95 - access("IQV"."QUESTIONNAIRE_ID"="MSQ"."INTERNAL_QUESTNR_ID")
+  96 - filter(VALUE(KOKBF$)=:B1)
+  97 - filter("MS_QSM_RPT_UTIL"."GET_LOV_DISP_VAL"('MS_QSM_Init_Questionnaire_Type',:B1)=VALUE(KOKBF$))
+  98 - filter(VALUE(KOKBF$)=TRIM(:8))
+  99 - filter(VALUE(KOKBF$)=TRIM(:9))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=0) MAX(TRUNC(INTERNAL_FUNCTION("SENT_OUT_ON")))[7]
+   2 - "SENT_OUT_ON"[DATE,7]
+   3 - "SA".ROWID[ROWID,10]
+   4 - (#keys=0) COUNT(*)[22]
+   6 - (#keys=0) COUNT(*)[22]
+   8 - (#keys=0) COUNT(*)[22]
+  10 - "X".ROWID[ROWID,10]
+  11 - (#keys=0) "MS_JOIN_CLOB"(DISTINCT INTERNAL_FUNCTION("C"."ORG_ENTITY_NAME"))[4000]
+  12 - (#keys=0) "C"."ORG_ENTITY_NAME"[VARCHAR2,400]
+  13 - (#keys=0) "C".ROWID[ROWID,10]
+  14 - "B"."OWNER_ORGANIZATIONS"[VARCHAR2,4000]
+  15 - "C".ROWID[ROWID,10]
+  16 - "C"."ORG_ENTITY_NAME"[VARCHAR2,400]
+  17 - (#keys=0) "MS_JOIN_CLOB"("MS_APPS_UTILITIES"."GET_USER_FULL_NAME"("B"."OWNERS"))[4000]
+  18 - "B"."OWNERS"[VARCHAR2,4000]
+  19 - ROWNUM[4]
+  20 - (#keys=1) 
+  21 - (#keys=0) "PACKAGE_ID"[NUMBER,22]
+  22 - (#keys=2) "B"."ORG_ENTITY_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  23 - (#keys=0) "PACKAGE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "C"."ENTERPRISE_ID"[NUMBER,22]
+  24 - (#keys=1) "C"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "C"."ENTERPRISE_ID"[NUMBER,22]
+  25 - (#keys=0) "PACKAGE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  26 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  27 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  28 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22]
+  29 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "ACT"."ACTIVITY_ID"[NUMBER,22]
+  30 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  31 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  32 - (#keys=0) "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22]
+  33 - "USERS"."USER_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  34 - "USERS".ROWID[ROWID,10]
+  35 - "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22]
+  36 - "PNAME".ROWID[ROWID,10], UPPER("PARAMETER_NAME")[VARCHAR2,400]
+  37 - "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22]
+  39 - (#keys=0) "ACT"."ACTIVITY_ID"[NUMBER,22]
+  40 - "ACT"."ACTIVITY_ID"[NUMBER,22]
+  41 - "ACT".ROWID[ROWID,10]
+  42 - "ROLE_ACT"."ROLE_ID"[NUMBER,22]
+  43 - "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  44 - "A".ROWID[ROWID,10], "A"."ROLE_ID"[NUMBER,22]
+  46 - "ORGS".ROWID[ROWID,10]
+  48 - "C"."ENTERPRISE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22]
+  49 - (#keys=1) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22]
+  50 - (#keys=0) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  51 - "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  53 - "SRA"."PACKAGE_ID"[NUMBER,22]
+  54 - STRDEF[22]
+  55 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  56 - "T"."MODULE_ID"[NUMBER,22]
+  60 - "B"."ENTERPRISE_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22]
+  61 - (#keys=0) "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+  62 - "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+  65 - "SRA"."PACKAGE_ID"[NUMBER,22]
+  66 - STRDEF[22]
+  67 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  68 - "T"."MODULE_ID"[NUMBER,22]
+  71 - "IQV"."QUE_REQUEST_ID"[VARCHAR2,400], "IQV"."QUESTIONNAIRE_ID"[VARCHAR2,1020], 
+       "IQV"."QUE_REQUEST_NAME"[VARCHAR2,1020], "IQV"."QUE_REQUEST_TYPE"[VARCHAR2,400], "MANAGE_SURVEY"[VARCHAR2,1020], 
+       "IQV"."DD_OBJECT_TYPE"[VARCHAR2,400], "IQV"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "IQV"."SCH_FREQUENCY"[VARCHAR2,1020], "SCH_NEXT_DATE"[DATE,7], "IQV"."LAST_SENT_DATE"[DATE,7], 
+       "IQV"."SENT"[NUMBER,22], "PROGRESS"[NUMBER,22], "IQV"."COMPLETED"[NUMBER,22], "SCH_END_BY"[DATE,7], 
+       "IQV"."OPEN_ISSUES"[VARCHAR2,4000], "IQV"."ISSUES_PAST_DUE"[VARCHAR2,4000], "OWNER_ORGANIZATIONS_DISP"[LOB,4000], 
+       "SCH_START_DATE"[DATE,7], "IQV"."QUE_NAME"[VARCHAR2,1020], "OWNERS_DISP"[LOB,4000], "SCH_CLOSE_DATE"[DATE,7], 
+       "DD_MODIFIED_ON"[DATE,7], "MSQ"."QUE_TYPE"[VARCHAR2,4000], "MSQ"."VALID_UNTILL"[DATE,7]
+  72 - (#keys=0) "MS_JOIN_CLOB"(INTERNAL_FUNCTION("B"."OWNER_ORGANIZATIONS"))[4000]
+  73 - "B"."OWNER_ORGANIZATIONS"[VARCHAR2,4000]
+  74 - (#keys=0) "MS_JOIN_CLOB"(INTERNAL_FUNCTION("B"."OWNERS"))[4000]
+  75 - "B"."OWNERS"[VARCHAR2,4000]
+  76 - (#keys=0) "IQV"."QUE_REQUEST_ID"[VARCHAR2,400], "IQV"."QUESTIONNAIRE_ID"[VARCHAR2,1020], 
+       "IQV"."QUE_REQUEST_NAME"[VARCHAR2,1020], "IQV"."QUE_REQUEST_TYPE"[VARCHAR2,400], "MANAGE_SURVEY"[VARCHAR2,1020], 
+       "IQV"."DD_OBJECT_TYPE"[VARCHAR2,400], "IQV"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "IQV"."SCH_FREQUENCY"[VARCHAR2,1020], "SCH_NEXT_DATE"[DATE,7], "IQV"."LAST_SENT_DATE"[DATE,7], 
+       "IQV"."SENT"[NUMBER,22], "PROGRESS"[NUMBER,22], "IQV"."COMPLETED"[NUMBER,22], "SCH_END_BY"[DATE,7], 
+       "IQV"."OPEN_ISSUES"[VARCHAR2,4000], "IQV"."ISSUES_PAST_DUE"[VARCHAR2,4000], "IQV"."OWNER_ORGANIZATIONS"[LOB,4000], 
+       "OWNER_ORGANIZATIONS_DISP"[LOB,4000], "SCH_START_DATE"[DATE,7], "IQV"."QUE_NAME"[VARCHAR2,1020], 
+       "IQV"."OWNERS"[LOB,4000], "OWNERS_DISP"[LOB,4000], "SCH_CLOSE_DATE"[DATE,7], "DD_MODIFIED_ON"[DATE,7], 
+       "MSQ"."QUE_TYPE"[VARCHAR2,4000], "MSQ"."VALID_UNTILL"[DATE,7]
+  77 - "IQV"."QUE_REQUEST_ID"[VARCHAR2,400], "IQV"."QUESTIONNAIRE_ID"[VARCHAR2,1020], 
+       "IQV"."QUE_REQUEST_NAME"[VARCHAR2,1020], "IQV"."QUE_REQUEST_TYPE"[VARCHAR2,400], "MANAGE_SURVEY"[VARCHAR2,1020], 
+       "IQV"."DD_OBJECT_TYPE"[VARCHAR2,400], "IQV"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "IQV"."SCH_FREQUENCY"[VARCHAR2,1020], "SCH_NEXT_DATE"[DATE,7], "IQV"."LAST_SENT_DATE"[DATE,7], 
+       "IQV"."SENT"[NUMBER,22], "PROGRESS"[NUMBER,22], "IQV"."COMPLETED"[NUMBER,22], "SCH_END_BY"[DATE,7], 
+       "IQV"."OPEN_ISSUES"[VARCHAR2,4000], "IQV"."ISSUES_PAST_DUE"[VARCHAR2,4000], "IQV"."OWNER_ORGANIZATIONS"[LOB,4000], 
+       "OWNER_ORGANIZATIONS_DISP"[LOB,4000], "IQV"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], "SCH_START_DATE"[DATE,7], 
+       "IQV"."QUE_NAME"[VARCHAR2,1020], "IQV"."OWNERS"[LOB,4000], "OWNERS_DISP"[LOB,4000], 
+       "IQV"."DD_CREATED_BY"[VARCHAR2,400], "SCH_CLOSE_DATE"[DATE,7]
+  78 - "A"."MANAGE_SURVEY"[VARCHAR2,1020], "A"."QUE_REQUEST_ID"[VARCHAR2,400], 
+       "A"."QUE_REQUEST_NAME"[VARCHAR2,1020], "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "A"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "A"."DD_CREATED_BY"[VARCHAR2,400], "A"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "A"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "A"."QUE_REQUEST_TYPE"[VARCHAR2,400], "C"."QUE_NAME"[VARCHAR2,1020], "B"."SCH_CLOSE_DATE"[DATE,7], 
+       "B"."SCH_FREQUENCY"[VARCHAR2,1020], "B"."SCH_END_BY"[DATE,7], "B"."SCH_NEXT_DATE"[DATE,7], 
+       "B"."SCH_START_DATE"[DATE,7]
+  79 - (#keys=0) "A"."MANAGE_SURVEY"[VARCHAR2,1020], "A"."QUE_REQUEST_ID"[VARCHAR2,400], 
+       "A"."QUE_REQUEST_NAME"[VARCHAR2,1020], "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "A"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "A"."DD_CREATED_BY"[VARCHAR2,400], "A"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "A"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "A"."QUE_REQUEST_TYPE"[VARCHAR2,400], "C"."QUE_NAME"[VARCHAR2,1020], "B"."SCH_CLOSE_DATE"[DATE,7], 
+       "B"."SCH_FREQUENCY"[VARCHAR2,1020], "B"."SCH_END_BY"[DATE,7], "B"."SCH_NEXT_DATE"[DATE,7], 
+       "B"."SCH_START_DATE"[DATE,7]
+  80 - (#keys=0) "A"."MANAGE_SURVEY"[VARCHAR2,1020], "A"."QUE_REQUEST_ID"[VARCHAR2,400], 
+       "A"."QUE_REQUEST_NAME"[VARCHAR2,1020], "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "A"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "A"."DD_CREATED_BY"[VARCHAR2,400], "A"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "A"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "A"."QUE_REQUEST_TYPE"[VARCHAR2,400], "C"."QUE_NAME"[VARCHAR2,1020]
+  81 - "A"."MANAGE_SURVEY"[VARCHAR2,1020], "A"."QUE_REQUEST_ID"[VARCHAR2,400], 
+       "A"."QUE_REQUEST_NAME"[VARCHAR2,1020], "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "A"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "A"."DD_CREATED_BY"[VARCHAR2,400], "A"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "A"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "A"."QUE_REQUEST_TYPE"[VARCHAR2,400]
+  82 - (#keys=1) UPPER("MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME")[1020], 
+       "MS_QSM_INIT_QUESTNR"."MANAGE_SURVEY"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_ID"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "MS_QSM_INIT_QUESTNR"."DD_CREATED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_TYPE"[VARCHAR2,400]
+  83 - "MS_QSM_INIT_QUESTNR".ROWID[ROWID,10], "MS_QSM_INIT_QUESTNR"."IS_SAVE"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."USER_EXPERIENCE"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."QUE_ACTION"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."LSI_STORED_VALUE"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."INSTRUCTIONS"[LOB,4000], 
+       "MS_QSM_INIT_QUESTNR"."LEVEL_2_APPROVER"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RTF_ATTACH"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."RESPONSE_APPROVER_DISP"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."PUBLISHED"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."QUE_SEND_TO"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."QUE_APPLIES_TO"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."MANAGE_SURVEY"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."DUMMY1"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."ALL_USER_APPROVAL"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."REPORTING_PERIOD_TYPE"[VARCHAR2,1020]
+       , "MS_QSM_INIT_QUESTNR"."LEVEL_1_APPROVER"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."INIT_COMMENTS"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."CHECK_AUTO_CREATE_ISSUE_FLAG"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_ID"[VARCHAR2,400], "MS_QSM_INIT_QUESTNR"."DUMMY2"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."ENABLE_ADVANCED"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."REINIT_PID"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."AUTO_CREATE_ISSUE"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."LSI_DISPLAY_VALUE"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."SURVEY_SOURCE_REF"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."OVERALL_APPROVER"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."CONSDR_NO_OF_PAST_MONTHS"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."TEMP_SCR_FLAG"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."REPORTING_PERIOD"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "MS_QSM_INIT_QUESTNR"."DD_INSTANCE_ID"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."DD_CREATED_ON"[DATE,7], "MS_QSM_INIT_QUESTNR"."DD_CREATED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_MODIFIED_ON"[DATE,7], "MS_QSM_INIT_QUESTNR"."DD_MODIFIED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_PROCESS_CODE"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."DD_EDIT_FLAG"[VARCHAR2,4], 
+       "MS_QSM_INIT_QUESTNR"."DD_STATUS_FLAG"[VARCHAR2,4], "MS_QSM_INIT_QUESTNR"."SURVEY_SCOPE_SELECTION"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."EXCEL_BASED"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."SUB_CERTIFICATION_FOR"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."STATUS"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."FIILTER_LEVEL"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."APPROVAL_BASED_ON_RESPONSE"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."COLLABORATIVE_RESPONSE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."INSTRUCTIONS_DISPLAY"[LOB,4000], "MS_QSM_INIT_QUESTNR"."SURVEY_SOURCE_TYPE"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RUN_EVENT_POST_RESP_FORM"[VARCHAR2,1
+       020], "MS_QSM_INIT_QUESTNR"."CONCAT_INDV_ITEMS"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."TEMP_APPLIES_TO"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."SEND_OPTION"[VARCHAR2,400], "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."RESPONSE_APPROVER"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."SEND_TO_APPROVAL"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."NO_RESP_ASSIGNMENTS"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."NO_RESP_EMAILS"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."RESP_DIRECT_PUBLISH"[VARCHAR2,1020]
+  84 - "MS_QSM_INIT_QUESTNR".ROWID[ROWID,10], "MS_QSM_INIT_QUESTNR"."IS_SAVE"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."USER_EXPERIENCE"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."QUE_ACTION"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."LSI_STORED_VALUE"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."INSTRUCTIONS"[LOB,4000], 
+       "MS_QSM_INIT_QUESTNR"."LEVEL_2_APPROVER"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RTF_ATTACH"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."RESPONSE_APPROVER_DISP"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."PUBLISHED"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."QUE_SEND_TO"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."QUE_APPLIES_TO"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."MANAGE_SURVEY"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."DUMMY1"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."ALL_USER_APPROVAL"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."REPORTING_PERIOD_TYPE"[VARCHAR2,1020]
+       , "MS_QSM_INIT_QUESTNR"."LEVEL_1_APPROVER"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."INIT_COMMENTS"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."CHECK_AUTO_CREATE_ISSUE_FLAG"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_ID"[VARCHAR2,400], "MS_QSM_INIT_QUESTNR"."DUMMY2"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."ENABLE_ADVANCED"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."REINIT_PID"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."AUTO_CREATE_ISSUE"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."LSI_DISPLAY_VALUE"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."SURVEY_SOURCE_REF"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."OVERALL_APPROVER"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."CONSDR_NO_OF_PAST_MONTHS"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."TEMP_SCR_FLAG"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."REPORTING_PERIOD"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "MS_QSM_INIT_QUESTNR"."DD_INSTANCE_ID"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."DD_CREATED_ON"[DATE,7], "MS_QSM_INIT_QUESTNR"."DD_CREATED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_MODIFIED_ON"[DATE,7], "MS_QSM_INIT_QUESTNR"."DD_MODIFIED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_PROCESS_CODE"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."DD_EDIT_FLAG"[VARCHAR2,4], 
+       "MS_QSM_INIT_QUESTNR"."DD_STATUS_FLAG"[VARCHAR2,4], "MS_QSM_INIT_QUESTNR"."SURVEY_SCOPE_SELECTION"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."EXCEL_BASED"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."SUB_CERTIFICATION_FOR"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."STATUS"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."FIILTER_LEVEL"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."APPROVAL_BASED_ON_RESPONSE"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."COLLABORATIVE_RESPONSE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."INSTRUCTIONS_DISPLAY"[LOB,4000], "MS_QSM_INIT_QUESTNR"."SURVEY_SOURCE_TYPE"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RUN_EVENT_POST_RESP_FORM"[VARCHAR2,1
+       020], "MS_QSM_INIT_QUESTNR"."CONCAT_INDV_ITEMS"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."TEMP_APPLIES_TO"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."SEND_OPTION"[VARCHAR2,400], "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."RESPONSE_APPROVER"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."SEND_TO_APPROVAL"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."NO_RESP_ASSIGNMENTS"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."NO_RESP_EMAILS"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."RESP_DIRECT_PUBLISH"[VARCHAR2,1020]
+  85 - "MS_QSM_INIT_QUESTNR".ROWID[ROWID,10], "MS_QSM_INIT_QUESTNR"."IS_SAVE"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."USER_EXPERIENCE"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."QUE_ACTION"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."LSI_STORED_VALUE"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."INSTRUCTIONS"[LOB,4000], 
+       "MS_QSM_INIT_QUESTNR"."LEVEL_2_APPROVER"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RTF_ATTACH"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."RESPONSE_APPROVER_DISP"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."PUBLISHED"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."QUE_SEND_TO"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."QUE_APPLIES_TO"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."MANAGE_SURVEY"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."DUMMY1"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."ALL_USER_APPROVAL"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."REPORTING_PERIOD_TYPE"[VARCHAR2,1020]
+       , "MS_QSM_INIT_QUESTNR"."LEVEL_1_APPROVER"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."INIT_COMMENTS"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."CHECK_AUTO_CREATE_ISSUE_FLAG"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_ID"[VARCHAR2,400], "MS_QSM_INIT_QUESTNR"."DUMMY2"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."ENABLE_ADVANCED"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."REINIT_PID"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."AUTO_CREATE_ISSUE"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."LSI_DISPLAY_VALUE"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."SURVEY_SOURCE_REF"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."OVERALL_APPROVER"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."CONSDR_NO_OF_PAST_MONTHS"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."TEMP_SCR_FLAG"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."REPORTING_PERIOD"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "MS_QSM_INIT_QUESTNR"."DD_INSTANCE_ID"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."DD_CREATED_ON"[DATE,7], "MS_QSM_INIT_QUESTNR"."DD_CREATED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_MODIFIED_ON"[DATE,7], "MS_QSM_INIT_QUESTNR"."DD_MODIFIED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_PROCESS_CODE"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."DD_EDIT_FLAG"[VARCHAR2,4], 
+       "MS_QSM_INIT_QUESTNR"."DD_STATUS_FLAG"[VARCHAR2,4], "MS_QSM_INIT_QUESTNR"."SURVEY_SCOPE_SELECTION"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."EXCEL_BASED"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."SUB_CERTIFICATION_FOR"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."STATUS"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."FIILTER_LEVEL"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."APPROVAL_BASED_ON_RESPONSE"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."COLLABORATIVE_RESPONSE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."INSTRUCTIONS_DISPLAY"[LOB,4000], "MS_QSM_INIT_QUESTNR"."SURVEY_SOURCE_TYPE"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RUN_EVENT_POST_RESP_FORM"[VARCHAR2,1
+       020], "MS_QSM_INIT_QUESTNR"."CONCAT_INDV_ITEMS"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."TEMP_APPLIES_TO"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."SEND_OPTION"[VARCHAR2,400], "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."RESPONSE_APPROVER"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."SEND_TO_APPROVAL"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."NO_RESP_ASSIGNMENTS"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."NO_RESP_EMAILS"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."RESP_DIRECT_PUBLISH"[VARCHAR2,1020]
+  86 - "MS_QSM_INIT_QUESTNR".ROWID[ROWID,10], "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020]
+  87 - "MS_QSM_INIT_QUESTNR".ROWID[ROWID,10], "MS_QSM_INIT_QUESTNR"."IS_SAVE"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."USER_EXPERIENCE"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."QUE_ACTION"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."LSI_STORED_VALUE"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."INSTRUCTIONS"[LOB,4000], 
+       "MS_QSM_INIT_QUESTNR"."LEVEL_2_APPROVER"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RTF_ATTACH"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."RESPONSE_APPROVER_DISP"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."PUBLISHED"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."QUE_SEND_TO"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."QUE_APPLIES_TO"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."MANAGE_SURVEY"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."DUMMY1"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."ALL_USER_APPROVAL"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."REPORTING_PERIOD_TYPE"[VARCHAR2,1020]
+       , "MS_QSM_INIT_QUESTNR"."LEVEL_1_APPROVER"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."INIT_COMMENTS"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."CHECK_AUTO_CREATE_ISSUE_FLAG"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_ID"[VARCHAR2,400], "MS_QSM_INIT_QUESTNR"."DUMMY2"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."ENABLE_ADVANCED"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."REINIT_PID"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."AUTO_CREATE_ISSUE"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."LSI_DISPLAY_VALUE"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."SURVEY_SOURCE_REF"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."OVERALL_APPROVER"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."CONSDR_NO_OF_PAST_MONTHS"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."TEMP_SCR_FLAG"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."REPORTING_PERIOD"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "MS_QSM_INIT_QUESTNR"."DD_INSTANCE_ID"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."DD_CREATED_ON"[DATE,7], "MS_QSM_INIT_QUESTNR"."DD_CREATED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_MODIFIED_ON"[DATE,7], "MS_QSM_INIT_QUESTNR"."DD_MODIFIED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_PROCESS_CODE"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."DD_EDIT_FLAG"[VARCHAR2,4], 
+       "MS_QSM_INIT_QUESTNR"."DD_STATUS_FLAG"[VARCHAR2,4], "MS_QSM_INIT_QUESTNR"."SURVEY_SCOPE_SELECTION"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."EXCEL_BASED"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."SUB_CERTIFICATION_FOR"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."STATUS"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."FIILTER_LEVEL"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."APPROVAL_BASED_ON_RESPONSE"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."COLLABORATIVE_RESPONSE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."INSTRUCTIONS_DISPLAY"[LOB,4000], "MS_QSM_INIT_QUESTNR"."SURVEY_SOURCE_TYPE"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RUN_EVENT_POST_RESP_FORM"[VARCHAR2,1
+       020], "MS_QSM_INIT_QUESTNR"."CONCAT_INDV_ITEMS"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."TEMP_APPLIES_TO"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."SEND_OPTION"[VARCHAR2,400], "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."RESPONSE_APPROVER"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."SEND_TO_APPROVAL"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."NO_RESP_ASSIGNMENTS"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."NO_RESP_EMAILS"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."RESP_DIRECT_PUBLISH"[VARCHAR2,1020]
+  88 - "MS_QSM_INIT_QUESTNR".ROWID[ROWID,10], "MS_QSM_INIT_QUESTNR"."IS_SAVE"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."USER_EXPERIENCE"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."QUE_ACTION"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."LSI_STORED_VALUE"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."INSTRUCTIONS"[LOB,4000], 
+       "MS_QSM_INIT_QUESTNR"."LEVEL_2_APPROVER"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RTF_ATTACH"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."RESPONSE_APPROVER_DISP"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."PUBLISHED"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."QUE_SEND_TO"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."QUE_APPLIES_TO"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."MANAGE_SURVEY"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."DUMMY1"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."ALL_USER_APPROVAL"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."REPORTING_PERIOD_TYPE"[VARCHAR2,1020]
+       , "MS_QSM_INIT_QUESTNR"."LEVEL_1_APPROVER"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."INIT_COMMENTS"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."CHECK_AUTO_CREATE_ISSUE_FLAG"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_ID"[VARCHAR2,400], "MS_QSM_INIT_QUESTNR"."DUMMY2"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."ENABLE_ADVANCED"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."REINIT_PID"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."AUTO_CREATE_ISSUE"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."LSI_DISPLAY_VALUE"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."SURVEY_SOURCE_REF"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."OVERALL_APPROVER"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."CONSDR_NO_OF_PAST_MONTHS"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."TEMP_SCR_FLAG"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."REPORTING_PERIOD"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], "MS_QSM_INIT_QUESTNR"."DD_INSTANCE_ID"[NUMBER,22], 
+       "MS_QSM_INIT_QUESTNR"."DD_CREATED_ON"[DATE,7], "MS_QSM_INIT_QUESTNR"."DD_CREATED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_MODIFIED_ON"[DATE,7], "MS_QSM_INIT_QUESTNR"."DD_MODIFIED_BY"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_PROCESS_CODE"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."DD_EDIT_FLAG"[VARCHAR2,4], 
+       "MS_QSM_INIT_QUESTNR"."DD_STATUS_FLAG"[VARCHAR2,4], "MS_QSM_INIT_QUESTNR"."SURVEY_SCOPE_SELECTION"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."EXCEL_BASED"[VARCHAR2,40], "MS_QSM_INIT_QUESTNR"."SUB_CERTIFICATION_FOR"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."STATUS"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."FIILTER_LEVEL"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."APPROVAL_BASED_ON_RESPONSE"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."COLLABORATIVE_RESPONSE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."INSTRUCTIONS_DISPLAY"[LOB,4000], "MS_QSM_INIT_QUESTNR"."SURVEY_SOURCE_TYPE"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RUN_EVENT_POST_RESP_FORM"[VARCHAR2,1
+       020], "MS_QSM_INIT_QUESTNR"."CONCAT_INDV_ITEMS"[VARCHAR2,4000], 
+       "MS_QSM_INIT_QUESTNR"."TEMP_APPLIES_TO"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."RESTRICT_ACCESS_TO"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."SEND_OPTION"[VARCHAR2,400], "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."RESPONSE_APPROVER"[VARCHAR2,4000], "MS_QSM_INIT_QUESTNR"."SEND_TO_APPROVAL"[VARCHAR2,40], 
+       "MS_QSM_INIT_QUESTNR"."NO_RESP_ASSIGNMENTS"[VARCHAR2,1020], "MS_QSM_INIT_QUESTNR"."NO_RESP_EMAILS"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."RESP_DIRECT_PUBLISH"[VARCHAR2,1020]
+  89 - "MS_QSM_INIT_QUESTNR".ROWID[ROWID,10], "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020]
+  90 - "C"."QUE_NAME"[VARCHAR2,1020]
+  91 - "C".ROWID[ROWID,10]
+  92 - "B"."SCH_CLOSE_DATE"[DATE,7], "B"."SCH_FREQUENCY"[VARCHAR2,1020], "B"."SCH_END_BY"[DATE,7], 
+       "B"."SCH_NEXT_DATE"[DATE,7], "B"."SCH_START_DATE"[DATE,7]
+  93 - "B".ROWID[ROWID,10]
+  94 - "DD_MODIFIED_ON"[DATE,7], "MSQ"."QUE_TYPE"[VARCHAR2,4000], "MSQ"."VALID_UNTILL"[DATE,7]
+  95 - "MSQ".ROWID[ROWID,10]
+  96 - VALUE(A0)[8000]
+  97 - VALUE(A0)[8000]
+  98 - VALUE(A0)[8000]
+  99 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

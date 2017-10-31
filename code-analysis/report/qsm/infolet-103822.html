@@ -1,0 +1,351 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_QUESTIONNAIRE_RPT (103822)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT QUE_ID,
+QUE_NAME,
+QUE_TYPE_DISP,
+APPLIES_TO_DISP,
+OWNER_ORGANIZATIONS_DISP,
+OWNERS_DISP,
+NO_OF_PLANS,
+VALID_FROM,
+VALID_UNTILL,
+VERSION_NUMBER,
+LOGIN_ID,
+report_json,
+internal_que_id
+FROM
+(SELECT q.que_id,
+Q.QUE_NAME,
+Ms_Qsm_Rpt_Util.Get_Lov_Disp_Val('MS_QSM_Questionnaire_Type' ,Q.QUE_TYPE) as QUE_TYPE_DISP,
+MS_QSM_RPT_UTIL.GET_APPLIES_TO_DISPLAY_VALUE(:7, Q.APPLIES_TO) AS APPLIES_TO_DISP,
+Q.OWNER_ORGANIZATIONS_DISP,
+Q.OWNERS_DISP,
+Q.OWNER_ORGANIZATIONS,
+Q.OWNERS,
+Q.APPLIES_TO,
+EXPIRED_FLAG,
+(SELECT COUNT(P.QUE_REQUEST_ID)
+FROM MS_QSM_INIT_QUESTNR_RPT_V P
+WHERE Q.internal_que_id =P.QUESTIONNAIRE_ID
+AND MS_APPS_SECURITY_PKG.CHECK_OBJECT_ACCESS(P.DD_OBJECT_TYPE, P.RESTRICT_ACCESS_TO, P.OWNER_ORGANIZATIONS,:7,'VIEW') = 'ACCESS'
+) NO_OF_PLANS,
+VALID_FROM,
+VALID_UNTILL,
+:7 as LOGIN_ID, 
+VERSION_NUMBER,
+(MS_QSM_RPT_UTIL.FN_GET_QUESTNR_REPORT_JSON(ms_apps_utilities.get_infolet_id(Q.DD_OBJECT_TYPE),DD_PROCESS_INSTANCE_ID,'0',null)) as report_json,
+Q.internal_que_id
+from MS_QSM_QUESTIONNAIRE_RPT_V Q
+where 
+MS_APPS_SECURITY_PKG.CHECK_OBJECT_ACCESS(Q.DD_OBJECT_TYPE, Q.RESTRICT_ACCESS_TO, Q.OWNER_ORGANIZATIONS,:7,'VIEW') = 'ACCESS'
+and ((:4 IS NULL) OR ( (:4 IS NOT NULL and :4= '1' and expired_flag =1) OR ( :4 IS NOT NULL and :4='2' and expired_flag =2 ) )
+)
+)
+WHERE (QUE_ID IN (SELECT COLUMN_VALUE FROM TABLE (ms_grc_str_common_utilities.Split_String_Stored(:1))) OR :1 IS NULL)
+AND (QUE_TYPE_DISP IN (SELECT COLUMN_VALUE FROM TABLE (ms_grc_str_common_utilities.Split_String_Stored(:2))) OR :2 IS NULL)
+AND (TRIM(:3) in (select column_value from table(ms_grc_str_common_utilities.Split_String_stored(TRIM(APPLIES_TO)))) OR :3 IS NULL)
+AND (TRIM(:6) in (select column_value from table(ms_grc_str_common_utilities.Split_Clob_stored(TRIM(OWNERS)))) OR :6 IS NULL)
+AND (TRIM(:5) in (select column_value from table(ms_grc_str_common_utilities.Split_Clob_stored(TRIM(OWNER_ORGANIZATIONS)))) OR :5 IS NULL)</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet is used in Questionnaire list report.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 105836208</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                          | Name                        | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                   |                             |     1 | 16295 |     2   (0)| 00:00:01 |
+|   1 |  SORT AGGREGATE                    |                             |     1 |  2514 |            |          |
+|*  2 |   INDEX RANGE SCAN                 | MS_QSM_QUESTIONNAIRE_APT_UK |     1 |  2514 |     1   (0)| 00:00:01 |
+|   3 |  SORT GROUP BY                     |                             |     1 |  2537 |            |          |
+|   4 |   NESTED LOOPS                     |                             |     1 |  2537 |     2   (0)| 00:00:01 |
+|   5 |    NESTED LOOPS                    |                             |     1 |  2537 |     2   (0)| 00:00:01 |
+|*  6 |     INDEX RANGE SCAN               | MS_QSM_QUESTIONNAIRE_OWO_UK |     1 |  2514 |     1   (0)| 00:00:01 |
+|*  7 |     INDEX RANGE SCAN               | SI_ORG_ENTITIES_N5          |     1 |       |     1   (0)| 00:00:01 |
+|   8 |    TABLE ACCESS BY INDEX ROWID     | SI_ORG_ENTITIES_T           |     1 |    23 |     1   (0)| 00:00:01 |
+|   9 |  SORT AGGREGATE                    |                             |     1 |  2514 |            |          |
+<font style="background-color: lightblue; color: red">|* 10 |   INDEX SKIP SCAN                  | MS_QSM_QUESTIONNAIRE_OWS_UK |     1 |  2514 |     1   (0)| 00:00:01 |</font>
+|  11 |  SORT AGGREGATE                    |                             |     1 |  1940 |            |          |
+|* 12 |   FILTER                           |                             |       |       |            |          |
+|  13 |    NESTED LOOPS                    |                             |     1 |  1940 |     3  (34)| 00:00:01 |
+|* 14 |     INDEX UNIQUE SCAN              | MS_QSM_QUESTIONNAIRE_PK     |     1 |   512 |     1   (0)| 00:00:01 |
+|* 15 |     VIEW                           |                             |     1 |  1428 |     2  (50)| 00:00:01 |
+|  16 |      SORT ORDER BY                 |                             |     1 | 35914 |     2  (50)| 00:00:01 |
+|  17 |       TABLE ACCESS BY INDEX ROWID  | MS_QSM_INIT_QUESTNR         |     1 | 35914 |     1   (0)| 00:00:01 |
+|* 18 |        INDEX RANGE SCAN            | MS_QSM_INIT_QUESTNR_NU      |     1 |       |     1   (0)| 00:00:01 |
+|  19 |    SORT AGGREGATE                  |                             |     1 |  2204 |            |          |
+<font style="background-color: lightblue; color: red">|* 20 |     INDEX SKIP SCAN                | MS_QSM_INIT_QUESTNR_OWO_UK  |     1 |  2204 |     1   (0)| 00:00:01 |</font>
+|* 21 |  FILTER                            |                             |       |       |            |          |
+|  22 |   SORT AGGREGATE                   |                             |     1 |  2514 |            |          |
+|* 23 |    INDEX RANGE SCAN                | MS_QSM_QUESTIONNAIRE_OWO_UK |     1 |  2514 |     1   (0)| 00:00:01 |
+|  24 |   SORT AGGREGATE                   |                             |     1 |  2514 |            |          |
+<font style="background-color: lightblue; color: red">|* 25 |    INDEX SKIP SCAN                 | MS_QSM_QUESTIONNAIRE_OWS_UK |     1 |  2514 |     1   (0)| 00:00:01 |</font>
+|* 26 |   VIEW                             | MS_QSM_QUESTIONNAIRE_RPT_V  |     1 | 16295 |     2   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 27 |    TABLE ACCESS FULL               | MS_QSM_QUESTIONNAIRE        |     1 |  6285 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 28 |   COLLECTION ITERATOR PICKLER FETCH| SPLIT_STRING_STORED         |     1 |     2 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 29 |   COLLECTION ITERATOR PICKLER FETCH| SPLIT_STRING_STORED         |     1 |     2 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 30 |   COLLECTION ITERATOR PICKLER FETCH| SPLIT_STRING_STORED         |     1 |     2 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 31 |   COLLECTION ITERATOR PICKLER FETCH| SPLIT_CLOB_STORED           |     1 |     2 |     2   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 32 |   COLLECTION ITERATOR PICKLER FETCH| SPLIT_CLOB_STORED           |     1 |     2 |     2   (0)| 00:00:01 |</font>
+------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$20      
+   2 - SEL$20       / B@SEL$20
+   3 - SEL$22      
+   6 - SEL$22       / B@SEL$22
+   7 - SEL$22       / C@SEL$22
+   8 - SEL$22       / C@SEL$22
+   9 - SEL$24      
+  10 - SEL$24       / B@SEL$24
+  11 - SEL$73B88837
+  14 - SEL$73B88837 / C@SEL$7
+  15 - SEL$17       / A@SEL$7
+  16 - SEL$17      
+  17 - SEL$17       / MS_QSM_INIT_QUESTNR@SEL$17
+  18 - SEL$17       / MS_QSM_INIT_QUESTNR@SEL$17
+  19 - SEL$13      
+  20 - SEL$13       / B@SEL$13
+  21 - SEL$F5BB74E1
+  22 - SEL$21      
+  23 - SEL$21       / B@SEL$21
+  24 - SEL$23      
+  25 - SEL$23       / B@SEL$23
+  26 - SEL$07C48A2D / Q@SEL$2
+  27 - SEL$07C48A2D / A@SEL$19
+  28 - SEL$95423B40 / KOKBF$0@SEL$26
+  29 - SEL$A065B7E5 / KOKBF$1@SEL$28
+  30 - SEL$F7A62D4D / KOKBF$2@SEL$30
+  31 - SEL$DB5DDC31 / KOKBF$3@SEL$32
+  32 - SEL$8C085B80 / KOKBF$4@SEL$34
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("B"."INTERNAL_QUESTNR_ID"=:B1)
+   6 - access("B"."INTERNAL_QUESTNR_ID"=:B1)
+   7 - access("C"."ORG_ENTITY_ID"=TO_NUMBER("B"."OWNER_ORGANIZATIONS"))
+  10 - access("B"."INTERNAL_QUESTNR_ID"=:B1)
+       filter("B"."INTERNAL_QUESTNR_ID"=:B1)
+  12 - filter("MS_APPS_SECURITY_PKG"."CHECK_OBJECT_ACCESS"("A"."DD_OBJECT_TYPE","A"."RESTRICT_ACCESS_TO",S
+              YS_OP_CL2C( (SELECT "MS_JOIN_CLOB"(INTERNAL_FUNCTION("B"."OWNER_ORGANIZATIONS")) FROM 
+              METRICSTREAM."MS_QSM_INIT_QUESTNR_OWO" "B" WHERE "B"."QUE_REQUEST_ID"=:B1)),:7,'VIEW')='ACCESS')
+  14 - access("C"."INTERNAL_QUESTNR_ID"=:B1)
+  15 - filter("A"."QUESTIONNAIRE_ID"="C"."INTERNAL_QUESTNR_ID")
+  18 - access("MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"=:B1)
+  20 - access("B"."QUE_REQUEST_ID"=:B1)
+       filter("B"."QUE_REQUEST_ID"=:B1)
+  21 - filter(( EXISTS (SELECT 0 FROM TABLE() "KOKBF$0" WHERE VALUE(KOKBF$)=:B1) OR :1 IS NULL) AND ( 
+              EXISTS (SELECT 0 FROM TABLE() "KOKBF$1" WHERE "MS_QSM_RPT_UTIL"."GET_LOV_DISP_VAL"('MS_QSM_Questionnaire_T
+              ype',:B2)=VALUE(KOKBF$)) OR :2 IS NULL) AND ( EXISTS (SELECT 0 FROM TABLE() "KOKBF$2" WHERE 
+              VALUE(KOKBF$)=TRIM(:3)) OR :3 IS NULL) AND ( EXISTS (SELECT 0 FROM TABLE() "KOKBF$3" WHERE 
+              VALUE(KOKBF$)=TRIM(:6)) OR :6 IS NULL) AND ( EXISTS (SELECT 0 FROM TABLE() "KOKBF$4" WHERE 
+              VALUE(KOKBF$)=TRIM(:5)) OR :5 IS NULL))
+  23 - access("B"."INTERNAL_QUESTNR_ID"=:B1)
+  25 - access("B"."INTERNAL_QUESTNR_ID"=:B1)
+       filter("B"."INTERNAL_QUESTNR_ID"=:B1)
+  26 - filter("MS_APPS_SECURITY_PKG"."CHECK_OBJECT_ACCESS"("Q"."DD_OBJECT_TYPE","Q"."RESTRICT_ACCESS_TO","
+              Q"."OWNER_ORGANIZATIONS",:7,'VIEW')='ACCESS')
+  27 - filter(:4 IS NULL OR :4 IS NOT NULL AND :4='1' AND TO_NUMBER(CASE  WHEN 
+              TRUNC(SYSDATE@!)<=NVL("A"."VALID_UNTILL",SYSDATE@!) THEN '2' ELSE '1' END )=1 OR :4 IS NOT NULL AND 
+              :4='2' AND TO_NUMBER(CASE  WHEN TRUNC(SYSDATE@!)<=NVL("A"."VALID_UNTILL",SYSDATE@!) THEN '2' ELSE '1' END 
+              )=2)
+  28 - filter(VALUE(KOKBF$)=:B1)
+  29 - filter("MS_QSM_RPT_UTIL"."GET_LOV_DISP_VAL"('MS_QSM_Questionnaire_Type',:B1)=VALUE(KOKBF$))
+  30 - filter(VALUE(KOKBF$)=TRIM(:3))
+  31 - filter(VALUE(KOKBF$)=TRIM(:6))
+  32 - filter(VALUE(KOKBF$)=TRIM(:5))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=0) "MS_JOIN"("B"."APPLIES_TO")[4000]
+   2 - "B"."APPLIES_TO"[VARCHAR2,4000]
+   3 - (#keys=0) "MS_JOIN_CLOB"(DISTINCT INTERNAL_FUNCTION("C"."ORG_ENTITY_NAME"))[4000]
+   4 - (#keys=0) "C"."ORG_ENTITY_NAME"[VARCHAR2,400]
+   5 - (#keys=0) "C".ROWID[ROWID,10]
+   6 - "B"."OWNER_ORGANIZATIONS"[VARCHAR2,4000]
+   7 - "C".ROWID[ROWID,10]
+   8 - "C"."ORG_ENTITY_NAME"[VARCHAR2,400]
+   9 - (#keys=0) "MS_JOIN_CLOB"("MS_APPS_UTILITIES"."GET_USER_FULL_NAME"("B"."OWNERS"))[4000]
+  10 - "B"."OWNERS"[VARCHAR2,4000]
+  11 - (#keys=0) COUNT("A"."QUE_REQUEST_ID")[22]
+  12 - "A"."QUE_REQUEST_ID"[VARCHAR2,400]
+  13 - (#keys=0) "A"."QUE_REQUEST_ID"[VARCHAR2,400], "A"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "A"."RESTRICT_ACCESS_TO"[VARCHAR2,1020]
+  14 - "C"."INTERNAL_QUESTNR_ID"[VARCHAR2,1020]
+  15 - "A"."QUE_REQUEST_ID"[VARCHAR2,400], "A"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "A"."QUESTIONNAIRE_ID"[VARCHAR2,1020], "A"."RESTRICT_ACCESS_TO"[VARCHAR2,1020]
+  16 - (#keys=1) UPPER("MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME")[1020], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_ID"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."RESTRICT_ACCESS_TO"[VARCHAR2,1020]
+  17 - "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_ID"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."QUE_REQUEST_NAME"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020], 
+       "MS_QSM_INIT_QUESTNR"."RESTRICT_ACCESS_TO"[VARCHAR2,1020]
+  18 - "MS_QSM_INIT_QUESTNR".ROWID[ROWID,10], "MS_QSM_INIT_QUESTNR"."QUESTIONNAIRE_ID"[VARCHAR2,1020]
+  19 - (#keys=0) "MS_JOIN_CLOB"(INTERNAL_FUNCTION("B"."OWNER_ORGANIZATIONS"))[4000]
+  20 - "B"."OWNER_ORGANIZATIONS"[VARCHAR2,4000]
+  21 - "Q"."INTERNAL_QUE_ID"[VARCHAR2,1020], "Q"."QUE_ID"[VARCHAR2,1020], 
+       "Q"."DD_OBJECT_TYPE"[VARCHAR2,400], "Q"."QUE_TYPE"[VARCHAR2,4000], "Q"."APPLIES_TO"[VARCHAR2,4000], 
+       "Q"."QUE_NAME"[VARCHAR2,1020], "Q"."OWNER_ORGANIZATIONS_DISP"[LOB,4000], "Q"."OWNERS_DISP"[LOB,4000], 
+       "VALID_FROM"[DATE,7], "VALID_UNTILL"[DATE,7], "DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "VERSION_NUMBER"[VARCHAR2,1020]
+  22 - (#keys=0) "MS_JOIN"("B"."OWNER_ORGANIZATIONS")[4000]
+  23 - "B"."OWNER_ORGANIZATIONS"[VARCHAR2,4000]
+  24 - (#keys=0) "MS_JOIN"("B"."OWNERS")[4000]
+  25 - "B"."OWNERS"[VARCHAR2,4000]
+  26 - "Q"."INTERNAL_QUE_ID"[VARCHAR2,1020], "Q"."QUE_ID"[VARCHAR2,1020], 
+       "Q"."DD_OBJECT_TYPE"[VARCHAR2,400], "Q"."QUE_TYPE"[VARCHAR2,4000], 
+       "Q"."OWNER_ORGANIZATIONS"[VARCHAR2,4000], "Q"."OWNERS"[VARCHAR2,4000], "Q"."APPLIES_TO"[VARCHAR2,4000], 
+       "Q"."QUE_NAME"[VARCHAR2,1020], "Q"."OWNER_ORGANIZATIONS_DISP"[LOB,4000], "Q"."OWNERS_DISP"[LOB,4000], 
+       "VALID_FROM"[DATE,7], "VALID_UNTILL"[DATE,7], "DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "Q"."RESTRICT_ACCESS_TO"[VARCHAR2,4000], "VERSION_NUMBER"[VARCHAR2,1020]
+  27 - "A"."RESTRICT_ACCESS_TO"[VARCHAR2,4000], "A"."QUE_NAME"[VARCHAR2,1020], 
+       "A"."QUE_ID"[VARCHAR2,1020], "A"."DD_OBJECT_TYPE"[VARCHAR2,400], "A"."DD_PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "A"."INTERNAL_QUESTNR_ID"[VARCHAR2,1020], "A"."VERSION_NUMBER"[VARCHAR2,1020], 
+       "A"."QUE_TYPE"[VARCHAR2,4000], "A"."VALID_UNTILL"[DATE,7], "A"."VALID_FROM"[DATE,7]
+  28 - VALUE(A0)[8000]
+  29 - VALUE(A0)[8000]
+  30 - VALUE(A0)[8000]
+  31 - VALUE(A0)[8000]
+  32 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

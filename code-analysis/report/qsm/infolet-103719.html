@@ -1,0 +1,1025 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_ACTION_LIST (103719)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code> select distinct action_id, action_name, locale_id,
+               current_stage, previous_stage, active, created_by,
+               creation_date, last_update_date, last_updated_by,
+               stage_type, status from (  SELECT a.action_id, b.action_name, b.locale_id, a.role_activity,
+               a.current_stage, a.previous_stage, a.active, a.created_by,
+               a.creation_date, a.last_update_date, a.last_updated_by,
+               a.stage_type, a.status
+          FROM ms_qsm_stage_action_mapping a, ms_qsm_actions_tl_v b
+         WHERE a.action_id = b.action_id     
+          AND Previous_Stage = :1
+         and Current_Stage = :2
+         and (Current_Stage <> 'OWN_QST' OR a.action_id <> DECODE(:3,'Y','SND_APP','APPROVE'))
+         and (trim(ROLE_ACTIVITY) IN (SELECT activity_name
+                            FROM SI_USER_ORG_ACT_VIEW fdo
+                            Where user_name = nvl(:4,user_name )
+                             And activity_name in  ( 'QSM - Setup Questionnaire','QSM - Approve Questionnaire','QSM - Manage Questionnaires','QSM - Manage All Questionnaires'))))</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This Infolet will fetch and display the Actions Based on Stage</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2523494896</h2></header><pre><code>
+ 
+-----------------------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                                        | Name                           | Rows  | Bytes | Cost (%CPU)| Time     |
+-----------------------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                                 |                                |     1 |  2555 |    85   (2)| 00:00:02 |
+|   1 |  SORT UNIQUE                                     |                                |     1 |  2555 |    85   (2)| 00:00:02 |
+|   2 |   CONCATENATION                                  |                                |       |       |            |          |
+|*  3 |    FILTER                                        |                                |       |       |            |          |
+|*  4 |     HASH JOIN                                    |                                |     1 |  2555 |    42   (0)| 00:00:01 |
+|   5 |      NESTED LOOPS                                |                                |     1 |  2542 |    36   (0)| 00:00:01 |
+|   6 |       NESTED LOOPS                               |                                |     1 |  2542 |    36   (0)| 00:00:01 |
+|   7 |        NESTED LOOPS                              |                                |     1 |  2520 |    35   (0)| 00:00:01 |
+|   8 |         NESTED LOOPS OUTER                       |                                |     1 |  2510 |    34   (0)| 00:00:01 |
+|*  9 |          HASH JOIN                               |                                |     1 |  2501 |    33   (0)| 00:00:01 |
+|  10 |           NESTED LOOPS OUTER                     |                                |     1 |  2493 |    23   (0)| 00:00:01 |
+|* 11 |            HASH JOIN                             |                                |     1 |  2486 |    22   (0)| 00:00:01 |
+|  12 |             NESTED LOOPS                         |                                |     1 |  2478 |    18   (0)| 00:00:01 |
+|  13 |              NESTED LOOPS                        |                                |     1 |  2478 |    18   (0)| 00:00:01 |
+|  14 |               NESTED LOOPS                       |                                |     1 |  2472 |    17   (0)| 00:00:01 |
+|  15 |                NESTED LOOPS                      |                                |     1 |  2457 |    16   (0)| 00:00:01 |
+|  16 |                 NESTED LOOPS                     |                                |     1 |  2447 |    15   (0)| 00:00:01 |
+|  17 |                  NESTED LOOPS                    |                                |     1 |  2415 |    14   (0)| 00:00:01 |
+|  18 |                   NESTED LOOPS                   |                                |     1 |  2402 |    13   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  19 |                    MERGE JOIN CARTESIAN          |                                |     1 |  2369 |    12   (0)| 00:00:01 |</font>
+|* 20 |                     HASH JOIN OUTER              |                                |     1 |  2335 |    11   (0)| 00:00:01 |
+|* 21 |                      HASH JOIN                   |                                |     1 |   109 |     9   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 22 |                       TABLE ACCESS FULL          | MS_QSM_STAGE_ACTION_MAPPING    |     1 |    82 |     3   (0)| 00:00:01 |</font>
+|  23 |                       VIEW                       |                                |     8 |   216 |     6   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  24 |                        MERGE JOIN CARTESIAN      |                                |     8 |   232 |     6   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 25 |                         TABLE ACCESS FULL        | SI_LOCALES                     |     1 |     6 |     3   (0)| 00:00:01 |</font>
+|  26 |                         BUFFER SORT              |                                |     8 |   184 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  27 |                          TABLE ACCESS FULL       | MS_QSM_ACTIONS                 |     8 |   184 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  28 |                      TABLE ACCESS FULL           | MS_QSM_ACTIONS_TL              |     1 |  2226 |     2   (0)| 00:00:01 |</font>
+|  29 |                     BUFFER SORT                  |                                |     1 |    34 |    10   (0)| 00:00:01 |
+|  30 |                      TABLE ACCESS BY INDEX ROWID | MS_QS_PARAMETER_NAMES          |     1 |    34 |     1   (0)| 00:00:01 |
+|* 31 |                       INDEX RANGE SCAN           | MS_QS_PARAMETER_NAMES_N2       |     1 |       |     1   (0)| 00:00:01 |
+|* 32 |                    INDEX RANGE SCAN              | MS_QS_PARAMETERTYPE_TYPEID_IDX |     1 |    33 |     1   (0)| 00:00:01 |
+|* 33 |                   INDEX RANGE SCAN               | MS_QS_PARAMETER_VALUES_IDX     |     1 |    13 |     1   (0)| 00:00:01 |
+|  34 |                  TABLE ACCESS BY INDEX ROWID     | SI_ACTIVITIES_T                |     1 |    32 |     1   (0)| 00:00:01 |
+|* 35 |                   INDEX RANGE SCAN               | SI_ACTIVITIES_N2               |     1 |       |     1   (0)| 00:00:01 |
+|* 36 |                 INDEX RANGE SCAN                 | ROLE_ACTIVITY_UQ               |     5 |    50 |     1   (0)| 00:00:01 |
+|  37 |                TABLE ACCESS BY INDEX ROWID       | SI_ORG_ROLES                   |     2 |    30 |     1   (0)| 00:00:01 |
+|* 38 |                 INDEX RANGE SCAN                 | SI_ORG_ROLES_N2                |     2 |       |     1   (0)| 00:00:01 |
+|* 39 |               INDEX RANGE SCAN                   | SI_ORG_ENTITIES_N5             |     1 |       |     1   (0)| 00:00:01 |
+|* 40 |              TABLE ACCESS BY INDEX ROWID         | SI_ORG_ENTITIES_T              |     1 |     6 |     1   (0)| 00:00:01 |
+|  41 |             VIEW                                 | SI_ORG_ENTITIES                |   113 |   904 |     4   (0)| 00:00:01 |
+|  42 |              NESTED LOOPS OUTER                  |                                |   113 |  1695 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  43 |               TABLE ACCESS FULL                  | SI_ORG_ENTITIES_T              |   113 |   904 |     3   (0)| 00:00:01 |</font>
+|* 44 |               INDEX RANGE SCAN                   | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+|* 45 |            INDEX RANGE SCAN                      | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+|  46 |           VIEW                                   | SI_ROLES                       |   456 |  3648 |    10   (0)| 00:00:01 |
+|* 47 |            HASH JOIN                             |                                |   456 | 15504 |    10   (0)| 00:00:01 |
+|  48 |             NESTED LOOPS OUTER                   |                                |   110 |  2310 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  49 |              TABLE ACCESS FULL                   | SI_ROLES_T                     |   110 |  1320 |     3   (0)| 00:00:01 |</font>
+|* 50 |              INDEX RANGE SCAN                    | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+|  51 |             VIEW                                 | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+|  52 |              UNION-ALL                           |                                |       |       |            |          |
+|  53 |               NESTED LOOPS OUTER                 |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  54 |                TABLE ACCESS FULL                 | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|* 55 |                INDEX RANGE SCAN                  | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+|  56 |               FAST DUAL                          |                                |     1 |       |     2   (0)| 00:00:01 |
+|* 57 |          INDEX RANGE SCAN                        | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+|* 58 |         INDEX RANGE SCAN                         | SI_USER_ORG_ROLES_N2           |     3 |    30 |     1   (0)| 00:00:01 |
+|* 59 |        INDEX UNIQUE SCAN                         | SI_USERS_T_N1                  |     1 |       |     1   (0)| 00:00:01 |
+|* 60 |       TABLE ACCESS BY INDEX ROWID                | SI_USERS_T                     |     1 |    22 |     1   (0)| 00:00:01 |
+|  61 |      VIEW                                        | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+|  62 |       UNION-ALL                                  |                                |       |       |            |          |
+|  63 |        NESTED LOOPS OUTER                        |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  64 |         TABLE ACCESS FULL                        | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|* 65 |         INDEX RANGE SCAN                         | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+|  66 |        FAST DUAL                                 |                                |     1 |       |     2   (0)| 00:00:01 |
+|* 67 |    FILTER                                        |                                |       |       |            |          |
+|  68 |     NESTED LOOPS                                 |                                |     1 |  2555 |    42   (0)| 00:00:01 |
+|  69 |      NESTED LOOPS                                |                                |     1 |  2542 |    41   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  70 |       MERGE JOIN CARTESIAN                       |                                |     1 |  2509 |    40   (0)| 00:00:01 |</font>
+|* 71 |        HASH JOIN                                 |                                |     1 |  2475 |    39   (0)| 00:00:01 |
+|  72 |         NESTED LOOPS                             |                                |     1 |  2462 |    33   (0)| 00:00:01 |
+|  73 |          NESTED LOOPS OUTER                      |                                |     1 |  2452 |    32   (0)| 00:00:01 |
+|* 74 |           HASH JOIN                              |                                |     1 |  2443 |    31   (0)| 00:00:01 |
+|  75 |            NESTED LOOPS OUTER                    |                                |     1 |  2435 |    21   (0)| 00:00:01 |
+|* 76 |             HASH JOIN                            |                                |     1 |  2428 |    20   (0)| 00:00:01 |
+|  77 |              NESTED LOOPS                        |                                |     1 |  2420 |    16   (0)| 00:00:01 |
+|  78 |               NESTED LOOPS                       |                                |     1 |  2420 |    16   (0)| 00:00:01 |
+|  79 |                NESTED LOOPS                      |                                |     1 |  2414 |    15   (0)| 00:00:01 |
+|  80 |                 NESTED LOOPS                     |                                |     1 |  2399 |    14   (0)| 00:00:01 |
+|* 81 |                  HASH JOIN OUTER                 |                                |     1 |  2389 |    13   (0)| 00:00:01 |
+|* 82 |                   HASH JOIN                      |                                |     1 |   163 |    11   (0)| 00:00:01 |
+|  83 |                    NESTED LOOPS                  |                                |     1 |   136 |     5   (0)| 00:00:01 |
+|  84 |                     NESTED LOOPS                 |                                |     1 |   136 |     5   (0)| 00:00:01 |
+|  85 |                      NESTED LOOPS                |                                |     1 |   104 |     4   (0)| 00:00:01 |
+|* 86 |                       TABLE ACCESS BY INDEX ROWID| SI_USERS_T                     |     1 |    22 |     1   (0)| 00:00:01 |
+|* 87 |                        INDEX UNIQUE SCAN         | USER_NAME_UK                   |     1 |       |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|* 88 |                       TABLE ACCESS FULL          | MS_QSM_STAGE_ACTION_MAPPING    |     1 |    82 |     3   (0)| 00:00:01 |</font>
+|* 89 |                      INDEX RANGE SCAN            | SI_ACTIVITIES_N2               |     1 |       |     1   (0)| 00:00:01 |
+|  90 |                     TABLE ACCESS BY INDEX ROWID  | SI_ACTIVITIES_T                |     1 |    32 |     1   (0)| 00:00:01 |
+|  91 |                    VIEW                          |                                |     8 |   216 |     6   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  92 |                     MERGE JOIN CARTESIAN         |                                |     8 |   232 |     6   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|* 93 |                      TABLE ACCESS FULL           | SI_LOCALES                     |     1 |     6 |     3   (0)| 00:00:01 |</font>
+|  94 |                      BUFFER SORT                 |                                |     8 |   184 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  95 |                       TABLE ACCESS FULL          | MS_QSM_ACTIONS                 |     8 |   184 |     3   (0)| 00:00:01 |</font>
+<font style="background-color: lightblue; color: red">|  96 |                   TABLE ACCESS FULL              | MS_QSM_ACTIONS_TL              |     1 |  2226 |     2   (0)| 00:00:01 |</font>
+|* 97 |                  INDEX RANGE SCAN                | ROLE_ACTIVITY_UQ               |     5 |    50 |     1   (0)| 00:00:01 |
+|  98 |                 TABLE ACCESS BY INDEX ROWID      | SI_ORG_ROLES                   |     2 |    30 |     1   (0)| 00:00:01 |
+|* 99 |                  INDEX RANGE SCAN                | SI_ORG_ROLES_N2                |     2 |       |     1   (0)| 00:00:01 |
+|*100 |                INDEX RANGE SCAN                  | SI_ORG_ENTITIES_N5             |     1 |       |     1   (0)| 00:00:01 |
+|*101 |               TABLE ACCESS BY INDEX ROWID        | SI_ORG_ENTITIES_T              |     1 |     6 |     1   (0)| 00:00:01 |
+| 102 |              VIEW                                | SI_ORG_ENTITIES                |   113 |   904 |     4   (0)| 00:00:01 |
+| 103 |               NESTED LOOPS OUTER                 |                                |   113 |  1695 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">| 104 |                TABLE ACCESS FULL                 | SI_ORG_ENTITIES_T              |   113 |   904 |     3   (0)| 00:00:01 |</font>
+|*105 |                INDEX RANGE SCAN                  | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+|*106 |             INDEX RANGE SCAN                     | SI_ORG_ENTITIES_TL_IDX         |     1 |     7 |     1   (0)| 00:00:01 |
+| 107 |            VIEW                                  | SI_ROLES                       |   456 |  3648 |    10   (0)| 00:00:01 |
+|*108 |             HASH JOIN                            |                                |   456 | 15504 |    10   (0)| 00:00:01 |
+| 109 |              NESTED LOOPS OUTER                  |                                |   110 |  2310 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">| 110 |               TABLE ACCESS FULL                  | SI_ROLES_T                     |   110 |  1320 |     3   (0)| 00:00:01 |</font>
+|*111 |               INDEX RANGE SCAN                   | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+| 112 |              VIEW                                | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+| 113 |               UNION-ALL                          |                                |       |       |            |          |
+| 114 |                NESTED LOOPS OUTER                |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">| 115 |                 TABLE ACCESS FULL                | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|*116 |                 INDEX RANGE SCAN                 | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+| 117 |                FAST DUAL                         |                                |     1 |       |     2   (0)| 00:00:01 |
+|*118 |           INDEX RANGE SCAN                       | SI_ROLES_TL_N2                 |     1 |     9 |     1   (0)| 00:00:01 |
+|*119 |          INDEX RANGE SCAN                        | SI_USER_ORG_ROLES_N2           |     1 |    10 |     1   (0)| 00:00:01 |
+| 120 |         VIEW                                     | SI_REGISTER_APPLICATION_V      |    58 |   754 |     6   (0)| 00:00:01 |
+| 121 |          UNION-ALL                               |                                |       |       |            |          |
+| 122 |           NESTED LOOPS OUTER                     |                                |    57 |  1881 |     4   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">| 123 |            TABLE ACCESS FULL                     | SI_REGISTER_APPLICATION        |    57 |   399 |     3   (0)| 00:00:01 |</font>
+|*124 |            INDEX RANGE SCAN                      | SI_REGISTER_APPLICATION_TL_N1  |     1 |    26 |     1   (0)| 00:00:01 |
+| 125 |           FAST DUAL                              |                                |     1 |       |     2   (0)| 00:00:01 |
+| 126 |        BUFFER SORT                               |                                |     1 |    34 |    40   (0)| 00:00:01 |
+| 127 |         TABLE ACCESS BY INDEX ROWID              | MS_QS_PARAMETER_NAMES          |     1 |    34 |     1   (0)| 00:00:01 |
+|*128 |          INDEX RANGE SCAN                        | MS_QS_PARAMETER_NAMES_N2       |     1 |       |     1   (0)| 00:00:01 |
+|*129 |       INDEX RANGE SCAN                           | MS_QS_PARAMETERTYPE_TYPEID_IDX |     1 |    33 |     1   (0)| 00:00:01 |
+|*130 |      INDEX RANGE SCAN                            | MS_QS_PARAMETER_VALUES_IDX     |     1 |    13 |     1   (0)| 00:00:01 |
+-----------------------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$74EDB665  
+  22 - SEL$74EDB665_1 / A@SEL$2
+  23 - SEL$7286615E   / T@SEL$3
+  24 - SEL$7286615E  
+  25 - SEL$7286615E   / SI_LOCALES@SEL$5
+  27 - SEL$7286615E   / A@SEL$4
+  28 - SEL$74EDB665_1 / TL@SEL$3
+  30 - SEL$74EDB665_1 / PNAME@SEL$7
+  31 - SEL$74EDB665_1 / PNAME@SEL$7
+  32 - SEL$74EDB665_1 / PTYPE@SEL$7
+  33 - SEL$74EDB665_1 / PVALUE@SEL$7
+  34 - SEL$74EDB665_1 / ACT@SEL$7
+  35 - SEL$74EDB665_1 / ACT@SEL$7
+  36 - SEL$74EDB665_1 / ROLE_ACT@SEL$7
+  37 - SEL$74EDB665_1 / A@SEL$8
+  38 - SEL$74EDB665_1 / A@SEL$8
+  39 - SEL$74EDB665_1 / ORGS@SEL$7
+  40 - SEL$74EDB665_1 / ORGS@SEL$7
+  41 - SEL$18         / B@SEL$8
+  42 - SEL$18        
+  43 - SEL$18         / T@SEL$18
+  44 - SEL$18         / TL@SEL$18
+  45 - SEL$74EDB665_1 / BL@SEL$8
+  46 - SEL$3B673E5C   / C@SEL$8
+  47 - SEL$3B673E5C  
+  49 - SEL$3B673E5C   / T@SEL$20
+  50 - SEL$3B673E5C   / TL@SEL$20
+  51 - SET$2          / SRA@SEL$19
+  52 - SET$2         
+  53 - SEL$21        
+  54 - SEL$21         / T@SEL$21
+  55 - SEL$21         / TL@SEL$21
+  56 - SEL$24         / DUAL@SEL$24
+  57 - SEL$74EDB665_1 / CL@SEL$8
+  58 - SEL$74EDB665_1 / D@SEL$8
+  59 - SEL$74EDB665_1 / USERS@SEL$7
+  60 - SEL$74EDB665_1 / USERS@SEL$7
+  61 - SET$1          / SRA@SEL$9
+  62 - SET$1         
+  63 - SEL$10        
+  64 - SEL$10         / T@SEL$10
+  65 - SEL$10         / TL@SEL$10
+  66 - SEL$13         / DUAL@SEL$13
+  86 - SEL$74EDB665_2 / USERS@SEL$74EDB665_2
+  87 - SEL$74EDB665_2 / USERS@SEL$74EDB665_2
+  88 - SEL$74EDB665_2 / A_0001@SEL$74EDB665_2
+  89 - SEL$74EDB665_2 / ACT@SEL$74EDB665_2
+  90 - SEL$74EDB665_2 / ACT@SEL$74EDB665_2
+  91 - SEL$7286615E   / T@SEL$74EDB665_2
+  93 - SEL$7286615E   / SI_LOCALES@SEL$5
+  95 - SEL$7286615E   / A@SEL$4
+  96 - SEL$74EDB665_2 / TL@SEL$74EDB665_2
+  97 - SEL$74EDB665_2 / ROLE_ACT@SEL$74EDB665_2
+  98 - SEL$74EDB665_2 / A_0002@SEL$74EDB665_2
+  99 - SEL$74EDB665_2 / A_0002@SEL$74EDB665_2
+ 100 - SEL$74EDB665_2 / ORGS@SEL$74EDB665_2
+ 101 - SEL$74EDB665_2 / ORGS@SEL$74EDB665_2
+ 102 - SEL$18         / B@SEL$74EDB665_2
+ 104 - SEL$18         / T@SEL$18
+ 105 - SEL$18         / TL@SEL$18
+ 106 - SEL$74EDB665_2 / BL@SEL$74EDB665_2
+ 107 - SEL$3B673E5C   / C@SEL$74EDB665_2
+ 110 - SEL$3B673E5C   / T@SEL$20
+ 111 - SEL$3B673E5C   / TL@SEL$20
+ 112 - SET$2          / SRA@SEL$19
+ 115 - SEL$21         / T@SEL$21
+ 116 - SEL$21         / TL@SEL$21
+ 117 - SEL$24         / DUAL@SEL$24
+ 118 - SEL$74EDB665_2 / CL@SEL$74EDB665_2
+ 119 - SEL$74EDB665_2 / D@SEL$74EDB665_2
+ 120 - SET$1          / SRA@SEL$74EDB665_2
+ 123 - SEL$10         / T@SEL$10
+ 124 - SEL$10         / TL@SEL$10
+ 125 - SEL$13         / DUAL@SEL$13
+ 127 - SEL$74EDB665_2 / PNAME@SEL$74EDB665_2
+ 128 - SEL$74EDB665_2 / PNAME@SEL$74EDB665_2
+ 129 - SEL$74EDB665_2 / PTYPE@SEL$74EDB665_2
+ 130 - SEL$74EDB665_2 / PVALUE@SEL$74EDB665_2
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   3 - filter(:4 IS NULL)
+   4 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+   9 - access("C"."ROLE_ID"="A"."ROLE_ID" AND "C"."ENTERPRISE_ID"="B"."ENTERPRISE_ID")
+  11 - access("B"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID")
+  20 - access("T"."ACTION_ID"="TL"."ACTION_ID"(+) AND "T"."LOCALE_ID"=TO_NUMBER("TL"."LOCALE_ID"(+)))
+  21 - access("A"."ACTION_ID"="T"."ACTION_ID")
+  22 - filter("PREVIOUS_STAGE"=:1 AND "CURRENT_STAGE"=:2 AND (TRIM("ROLE_ACTIVITY")='QSM - Approve Questionnaire' OR 
+              TRIM("ROLE_ACTIVITY")='QSM - Manage All Questionnaires' OR TRIM("ROLE_ACTIVITY")='QSM - Manage Questionnaires' OR 
+              TRIM("ROLE_ACTIVITY")='QSM - Setup Questionnaire') AND ("CURRENT_STAGE"<>'OWN_QST' OR 
+              "A"."ACTION_ID"<>DECODE(:3,'Y','SND_APP','APPROVE')))
+  25 - filter("ENABLED_FLAG"='Y')
+  31 - access(UPPER("PARAMETER_NAME")='DISPLAY_FORMAT')
+  32 - access("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND UPPER("PARAMETER_TYPE")='MS APPS USER NAME 
+              DISPLAY FORMAT')
+  33 - access("PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" 
+              AND "PVALUE"."ORG_ENTITY_ID"=1)
+  35 - access("ACT"."ACTIVITY_NAME"=TRIM("ROLE_ACTIVITY"))
+       filter("ACT"."ACTIVITY_NAME"='QSM - Approve Questionnaire' OR "ACT"."ACTIVITY_NAME"='QSM - Manage All 
+              Questionnaires' OR "ACT"."ACTIVITY_NAME"='QSM - Manage Questionnaires' OR "ACT"."ACTIVITY_NAME"='QSM - Setup 
+              Questionnaire')
+  36 - access("ROLE_ACT"."ACTIVITY_ID"="ACT"."ACTIVITY_ID")
+  38 - access("ROLE_ACT"."ROLE_ID"="A"."ROLE_ID")
+  39 - access("ORGS"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID")
+  40 - filter(NVL("ORGS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+  44 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+) AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  45 - access("B"."ORG_ENTITY_ID"="BL"."ORG_ENTITY_ID"(+) AND 
+              "BL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  47 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+  50 - access("T"."ROLE_ID"="TL"."ROLE_ID"(+) AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  55 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  57 - access("C"."ROLE_ID"="CL"."ROLE_ID"(+) AND "CL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  58 - access("D"."ORG_ROLE_ID"="A"."ORG_ROLE_ID")
+  59 - access("USERS"."USER_ID"="D"."USER_ID")
+       filter("USERS"."USER_ID" IS NOT NULL)
+  60 - filter(NVL("USERS"."END_DATE",SYSDATE@!)>=SYSDATE@! AND "USERS"."USER_NAME" IS NOT NULL)
+  65 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+  67 - filter(:4 IS NOT NULL)
+  71 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+  74 - access("C"."ROLE_ID"="A"."ROLE_ID" AND "C"."ENTERPRISE_ID"="B"."ENTERPRISE_ID")
+  76 - access("B"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID")
+  81 - access("T"."ACTION_ID"="TL"."ACTION_ID"(+) AND "T"."LOCALE_ID"=TO_NUMBER("TL"."LOCALE_ID"(+)))
+  82 - access("A"."ACTION_ID"="T"."ACTION_ID")
+  86 - filter(NVL("USERS"."END_DATE",SYSDATE@!)>=SYSDATE@! AND "USERS"."USER_ID" IS NOT NULL)
+  87 - access("USERS"."USER_NAME"=:4)
+  88 - filter("PREVIOUS_STAGE"=:1 AND "CURRENT_STAGE"=:2 AND (TRIM("ROLE_ACTIVITY")='QSM - Approve Questionnaire' OR 
+              TRIM("ROLE_ACTIVITY")='QSM - Manage All Questionnaires' OR TRIM("ROLE_ACTIVITY")='QSM - Manage Questionnaires' OR 
+              TRIM("ROLE_ACTIVITY")='QSM - Setup Questionnaire') AND ("CURRENT_STAGE"<>'OWN_QST' OR 
+              "A"."ACTION_ID"<>DECODE(:3,'Y','SND_APP','APPROVE')))
+  89 - access("ACT"."ACTIVITY_NAME"=TRIM("ROLE_ACTIVITY"))
+       filter("ACT"."ACTIVITY_NAME"='QSM - Approve Questionnaire' OR "ACT"."ACTIVITY_NAME"='QSM - Manage All 
+              Questionnaires' OR "ACT"."ACTIVITY_NAME"='QSM - Manage Questionnaires' OR "ACT"."ACTIVITY_NAME"='QSM - Setup 
+              Questionnaire')
+  93 - filter("ENABLED_FLAG"='Y')
+  97 - access("ROLE_ACT"."ACTIVITY_ID"="ACT"."ACTIVITY_ID")
+  99 - access("ROLE_ACT"."ROLE_ID"="A"."ROLE_ID")
+ 100 - access("ORGS"."ORG_ENTITY_ID"="A"."ORG_ENTITY_ID")
+ 101 - filter(NVL("ORGS"."END_DATE",SYSDATE@!)>=SYSDATE@!)
+ 105 - access("T"."ORG_ENTITY_ID"="TL"."ORG_ENTITY_ID"(+) AND 
+              "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 106 - access("B"."ORG_ENTITY_ID"="BL"."ORG_ENTITY_ID"(+) AND 
+              "BL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 108 - access(NVL("PACKAGE_ID",0)=NVL("SRA"."PACKAGE_ID",0))
+ 111 - access("T"."ROLE_ID"="TL"."ROLE_ID"(+) AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 116 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 118 - access("C"."ROLE_ID"="CL"."ROLE_ID"(+) AND "CL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 119 - access("D"."ORG_ROLE_ID"="A"."ORG_ROLE_ID" AND "USERS"."USER_ID"="D"."USER_ID")
+ 124 - access("TL"."MODULE_ID"(+)="T"."MODULE_ID" AND "TL"."LOCALE_ID"(+)=TO_NUMBER("SI_DB_LOCALE_SV"."GETVALUE"()))
+ 128 - access(UPPER("PARAMETER_NAME")='DISPLAY_FORMAT')
+ 129 - access("PTYPE"."PARAMETER_TYPE_ID"="PNAME"."PARAMETER_TYPE_ID" AND UPPER("PARAMETER_TYPE")='MS APPS USER NAME 
+              DISPLAY FORMAT')
+ 130 - access("PTYPE"."PARAMETER_TYPE_ID"="PVALUE"."PARAMETER_TYPE_ID" AND "PNAME"."PARAMETER_ID"="PVALUE"."PARAMETER_ID" 
+              AND "PVALUE"."ORG_ENTITY_ID"=1)
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=12) "A"."ACTION_ID"[VARCHAR2,40], NVL("TL"."ACTION_NAME","T"."ACTION_NAME")[4000], 
+       "T"."LOCALE_ID"[NUMBER,22], "A"."CURRENT_STAGE"[VARCHAR2,400], "A"."PREVIOUS_STAGE"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATE_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."STAGE_TYPE"[NUMBER,22], "A"."STATUS"[VARCHAR2,120]
+   2 - NVL("PACKAGE_ID",0)[22], NVL("SRA"."PACKAGE_ID",0)[22], "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], 
+       "B"."ENTERPRISE_ID"[NUMBER,22], "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], 
+       "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "BL"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], 
+       "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22], "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], "SRA"."PACKAGE_ID"[NUMBER,22]
+   3 - NVL("PACKAGE_ID",0)[22], NVL("SRA"."PACKAGE_ID",0)[22], "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], 
+       "B"."ENTERPRISE_ID"[NUMBER,22], "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], 
+       "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "BL"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], 
+       "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22], "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], "SRA"."PACKAGE_ID"[NUMBER,22]
+   4 - (#keys=1) NVL("PACKAGE_ID",0)[22], NVL("SRA"."PACKAGE_ID",0)[22], "A"."ROLE_ID"[NUMBER,22], 
+       "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], 
+       "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "BL"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], 
+       "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22], "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], "SRA"."PACKAGE_ID"[NUMBER,22]
+   5 - (#keys=0) "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], 
+       "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], 
+       "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], 
+       "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], 
+       "A"."ACTIVE"[VARCHAR2,4], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], 
+       "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "BL"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], 
+       "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22], "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22]
+   6 - (#keys=0) "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], 
+       "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], 
+       "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], 
+       "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], 
+       "A"."ACTIVE"[VARCHAR2,4], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], 
+       "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "BL"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], 
+       "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22], "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22]
+   7 - (#keys=0) "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], 
+       "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], 
+       "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], 
+       "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], 
+       "A"."ACTIVE"[VARCHAR2,4], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], 
+       "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "BL"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], 
+       "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22]
+   8 - (#keys=0) "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], 
+       "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], 
+       "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], 
+       "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], 
+       "A"."ACTIVE"[VARCHAR2,4], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], 
+       "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "BL"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], "CL"."LOCALE_ID"[NUMBER,22]
+   9 - (#keys=2) "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], 
+       "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], 
+       "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], 
+       "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], 
+       "A"."ACTIVE"[VARCHAR2,4], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], 
+       "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "BL"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL".ROWID[ROWID,10]
+  10 - (#keys=0) "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], 
+       "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], 
+       "T"."ACTION_NAME"[VARCHAR2,140], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], 
+       "A"."ACTIVE"[VARCHAR2,4], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], 
+       "A"."ROLE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], 
+       "BL".ROWID[ROWID,10], "BL"."ORG_ENTITY_ID"[NUMBER,22], "BL"."LOCALE_ID"[NUMBER,22]
+  11 - (#keys=1) "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], 
+       "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], 
+       "T"."ACTION_NAME"[VARCHAR2,140], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], 
+       "A"."ACTIVE"[VARCHAR2,4], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], 
+       "A"."ROLE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22]
+  12 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "A"."ROLE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7]
+  13 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "A"."ROLE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22]
+  14 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "A"."ROLE_ID"[NUMBER,22]
+  15 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ROLE_ACT"."ROLE_ID"[NUMBER,22]
+  16 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+  17 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], 
+       "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22]
+  18 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], 
+       "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400]
+  19 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "PNAME".ROWID[ROWID,10], 
+       "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400]
+  20 - (#keys=2) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000]
+  21 - (#keys=1) "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_ID"[VARCHAR2,40], "A"."CREATED_BY"[NUMBER,22], 
+       "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], 
+       "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], 
+       "A"."STATUS"[VARCHAR2,120], "A"."ACTIVE"[VARCHAR2,4], "T"."LOCALE_ID"[NUMBER,22], "T"."ACTION_NAME"[VARCHAR2,140]
+  22 - "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."ACTION_ID"[VARCHAR2,40], "A"."ACTIVE"[VARCHAR2,4], 
+       "A"."STATUS"[VARCHAR2,120]
+  23 - "T"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "T"."LOCALE_ID"[NUMBER,22]
+  24 - (#keys=0) "LOCALE_ID"[NUMBER,22], "A"."ACTION_ID"[VARCHAR2,40], "A"."ACTION_NAME"[VARCHAR2,140]
+  25 - "LOCALE_ID"[NUMBER,22]
+  26 - (#keys=0) "A"."ACTION_ID"[VARCHAR2,40], "A"."ACTION_NAME"[VARCHAR2,140]
+  27 - "A"."ACTION_ID"[VARCHAR2,40], "A"."ACTION_NAME"[VARCHAR2,140]
+  28 - "TL"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_NAME"[VARCHAR2,4000], "TL"."LOCALE_ID"[VARCHAR2,400]
+  29 - (#keys=0) "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], 
+       UPPER("PARAMETER_NAME")[VARCHAR2,400]
+  30 - "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], 
+       UPPER("PARAMETER_NAME")[VARCHAR2,400]
+  31 - "PNAME".ROWID[ROWID,10], UPPER("PARAMETER_NAME")[VARCHAR2,400]
+  32 - "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400]
+  33 - "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22]
+  34 - "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+  35 - "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+  36 - "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22]
+  37 - "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  38 - "A".ROWID[ROWID,10], "A"."ROLE_ID"[NUMBER,22]
+  39 - "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22]
+  40 - "ORGS".ROWID[ROWID,10], "ORGS"."END_DATE"[DATE,7]
+  41 - "B"."ENTERPRISE_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22]
+  42 - (#keys=0) "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+  43 - "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+  45 - "BL".ROWID[ROWID,10], "BL"."ORG_ENTITY_ID"[NUMBER,22], "BL"."LOCALE_ID"[NUMBER,22]
+  46 - "C"."ENTERPRISE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22]
+  47 - (#keys=1) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22]
+  48 - (#keys=0) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  49 - "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+  51 - "SRA"."PACKAGE_ID"[NUMBER,22]
+  52 - STRDEF[22]
+  53 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  54 - "T"."MODULE_ID"[NUMBER,22]
+  57 - "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], "CL"."LOCALE_ID"[NUMBER,22]
+  58 - "D".ROWID[ROWID,10], "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22]
+  59 - "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22]
+  60 - "USERS".ROWID[ROWID,10], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22]
+  61 - "SRA"."PACKAGE_ID"[NUMBER,22]
+  62 - STRDEF[22]
+  63 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+  64 - "T"."MODULE_ID"[NUMBER,22]
+  67 - NVL("PACKAGE_ID",0)[22], NVL("SRA"."PACKAGE_ID",0)[22], "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], 
+       "B"."ENTERPRISE_ID"[NUMBER,22], "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "ROLE_ACT".ROWID[ROWID,10], 
+       "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "ORGS"."END_DATE"[DATE,7], "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL"."ORG_ENTITY_ID"[NUMBER,22], "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], 
+       "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22], 
+       "SRA"."PACKAGE_ID"[NUMBER,22], "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], "PTYPE".ROWID[ROWID,10], 
+       "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], "PVALUE".ROWID[ROWID,10], 
+       "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], "PVALUE"."ORG_ENTITY_ID"[NUMBER,22]
+  68 - (#keys=0) NVL("PACKAGE_ID",0)[22], NVL("SRA"."PACKAGE_ID",0)[22], "A"."ROLE_ID"[NUMBER,22], 
+       "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "ROLE_ACT".ROWID[ROWID,10], 
+       "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "ORGS"."END_DATE"[DATE,7], "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL"."ORG_ENTITY_ID"[NUMBER,22], "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], 
+       "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22], 
+       "SRA"."PACKAGE_ID"[NUMBER,22], "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], "PTYPE".ROWID[ROWID,10], 
+       "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400], "PVALUE".ROWID[ROWID,10], 
+       "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], "PVALUE"."ORG_ENTITY_ID"[NUMBER,22]
+  69 - (#keys=0) NVL("PACKAGE_ID",0)[22], NVL("SRA"."PACKAGE_ID",0)[22], "A"."ROLE_ID"[NUMBER,22], 
+       "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "ROLE_ACT".ROWID[ROWID,10], 
+       "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "ORGS"."END_DATE"[DATE,7], "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL"."ORG_ENTITY_ID"[NUMBER,22], "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], 
+       "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22], 
+       "SRA"."PACKAGE_ID"[NUMBER,22], "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400], "PTYPE".ROWID[ROWID,10], 
+       "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400]
+  70 - (#keys=0) NVL("PACKAGE_ID",0)[22], NVL("SRA"."PACKAGE_ID",0)[22], "A"."ROLE_ID"[NUMBER,22], 
+       "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "ROLE_ACT".ROWID[ROWID,10], 
+       "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "ORGS"."END_DATE"[DATE,7], "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL"."ORG_ENTITY_ID"[NUMBER,22], "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], 
+       "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22], 
+       "SRA"."PACKAGE_ID"[NUMBER,22], "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], 
+       "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_NAME")[VARCHAR2,400]
+  71 - (#keys=1) NVL("PACKAGE_ID",0)[22], NVL("SRA"."PACKAGE_ID",0)[22], "A"."ROLE_ID"[NUMBER,22], 
+       "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], 
+       "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "ROLE_ACT".ROWID[ROWID,10], 
+       "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "ORGS"."END_DATE"[DATE,7], "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL"."ORG_ENTITY_ID"[NUMBER,22], "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], 
+       "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22], 
+       "SRA"."PACKAGE_ID"[NUMBER,22]
+  72 - (#keys=0) "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], 
+       "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], 
+       "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], 
+       "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], "A"."CREATED_BY"[NUMBER,22], 
+       "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], 
+       "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], 
+       "ACT"."ACTIVITY_ID"[NUMBER,22], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], 
+       "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], 
+       "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], 
+       "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "BL"."ORG_ENTITY_ID"[NUMBER,22], "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], 
+       "CL"."ROLE_ID"[NUMBER,22], "CL"."LOCALE_ID"[NUMBER,22], "D".ROWID[ROWID,10], "D"."ORG_ROLE_ID"[NUMBER,22], 
+       "D"."USER_ID"[NUMBER,22]
+  73 - (#keys=0) "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], 
+       "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], 
+       "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], 
+       "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], "A"."CREATED_BY"[NUMBER,22], 
+       "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], 
+       "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], 
+       "ACT"."ACTIVITY_ID"[NUMBER,22], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], 
+       "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], 
+       "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], 
+       "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "BL"."ORG_ENTITY_ID"[NUMBER,22], "BL".ROWID[ROWID,10], "CL".ROWID[ROWID,10], 
+       "CL"."ROLE_ID"[NUMBER,22], "CL"."LOCALE_ID"[NUMBER,22]
+  74 - (#keys=2) "A"."ROLE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], 
+       "C"."ENTERPRISE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], 
+       "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], 
+       "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], 
+       "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], "A"."CREATED_BY"[NUMBER,22], 
+       "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], 
+       "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], 
+       "ACT"."ACTIVITY_ID"[NUMBER,22], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], 
+       "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], 
+       "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], "BL"."LOCALE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], 
+       "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "BL"."ORG_ENTITY_ID"[NUMBER,22], "BL".ROWID[ROWID,10]
+  75 - (#keys=0) "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], 
+       "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], 
+       "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], 
+       "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], 
+       "ACT"."ACTIVITY_ID"[NUMBER,22], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], 
+       "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], 
+       "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], "A"."ROLE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], 
+       "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22], "BL".ROWID[ROWID,10], "BL"."ORG_ENTITY_ID"[NUMBER,22], 
+       "BL"."LOCALE_ID"[NUMBER,22]
+  76 - (#keys=1) "A"."ORG_ENTITY_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22], "T"."ACTION_ID"[VARCHAR2,40], 
+       "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], 
+       "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], 
+       "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400], "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], 
+       "ACT"."ACTIVITY_ID"[NUMBER,22], "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], 
+       "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], 
+       "A"."ORG_ROLE_ID"[NUMBER,22], "ORGS"."END_DATE"[DATE,7], "A"."ROLE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], 
+       "ORGS"."ORG_ENTITY_ID"[NUMBER,22], "B"."ENTERPRISE_ID"[NUMBER,22]
+  77 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "ROLE_ACT".ROWID[ROWID,10], 
+       "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22], 
+       "ORGS"."END_DATE"[DATE,7]
+  78 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "ROLE_ACT".ROWID[ROWID,10], 
+       "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22], "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22]
+  79 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "ROLE_ACT".ROWID[ROWID,10], 
+       "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22], "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], 
+       "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  80 - (#keys=0) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000], "ROLE_ACT".ROWID[ROWID,10], 
+       "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22]
+  81 - (#keys=2) "T"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_ID"[VARCHAR2,40], "T"."LOCALE_ID"[NUMBER,22], 
+       TO_NUMBER("TL"."LOCALE_ID")[22], "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "USERS".ROWID[ROWID,10], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "TL"."LOCALE_ID"[VARCHAR2,400], "TL"."ACTION_NAME"[VARCHAR2,4000]
+  82 - (#keys=1) "A"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_ID"[VARCHAR2,40], "USERS".ROWID[ROWID,10], 
+       "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], 
+       "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "ACT"."ACTIVITY_NAME"[VARCHAR2,400], 
+       "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22], 
+       "T"."LOCALE_ID"[NUMBER,22], "T"."ACTION_NAME"[VARCHAR2,140]
+  83 - (#keys=0) "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], 
+       "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], 
+       "A"."ACTION_ID"[VARCHAR2,40], "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], 
+       "ACT"."ACTIVITY_ID"[NUMBER,22], "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+  84 - (#keys=0) "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], 
+       "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], 
+       "A"."ACTION_ID"[VARCHAR2,40], "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120], "ACT".ROWID[ROWID,10], 
+       "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+  85 - (#keys=0) "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], 
+       "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22], "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], 
+       "A"."LAST_UPDATED_BY"[NUMBER,22], "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], 
+       "PREVIOUS_STAGE"[VARCHAR2,400], "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], 
+       "A"."ACTION_ID"[VARCHAR2,40], "A"."ACTIVE"[VARCHAR2,4], "A"."STATUS"[VARCHAR2,120]
+  86 - "USERS".ROWID[ROWID,10], "USERS"."USER_ID"[NUMBER,22], "USERS"."USER_NAME"[VARCHAR2,320], 
+       "USERS"."END_DATE"[DATE,7], "PACKAGE_ID"[NUMBER,22]
+  87 - "USERS".ROWID[ROWID,10], "USERS"."USER_NAME"[VARCHAR2,320]
+  88 - "A"."CREATED_BY"[NUMBER,22], "A"."CREATION_DATE"[DATE,7], "A"."LAST_UPDATED_BY"[NUMBER,22], 
+       "A"."LAST_UPDATE_DATE"[DATE,7], "A"."STAGE_TYPE"[NUMBER,22], "PREVIOUS_STAGE"[VARCHAR2,400], 
+       "CURRENT_STAGE"[VARCHAR2,400], "ROLE_ACTIVITY"[VARCHAR2,140], "A"."ACTION_ID"[VARCHAR2,40], "A"."ACTIVE"[VARCHAR2,4], 
+       "A"."STATUS"[VARCHAR2,120]
+  89 - "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_NAME"[VARCHAR2,400]
+  90 - "ACT".ROWID[ROWID,10], "ACT"."ACTIVITY_ID"[NUMBER,22]
+  91 - "T"."ACTION_ID"[VARCHAR2,40], "T"."ACTION_NAME"[VARCHAR2,140], "T"."LOCALE_ID"[NUMBER,22]
+  92 - (#keys=0) "LOCALE_ID"[NUMBER,22], "A"."ACTION_ID"[VARCHAR2,40], "A"."ACTION_NAME"[VARCHAR2,140]
+  93 - "LOCALE_ID"[NUMBER,22]
+  94 - (#keys=0) "A"."ACTION_ID"[VARCHAR2,40], "A"."ACTION_NAME"[VARCHAR2,140]
+  95 - "A"."ACTION_ID"[VARCHAR2,40], "A"."ACTION_NAME"[VARCHAR2,140]
+  96 - "TL"."ACTION_ID"[VARCHAR2,40], "TL"."ACTION_NAME"[VARCHAR2,4000], "TL"."LOCALE_ID"[VARCHAR2,400]
+  97 - "ROLE_ACT".ROWID[ROWID,10], "ROLE_ACT"."ACTIVITY_ID"[NUMBER,22], "ROLE_ACT"."ROLE_ID"[NUMBER,22]
+  98 - "A".ROWID[ROWID,10], "A"."ORG_ROLE_ID"[NUMBER,22], "A"."ORG_ENTITY_ID"[NUMBER,22], "A"."ROLE_ID"[NUMBER,22]
+  99 - "A".ROWID[ROWID,10], "A"."ROLE_ID"[NUMBER,22]
+ 100 - "ORGS".ROWID[ROWID,10], "ORGS"."ORG_ENTITY_ID"[NUMBER,22]
+ 101 - "ORGS".ROWID[ROWID,10], "ORGS"."END_DATE"[DATE,7]
+ 102 - "B"."ENTERPRISE_ID"[NUMBER,22], "B"."ORG_ENTITY_ID"[NUMBER,22]
+ 103 - (#keys=0) "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+ 104 - "T"."ENTERPRISE_ID"[NUMBER,22], "T"."ORG_ENTITY_ID"[NUMBER,22]
+ 106 - "BL".ROWID[ROWID,10], "BL"."ORG_ENTITY_ID"[NUMBER,22], "BL"."LOCALE_ID"[NUMBER,22]
+ 107 - "C"."ENTERPRISE_ID"[NUMBER,22], "C"."ROLE_ID"[NUMBER,22]
+ 108 - (#keys=1) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22]
+ 109 - (#keys=0) "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+ 110 - "ENTERPRISE_ID"[NUMBER,22], "T"."ROLE_ID"[NUMBER,22], "PACKAGE_ID"[NUMBER,22]
+ 112 - "SRA"."PACKAGE_ID"[NUMBER,22]
+ 113 - STRDEF[22]
+ 114 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+ 115 - "T"."MODULE_ID"[NUMBER,22]
+ 118 - "CL".ROWID[ROWID,10], "CL"."ROLE_ID"[NUMBER,22], "CL"."LOCALE_ID"[NUMBER,22]
+ 119 - "D".ROWID[ROWID,10], "D"."ORG_ROLE_ID"[NUMBER,22], "D"."USER_ID"[NUMBER,22]
+ 120 - "SRA"."PACKAGE_ID"[NUMBER,22]
+ 121 - STRDEF[22]
+ 122 - (#keys=0) "T"."MODULE_ID"[NUMBER,22]
+ 123 - "T"."MODULE_ID"[NUMBER,22]
+ 126 - (#keys=0) "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], 
+       UPPER("PARAMETER_NAME")[VARCHAR2,400]
+ 127 - "PNAME".ROWID[ROWID,10], "PNAME"."PARAMETER_ID"[NUMBER,22], "PNAME"."PARAMETER_TYPE_ID"[NUMBER,22], 
+       UPPER("PARAMETER_NAME")[VARCHAR2,400]
+ 128 - "PNAME".ROWID[ROWID,10], UPPER("PARAMETER_NAME")[VARCHAR2,400]
+ 129 - "PTYPE".ROWID[ROWID,10], "PTYPE"."PARAMETER_TYPE_ID"[NUMBER,22], UPPER("PARAMETER_TYPE")[VARCHAR2,400]
+ 130 - "PVALUE".ROWID[ROWID,10], "PVALUE"."PARAMETER_TYPE_ID"[NUMBER,22], "PVALUE"."PARAMETER_ID"[NUMBER,22], 
+       "PVALUE"."ORG_ENTITY_ID"[NUMBER,22]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

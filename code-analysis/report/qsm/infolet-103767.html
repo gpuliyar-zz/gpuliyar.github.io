@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_GRC_GET_REQUIREMENTS (103767)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT DISTINCT a.tgt_obj_id as object_id,
+          (SELECT      b.object_name
+               FROM ms_grc_requirement_pub_v b
+               WHERE a.tgt_obj_id = b.object_id
+          ) as object_name
+     FROM ms_grc_orb_relations_pub_v a
+     where a.src_obj_id IN (SELECT COLUMN_VALUE FROM TABLE (ms_grc_str_common_utilities.Split_String_Stored(:1)))
+          and a.tgt_obj_type = 'MS_GRC_REQUIREMENT'
+     ORDER BY object_name</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet will fetch Requirements from GRC based on Area of Compliance.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 1220975132</h2></header><pre><code>
+ 
+--------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                           | Name                         | Rows  | Bytes | Cost (%CPU)| Time     |
+--------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                    |                              |       |  2397 |    43   (5)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID        | MS_GRC_REQUIREMENT           |     1 |    36 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX UNIQUE SCAN                 | MS_GRC_REQUIREMENT_PK        |     1 |       |     1   (0)| 00:00:01 |
+|   3 |  SORT UNIQUE                        |                              |       |  2397 |    42   (3)| 00:00:01 |
+|*  4 |   HASH JOIN                         |                              |  3012 |   138K|    41   (0)| 00:00:01 |
+|   5 |    VIEW                             | MS_GRC_ORB_RELATIONS_PUB_V   |    59 |  2655 |    12   (0)| 00:00:01 |
+|   6 |     UNION-ALL                       |                              |       |       |            |          |
+|   7 |      NESTED LOOPS                   |                              |     1 |   126 |     3   (0)| 00:00:01 |
+|   8 |       NESTED LOOPS                  |                              |     1 |   106 |     2   (0)| 00:00:01 |
+|   9 |        TABLE ACCESS BY INDEX ROWID  | MS_GRC_ORB_RELATIONS_ORB     |     1 |    58 |     1   (0)| 00:00:01 |
+|* 10 |         INDEX RANGE SCAN            | IDX_ADDITIONAL_COLUMN3       |     1 |       |     1   (0)| 00:00:01 |
+|  11 |        TABLE ACCESS BY INDEX ROWID  | MS_GRC_ORB_RELATIONS         |     1 |    48 |     1   (0)| 00:00:01 |
+|* 12 |         INDEX UNIQUE SCAN           | MS_GRC_ORB_RELATIONS_PK      |     1 |       |     1   (0)| 00:00:01 |
+|* 13 |       INDEX UNIQUE SCAN             | UC_FORM_NAME                 |     1 |    20 |     1   (0)| 00:00:01 |
+|  14 |      NESTED LOOPS                   |                              |    21 |  1974 |     6   (0)| 00:00:01 |
+|  15 |       NESTED LOOPS                  |                              |    21 |  1974 |     6   (0)| 00:00:01 |
+|  16 |        NESTED LOOPS                 |                              |     5 |   340 |     2   (0)| 00:00:01 |
+|* 17 |         INDEX UNIQUE SCAN           | UC_FORM_NAME                 |     1 |    20 |     1   (0)| 00:00:01 |
+|  18 |         TABLE ACCESS BY INDEX ROWID | MS_GRC_ORB_RELATIONS         |     5 |   240 |     1   (0)| 00:00:01 |
+|* 19 |          INDEX RANGE SCAN           | MS_GRC_ORB_RELATIONS_IDX2    |     5 |       |     1   (0)| 00:00:01 |
+|* 20 |        INDEX RANGE SCAN             | MS_GRC_ORB_RELATIONS_ORB_FK2 |     4 |       |     1   (0)| 00:00:01 |
+|  21 |       TABLE ACCESS BY INDEX ROWID   | MS_GRC_ORB_RELATIONS_ORB     |     4 |   104 |     1   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  22 |    COLLECTION ITERATOR PICKLER FETCH| SPLIT_STRING_STORED          |  8168 | 16336 |    29   (0)| 00:00:01 |</font>
+--------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$335DD26A / A@SEL$3
+   2 - SEL$335DD26A / A@SEL$3
+   3 - SEL$B1D9F716
+   5 - SET$1        / A@SEL$1
+   6 - SET$1       
+   7 - SEL$6       
+   9 - SEL$6        / REL_ORB@SEL$6
+  10 - SEL$6        / REL_ORB@SEL$6
+  11 - SEL$6        / REL@SEL$6
+  12 - SEL$6        / REL@SEL$6
+  13 - SEL$6        / CO@SEL$6
+  14 - SEL$8       
+  17 - SEL$8        / CO@SEL$8
+  18 - SEL$8        / REL@SEL$8
+  19 - SEL$8        / REL@SEL$8
+  20 - SEL$8        / REL_ORB@SEL$8
+  21 - SEL$8        / REL_ORB@SEL$8
+  22 - SEL$B1D9F716 / KOKBF$0@SEL$10
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("OBJECT_ID"=:B1)
+   4 - access("A"."SRC_OBJ_ID"=VALUE(KOKBF$))
+  10 - access("REL_ORB"."ADDITIONAL_COLUMN3"='MS_GRC_REQUIREMENT')
+  12 - access("REL"."REL_SOURCE_ID"="REL_ORB"."REL_SOURCE_ID")
+  13 - access("CO"."FORM_NAME"="REL"."DD_OBJECT_TYPE")
+  17 - access("CO"."FORM_NAME"='MS_GRC_REQUIREMENT')
+  19 - access("REL"."DD_OBJECT_TYPE"='MS_GRC_REQUIREMENT')
+  20 - access("REL"."REL_SOURCE_ID"="REL_ORB"."REL_SOURCE_ID")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "A".ROWID[ROWID,10], "OBJECT_NAME"[VARCHAR2,4000]
+   2 - "A".ROWID[ROWID,10]
+   3 - (#keys=2)  (SELECT "OBJECT_NAME" FROM METRICSTREAM."MS_GRC_REQUIREMENT" "A" WHERE 
+       "OBJECT_ID"=:B1)[4000], "A"."TGT_OBJ_ID"[VARCHAR2,4000]
+   4 - (#keys=1) "A"."TGT_OBJ_ID"[VARCHAR2,4000]
+   5 - "A"."SRC_OBJ_ID"[VARCHAR2,4000], "A"."TGT_OBJ_ID"[VARCHAR2,4000]
+   6 - STRDEF[4000], STRDEF[4000], STRDEF[4000]
+   7 - (#keys=0) "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,4000], "REL_ORB"."ADDITIONAL_COLUMN3"[VARCHAR2,4000], 
+       "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016]
+   8 - (#keys=0) "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,4000], "REL_ORB"."ADDITIONAL_COLUMN3"[VARCHAR2,4000], 
+       "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."DD_OBJECT_TYPE"[VARCHAR2,400]
+   9 - "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,4000], "REL_ORB"."REL_SOURCE_ID"[VARCHAR2,1020], 
+       "REL_ORB"."ADDITIONAL_COLUMN3"[VARCHAR2,4000]
+  10 - "REL_ORB".ROWID[ROWID,10], "REL_ORB"."ADDITIONAL_COLUMN3"[VARCHAR2,4000]
+  11 - "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."DD_OBJECT_TYPE"[VARCHAR2,400]
+  12 - "REL".ROWID[ROWID,10]
+  14 - (#keys=0) "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,4000]
+  15 - (#keys=0) "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."DD_OBJECT_TYPE"[VARCHAR2,400], 
+       "REL_ORB".ROWID[ROWID,10]
+  16 - (#keys=0) "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."REL_SOURCE_ID"[VARCHAR2,1020], 
+       "REL"."DD_OBJECT_TYPE"[VARCHAR2,400]
+  18 - "REL"."REL_SOURCE_OBJECT_ID"[VARCHAR2,1016], "REL"."REL_SOURCE_ID"[VARCHAR2,1020], 
+       "REL"."DD_OBJECT_TYPE"[VARCHAR2,400]
+  19 - "REL".ROWID[ROWID,10], "REL"."DD_OBJECT_TYPE"[VARCHAR2,400]
+  20 - "REL_ORB".ROWID[ROWID,10]
+  21 - "REL_ORB"."TGT_OBJ_ID"[VARCHAR2,4000]
+  22 - VALUE(A0)[8000]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_RESP_QTN_LNK_RPT (103865)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>SELECT QUE_RESPONSE_ID,
+  QUE_REQUEST_NAME,
+  b.SECTION_NAME As SECTION_NAME,
+  QUESTION_TEXT,
+  SCORE,
+  GRADE,RESPONDENT
+FROM
+  (SELECT level LVL,
+    QUE_REQUEST_NAME,
+    QUE_RESPONSE_ID,
+    QST_SECTION_FK,
+    SECTION_NAME,
+    QST_ID_PK,
+    QUESTION_TEXT,
+    RESPONSE_TYPE,
+    RESPONSE_OPTIONS,
+    SCORE,
+    GRADE,
+	RESPONDENT,
+    SORT_ID
+  FROM
+    (SELECT QUE_REQUEST_NAME,
+      QUE_RESPONSE_ID,
+      QST_SECTION_FK,
+      SECTION_NAME,
+      QST_ID_PK,
+      QUESTION_TEXT,
+      RESPONSE_TYPE,
+      RESPONSE_OPTIONS,
+      SCORE,
+      GRADE,
+	  RESPONDENT,
+      TO_char(REGEXP_REPLACE(QST_SECTION_FK, '[^[:digit:'    || CHR(93)    || CHR(93)    || '')    ||regexp_replace(DECODE('SEC','QST',QST_ID_PK,QST_ID_PK), '[^[:digit:'    || chr(93)    || chr(93))    ||REGEXP_REPLACE(QST_ID_PK, '[^[:digit:'    || CHR(93)    || CHR(93)    || ''))              AS SORT_ID
+    from MS_QSM_QUESTNR_RESP_QTN_RPT_V a
+    WHERE QUE_RESPONSE_ID=:1
+    AND qst_id_pk       IS NOT NULL
+    )
+  ) a,Ms_Qsm_Section b
+  where A.Qst_Section_Fk=B.SECTION_ID_PK
+  order by Que_Request_Name,SORT_ID</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet is used to fetch the details of scores entered for the questions in the questionnaire.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 2462346454</h2></header><pre><code>
+ 
+------------------------------------------------------------------------------------------------------------------------
+| Id  | Operation                             | Name                           | Rows  | Bytes | Cost (%CPU)| Time     |
+------------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                      |                                |     1 |  9551 |     7  (15)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID          | MS_QSM_GRADE_CONFIG            |     1 |     9 |     1   (0)| 00:00:01 |
+|*  2 |   INDEX UNIQUE SCAN                   | SYS_C0012759                   |     1 |       |     1   (0)| 00:00:01 |
+|   3 |  SORT ORDER BY                        |                                |     1 |  9551 |     7  (15)| 00:00:01 |
+|   4 |   NESTED LOOPS                        |                                |     1 |  9551 |     6   (0)| 00:00:01 |
+|   5 |    VIEW                               |                                |     1 |  8527 |     5   (0)| 00:00:01 |
+|   6 |     NESTED LOOPS                      |                                |     1 | 10167 |     5   (0)| 00:00:01 |
+|   7 |      NESTED LOOPS                     |                                |     1 |  7551 |     4   (0)| 00:00:01 |
+|   8 |       NESTED LOOPS                    |                                |     1 |  5128 |     3   (0)| 00:00:01 |
+|   9 |        NESTED LOOPS                   |                                |     1 |   920 |     2   (0)| 00:00:01 |
+|  10 |         INDEX FULL SCAN               | MS_QSM_TRIGGERED_SECTION_IND   |     1 |   614 |     1   (0)| 00:00:01 |
+|* 11 |         VIEW                          | MS_QSM_RESP_SECTION_V          |     1 |   306 |     1   (0)| 00:00:01 |
+|  12 |          SORT UNIQUE                  |                                |       |       |            |          |
+|  13 |           UNION-ALL PARTITION         |                                |       |       |            |          |
+|  14 |            TABLE ACCESS BY INDEX ROWID| MS_QSM_RESP_CONSD_SECTIONS     |     1 |   586 |     1   (0)| 00:00:01 |
+|* 15 |             INDEX RANGE SCAN          | MS_QSM_RESP_CONSD_SECTIONS_PK  |     1 |       |     1   (0)| 00:00:01 |
+|  16 |            TABLE ACCESS BY INDEX ROWID| MS_QSM_RESP_FINAL_SECTIONS     |     1 |   586 |     1   (0)| 00:00:01 |
+|* 17 |             INDEX RANGE SCAN          | MS_QSM_RESP_FINAL_SECTIONS_PK  |     1 |       |     1   (0)| 00:00:01 |
+|  18 |        VIEW                           | MS_QSM_RESP_DETAILS_V          |     1 |  4208 |     1   (0)| 00:00:01 |
+|  19 |         SORT UNIQUE                   |                                |       |       |            |          |
+|  20 |          UNION-ALL PARTITION          |                                |       |       |            |          |
+|  21 |           TABLE ACCESS BY INDEX ROWID | MS_QSM_RESP_CONSD_DETAILS      |     1 | 30348 |     1   (0)| 00:00:01 |
+|* 22 |            INDEX RANGE SCAN           | MS_QSM_RESP_CONSD_DETAILS_PK   |     1 |       |     1   (0)| 00:00:01 |
+|  23 |           TABLE ACCESS BY INDEX ROWID | MS_QSM_RESP_FINAL_DETAILS      |     1 | 30348 |     1   (0)| 00:00:01 |
+|* 24 |            INDEX RANGE SCAN           | MS_QSM_RESP_FINAL_DETAILS_PK   |     1 |       |     1   (0)| 00:00:01 |
+|* 25 |       VIEW                            | MS_QSM_RESP_QUESTION_V         |     1 |  2423 |     1   (0)| 00:00:01 |
+|  26 |        UNION-ALL PARTITION            |                                |       |       |            |          |
+|  27 |         TABLE ACCESS BY INDEX ROWID   | MS_QSM_RESP_CONSD_QUESTIONS    |     1 |  2423 |     1   (0)| 00:00:01 |
+|* 28 |          INDEX RANGE SCAN             | MS_QSM_RESP_CONSD_QUESTIONS_PK |     1 |       |     1   (0)| 00:00:01 |
+|  29 |         TABLE ACCESS BY INDEX ROWID   | MS_QSM_RESP_FINAL_QUESTIONS    |     1 |  2423 |     1   (0)| 00:00:01 |
+|* 30 |          INDEX RANGE SCAN             | MS_QSM_RESP_FINAL_QUESTIONS_PK |     1 |       |     1   (0)| 00:00:01 |
+|  31 |      TABLE ACCESS BY INDEX ROWID      | MS_QSM_TRIGGERED_QUESTION      |     1 |  2616 |     1   (0)| 00:00:01 |
+|* 32 |       INDEX RANGE SCAN                | MS_QSM_TRIG_QST_IDX2           |     1 |       |     1   (0)| 00:00:01 |
+|  33 |    TABLE ACCESS BY INDEX ROWID        | MS_QSM_SECTION                 |     1 |  1024 |     1   (0)| 00:00:01 |
+|* 34 |     INDEX UNIQUE SCAN                 | MS_QSM_SECTION_PK              |     1 |       |     1   (0)| 00:00:01 |
+------------------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SEL$5        / MS_QSM_GRADE_CONFIG@SEL$5
+   2 - SEL$5        / MS_QSM_GRADE_CONFIG@SEL$5
+   3 - SEL$1       
+   5 - SEL$8A75B550 / A@SEL$1
+   6 - SEL$8A75B550
+  10 - SEL$8A75B550 / C@SEL$11
+  11 - SET$7BE537C4 / B@SEL$6
+  12 - SET$7BE537C4
+  14 - SEL$193D1E52 / MS_QSM_RESP_CONSD_SECTIONS@SEL$9
+  15 - SEL$193D1E52 / MS_QSM_RESP_CONSD_SECTIONS@SEL$9
+  16 - SEL$A66D0F29 / MS_QSM_RESP_FINAL_SECTIONS@SEL$10
+  17 - SEL$A66D0F29 / MS_QSM_RESP_FINAL_SECTIONS@SEL$10
+  18 - SET$AD7CC163 / A@SEL$6
+  19 - SET$AD7CC163
+  21 - SEL$37248FBF / MS_QSM_RESP_CONSD_DETAILS@SEL$7
+  22 - SEL$37248FBF / MS_QSM_RESP_CONSD_DETAILS@SEL$7
+  23 - SEL$81C74289 / MS_QSM_RESP_FINAL_DETAILS@SEL$8
+  24 - SEL$81C74289 / MS_QSM_RESP_FINAL_DETAILS@SEL$8
+  25 - SET$61667F90 / D@SEL$12
+  26 - SET$61667F90
+  27 - SEL$42DA16AB / MS_QSM_RESP_CONSD_QUESTIONS@SEL$13
+  28 - SEL$42DA16AB / MS_QSM_RESP_CONSD_QUESTIONS@SEL$13
+  29 - SEL$354EC8B6 / MS_QSM_RESP_FINAL_QUESTIONS@SEL$14
+  30 - SEL$354EC8B6 / MS_QSM_RESP_FINAL_QUESTIONS@SEL$14
+  31 - SEL$8A75B550 / E@SEL$15
+  32 - SEL$8A75B550 / E@SEL$15
+  33 - SEL$1        / B@SEL$1
+  34 - SEL$1        / B@SEL$1
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   2 - access("GRADE_ID"=:B1)
+  11 - filter("C"."SECTION_ID_PK"="B"."SECTION_ID")
+  15 - access("QUE_REQUEST_ID"="C"."QUE_REQUEST_ID" AND "QUE_RESPONSE_ID"=:1)
+  17 - access("QUE_REQUEST_ID"="C"."QUE_REQUEST_ID" AND "QUE_RESPONSE_ID"=:1)
+  22 - access("QUE_REQUEST_ID"="B"."QUE_REQUEST_ID" AND "QUE_RESPONSE_ID"=:1)
+  24 - access("QUE_REQUEST_ID"="B"."QUE_REQUEST_ID" AND "QUE_RESPONSE_ID"=:1)
+  25 - filter("D"."SECTION_FK"="B"."SECTION_ID")
+  28 - access("QUE_REQUEST_ID"="B"."QUE_REQUEST_ID" AND "QUE_RESPONSE_ID"=:1)
+  30 - access("QUE_REQUEST_ID"="B"."QUE_REQUEST_ID" AND "QUE_RESPONSE_ID"=:1)
+  32 - access("E"."QST_ID_PK"="D"."QUESTION_ID" AND "E"."QUE_REQUEST_ID"="D"."QUE_REQUEST_ID")
+  34 - access("A"."QST_SECTION_FK"="B"."SECTION_ID_PK")
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - "MS_QSM_GRADE_CONFIG".ROWID[ROWID,10], "GRADE_NAME"[VARCHAR2,4000]
+   2 - "MS_QSM_GRADE_CONFIG".ROWID[ROWID,10]
+   3 - (#keys=2) "QUE_REQUEST_NAME"[VARCHAR2,4000], "SORT_ID"[VARCHAR2,600], "QUE_RESPONSE_ID"[VARCHAR2,200], 
+       "RESPONDENT"[VARCHAR2,4000], "B"."SECTION_NAME"[VARCHAR2,1020], "QUESTION_TEXT"[VARCHAR2,4000], 
+       "SCORE"[NUMBER,22], "GRADE"[VARCHAR2,4000]
+   4 - (#keys=0) "QUE_REQUEST_NAME"[VARCHAR2,4000], "QUE_RESPONSE_ID"[VARCHAR2,200], 
+       "QUESTION_TEXT"[VARCHAR2,4000], "SCORE"[NUMBER,22], "GRADE"[VARCHAR2,4000], "RESPONDENT"[VARCHAR2,4000], 
+       "SORT_ID"[VARCHAR2,600], "B"."SECTION_NAME"[VARCHAR2,1020]
+   5 - "QUE_REQUEST_NAME"[VARCHAR2,4000], "QUE_RESPONSE_ID"[VARCHAR2,200], "A"."QST_SECTION_FK"[VARCHAR2,200], 
+       "QUESTION_TEXT"[VARCHAR2,4000], "SCORE"[NUMBER,22], "GRADE"[VARCHAR2,4000], "RESPONDENT"[VARCHAR2,4000], 
+       "SORT_ID"[VARCHAR2,600]
+   6 - (#keys=0) "B"."SECTION_ID"[VARCHAR2,200], "A"."QUE_RESPONSE_ID"[VARCHAR2,200], 
+       "A"."QUE_REQUEST_NAME"[VARCHAR2,4000], "A"."RESPONDENT"[VARCHAR2,4000], "D"."QUESTION_ID"[VARCHAR2,200], 
+       "D"."SCORE"[NUMBER,22], "D"."GRADE"[VARCHAR2,4000], "E"."QST_NAME"[VARCHAR2,4000]
+   7 - (#keys=0) "B"."SECTION_ID"[VARCHAR2,200], "A"."QUE_RESPONSE_ID"[VARCHAR2,200], 
+       "A"."QUE_REQUEST_NAME"[VARCHAR2,4000], "A"."RESPONDENT"[VARCHAR2,4000], "D"."QUE_REQUEST_ID"[VARCHAR2,200], 
+       "D"."QUESTION_ID"[VARCHAR2,200], "D"."SCORE"[NUMBER,22], "D"."GRADE"[VARCHAR2,4000]
+   8 - (#keys=0) "B"."QUE_REQUEST_ID"[VARCHAR2,200], "B"."SECTION_ID"[VARCHAR2,200], 
+       "A"."QUE_RESPONSE_ID"[VARCHAR2,200], "A"."QUE_REQUEST_NAME"[VARCHAR2,4000], "A"."RESPONDENT"[VARCHAR2,4000]
+   9 - (#keys=0) "B"."QUE_REQUEST_ID"[VARCHAR2,200], "B"."SECTION_ID"[VARCHAR2,200]
+  10 - "C"."SECTION_ID_PK"[VARCHAR2,1020], "C"."QUE_REQUEST_ID"[VARCHAR2,200]
+  11 - "B"."QUE_REQUEST_ID"[VARCHAR2,200], "B"."SECTION_ID"[VARCHAR2,200]
+  12 - (#keys=10) STRDEF[200], STRDEF[200], STRDEF[22], STRDEF[22], STRDEF[200], STRDEF[22], STRDEF[22], 
+       STRDEF[400], STRDEF[22], STRDEF[22]
+  13 - STRDEF[200], STRDEF[200], STRDEF[22], STRDEF[22], STRDEF[200], STRDEF[22], STRDEF[22], STRDEF[400], 
+       STRDEF[22], STRDEF[22]
+  14 - "QUE_REQUEST_ID"[VARCHAR2,200], "QUE_RESPONSE_ID"[VARCHAR2,200], "PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "R_IID"[NUMBER,22], "SECTION_ID"[VARCHAR2,200], "WEIGHTED_SCORE"[NUMBER,22], "SECTION_SCORE"[NUMBER,22], 
+       "SECTION_GRADE"[VARCHAR2,400], "ALL_COMPLETED_QUESTION"[NUMBER,22], "COMPLETED_QUESTION"[NUMBER,22]
+  15 - "MS_QSM_RESP_CONSD_SECTIONS".ROWID[ROWID,10], "QUE_REQUEST_ID"[VARCHAR2,200], 
+       "QUE_RESPONSE_ID"[VARCHAR2,200], "PROCESS_INSTANCE_ID"[NUMBER,22], "SECTION_ID"[VARCHAR2,200]
+  16 - "QUE_REQUEST_ID"[VARCHAR2,200], "QUE_RESPONSE_ID"[VARCHAR2,200], "PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "R_IID"[NUMBER,22], "SECTION_ID"[VARCHAR2,200], "WEIGHTED_SCORE"[NUMBER,22], "SECTION_SCORE"[NUMBER,22], 
+       "SECTION_GRADE"[VARCHAR2,400], "ALL_COMPLETED_QUESTION"[NUMBER,22], "COMPLETED_QUESTION"[NUMBER,22]
+  17 - "MS_QSM_RESP_FINAL_SECTIONS".ROWID[ROWID,10], "QUE_REQUEST_ID"[VARCHAR2,200], 
+       "QUE_RESPONSE_ID"[VARCHAR2,200], "PROCESS_INSTANCE_ID"[NUMBER,22], "SECTION_ID"[VARCHAR2,200]
+  18 - "A"."QUE_RESPONSE_ID"[VARCHAR2,200], "A"."QUE_REQUEST_NAME"[VARCHAR2,4000], 
+       "A"."RESPONDENT"[VARCHAR2,4000]
+  19 - (#keys=26) STRDEF[200], STRDEF[200], STRDEF[22], STRDEF[22], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[22], STRDEF[4000], 
+       STRDEF[7], STRDEF[7], STRDEF[4000], STRDEF[7], STRDEF[4000], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[40], STRDEF[4000]
+  20 - STRDEF[200], STRDEF[200], STRDEF[22], STRDEF[22], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[4000], STRDEF[4000], STRDEF[22], STRDEF[22], STRDEF[4000], 
+       STRDEF[7], STRDEF[7], STRDEF[4000], STRDEF[7], STRDEF[4000], STRDEF[4000], STRDEF[4000], STRDEF[4000], 
+       STRDEF[4000], STRDEF[40], STRDEF[4000]
+  21 - "QUE_REQUEST_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,4000], "INSTANCE_ID"[NUMBER,22], 
+       "INSTANCE_REC_NUM"[NUMBER,22], "RESPONDENT"[VARCHAR2,4000], "QUE_REQUEST_TYPE"[VARCHAR2,40], 
+       "APPLIES_TO_OBJECT_CODE"[VARCHAR2,4000], "CREATION_DATE"[DATE,7], "RESPONDED_ON"[DATE,7], 
+       "RESPONDED_BY"[VARCHAR2,4000], "DUE_DATE"[DATE,7], "RESP_STATUS"[VARCHAR2,4000], "APPLIES_TO"[VARCHAR2,4000], 
+       "APPLIES_TO_OBJECT"[VARCHAR2,4000], "RESPONSE_APPROVER"[VARCHAR2,4000], "ASSIGNEE"[VARCHAR2,4000], 
+       "QUE_REQUEST_ID"[VARCHAR2,200], "QUE_RESPONSE_ID"[VARCHAR2,200], "PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "R_IID"[NUMBER,22], "OVERALL_SCORE"[VARCHAR2,4000], "OVERALL_GRADE"[VARCHAR2,4000], "STAGE"[VARCHAR2,4000], 
+       "ACTION_COMMENT"[VARCHAR2,4000], "LOGIN_ID"[VARCHAR2,4000], "REFERENCE_PID"[NUMBER,22]
+  22 - "MS_QSM_RESP_CONSD_DETAILS".ROWID[ROWID,10], "QUE_REQUEST_ID"[VARCHAR2,200], 
+       "QUE_RESPONSE_ID"[VARCHAR2,200], "PROCESS_INSTANCE_ID"[NUMBER,22]
+  23 - "QUE_REQUEST_TYPE"[VARCHAR2,40], "APPLIES_TO_OBJECT_CODE"[VARCHAR2,4000], 
+       "QUE_REQUEST_ID"[VARCHAR2,200], "QUE_RESPONSE_ID"[VARCHAR2,200], "PROCESS_INSTANCE_ID"[NUMBER,22], 
+       "R_IID"[NUMBER,22], "OVERALL_SCORE"[VARCHAR2,4000], "OVERALL_GRADE"[VARCHAR2,4000], "STAGE"[VARCHAR2,4000], 
+       "ACTION_COMMENT"[VARCHAR2,4000], "LOGIN_ID"[VARCHAR2,4000], "REFERENCE_PID"[NUMBER,22], 
+       "QUE_REQUEST_NAME"[VARCHAR2,4000], "DD_OBJECT_TYPE"[VARCHAR2,4000], "INSTANCE_ID"[NUMBER,22], 
+       "INSTANCE_REC_NUM"[NUMBER,22], "RESPONDENT"[VARCHAR2,4000], "CREATION_DATE"[DATE,7], "RESPONDED_ON"[DATE,7], 
+       "RESPONDED_BY"[VARCHAR2,4000], "DUE_DATE"[DATE,7], "RESP_STATUS"[VARCHAR2,4000], "APPLIES_TO"[VARCHAR2,4000], 
+       "APPLIES_TO_OBJECT"[VARCHAR2,4000], "RESPONSE_APPROVER"[VARCHAR2,4000], "ASSIGNEE"[VARCHAR2,4000]
+  24 - "MS_QSM_RESP_FINAL_DETAILS".ROWID[ROWID,10], "QUE_REQUEST_ID"[VARCHAR2,200], 
+       "QUE_RESPONSE_ID"[VARCHAR2,200], "PROCESS_INSTANCE_ID"[NUMBER,22]
+  25 - "D"."QUE_REQUEST_ID"[VARCHAR2,200], "D"."QUESTION_ID"[VARCHAR2,200], "D"."SCORE"[NUMBER,22], 
+       "D"."GRADE"[VARCHAR2,4000], "D"."SECTION_FK"[VARCHAR2,200]
+  26 - STRDEF[200], STRDEF[200], STRDEF[200], STRDEF[22], STRDEF[4000], STRDEF[200]
+  27 - "QUE_REQUEST_ID"[VARCHAR2,200], "QUE_RESPONSE_ID"[VARCHAR2,200], "QUESTION_ID"[VARCHAR2,200], 
+       "SCORE"[NUMBER,22], "GRADE"[VARCHAR2,4000], "SECTION_FK"[VARCHAR2,200]
+  28 - "MS_QSM_RESP_CONSD_QUESTIONS".ROWID[ROWID,10], "QUE_REQUEST_ID"[VARCHAR2,200], 
+       "QUE_RESPONSE_ID"[VARCHAR2,200], "QUESTION_ID"[VARCHAR2,200], "SECTION_FK"[VARCHAR2,200]
+  29 - "SCORE"[NUMBER,22], "GRADE"[VARCHAR2,4000], "SECTION_FK"[VARCHAR2,200], "QUE_REQUEST_ID"[VARCHAR2,200], 
+       "QUE_RESPONSE_ID"[VARCHAR2,200], "QUESTION_ID"[VARCHAR2,200]
+  30 - "MS_QSM_RESP_FINAL_QUESTIONS".ROWID[ROWID,10], "QUE_REQUEST_ID"[VARCHAR2,200], 
+       "QUE_RESPONSE_ID"[VARCHAR2,200], "QUESTION_ID"[VARCHAR2,200], "SECTION_FK"[VARCHAR2,200]
+  31 - "E"."QST_NAME"[VARCHAR2,4000]
+  32 - "E".ROWID[ROWID,10]
+  33 - "B"."SECTION_NAME"[VARCHAR2,1020]
+  34 - "B".ROWID[ROWID,10]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>

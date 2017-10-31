@@ -1,0 +1,255 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Code Analysis - MetricStream</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="../../lib/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../../lib/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="../../lib/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../../lib/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Static Code Analysis Report</strong> by Code Analyzer Tool</a>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<!-- Content -->
+										<header class="major"><h2>Infolet Details</h2></header>
+										<div class="table-wrapper">
+											<table>
+												<tbody>
+													<tr>
+														<th>Name</th>
+														<td>MS_QSM_SURVEY_SECTIONS (103895)</td>
+													</tr>
+													<tr>
+														<th>SQL</th>
+														<td><pre><code>select section_name,section_id_pk,fn_qsm_get_user_locale(:1) as local_id,'1' filter_type,b.internal_questnr_id
+ from MS_QSM_QUESTIONNAIRE b,MS_QSM_SECTION c
+where c.section_questnr_fk=b.internal_questnr_id
+UNION ALL
+select section_name,section_id_pk,fn_qsm_get_user_locale(:1) as local_id,'2' filter_type,y.QUE_REQUEST_ID
+FROM MS_QSM_SECTION x,MS_QSM_INIT_QUESTNR y,MS_QSM_INIT_QUESTNR_SCS z
+WHERE x.SECTION_QUESTNR_FK=y.questionnaire_id
+AND y.QUE_REQUEST_ID=z.QUE_REQUEST_ID
+AND section_id_pk=z.SECTIONS
+UNION ALL
+select SECTION_NAME,a.section_id_pk,fn_qsm_get_user_locale(:1) as local_id,'2' filter_type,a.QUE_REQUEST_ID
+from 
+(select b.QUE_REQUEST_ID,section_id_pk,a.SECTION_NAME from MS_QSM_SECTION a,MS_QSM_INIT_QUESTNR b
+where a.SECTION_QUESTNR_FK=b.questionnaire_id) a,MS_QSM_INIT_QUESTNR_SCS b
+where a.QUE_REQUEST_ID=b.QUE_REQUEST_ID(+)
+AND a.section_id_pk=b.SECTIONS(+)
+AND b.QUE_REQUEST_ID IS NULL
+ORDER BY 1</code></pre></td>
+													</tr>
+													<tr>
+														<th>Description</th>
+														<td>This infolet is used for the Filter Sections, in the Survey Summary Report.</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h2 align="center" id="content">Analysis Report</h2>
+										<hr>
+
+<header class="major"><h2>Plan hash value: 10589848</h2></header><pre><code>
+ 
+----------------------------------------------------------------------------------------------------------------
+| Id  | Operation                         | Name                       | Rows  | Bytes | Cost (%CPU)| Time     |
+----------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT                  |                            |     3 |  9932 |    10  (10)| 00:00:01 |
+|   1 |  SORT ORDER BY                    |                            |     3 |  9932 |     9   (0)| 00:00:01 |
+|   2 |   UNION-ALL                       |                            |       |       |            |          |
+|   3 |    NESTED LOOPS                   |                            |     1 |  2048 |     2   (0)| 00:00:01 |
+|   4 |     NESTED LOOPS                  |                            |     1 |  2048 |     2   (0)| 00:00:01 |
+|   5 |      INDEX FULL SCAN              | MS_QSM_QUESTIONNAIRE_PK    |     1 |   512 |     1   (0)| 00:00:01 |
+|*  6 |      INDEX RANGE SCAN             | MS_QSM_SECTION_FK          |     1 |       |     1   (0)| 00:00:01 |
+|   7 |     TABLE ACCESS BY INDEX ROWID   | MS_QSM_SECTION             |     1 |  1536 |     1   (0)| 00:00:01 |
+|   8 |    NESTED LOOPS                   |                            |     1 |  4454 |     3   (0)| 00:00:01 |
+|   9 |     NESTED LOOPS                  |                            |     1 |  3740 |     2   (0)| 00:00:01 |
+|  10 |      INDEX FULL SCAN              | MS_QSM_INIT_QUESTNR_SCS_UK |     1 |  2204 |     1   (0)| 00:00:01 |
+|  11 |      TABLE ACCESS BY INDEX ROWID  | MS_QSM_SECTION             |     1 |  1536 |     1   (0)| 00:00:01 |
+|* 12 |       INDEX UNIQUE SCAN           | MS_QSM_SECTION_PK          |     1 |       |     1   (0)| 00:00:01 |
+|* 13 |     TABLE ACCESS BY INDEX ROWID   | MS_QSM_INIT_QUESTNR        |       |       |            |          |
+|* 14 |      INDEX RANGE SCAN             | MS_QSM_INIT_QUESTNR_NU     |     1 |       |     1   (0)| 00:00:01 |
+|* 15 |    FILTER                         |                            |       |       |            |          |
+|  16 |     NESTED LOOPS OUTER            |                            |     1 |  3430 |     4   (0)| 00:00:01 |
+|  17 |      VIEW                         |                            |     1 |  1226 |     3   (0)| 00:00:01 |
+|  18 |       NESTED LOOPS                |                            |     1 |  2250 |     3   (0)| 00:00:01 |
+|  19 |        NESTED LOOPS               |                            |     1 |  2250 |     3   (0)| 00:00:01 |
+<font style="background-color: lightblue; color: red">|  20 |         TABLE ACCESS FULL         | MS_QSM_SECTION             |     1 |  1536 |     2   (0)| 00:00:01 |</font>
+|* 21 |         INDEX RANGE SCAN          | MS_QSM_INIT_QUESTNR_NU     |     1 |       |     1   (0)| 00:00:01 |
+|  22 |        TABLE ACCESS BY INDEX ROWID| MS_QSM_INIT_QUESTNR        |     1 |   714 |     1   (0)| 00:00:01 |
+|* 23 |      INDEX UNIQUE SCAN            | MS_QSM_INIT_QUESTNR_SCS_UK |     1 |  2204 |     1   (0)| 00:00:01 |
+----------------------------------------------------------------------------------------------------------------
+ 
+</code></pre><header class="major"><h2>Query Block Name / Object Alias (identified by operation id):</h2></header><pre><code>
+ 
+   1 - SET$1
+   3 - SEL$1
+   5 - SEL$1 / B@SEL$1
+   6 - SEL$1 / C@SEL$1
+   7 - SEL$1 / C@SEL$1
+   8 - SEL$2
+  10 - SEL$2 / Z@SEL$2
+  11 - SEL$2 / X@SEL$2
+  12 - SEL$2 / X@SEL$2
+  14 - SEL$2 / Y@SEL$2
+  15 - SEL$3
+  17 - SEL$4 / A@SEL$3
+  18 - SEL$4
+  20 - SEL$4 / A@SEL$4
+  21 - SEL$4 / B@SEL$4
+  22 - SEL$4 / B@SEL$4
+  23 - SEL$3 / B@SEL$3
+ 
+</code></pre><header class="major"><h2>Predicate Information (identified by operation id):</h2></header><pre><code>
+ 
+   6 - access("C"."SECTION_QUESTNR_FK"="B"."INTERNAL_QUESTNR_ID")
+  12 - access("SECTION_ID_PK"="Z"."SECTIONS")
+  13 - filter("Y"."QUE_REQUEST_ID"="Z"."QUE_REQUEST_ID")
+  14 - access("X"."SECTION_QUESTNR_FK"="Y"."QUESTIONNAIRE_ID")
+  15 - filter("B"."QUE_REQUEST_ID" IS NULL)
+  21 - access("A"."SECTION_QUESTNR_FK"="B"."QUESTIONNAIRE_ID")
+  23 - access("A"."SECTION_ID_PK"="B"."SECTIONS"(+) AND "A"."QUE_REQUEST_ID"="B"."QUE_REQUEST_ID"(+))
+ 
+</code></pre><header class="major"><h2>Column Projection Information (identified by operation id):</h2></header><pre><code>
+ 
+   1 - (#keys=1) STRDEF[1020], STRDEF[1020], STRDEF[0], STRDEF[1], STRDEF[1020]
+   2 - STRDEF[1020], STRDEF[1020], STRDEF[0], STRDEF[1], STRDEF[1020]
+   3 - (#keys=0) "B"."INTERNAL_QUESTNR_ID"[VARCHAR2,1020], "SECTION_NAME"[VARCHAR2,1020], 
+       "SECTION_ID_PK"[VARCHAR2,1020]
+   4 - (#keys=0) "B"."INTERNAL_QUESTNR_ID"[VARCHAR2,1020], "C".ROWID[ROWID,10]
+   5 - "B"."INTERNAL_QUESTNR_ID"[VARCHAR2,1020]
+   6 - "C".ROWID[ROWID,10]
+   7 - "SECTION_NAME"[VARCHAR2,1020], "SECTION_ID_PK"[VARCHAR2,1020]
+   8 - (#keys=0) "SECTION_NAME"[VARCHAR2,1020], "SECTION_ID_PK"[VARCHAR2,1020], 
+       "Y"."QUE_REQUEST_ID"[VARCHAR2,400]
+   9 - (#keys=0) "Z"."QUE_REQUEST_ID"[VARCHAR2,400], "X"."SECTION_QUESTNR_FK"[VARCHAR2,1020], 
+       "SECTION_NAME"[VARCHAR2,1020], "SECTION_ID_PK"[VARCHAR2,1020]
+  10 - "Z"."SECTIONS"[VARCHAR2,4000], "Z"."QUE_REQUEST_ID"[VARCHAR2,400]
+  11 - "X"."SECTION_QUESTNR_FK"[VARCHAR2,1020], "SECTION_NAME"[VARCHAR2,1020], 
+       "SECTION_ID_PK"[VARCHAR2,1020]
+  12 - "X".ROWID[ROWID,10], "SECTION_ID_PK"[VARCHAR2,1020]
+  13 - "Y"."QUE_REQUEST_ID"[VARCHAR2,400]
+  14 - "Y".ROWID[ROWID,10]
+  15 - "A"."QUE_REQUEST_ID"[VARCHAR2,400], "A"."SECTION_ID_PK"[VARCHAR2,1020], 
+       "SECTION_NAME"[VARCHAR2,1020]
+  16 - (#keys=0) "A"."QUE_REQUEST_ID"[VARCHAR2,400], "A"."SECTION_ID_PK"[VARCHAR2,1020], 
+       "SECTION_NAME"[VARCHAR2,1020], "B"."QUE_REQUEST_ID"[VARCHAR2,400]
+  17 - "A"."QUE_REQUEST_ID"[VARCHAR2,400], "A"."SECTION_ID_PK"[VARCHAR2,1020], 
+       "SECTION_NAME"[VARCHAR2,1020]
+  18 - (#keys=0) "A"."SECTION_NAME"[VARCHAR2,1020], "SECTION_ID_PK"[VARCHAR2,1020], 
+       "B"."QUE_REQUEST_ID"[VARCHAR2,400]
+  19 - (#keys=0) "A"."SECTION_NAME"[VARCHAR2,1020], "SECTION_ID_PK"[VARCHAR2,1020], "B".ROWID[ROWID,10]
+  20 - "A"."SECTION_QUESTNR_FK"[VARCHAR2,1020], "A"."SECTION_NAME"[VARCHAR2,1020], 
+       "SECTION_ID_PK"[VARCHAR2,1020]
+  21 - "B".ROWID[ROWID,10]
+  22 - "B"."QUE_REQUEST_ID"[VARCHAR2,400]
+  23 - "B"."QUE_REQUEST_ID"[VARCHAR2,400]
+										</code></pre>
+								</section>
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+						<!-- Menu -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							<ul>
+								<li><a href="../index.html">Module List</a></li>
+								<li><a href="index.html">Summary</a></li>
+								<li>
+									<span class="opener">DB Analysis</span>
+									<ul>
+										<li><a href="bad-sql.html">Bad SQL</a></li>
+										<li><a href="poor-sql.html">Poor SQL Plan</a></li>
+										<li><a href="invalid-sql.html">Invalid SQL</a></li>
+										<li><a href="full-sql.html">Full SQL Report</a></li>
+										<li><a href="table-nil-key.html">Primary/Unique Key Miss</a></li>
+										<li><a href="invalid-db-object.html">Invalid DB Objects</a></li>
+										<li><a href="sequence-with-less-cache.html">Sequence</a></li>
+										<li><a href="table-index-lob-size.html">Table Size</a></li>
+										<li><a href="table-row-count.html">Table Row Count</a></li>
+										<li><a href="top-worst-queries.html">Top Worst Queries</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">LOB</span>
+								    <ul>
+								        <li><a href="lob-no-cache.html">LOB - No Cache</a></li>
+								        <li><a href="lob-columns.html">LOB - All Columns</a></li>
+								    </ul>
+								</li>
+								<li>
+									<span class="opener">Infolets</span>
+									<ul>
+										<li><a href="keep-history-infolets.html">Keep History Infolets</a></li>
+										<li><a href="plsql-context-switch.html">SQL-PL/SQL Context Switch</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">Pushforms</span>
+									<ul>
+										<li><a href="pushform-denormalize.html">Pushform Denormalized</a></li>
+									</ul>
+								</li>
+								<li>
+									<span class="opener">PL/SQL</span>
+									<ul>
+										<li><a href="plsql-dyn-qry-objs.html">Dynamic Query</a></li>
+									</ul>
+								</li>
+								<li>
+								    <span class="opener">Report</span>
+								    <ul>
+								        <li><a href="jasper.html">Jasper Reports</a></li>
+								    </ul>
+								</li>
+							</ul>
+						</nav>
+
+						<!-- Section -->
+						<section>
+							<header class="major">
+								<h2>Get in touch</h2>
+							</header>
+							<p>You need more details on the report or want more functionality, don't hesitate to reach out to us.</p>
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="mailto:apps-rnd-arch-team@metricstream.com?Subject=Reg - Code Analysis Tool" target="_top">apps-rnd-arch-team@metricstream.com</a></li>
+							</ul>
+						</section>
+
+						<!-- Footer -->
+						<footer id="footer">
+							<p class="copyright">&copy; <a href="http://www.metricstream.com" target="_blank">MetricStream</a>. All rights reserved. </p>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="../../lib/assets/js/jquery.min.js"></script>
+			<script src="../../lib/assets/js/skel.min.js"></script>
+			<script src="../../lib/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="../../lib/assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../../lib/assets/js/main.js"></script>
+	</body>
+</html>
